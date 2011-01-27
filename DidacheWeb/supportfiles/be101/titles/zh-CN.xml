@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<course code="BE101" name="研经法" active="true">
+  <unit number="1" name="课程简介、「观察」概论" active="true">
+    <video speaker="Mark Bailey" number="1" name="课程简介 1" duration="00:12:03.59" group="1" active="true" />
+    <video speaker="Mark Bailey" number="2" name="课程简介 2" duration="00:17:28.44" group="1" active="true" />
+    <video speaker="Mark Bailey" number="3" name="研经法：「观察」概论" duration="00:19:55.55" group="1" active="true" />
+    <video speaker="Mark Bailey" number="4" name="研经法概论" duration="00:16:34.52" group="1" active="true" />
+    <video speaker="Mark Bailey" number="5" name="作业指引：使徒行传1:8 " duration="00:03:16.19" group="1" active="true" />
+  </unit>
+  <unit number="2" name="观察:名词与架构" active="true">
+    <video speaker="Mark Bailey" number="1" name="与韩瑞德教授面谈:观察的重要性" duration="00:05:33.93" group="1" active="true" />
+    <video speaker="Mark Bailey" number="2" name="阅读七则(第一部)" duration="00:20:05.73" group="2" active="true" />
+    <video speaker="Mark Bailey" number="3" name="阅读七则(第二部)" duration="00:15:13.14" group="3" active="true" />
+    <video speaker="Mark Bailey" number="4" name="观察的构成要素 (第一部份)" duration="00:15:41.04" group="4" active="true" />
+  </unit>
+  <unit number="3" name="观察:架构" active="true">
+    <video speaker="Mark Bailey" number="1" name="观察的构成要素 (第二部份)" duration="00:09:42.34" group="1" active="true" />
+    <video speaker="Mark Bailey" number="2" name="观察的构成要素 (第三部份)" duration="00:17:13.08" group="2" active="true" />
+    <video speaker="Mark Bailey" number="3" name="架构関係" duration="00:08:03.14" group="3" active="true" />
+    <video speaker="Mark Bailey" number="4" name="文學寫作的法則(第一部份)" duration="00:18:38.30" group="4" active="true" />
+    <video speaker="Mark Bailey" number="5" name="文學寫作的法則(第二部份)" duration="00:15:27.86" group="5" active="true" />
+    <video speaker="Mark Bailey" number="6" name="文學寫作的法則(第三部份)" duration="00:19:35.40" group="6" active="true" />
+    <video speaker="Mark Bailey" number="7" name="文學寫作的法則(第四部份)" duration="00:17:03.27" group="7" active="true" />
+  </unit>
+  <unit number="4" name="解释：释经概论" active="true">
+    <video speaker="Mark Bailey" number="1" name="联邦密探：观察的最後一课" duration="00:01:52.67" group="1" active="true" />
+    <video speaker="Mark Bailey" number="2" name="观察的四大陷阱" duration="00:09:05.61" group="2" active="true" />
+    <video speaker="Mark Bailey" number="3" name="与韩瑞德教授一夕话：解释的重要性" duration="00:04:59.93" group="3" active="true" />
+    <video speaker="Mark Bailey" number="4" name="解释概论" duration="00:18:59.43" group="4" active="true" />
+    <video speaker="Mark Bailey" number="5" name="释经学的三大特徵" duration="00:09:32.87" group="5" active="true" />
+    <video speaker="Mark Bailey" number="6" name="跨越鸿沟 (第一部份)" duration="00:16:22.30" group="6" active="true" />
+    <video speaker="Mark Bailey" number="7" name="跨越鸿沟 (第二部份)" duration="00:18:15.29" group="7" active="true" />
+  </unit>
+  <unit number="5" name="解释：解释简介" active="true">
+    <video speaker="Mark Bailey" number="1" name="释经学的定义: 遊戏规则" duration="00:11:43.13" group="1" active="true" />
+    <video speaker="Mark Bailey" number="2" name="释经者的资格 (第一部份)" duration="00:13:47.05" group="2" active="true" />
+    <video speaker="Mark Bailey" number="3" name="释经者的资格 (第二部份)" duration="00:11:27.35" group="3" active="true" />
+    <video speaker="Mark Bailey" number="4" name="释经者的资格 (第三部份)" duration="00:18:42.02" group="4" active="true" />
+    <video speaker="Mark Bailey" number="5" name="释经学的设定" duration="00:12:58.21" group="5" active="true" />
+  </unit>
+  <unit number="6" name="解释：历史背景" active="true">
+    <video speaker="Mark Yarbrough" number="1" name="历史背景介绍 第一部份" duration="00:20:01.09" group="1" active="true" />
+    <video speaker="Mark Yarbrough" number="2" name="历史背景研究：作者身份" duration="00:06:50.31" group="2" active="true" />
+    <video speaker="Mark Yarbrough" number="3" name="历史背景研究：讀者身份" duration="00:21:58.28" group="3" active="true" />
+    <video speaker="Mark Yarbrough" number="4" name="文化背景： 文化区隔" duration="00:17:00.45" group="4" active="true" />
+  </unit>
+  <unit number="7" name="解释：文化规範、散文、诗集" active="true">
+    <video speaker="Mark Bailey" number="1" name="鑑别文化规範" duration="00:13:39.92" group="1" active="true" />
+    <video speaker="Mark Bailey" number="2" name="文化运用的步骤 第一部份" duration="00:20:25.99" group="2" active="true" />
+    <video speaker="Mark Bailey" number="3" name="文化运用的步骤 第二部份" duration="00:14:20.86" group="3" active="true" />
+    <video speaker="Mark Bailey" number="4" name="文学体裁第一部份 情节与人物" duration="一20.67" group="4" active="true" />
+    <video speaker="Mark Bailey" number="5" name="文学体裁第一部份 故事主角,反派主角与佈局" duration="00:15:29.69" group="5" active="true" />
+    <video speaker="Mark Bailey" number="6" name="文学体裁第一部份 诗歌文体" duration="00:21:39.05" group="6" active="true" />
+  </unit>
+  <unit number="8" name="解释：比喻、书信、异象文学" active="true">
+    <video speaker="Mark Bailey" number="1" name="文学体裁   第二部：比喻   第一部份" duration="00:18:14.85" group="1" active="true" />
+    <video speaker="Mark Bailey" number="2" name="文学体裁   第二部：比喻   第二部份" duration="00:15:45.80" group="2" active="true" />
+    <video speaker="Mark Bailey" number="3" name="文学体裁   第二部：比喻   第三部份" duration="00:12:09.38" group="3" active="true" />
+    <video speaker="Mark Bailey" number="4" name="文学体裁   第二部：书信   " duration="00:17:55.02" group="4" active="true" />
+    <video speaker="Mark Bailey" number="5" name="文学体裁   第二部：先知书  第一部份" duration="00:09:48.98" group="5" active="true" />
+    <video speaker="Mark Bailey" number="6" name="文学体裁   第二部：先知书  第二部份" duration="00:15:57.22" group="6" active="true" />
+    <video speaker="Mark Bailey" number="7" name="文学体裁   第二部：异象文学 " duration="00:20:02.90" group="7" active="true" />
+  </unit>
+  <unit number="9" name="解释：文法背景 " active="true">
+    <video speaker="Mark Bailey" number="1" name="文法背景 第一部份" duration="00:21:24.15" group="1" active="true" />
+    <video speaker="Mark Bailey" number="2" name="文法背景 第二部份" duration="00:16:54.08" group="2" active="true" />
+    <video speaker="Mark Bailey" number="3" name="文法背景 第三部份" duration="00:09:37.34" group="3" active="true" />
+    <video speaker="Mark Bailey" number="4" name="文法背景 辞句" duration="00:04:24.06" group="4" active="true" />
+    <video speaker="Mark Bailey" number="5" name="文法背景 结构" duration="00:20:48.54" group="5" active="true" />
+    <video speaker="Mark Bailey" number="6" name="文法背景 主要句与附属句" duration="00:13:48.69" group="6" active="true" />
+    <video speaker="Mark Bailey" number="7" name="文法背景 片语" duration="00:13:09.48" group="7" active="true" />
+  </unit>
+  <unit number="10" name="解释： 文学要素" active="true">
+    <video speaker="Mark Bailey" number="1" name="修辞手法 第一部份" duration="00:20:43.54" group="1" active="true" />
+    <video speaker="Mark Bailey" number="2" name="修辞手法 第二部份" duration="00:20:13.24" group="2" active="true" />
+    <video speaker="Mark Bailey" number="3" name="修辞手法 第三部份" duration="00:08:52.23" group="3" active="true" />
+    <video speaker="Mark Bailey" number="4" name="修辞手法的解释" duration="00:20:18.51" group="4" active="true" />
+    <video speaker="Mark Bailey" number="5" name="预表论 第一部份" duration="00:20:54.78" group="5" active="true" />
+    <video speaker="Mark Bailey" number="6" name="预表论 第二部份" duration="00:03:56.43" group="6" active="true" />
+    <video speaker="Mark Bailey" number="7" name="旧约经文出现在新约圣经 第一部份" duration="00:13:59.06" group="7" active="true" />
+    <video speaker="Mark Bailey" number="8" name="旧约经文出现在新约圣经 第二部份" duration="00:09:16.86" group="8" active="true" />
+  </unit>
+  <unit number="11" name="解释：时代的间断与连续" active="true">
+    <video speaker="Mark Bailey" number="1" name="时代神学绪论 " duration="00:17:48.08" group="1" active="true" />
+    <video speaker="Mark Bailey" number="2" name="时代论的定义" duration="00:19:54.61" group="2" active="true" />
+    <video speaker="Mark Bailey" number="3" name="时代论的辩护" duration="00:13:20.86" group="3" active="true" />
+    <video speaker="Mark Bailey" number="4" name="横跨两约 第一部份" duration="00:18:33.93" group="4" active="true" />
+    <video speaker="Mark Bailey" number="5" name="横跨两约 第二部份" duration="00:19:50.86" group="5" active="true" />
+  </unit>
+  <unit number="12" name="关联:原则与中心思想" active="true">
+    <video speaker="Mark Bailey" number="1" name="与韩教授会谈关联重要性" duration="00:07:26.58" group="1" active="true" />
+    <video speaker="Mark Bailey" number="2" name="关联概论" duration="00:15:27.12" group="2" active="true" />
+    <video speaker="Mark Bailey" number="3" name="关联练习:罗马书12:1-2" duration="00:15:41.94" group="3" active="true" />
+    <video speaker="Mark Bailey" number="4" name="关联原则" duration="00:13:36.45" group="4" active="true" />
+    <video speaker="Mark Bailey" number="5" name="神学中心思想:彼前5:10" duration="00:17:11.03" group="5" active="true" />
+    <video speaker="Mark Bailey" number="6" name="经文大纲:罗马书12:1-2" duration="00:14:53.89" group="6" active="true" />
+  </unit>
+  <unit number="13" name="应用: 概论与基本考量" active="true">
+    <video speaker="Mark Bailey" number="1" name="与韩教授一夕谈:应用的重要" duration="00:14:09.61" group="1" active="true" />
+    <video speaker="Mark Bailey" number="2" name="应用的必要条件" duration="00:15:44.14" group="2" active="true" />
+    <video speaker="Mark Bailey" number="3" name="应用的注意事项" duration="00:19:21.02" group="3" active="true" />
+    <video speaker="Mark Bailey" number="4" name="应用的法则 第一部份" duration="00:09:08.21" group="4" active="true" />
+    <video speaker="Mark Bailey" number="5" name="应用的法则 第二部份" duration="00:18:03.75" group="5" active="true" />
+  </unit>
+  <unit number="14" name="应用:背景与特色" active="true">
+    <video speaker="Mark Bailey" number="1" name="SPECS 应用法" duration="00:10:12.30" group="1" active="true" />
+    <video speaker="Mark Bailey" number="2" name="TRCI应用法" duration="00:11:39.09" group="2" active="true" />
+    <video speaker="Mark Bailey" number="3" name="应用的障碍" duration="00:08:13.39" group="3" active="true" />
+    <video speaker="Mark Bailey" number="4" name="应用的提醒" duration="00:07:28.21" group="4" active="true" />
+  </unit>
+</course>

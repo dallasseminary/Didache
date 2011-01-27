@@ -1,0 +1,5 @@
+D:\git\didache\Didache.Core\Didache.Core\obj\Debug\ResolveAssemblyReference.cache
+D:\git\didache\Didache.Core\Didache.Core\bin\Debug\Didache.dll
+D:\git\didache\Didache.Core\Didache.Core\bin\Debug\Didache.pdb
+D:\git\didache\Didache.Core\Didache.Core\obj\Debug\Didache.dll
+D:\git\didache\Didache.Core\Didache.Core\obj\Debug\Didache.pdb

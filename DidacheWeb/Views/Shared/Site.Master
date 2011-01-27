@@ -1,0 +1,85 @@
+﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
+
+<!DOCTYPE html>
+<html>
+<head runat="server">
+    <title><asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>
+   
+    <link href="/css/reset.css" rel="stylesheet"  />
+	<link href="/css/dts-common.css" rel="stylesheet"  />
+	<link href="/css/didache.css" rel="stylesheet"  />
+    
+	<script src="<%: Url.Content("~/js/jquery-1.4.4.min.js") %>"></script>
+	<script src="<%: Url.Content("~/js/jquery-ui.min.js") %>"></script>
+	<script src="<%: Url.Content("~/js/jquery.validate.min.js") %>" type="text/javascript"></script>
+	<script src="<%: Url.Content("~/js/jquery.validate.unobtrusive.min.js") %>" type="text/javascript"></script>
+	<script src="<%: Url.Content("~/js/jquery.expander.js") %>" type="text/javascript"></script>
+	<script src="<%: Url.Content("~/js/main.js") %>"></script>
+</head>
+
+<body>
+
+	<div id="dts-common-menu">
+		<% Html.RenderPartial("CommonMenu"); %>
+	</div>
+
+	<div id="nav">
+		<ul id="main-menu">              
+            <li><a id="main-menu-home" href="/" <%= Request.Url.PathAndQuery == "/" ? " class=\"selected\"" : "" %>>Home</a></li>
+            <% if (HttpContext.Current.User.Identity.IsAuthenticated) { %>
+			<li><a id="main-menu-courses" href="/courses" <%= Request.Url.PathAndQuery.StartsWith("/courses") ? " class=\"selected\"" : "" %>>Courses</a></li>
+			<li><a id="main-menu-profile" href="/profile" <%= Request.Url.PathAndQuery.StartsWith("/profile") ? " class=\"selected\"" : "" %>>Profile</a></li>
+			<li><a id="main-menu-admin" href="/admin" <%= Request.Url.PathAndQuery.StartsWith("/admin") ? " class=\"selected\"" : "" %>>Admin</a></li>
+			<% } %>
+        </ul>
+		<div id="sub-menu">              
+            <div class="sub-menu-item <%= Request.Url.PathAndQuery == "/" ? " selected" : "" %>" id="main-menu-home-details">
+				<ul>
+					<li><a href="/dashboard">Dashboard</a></li>		
+				</ul>
+			</div>
+			<% if (HttpContext.Current.User.Identity.IsAuthenticated) { %>
+            <div class="sub-menu-item <%= Request.Url.PathAndQuery.StartsWith("/courses") ? " selected" : "" %>" id="main-menu-courses-details">
+				<ul>
+					<li><span>Current:</span></li>
+
+					<% List<Course> courses = Didache.Courses.GetUsersRunningCourses(CourseUserRole.Student); %>
+					<% foreach (Course course in courses) { %>
+					<li><a href="/courses/<%= course.Slug %>/"><%= course.CourseCode + course.Section %></a></li>	
+					<% } %>
+									
+					<li><span>Tools:</span></li>
+					<li><a href="/courses/">Archive</a></li>
+				</ul>
+			</div>
+            <div class="sub-menu-item <%= Request.Url.PathAndQuery.StartsWith("/profile") ? " selected" : "" %>" id="main-menu-profile-details">
+				<ul>
+					<li><a href="/profile">View</a></li>
+					<li><a href="/profile/edit">Edit</a></li>
+				</ul>
+			</div>
+            <div class="sub-menu-item <%= Request.Url.PathAndQuery.StartsWith("/admin") ? " selected" : "" %>" id="main-menu-admin-details">
+				<ul>
+					<li><a href="/admin/sessions">Sessions</a></li>
+					<li><a href="/admin/campuses">Campuses</a></li>
+					<li><a href="/admin/courses">Courses</a></li>
+					<li><a href="/admin/files">Files</a></li>
+					<li><a href="/admin/users">Users</a></li>
+				</ul>
+			</div>
+			<% } %>
+        </div>
+	</div>	
+
+	<div id="main">
+		
+		<asp:ContentPlaceHolder ID="MainContent" runat="server" />
+		
+		<div class="clear"></div>
+	</div>
+
+	<div id="footer"></div>
+	
+
+</body>
+</html>
