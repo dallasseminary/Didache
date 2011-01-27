@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<course code="BC101" name="Christian Counseling">
+  <unit number="1" name="Introduction to the Course" active="true">
+    <video speaker="Chip Dickens" number="1" name="Introduction to the Professor" duration="00:07:20.00" group="1" active="true" iid="1610629749.01610629752.1648989099" />
+    <video speaker="Chip Dickens" number="2" name="Introduction to the Course" duration="00:04:23.00" group="1" active="true" iid="1610629749.01610629752.1648973365" />
+    <video speaker="Chip Dickens" number="3" name="Introduction to the Application Project" duration="00:09:13.00" group="1" active="true" iid="1610629749.01610629752.1648840917" />
+    <video speaker="Chip Dickens" number="4" name="Change Strategies" duration="00:20:23.00" group="1" active="true" iid="1610629749.01610629752.1648284680" />
+  </unit>
+  <unit number="2" name="Christian Counseling &amp; Theological Foundations" active="true">
+    <video speaker="Chip Dickens" number="1" name="Introduction to Christian Counseling" duration="00:12:17.00" group="1" active="true" iid="1610629749.01610629752.1648282526" />
+    <video speaker="Chip Dickens" number="2" name="Essentials for Christian Model of Counseling" duration="00:16:05.05" group="1" active="true" iid="1610629749.01610629752.1648692136" />
+    <video speaker="Chip Dickens" number="3" name="Skills and Techniques" duration="00:14:46.46" group="1" active="true" iid="1610629749.01610629752.1648298847" />
+    <video speaker="Chip Dickens" number="4" name="Goals of Counseling Relationship" duration="00:15:06.06" group="1" active="true" iid="1610629749.01610629752.1649101680" />
+    <video speaker="Gary Barnes" number="5" name="Anchor Point #1: Theology" duration="00:16:36.36" group="1" active="true" iid="1610629749.01610629752.1649462091" />
+    <video speaker="Gary Barnes" number="6" name="Anchor Point #2: Systematic Theology" duration="00:07:36.36" group="1" active="true" iid="1610629749.01610629752.1648298901" />
+    <video speaker="Gary Barnes" number="7" name="Anchor Point #3: Practical Theology" duration="00:12:11.11" group="1" active="true" iid="1610629749.01610629752.1649118196" />
+    <video speaker="Gary Barnes" number="8" name="Anchor Point #4: Biblical Psychology" duration="00:15:46.46" group="1" active="true" iid="1610629749.01610629752.1649101729" />
+    <video speaker="Gary Barnes" number="9" name="Historical Developments  Part 1" duration="00:19:34.34" group="1" active="true" iid="1610629749.01610629752.1648708995" />
+    <video speaker="Gary Barnes" number="10" name="Historical Developments Part 2" duration="00:13:42.13" group="1" active="true" />
+  </unit>
+  <unit number="3" name="Foundational Models &amp; Implications" active="true">
+    <video speaker="Gary Barnes" number="1" name="Integration of Theology and Psychology" duration="00:22:21.21" group="1" active="true" iid="1610629749.01610629752.1649118289" />
+    <video speaker="Gary Barnes" number="2" name="Developing a Foundation Model" duration="00:17:59.59" group="1" active="true" iid="1610629749.01610629752.1649364180" />
+    <video speaker="Gary Barnes" number="3" name="Foundational Models:  The Against Model" duration="00:05:25.25" group="1" active="true" iid="1610629749.01610629752.1649101830" />
+    <video speaker="Gary Barnes" number="4" name="Foundational Models:  The Of Model" duration="00:14:39.39" group="1" active="true" iid="1610629749.01610629752.1648561336" />
+    <video speaker="Gary Barnes" number="5" name="Foundational Models:  The Parallels Model" duration="00:07:36.36" group="1" active="true" iid="1610629749.01610629752.1648987248" />
+    <video speaker="Gary Barnes" number="6" name="Foundational Models:  The Integrates Model" duration="00:14:38.38" group="1" active="true" iid="1610629749.01610629752.1648561367" />
+    <video speaker="Gary Barnes" number="7" name="Intradisciplinary Integration" duration="00:13:48.48" group="1" active="true" iid="1610629749.01610629752.1648757802" />
+  </unit>
+  <unit number="4" name="Biblical View of Individuals" active="true">
+    <video speaker="Gary Barnes" number="1" name="Theory in General" duration="00:08:34.34" group="1" active="true" iid="1610629749.01610629752.1649101911" />
+    <video speaker="Gary Barnes" number="2" name="Defining Personality" duration="00:05:34.34" group="1" active="true" iid="1610629749.01610629752.1648692407" />
+    <video speaker="Gary Barnes" number="3" name="Personality Theory" duration="00:08:51.51" group="1" active="true" iid="1610629749.01610629752.1649331230" />
+    <video speaker="Gary Barnes" number="4" name="Biblical Anthropology" duration="00:20:40.40" group="1" active="true" iid="1610629749.01610629752.1649495443" />
+    <video speaker="Gary Barnes" number="5" name="Personality Theory in Practice" duration="00:20:49.49" group="1" active="true" iid="1610629749.01610629752.1648839455" />
+  </unit>
+  <unit number="5" name="Biblical View of Marriage &amp; Family" active="true">
+    <video speaker="Chip Dickens" number="1" name="Introduction to Biblical Marriage" duration="00:13:09.09" group="1" active="true" iid="1610629749.01610629752.1649364504" />
+    <video speaker="Chip Dickens" number="2" name="A Biblical Picture of Marriage: Covenant" duration="00:15:49.49" group="1" active="true" iid="1610629749.01610629752.1649118483" />
+    <video speaker="Chip Dickens" number="3" name="A Biblical Picture of Marriage: Grace" duration="00:10:26.26" group="1" active="true" iid="1610629749.01610629752.1649364386" />
+    <video speaker="Chip Dickens" number="4" name="A Biblical Picture of Marriage: Empowerment" duration="00:09:29.29" group="1" active="true" iid="1610629749.01610629752.1648692544" />
+    <video speaker="Chip Dickens" number="5" name="A Biblical Picture of Marriage: Intimacy" duration="00:08:44.44" group="1" active="true" iid="1610629749.01610629752.1648561535" />
+    <video speaker="Chip Dickens" number="6" name="Divorce" duration="00:17:32.32" group="1" active="true" iid="1610629749.01610629752.1649331367" />
+    <video speaker="Chip Dickens" number="7" name="Q/A with Dr. and Mrs. Dickens" duration="00:20:48.48" group="1" active="true" iid="1610629749.01610629752.1648299257" />
+    <video speaker="Chip Dickens" number="8" name="Marital Conflict Resolution" duration="00:18:31.31" group="1" active="true" iid="1610629749.01610629752.1649118581" />
+    <video speaker="Chip Dickens" number="9" name="Negative Interactions" duration="00:14:16.16" group="1" active="true" iid="1610629749.01610629752.1649331452" />
+    <video speaker="Chip Dickens" number="10" name="Experiences in Conflict" duration="00:13:09.79" group="1" active="true" />
+    <video speaker="Chip Dickens" number="11" name="Rules for Fighting Fair Pt. 1" duration="00:12:34.34" group="1" active="true" iid="1610629749.01610629752.1648282844" />
+    <video speaker="Chip Dickens" number="12" name="Rules for Fighting Fair Pt. 2" duration="00:16:33.33" group="1" active="true" iid="1610629749.01610629752.1648446734" />
+    <video speaker="Chip Dickens" number="13" name="Parenting Styles Pt. 1" duration="00:16:06.06" group="1" active="true" iid="1610629749.01610629752.1648987476" />
+    <video speaker="Chip Dickens" number="14" name="Parenting Styles Pt. 2" duration="00:09:23.23" group="1" active="true" iid="1610629749.01610629752.1648561660" />
+    <video speaker="Chip Dickens" number="15" name="Family Structure Pt. 1" duration="00:16:44.44" group="1" active="true" iid="1610629749.01610629752.1649495641" />
+    <video speaker="Chip Dickens" number="16" name="Family Structure Pt. 2" duration="00:15:14.14" group="1" active="true" iid="1610629749.01610629752.1648561073" />
+    <video speaker="Chip Dickens" number="17" name="Family Connectedness" duration="00:13:53.53" group="1" active="true" iid="1610629749.01610629752.1649496216" />
+  </unit>
+  <unit number="6" name="Biblical View of Church" active="true">
+    <video speaker="Gary Barnes" number="1" name="The Church" duration="00:06:55.55" group="1" active="true" iid="1610629749.01610629752.1649365203" />
+    <video speaker="Gary Barnes" number="2" name="Sub Groups Within the Church" duration="00:18:06.06" group="1" active="true" iid="1610629749.01610629752.1648431843" />
+    <video speaker="Gary Barnes" number="3" name="Secular Group Dynamics" duration="00:09:04.04" group="1" active="true" iid="1610629749.01610629752.1648693754" />
+    <video speaker="Gary Barnes" number="4" name="The Church and Change Pt. 1" duration="00:11:55.55" group="1" active="true" iid="1610629749.01610629752.1648972666" />
+    <video speaker="Gary Barnes" number="5" name="The Church and Change Pt. 2" duration="00:13:46.46" group="1" active="true" iid="1610629749.01610629752.1649103175" />
+  </unit>
+  <unit active="true" number="7" name="Expertise Model">
+    <video speaker="Chip Dickens" active="true" number="1" name="Introduction to Expertise Model" duration="00:14:05.05" group="1" iid="1610629749.01610629752.1649365362" />
+    <video speaker="Chip Dickens" active="true" number="2" name="Areas of Expertise" duration="00:14:02.02" group="1" iid="1610629749.01610629752.1648972762" />
+    <video speaker="Pam Stenzel" active="true" number="3" name="Expertise Model Pt. 1" duration="00:14:49.49" group="1" iid="1610629749.01610629752.1648693885" />
+    <video speaker="Pam Stenzel" active="true" number="4" name="Expertise Model Pt. 2" duration="00:17:24.24" group="1" iid="1610629749.01610629752.1649332451" />
+    <video speaker="Pam Stenzel" active="true" number="5" name="Expertise Model Pt. 3" duration="00:16:37.37" group="1" iid="1610629749.01610629752.1648432058" />
+    <video speaker="Pam Stenzel" active="true" number="6" name="Expertise Model Pt. 4" duration="00:13:40.40" group="1" iid="1610629749.01610629752.1648611535" />
+  </unit>
+  <unit active="true" number="8" name="Pastoral Model">
+    <video speaker="Bill Bryan" active="true" number="1" name="We Need You!" duration="00:19:42.42" group="1" iid="1610629749.01610629752.1649496496" />
+    <video speaker="Bill Bryan" active="true" number="2" name="Where People Go First for Help" duration="00:05:30.30" group="1" iid="1610629749.01610629752.1649365629" />
+    <video speaker="Bill Bryan" active="true" number="3" name="Kinds of People You Counsel in Ministry" duration="00:15:49.49" group="1" iid="1610629749.01610629752.1648284195" />
+    <video speaker="Bill Bryan" active="true" number="4" name="Philosophy of Pastoral Counseling" duration="00:21:39.39" group="1" iid="1610629749.01610629752.1648710885" />
+    <video speaker="Bill Bryan" active="true" number="5" name="Demonstration of Philosophy" duration="00:18:30.30" group="1" iid="1610629749.01610629752.1648432310" />
+    <video speaker="Bill Bryan" active="true" number="6" name="Chaplain's &quot;PBR&quot;" duration="00:17:06.06" group="1" iid="1610629749.01610629752.1648694202" />
+    <video speaker="Chip Dickens" active="true" number="7" name="Confidentiality and Dual Relationships" duration="00:09:56.56" group="1" iid="1610629749.01610629752.1648284329" />
+  </unit>
+  <unit active="true" number="9" name="Lay Caring Model">
+    <video speaker="Chip Dickens" active="true" number="1" name="Ministry of Presence" duration="00:18:30.30" group="1" iid="1610629749.01610629752.1648448116" />
+    <video speaker="Chip Dickens" active="true" number="2" name="Stephen Ministry" duration="00:18:42.42" group="1" iid="1610629749.01610629752.1648563097" />
+    <video speaker="Chip Dickens" active="true" number="3" name="Suicide Assessment" duration="00:12:18.18" group="1" iid="1610629749.01610629752.1649463649" />
+    <video speaker="Chip Dickens" active="true" number="4" name="Suicide Risk Factors" duration="00:16:31.31" group="1" iid="1610629749.01610629752.1648611810" />
+    <video speaker="Chip Dickens" active="true" number="5" name="Levels of Suicide Risk" duration="00:11:04.04" group="1" iid="1610629749.01610629752.1648300674" />
+    <video speaker="Chip Dickens" active="true" number="6" name="Practical Suggestions for Crisis" duration="00:11:36.36" group="1" iid="1610629749.01610629752.1649119851" />
+  </unit>
+  <unit active="true" number="10" name="Clinical Professional Model">
+    <video speaker="Gary Barnes" active="true" number="1" name="DSM-IV Part 1" duration="00:18:58.02" group="1" />
+    <video speaker="Gary Barnes" active="true" number="2" name="DSM-IV Part 2" duration="00:18:55.40" group="1" />
+    <video speaker="Donald Meichenbaum" active="true" number="3" name="A Cognitive-Behavioral Approach  Part 1" duration="00:14:33.02" group="1" />
+    <video speaker="Donald Meichenbaum" active="true" number="4" name="A Cognitive-Behavioral Approach  Part 2" duration="00:16:07.07" group="1" />
+    <video speaker="Donald Meichenbaum" active="true" number="5" name="A Cognitive-Behavioral Approach  Part 3" duration="00:15:20.13" group="1" />
+    <video speaker="Donald Meichenbaum" active="true" number="6" name="A Cognitive-Behavioral Approach  Part 4" duration="00:11:33.08" group="1" />
+    <video speaker="Donald Meichenbaum" active="true" number="7" name="A Cognitive-Behavioral Approach  Part 5" duration="00:08:08.45" group="1" />
+  </unit>
+</course>

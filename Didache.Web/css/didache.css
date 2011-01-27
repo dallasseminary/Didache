@@ -1,0 +1,273 @@
+﻿body {
+	background: #ddd;
+	font-family: Helvetica, Arial;
+	font-size: 12px;
+	line-height: 140%;	
+}
+/* for older forums posts */
+font {
+	font-size: 12px;
+	line-height: 140%;	
+}
+
+
+#nav {}
+	#main-menu {
+		width: 960px;
+		margin: 0 auto;
+		overflow: hidden;	
+	}
+	#main-menu li {
+		float: left;
+		display: inline;	
+	}
+	#main-menu li a {
+		float: left;
+		display: block;	
+		padding: 10px 20px;
+		margin: 0 10px 0 0;
+		border-radius: 10px 10px 0 0;
+		background: #333;
+		color: #fff;
+		text-decoration: none;
+	}
+	#main-menu li a:hover {
+		background: #555;
+	}
+	#main-menu li a.selected {
+		background: #111;
+	}
+	
+	#sub-menu {
+		background: #111;
+		overflow: hidden;
+		height: 40px;
+	}
+	#sub-menu .sub-menu-item {
+		width: 960px;
+		margin: 0 auto;
+		overflow: hidden;	
+		display: none;	
+	}
+	#sub-menu .sub-menu-item.selected {	
+		display: block;	
+	}
+	
+	#sub-menu .sub-menu-item ul li {
+		float: left;
+		display: inline;
+	}
+	#sub-menu .sub-menu-item ul li a, 
+	#sub-menu .sub-menu-item ul li span {
+		float: left;
+		display: block;	
+		padding: 4px 5px;
+		margin: 8px 6px 4px 0;
+		text-decoration: none;
+		color: #fff;
+	}
+	#sub-menu .sub-menu-item ul li a {
+		background: #999;
+		border-radius: 6px;
+		color: #222;
+	}	
+
+#main {
+	width: 920px;
+	padding: 20px;
+	margin: 0 auto;
+	background: #fff;
+}
+.clear {
+	clear: both;
+}
+
+/* student */
+#main-column {
+	float: left;
+	width: 650px;
+}
+#sub-column {
+	float: right;
+	width: 250px;
+}
+
+
+#course-tabs {
+	overflow: hidden;
+	border-bottom: solid 1px #333;	
+}
+
+	#course-tabs li {
+		float: left;
+		display: inline;
+	}
+
+	#course-tabs li a {
+		float: left;
+		display: block;
+		padding: 10px;
+		margin: 0 5px -1px 5px;	
+		text-decoration: none;
+		width: 120px;
+		border: solid 1px #333;
+		border-radius: 10px 10px 0 0;
+		color: #222;
+		background: #eee;
+		z-index:1;
+	}
+	#course-tabs li a:hover {
+		background: #eef;
+	}
+	#course-tabs li a.selected {
+		background: #fff;
+		border-bottom: #fff;
+	}
+
+	#course-tabs li a span{
+		display: block;
+		font-weight: bold;
+		white-space: nowrap;
+	}
+	#course-tabs li a dfn{
+		display: block;
+		font-style: italic;
+		margin: 5px 0 0 0;
+		white-space: nowrap;
+		color: #888;
+	}
+
+#course-roster {
+	overflow: hidden;
+}
+	#course-roster .course-group {
+		padding: 20px;
+	}
+	#course-roster .course-group:nth-child(odd) {
+		background: #eee;
+	}
+	#course-roster .course-group-members {
+		overflow: hidden;
+	}
+	#course-roster .course-group-name {
+		font-size: 20px;
+		padding: 5px 0;
+		font-weight: bold;
+		display: block;
+	}	
+	#course-roster .course-group-member {
+		width: 120px;
+		height: 200px;
+		float: left;		
+		margin: 5px;
+	}	
+	#course-roster .course-group-member img {
+		width: 100px;	
+		height: 125px;
+	}			
+
+#schedule-tasks {
+}
+
+	#schedule-tasks .task-entry {	
+		border: solid 1px #666;		
+	}
+	#schedule-tasks .task-entry:nth-child(odd) {	
+		background: #eee;
+	}	
+
+	#schedule-tasks .task-entry .task-info {
+		width: 100px;
+		float: left;
+	}
+	#schedule-tasks .task-entry .task-info .task-status {
+		margin: 15px;
+		display: block;
+	}	
+
+	#schedule-tasks .task-entry .task-details {
+		width: 500px;
+		float: left;
+	}	
+	
+	#schedule-tasks .task-entry .task-name {
+		font-weight: bold;
+		font-size: 120%;
+		margin: 5px 0;
+	}	
+	
+	
+/* video task */
+.video-list
+	{ overflow: hidden; }
+.video-list .video
+	{ float: left; width: 110px; height: 160px; margin: 0 15px 15px 0; text-align: center;}
+
+.video-list .video-thumb
+	{ width: 100px; height: 78px; border: solid 3px #999; margin: 0 auto 8px auto; }
+.video-list .video-options-container
+	{ width: 100px; height: 75px; text-align: left;}
+.video-list .video-options-container .video-options
+	{ display: none; padding: 5px;  background-image: url(/assets/images/ui/semi-transparent-000000-50.png); }
+#main .video-list .video-options-container .video-options a
+	{ color: #fff; font-weight: bold; font-size: 11px; }	
+.video-list .video-thumb:hover .video-options-container .video-options
+	{ display: block;}	
+.video-list .progress-outline 
+	{ background: #ccc; width: 100px; margin: 0;  }
+.video-list .progress-percent 
+	{ background: #01b600; height: 3px; margin: 0; }	
+	
+.video-list .video span
+	{ display: block; }
+.video-list .video .video-title
+	{ font-size: 12px; }	
+.video-list .video span.video-length
+	{ font-size: 11px; color: #999; }	
+
+.video-list .icon
+	{ display: block; padding: 3px 0 3px 19px; background-position: left center; background-repeat: no-repeat; }
+.video-list .watchvideo
+	{ background-image: url(/assets/images/icons/famfamfam_silk_icons/control_play.png); }
+.video-list .slides
+	{ background-image: url(/assets/images/icons/famfamfam_silk_icons/picture_save.png); }
+.video-list .transcript
+	{ background-image: url(/assets/images/icons/famfamfam_silk_icons/page_save.png); }	
+
+
+/* Forums */
+
+.forum-posts {
+	border-collapse: collapse;
+}
+	.forum-posts tbody tr:nth-child(odd) {
+		background: #eee;
+	}
+	.forum-posts tbody td, .forum-posts tbody th{
+		text-align: left;
+		padding: 10px;
+		border: solid 1px #999;
+	}
+	.forum-posts tbody td{
+		text-align: left;
+		padding: 10px;
+		border: solid 1px #999;
+	}
+	.forum-posts .post-author {
+		width: 150px;
+	}
+
+
+/* ADMIN */
+.admin-list {
+	border-collapse: collapse;
+}
+
+.admin-list td, .admin-list th{
+	padding: 4px;
+}
+.admin-list thead th{
+	background: #333;
+	color: #eee;
+	padding: 6px 4px;
+}
