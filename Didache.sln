@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DidacheWeb", "DidacheWeb\DidacheWeb.csproj", "{BD8F2541-7402-46B1-8E47-A95BD77FB8D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Didache", "Didache.Core\Didache.Core\Didache.csproj", "{287140B7-0BD7-4F9A-A3B3-2F4ED02C6B72}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Didache", "Didache.Core\Didache.csproj", "{287140B7-0BD7-4F9A-A3B3-2F4ED02C6B72}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Didache.Web", "Didache.Web\Didache.Web.csproj", "{4BAD6690-E3AC-4E39-8638-F0E0360345C0}"
 EndProject
