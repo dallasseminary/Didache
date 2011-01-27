@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Didache.Web.Areas.Admin.Controllers
 {
-    public class HomeController : Controller
+    public class AdminController : Controller
     {
         //
         // GET: /Admin/Home/
