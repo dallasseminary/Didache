@@ -1,0 +1,6 @@
+
+#ignore Visual studio
+Didache.Core/obj/*
+Didache.Core/bin/*
+Didache.Web/obj/*
+Didache.Web/bin/*
