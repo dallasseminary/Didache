@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Didache.Web.Controllers
 {
-    public class HomeController : Controller
+    public class MainController : Controller
     {
         //
         // GET: /Home/
