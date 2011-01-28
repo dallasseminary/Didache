@@ -1,0 +1,69 @@
+﻿@model Didache.UserTaskData
+
+@{	
+	
+	List<VideoInfo> Videos = new List<VideoInfo>();
+
+	string locaThumbBase = "/supportfiles";
+	string externalThumbBase = "http://oefiles.dts.edu";
+
+	// load XML
+	string xmlPath = System.Web.HttpContext.Current.Server.MapPath(String.Format("~/supportfiles/{0}/Titles/en-US.xml", Model.Task.Course.CourseCode));
+	
+	if (File.Exists(xmlPath))
+	{
+		System.Xml.XmlDocument doc = new System.Xml.XmlDocument();
+		doc.Load(xmlPath);
+
+		Random random = new Random();
+
+		// pull videos
+		System.Xml.XmlNodeList videoNodes = doc.SelectNodes("//unit[@number=" + Model.Task.Unit.SortOrder + "]/video");
+		foreach (System.Xml.XmlNode vNode in videoNodes)
+		{
+
+			Videos.Add(new VideoInfo
+						{
+							Title = vNode.Attributes["name"].Value,
+							Duration = vNode.Attributes["duration"].Value,
+							VideoUrl = String.Format("{0}/{1}/{2}_u{3}_v{4}.mp4", externalThumbBase, Model.Task.Course.CourseCode.ToLower(), Model.Task.Course.CourseCode.ToUpper(), Model.Task.Unit.SortOrder.ToString().PadLeft(3, '0'), vNode.Attributes["number"].Value.ToString().PadLeft(3, '0')),
+
+							ThumbnailFilename = String.Format("{0}_u{1}_v{2}_thumb.jpg", Model.Task.Course.CourseCode.ToUpper(), Model.Task.Unit.SortOrder.ToString().PadLeft(3, '0'), vNode.Attributes["number"].Value.ToString().PadLeft(3, '0')),
+
+							//ThumbnailUrl = String.Format("{0}/{1}/videos/{2}_u{3}_v{4}_thumb.jpg", locaThumbBase, Model.Course.CourseCode.ToLower(), Model.Course.CourseCode.ToUpper(), Model.Unit.UnitNumber.ToString().PadLeft(3, '0'), vNode.Attributes["number"].Value.ToString().PadLeft(3, '0')),
+							ThumbnailUrl = String.Format("{0}/{1}/{2}_u{3}_v{4}_thumb.jpg", externalThumbBase, Model.Task.Course.CourseCode.ToLower(), Model.Task.Course.CourseCode.ToUpper(), Model.Task.Unit.SortOrder.ToString().PadLeft(3, '0'), vNode.Attributes["number"].Value.ToString().PadLeft(3, '0')),
+							PercentComplete = random.Next(100)
+						});
+		}
+	}
+	
+}
+
+<div class="video-list">
+@foreach (VideoInfo v in Videos) {
+	<div class="video">
+
+		<div class="video-thumb"  title="You have watched about @((Double)v.Minutes*(Double)v.PercentComplete/100) out of the @v.Minutes minutes in this video">
+			<div class="video-options-container" style="background-image:url(@v.ThumbnailUrl);">
+				<div class="video-options">
+					<a class="icon watchvideo" href="javascript:void(0);">watch</a>
+					<a class="icon slides" href="javascript:void(0);">slides</a>
+					<a class="icon transcript" href="javascript:void(0);">transcript</a>
+				</div>
+			</div>
+			<div class="progress-outline" >
+				<div class="progress-percent" style="width:@(v.PercentComplete)px"></div>
+			</div>					
+		</div>					
+				
+		<a href="javascript:void(0);" title="You have watched about @((Double)v.Minutes*(Double)v.PercentComplete/100) out of the @v.Minutes minutes in this video">
+			<span class="video-title">@v.Title</span>
+			<span class="video-length">@v.FormattedDuration</span>
+		</a>
+	</div>
+
+}
+</div>
+
+@{Html.RenderPartial("TaskType-SimpleCompletion", Model); }
+

@@ -35,7 +35,7 @@
 				</div>	
 											
 				<div class="task-interaction">
-					Html.RenderPartial("TaskType-" + userTaskData.Task.TaskTypeName + "", userTaskData);
+					@{Html.RenderPartial("TaskType-" + userTaskData.Task.TaskTypeName + "", userTaskData);}
 				</div>
 			</div>
 
