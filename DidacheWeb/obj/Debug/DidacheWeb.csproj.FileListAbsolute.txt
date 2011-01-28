@@ -1,7 +1,0 @@
-D:\git\didache\DidacheWeb\obj\Debug\ResolveAssemblyReference.cache
-D:\git\didache\DidacheWeb\bin\Didache.dll
-D:\git\didache\DidacheWeb\bin\Didache.pdb
-d:\git\didache\DidacheWeb\bin\Didache.Web.dll
-d:\git\didache\DidacheWeb\bin\Didache.Web.pdb
-d:\git\didache\DidacheWeb\obj\Debug\Didache.Web.dll
-d:\git\didache\DidacheWeb\obj\Debug\Didache.Web.pdb
