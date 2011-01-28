@@ -4,3 +4,9 @@ Didache.Core/obj/Debug/*
 Didache.Core/bin/*
 Didache.Web/obj/Debug/*
 Didache.Web/bin/*
+Didache.Web/App_Data/*
+Didache.Web/setup/*
+Didache.Web/uploads/*
+DidacheWeb/*
+Setup/*
+database/*
