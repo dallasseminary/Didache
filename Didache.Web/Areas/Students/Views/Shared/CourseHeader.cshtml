@@ -5,5 +5,5 @@
 <div id="course-header">
 	<h2>@course.CourseCode @course.Section - @course.Name</h2>
 	<h3>@course.Session.Name @course.Campus.Name</h3>
-	<p>@course.Description</p>
+	<p>@Html.Raw(course.Description)</p>
 </div>
