@@ -82,11 +82,21 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Admin\Controllers\CampusesController.cs" />
-    <Compile Include="Areas\Admin\Controllers\CoursesController.cs" />
-    <Compile Include="Areas\Admin\Controllers\GradingController.cs" />
-    <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
-    <Compile Include="Areas\Admin\Controllers\SessionsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Areas\Admin\Controllers\CampusesController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Areas\Admin\Controllers\CoursesController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Areas\Admin\Controllers\GradingController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Areas\Admin\Controllers\SessionsController.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Areas\Students\Controllers\ApiController.cs" />
     <Compile Include="Areas\Students\Controllers\CoursesController.cs" />
     <Compile Include="Areas\Students\Controllers\DiscussionController.cs" />
@@ -147,7 +157,6 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\Students\Models\" />
-    <Folder Include="Areas\Students\Views\Shared\" />
     <Folder Include="supportfiles\be101\" />
     <Folder Include="uploads\" />
   </ItemGroup>
@@ -230,6 +239,56 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Students\Views\Courses\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Students\Views\Courses\Schedule.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Students\Views\_ViewStart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Students\Views\Shared\CourseHeader.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Students\Views\Shared\CourseMenu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Students\Views\Courses\Roster.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Students\Views\Courses\Dashboard.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Students\Views\Courses\Assignments.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Students\Views\Courses\Files.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Students\Views\Discussion\Forum.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Students\Views\Discussion\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Students\Views\Discussion\Thread.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Students\Views\Shared\TaskType-SimpleCompletion.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Students\Views\Shared\TaskType-SimpleCompletionNoGrade.cshtml" />
+    <Content Include="Areas\Students\Views\Shared\TaskType-Survey.cshtml" />
+    <Content Include="Areas\Students\Views\Shared\TaskType-TurnInFileForComment.cshtml" />
+    <Content Include="Areas\Students\Views\Shared\TaskType-TurnInFileSimple.cshtml" />
+    <Content Include="Areas\Students\Views\Shared\TaskType-VideoListing.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Students\Views\Shared\TaskType-CommentOnClassmatesFile.cshtml" />
+    <Content Include="Areas\Students\Views\Shared\TaskType-Default.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
