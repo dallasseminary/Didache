@@ -13,9 +13,9 @@
 		<div class="grid_6">
 			<div id="dts-account">				
 @if (Request.IsAuthenticated) {	
-	<b>@User.Identity.Name</b> @Html.ActionLink("Log Off", "LogOff", "Account")		
+	<b>@User.Identity.Name</b> <a href="/logout.aspx">Logout</a>
 } else {	
-	@Html.ActionLink("Login", "Login", "Account")	
+	<a href="/loginas.aspx?username=john.locoe">Login</a>
 }
 							
 			</div>
