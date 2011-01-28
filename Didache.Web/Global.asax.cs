@@ -30,6 +30,20 @@ namespace Didache.Web {
 
 			RegisterGlobalFilters(GlobalFilters.Filters);
 			RegisterRoutes(RouteTable.Routes);
+
+			// fixes a caching problem on attributes like [AllowHtml]
+			ModelMetadataProviders.Current = new DataAnnotationsModelMetadataProvider();
+
+			// String.Empty instead of null for empty form fields
+			ModelBinders.Binders.DefaultBinder = new EmptyStringModelBinder();
+		}
+	}
+
+
+	public class EmptyStringModelBinder : DefaultModelBinder {
+		public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext) {
+			bindingContext.ModelMetadata.ConvertEmptyStringToNull = false;
+			return base.BindModel(controllerContext, bindingContext);
 		}
 	}
 }
