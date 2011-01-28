@@ -87,6 +87,10 @@
     <Compile Include="Areas\Admin\Controllers\GradingController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\SessionsController.cs" />
+    <Compile Include="Areas\Students\Controllers\ApiController.cs" />
+    <Compile Include="Areas\Students\Controllers\CoursesController.cs" />
+    <Compile Include="Areas\Students\Controllers\DiscussionController.cs" />
+    <Compile Include="Areas\Students\StudentsAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Global.asax.cs">
@@ -95,6 +99,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Didache.mdf" />
+    <Content Include="App_Data\Didache_log.ldf">
+      <DependentUpon>Didache.mdf</DependentUpon>
+    </Content>
     <Content Include="logout.aspx" />
     <Content Include="css\didache.css" />
     <Content Include="css\dts-common.css" />
@@ -122,7 +130,9 @@
     <Content Include="js\MicrosoftMvcValidation.js" />
     <Content Include="loginas.aspx" />
     <Content Include="setup\username conversion.sql" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -136,6 +146,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\Shared\" />
+    <Folder Include="Areas\Students\Models\" />
+    <Folder Include="Areas\Students\Views\Shared\" />
     <Folder Include="supportfiles\be101\" />
     <Folder Include="uploads\" />
   </ItemGroup>
@@ -186,6 +198,38 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\Sessions\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="connectionStrings.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Courses\List.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Courses\Units.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Courses\Tasks.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Courses\Task.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Courses\Groups.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Grading\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Grading\Grid.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Students\Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Students\Views\Courses\Index.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

@@ -1,6 +1,6 @@
 
 #ignore Visual studio
-Didache.Core/obj/*
+Didache.Core/obj/Debug/*
 Didache.Core/bin/*
-Didache.Web/obj/*
+Didache.Web/obj/Debug/*
 Didache.Web/bin/*
