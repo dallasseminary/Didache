@@ -1,0 +1,18 @@
+﻿@model List<Forum>
+@{
+	ViewBag.Title = "Forum";
+}
+
+@{Html.RenderPartial("CourseHeader"); }
+
+@{Html.RenderPartial("CourseMenu"); }
+
+@foreach (Forum forum in Model) { 
+
+<div class="course-forum">
+	<a href="/courses/@ViewContext.RouteData.Values["slug"]/discussion/forum/@forum.ForumID">@forum.Name</a>
+	<br />
+	@forum.Description
+</div>
+
+}

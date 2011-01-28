@@ -1,0 +1,10 @@
+﻿@model Course
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Grading</h2>
+
+<a href="/admin/grading/@Model.CourseID/grid">Grid</a>

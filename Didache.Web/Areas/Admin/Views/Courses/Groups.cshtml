@@ -1,0 +1,20 @@
+﻿@model List<CourseUserGroup>
+
+@{
+	ViewBag.Title = "Groups";
+}
+
+<h2>Groups</h2>
+
+<ul>
+@foreach (CourseUserGroup group in Model) {
+<li>@group.Name
+
+	<ul>
+		@foreach (CourseUser user in group.Students) {
+		<li>@user.User.FullName</li>
+  }
+	</ul>
+</li>
+}
+</ul>

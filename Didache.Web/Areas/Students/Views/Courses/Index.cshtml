@@ -1,0 +1,13 @@
+﻿@model List<Didache.Course>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<ul>
+@foreach (Course course in Model) {
+	<li><a href="/courses/@course.Slug">@course.CourseCode</a> (@course.Session.Name)</li>
+}
+</ul>

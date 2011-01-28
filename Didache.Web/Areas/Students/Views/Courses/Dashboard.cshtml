@@ -1,0 +1,24 @@
+﻿@model Didache.Course
+
+@{
+ 
+}
+
+@{Html.RenderPartial("CourseHeader"); }
+
+@{ Html.RenderPartial("CourseMenu"); }
+
+<ul>
+@foreach (Didache.Unit unit in Model.Units) {
+	<li>
+		@unit.SortOrder. @unit.Name
+		<ul>
+		@foreach (Task task in unit.Tasks) {
+			<li>
+				@task.Name
+			</li>
+		}
+		</ul>	
+	</li>
+  }
+</ul>
