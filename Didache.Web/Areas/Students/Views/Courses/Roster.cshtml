@@ -20,10 +20,10 @@ ROSTER
 			<span class="course-group-name">@group.Name</span>
 			<div class="course-group-members">
 			@foreach (CourseUser user in group.Students) {
-				<div class="course-group-member">				
+				<a class="course-group-member" href="@user.User.ProfileDisplayUrl">				
 					<img src="@user.User.ProfileImageUrl" />
-					<span>@user.User.FullName</span>
-				</div>
+					<span>@user.User.FormattedName</span>
+				</a>
 			}
 			</div>
 		</div>

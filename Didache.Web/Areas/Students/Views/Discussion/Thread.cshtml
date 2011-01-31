@@ -16,9 +16,10 @@
 @foreach (Post post in Model.Posts) {
 	<tr>
 		<th>			
-			@post.User.FormattedName
-			<br />
-			<img src="http://www.dts.edu/images/carsphotos/photo.ashx?id=@post.UserID" alt="@post.UserName" class="post-author" />
+			<a href="@post.User.ProfileDisplayUrl">
+				<img src="@post.User.ProfileImageUrl" alt="@post.UserName" class="post-author" />				
+				<span class="name">@post.User.FormattedName</span>
+			</a>
 		</th>
 		<td>
 			<div class="date">
