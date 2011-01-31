@@ -47,7 +47,7 @@ namespace Didache  {
 		}
 
 		public static List<Course> GetUsersCourses(CourseUserRole roleID) {
-			return GetUsersCourses(Users.GetLoggedInProfile().UserID, roleID);
+			return GetUsersCourses(Users.GetLoggedInUser().UserID, roleID);
 		}
 
 		public static List<Course> GetUsersCourses(int userID, CourseUserRole roleID) {
@@ -58,7 +58,7 @@ namespace Didache  {
 		}
 
 		public static List<Course> GetUsersRunningCourses(CourseUserRole roleID) {
-			User profile = Users.GetLoggedInProfile();
+			User profile = Users.GetLoggedInUser();
 
 			if (profile != null)
 				return GetUsersRunningCourses(profile.UserID, roleID);

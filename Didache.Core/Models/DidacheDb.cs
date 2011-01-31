@@ -28,13 +28,18 @@ namespace Didache {
 		public DbSet<UserTaskData> UserTasks { get; set; }
 
 		// people
-		public DbSet<User> Profiles { get; set; }
+		public DbSet<User> Users { get; set; }
 		public DbSet<CourseUser> CourseUsers { get; set; }
 
 		// forums
 		public DbSet<Forum> Forums { get; set; }
 		public DbSet<Post> Posts { get; set; }
 		public DbSet<Thread> Threads { get; set; }
+
+
+		// interactions
+		public DbSet<InteractionPost> InteractionPosts { get; set; }
+		public DbSet<InteractionThread> InteractionThreads { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder) {
 			// TODO: Use Fluent API Here 
@@ -99,6 +104,11 @@ namespace Didache {
 
 			modelBuilder.Entity<Post>()
 				.ToTable("oe_Forums_Posts");
+
+
+			// interactions
+
+			
 		}
 	}
 

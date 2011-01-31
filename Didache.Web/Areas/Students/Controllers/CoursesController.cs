@@ -13,7 +13,7 @@ namespace Didache.Web.Areas.Students.Controllers
 		public ActionResult Index() {
 
 			List<Course> courses = null;
-			User profile = Users.GetLoggedInProfile();
+			User profile = Users.GetLoggedInUser();
 
 			if (profile != null)
 				courses = Didache.Courses.GetUsersCourses(profile.UserID, CourseUserRole.Student);
@@ -54,7 +54,7 @@ namespace Didache.Web.Areas.Students.Controllers
 
 			// get tasks
 			if (currentUnit != null) {
-				userTasks = Tasks.GetUserTaskDataInUnit(currentUnit.UnitID, Users.GetLoggedInProfile().UserID);
+				userTasks = Tasks.GetUserTaskDataInUnit(currentUnit.UnitID, Users.GetLoggedInUser().UserID);
 			}
 			
 			ViewBag.Units = units;
