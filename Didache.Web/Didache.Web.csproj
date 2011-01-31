@@ -34,8 +34,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files\Microsoft ADO.NET Entity Framework Feature CTP5\Binaries\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+      <HintPath>..\packages\EFCodeFirst.0.8\lib\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.WebPages" />
@@ -113,9 +113,11 @@
     <Content Include="App_Data\Didache_log.ldf">
       <DependentUpon>Didache.mdf</DependentUpon>
     </Content>
+    <Content Include="css\layout.css" />
+    <Content Include="css\admin.css" />
+    <Content Include="js\jquery-1.5.js" />
+    <Content Include="js\jquery-1.5.min.js" />
     <Content Include="logout.aspx" />
-    <Content Include="css\didache.css" />
-    <Content Include="css\dts-common.css" />
     <Content Include="css\reset.css" />
     <Content Include="Global.asax" />
     <Content Include="js\jquery-1.4.4-vsdoc.js" />
@@ -289,6 +291,12 @@
   <ItemGroup>
     <Content Include="Areas\Students\Views\Shared\TaskType-CommentOnClassmatesFile.cshtml" />
     <Content Include="Areas\Students\Views\Shared\TaskType-Default.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="css\students.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
