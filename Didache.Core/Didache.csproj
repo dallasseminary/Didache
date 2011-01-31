@@ -63,6 +63,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Courses\Campuses.cs" />
+    <Compile Include="Models\Courses\Interactions\Post.cs" />
+    <Compile Include="Models\Courses\Interactions\Thread.cs" />
     <Compile Include="Models\Courses\VideoInfo.cs" />
     <Compile Include="Models\Grading\Grading.cs" />
     <Compile Include="Models\Courses\Courses.cs" />
