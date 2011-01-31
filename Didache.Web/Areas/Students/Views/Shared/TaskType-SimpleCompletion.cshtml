@@ -3,7 +3,7 @@
    
 }
 @if (Model.TaskCompletionStatus != TaskCompletionStatus.Completed) {
-	<input type="button" class="mark-completed" value="Mark Completed" />
+	<input type="button" class="mark-completed task-submit" value="Mark Completed"  />
 }
 	
 @if (Model.Task.IsSkippable && Model.TaskCompletionStatus == TaskCompletionStatus.NotStarted) {

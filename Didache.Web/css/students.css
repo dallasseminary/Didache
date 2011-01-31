@@ -229,18 +229,33 @@ font {
 	border-collapse: collapse;
 }
 	.forum-posts tbody tr:nth-child(odd) {
-			background: #eee;
+		background: #eee;
 	}
 	.forum-posts tbody td, .forum-posts tbody th{
-			text-align: left;
-			padding: 10px;
-			border: solid 1px #999;
+		text-align: left;
+		padding: 10px;
+		border: solid 1px #999;
 	}
 	.forum-posts tbody td{
-			text-align: left;
-			padding: 10px;
-			border: solid 1px #999;
+		vertical-align: top;
+		text-align: left;
+		padding: 10px;
+		border: solid 1px #999;
 	}
 	.forum-posts .post-author {
-			width: 150px;
+		width: 150px;
 	}
+
+
+.task-submit {
+	color: #fff;
+	padding: 3px 12px;
+	border-radius: 14px;
+	background: #33ee33;
+	border: 0;
+}
+.task-submit:hover {
+	background: #66cc66;
+	cursor: pointer;
+
+}
