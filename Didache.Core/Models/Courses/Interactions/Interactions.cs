@@ -9,6 +9,8 @@ namespace Didache {
 		public static List<InteractionThread> GetInteractionThreads(int taskID) {
 			return new DidacheDb()
 				.InteractionThreads
+				.Include("Posts")
+				.Include("Posts.User")
 				.Where(t => t.TaskID == taskID)
 				.OrderByDescending(t => t.ThreadDate)
 				.ToList();
