@@ -169,11 +169,15 @@ font {
 		 padding: 5px;  
 		 background-image: url(/assets/images/ui/semi-transparent-000000-50.png); 
 	}
-	#main .video-list .video-options-container .video-options a {
+	.video-list .video-options-container .video-options a {
 		 color: #fff; 
 		 font-weight: bold; 
 		 font-size: 11px; 
+		 text-decoration: none;
 	}	
+	.video-list .video-options-container .video-options a:hover {
+		 text-decoration: underline;
+	}		
 	.video-list .video-thumb:hover .video-options-container .video-options {
 		 display: block;
 	}	
@@ -189,11 +193,17 @@ font {
 	.video-list .video span {
 		 display: block; 
 	}
-	.video-list .video .video-title {
+	.video-list .video .video-info {
 		 font-size: 12px; 
+		 text-decoration: none;
 	}	
-	.video-list .video span.video-length {
-		 font-size: 11px; 
+	.video-list .video .video-info .title {
+		 color: #333; 
+	}	
+	.video-list .video .video-info:hover .title {
+		 text-decoration: underline;
+	}		
+	.video-list .video .video-info .duration {
 		 color: #999; 
 	}	
 	.video-list .icon {
