@@ -109,6 +109,13 @@ namespace Didache {
 			}
 		}
 
+
+		public string ProfileDisplayUrl {
+			get {
+				return "/profiles/" + ((Username != "") ? Username : UserID.ToString());
+			}
+		}
+
 		public string Title { get; set; }
 		public string Suffix { get; set; }
 
