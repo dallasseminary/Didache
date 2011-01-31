@@ -39,11 +39,20 @@ namespace Didache.Web.Areas.Students.Controllers
 			List<UserTaskData> userTasks = null;
 
 			if (id.HasValue) {
+				// pick unit specified in URL
 				currentUnit = units.AsQueryable().SingleOrDefault(u => u.UnitID == id.Value);
 			} else {
+				// pick current URL by date
 				currentUnit = units.AsQueryable().SingleOrDefault(u => u.StartDate <= DateTime.Now && u.EndDate >= DateTime.Now);
 			}
 
+			// fallback to first unit
+			if (currentUnit == null && units.Count > 0) {
+				currentUnit = units[0];
+			}
+
+
+			// get tasks
 			if (currentUnit != null) {
 				userTasks = Tasks.GetUserTaskDataInUnit(currentUnit.UnitID, Users.GetLoggedInProfile().UserID);
 			}
