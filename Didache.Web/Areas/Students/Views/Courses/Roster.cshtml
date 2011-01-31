@@ -1,29 +1,28 @@
-﻿@model List<CourseUserGroup>
+﻿@model Course
 
 @{
-    ViewBag.Title = "Roster";
+    ViewBag.Title = Model.CourseCode + Model.Section + " " + Resources.labels.coursetabs_roster;
 }
 
-
-@{Html.RenderPartial("CourseHeader"); }
+@{ Html.RenderPartial("CourseHeader"); }
 
 @{ Html.RenderPartial("CourseMenu"); }
-
-ROSTER
 
 <div id="main-column">
 
 	<div id="course-roster">
 
-	@foreach (Didache.CourseUserGroup group in Model) {
+	@foreach (Didache.CourseUserGroup group in ViewBag.UserGroups) {
 		<div class="course-group">
 			<span class="course-group-name">@group.Name</span>
 			<div class="course-group-members">
 			@foreach (CourseUser user in group.Students) {
+				if (user.User != null) {
 				<a class="course-group-member" href="@user.User.ProfileDisplayUrl">				
 					<img src="@user.User.ProfileImageUrl" />
 					<span>@user.User.FormattedName</span>
 				</a>
+				}
 			}
 			</div>
 		</div>

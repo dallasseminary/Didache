@@ -1,7 +1,8 @@
-﻿@{
-    ViewBag.Title = "Assignments";
+﻿@model Course
+		   
+@{
+	ViewBag.Title = Model.CourseCode + Model.Section + " " + Resources.labels.coursetabs_assignments;
 }
-
 
 @{Html.RenderPartial("CourseHeader"); }
 
