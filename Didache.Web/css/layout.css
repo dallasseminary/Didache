@@ -1,0 +1,95 @@
+﻿body {
+	background: #ddd;
+	font-family: Helvetica, Arial;
+	font-size: 12px;
+	line-height: 140%;	
+}
+
+
+#dts-common-menu {
+	width: 960px;
+	margin: 5px auto;
+	overflow: hidden;
+}
+#dts-sites {
+	float: left;
+	width: 400px;
+}
+#dts-account {
+	float: right;
+	width: 400px;
+	text-align: right;
+}
+
+
+#nav {}
+	#main-menu {
+		width: 960px;
+		margin: 0 auto;
+		overflow: hidden;	
+	}
+	#main-menu li {
+		float: left;
+		display: inline;	
+	}
+	#main-menu li a {
+		float: left;
+		display: block;	
+		padding: 10px 20px;
+		margin: 0 10px 0 0;
+		border-radius: 10px 10px 0 0;
+		background: #333;
+		color: #fff;
+		text-decoration: none;
+	}
+	#main-menu li a:hover {
+		background: #555;
+	}
+	#main-menu li a.selected {
+		background: #111;
+	}
+	
+	#sub-menu {
+		background: #111;
+		overflow: hidden;
+		height: 40px;
+	}
+	#sub-menu .sub-menu-item {
+		width: 960px;
+		margin: 0 auto;
+		overflow: hidden;	
+		display: none;	
+	}
+	#sub-menu .sub-menu-item.selected {	
+		display: block;	
+	}
+	
+	#sub-menu .sub-menu-item ul li {
+		float: left;
+		display: inline;
+	}
+	#sub-menu .sub-menu-item ul li a, 
+	#sub-menu .sub-menu-item ul li span {
+		float: left;
+		display: block;	
+		padding: 4px 5px;
+		margin: 8px 6px 4px 0;
+		text-decoration: none;
+		color: #fff;
+	}
+	#sub-menu .sub-menu-item ul li a {
+		background: #999;
+		border-radius: 6px;
+		color: #222;
+	}	
+
+#main {
+	width: 920px;
+	min-height: 500px;
+	padding: 20px;
+	margin: 0 auto;
+	background: #fff;
+}
+.clear {
+	clear: both;
+}

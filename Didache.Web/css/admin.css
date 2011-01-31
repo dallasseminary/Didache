@@ -1,0 +1,13 @@
+﻿/* ADMIN */
+.admin-list {
+	border-collapse: collapse;
+}
+
+.admin-list td, .admin-list th{
+	padding: 4px;
+}
+.admin-list thead th{
+	background: #333;
+	color: #eee;
+	padding: 6px 4px;
+}
