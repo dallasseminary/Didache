@@ -1,3 +1,49 @@
 ﻿@model Didache.UserTaskData
 
-Interaction on file...
+@{
+	List<InteractionThread> threads = Interactions.GetInteractionThreads(Model.TaskID);
+}
+
+
+<style>
+.interaction-threads {
+	width: 100%;
+	border: solid 1px #333;
+}
+.interaction-threads th, .interaction-threads td {
+	padding: 5px;
+}
+
+.interaction-threads thead th{
+	background: #333;
+	font-weight: bold;
+	color: #fff;
+	text-align: left;
+}
+.interaction-threads tbody tr:nth-child(odd){
+	background: #ddd;
+}
+</style>
+
+
+<table class="interaction-threads">
+<thead>
+	<tr>
+		<th>Name</th>
+		<th>Date</th>
+		<th>Replies</th>
+		<th></th>
+	</tr>
+</thead>
+<tbody>
+@foreach (InteractionThread thread in threads) {
+	<tr>
+		<td>@thread.User.FormattedName</td>
+		<td>@thread.ThreadDate</td>
+		<td>@thread.TotalReplies</td>
+		<td>Open</td>
+	</tr>
+}
+</tbody>
+</table>
+
