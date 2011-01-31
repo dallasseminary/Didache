@@ -21,7 +21,6 @@ namespace Didache {
 		public DateTime PostDate { get; set; }
 		public int UserID { get; set; }	
 		public int ReplyToPostID { get; set; }
-		public int TotalViews { get; set; }
 
 		public string Subject{ get; set; }
 		public string PostContent { get; set; }

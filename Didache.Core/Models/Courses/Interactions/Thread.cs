@@ -20,13 +20,12 @@ namespace Didache {
 		public string Subject { get; set; }
 
 		public int UserID  { get; set; }
-		public string UserName { get; set; }
 		public DateTime ThreadDate { get; set; }
 
-		public int TotalViews { get; set; }
 		public int TotalReplies { get; set; }
 
-		public virtual ICollection<Post> Posts { get; set; }
+		public virtual User User { get; set; }
+		public virtual ICollection<InteractionPost> Posts { get; set; }
 	}
 
 

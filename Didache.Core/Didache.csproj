@@ -63,12 +63,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Courses\Campuses.cs" />
+    <Compile Include="Models\Courses\Interactions\Interactions.cs" />
     <Compile Include="Models\Courses\Interactions\Post.cs" />
     <Compile Include="Models\Courses\Interactions\Thread.cs" />
     <Compile Include="Models\Courses\VideoInfo.cs" />
     <Compile Include="Models\Grading\Grading.cs" />
     <Compile Include="Models\Courses\Courses.cs" />
-    <Compile Include="Models\Courses\Profiles.cs" />
+    <Compile Include="Models\User\Users.cs" />
     <Compile Include="Models\Courses\Sessions.cs" />
     <Compile Include="Models\Courses\Tasks.cs" />
     <Compile Include="Models\Courses\Units.cs" />
