@@ -18,12 +18,13 @@ font {
 #course-tabs {
 	overflow: hidden;
 	border-bottom: solid 1px #333;	
+	margin: 0 0 10px 0;
 }
 
 	#course-tabs li {
-		float: left;
-		display: inline;
-}
+			float: left;
+			display: inline;
+	}
 
 	#course-tabs li a {
 		float: left;
@@ -37,86 +38,107 @@ font {
 		color: #222;
 		background: #eee;
 		z-index:1;
-}
+	}
 	#course-tabs li a:hover {
 		background: #eef;
-}
+	}
 	#course-tabs li a.selected {
 		background: #fff;
 		border-bottom: #fff;
-}
+	}
 
 	#course-tabs li a span{
 		display: block;
 		font-weight: bold;
 		white-space: nowrap;
-}
+	}
 	#course-tabs li a dfn{
 		display: block;
 		font-style: italic;
 		margin: 5px 0 0 0;
 		white-space: nowrap;
 		color: #888;
-}
+	}
 
 #course-roster {
 	overflow: hidden;
 }
 	#course-roster .course-group {
 		padding: 20px;
-}
+	}
 	#course-roster .course-group:nth-child(odd) {
 		background: #eee;
-}
+	}
 	#course-roster .course-group-members {
 		overflow: hidden;
-}
+	}
 	#course-roster .course-group-name {
 		font-size: 20px;
 		padding: 5px 0;
 		font-weight: bold;
 		display: block;
-}	
+	}	
 	#course-roster .course-group-member {
 		width: 120px;
 		height: 200px;
 		float: left;		
 		margin: 5px;
-}	
+	}	
 	#course-roster .course-group-member img {
 		width: 100px;	
 		height: 125px;
-}			
+	}	
+	
+#schedule-units {	
+}		
+	#schedule-units a{	
+		display: block;
+		margin: 0 0 5px;
+		text-decoration:none;
+	}	
+	#schedule-units a .name{	
+		display: block;
+		font-weight: bold;
+		color: #000;
+	}			
+	#schedule-units a .date{	
+		color: #999;
+		display: block;
+	}				
+	#schedule-units a.selected {	
+		background: #ccc;
+	}	
+
 
 #schedule-tasks {
 }
 
 	#schedule-tasks .task-entry {	
 		border: solid 1px #666;		
-}
+	}
 	#schedule-tasks .task-entry:nth-child(odd) {	
 		background: #eee;
-}	
+	}	
 
 	#schedule-tasks .task-entry .task-info {
 		width: 100px;
 		float: left;
-}
+	}
 	#schedule-tasks .task-entry .task-info .task-status {
 		margin: 15px;
 		display: block;
-}	
+	}	
 
 	#schedule-tasks .task-entry .task-details {
 		width: 500px;
 		float: left;
-}	
+	}	
 	
 	#schedule-tasks .task-entry .task-name {
 		font-weight: bold;
 		font-size: 120%;
 		margin: 5px 0;
-}	
+	}	
 	
 	
 /* video task */

@@ -54,14 +54,11 @@
 <div id="sub-column">
 	<div id="schedule-units">
 		@if (ViewBag.Units != null) {
-			foreach (Didache.Unit unit in ViewBag.Units) {
-		
-				<a href="/courses/@unit.Course.Slug/schedule/@unit.UnitID"@((ViewBag.CurrentUnit != null && unit.UnitID == ViewBag.CurrentUnit.UnitID) ? " class=\"selected\"" : "")>
-					@unit.SortOrder. @unit.Name
-					<br />
-					@unit.StartDate.ToString("MM/dd/yyyy") - @unit.EndDate.ToString("MM/dd/yyyy")
-				</a>
-				<br />
+			foreach (Didache.Unit unit in ViewBag.Units) {		
+				<a href="/courses/@unit.Course.Slug/schedule/@unit.UnitID"@Html.Raw((ViewBag.CurrentUnit != null && unit.UnitID == ViewBag.CurrentUnit.UnitID) ? " class=\"selected\"" : "")>
+					<span class="name">@unit.SortOrder. @unit.Name</span>					
+					<span class="date">@unit.StartDate.ToString("MM/dd/yyyy") - @unit.EndDate.ToString("MM/dd/yyyy")</span>
+				</a>				
 			}	
 		}
 	</div>
