@@ -2,7 +2,6 @@
 .admin-list {
 	border-collapse: collapse;
 }
-
 .admin-list td, .admin-list th{
 	padding: 4px;
 }
