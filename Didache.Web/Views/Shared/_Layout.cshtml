@@ -24,21 +24,21 @@
 
 	<div id="nav">
 		<ul id="main-menu">              
-            <li><a id="main-menu-home" href="/" @(Request.Url.PathAndQuery == "/" ? " class=\"selected\"" : "")>Home</a></li>
+            <li><a id="main-menu-home" href="/" @Html.Raw(Request.Url.PathAndQuery == "/" ? " class=\"selected\"" : "")>Home</a></li>
             @if (HttpContext.Current.User.Identity.IsAuthenticated) {
-			<li><a id="main-menu-courses" href="/courses" @(Request.Url.PathAndQuery.StartsWith("/courses") ? " class=\"selected\"" : "")>Courses</a></li>
-			<li><a id="main-menu-profile" href="/profile" @(Request.Url.PathAndQuery.StartsWith("/profile") ? " class=\"selected\"" : "")>Profile</a></li>
-			<li><a id="main-menu-admin" href="/admin" @(Request.Url.PathAndQuery.StartsWith("/admin") ? " class=\"selected\"" : "")>Admin</a></li>
+			<li><a id="main-menu-courses" href="/courses" @Html.Raw(Request.Url.PathAndQuery.StartsWith("/courses") ? " class=\"selected\"" : "")>Courses</a></li>
+			<li><a id="main-menu-profile" href="/profiles" @Html.Raw(Request.Url.PathAndQuery.StartsWith("/profiles") ? " class=\"selected\"" : "")>Profile</a></li>
+			<li><a id="main-menu-admin" href="/admin" @Html.Raw(Request.Url.PathAndQuery.StartsWith("/admin") ? " class=\"selected\"" : "")>Admin</a></li>
 			}
         </ul>
 		<div id="sub-menu">              
-            <div class="sub-menu-item @(Request.Url.PathAndQuery == "/" ? " selected" : "")" id="main-menu-home-details">
+            <div class="sub-menu-item @Html.Raw(Request.Url.PathAndQuery == "/" ? " selected" : "")" id="main-menu-home-details">
 				<ul>
 					<li><a href="/dashboard">Dashboard</a></li>		
 				</ul>
 			</div>
 			@if (HttpContext.Current.User.Identity.IsAuthenticated) {
-            <div class="sub-menu-item @(Request.Url.PathAndQuery.StartsWith("/courses") ? " selected" : "")" id="main-menu-courses-details">
+            <div class="sub-menu-item @Html.Raw(Request.Url.PathAndQuery.StartsWith("/courses") ? " selected" : "")" id="main-menu-courses-details">
 				<ul>
 					<li><span>Current:</span></li>
 
@@ -53,10 +53,11 @@
 					<li><a href="/courses/">Archive</a></li>
 				</ul>
 			</div>
-            <div class="sub-menu-item @(Request.Url.PathAndQuery.StartsWith("/profile") ? " selected" : "")" id="main-menu-profile-details">
+            <div class="sub-menu-item @(Request.Url.PathAndQuery.StartsWith("/profiles") ? " selected" : "")" id="main-menu-profile-details">
 				<ul>
-					<li><a href="/profile">View</a></li>
-					<li><a href="/profile/edit">Edit</a></li>
+					<li><a href="/profiles">Search</a></li>
+					<li><a href="@Users.GetLoggedInUser().ProfileDisplayUrl">My Profile</a></li>
+					<li><a href="/profiles/edit">Edit</a></li>
 				</ul>
 			</div>
             <div class="sub-menu-item @(Request.Url.PathAndQuery.StartsWith("/admin") ? " selected" : "")" id="main-menu-admin-details">
