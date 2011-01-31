@@ -6,44 +6,64 @@
 
 
 <style>
-.interaction-threads {
-	width: 100%;
-	border: solid 1px #333;
+.task-interactions {
+	margin: 10px 0 0 0;
+	background: blue;
 }
-.interaction-threads th, .interaction-threads td {
-	padding: 5px;
-}
-
-.interaction-threads thead th{
-	background: #333;
-	font-weight: bold;
-	color: #fff;
-	text-align: left;
-}
-.interaction-threads tbody tr:nth-child(odd){
-	background: #ddd;
-}
+	.task-interaction {
+		padding: 5px;
+	}
+	.task-interaction .header {
+		background: #333;
+		overflow: hidden;
+		color: #fff;
+		cursor: pointer;
+		padding: 5px;
+	}	
+	.task-interaction .header .user {
+		width: 200px;
+		float: left;
+		display: block;
+	}		
+	.task-interaction .header .date {
+		width: 150px;
+		float: left;
+		display: block;
+	}			
+	.task-interaction .header .total-replies {
+		width: 100px;
+		float: left;
+		text-align: right;
+		display: block;
+	}				
 </style>
 
-
-<table class="interaction-threads">
-<thead>
-	<tr>
-		<th>Name</th>
-		<th>Date</th>
-		<th>Replies</th>
-		<th></th>
-	</tr>
-</thead>
-<tbody>
+<div class="task-interactions">
 @foreach (InteractionThread thread in threads) {
-	<tr>
-		<td>@thread.User.FormattedName</td>
-		<td>@thread.ThreadDate</td>
-		<td>@thread.TotalReplies</td>
-		<td>Open</td>
-	</tr>
+	<div class="task-interaction">
+		<div class="header">
+			<span class="user">@thread.User.FormattedName</span>
+			<span class="date">@thread.ThreadDate</span>
+			<span class="total-replies">@thread.TotalReplies</span>
+		</div>
+		<div class="interactions" style="display:none;">
+			
+		@foreach (InteractionPost post in thread.Posts) {
+			<div class="interaction-post">
+				<div class="user-info">
+					<a href="@post.User.ProfileDisplayUrl">
+						<img src="@post.User.ProfileImageUrl" />
+						<span class="name">@post.User.FormattedName</span>
+					</a>
+				</div>
+				<div class="post-content">
+					@post.PostContentFormatted
+				</div>			
+			</div>		  
+		}
+				
+		</div>
+	</div>
 }
-</tbody>
-</table>
+</div>
 
