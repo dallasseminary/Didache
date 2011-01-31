@@ -130,7 +130,7 @@ font {
 	}	
 
 	#schedule-tasks .task-entry .task-details {
-		width: 500px;
+		width: 530px;
 		float: left;
 	}	
 	
@@ -217,7 +217,7 @@ font {
 	}
 	.video-list .slides {
 		 background-image: url(/assets/images/icons/famfamfam_silk_icons/picture_save.png); 
-		 }
+	}
 	.video-list .transcript {
 		 background-image: url(/assets/images/icons/famfamfam_silk_icons/page_save.png); 
 	}	
