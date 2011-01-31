@@ -32,13 +32,13 @@
 			}
         </ul>
 		<div id="sub-menu">              
-            <div class="sub-menu-item @Html.Raw(Request.Url.PathAndQuery == "/" ? " selected" : "")" id="main-menu-home-details">
+            <div class="sub-menu-item @(Request.Url.PathAndQuery == "/" ? " selected" : "")" id="main-menu-home-details">
 				<ul>
 					<li><a href="/dashboard">Dashboard</a></li>		
 				</ul>
 			</div>
 			@if (HttpContext.Current.User.Identity.IsAuthenticated) {
-            <div class="sub-menu-item @Html.Raw(Request.Url.PathAndQuery.StartsWith("/courses") ? " selected" : "")" id="main-menu-courses-details">
+            <div class="sub-menu-item @(Request.Url.PathAndQuery.StartsWith("/courses") ? " selected" : "")" id="main-menu-courses-details">
 				<ul>
 					<li><span>Current:</span></li>
 
