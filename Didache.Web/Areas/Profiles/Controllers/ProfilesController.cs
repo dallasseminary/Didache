@@ -47,7 +47,7 @@ namespace Didache.Web.Areas.Profiles.Controllers
 
 				db.SaveChanges();
 
-				return RedirectToAction("Display", new { username = model.Username });
+				return RedirectToAction("Display", new { name = model.Username });
 			} catch (Exception ex) {
 				ModelState.AddModelError("", "Edit Failure, see inner exception: " + ex.ToString());
 			}
