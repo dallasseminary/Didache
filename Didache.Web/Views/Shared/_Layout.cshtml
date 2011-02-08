@@ -4,8 +4,10 @@
     <title>@ViewBag.Title</title>
 
 	<link href="@Url.Content("/css/reset.css")" rel="stylesheet"  />
+	<link href="@Url.Content("/css/type.css")" rel="stylesheet"  />
 	<link href="@Url.Content("/css/layout.css")" rel="stylesheet"  />
 	<link href="@Url.Content("/css/students.css")" rel="stylesheet"  />
+	<link href="@Url.Content("/css/courses.css")" rel="stylesheet"  />
 	<link href="@Url.Content("/css/admin.css")" rel="stylesheet"  />
     
 	<script src="@Url.Content("~/js/jquery-1.5.min.js") "></script>
@@ -19,18 +21,28 @@
 <body>
 
 	<div id="dts-common-menu">
-		@{ Html.RenderPartial("CommonMenu"); }
+        <div class="wrapper">
+		    @{ Html.RenderPartial("CommonMenu"); }
+        </div>
 	</div>
 
-	<div id="nav">
-		<ul id="main-menu">              
-            <li><a id="main-menu-home" href="/" @(Request.Url.PathAndQuery == "/" ? " class=\"selected\"" : "")>Home</a></li>
-            @if (HttpContext.Current.User.Identity.IsAuthenticated) {
-			<li><a id="main-menu-courses" href="/courses" @(Request.Url.PathAndQuery.StartsWith("/courses") ? " class=\"selected\"" : "")>Courses</a></li>
-			<li><a id="main-menu-profile" href="/profile" @(Request.Url.PathAndQuery.StartsWith("/profile") ? " class=\"selected\"" : "")>Profile</a></li>
-			<li><a id="main-menu-admin" href="/admin" @(Request.Url.PathAndQuery.StartsWith("/admin") ? " class=\"selected\"" : "")>Admin</a></li>
-			}
-        </ul>
+    <div id="container-1">
+        <div class="wrapper">
+            <div id="profile-display">
+                <img alt="@User.Identity.Name.Replace("."," ")" src="/assets/images/user/square/0.jpg">
+                <a href="javascript:void(0);">@User.Identity.Name.Replace("."," ").ToUpper()</a>
+            </div>
+	        <div id="nav">
+		        <ul id="main-menu">         
+                    <li><a id="main-menu-home" href="/" @(Request.Url.PathAndQuery == "/" ? " class=\"selected\"" : "")>Home</a></li>
+                    @if (HttpContext.Current.User.Identity.IsAuthenticated) {
+			        <li><a id="main-menu-courses" href="/courses" @(Request.Url.PathAndQuery.StartsWith("/courses") ? " class=\"selected\"" : "")>Courses</a></li>
+			        <li><a id="main-menu-profile" href="/profile" @(Request.Url.PathAndQuery.StartsWith("/profile") ? " class=\"selected\"" : "")>Profile</a></li>
+			        <li><a id="main-menu-admin" href="/admin" @(Request.Url.PathAndQuery.StartsWith("/admin") ? " class=\"selected\"" : "")>Admin</a></li>
+			        }
+                </ul>
+            </div>
+        </div>
 		<div id="sub-menu">              
             <div class="sub-menu-item @(Request.Url.PathAndQuery == "/" ? " selected" : "")" id="main-menu-home-details">
 				<ul>
@@ -38,46 +50,49 @@
 				</ul>
 			</div>
 			@if (HttpContext.Current.User.Identity.IsAuthenticated) {
-            <div class="sub-menu-item @(Request.Url.PathAndQuery.StartsWith("/courses") ? " selected" : "")" id="main-menu-courses-details">
-				<ul>
-					<li><span>Current:</span></li>
+                <div class="sub-menu-item @(Request.Url.PathAndQuery.StartsWith("/courses") ? " selected" : "")" id="main-menu-courses-details">
+				    <ul>
+					    <li><span>Current:</span></li>
 
-					@{
-					List<Course> courses = Didache.Courses.GetUsersRunningCourses(CourseUserRole.Student);
-					}
-					@foreach (Course course in courses) {
-					<li><a href="/courses/@course.Slug/">@(course.CourseCode + course.Section)</a></li>	
-					}
+					    @{
+					    List<Course> courses = Didache.Courses.GetUsersRunningCourses(CourseUserRole.Student);
+					    }
+					    @foreach (Course course in courses) {
+					    <li><a href="/courses/@course.Slug/">@(course.CourseCode + course.Section)</a></li>	
+					    }
 									
-					<li><span>Tools:</span></li>
-					<li><a href="/courses/">Archive</a></li>
-				</ul>
-			</div>
-            <div class="sub-menu-item @(Request.Url.PathAndQuery.StartsWith("/profile") ? " selected" : "")" id="main-menu-profile-details">
-				<ul>
-					<li><a href="/profile">View</a></li>
-					<li><a href="/profile/edit">Edit</a></li>
-				</ul>
-			</div>
-            <div class="sub-menu-item @(Request.Url.PathAndQuery.StartsWith("/admin") ? " selected" : "")" id="main-menu-admin-details">
-				<ul>
-					<li><a href="/admin/sessions">Sessions</a></li>
-					<li><a href="/admin/campuses">Campuses</a></li>
-					<li><a href="/admin/courses">Courses</a></li>
-					<li><a href="/admin/files">Files</a></li>
-					<li><a href="/admin/users">Users</a></li>
-				</ul>
-			</div>
-   }
-        </div>
-	</div>	
+					    <li><span>Tools:</span></li>
+					    <li><a href="/courses/">Archive</a></li>
+				    </ul>
+			    </div>
+                <div class="sub-menu-item @(Request.Url.PathAndQuery.StartsWith("/profile") ? " selected" : "")" id="main-menu-profile-details">
+				    <ul>
+					    <li><a href="/profile">View</a></li>
+					    <li><a href="/profile/edit">Edit</a></li>
+				    </ul>
+			    </div>
+                <div class="sub-menu-item @(Request.Url.PathAndQuery.StartsWith("/admin") ? " selected" : "")" id="main-menu-admin-details">
+				    <ul>
+					    <li><a href="/admin/sessions">Sessions</a></li>
+					    <li><a href="/admin/campuses">Campuses</a></li>
+					    <li><a href="/admin/courses">Courses</a></li>
+					    <li><a href="/admin/files">Files</a></li>
+					    <li><a href="/admin/users">Users</a></li>
+				    </ul>
+			    </div>
+            }
+	    </div>
+    </div>
+    <div class="clear"></div>
+    <div id="container-2">
+	    <div id="main">
+            <div class="wrapper">
+                @RenderBody()
 
-	<div id="main">
-
-    @RenderBody()
-
-		<div class="clear"></div>
-	</div>
+		        <div class="clear"></div>
+            </div>
+	    </div>
+    </div>
 
 	<div id="footer"></div>
 </body>

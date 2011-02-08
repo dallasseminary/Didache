@@ -1,95 +1,132 @@
 ﻿body {
-	background: #ddd;
-	font-family: Helvetica, Arial;
-	font-size: 12px;
-	line-height: 140%;	
-}
-
-
-#dts-common-menu {
-	width: 960px;
-	margin: 5px auto;
-	overflow: hidden;
-}
-#dts-sites {
-	float: left;
-	width: 400px;
-}
-#dts-account {
-	float: right;
-	width: 400px;
-	text-align: right;
-}
-
-
-#nav {}
-	#main-menu {
-		width: 960px;
-		margin: 0 auto;
-		overflow: hidden;	
-	}
-	#main-menu li {
-		float: left;
-		display: inline;	
-	}
-	#main-menu li a {
-		float: left;
-		display: block;	
-		padding: 10px 20px;
-		margin: 0 10px 0 0;
-		border-radius: 10px 10px 0 0;
-		background: #333;
-		color: #fff;
-		text-decoration: none;
-	}
-	#main-menu li a:hover {
-		background: #555;
-	}
-	#main-menu li a.selected {
-		background: #111;
-	}
-	
-	#sub-menu {
-		background: #111;
-		overflow: hidden;
-		height: 40px;
-	}
-	#sub-menu .sub-menu-item {
-		width: 960px;
-		margin: 0 auto;
-		overflow: hidden;	
-		display: none;	
-	}
-	#sub-menu .sub-menu-item.selected {	
-		display: block;	
-	}
-	
-	#sub-menu .sub-menu-item ul li {
-		float: left;
-		display: inline;
-	}
-	#sub-menu .sub-menu-item ul li a, 
-	#sub-menu .sub-menu-item ul li span {
-		float: left;
-		display: block;	
-		padding: 4px 5px;
-		margin: 8px 6px 4px 0;
-		text-decoration: none;
-		color: #fff;
-	}
-	#sub-menu .sub-menu-item ul li a {
-		background: #999;
-		border-radius: 6px;
-		color: #222;
-	}	
-
-#main {
-	width: 920px;
-	min-height: 500px;
-	padding: 20px;
-	margin: 0 auto;
 	background: #fff;
 }
-.clear {
-	clear: both;
+.wrapper {
+    width: 960px;
+    margin: 0 auto;
 }
+
+#container-1 {
+    background: #EEE;
+}    
+    #dts-common-menu {
+	    background: #333;
+	    color: #FFF;
+	    margin: 0;
+	    overflow: hidden;
+    }
+    #dts-common-menu a {
+        color:#FFF;
+        font-weight: bold;
+        display: inline-block;
+        padding: 1px 8px 2px 0;
+        margin: 5px 5px 5px 0;
+        border-right: 1px solid #FFF;
+        text-decoration: none;
+    }
+    #dts-sites {
+	    float: left;
+	    width: 660px;
+    }
+    #dts-account {
+	    float: right;
+	    width: 300px;
+	    text-align: right;
+    }
+    #dts-account span.user {
+        border-right: 1px solid #FFF;
+        padding: 1px 8px 2px 0;
+        margin-right: 5px;
+        margin-bottom: 5px;
+    }
+    
+
+    /* for profile in header */
+    #profile-display
+	    { margin: 0; padding: 10px 0; overflow: auto; text-align: right;}
+    #profile-display img
+	    { float: right; width: 70px; height: 70px; margin: 0 0 0 20px; border: 1px solid #ccc; background: #fff; padding: 3px; -moz-border-radius: 5px; -webkit-border-radius: 5px;}		
+    #profile-display a
+	    { color: #0281CA; font-size: 24px; position: relative; top: 12px; font-weight: normal; /*font-family: Medio, Palatino, "Palatino Linotype", Georgia, Times, "Times New Roman", serif;*/ 
+        font-family: "LeagueGothicRegular", "Gill Sans", Arial, sans-serif; letter-spacing: 0; }
+    #profile-display a:hover
+	    { text-decoration: underline;}
+
+
+    #nav {padding-top: 10px;}
+	    #main-menu 
+	    {
+	        font-family: LeagueGothicRegular, "Gill Sans", Arial, Sans-Serif;
+	        letter-spacing: 0;
+		    margin: 0 auto 10px;
+		    overflow: hidden;	
+	    }
+	    #main-menu li {
+		    float: left;
+		    display: inline;	
+	    }
+	    #main-menu li a {
+		    float: left;
+		    display: block;	
+		    padding: 5px 20px 5px 0;
+		    margin: 0 20px 0 0;
+		    /*border-radius: 10px 10px 0 0;*/
+		    border-right: 2px dotted #333;
+		    color: #666;
+		    font-size: 36px;
+		    line-height: 36px;Replace("."," ")
+		    text-decoration: none;
+	    }
+	    #main-menu li a:hover {
+		    color: #999;
+		    text-shadow: 1px 2px 1px #FFF;
+	    }
+	    #main-menu li a.selected {
+		    color: #999;
+		    text-shadow: 1px 2px 1px #FFF;
+	    }
+	
+	    #sub-menu {
+		    background: #111;
+		    overflow: hidden;
+		    height: 40px;
+	    }
+	    #sub-menu .sub-menu-item {
+		    width: 960px;
+		    margin: 0 auto;
+		    overflow: hidden;	
+		    display: none;	
+	    }
+	    #sub-menu .sub-menu-item.selected {	
+		    display: block;	
+	    }
+	
+	    #sub-menu .sub-menu-item ul li {
+		    float: left;
+		    display: inline;
+	    }
+	    #sub-menu .sub-menu-item ul li a, 
+	    #sub-menu .sub-menu-item ul li span {
+		    float: left;
+		    display: block;	
+		    padding: 4px 5px;
+		    margin: 8px 6px 4px 0;
+		    text-decoration: none;
+		    color: #fff;
+	    }
+	    #sub-menu .sub-menu-item ul li a {
+		    background: #999;
+		    border-radius: 6px;
+		    color: #222;
+	    }	
+
+#container-2 {}
+    #main {
+	    min-height: 500px;
+	    padding: 20px;
+	    margin: 0 auto;
+	    background: #fff;
+    }
+    .clear {
+	    clear: both;
+    }

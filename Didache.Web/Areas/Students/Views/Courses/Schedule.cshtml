@@ -12,10 +12,10 @@
 
 <div id="main-column">
 	
-	@(ViewBag.CurrentUnit != null ? "Unit " + ViewBag.CurrentUnit.SortOrder + ": " + ViewBag.CurrentUnit.Name : "")
+	<div class="block-list-header"><h3>@(ViewBag.CurrentUnit != null ? "Unit " + ViewBag.CurrentUnit.SortOrder + ": " + ViewBag.CurrentUnit.Name : "")</h3></div>
 
 
-	<div id="schedule-tasks">
+	<div id="schedule-tasks" class="block-list">
 
 	
 	@if (ViewBag.UserTasks != null) {	 

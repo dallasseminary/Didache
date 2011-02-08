@@ -14,7 +14,19 @@ font {
 	width: 250px;
 }
 
-
+#course-header {}
+    #course-header h2 
+    {
+        margin-bottom: 0;
+    }
+    p
+    {
+        font-size: 10px;
+        line-height: 13px;
+        color: #666;
+        margin-bottom: 6px;
+    }
+    
 #course-tabs {
 	overflow: hidden;
 	border-bottom: solid 1px #333;	
@@ -34,7 +46,8 @@ font {
 		text-decoration: none;
 		width: 120px;
 		border: solid 1px #333;
-		border-radius: 10px 10px 0 0;
+		-moz-border-radius: 10px 10px 0 0;
+		     border-radius: 10px 10px 0 0;
 		color: #222;
 		background: #eee;
 		z-index:1;
