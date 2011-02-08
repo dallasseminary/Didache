@@ -1,3 +1,170 @@
 ﻿@model Didache.UserTaskData
 
-Interaction on file...
+@{
+	List<InteractionThread> threads = Interactions.GetInteractionThreads(Model.TaskID);
+}
+
+
+<style>
+.task-interactions {
+	margin: 10px 0 0 0;
+	background: #333;
+}
+	.task-interaction {
+		padding: 5px;
+	}
+	.task-interaction .task-interaction-header {
+		background: #111;
+		overflow: hidden;
+		color: #fff;
+		cursor: pointer;
+		padding: 5px;
+	}	
+	.task-interaction .task-interaction-header .user {
+		width: 200px;
+		float: left;
+		display: block;
+	}		
+	.task-interaction .task-interaction-header .date {
+		width: 150px;
+		float: left;
+		display: block;
+	}			
+	.task-interaction .task-interaction-header .total-replies {
+		width: 100px;
+		float: left;
+		text-align: right;
+		display: block;
+	}	
+	
+	.task-interaction .task-interaction-post {
+		overflow: hidden;		
+		background: #eee;
+	}
+	.task-interaction .task-interaction-post:nth-child(even) {
+		overflow: hidden;		
+		background: #ddd;
+	}					
+	.task-interaction .task-interaction-post .user-info {
+		width: 100px;
+		float: left;
+		margin: 5px;
+		text-align: center;		
+	}	
+	.task-interaction .task-interaction-post .user-info a {
+		text-decoration:none;
+		color: #555;
+		font-wize: 10px;
+	}	
+	.task-interaction .task-interaction-post .user-info img {
+		width: 80px;
+	}	
+	.task-interaction .task-interaction-post .user-info span {
+		display: block;
+		text-align: center;		
+	}							
+	.task-interaction .task-interaction-post .post-content {
+		width: 360px;
+		float: left;
+		margin: 5px;
+	}	
+				
+</style>
+
+<div class="task-interactions">
+@foreach (InteractionThread thread in threads) {
+	<div class="task-interaction" data-threadid="@thread.ThreadID">
+		<div class="task-interaction-header">
+			<span class="user">@thread.User.FormattedName</span>
+			<span class="date">@thread.ThreadDate</span>
+			<span class="total-replies">@thread.Posts.Count</span>
+		</div>
+		<div class="task-interaction-list" style="display:none;">
+			
+		@foreach (InteractionPost post in thread.Posts) {
+			<div class="task-interaction-post">
+				<div class="user-info">
+					@if (post.User != null) {
+					<a href="@post.User.ProfileDisplayUrl">
+						<img src="@post.User.ProfileImageUrl" />
+						<span class="name">@post.User.FormattedName</span>
+					</a>
+					}
+				</div>
+				<div class="post-content">
+					@post.PostContentFormatted
+				</div>			
+			</div>	
+	  	  
+		}
+
+	  
+			<div class="add-reply">
+				<textarea class="reply-text"></textarea>		
+				<br />
+				<input type="button" class="reply-button" value="Add reply" />
+			</div>	
+				
+		</div>
+
+	
+
+	</div>
+}
+</div>
+
+<script>
+	jQuery(function ($) {
+		$('div.task-interaction .task-interaction-header').toggle(function () {
+			$(this).siblings('.task-interaction-list').slideDown();
+		}, function () {
+			$(this).siblings('.task-interaction-list').slideUp();
+		});
+
+		$('div.task-interaction input.reply-button').click(function () {
+
+			var button = $(this).attr('disabled', 'disabled');
+
+			var text = button.siblings('textarea').attr('disabled', 'disabled').val();
+			var threadID = button.closest('.task-interaction').data('threadid');
+
+
+			$.ajax({
+				url: '/courses/api/interactionreply',
+				type: 'POST',
+				data: {
+					text: text,
+					threadID: threadID
+				},
+				success: function (d) {
+
+					// create response
+					button.closest('.add-reply').prepend(
+						$('<div class="task-interaction-post">' +
+							'<div class="user-info">' +
+								'<a href="@(Users.GetLoggedInUser().ProfileDisplayUrl)">' +
+									'<img src="@(Users.GetLoggedInUser().ProfileImageUrl)" />' +
+									'<span class="name">@(Users.GetLoggedInUser().FormattedName)</span>' +
+								'</a>' +
+							'</div>' +
+							'<div class="post-content">' +
+								text +
+							'</div>' +
+						'</div>')
+					);
+
+					// increase reply ount
+					var replies = button.closest('.task-interaction').find('.total-replies');
+					var count = parseInt(replies.html(), 10);
+					replies.html((count + 1).toString());
+
+					// clean up
+					button.siblings('textarea').removeAttr('disabled').val('');
+					button.removeAttr('disabled');
+				}
+			});
+
+
+		});
+	});
+</script>

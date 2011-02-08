@@ -57,7 +57,7 @@ namespace Didache.Web.Areas.Students.Controllers
 		public ActionResult Reply(string slug, int id, FormCollection collection) {
 			// add post to thread id
 
-			User profile = Users.GetLoggedInProfile();
+			User profile = Users.GetLoggedInUser();
 
 			Post post = new Post();
 			post.ThreadID = id;

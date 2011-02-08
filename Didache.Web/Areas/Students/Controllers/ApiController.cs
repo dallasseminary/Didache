@@ -48,5 +48,38 @@ namespace Didache.Web.Areas.Students.Controllers
 			return Redirect("/courses/" + data.Task.Course.Slug + "/schedule/" + data.Task.UnitID);
 		}
 
+
+		[HttpPost]
+		public ActionResult InteractionReply(FormCollection collection) {
+
+			int threadID = 0;
+
+			if (Int32.TryParse(collection["threadID"], out threadID)) {
+
+				DidacheDb db = new DidacheDb();
+
+
+				InteractionThread thread = db.InteractionThreads.Find(threadID);
+				InteractionPost post = new InteractionPost();
+				post.PostContent = collection["text"];
+				post.PostContentFormatted = collection["text"];
+				post.IsApproved = true;
+				post.UserID = Users.GetLoggedInUser().UserID;
+				post.PostDate = DateTime.Now;
+				post.ThreadID = threadID;
+				post.TaskID = thread.TaskID;
+				post.Subject = "";
+				post.ReplyToPostID = 0;
+
+				db.InteractionPosts.Add(post);
+				db.SaveChanges();
+
+				return Json(new {success= true, postID= post.PostID});
+
+			} else {
+				return Json(new {success= false});
+			}
+
+		}
     }
 }

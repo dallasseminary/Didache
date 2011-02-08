@@ -1,0 +1,42 @@
+﻿@model Didache.User
+
+@{
+    ViewBag.Title = "View";
+}
+
+
+
+<div style="float: left; width: 200px;">
+	<img src="@Model.ProfileImageUrl" alt="@Model.FormattedName" />
+</div>
+
+<div style="float: right; width: 600px;">
+	
+	<h2>@Model.FormattedName</h2>
+	
+	<table>
+		<tbody>
+			<tr>
+				<td>Address</td>
+				<td>
+					@Model.Address1 @(Model.Address2 != "" ? "<br />" + @Model.Address2 : "")
+					<br />
+					@Model.City, @Model.State @Model.Zip
+				</td>
+			</tr>
+			<tr>
+				<td>Phone</td>
+				<td>
+					@Model.Phone
+				</td>
+			</tr>
+			<tr>
+				<td>Email</td>
+				<td>
+					@Model.Email
+				</td>
+			</tr>
+			
+		</tbody>
+	</table>
+</div>

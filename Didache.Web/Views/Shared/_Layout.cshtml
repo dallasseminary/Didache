@@ -43,6 +43,8 @@
                 </ul>
             </div>
         </div>
+
+	
 		<div id="sub-menu">              
             <div class="sub-menu-item @(Request.Url.PathAndQuery == "/" ? " selected" : "")" id="main-menu-home-details">
 				<ul>
@@ -60,7 +62,6 @@
 					    @foreach (Course course in courses) {
 					    <li><a href="/courses/@course.Slug/">@(course.CourseCode + course.Section)</a></li>	
 					    }
-									
 					    <li><span>Tools:</span></li>
 					    <li><a href="/courses/">Archive</a></li>
 				    </ul>

@@ -1,10 +1,10 @@
 ﻿@model Didache.Course
 
 @{
- 
+	ViewBag.Title = Model.CourseCode + Model.Section + " " + Resources.labels.coursetabs_dashboard;
 }
 
-@{Html.RenderPartial("CourseHeader"); }
+@{ Html.RenderPartial("CourseHeader"); }
 
 @{ Html.RenderPartial("CourseMenu"); }
 

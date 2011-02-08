@@ -1,14 +1,11 @@
-﻿@{
-    ViewBag.Title = "Schedule";
+﻿@model Course
+@{
+	ViewBag.Title = Model.CourseCode + Model.Section + " " + Resources.labels.coursetabs_schedule;
 }
-
-<h2>Schedule</h2>
-
 
 @{Html.RenderPartial("CourseHeader");}
 
 @{Html.RenderPartial("CourseMenu");}
-
 
 <div id="main-column">
 	

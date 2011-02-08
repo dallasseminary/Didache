@@ -13,7 +13,7 @@ namespace Didache.Web.Areas.Students.Controllers
 		public ActionResult Index() {
 
 			List<Course> courses = null;
-			User profile = Users.GetLoggedInProfile();
+			User profile = Users.GetLoggedInUser();
 
 			if (profile != null)
 				courses = Didache.Courses.GetUsersCourses(profile.UserID, CourseUserRole.Student);
@@ -54,18 +54,21 @@ namespace Didache.Web.Areas.Students.Controllers
 
 			// get tasks
 			if (currentUnit != null) {
-				userTasks = Tasks.GetUserTaskDataInUnit(currentUnit.UnitID, Users.GetLoggedInProfile().UserID);
+				userTasks = Tasks.GetUserTaskDataInUnit(currentUnit.UnitID, Users.GetLoggedInUser().UserID);
 			}
 			
 			ViewBag.Units = units;
 			ViewBag.CurrentUnit = currentUnit;
 			ViewBag.UserTasks = userTasks;
 
-			return View();
+			return View(course);
 		}
 
 		public ActionResult Files(string slug) {
-			return View();
+
+			Course course = Didache.Courses.GetCourseBySlug(slug);
+
+			return View(course);
 		}
 
 		public ActionResult Roster(string slug) {
@@ -76,17 +79,17 @@ namespace Didache.Web.Areas.Students.Controllers
 
 			Course course = Didache.Courses.GetCourseBySlug(slug);
 
-			List<CourseUserGroup> usergroups = Didache.Courses.GetCourseUserGroups(course.CourseID);
+			ViewBag.UserGroups = Didache.Courses.GetCourseUserGroups(course.CourseID);
 
-			return View(usergroups);
+			return View(course);
 		}
 
 		public ActionResult Assignments(string slug) {
-			return View();
+
+			Course course = Didache.Courses.GetCourseBySlug(slug);
+
+			return View(course);
 		}
 
-		public ActionResult Forums(string slug) {
-			return View();
-		}
     }
 }

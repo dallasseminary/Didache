@@ -28,7 +28,7 @@ namespace Didache {
 		public DbSet<UserTaskData> UserTasks { get; set; }
 
 		// people
-		public DbSet<User> Profiles { get; set; }
+		public DbSet<User> Users { get; set; }
 		public DbSet<CourseUser> CourseUsers { get; set; }
 
 		// forums
@@ -36,8 +36,17 @@ namespace Didache {
 		public DbSet<Post> Posts { get; set; }
 		public DbSet<Thread> Threads { get; set; }
 
+
+		// interactions
+		public DbSet<InteractionPost> InteractionPosts { get; set; }
+		public DbSet<InteractionThread> InteractionThreads { get; set; }
+
 		protected override void OnModelCreating(ModelBuilder modelBuilder) {
-			// TODO: Use Fluent API Here 
+
+
+			modelBuilder.Entity<User>()
+				.ToTable("dts_cars_Users");
+
 
 			modelBuilder.Entity<Session>()
 				.ToTable("oe_Sessions");
@@ -80,14 +89,6 @@ namespace Didache {
 			modelBuilder.Entity<UserTaskData>()
 				.ToTable("oe_Courses_Tasks_UserData");
 
-			/*
-			modelBuilder.Entity<User>()
-				.Property(u => u.UserID).HasColumnName("ID");
-			modelBuilder.Entity<User>()
-				.Property(u => u.LoginUserID).HasColumnName("UserID");
-			*/
-			modelBuilder.Entity<User>()
-				.ToTable("dts_cars_Users");
 
 
 			// FOURMS
@@ -99,6 +100,14 @@ namespace Didache {
 
 			modelBuilder.Entity<Post>()
 				.ToTable("oe_Forums_Posts");
+
+
+			// interactions
+			modelBuilder.Entity<InteractionPost>()
+				.ToTable("oe_Interactions_Posts");
+			modelBuilder.Entity<InteractionThread>()
+				.ToTable("oe_Interactions_Threads");
+			
 		}
 	}
 
