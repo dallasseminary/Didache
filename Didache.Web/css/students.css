@@ -72,6 +72,32 @@ font {
 		white-space: nowrap;
 		color: #888;
 	}
+	
+		
+/* common lists on all course pages */
+.block-list-header
+	{ background: #194e76; padding: 15px 20px; margin-bottom: 0; border-bottom: 1px #DEDEDE; }
+.block-list-header h3
+	{ color: #FFF; font-size: 24px; margin: 0; }
+.block-list-header h4	
+	{ color: #DEDEDE; font-size: 18px; margin: 0 0 8px 0;}
+
+.block-list
+	{ background: #efefef; border: 1px solid #CCC; border-width: 0 1px 1px; padding: 0; margin-bottom: 20px; overflow: visible; }	
+.block-list .block-list-item
+	{ padding: 25px 30px 15px 135px; margin: 0; overflow: visible; position: relative; min-height: 60px;}
+.block-list .alt
+  { background: #FFF; border-bottom-color: #CCC;}
+.block-list .block-list-item:last-child
+	{ margin-bottom: 0; }
+	
+
+.block-list-title
+	{ width: 100px; float: left; font-size: 13px; font-weight: bold; }
+.block-list-content
+	{ width: 550px; float: left; font-size: 13px; }	
+.block-list-content li
+	{ margin: 0 0 4px 0; }	
 
 #course-roster {
 	overflow: hidden;
@@ -135,7 +161,9 @@ font {
 
 	#schedule-tasks .task-entry .task-info {
 		width: 100px;
-		float: left;
+		position: absolute;
+	    left: 10px;
+	    top: 20px;
 	}
 	#schedule-tasks .task-entry .task-info .task-status {
 		margin: 15px;
@@ -143,9 +171,12 @@ font {
 	}	
 
 	#schedule-tasks .task-entry .task-details {
-		width: 530px;
-		float: left;
-	}	
+		display: block;
+	}
+	
+	#schedule-tasks .task-entry .task-details .task-instructions {
+	    margin-bottom: 10px;
+	}
 	
 	#schedule-tasks .task-entry .task-name {
 		font-weight: bold;
@@ -262,6 +293,7 @@ font {
 
 .task-submit {
 	color: #fff;
+	margin-top: 10px;
 	padding: 3px 12px;
 	border-radius: 14px;
 	background: #33ee33;
