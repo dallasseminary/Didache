@@ -8,17 +8,20 @@
 
 @{ Html.RenderPartial("CourseMenu"); }
 
-<ul>
-@foreach (Didache.Unit unit in Model.Units) {
-	<li>
-		@unit.SortOrder. @unit.Name
-		<ul>
-		@foreach (Task task in unit.Tasks) {
-			<li>
-				@task.Name
-			</li>
-		}
-		</ul>	
-	</li>
-  }
-</ul>
+<div id="main-column">
+    <div class="block-list-header"><h3>Upcoming...</h3></div>
+    <div class="block-list">
+        @foreach (Didache.Unit unit in Model.Units) {
+	        <div class="block-list-item">
+		        <h5>@unit.SortOrder. @unit.Name</h5>
+		        <ol>
+		        @foreach (Task task in unit.Tasks) {
+			        <li>
+				        @task.Name
+			        </li>
+                }
+		        </ol>	
+	        </div>
+        }
+    </div>
+</div>

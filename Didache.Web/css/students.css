@@ -7,12 +7,101 @@ font {
 /* student */
 #main-column {
 	float: left;
-	width: 650px;
+	width: 690px;
 }
+
+/* unit side bar */
 #sub-column {
 	float: right;
-	width: 250px;
+	width: 270px;
 }
+
+    #sub-column #right-panel
+      { margin: 0 0 0 20px; }
+    #sub-column .header
+      { padding: 4px 6px; background: #bbd1e1; display: block; margin-top: 16px; }
+    #sub-column #unit-list-header
+      { margin: 100px 0 0; }
+    #sub-column .header h4
+      { color: #333; /*text-shadow: 0 1px 0 #FFF;*/ font-size: 1.7em; }
+    #sub-column .unit-list
+	    { /* background: url(images/sub-column-bg.png) top left repeat-y; */ margin: 0 0 0 10px; padding: 10px 0 0;
+       /* -webkit-border-radius: 0 10px 10px 0;
+           -moz-border-radius: 0 10px 10px 0; 
+                border-radius: 0 10px 10px 0; */
+        border-right: 1px solid #CCC;
+        border-left-width: 0; position: relative;}
+  
+    #sub-column .discussions, #sub-column .faculty, #sub-column .grades
+      { background: #FFF; border: 1px solid #CCC; border-top-width: 0; }
+    #sub-column ol
+      { list-style: none; }
+    #sub-column ol li
+      { list-style: none; padding: 5px; border-bottom: 1px solid #CCC; overflow: hidden; }
+    #sub-column ol li:hover
+      { background: #EEE; }
+    #sub-column ol li:last-child
+      { border: none; }
+    #sub-column .discussions ol li a img
+      { float: left; height: 50px; margin-right: 5px; }
+    #sub-column .faculty ol li a img
+      { float: left; height: 80px; margin-right: 5px; }
+    #sub-column .discussions ol li a span.student-name, 
+    #sub-column .faculty ol li a span.fac-name 
+      { display: inline-block; clear: both; font-weight: bold; color: #333; margin-bottom: 5px; }
+    #sub-column .faculty ol li a span.fac-name 
+      { margin-top: 50px;}
+    #sub-column .discussions ol li a span.post-excerpt,
+    #sub-column .faculty ol li a span.fac-title
+      { display: inline-block; clear: both; font-weight: normal; }
+
+    #sub-column .grades span.total-percent
+      { font-family: "LeagueGothicRegular", "Gill Sans", Arial, sans-serif; letter-spacing: 0; font-size: 1.8em;
+        padding-right: 10px; margin-right: 8px; border-right: 1px solid #AAA; display: inline-block; }
+    #sub-column .grades span.points
+      { font-size: 13px; color: #666; }
+
+    #sub-column .unit-list ol
+	    { list-style-type: decimal;}	
+    #sub-column .unit-list ol li
+	    { list-style-type: decimal; margin: 0 0 0 0; height: 36px; width: 270px;
+        overflow: hidden; text-indent: -12px; position: relative; right: 0px;
+        padding: 0; border: none; }
+    #sub-column .unit-list ol li:hover
+      { background: none; }
+    #sub-column .unit-list ol li a
+      { padding: 4px 0 4px 50px; display: block; text-decoration: none; }
+    #sub-column .unit-list .unit-name
+	    { display:block; font-size: 12px; color: #0281CA; line-height: 120%; }
+    #sub-column .unit-list a:hover
+	    { text-decoration: underline; }
+    #sub-column .unit-list .unit-dates
+	    { display:block; font-size: 11px; padding: 3px 0 0 18px; color: #444;}	
+    /*
+    #sub-column .unit-list li.selected
+	    { font-weight: bold; background: transparent url(../images/site/unit-selected.png) no-repeat center left;  }
+    */
+    #sub-column .unit-list li.selected, #sub-column .unit-list li.selected:hover
+	    { font-weight: bold; background: url(images/unit-list-selected-bg.png) top right no-repeat; height: 43px;
+        margin-bottom: -7px; }
+    #sub-column .unit-list li.selected a span.unit-name 
+      { color: #FFF; }
+    #sub-column .unit-list li.selected a span.unit-dates 
+      { color: #DDD; }
+  
+#main-column .unit-list
+	{ margin: 0; }
+#main-column .unit-list li
+	{ margin: 0 0 0 0; padding: 0; overflow: hidden; }
+#main-column .unit-list .unit-name
+	{ display:block; font-size: 12px; color: #0281CA; }
+#main-column .unit-list a:hover .unit-name
+	{ text-decoration: underline; }
+#main-column .unit-list .unit-dates
+	{ display:block; font-size: 11px; padding: 0 0 0 18px; color: #444;}	
+#main-column .unit-list li.selected
+	{ font-weight: bold; background: transparent url(../images/site/unit-selected.png) no-repeat center left;  }
+	
 
 #course-header {}
     #course-header h2 
@@ -27,52 +116,31 @@ font {
         margin-bottom: 6px;
     }
     
-#course-tabs {
-	overflow: hidden;
-	border-bottom: solid 1px #333;	
-	margin: 0 0 10px 0;
-}
+#course-menu
+	{ height: 57px; overflow: visible; margin: 0 0 20px 0; padding: 0; border-bottom: 1px solid #ccc; }
+    #course-menu li
+	    { float: left; margin: 0 10px 0 0; }	
+    #course-menu li:last-child
+      { margin: 0; }  
+    #course-menu li a
+	    { display: block; width: 120px; padding: 10px 14px; border: 1px solid #ccc; background: #e9e9e9; text-decoration: none;
+        -moz-border-radius-topleft: 3px;
+        -moz-border-radius-topright: 3px;
+        -webkit-border-top-left-radius: 3px;
+        -webkit-border-top-right-radius: 3px; }	
+    #course-menu li a.last
+	    {   }
+    #course-menu li a:hover
+	    { text-decoration: none; background: #f0f0ff;}			
+    #course-menu li a:hover span
+	    { color: #0281CA; }				
+    #course-menu li a.selected
+	    { background: transparent; border-bottom-color: #fff;  }	
 
-	#course-tabs li {
-			float: left;
-			display: inline;
-	}
-
-	#course-tabs li a {
-		float: left;
-		display: block;
-		padding: 10px;
-		margin: 0 5px -1px 5px;	
-		text-decoration: none;
-		width: 120px;
-		border: solid 1px #333;
-		-moz-border-radius: 10px 10px 0 0;
-		     border-radius: 10px 10px 0 0;
-		color: #222;
-		background: #eee;
-		z-index:1;
-	}
-	#course-tabs li a:hover {
-		background: #eef;
-	}
-	#course-tabs li a.selected {
-		background: #fff;
-		border-bottom: #fff;
-	}
-
-	#course-tabs li a span{
-		display: block;
-		font-weight: bold;
-		white-space: nowrap;
-	}
-	#course-tabs li a dfn{
-		display: block;
-		font-style: italic;
-		margin: 5px 0 0 0;
-		white-space: nowrap;
-		color: #888;
-	}
-	
+    #course-menu li a span
+	    { color: #222; font-weight: bold; font-size: 14px; display:block; margin: 0 0 5px 0;}
+    #course-menu li a dfn
+	    { color: #666; font-size: 11px; display:block; }	
 		
 /* common lists on all course pages */
 .block-list-header
@@ -83,10 +151,10 @@ font {
 	{ color: #DEDEDE; font-size: 18px; margin: 0 0 8px 0;}
 
 .block-list
-	{ background: #efefef; border: 1px solid #CCC; border-width: 0 1px 1px; padding: 0; margin-bottom: 20px; overflow: visible; }	
+	{ background: #efefef; border: solid #CCC; border-width: 0 1px 1px; padding: 0; margin-bottom: 20px; overflow: visible; }	
 .block-list .block-list-item
 	{ padding: 25px 30px 15px 135px; margin: 0; overflow: visible; position: relative; min-height: 60px;}
-.block-list .alt
+.block-list .block-list-item:nth-child(odd)
   { background: #FFF; border-bottom-color: #CCC;}
 .block-list .block-list-item:last-child
 	{ margin-bottom: 0; }
@@ -97,19 +165,33 @@ font {
 .block-list-content
 	{ width: 550px; float: left; font-size: 13px; }	
 .block-list-content li
-	{ margin: 0 0 4px 0; }	
+	{ margin: 0 0 4px 0; }
+	
+.block-list-item-label
+  { position: absolute; top: 12px; left: -12px; background: url(images/tasktype-label-bg-alt.png); height: 48px; width: 140px;
+    display: block; z-index: 999; font-size: 2em; font-weight: normal; color: #FFF;
+    font-family: "LeagueGothicRegular", "Gill Sans", Arial, sans-serif; letter-spacing: 0; }
+.block-list-item-label span
+  { display: block; line-height: 1; padding: 13px 0 6px 10px; display: inline-block; }
+.block-list-item-label span.notify
+  { background: #EEE; center top; width: 20px; height: 20px; float: left; border: 1px solid #194e76;
+    padding: 0; margin: 13px 0 8px 10px; line-height: 1; display: block; }
+.complete .block-list-item-label span.notify
+  { background-color: #3C3 }
+.skipped .block-list-item-label span.notify 
+  { background-color: #C33 }
+  
 
 #course-roster {
-	overflow: hidden;
+	
 }
 	#course-roster .course-group {
-		padding: 20px;
 	}
-	#course-roster .course-group:nth-child(odd) {
-		background: #eee;
-	}
+	/*#course-roster .course-group:nth-child(odd) {
+		background: #FFF;
+	}*/
 	#course-roster .course-group-members {
-		overflow: hidden;
+		
 	}
 	#course-roster .course-group-name {
 		font-size: 20px;
@@ -128,7 +210,7 @@ font {
 		height: 125px;
 	}	
 	
-#schedule-units {	
+/*#schedule-units {	
 }		
 	#schedule-units a{	
 		display: block;
@@ -146,17 +228,17 @@ font {
 	}				
 	#schedule-units a.selected {	
 		background: #ccc;
-	}	
+	}	*/
 
 
 #schedule-tasks {
 }
 
 	#schedule-tasks .task-entry {	
-		border: solid 1px #666;		
+		/*border: solid 1px #666;		*/
 	}
 	#schedule-tasks .task-entry:nth-child(odd) {	
-		background: #eee;
+		background: #FFF;
 	}	
 
 	#schedule-tasks .task-entry .task-info {
