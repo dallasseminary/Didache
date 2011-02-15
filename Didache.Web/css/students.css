@@ -21,7 +21,7 @@ font {
     #sub-column .header
       { padding: 4px 6px; background: #bbd1e1; display: block; margin-top: 16px; }
     #sub-column #unit-list-header
-      { margin: 100px 0 0; }
+      { margin: 17px 0 0; }
     #sub-column .header h4
       { color: #333; /*text-shadow: 0 1px 0 #FFF;*/ font-size: 1.7em; }
     #sub-column .unit-list
@@ -245,7 +245,7 @@ font {
 		width: 100px;
 		position: absolute;
 	    left: 10px;
-	    top: 20px;
+	    top: 55px;
 	}
 	#schedule-tasks .task-entry .task-info .task-status {
 		margin: 15px;

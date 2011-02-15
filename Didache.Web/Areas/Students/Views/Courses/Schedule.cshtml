@@ -18,7 +18,10 @@
 	@if (ViewBag.UserTasks != null) {	 
 		foreach (Didache.UserTaskData userTaskData in ViewBag.UserTasks) {
 		
-		<div class="task-entry block-list-item" id="task-@userTaskData.UserID-@userTaskData.TaskID">			
+		<div class="task-entry block-list-item" id="task-@userTaskData.UserID-@userTaskData.TaskID">
+            <div class="block-list-item-label">
+                <span>@userTaskData.Task.DueDate</span>
+            </div>			
 			
 			<div class="task-info">
 				<span class="task-status status-@userTaskData.TaskCompletionStatus.ToString().ToLower()">@userTaskData.TaskCompletionStatus</span>				
