@@ -12,16 +12,22 @@
     <div class="block-list-header"><h3>Upcoming...</h3></div>
     <div class="block-list">
         @foreach (Didache.Unit unit in Model.Units) {
-	        <div class="block-list-item">
-		        <h5>@unit.SortOrder. @unit.Name</h5>
-		        <ol>
-		        @foreach (Task task in unit.Tasks) {
-			        <li>
-				        @task.Name
-			        </li>
-                }
-		        </ol>	
-	        </div>
+            if (unit.StartDate > DateTime.Now) {
+	            <div class="block-list-item">
+                    <div class="block-list-item-label">
+                        <span>@unit.StartDate.ToShortDateString()</span>
+                    </div>
+		            <h5>@unit.SortOrder. @unit.Name</h5>
+                
+		            <ol>
+		            @foreach (Task task in unit.Tasks) {
+			            <li>
+				            @task.Name
+			            </li>
+                    }
+		            </ol>	
+	            </div>
+            }
         }
     </div>
 </div>
