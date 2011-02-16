@@ -7,8 +7,8 @@
 	<link href="@Url.Content("/css/type.css")" rel="stylesheet"  />
 	<link href="@Url.Content("/css/layout.css")" rel="stylesheet"  />
 	<link href="@Url.Content("/css/students.css")" rel="stylesheet"  />
-	<!--<link href="@Url.Content("/css/courses.css")" rel="stylesheet"  />-->
-	<!--link href="@Url.Content("/css/admin.css")" rel="stylesheet"  /-->
+	<link href="@Url.Content("/css/admin.css")" rel="stylesheet"  />
+	<!--<link href="@Url.Content("/css/courses.css")" rel="stylesheet"  />-->	
     
 	<script src="@Url.Content("~/js/jquery-1.5.min.js") "></script>
 	<script src="@Url.Content("~/js/jquery-ui.min.js") "></script>
@@ -68,8 +68,8 @@
 			    </div>
                 <div class="sub-menu-item @(Request.Url.PathAndQuery.StartsWith("/profile") ? " selected" : "")" id="main-menu-profile-details">
 				    <ul>
-					    <li><a href="/profile">View</a></li>
-					    <li><a href="/profile/edit">Edit</a></li>
+					    <li><a href="/profiles">View</a></li>
+					    <li><a href="/profiles/edit">Edit</a></li>
 				    </ul>
 			    </div>
                 <div class="sub-menu-item @(Request.Url.PathAndQuery.StartsWith("/admin") ? " selected" : "")" id="main-menu-admin-details">
