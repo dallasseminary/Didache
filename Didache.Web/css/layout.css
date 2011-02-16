@@ -5,6 +5,29 @@
     width: 960px;
     margin: 0 auto;
 }
+a.oe-button 
+{
+    background: #DDD;
+    color: #333;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    padding: 3px 10px;
+    line-height: 105%;
+    white-space: nowrap;
+    margin: 3px 0 10px;
+}
+a:hover.oe-button
+{
+    background: #EEE;
+    color: #444;
+}
+a:active.oe-button
+{
+    background: #BBB;
+    color: #333;
+}
+
 
 #container-1 {
     background: #EEE;

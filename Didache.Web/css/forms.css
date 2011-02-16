@@ -1,0 +1,23 @@
+﻿/** Forms **/
+
+#edit form 
+{
+    min-width: 300px;
+    max-width: 600px;
+    padding: 10px;
+    background: #EEE;
+    border: 1px solid #CCC;
+    margin-bottom: 20px;
+}
+#edit .editor-field {
+    display: inline-block;
+    margin-bottom: 15px;
+}
+#edit .editor-field input {
+    font-size: 14px;
+    padding: 3px;
+}
+#edit .editor-field input[type="text"] 
+{
+    margin-right: 5px;
+}

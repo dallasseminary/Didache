@@ -20,7 +20,7 @@
 		
 		<div class="task-entry block-list-item" id="task-@userTaskData.UserID-@userTaskData.TaskID">
             <div class="block-list-item-label">
-                <span>@userTaskData.Task.DueDate</span>
+                <span>@(userTaskData.Task.DueDate.HasValue?userTaskData.Task.DueDate.Value.ToShortDateString():"")</span>
             </div>			
 			
 			<div class="task-info">
