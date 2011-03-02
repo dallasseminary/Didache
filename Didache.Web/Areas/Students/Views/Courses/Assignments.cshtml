@@ -8,3 +8,29 @@
 
 @{ Html.RenderPartial("CourseMenu"); }
 
+
+<div id="main-column">
+    <div class="block-list-header"><h3>Archived Courses</h3></div>
+    <div class="block-list">
+            @foreach (Unit unit in Model.Units)
+            {
+	                <div class="block-list-item">
+                        <div class="block-list-item-label">
+                            <span>Unit @unit.UnitID</span>
+                        </div>
+                        <h5>@unit.Name</h5>
+
+                        <ul class="graded-assignments">
+                            @foreach ( Task task in unit.Tasks ) {
+                                if (task.UnitID == unit.UnitID)
+                                {
+	                                <li>@task.Name</li>
+                                }
+                            }
+                        </ul>
+
+                        <div class="clear"></div>
+	                </div>
+            }
+    </div>
+</div>
