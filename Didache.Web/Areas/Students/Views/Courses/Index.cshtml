@@ -4,10 +4,34 @@
 	ViewBag.Title = Resources.labels.coursemenu_archived_courses;
 }
 
-<h2>Index</h2>
+<div id="main-column">
+    <div class="block-list-header"><h3>Archived Courses</h3></div>
+    <div class="block-list">
+            @foreach (Session session in Didache.Sessions.GetSessions())
+            {
+                if (Model.Find(delegate(Course course) { return course.SessionID == session.SessionID; }) != null)
+                {
+	                <div class="block-list-item">
+                        <div class="block-list-item-label">
+                            <span>@session.SessionCode</span>
+                        </div>
+                        <div class="task-info">
+                            <span>@session.Name</span>
+                        </div>
 
-<ul>
-@foreach (Course course in Model) {
-	<li><a href="/courses/@course.Slug">@course.CourseCode</a> (@course.Session.Name)</li>
-}
-</ul>
+                        <ul class="course-archive">
+                            @foreach (Course course in Model)
+                            {
+                                if (course.SessionID == session.SessionID)
+                                {
+	                                <li><a href="/courses/@course.Slug">@course.CourseCode</a></li>
+                                }
+                            }
+                        </ul>
+
+                        <div class="clear"></div>
+	                </div>
+                } 
+            }
+    </div>
+</div>

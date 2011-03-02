@@ -180,6 +180,16 @@ font {
   { background-color: #3C3 }
 .skipped .block-list-item-label span.notify 
   { background-color: #C33 }
+.block-list-item .task-info {
+		width: 100px;
+		position: absolute;
+	    left: 10px;
+	    top: 55px;
+	}
+.block-list-item .task-info {
+    display: block;
+    margin: 15px 10px;
+}
   
 
 #course-roster {
@@ -230,6 +240,25 @@ font {
 		background: #ccc;
 	}	*/
 
+/* course archive */
+
+ul.course-archive li {
+    background: #FFF;
+    float: left; margin: 0 10px 10px 0;
+    display: block;
+    height: 20px;
+    width: 110px;
+    padding: 8px 4px;
+    text-align: center;
+}
+
+.block-list .block-list-item:nth-child(odd) ul.course-archive li {
+    background: #EEE;
+}
+
+ul.course-archive li a {
+    font-weight: bold;
+}
 
 #schedule-tasks {
 }
