@@ -380,26 +380,66 @@ ul.course-archive li a {
 
 /* Forums */
 
-.forum-posts {
+.forum-threads, .forum-posts {
 	border-collapse: collapse;
+	text-align: left;
+	font-size: 12px;
 }
-	.forum-posts tbody tr:nth-child(odd) {
+    .forum-posts thead tr,  .forum-threads thead tr 
+    {
+        background: #194e76;
+        color: #FFF;
+    }
+    .forum-posts thead th,  .forum-threads thead th 
+    {
+        font-weight: bold;
+        font-size: 90%;
+        padding: 5px 10px;   
+        border: 1px solid #333;
+    }
+    .forum-posts thead td,  .forum-threads thead td 
+    {
+        font-size: 90%;
+        padding: 5px 10px;
+        border: 1px solid #333;
+    }
+    .forum-posts thead th a,  .forum-threads thead th a
+    {
+        color: #FFF; 
+    }
+	.forum-posts tbody tr:nth-child(odd), .forum-threads tbody tr:nth-child(odd) {
 		background: #eee;
 	}
-	.forum-posts tbody td, .forum-posts tbody th{
-		text-align: left;
-		padding: 10px;
-		border: solid 1px #999;
-	}
-	.forum-posts tbody td{
+	.forum-posts tbody td, .forum-posts tbody th, .forum-threads tbody td, .forum-threads tbody th{
 		vertical-align: top;
 		text-align: left;
 		padding: 10px;
 		border: solid 1px #999;
+		position: relative;
 	}
-	.forum-posts .post-author {
-		width: 150px;
+	.forum-posts tbody td .date 
+	{
+	    position: relative;
+	    bottom: 0;
 	}
+	.forum-posts .post-author, .forum-threads .post-author {
+		width: 70px;
+	}
+	.forum-posts .name, .forum-threads .name {
+		font-size: 11px;
+		font-weight: bold;
+	}
+	
+form.forum-post-new table td 
+{
+    vertical-align: top;
+    padding: 10px;
+}
+    form.forum-post-new input[type="text"], form.forum-post-new textarea 
+    {
+        padding: 4px;
+        font-size: 13px;
+    }
 
 
 .task-submit {

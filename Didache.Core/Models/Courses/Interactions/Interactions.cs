@@ -7,7 +7,9 @@ namespace Didache {
 	public class Interactions {
 		
 		public static List<InteractionThread> GetInteractionThreads(int taskID) {
-			return new DidacheDb()
+            return new List<InteractionThread>();
+            
+            return new DidacheDb()
 				.InteractionThreads
 				.Include("Posts")
 				.Include("Posts.User")
@@ -17,7 +19,10 @@ namespace Didache {
 		}
 
 		public static List<InteractionPost> GetInteractionPosts(int threadID) {
-			return new DidacheDb()
+
+            return new List<InteractionPost>();
+            
+            return new DidacheDb()
 				.InteractionPosts
 				.Where(p => p.ThreadID == threadID)
 				.OrderByDescending(p => p.PostDate)

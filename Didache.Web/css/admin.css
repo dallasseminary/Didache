@@ -1,6 +1,8 @@
 ﻿/* ADMIN */
 .admin-list {
 	border-collapse: collapse;
+	padding-bottom: 10px;
+	border-bottom: 5px solid #CCC;
 }
 .admin-list td, .admin-list th{
 	padding: 4px;

@@ -20,7 +20,7 @@
 
 @foreach (Thread thread in Model.Threads) {
 	<tr>
-		<td><a href="/courses/@ViewContext.RouteData.Values["slug"]/discussion/thread/@thread.ThreadID">@thread.Subject</a></td>
+		<th><a href="/courses/@ViewContext.RouteData.Values["slug"]/discussion/thread/@thread.ThreadID">@thread.Subject</a></th>
 		<td>@thread.ThreadDate </td>
 		<td>@thread.LastPostSubject by @thread.LastPostUserName </td>
 	</tr>
