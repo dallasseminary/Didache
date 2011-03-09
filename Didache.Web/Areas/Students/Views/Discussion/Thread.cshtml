@@ -9,12 +9,12 @@
 
 
 
-<div id="main-column">
+
     <table class="forum-posts">
         <thead>
             <tr>
-                <th width="160"><a href="/courses/@ViewContext.RouteData.Values["slug"]/discussion/forum/@Model.Forum.ForumID">@Model.Forum.Name</a></th>
-                <td>@Model.Subject</td>
+                <th width="200"><a href="/courses/@ViewContext.RouteData.Values["slug"]/discussion/forum/@Model.Forum.ForumID">@Model.Forum.Name</a></th>
+                <td width="720">@Model.Subject</td>
             </tr>
         </thead>
 	    <tbody>
@@ -29,11 +29,11 @@
 			    <a href="@post.User.ProfileDisplayUrl">
 				    <img src="@post.User.ProfileImageUrl" alt="@post.UserName" class="post-author" />
 			    </a>
-		    </th>
-		    <td>
 			    <div class="date">
 				    @post.PostDate
 			    </div>
+		    </th>
+		    <td>
 			    <div class="content">
 				    @Html.Raw(post.PostContentFormatted)
 			    </div>
@@ -69,4 +69,3 @@
 	     <input type="submit" value="Submit Reply" />
 
     </form>
-</div>

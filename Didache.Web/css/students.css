@@ -108,7 +108,7 @@ font {
     {
         margin-bottom: 0;
     }
-    p
+    #course-header p
     {
         font-size: 10px;
         line-height: 13px;
@@ -289,6 +289,14 @@ ul.course-archive li a {
 	    margin-bottom: 10px;
 	}
 	
+	#schedule-tasks .task-entry .task-details .task-interaction textarea {
+	    width: 500px;
+	}
+	
+	#schedule-tasks .task-entry .task-details .task-interaction input[type="text"] {
+	    width: 300px;
+	}
+	
 	#schedule-tasks .task-entry .task-name {
 		font-weight: bold;
 		font-size: 120%;
@@ -379,11 +387,27 @@ ul.course-archive li a {
 
 
 /* Forums */
+.course-forum 
+{
+    display: block;
+    background: #EEE;
+    border: 1px solid #DCDCDC;
+    margin-bottom: 8px;
+    padding: 4px 8px;
+}
+.course-forum h3 
+{
+    margin-bottom: 0;
+}
+.course-forum p 
+{
+    color: #666;
+}
 
 .forum-threads, .forum-posts {
 	border-collapse: collapse;
 	text-align: left;
-	font-size: 12px;
+	font-size: 14px;
 	margin-bottom: 20px;
 }
     .forum-posts thead tr,  .forum-threads thead tr 
@@ -394,13 +418,13 @@ ul.course-archive li a {
     .forum-posts thead th,  .forum-threads thead th 
     {
         font-weight: bold;
-        font-size: 90%;
+        font-size: 100%;
         padding: 5px 10px;   
         border: 1px solid #333;
     }
     .forum-posts thead td,  .forum-threads thead td 
     {
-        font-size: 90%;
+        font-size: 100%;
         padding: 5px 10px;
         border: 1px solid #333;
     }
@@ -408,33 +432,62 @@ ul.course-archive li a {
     {
         color: #FFF; 
     }
+    .forum-posts tbody p,  .forum-threads tbody p
+    {
+        font-size: 13px;
+        line-height: 140%;
+        margin-bottom: 12px;
+    }
+    .forum-posts tbody td.content 
+    {
+        font-size: 13px;
+        line-height: 140%;
+    }
 	.forum-posts tbody tr:nth-child(odd), .forum-threads tbody tr:nth-child(odd) {
 		background: #eee;
 	}
 	.forum-posts tbody td, .forum-posts tbody th, .forum-threads tbody td, .forum-threads tbody th{
 		vertical-align: top;
 		text-align: left;
-		padding: 10px;
+		padding: 5px 10px;
 		border: solid 1px #999;
 		position: relative;
 	}
-	.forum-posts tbody td .date 
-	{
-	    position: relative;
-	    bottom: 0;
+	.forum-threads tbody th h3 {
+	    font-weight: normal;
+	    margin-bottom: 0;
+	}
+	.forum-threads tbody td, forum-posts tbody td {
+		padding: 15px 10px 5px;
+	}
+	.forum-threads tbody td.replies {
+	    font-weight: bold;
+	    font-size: 16px;
+	    text-align: center;
+	    padding: 15px 0;
+	}
+	.forum-threads .date, .forum-posts tbody .date {
+	    color: #666;
+	    font-size: 10px;
+	    line-height: 100%;
+	    margin-bottom: 10px;
 	}
 	.forum-posts .post-author, .forum-threads .post-author {
-		width: 70px;
+		width: 100px;
+		margin-bottom: 8px;
 	}
 	.forum-posts .name, .forum-threads .name {
 		font-size: 11px;
 		font-weight: bold;
+		margin-bottom: 8px;
+		display: inline-block;
 	}
 	
 form.forum-post-new {
     background: #DEDEDE;
     border: 1px solid #999;
     padding: 10px;
+    width: 600px;
 }
     form.forum-post-new table td 
     {

@@ -145,6 +145,7 @@
     <Content Include="js\MicrosoftMvcValidation.js" />
     <Content Include="loginas.aspx" />
     <Content Include="setup\username conversion.sql" />
+    <Content Include="sql.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

@@ -7,7 +7,7 @@ namespace Didache {
 	public class Interactions {
 		
 		public static List<InteractionThread> GetInteractionThreads(int taskID) {
-            return new List<InteractionThread>();
+            //return new List<InteractionThread>();
             
             return new DidacheDb()
 				.InteractionThreads
@@ -20,7 +20,7 @@ namespace Didache {
 
 		public static List<InteractionPost> GetInteractionPosts(int threadID) {
 
-            return new List<InteractionPost>();
+            //return new List<InteractionPost>();
             
             return new DidacheDb()
 				.InteractionPosts
