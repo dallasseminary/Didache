@@ -290,7 +290,12 @@ ul.course-archive li a {
 	}
 	
 	#schedule-tasks .task-entry .task-details .task-interaction textarea {
-	    width: 500px;
+	    width: 480px;
+	    padding: 10px;
+	    border: none;
+	    -webkit-border-radius: 4px;
+	       -moz-border-radius: 4px;
+	            border-radius: 4px;
 	}
 	
 	#schedule-tasks .task-entry .task-details .task-interaction input[type="text"] {
@@ -520,3 +525,92 @@ form.forum-post-new {
 	cursor: pointer;
 
 }
+
+
+/** Interactions **/
+
+.task-interactions {
+	margin: 10px 0 0 0;
+	padding: 0 5px;
+	background: #194e76;
+}
+	.task-interaction {
+		padding: 5px 0;
+		width: 510px;
+	}
+	.task-interaction-thread {
+	    padding: 5px 0;
+	}
+	.task-interaction-thread .task-interaction-header {
+		background: #BBD1E1;
+		overflow: hidden;
+		color: #222;
+		cursor: pointer;
+		padding: 5px;
+		border-bottom: #99B0C0 1px solid;
+	}	
+	.task-interaction-thread .task-interaction-header .user {
+		width: 200px;
+		float: left;
+		display: block;
+	}		
+	.task-interaction-thread .task-interaction-header .date {
+		width: 150px;
+		float: left;
+		display: block;
+	}			
+	.task-interaction-thread .task-interaction-header .total-replies {
+		width: 100px;
+		float: left;
+		text-align: right;
+		display: block;
+	}	
+	
+	.task-interaction-thread .task-interaction-post {
+		overflow: hidden;		
+		background: #eee;
+	}
+	.task-interaction-thread .task-interaction-post:nth-child(even) {
+		overflow: hidden;		
+		background: #ddd;
+	}					
+	.task-interaction-thread .task-interaction-post .user-info {
+		width: 100px;
+		float: left;
+		margin: 5px;
+		text-align: center;		
+	}	
+	.task-interaction-thread .task-interaction-post .user-info a {
+		text-decoration:none;
+		color: #555;
+		font-wize: 10px;
+	}	
+	.task-interaction-thread .task-interaction-post .user-info img {
+		width: 80px;
+	}	
+	.task-interaction-thread .task-interaction-post .user-info span {
+		display: block;
+		text-align: center;		
+	}							
+	.task-interaction-thread .task-interaction-post .post-content {
+		width: 360px;
+		float: left;
+		margin: 5px;
+	}	
+	.task-interaction-thread .add-reply {
+	    margin-top: 8px;
+	}
+	    .task-interaction-thread .add-reply textarea {
+	        display: block;
+	        clear: both;
+	        margin-bottom: 5px;
+	    }
+	    .task-interaction-thread .add-reply span.add-reply-button {
+	        text-align: right;
+	        display: block;
+	        width: 100%;
+	    }
+	    .task-interaction-thread .add-reply input[type="button"] {
+	        margin: 0 -1px auto 0;
+	        padding: 2px 20px;
+	    }

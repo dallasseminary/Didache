@@ -4,76 +4,9 @@
 	List<InteractionThread> threads = Interactions.GetInteractionThreads(Model.TaskID);
 }
 
-
-<style>
-.task-interactions {
-	margin: 10px 0 0 0;
-	background: #333;
-}
-	.task-interaction {
-		padding: 5px;
-	}
-	.task-interaction .task-interaction-header {
-		background: #111;
-		overflow: hidden;
-		color: #fff;
-		cursor: pointer;
-		padding: 5px;
-	}	
-	.task-interaction .task-interaction-header .user {
-		width: 200px;
-		float: left;
-		display: block;
-	}		
-	.task-interaction .task-interaction-header .date {
-		width: 150px;
-		float: left;
-		display: block;
-	}			
-	.task-interaction .task-interaction-header .total-replies {
-		width: 100px;
-		float: left;
-		text-align: right;
-		display: block;
-	}	
-	
-	.task-interaction .task-interaction-post {
-		overflow: hidden;		
-		background: #eee;
-	}
-	.task-interaction .task-interaction-post:nth-child(even) {
-		overflow: hidden;		
-		background: #ddd;
-	}					
-	.task-interaction .task-interaction-post .user-info {
-		width: 100px;
-		float: left;
-		margin: 5px;
-		text-align: center;		
-	}	
-	.task-interaction .task-interaction-post .user-info a {
-		text-decoration:none;
-		color: #555;
-		font-wize: 10px;
-	}	
-	.task-interaction .task-interaction-post .user-info img {
-		width: 80px;
-	}	
-	.task-interaction .task-interaction-post .user-info span {
-		display: block;
-		text-align: center;		
-	}							
-	.task-interaction .task-interaction-post .post-content {
-		width: 360px;
-		float: left;
-		margin: 5px;
-	}	
-				
-</style>
-
 <div class="task-interactions">
 @foreach (InteractionThread thread in threads) {
-	<div class="task-interaction" data-threadid="@thread.ThreadID">
+	<div class="task-interaction-thread" data-threadid="@thread.ThreadID">
 		<div class="task-interaction-header">
 			<span class="user">@thread.User.FormattedName</span>
 			<span class="date">@thread.ThreadDate</span>
@@ -100,9 +33,8 @@
 
 	  
 			<div class="add-reply">
-				<textarea class="reply-text"></textarea>		
-				<br />
-				<input type="button" class="reply-button" value="Add reply" />
+				<textarea class="reply-text"></textarea>	
+				<span class="add-reply-button"><input type="button" class="reply-button" value="Add reply" /></span>
 			</div>	
 				
 		</div>
