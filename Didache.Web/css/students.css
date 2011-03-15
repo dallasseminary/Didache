@@ -277,7 +277,7 @@ ul.course-archive li a {
 	    top: 55px;
 	}
 	#schedule-tasks .task-entry .task-info .task-status {
-		margin: 15px;
+		margin: 5px 15px;
 		display: block;
 	}	
 
@@ -476,6 +476,11 @@ ul.course-archive li a {
 	    font-size: 10px;
 	    line-height: 100%;
 	    margin-bottom: 10px;
+	}
+	.forum-threads .last-poster {
+	    clear: both;
+	    display: block;
+	    margin-bottom: 2px;
 	}
 	.forum-posts .post-author, .forum-threads .post-author {
 		width: 100px;

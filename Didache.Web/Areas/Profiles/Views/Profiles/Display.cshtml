@@ -5,38 +5,32 @@
 }
 
 
+<div class="profile">
+    <div style="float: left; width: 300px;">
+	    <img src="@Model.ProfileImageUrl" alt="@Model.FormattedName" />
+    </div>
 
-<div style="float: left; width: 200px;">
-	<img src="@Model.ProfileImageUrl" alt="@Model.FormattedName" />
-</div>
+    <div style="float: left; width: 400px;">
+	
+	    <h2>@Model.FormattedName</h2>
 
-<div style="float: right; width: 600px;">
-	
-	<h2>@Model.FormattedName</h2>
-	
-	<table>
-		<tbody>
-			<tr>
-				<td>Address</td>
-				<td>
-					@Model.Address1 @(Model.Address2 != "" ? "<br />" + @Model.Address2 : "")
-					<br />
-					@Model.City, @Model.State @Model.Zip
-				</td>
-			</tr>
-			<tr>
-				<td>Phone</td>
-				<td>
-					@Model.Phone
-				</td>
-			</tr>
-			<tr>
-				<td>Email</td>
-				<td>
-					@Model.Email
-				</td>
-			</tr>
+			    <dl>
+				    <dt>From</dt>
+				    <dd>
+					    @Model.City, @Model.State
+				    </dd>
+				    <dt>Phone</dt>
+				    <dd>
+					    @Model.Phone
+				    </dd>
+				    <dt>Email</dt>
+				    <dd>
+					    @Model.Email
+				    </dd>
+                    <dt>Birthday</dt>
+                    <dd>@Model.BirthDate.Value.ToShortDateString()</dd>
+
+			    </dl>
 			
-		</tbody>
-	</table>
+    </div>
 </div>
