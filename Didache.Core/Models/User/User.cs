@@ -48,7 +48,7 @@ namespace Didache {
 			Latitude = 0;
 			Longitude = 0;
 			IsGeocoded = false;
-			AttemptedGeocode = false;
+            AttemptedGeocode = false;
 		}
 
 		[Key]
@@ -141,7 +141,14 @@ namespace Didache {
 		public Double Latitude { get; set; }
 		public Double Longitude { get; set; }
 		public bool IsGeocoded { get; set; }
-		public bool AttemptedGeocode { get; set; }
+        public bool AttemptedGeocode { get; set; }
+        public string Hometown { get; set; }
+        public string AlmaMater { get; set; }
+        public string Bio { get; set; }
+        public string MinistryGoals { get; set; }
+        public string Facebook { get; set; }
+        public string Twitter { get; set; }
+        public string Website { get; set; }
 
 		// LOGIN details
 		public string Username { get; set; }

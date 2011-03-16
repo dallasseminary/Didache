@@ -115,6 +115,7 @@
     <Content Include="App_Data\Didache_log.ldf">
       <DependentUpon>Didache.mdf</DependentUpon>
     </Content>
+    <Content Include="css\forms.css" />
     <Content Include="css\layout.css" />
     <Content Include="css\admin.css" />
     <Content Include="css\courses.css" />

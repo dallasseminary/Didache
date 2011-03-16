@@ -177,7 +177,7 @@ a:active.oe-button
             margin: 0 20px 0 0;
             display: inline-block;
             float: left;
-            width: 60px;
+            width: 80px;
         }
         
         .profile dl dd {
@@ -185,4 +185,6 @@ a:active.oe-button
             margin: 0 0 12px;
             padding: 2px 0 12px 20px;
             border-bottom: 1px solid #CCC;
+            display: block;
+            width: 290px;
         }
