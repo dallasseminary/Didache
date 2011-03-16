@@ -574,6 +574,7 @@ form.forum-post-new {
 	.task-interaction-thread .task-interaction-post {
 		overflow: hidden;		
 		background: #eee;
+		margin-bottom: 8px;
 	}
 	.task-interaction-thread .task-interaction-post:nth-child(even) {
 		overflow: hidden;		
@@ -603,7 +604,7 @@ form.forum-post-new {
 		margin: 5px;
 	}	
 	.task-interaction-thread .add-reply {
-	    margin-top: 8px;
+	    margin:0;
 	}
 	    .task-interaction-thread .add-reply textarea {
 	        display: block;
