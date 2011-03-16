@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
+<h2>Edit Session</h2>
 
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
@@ -13,12 +13,12 @@
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
     <fieldset>
-        <legend>Session</legend>
+        <legend></legend>
 
         @Html.HiddenFor(model => model.SessionID)
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.IsActive)
+            @Html.LabelFor(model => model.IsActive):
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.IsActive)
@@ -26,7 +26,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.SessionCode)
+            @Html.LabelFor(model => model.SessionCode):
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.SessionCode)
@@ -34,7 +34,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Name)
+            @Html.LabelFor(model => model.Name):
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Name)
@@ -42,7 +42,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.StartDate)
+            @Html.LabelFor(model => model.StartDate):
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.StartDate)
@@ -50,20 +50,20 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.EndDate)
+            @Html.LabelFor(model => model.EndDate):
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.EndDate)
             @Html.ValidationMessageFor(model => model.EndDate)
         </div>
 
-        <p>
+        <div class="submit">
             <input type="submit" value="Save" />
-        </p>
+        </div>
     </fieldset>
 }
 
-<div>
+<div class="back-to-list">
     @Html.ActionLink("Back to List", "Index")
 </div>
 
