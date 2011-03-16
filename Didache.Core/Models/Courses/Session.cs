@@ -14,9 +14,12 @@ namespace Didache {
 	public class Session {
 		[Key]
 		public int SessionID { get; set; }
+
+		[Display(Name = "Is Active")]
 		public bool IsActive { get; set; }
 
 		[Required]
+		[Display(Name = "Session Code")]
 		public string SessionCode { get; set; }
 
 		[Required]
