@@ -15,6 +15,10 @@
 	    <h2>@Model.FormattedName (@Model.UserID)</h2>
 
 			    <dl>
+				    <dt>Birthday</dt>
+				    <dd>
+					    @Model.BirthDate.Value.ToShortDateString() &nbsp;
+				    </dd>
 				    <dt>From</dt>
 				    <dd>
 					    @Model.Hometown &nbsp;

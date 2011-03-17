@@ -14,6 +14,10 @@
     <div class="block-list">
             @foreach (Unit unit in Model.Units)
             {
+                List<UserTaskData> userTasks = null;
+
+                userTasks = Tasks.GetUserTaskDataInUnit(unit.UnitID, Users.GetLoggedInUser().UserID);
+                
 	                <div class="block-list-item">
                         <div class="block-list-item-label">
                             <span>Unit @unit.UnitID</span>
@@ -21,11 +25,22 @@
                         <h5>@unit.Name</h5>
 
                         <ul class="graded-assignments">
-                            @foreach ( Task task in unit.Tasks ) {
-                                if (task.UnitID == unit.UnitID)
-                                {
-	                                <li>@task.Name</li>
+                            @foreach (Didache.UserTaskData userTaskData in userTasks) {
+                                switch (userTaskData.TaskCompletionStatus) {
+	                            
+                                    case TaskCompletionStatus.Completed:    
+                                        <li><strike>@userTaskData.Task.Name</strike></li>;
+                                        break;
+                                    
+                                    case TaskCompletionStatus.Skipped:      
+                                        <li><strike><span class="skipped">@userTaskData.Task.Name</span></strike></li>; 
+                                        break;
+                                    
+                                    case TaskCompletionStatus.NotStarted:   
+                                        <li>@userTaskData.Task.Name</li>
+                                        break;
                                 }
+
                             }
                         </ul>
 
