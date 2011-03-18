@@ -23,6 +23,12 @@ namespace Didache {
 		public int UploadedByUserID { get; set; }
 		public DateTime UploadedDate { get; set; }
 		public string Title { get; set; }
+
+		public string FileUrl {
+			get {
+				return "/files/course/" + FileID + "/" + Filename;
+			}
+		}
 	}
 
 

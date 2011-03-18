@@ -12,7 +12,7 @@ namespace Didache {
 
 	public class CourseFileAssociation {
 		public int FileID { get; set; }
-		public int CourseGroupID { get; set; }
+		public int GroupID { get; set; }
 		public int SortOrder { get; set; }
 
 		public virtual CourseFileGroup CourseFileGroup { get; set; }

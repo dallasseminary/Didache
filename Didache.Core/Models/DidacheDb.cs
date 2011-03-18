@@ -119,7 +119,9 @@ namespace Didache {
 			modelBuilder.Entity<CourseFileGroup>()
 				.ToTable("oe_CourseFileGroups");
 			modelBuilder.Entity<CourseFileAssociation>()
+				.HasKey(cfa => new { cfa.GroupID, cfa.FileID })
 				.ToTable("oe_CourseFileGroups_Files");
+
 			
 		}
 	}

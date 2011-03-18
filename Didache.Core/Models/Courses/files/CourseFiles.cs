@@ -8,8 +8,10 @@ namespace Didache  {
 		public static List<CourseFileGroup> GetCourseFileGroups(int courseID) {
 			return new DidacheDb()
 				.CourseFileGroups
-					.Include("CourseFileAssociations").Include("CourseFiles")
-				.Where(g => g.CourseID == courseID).ToList();
+					.Include("CourseFileAssociations") /* .Include("CourseFiles") */
+				.Where(g => g.CourseID == courseID)
+				.OrderBy(g => g.SortOrder)
+				.ToList();
 		}
 	}
 }
