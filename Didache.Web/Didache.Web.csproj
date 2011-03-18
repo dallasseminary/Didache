@@ -116,7 +116,12 @@
     <Content Include="App_Data\Didache_log.ldf">
       <DependentUpon>Didache.mdf</DependentUpon>
     </Content>
-    <Content Include="Areas\Admin\Views\Sessions\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Courses\Edit.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Areas\Admin\Views\Sessions\Edit.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Areas\Admin\Views\Sessions\Index.cshtml">
       <SubType>Code</SubType>
     </Content>
