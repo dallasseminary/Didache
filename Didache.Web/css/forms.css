@@ -21,3 +21,17 @@
 {
     margin-right: 5px;
 }
+#edit .editor-field.textarea {
+    width: 100%;
+    display: block;
+    clear: both;
+}
+
+#edit .editor-field textarea {
+    width: 96%;
+    height: 150px;
+    padding: 5px;
+    font-size: 14px;
+    line-height: 19px;
+    margin-bottom: 8px;
+}

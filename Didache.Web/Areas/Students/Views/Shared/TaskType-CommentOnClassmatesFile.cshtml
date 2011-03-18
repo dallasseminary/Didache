@@ -30,7 +30,6 @@
 			</div>	
 	  	  
 		}
-
 	  
 			<div class="add-reply">
 				<textarea class="reply-text"></textarea>	
@@ -46,57 +45,56 @@
 </div>
 
 <script>
-	jQuery(function ($) {
-		$('div.task-interaction .task-interaction-header').toggle(function () {
-			$(this).siblings('.task-interaction-list').slideDown();
-		}, function () {
-			$(this).siblings('.task-interaction-list').slideUp();
-		});
+    jQuery(function ($) {
+        $('div.task-interaction .task-interaction-header').toggle(function () {
+            $(this).siblings('.task-interaction-list').slideDown();
+        }, function () {
+            $(this).siblings('.task-interaction-list').slideUp();
+        });
 
-		$('div.task-interaction input.reply-button').click(function () {
+        $('div.task-interaction input.reply-button').click(function () {
 
-			var button = $(this).attr('disabled', 'disabled');
+            var button = $(this).attr('disabled', 'disabled');
 
-			var text = button.siblings('textarea').attr('disabled', 'disabled').val();
-			var threadID = button.closest('.task-interaction').data('threadid');
-
-
-			$.ajax({
-				url: '/courses/api/interactionreply',
-				type: 'POST',
-				data: {
-					text: text,
-					threadID: threadID
-				},
-				success: function (d) {
-
-					// create response
-					button.closest('.add-reply').prepend(
-						$('<div class="task-interaction-post">' +
-							'<div class="user-info">' +
-								'<a href="@(Users.GetLoggedInUser().ProfileDisplayUrl)">' +
-									'<img src="@(Users.GetLoggedInUser().ProfileImageUrl)" />' +
-									'<span class="name">@(Users.GetLoggedInUser().FormattedName)</span>' +
-								'</a>' +
-							'</div>' +
-							'<div class="post-content">' +
-								text +
-							'</div>' +
-						'</div>')
-					);
-
-					// increase reply ount
-					var replies = button.closest('.task-interaction').find('.total-replies');
-					var count = parseInt(replies.html(), 10);
-					replies.html((count + 1).toString());
-
-					// clean up
-					button.siblings('textarea').removeAttr('disabled').val('');
-					button.removeAttr('disabled');
-				}
-			});
+            var text = button.siblings('textarea').attr('disabled', 'disabled').val();
+            var threadID = button.closest('.task-interaction').data('threadid');
 
 
-		});
-	});
+            $.ajax({
+                url: '/courses/api/interactionreply',
+                type: 'POST',
+                data: {
+                    text: text,
+                    threadID: threadID
+                },
+                success: function (d) {
+
+                    // create response
+                    var target = button.closest('.add-reply');
+                    $('<div class="task-interaction-post">' +
+						'<div class="user-info">' +
+							'<a href="@(Users.GetLoggedInUser().ProfileDisplayUrl)">' +
+								'<img src="@(Users.GetLoggedInUser().ProfileImageUrl)" />' +
+								'<span class="name">@(Users.GetLoggedInUser().FormattedName)</span>' +
+							'</a>' +
+						'</div>' +
+						'<div class="post-content">' +
+							text +
+						'</div>' +
+					'</div>').insertBefore(target);
+
+                    // increase reply count
+                    var replies = button.closest('.task-interaction').find('.total-replies');
+                    var count = parseInt(replies.html(), 10);
+                    replies.html((count + 1).toString());
+
+                    // clean up
+                    button.siblings('textarea').removeAttr('disabled').val('');
+                    button.removeAttr('disabled');
+                }
+            });
+
+
+        });
+    });
 </script>

@@ -33,8 +33,9 @@ namespace Didache {
 			}
 		}
 
-		public static string FormatPost(string input) {
-			return input.Replace("\n", "<br />");
+        public static string FormatPost(string input) {
+            return input.Insert(input.Length, "</p>").Insert(0, "<p>").Replace("\n", "<br />");
+            //return input.Replace("\n\n", "</p><p>");
 		}
 	}
 }

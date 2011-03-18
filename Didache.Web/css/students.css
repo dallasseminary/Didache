@@ -536,15 +536,15 @@ form.forum-post-new {
 
 .task-interactions {
 	margin: 10px 0 0 0;
-	padding: 0 5px;
-	background: #194e76;
+	border: 1px solid #194e76;
 }
 	.task-interaction {
 		padding: 5px 0;
-		width: 510px;
+		width: 520px;
 	}
 	.task-interaction-thread {
-	    padding: 5px 0;
+	    padding: 0;		
+		background: #eee;
 	}
 	.task-interaction-thread .task-interaction-header {
 		background: #BBD1E1;
@@ -572,19 +572,18 @@ form.forum-post-new {
 	}	
 	
 	.task-interaction-thread .task-interaction-post {
-		overflow: hidden;		
-		background: #eee;
+		overflow: hidden;
 		margin-bottom: 8px;
 	}
 	.task-interaction-thread .task-interaction-post:nth-child(even) {
 		overflow: hidden;		
 		background: #ddd;
-	}					
+	}			
 	.task-interaction-thread .task-interaction-post .user-info {
 		width: 100px;
 		float: left;
-		margin: 5px;
-		text-align: center;		
+		margin: 10px;
+		text-align: left;		
 	}	
 	.task-interaction-thread .task-interaction-post .user-info a {
 		text-decoration:none;
@@ -595,13 +594,14 @@ form.forum-post-new {
 		width: 80px;
 	}	
 	.task-interaction-thread .task-interaction-post .user-info span {
-		display: block;
-		text-align: center;		
+		display: block;	
 	}							
 	.task-interaction-thread .task-interaction-post .post-content {
 		width: 360px;
 		float: left;
 		margin: 5px;
+		padding-bottom: 10px;
+		border-bottom: 1px solid #BBB;
 	}	
 	.task-interaction-thread .add-reply {
 	    margin:0;
@@ -609,7 +609,7 @@ form.forum-post-new {
 	    .task-interaction-thread .add-reply textarea {
 	        display: block;
 	        clear: both;
-	        margin-bottom: 5px;
+	        margin: 5px 9px;
 	    }
 	    .task-interaction-thread .add-reply span.add-reply-button {
 	        text-align: right;
@@ -617,6 +617,10 @@ form.forum-post-new {
 	        width: 100%;
 	    }
 	    .task-interaction-thread .add-reply input[type="button"] {
-	        margin: 0 -1px auto 0;
+	        margin: 0 9px auto 0;
 	        padding: 2px 20px;
 	    }
+	    
+	ul.graded-assignments .skipped {
+	    color: #BBB;
+	}

@@ -12,23 +12,30 @@
 
     <div style="float: left; width: 400px;">
 	
-	    <h2>@Model.FormattedName</h2>
+	    <h2>@Model.FormattedName (@Model.UserID)</h2>
 
 			    <dl>
+				    <dt>Birthday</dt>
+				    <dd>
+					    @Model.BirthDate.Value.ToShortDateString() &nbsp;
+				    </dd>
 				    <dt>From</dt>
 				    <dd>
-					    @Model.City, @Model.State
+					    @Model.Hometown &nbsp;
 				    </dd>
-				    <dt>Phone</dt>
+				    <dt>Alma Mater</dt>
 				    <dd>
-					    @Model.Phone
+					    @Model.AlmaMater &nbsp;
 				    </dd>
-				    <dt>Email</dt>
+				    <dt>Bio</dt>
 				    <dd>
-					    @Model.Email
+					    @Model.Bio &nbsp;
 				    </dd>
-                    <dt>Birthday</dt>
-                    <dd>@Model.BirthDate.Value.ToShortDateString()</dd>
+                    <dt>Ministry Goals</dt>
+                    <dd>@Model.MinistryGoals &nbsp;</dd>
+                    @if (!Model.Facebook.IsEmpty()) {<dt>Facebook</dt><dd><a href="@Model.Facebook">@Model.Facebook</a></dd>}
+                    @if (!Model.Twitter.IsEmpty()) {<dt>Twitter</dt><dd><a href="http://www.twitter.com/@Model.Twitter">@@@Model.Twitter</a></dd>}
+                    @if (!Model.Website.IsEmpty()) {<dt>Website</dt> <dd><a href="@(!Model.Website.Contains("http://") ? "http://" + Model.Website : Model.Website)">@Model.Website.Replace("http://","")</a></dd>}
 
 			    </dl>
 			

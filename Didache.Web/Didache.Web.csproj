@@ -119,9 +119,8 @@
     <Content Include="Areas\Admin\Views\Courses\Edit.cshtml">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Areas\Admin\Views\Sessions\Edit.cshtml">
-      <SubType>Code</SubType>
-    </Content>
+    <Content Include="css\forms.css" />
+    <Content Include="Areas\Admin\Views\Sessions\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Sessions\Index.cshtml">
       <SubType>Code</SubType>
     </Content>
