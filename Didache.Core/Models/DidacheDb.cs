@@ -36,10 +36,14 @@ namespace Didache {
 		public DbSet<Post> Posts { get; set; }
 		public DbSet<Thread> Threads { get; set; }
 
-
 		// interactions
 		public DbSet<InteractionPost> InteractionPosts { get; set; }
 		public DbSet<InteractionThread> InteractionThreads { get; set; }
+
+		// course files
+		public DbSet<CourseFile> CourseFiles { get; set; }
+		public DbSet<CourseFileGroup> CourseFileGroups { get; set; }
+		public DbSet<CourseFileAssociation> CourseFileAssociations { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder) {
 
@@ -107,6 +111,15 @@ namespace Didache {
 				.ToTable("oe_Interactions_Posts");
 			modelBuilder.Entity<InteractionThread>()
 				.ToTable("oe_Interactions_Threads");
+
+
+			// files
+			modelBuilder.Entity<CourseFile>()
+				.ToTable("oe_CourseFiles");
+			modelBuilder.Entity<CourseFileGroup>()
+				.ToTable("oe_CourseFileGroups");
+			modelBuilder.Entity<CourseFileAssociation>()
+				.ToTable("oe_CourseFileGroups_Files");
 			
 		}
 	}
