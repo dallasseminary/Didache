@@ -11,8 +11,8 @@
 <table class="forum-threads">
 	<thead>
 		<tr>
-			<th width="300">Subject</th>
-			<th width="600">Last Post</th>
+			<th width="700">Subject</th>
+			<th width="200">Last Poster</th>
             <th width="20">Replies</th>
 		</tr>
 	</thead>
@@ -21,7 +21,7 @@
 @foreach (Thread thread in Model.Threads) {
 	<tr>
 		<th><h3><a href="/courses/@ViewContext.RouteData.Values["slug"]/discussion/thread/@thread.ThreadID">@thread.Subject</a></h3><span class="date">@thread.ThreadDate</span></th>
-		<td>@thread.LastPostSubject by @thread.LastPostUserName </td>
+		<td><span class="last-poster">@thread.LastPostUserName</span> <span class="date">@thread.LastPostDate</span> </td>
         <td class="replies">@thread.TotalReplies</td>
 	</tr>
 }

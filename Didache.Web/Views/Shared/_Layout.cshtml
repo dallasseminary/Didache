@@ -58,11 +58,13 @@
 					    <li><span>Current:</span></li>
 
 					    @{
-					    List<Course> courses = Didache.Courses.GetUsersRunningCourses(CourseUserRole.Student);
-					    }
-					    @foreach (Course course in courses) {
-					    <li><a href="/courses/@course.Slug/">@(course.CourseCode + course.Section)</a></li>	
-					    }
+							List<Course> courses = Didache.Courses.GetUsersRunningCourses(CourseUserRole.Student);
+							if (courses != null) {
+								foreach (Course course in courses) {
+								<li><a href="/courses/@course.Slug/">@(course.CourseCode + course.Section)</a></li>	
+								}
+							}
+						}
 					    <li><span>Tools:</span></li>
 					    <li><a href="/courses/">Archive</a></li>
 				    </ul>

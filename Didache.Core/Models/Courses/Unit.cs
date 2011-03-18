@@ -18,9 +18,11 @@ namespace Didache {
 		public int UnitID { get; set; }
 		public int CourseID { get; set; }
 
+		[Display(Name = "Is Active")]
 		public bool IsActive { get; set; }
 
 		[Required]
+		[Display(Name = "Sort Order")]
 		public int SortOrder { get; set; }
 
 		[Required]

@@ -9,10 +9,9 @@
 
 @foreach (Forum forum in Model) { 
 
-<div class="course-forum">
-	<a href="/courses/@ViewContext.RouteData.Values["slug"]/discussion/forum/@forum.ForumID">@forum.Name</a>
-	<br />
-	@forum.Description
-</div>
+    <div class="course-forum">
+	    <h3><a href="/courses/@ViewContext.RouteData.Values["slug"]/discussion/forum/@forum.ForumID">@forum.Name</a></h3>
+	    <span class="forum-description"><p>@forum.Description</p></span>
+    </div>
 
 }
