@@ -2,12 +2,12 @@
 		   
 @{
 	ViewBag.Title = Model.CourseCode + Model.Section + " " + Resources.labels.coursetabs_assignments;
+    int i = 1;
 }
 
 @{Html.RenderPartial("CourseHeader"); }
 
 @{ Html.RenderPartial("CourseMenu"); }
-
 
 <div id="main-column">
     <div class="block-list-header"><h3>Assignments</h3></div>
@@ -20,7 +20,7 @@
                 
 	                <div class="block-list-item">
                         <div class="block-list-item-label">
-                            <span>Unit @unit.UnitID</span>
+                            <span>Unit @i</span>
                         </div>
                         <h5>@unit.Name</h5>
 
@@ -46,6 +46,7 @@
 
                         <div class="clear"></div>
 	                </div>
+                { i += 1; }
             }
     </div>
 </div>

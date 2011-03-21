@@ -20,7 +20,7 @@
 
 @foreach (Thread thread in Model.Threads) {
 	<tr>
-		<th><h3><a href="/courses/@ViewContext.RouteData.Values["slug"]/discussion/thread/@thread.ThreadID">@thread.Subject</a></h3><span class="date">@thread.ThreadDate</span></th>
+		<th><h3><a href="/courses/@ViewContext.RouteData.Values["slug"]/discussion/thread/@thread.ThreadID">@Html.Raw(thread.Subject)</a></h3><span class="date">@thread.ThreadDate</span></th>
 		<td><span class="last-poster">@thread.LastPostUserName</span> <span class="date">@thread.LastPostDate</span> </td>
         <td class="replies">@thread.TotalReplies</td>
 	</tr>
