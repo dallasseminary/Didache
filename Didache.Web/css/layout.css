@@ -95,17 +95,17 @@ a:active.oe-button
 		    margin: 0 20px 0 0;
 		    /*border-radius: 10px 10px 0 0;*/
 		    border-right: 2px dotted #333;
-		    color: #666;
+		    color: #AAA;
 		    font-size: 36px;
 		    line-height: 36px;Replace("."," ")
 		    text-decoration: none;
 	    }
 	    #main-menu li a:hover {
-		    color: #999;
+		    color: #444;
 		    text-shadow: 1px 2px 1px #FFF;
 	    }
 	    #main-menu li a.selected {
-		    color: #999;
+		    color: #444;
 		    text-shadow: 1px 2px 1px #FFF;
 	    }
 	

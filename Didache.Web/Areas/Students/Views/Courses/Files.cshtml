@@ -14,12 +14,18 @@
 	@foreach (CourseFileGroup group in ViewBag.CourseFileGroups) {
 		<div class="course-filegroup block-list-item">
 			<div class="block-list-item-label"><span>@group.Name</span></div>
-			<div class="course-filegroup-files">
+			<ul class="course-filegroup-files">
 				@foreach (CourseFileAssociation courseFileAssociation in group.CourseFileAssociations) {				
-					<a class="file-@courseFileAssociation.CourseFile.FileType" href="@courseFileAssociation.CourseFile.FileUrl">@courseFileAssociation.CourseFile.Title</a> @courseFileAssociation.CourseFile.FormattedLength<br />
+					<li>
+                        <a class="file-@courseFileAssociation.CourseFile.FileType" href="@courseFileAssociation.CourseFile.FileUrl">
+                            <span class="filename">@courseFileAssociation.CourseFile.Title</span>
+                            <span class="type"><img src="/css/images/@(courseFileAssociation.CourseFile.FileType).png"</span>
+                            <span class="size">@courseFileAssociation.CourseFile.FormattedLength</span>
+                        </a>
+                    </li>
+
 				}
-            <div class="clear"></div>
-			</div>
+			</ul>
 		</div>
 	}
 
@@ -27,5 +33,5 @@
 </div>
 
 <div id="sub-column">
-	<a href="/courses/downloadall/@Model.Slug-Files.zip">Download all files</a>
+	<div id="all-downloads" class="header"><h4><a href="/courses/downloadall/@Model.Slug-Files.zip">Download all files</a></h4></div>
 </div>

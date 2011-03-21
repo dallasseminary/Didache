@@ -24,7 +24,9 @@
                             {
                                 if (course.SessionID == session.SessionID)
                                 {
-	                                <li><a href="/courses/@course.Slug">@course.CourseCode</a></li>
+	                                <li>
+                                        <a href="/courses/@course.Slug"><h4>@course.CourseCode - @course.Name</h4></a>
+                                    </li>
                                 }
                             }
                         </ul>
