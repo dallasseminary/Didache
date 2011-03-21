@@ -290,9 +290,8 @@ ul.course-archive li a {
 	}
 	
 	#schedule-tasks .task-entry .task-details .task-interaction textarea {
-	    width: 480px;
+	    width: 478px;
 	    padding: 10px;
-	    border: none;
 	    -webkit-border-radius: 4px;
 	       -moz-border-radius: 4px;
 	            border-radius: 4px;
@@ -442,6 +441,9 @@ ul.course-archive li a {
         font-size: 13px;
         line-height: 140%;
         margin-bottom: 12px;
+    }
+    .forum-posts tbody li {
+        margin-left: 30px;
     }
     .forum-posts tbody td.content 
     {
