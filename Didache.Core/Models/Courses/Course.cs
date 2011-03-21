@@ -17,9 +17,12 @@ namespace Didache {
 		public int CourseID { get; set; }
 		public int SessionID { get; set; }
 		public int CampusID { get; set; }
+
+		[Display(Name = "Is Active")]
 		public bool IsActive { get; set; }
 
 		[Required]
+		[Display(Name = "Course Code")]
 		public string CourseCode { get; set; }
 
 		[Required]
@@ -38,6 +41,7 @@ namespace Didache {
 		public DateTime EndDate { get; set; }
 
 		[Required]
+		[DataType(DataType.MultilineText)]
 		[Display(Name = "Description")]
 		public string Description { get; set; }
 

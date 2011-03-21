@@ -97,7 +97,52 @@ namespace Didache.Web.Areas.Admin.Controllers
 		}
 
 
-		// TASKS EDIT
+		public ActionResult Edit(int? id)
+		{
+			Course course = db.Courses.SingleOrDefault(s => s.CourseID == id);
+			if (course == null)
+				course = new Course() { CourseID = 0 };
+			return View(course);
+		}
+
+		[HttpPost]
+		public ActionResult Edit(Course model)
+		{
+			if (model.CourseID > 0)
+			{
+				// EDIT MODE
+				try
+				{
+					model = db.Courses.Find(model.CourseID);
+
+					UpdateModel(model);
+
+					db.SaveChanges();
+
+					//return RedirectToAction("Courses", new { id = model.ID });
+					return RedirectToAction("Index");
+				}
+				catch (Exception)
+				{
+					ModelState.AddModelError("", "Edit Failure, see inner exception");
+				}
+				return View(model);
+			}
+			else
+			{
+				// ADD MODE
+				if (ModelState.IsValid)
+				{
+					db.Courses.Add(model);
+					db.SaveChanges();
+					return RedirectToAction("Index");
+				}
+				else
+				{
+					return View(model);
+				}
+			}
+		}
 
     }
 }

@@ -68,6 +68,8 @@ namespace Didache.Web.Areas.Students.Controllers
 
 			Course course = Didache.Courses.GetCourseBySlug(slug);
 
+			ViewBag.CourseFileGroups = CourseFiles.GetCourseFileGroups(course.CourseID);
+
 			return View(course);
 		}
 

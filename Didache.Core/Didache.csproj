@@ -33,9 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\EFCodeFirst.0.8\lib\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.4.1.10311.0\lib\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -63,6 +63,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Courses\Campuses.cs" />
+    <Compile Include="Models\Courses\files\CourseFileAssociation.cs" />
+    <Compile Include="Models\Courses\files\CourseFileGroup.cs" />
+    <Compile Include="Models\Courses\files\CourseFile.cs" />
+    <Compile Include="Models\Courses\files\CourseFiles.cs" />
     <Compile Include="Models\Courses\Interactions\Interactions.cs" />
     <Compile Include="Models\Courses\Interactions\Post.cs" />
     <Compile Include="Models\Courses\Interactions\Thread.cs" />

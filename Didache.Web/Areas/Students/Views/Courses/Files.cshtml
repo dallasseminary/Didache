@@ -7,3 +7,21 @@
 
 @{ Html.RenderPartial("CourseMenu"); }
 
+<div id="main-column">
+    <div class="block-list-header"><h3>Course Files</h3></div>
+	<div id="course-roster" class="block-list">
+
+	@foreach (CourseFileGroup group in ViewBag.CourseFileGroups) {
+		<div class="course-filegroup block-list-item">
+			<div class="block-list-item-label"><span>@group.Name</span></div>
+			<div class="course-filegroup-files">
+				@foreach (CourseFileAssociation courseFileAssociation in group.CourseFileAssociations) {				
+					<a href="@courseFileAssociation.CourseFile.FileUrl">@courseFileAssociation.CourseFile.Title</a>
+				}
+            <div class="clear"></div>
+			</div>
+		</div>
+	}
+
+	</div>
+</div>
