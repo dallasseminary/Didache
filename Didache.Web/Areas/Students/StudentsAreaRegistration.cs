@@ -31,6 +31,27 @@ namespace Didache.Web.Areas.Students {
 				new { controller = "Discussion", action = "Index", id = UrlParameter.Optional }
 			);
 
+			// files
+			context.MapRoute(
+				"Coursefiles",
+				"courses/coursefile/{id}/{*filename}",
+				new { controller = "Courses", action = "CourseFile" }
+			);
+			context.MapRoute(
+				"studentfiles",
+				"courses/studentfile/{id}/{*filename}",
+				new { controller = "Courses", action = "StudentFile" }
+			);
+			context.MapRoute(
+				"gradedfiles",
+				"courses/gradedfile/{id}/{*filename}",
+				new { controller = "Courses", action = "GradedFile" }
+			);
+			context.MapRoute(
+				"downloadall",
+				"courses/downloadall/{slug}-Files.zip",
+				new { controller = "Courses", action = "DownloadAll" }
+			);
 
 			// main six tabs
 			context.MapRoute(
@@ -38,6 +59,8 @@ namespace Didache.Web.Areas.Students {
 				"courses/{slug}/{action}/{id}",
 				new { controller = "Courses", action = "Schedule", id = UrlParameter.Optional }
 			);
+
+
 		}
 	}
 }

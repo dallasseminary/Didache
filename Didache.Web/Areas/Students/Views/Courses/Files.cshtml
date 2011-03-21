@@ -16,7 +16,7 @@
 			<div class="block-list-item-label"><span>@group.Name</span></div>
 			<div class="course-filegroup-files">
 				@foreach (CourseFileAssociation courseFileAssociation in group.CourseFileAssociations) {				
-					<a href="@courseFileAssociation.CourseFile.FileUrl">@courseFileAssociation.CourseFile.Title</a>
+					<a class="file-@courseFileAssociation.CourseFile.FileType" href="@courseFileAssociation.CourseFile.FileUrl">@courseFileAssociation.CourseFile.Title</a> @courseFileAssociation.CourseFile.FormattedLength<br />
 				}
             <div class="clear"></div>
 			</div>
@@ -24,4 +24,8 @@
 	}
 
 	</div>
+</div>
+
+<div id="sub-column">
+	<a href="/courses/downloadall/@Model.Slug-Files.zip">Download all files</a>
 </div>

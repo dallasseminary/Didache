@@ -63,6 +63,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Courses\Campuses.cs" />
+    <Compile Include="Models\Courses\files\BaseFile.cs" />
+    <Compile Include="Models\Courses\files\GradedFile.cs" />
+    <Compile Include="Models\Courses\files\StudentFile.cs" />
     <Compile Include="Models\Courses\files\CourseFileAssociation.cs" />
     <Compile Include="Models\Courses\files\CourseFileGroup.cs" />
     <Compile Include="Models\Courses\files\CourseFile.cs" />
