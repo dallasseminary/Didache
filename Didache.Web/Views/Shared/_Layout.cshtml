@@ -37,7 +37,7 @@
 		        <ul id="main-menu">         
                     <li><a id="main-menu-home" href="/" @(Request.Url.PathAndQuery == "/" ? " class=\"selected\"" : "")>@Resources.labels.tabs_home</a></li>
                     @if (HttpContext.Current.User.Identity.IsAuthenticated) {
-			        <li><a id="main-menu-courses" href="/courses" @(Request.Url.PathAndQuery.StartsWith("/courses") ? " class=\"selected\"" : "")>Courses</a></li>
+			        <li><a id="main-menu-courses" href="/courses" @(Request.Url.PathAndQuery.StartsWith("/courses") ? " class=\"selected\"" : "")>@Resources.labels.tabs_courses</a></li>
 			        <li><a id="main-menu-profile" href="/profile" @(Request.Url.PathAndQuery.StartsWith("/profile") ? " class=\"selected\"" : "")>Profile</a></li>
 			        <li><a id="main-menu-admin" href="/admin" @(Request.Url.PathAndQuery.StartsWith("/admin") ? " class=\"selected\"" : "")>Admin</a></li>
 			        }
