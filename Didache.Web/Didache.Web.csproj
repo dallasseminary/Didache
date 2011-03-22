@@ -127,6 +127,7 @@
     <Content Include="css\layout.css" />
     <Content Include="css\admin.css" />
     <Content Include="css\courses.css" />
+    <Content Include="Didache.Web.Publish.xml" />
     <Content Include="js\jquery-1.5.js" />
     <Content Include="js\jquery-1.5.min.js" />
     <Content Include="logout.aspx" />
