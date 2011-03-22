@@ -112,11 +112,110 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="admin_active" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="admin_code" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="admin_courses" xml:space="preserve">
+    <value>Courses</value>
+  </data>
+  <data name="admin_courseunits" xml:space="preserve">
+    <value>Course Units</value>
+  </data>
+  <data name="admin_due" xml:space="preserve">
+    <value>Due</value>
+  </data>
+  <data name="admin_edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="admin_editsession" xml:space="preserve">
+    <value>Edit Session</value>
+  </data>
+  <data name="admin_edittask" xml:space="preserve">
+    <value>Edit Task</value>
+  </data>
+  <data name="admin_end" xml:space="preserve">
+    <value>End</value>
+  </data>
+  <data name="admin_files" xml:space="preserve">
+    <value>Files</value>
+  </data>
+  <data name="admin_grading" xml:space="preserve">
+    <value>Grading</value>
+  </data>
+  <data name="admin_grid" xml:space="preserve">
+    <value>Grid</value>
+  </data>
+  <data name="admin_groups" xml:space="preserve">
+    <value>Groups</value>
+  </data>
+  <data name="admin_index" xml:space="preserve">
+    <value>Index</value>
+  </data>
+  <data name="admin_index_menu_sessions" xml:space="preserve">
+    <value>Sessions</value>
+  </data>
+  <data name="admin_name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="admin_newcourse" xml:space="preserve">
+    <value>New Course</value>
+  </data>
+  <data name="admin_newsession" xml:space="preserve">
+    <value>New Session</value>
+  </data>
+  <data name="admin_sec" xml:space="preserve">
+    <value>Sec</value>
+  </data>
+  <data name="admin_sessions" xml:space="preserve">
+    <value>Sessions</value>
+  </data>
+  <data name="admin_skippable" xml:space="preserve">
+    <value>Skippable</value>
+  </data>
+  <data name="admin_sort" xml:space="preserve">
+    <value>Sort</value>
+  </data>
+  <data name="admin_start" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="admin_tasks" xml:space="preserve">
+    <value>Tasks</value>
+  </data>
+  <data name="admin_unit" xml:space="preserve">
+    <value>Unit</value>
+  </data>
+  <data name="admin_units" xml:space="preserve">
+    <value>Units</value>
+  </data>
+  <data name="admin_users" xml:space="preserve">
+    <value>Users</value>
+  </data>
+  <data name="commonmenu_alumni" xml:space="preserve">
+    <value>Alumni</value>
+  </data>
+  <data name="commonmenu_bookcenter" xml:space="preserve">
+    <value>Book Center</value>
+  </data>
+  <data name="commonmenu_campusnet" xml:space="preserve">
+    <value>CampusNet</value>
+  </data>
+  <data name="commonmenu_dtswebsite" xml:space="preserve">
+    <value>DTS Website</value>
+  </data>
+  <data name="commonmenu_library" xml:space="preserve">
+    <value>Library</value>
+  </data>
+  <data name="commonmenu_mydts" xml:space="preserve">
+    <value>MyDTS</value>
+  </data>
   <data name="confirm_delete" xml:space="preserve">
     <value>Are you sure you want to delete this item?</value>
   </data>
@@ -171,6 +270,9 @@
   <data name="coursetabs_schedule_desc" xml:space="preserve">
     <value>dates &amp;amp; assignments</value>
   </data>
+  <data name="error_desc" xml:space="preserve">
+    <value>Sorry, an error occurred while processing your request</value>
+  </data>
   <data name="forums_by" xml:space="preserve">
     <value>by</value>
   </data>
@@ -204,6 +306,9 @@
   <data name="homemenu_message" xml:space="preserve">
     <value>This is the home page where all your stuff should be</value>
   </data>
+  <data name="index_title" xml:space="preserve">
+    <value>Index Page</value>
+  </data>
   <data name="login_instructions" xml:space="preserve">
     <value>Please enter your username and password</value>
   </data>
@@ -212,6 +317,9 @@
   </data>
   <data name="login_login" xml:space="preserve">
     <value>Login</value>
+  </data>
+  <data name="login_logout" xml:space="preserve">
+    <value>Logout</value>
   </data>
   <data name="login_password" xml:space="preserve">
     <value>Password</value>
@@ -224,6 +332,39 @@
   </data>
   <data name="login_username" xml:space="preserve">
     <value>Username</value>
+  </data>
+  <data name="submenu_archive" xml:space="preserve">
+    <value>Archive</value>
+  </data>
+  <data name="submenu_campuses" xml:space="preserve">
+    <value>Campuses</value>
+  </data>
+  <data name="submenu_courses" xml:space="preserve">
+    <value>Courses</value>
+  </data>
+  <data name="submenu_current" xml:space="preserve">
+    <value>Current</value>
+  </data>
+  <data name="submenu_dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="submenu_edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="submenu_files" xml:space="preserve">
+    <value>Files</value>
+  </data>
+  <data name="submenu_sessions" xml:space="preserve">
+    <value>Sessions</value>
+  </data>
+  <data name="submenu_tools" xml:space="preserve">
+    <value>Tools</value>
+  </data>
+  <data name="submenu_users" xml:space="preserve">
+    <value>Users</value>
+  </data>
+  <data name="submenu_view" xml:space="preserve">
+    <value>View</value>
   </data>
   <data name="tabs_about" xml:space="preserve">
     <value>About</value>
