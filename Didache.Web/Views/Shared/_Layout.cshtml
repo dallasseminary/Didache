@@ -48,13 +48,13 @@
 		<div id="sub-menu">              
             <div class="sub-menu-item @(Request.Url.PathAndQuery == "/" ? " selected" : "")" id="main-menu-home-details">
 				<ul>
-					<li><a href="/dashboard">Dashboard</a></li>		
+					<li><a href="/dashboard">@Resources.labels.submenu_dashboard</a></li>		
 				</ul>
 			</div>
 			@if (HttpContext.Current.User.Identity.IsAuthenticated) {
                 <div class="sub-menu-item @(Request.Url.PathAndQuery.StartsWith("/courses") ? " selected" : "")" id="main-menu-courses-details">
 				    <ul>
-					    <li><span>Current:</span></li>
+					    <li><span>@Resources.labels.submenu_current:</span></li>
 
 					    @{
 							List<Course> courses = Didache.Courses.GetUsersRunningCourses(CourseUserRole.Student);
@@ -64,23 +64,23 @@
 								}
 							}
 						}
-					    <li><span>Tools:</span></li>
-					    <li><a href="/courses/">Archive</a></li>
+					    <li><span>@Resources.labels.submenu_tools:</span></li>
+					    <li><a href="/courses/">@Resources.labels.submenu_archive</a></li>
 				    </ul>
 			    </div>
                 <div class="sub-menu-item @(Request.Url.PathAndQuery.StartsWith("/profile") ? " selected" : "")" id="main-menu-profile-details">
 				    <ul>
-					    <li><a href="/profiles">View</a></li>
-					    <li><a href="/profiles/edit">Edit</a></li>
+					    <li><a href="/profiles">@Resources.labels.submenu_view</a></li>
+					    <li><a href="/profiles/edit">@Resources.labels.submenu_edit</a></li>
 				    </ul>
 			    </div>
                 <div class="sub-menu-item @(Request.Url.PathAndQuery.StartsWith("/admin") ? " selected" : "")" id="main-menu-admin-details">
 				    <ul>
-					    <li><a href="/admin/sessions">Sessions</a></li>
-					    <li><a href="/admin/campuses">Campuses</a></li>
-					    <li><a href="/admin/courses">Courses</a></li>
-					    <li><a href="/admin/files">Files</a></li>
-					    <li><a href="/admin/users">Users</a></li>
+					    <li><a href="/admin/sessions">@Resources.labels.submenu_sessions</a></li>
+					    <li><a href="/admin/campuses">@Resources.labels.submenu_campuses</a></li>
+					    <li><a href="/admin/courses">@Resources.labels.submenu_courses</a></li>
+					    <li><a href="/admin/files">@Resources.labels.submenu_files</a></li>
+					    <li><a href="/admin/users">@Resources.labels.submenu_users</a></li>
 				    </ul>
 			    </div>
             }
