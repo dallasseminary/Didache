@@ -2,20 +2,20 @@
 	<div class="container_12">
 		<div class="grid_6">
 			<div id="dts-sites">				
-				<a href="http://www.dts.edu/">DTS Website</a>
-				<a href="http://library.dts.edu/">Library</a>
-				<a href="http://bookcenter.dts.edu/">Book Center</a>
-				<a href="http://campus.dts.edu/">CampusNet</a>
-				<a href="http://alumni.dts.edu/">Alumni</a>				
-				<a href="http://online.dts.edu/">Online Ed</a>
+				<a href="http://www.dts.edu/">@Resources.labels.commonmenu_dtswebsite</a>
+				<a href="http://library.dts.edu/">@Resources.labels.commonmenu_library</a>
+				<a href="http://bookcenter.dts.edu/">@Resources.labels.commonmenu_bookcenter</a>
+				<a href="http://campus.dts.edu/">@Resources.labels.commonmenu_campusnet</a>
+				<a href="http://alumni.dts.edu/">@Resources.labels.commonmenu_alumni</a>				
+				<a href="http://online.dts.edu/">@Resources.labels.commonmenu_onlineed</a>
 			</div>
 		</div>
 		<div class="grid_6">
 			<div id="dts-account">				
 @if (Request.IsAuthenticated) {	
-	<span class="user">@User.Identity.Name</span> <a href="/logout.aspx">Logout</a>
+	<span class="user">@User.Identity.Name</span> <a href="/logout.aspx">@Resources.labels.login_logout</a>
 } else {	
-	<a href="/loginas.aspx?username=john.locoe">Login</a>
+	<a href="/loginas.aspx?username=john.locoe">@Resources.labels.login_login</a>
 }
 							
 			</div>

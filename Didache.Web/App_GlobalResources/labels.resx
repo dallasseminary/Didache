@@ -132,8 +132,8 @@
   <data name="commonmenu_library" xml:space="preserve">
     <value>Library</value>
   </data>
-  <data name="commonmenu_mydts" xml:space="preserve">
-    <value>MyDTS</value>
+  <data name="commonmenu_onlineed" xml:space="preserve">
+    <value>Online Ed</value>
   </data>
   <data name="confirm_delete" xml:space="preserve">
     <value>Are you sure you want to delete this item?</value>
