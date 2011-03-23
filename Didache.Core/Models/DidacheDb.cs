@@ -36,12 +36,20 @@ namespace Didache {
 		public DbSet<Post> Posts { get; set; }
 		public DbSet<Thread> Threads { get; set; }
 
-
 		// interactions
 		public DbSet<InteractionPost> InteractionPosts { get; set; }
 		public DbSet<InteractionThread> InteractionThreads { get; set; }
 
-		protected override void OnModelCreating(ModelBuilder modelBuilder) {
+		// course files
+		public DbSet<CourseFile> CourseFiles { get; set; }
+		public DbSet<CourseFileGroup> CourseFileGroups { get; set; }
+		public DbSet<CourseFileAssociation> CourseFileAssociations { get; set; }
+
+		// studnet and graded files
+		public DbSet<StudentFile> StudentFiles { get; set; }
+		public DbSet<GradedFile> GradedFiles { get; set; }
+
+		protected override void OnModelCreating(DbModelBuilder modelBuilder) {
 
 
 			modelBuilder.Entity<User>()
@@ -107,7 +115,35 @@ namespace Didache {
 				.ToTable("oe_Interactions_Posts");
 			modelBuilder.Entity<InteractionThread>()
 				.ToTable("oe_Interactions_Threads");
-			
+
+
+			// course files
+			modelBuilder.Entity<CourseFile>()
+				.ToTable("oe_CourseFiles");
+			modelBuilder.Entity<CourseFileGroup>()
+				.ToTable("oe_CourseFileGroups");
+			modelBuilder.Entity<CourseFileAssociation>()
+				.HasKey(cfa => new { cfa.GroupID, cfa.FileID })
+				.ToTable("oe_CourseFileGroups_Files");
+
+			// student and graded
+			modelBuilder.Entity<StudentFile>()
+				.ToTable("oe_StudentFiles");
+			modelBuilder.Entity<GradedFile>()
+				.ToTable("oe_GradedFiles");
+
+			// map example
+			/*
+			modelBuilder.Entity<WatchList>().HasMany(w => w.Securities)
+				   .WithMany()
+				   .Map(map => map.ToTable("WatchListSecurity")
+				   .MapRightKey("SecurityId")
+				   .MapLeftKey("WatchListId"));
+			*/
+
+			//http://johnpapa.net/silverlight/upgrading-to-entity-framework-4-1-rc/
+			// possible silliness
+			//modelBuilder.Entity<Security>().ToTable("Securities"); 
 		}
 	}
 

@@ -68,6 +68,8 @@ namespace Didache.Web.Areas.Students.Controllers
 
 			Course course = Didache.Courses.GetCourseBySlug(slug);
 
+			ViewBag.CourseFileGroups = CourseFiles.GetCourseFileGroups(course.CourseID);
+
 			return View(course);
 		}
 
@@ -89,6 +91,67 @@ namespace Didache.Web.Areas.Students.Controllers
 			Course course = Didache.Courses.GetCourseBySlug(slug);
 
 			return View(course);
+		}
+
+
+		public ActionResult CourseFile(int id, string filename) {
+			
+			CourseFile file = new DidacheDb().CourseFiles.Find(id);
+
+			string basePath = System.Configuration.ConfigurationManager.AppSettings["CourseFilesLocation"];
+			string path = System.IO.Path.Combine(basePath, file.Filename);
+
+			if (System.IO.File.Exists(path)) {
+
+				return File(path, file.ContentType);
+			} else {
+				return HttpNotFound("Cannot find: " + file.Filename);
+			}
+		}
+
+		public ActionResult StudentFile(int id, string filename) {
+
+			CourseFile file = new DidacheDb().CourseFiles.Find(id);
+
+			string basePath = System.Configuration.ConfigurationManager.AppSettings["StudentFilesLocation"];
+			string path = System.IO.Path.Combine(basePath, file.Filename);
+
+			if (System.IO.File.Exists(path)) {
+
+				return File(path, file.ContentType);
+			} else {
+				return HttpNotFound("Cannot find: " + file.Filename);
+			}
+		}
+
+		public ActionResult GradedFile(int id, string filename) {
+
+			CourseFile file = new DidacheDb().CourseFiles.Find(id);
+
+			string basePath = System.Configuration.ConfigurationManager.AppSettings["GradedFilesLocation"];
+			string path = System.IO.Path.Combine(basePath, file.Filename);
+
+			if (System.IO.File.Exists(path)) {
+
+				return File(path, file.ContentType);
+			} else {
+				return HttpNotFound("Cannot find: " + file.Filename);
+			}
+		}
+
+
+		public ActionResult DownloadAll(string slug) {
+
+			Course course = Didache.Courses.GetCourseBySlug(slug);
+
+			string basePath = System.Configuration.ConfigurationManager.AppSettings["StudentFilesLocation"];
+
+			List<CourseFileGroup> groups = CourseFiles.GetCourseFileGroups(course.CourseID);
+
+			// TODO: create zip file	
+			
+			return HttpNotFound("This doesn't work yet");
+			
 		}
 
     }

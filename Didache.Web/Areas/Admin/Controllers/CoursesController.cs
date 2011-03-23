@@ -44,7 +44,46 @@ namespace Didache.Web.Areas.Admin.Controllers
 			return View(units);
 		}
 
-		// UNIT EDIT
+		public ActionResult Unit(int? id, int? courseID) {
+			Unit unit = db.Units.SingleOrDefault(u => u.UnitID == id);
+			if (unit == null)
+				unit = new Unit();
+
+			return View(unit);
+		}
+
+		[HttpPost]
+		//[ValidateInput(false)]
+		public ActionResult Unit(Unit model) {
+
+			if (model.UnitID > 0) {
+				// EDIT MODE
+				try {
+					model = db.Units.Find(model.UnitID);
+
+					UpdateModel(model);
+
+					db.SaveChanges();
+
+					return RedirectToAction("units", new { id = model.CourseID });
+				} catch (Exception ex) {
+					ModelState.AddModelError("", "Edit Failure, see inner exception: " + ex.ToString());
+				}
+
+				return View(model);
+			} else {
+
+				// ADD MODE
+				if (ModelState.IsValid) {
+					db.Units.Add(model);
+					db.SaveChanges();
+					return RedirectToAction("units", new { id = model.CourseID });
+				} else {
+					return View(model);
+				}
+			}
+
+		}
 
 		public ActionResult Tasks(int id) {
 

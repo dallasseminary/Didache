@@ -1,0 +1,29 @@
+﻿@model List<Campus>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>Campus</h2>
+
+<a class="oe-button" href="/admin/campuses/edit/0">New Campus</a>
+
+<table class="admin-list">
+<thead>
+	<tr>
+		<th>Code</th>
+		<th>Name</th>
+		<th></th>
+	</tr>
+</thead>
+<tbody>
+	@foreach (Campus campus in Model) {
+	<tr>
+		<td>@campus.CampusCode</td>
+		<td>@campus.Name</td>
+		<td><a href="/admin/campuses/edit/@campus.CampusID">edit</a></td>
+	</tr>
+	}
+
+</tbody>
+</table>
