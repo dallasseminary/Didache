@@ -47,6 +47,9 @@ a:active.oe-button
         border-right: 1px solid #FFF;
         text-decoration: none;
     }
+    #dts-common-menu a:last-child {
+        border: none;
+    }
     #dts-sites {
 	    float: left;
 	    width: 660px;
@@ -93,12 +96,14 @@ a:active.oe-button
 		    display: block;	
 		    padding: 5px 20px 5px 0;
 		    margin: 0 20px 0 0;
-		    /*border-radius: 10px 10px 0 0;*/
 		    border-right: 2px dotted #333;
 		    color: #AAA;
 		    font-size: 36px;
 		    line-height: 36px;Replace("."," ")
 		    text-decoration: none;
+	    }
+	    #main-menu li:last-child a {
+	        border: none;
 	    }
 	    #main-menu li a:hover {
 		    color: #444;
