@@ -139,7 +139,6 @@ a:active.oe-button
 	    }
 	    #sub-menu .sub-menu-item ul li a {
 		    background: #999;
-		    border-radius: 6px;
 		    color: #222;
 	    }	
 
@@ -162,7 +161,7 @@ a:active.oe-button
     
 } 
     .profile img {
-        max-width: 280px;
+        max-width: 260px;
     }
 
     .profile dl {
@@ -177,7 +176,7 @@ a:active.oe-button
             margin: 0 20px 0 0;
             display: inline-block;
             float: left;
-            width: 80px;
+            width: 90px;
         }
         
         .profile dl dd {
@@ -186,5 +185,5 @@ a:active.oe-button
             padding: 2px 0 12px 20px;
             border-bottom: 1px solid #CCC;
             display: block;
-            width: 290px;
+            width: 350px;
         }

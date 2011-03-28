@@ -88,7 +88,9 @@ namespace Didache.Web.Areas.Students.Controllers
 
 		public ActionResult Assignments(string slug) {
 
-			Course course = Didache.Courses.GetCourseBySlug(slug);
+            Course course = Didache.Courses.GetCourseBySlug(slug);
+
+            ViewBag.CourseFileGroups = CourseFiles.GetCourseFileGroups(course.CourseID);
 
 			return View(course);
 		}
