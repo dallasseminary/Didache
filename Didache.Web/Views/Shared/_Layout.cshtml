@@ -54,6 +54,8 @@
 			@if (HttpContext.Current.User.Identity.IsAuthenticated) {
                 <div class="sub-menu-item @(Request.Url.PathAndQuery.StartsWith("/courses") ? " selected" : "")" id="main-menu-courses-details">
 				    <ul>
+					    <li><span>@Resources.labels.submenu_tools:</span></li>
+					    <li><a href="/courses/">@Resources.labels.submenu_archive</a></li>
 					    <li><span>@Resources.labels.submenu_current:</span></li>
 
 					    @{
@@ -64,8 +66,6 @@
 								}
 							}
 						}
-					    <li><span>@Resources.labels.submenu_tools:</span></li>
-					    <li><a href="/courses/">@Resources.labels.submenu_archive</a></li>
 				    </ul>
 			    </div>
                 <div class="sub-menu-item @(Request.Url.PathAndQuery.StartsWith("/profile") ? " selected" : "")" id="main-menu-profile-details">
