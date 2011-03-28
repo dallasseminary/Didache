@@ -64,7 +64,15 @@ namespace Didache {
 					case "mp3":
 					case "wav":
 						fileType = "audio";
-						break;
+                        break;
+                    case "zip":
+                    case "rar":
+                    case "7z":
+                    case "7zip":
+                    case "tar":
+                    case "gz":
+                        fileType = "compress";
+                        break;
 				}
 
 

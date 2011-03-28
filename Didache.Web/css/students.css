@@ -24,11 +24,9 @@ font {
       { margin: 17px 0 0; }
     #sub-column .header h4
       { color: #333; /*text-shadow: 0 1px 0 #FFF;*/ font-size: 1.7em; }
-    #sub-column .unit-list
-	    { /* background: url(images/sub-column-bg.png) top left repeat-y; */ margin: 0 0 0 10px; padding: 10px 0 0;
-       /* -webkit-border-radius: 0 10px 10px 0;
-           -moz-border-radius: 0 10px 10px 0; 
-                border-radius: 0 10px 10px 0; */
+    #sub-column .unit-list {
+        margin: 0 0 0 10px;
+        padding: 10px 0 0;
         border-right: 1px solid #CCC;
         border-left-width: 0; position: relative;}
   
@@ -64,26 +62,27 @@ font {
     #sub-column .unit-list ol
 	    { list-style-type: decimal;}	
     #sub-column .unit-list ol li
-	    { list-style-type: decimal; margin: 0 0 0 0; min-height: 36px; width: 270px;
+	    { list-style-type: decimal; margin: 0; min-height: 36px;
         overflow: hidden; text-indent: -12px; position: relative; right: 0px;
         padding: 0; border: none; }
     #sub-column .unit-list ol li:hover
       { background: none; }
     #sub-column .unit-list ol li a
       { padding: 4px 10px 4px 30px; display: block; text-decoration: none; }
+    #sub-column .unit-list ol li a:hover {
+        background: #f0f0ff;
+        border-left: 10px solid #BBB;
+        padding-left: 20px;
+    }
+    #sub-column .unit-list ol li a.selected {
+        background: #DDD;
+        border-left: 10px solid #BBB;
+        padding-left: 20px;
+    }
     #sub-column .unit-list .unit-name
 	    { display:block; font-size: 12px; color: #0281CA; line-height: 120%; }
-    #sub-column .unit-list a:hover
-	    { text-decoration: underline; }
     #sub-column .unit-list .unit-dates
-	    { display:block; font-size: 11px; padding: 3px 0 0 18px; color: #444;}	
-    /*
-    #sub-column .unit-list li.selected
-	    { font-weight: bold; background: transparent url(../images/site/unit-selected.png) no-repeat center left;  }
-    */
-    #sub-column .unit-list li.selected, #sub-column .unit-list li.selected:hover
-	    { font-weight: bold; background: url(images/unit-list-selected-bg.png) top right no-repeat; height: 43px;
-        margin-bottom: -7px; }
+	    { display:block; font-size: 11px; padding: 3px 0 0 18px; color: #444;}
     #sub-column .unit-list li.selected a span.unit-name 
       { color: #FFF; }
     #sub-column .unit-list li.selected a span.unit-dates 
@@ -117,7 +116,7 @@ font {
     }
     
 #course-menu
-	{ height: 57px; overflow: visible; margin: 0 0 20px 0; padding: 0; border-bottom: 1px solid #ccc; }
+	{ height: 57px; /*overflow: visible;*/ margin: 0 0 20px 0; padding: 0; border-bottom: 1px solid #ccc; }
     #course-menu li
 	    { float: left; margin: 0 10px 0 0; }	
     #course-menu li:last-child
@@ -127,7 +126,8 @@ font {
         -moz-border-radius-topleft: 3px;
         -moz-border-radius-topright: 3px;
         -webkit-border-top-left-radius: 3px;
-        -webkit-border-top-right-radius: 3px; }	
+        -webkit-border-top-right-radius: 3px;
+        border-radius: 3px 3px 0 0; }	
     #course-menu li a.last
 	    {   }
     #course-menu li a:hover
