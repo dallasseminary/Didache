@@ -123,6 +123,8 @@
     <Compile Include="Areas\Admin\Controllers\SessionsController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Areas\Community\CommunityAreaRegistration.cs" />
+    <Compile Include="Areas\Community\Controllers\CommunityController.cs" />
     <Compile Include="Areas\Profiles\Controllers\ProfilesController.cs" />
     <Compile Include="Areas\Profiles\ProfilesAreaRegistration.cs" />
     <Compile Include="Areas\Students\Controllers\ApiController.cs" />
@@ -226,6 +228,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\Shared\" />
+    <Folder Include="Areas\Community\Models\" />
+    <Folder Include="Areas\Community\Views\Shared\" />
     <Folder Include="Areas\Profiles\Models\" />
     <Folder Include="Areas\Profiles\Views\Shared\" />
     <Folder Include="Areas\Students\Models\" />
@@ -386,6 +390,7 @@
   <ItemGroup>
     <Content Include="Areas\Admin\Views\Campuses\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Courses\Unit.cshtml" />
+    <Content Include="Areas\Community\Views\Web.config" />
     <None Include="css\fonts\league\League_Gothic-webfont.eot" />
     <None Include="css\fonts\league\League_Gothic-webfont.ttf" />
     <None Include="css\fonts\league\League_Gothic-webfont.woff" />

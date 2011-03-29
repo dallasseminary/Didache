@@ -37,7 +37,7 @@
                     <li><a id="main-menu-home" href="/" @Html.Raw(Request.Url.PathAndQuery == "/" ? " class=\"selected\"" : "")>@Resources.labels.tabs_home</a></li>
                     @if (HttpContext.Current.User.Identity.IsAuthenticated) {
 			        <li><a id="main-menu-courses" href="/courses" @Html.Raw(Request.Url.PathAndQuery.StartsWith("/courses") ? " class=\"selected\"" : "")>@Resources.labels.tabs_courses</a></li>
-			        <li><a id="main-menu-profile" href="/profile" @Html.Raw(Request.Url.PathAndQuery.StartsWith("/profile") ? " class=\"selected\"" : "")>@Resources.labels.tabs_profile</a></li>
+			        <li><a id="main-menu-profile" href="/community" @Html.Raw(Request.Url.PathAndQuery.StartsWith("/community") ? " class=\"selected\"" : "")>@Resources.labels.tabs_community</a></li>
 			        <li><a id="main-menu-admin" href="/admin" @Html.Raw(Request.Url.PathAndQuery.StartsWith("/admin") ? " class=\"selected\"" : "")>@Resources.labels.tabs_admin</a></li>
 			        }
                 </ul>
@@ -70,7 +70,7 @@
 			    </div>
                 <div class="sub-menu-item @(Request.Url.PathAndQuery.StartsWith("/profile") ? " selected" : "")" id="main-menu-profile-details">
 				    <ul>
-					    <li><a href="/profiles">@Resources.labels.submenu_view</a></li>
+					    <li><a href="/@Users.GetLoggedInUser().ProfileDisplayUrl">@Resources.labels.submenu_view</a></li>
 					    <li><a href="/profiles/edit">@Resources.labels.submenu_edit</a></li>
 				    </ul>
 			    </div>
