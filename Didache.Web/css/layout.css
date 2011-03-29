@@ -47,6 +47,9 @@ a:active.oe-button
         border-right: 1px solid #FFF;
         text-decoration: none;
     }
+    #dts-common-menu a:last-child {
+        border: none;
+    }
     #dts-sites {
 	    float: left;
 	    width: 660px;
@@ -81,7 +84,7 @@ a:active.oe-button
 	    {
 	        font-family: LeagueGothicRegular, "Gill Sans", Arial, Sans-Serif;
 	        letter-spacing: 0;
-		    margin: 0 auto 10px;
+		    margin: 0 auto;
 		    overflow: hidden;	
 	    }
 	    #main-menu li {
@@ -91,22 +94,21 @@ a:active.oe-button
 	    #main-menu li a {
 		    float: left;
 		    display: block;	
-		    padding: 5px 20px 5px 0;
-		    margin: 0 20px 0 0;
-		    /*border-radius: 10px 10px 0 0;*/
-		    border-right: 2px dotted #333;
-		    color: #AAA;
+		    padding: 5px 20px 5px;
+		    margin: 0;
+		    /*border-left: 2px solid #111;*/
+		    color: #333;
 		    font-size: 36px;
-		    line-height: 36px;Replace("."," ")
+		    line-height: 36px;
 		    text-decoration: none;
 	    }
 	    #main-menu li a:hover {
-		    color: #444;
-		    text-shadow: 1px 2px 1px #FFF;
+	        background: #999;
+		    color: #333;
 	    }
 	    #main-menu li a.selected {
-		    color: #444;
-		    text-shadow: 1px 2px 1px #FFF;
+	        background: #111;
+		    color: #EEE;
 	    }
 	
 	    #sub-menu {
@@ -115,13 +117,14 @@ a:active.oe-button
 		    height: 40px;
 	    }
 	    #sub-menu .sub-menu-item {
-		    width: 960px;
+		    width: 940px;
 		    margin: 0 auto;
 		    overflow: hidden;	
 		    display: none;	
 	    }
 	    #sub-menu .sub-menu-item.selected {	
 		    display: block;	
+		    
 	    }
 	
 	    #sub-menu .sub-menu-item ul li {
