@@ -30,8 +30,10 @@ font {
         border-right: 1px solid #CCC;
         border-left-width: 0; position: relative;
         }
-    #sub-column .unit-list, #sub-column .list p {
+    #sub-column .unit-list p, #sub-column .list p {
         margin: 0 10px 12px;
+        font-size: 14px;
+        line-height: 140%;
     }
     #sub-column .discussions, #sub-column .faculty, #sub-column .grades
       { background: #FFF; border: 1px solid #CCC; border-top-width: 0; }
