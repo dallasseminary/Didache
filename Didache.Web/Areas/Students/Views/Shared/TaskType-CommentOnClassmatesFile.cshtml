@@ -8,14 +8,14 @@
 @foreach (InteractionThread thread in threads) {
 	<div class="task-interaction-thread" data-threadid="@thread.ThreadID">
 		<div class="task-interaction-header">
-			<span class="user">@thread.User.FormattedName</span>
+			<span class="user">@(thread.User != null ? thread.User.FormattedName : "missing")</span>
 			<span class="date">@thread.ThreadDate</span>
-			<span class="total-replies">@thread.Posts.Count</span>
+			<span class="total-replies">@(thread.Posts.Count-1)</span>
 		</div>
 		<div class="task-interaction-list" style="display:none;">
 			
 		@foreach (InteractionPost post in thread.Posts) {
-			<div class="task-interaction-post">
+			<div class="task-interaction-post @(post.UserID == thread.UserID ? " thread-starter" : "")">
 				<div class="user-info">
 					@if (post.User != null) {
 					<a href="@post.User.ProfileDisplayUrl">
@@ -25,7 +25,10 @@
 					}
 				</div>
 				<div class="post-content">
-					@post.PostContentFormatted
+					<div class="post-date">
+						@post.PostDate.ToString()
+					</div>
+					@Html.Raw(post.PostContentFormatted)
 				</div>			
 			</div>	
 	  	  
