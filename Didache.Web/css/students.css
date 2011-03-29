@@ -670,6 +670,10 @@ form.forum-post-new {
 	        padding: 2px 20px;
 	    }
 	    
+	.task-interactions .task-interaction-thread .thread-starter {
+		background: #ddffdd;
+	}
+	    
 	ul.graded-assignments .skipped {
 	    color: #BBB;
 	}
