@@ -19,7 +19,7 @@
 		foreach (Didache.UserTaskData userTaskData in ViewBag.UserTasks) {
 		
 		<div class="task-entry block-list-item" id="task-@userTaskData.UserID-@userTaskData.TaskID">
-            <div class="block-list-item-label">
+            <div class="block-list-item-label @userTaskData.TaskCompletionStatus.ToString().ToLower()">
                 <span>@(userTaskData.Task.DueDate.HasValue?userTaskData.Task.DueDate.Value.ToShortDateString():"")</span>
             </div>			
 			

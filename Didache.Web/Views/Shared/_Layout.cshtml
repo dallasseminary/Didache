@@ -1,4 +1,16 @@
-﻿<!DOCTYPE html>
+﻿@{
+    string currentQuery = Request.Url.PathAndQuery;
+    string currentArea = "";
+    if (currentQuery.StartsWith("/courses")) {
+        currentArea = "courses";
+    } else if (currentQuery.StartsWith("/community")) {
+        currentArea = "community";
+    } else if (currentQuery.StartsWith("/admin")) {
+        currentArea = "admin";
+    }
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <title>@ViewBag.Title</title>
@@ -28,10 +40,6 @@
 
     <div id="container-1">
         <div class="wrapper">
-            <div id="profile-display">
-                <img alt="@User.Identity.Name.Replace("."," ")" src="/assets/images/user/square/0.jpg">
-                <a href="javascript:void(0);">@User.Identity.Name.Replace("."," ").ToUpper()</a>
-            </div>
 	        <div id="nav">
 		        <ul id="main-menu">         
                     <li><a id="main-menu-home" href="/" @Html.Raw(Request.Url.PathAndQuery == "/" ? " class=\"selected\"" : "")>@Resources.labels.tabs_home</a></li>
@@ -42,8 +50,13 @@
 			        }
                 </ul>
             </div>
+            <div id="profile-display">
+                <img alt="@User.Identity.Name.Replace("."," ")" src="/assets/images/user/square/0.jpg">
+                <a href="javascript:void(0);">@User.Identity.Name.Replace("."," ").ToUpper()</a>
+            </div>
+            <div class="clear"></div>
         </div>
-
+        <div class="clear"></div>
 	
 		<div id="sub-menu">              
             <div class="sub-menu-item @(Request.Url.PathAndQuery == "/" ? " selected" : "")" id="main-menu-home-details">
@@ -87,7 +100,7 @@
 	    </div>
     </div>
     <div class="clear"></div>
-    <div id="container-2">
+    <div id="container-2" @( Html.Raw(currentArea.IsEmpty() ? "" :"class=\"" + currentArea + "\"" ))>
 	    <div id="main">
             <div class="wrapper">
                 @RenderBody()
