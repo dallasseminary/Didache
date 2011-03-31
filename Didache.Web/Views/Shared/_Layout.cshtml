@@ -80,9 +80,9 @@
 						}
 				    </ul>
 			    </div>
-                <div class="sub-menu-item @(Request.Url.PathAndQuery.StartsWith("/profile") ? " selected" : "")" id="main-menu-profile-details">
+                <div class="sub-menu-item @(Request.Url.PathAndQuery.StartsWith("/profiles") ? " selected" : "")" id="main-menu-profile-details">
 				    <ul>
-					    <li><a href="/@Users.GetLoggedInUser().ProfileDisplayUrl">@Resources.labels.submenu_view</a></li>
+					    <li><a href="/profiles/@Users.GetLoggedInUser().ProfileDisplayUrl">@Resources.labels.submenu_view</a></li>
 					    <li><a href="/profiles/edit">@Resources.labels.submenu_edit</a></li>
 				    </ul>
 			    </div>
