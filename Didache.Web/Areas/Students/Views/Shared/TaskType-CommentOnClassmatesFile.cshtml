@@ -19,6 +19,7 @@
 		<div class="task-interaction-header">
 			<span class="user">@(thread.User != null ? thread.User.FormattedName : "missing")</span>
 			<span class="date">@thread.ThreadDate.ToShortDateString()</span>
+			<span class="date">@thread.Posts.Last().PostDate.ToShortDateString()</span>
 			<span class="total-replies">@(thread.Posts.Count - 1)</span>
 		</div>
 		<div class="task-interaction-list" style="display:none;">
