@@ -175,24 +175,29 @@ font {
 	{ margin: 0 0 4px 0; }
 	
 .block-list-item-label
-  { position: absolute; top: 12px; left: -12px; background: url(images/tasktype-label-bg-alt.png); height: 48px; width: 140px;
+    { position: absolute; top: 12px; left: -12px; background: url(images/tasktype-label-bg-alt.png); height: 48px; width: 140px;
     display: block; z-index: 999; font-size: 2em; font-weight: normal; color: #FFF;
     font-family: "LeagueGothicRegular", "Gill Sans", Arial, sans-serif; letter-spacing: 0; }
+.block-list-item-label.completed 
+    { background: url(images/tasktype-label-bg-completed.png); }
+.block-list-item-label.skipped 
+    { background: url(images/tasktype-label-bg-skipped.png); }
+    
 .block-list-item-label span
-  { display: block; line-height: 1; padding: 13px 0 6px 10px; display: inline-block; }
+    { display: block; line-height: 1; padding: 13px 0 6px 10px; display: inline-block; }
 .block-list-item-label span.notify
-  { background: #EEE; center top; width: 20px; height: 20px; float: left; border: 1px solid #194e76;
+    { background: #EEE; center top; width: 20px; height: 20px; float: left; border: 1px solid #194e76;
     padding: 0; margin: 13px 0 8px 10px; line-height: 1; display: block; }
 .complete .block-list-item-label span.notify
-  { background-color: #3C3 }
+    { background-color: #3C3 }
 .skipped .block-list-item-label span.notify 
-  { background-color: #C33 }
+    { background-color: #C33 }
 .block-list-item .task-info {
-		width: 100px;
-		position: absolute;
-	    left: 10px;
-	    top: 55px;
-	}
+	width: 100px;
+	position: absolute;
+	left: 10px;
+	top: 55px;
+}
 .block-list-item .task-info {
     display: block;
     margin: 15px 10px;
@@ -594,6 +599,12 @@ form.forum-post-new {
 	margin: 10px 0 0 0;
 	border: 1px solid #194e76;
 }
+    .task-interactions-header {
+        background: #194e76;
+        padding: 5px;
+        color: #FFF;
+        font-weight: bold;
+    }
 	.task-interaction {
 		padding: 5px 0;
 		width: 520px;
@@ -610,18 +621,33 @@ form.forum-post-new {
 		padding: 5px;
 		border-bottom: #99B0C0 1px solid;
 	}	
-	.task-interaction-thread .task-interaction-header .user {
-		width: 200px;
+	.task-interactions .user {
+		width: 360px;
+		margin-right: 8px;
 		float: left;
 		display: block;
+		font-weight: bold;
 	}		
-	.task-interaction-thread .task-interaction-header .date {
-		width: 150px;
+	.task-interactions .date {
+		width: 60px;
 		float: left;
 		display: block;
-	}			
-	.task-interaction-thread .task-interaction-header .total-replies {
-		width: 100px;
+		margin-right: 20px;
+	}		
+	.task-interactions .task-interaction-header .date, .task-interaction .post-date {
+	    color: #666;
+	    font-style: italic;
+	    font-size: 11px;
+	    font-weight: normal;
+	}
+	.task-interaction .post-date {
+	    display: block;
+	    text-align: right;
+	    margin-right: 15px;
+	    color: #333;
+	}
+	.task-interactions .total-replies {
+		width: 60px;
 		float: left;
 		text-align: right;
 		display: block;
@@ -629,7 +655,6 @@ form.forum-post-new {
 	
 	.task-interaction-thread .task-interaction-post {
 		overflow: hidden;
-		margin-bottom: 8px;
 	}
 	.task-interaction-thread .task-interaction-post:nth-child(even) {
 		overflow: hidden;		
@@ -648,12 +673,18 @@ form.forum-post-new {
 	}	
 	.task-interaction-thread .task-interaction-post .user-info img {
 		width: 80px;
+		background: #FFF;
+		padding: 8px;
+		border: 1px solid #BBB;
+		-webkit-border-radius: 3px;
+		   -moz-border-radius: 3px;
+		        border-radius: 3px;		
 	}	
 	.task-interaction-thread .task-interaction-post .user-info span {
 		display: block;	
 	}							
 	.task-interaction-thread .task-interaction-post .post-content {
-		width: 360px;
+		width: 380px;
 		float: left;
 		margin: 5px;
 		padding-bottom: 10px;
@@ -678,7 +709,13 @@ form.forum-post-new {
 	    }
 	    
 	.task-interactions .task-interaction-thread .thread-starter {
-		background: #ddffdd;
+		background: #FFF;
+		border-top: 2px solid #BBB;
+		border-bottom: 2px solid #BBB;
+	}
+	    
+	.task-interactions .task-interaction-thread .thread-starter .user-info img {
+		background: #EEE;
 	}
 	    
 	ul.graded-assignments .skipped {
