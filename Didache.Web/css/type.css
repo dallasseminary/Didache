@@ -51,16 +51,16 @@ body
 }
     
 
-h1,h2,h3,h4 { font-family: LeagueGothicRegular, "Gill Sans", Arial, sans-serif; line-height: 120%; }
+h1,h2,h3,h4 { font-family: Trebuchet,"Helvetica Neue", Helvetica, Arial, Liberation Sans, sans-serif; line-height: 120%; letter-spacing: -1px; }
 
 h1
-  { font-size: 2.4em; font-weight: normal; margin-bottom: 16px; }
+  { font-size: 2.2em; font-weight: normal; margin-bottom: 16px; }
 h2
-  { color: #444; font-size: 2em; font-weight: normal; margin-bottom: 12px; }
+  { color: #444; font-size: 1.8em; font-weight: normal; margin-bottom: 12px; }
 h3
-  { color: #999; font-size: 1.7em; font-weight: normal; margin-bottom: 10px; }
+  { color: #999; font-size: 1.5em; font-weight: normal; margin-bottom: 10px; }
 h4
-  { color: #666; font-size: 1.4em; font-weight: normal; margin-bottom: 10px; }
+  { color: #666; font-size: 1.2em; font-weight: normal; margin-bottom: 10px; }
 h5
   { font-size: 1.0em; font-weight: bold; margin-bottom: 8px; }
 h6

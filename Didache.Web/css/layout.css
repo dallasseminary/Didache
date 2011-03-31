@@ -86,8 +86,8 @@ a:active.oe-button
 		    bottom: 0;}
 	    #main-menu 
 	    {
-	        font-family: LeagueGothicRegular, "Gill Sans", Arial, Sans-Serif;
-	        letter-spacing: 0;
+	        font-family: Trebuchet,"Helvetica Neue", Helvetica, Arial, Liberation Sans, sans-serif;
+	        letter-spacing: -1px;
 		    margin: 0 auto;
 		    overflow: hidden;	
 		    float: left;
@@ -104,8 +104,8 @@ a:active.oe-button
 		    margin: 0;
 		    /*border-left: 1px solid #999;*/
 		    color: #333;
-		    font-size: 36px;
-		    line-height: 36px;
+		    font-size: 22px;
+		    line-height: 22px;
 		    text-decoration: none;
 		    margin: 0 10px 0 0 ;
 	    }
