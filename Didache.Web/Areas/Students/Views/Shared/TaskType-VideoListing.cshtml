@@ -4,11 +4,17 @@
 	
 	List<VideoInfo> Videos = new List<VideoInfo>();
 
-	string locaThumbBase = "/supportfiles";
-	string externalThumbBase = "http://oefiles.dts.edu";
+	string externalThumbBase = "http://dtsoe.s3.amazonaws.com"; // "http://oefiles.dts.edu";
+	string xmlPath = System.Web.HttpContext.Current.Server.MapPath(String.Format("~/supportfiles/{0}/Titles/en-US.xml", Model.Task.Course.CourseCode));
+
+	
+	if (Request.Url.Host == "online.dts.edu") {
+		xmlPath = @"e:\websites\my.dts.edu\web\playerfiles\" + Model.Task.Course.CourseCode + @"\titles\en-US.xml";
+	}
+			
 
 	// load XML
-	string xmlPath = System.Web.HttpContext.Current.Server.MapPath(String.Format("~/supportfiles/{0}/Titles/en-US.xml", Model.Task.Course.CourseCode));
+	
 	
 	if (File.Exists(xmlPath))
 	{
@@ -35,6 +41,8 @@
 							PercentComplete = random.Next(100)
 						});
 		}
+	} else {
+		Response.Write("can't find: " + xmlPath);	
 	}
 	
 }
