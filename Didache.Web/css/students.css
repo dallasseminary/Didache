@@ -441,13 +441,13 @@ ul.course-archive, ul.course-filegroup-files {
 		 background-repeat: no-repeat; 
 	}
 	.video-list .watchvideo {
-		 background-image: url(/assets/images/icons/famfamfam_silk_icons/control_play.png); 
+		 background-image: url(images/icons/famfamfam_silk_icons/control_play.png); 
 	}
 	.video-list .slides {
-		 background-image: url(/assets/images/icons/famfamfam_silk_icons/picture_save.png); 
+		 background-image: url(images/icons/famfamfam_silk_icons/picture_save.png); 
 	}
 	.video-list .transcript {
-		 background-image: url(/assets/images/icons/famfamfam_silk_icons/page_save.png); 
+		 background-image: url(images/icons/famfamfam_silk_icons/page_save.png); 
 	}	
 
 

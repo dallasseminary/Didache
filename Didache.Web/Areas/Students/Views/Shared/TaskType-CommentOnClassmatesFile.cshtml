@@ -4,6 +4,7 @@
 	List<InteractionThread> threads = Interactions.GetInteractionThreads(Model.TaskID);
 }
 
+@if (threads.Count > 0) {
 <div class="task-interactions">
 <div class="task-interactions-header">
     <span class="user">Name</span>
@@ -12,13 +13,13 @@
     <span class="total-replies">Replies</span>
     <div class="clear"></div>
 </div>
+
 @foreach (InteractionThread thread in threads) {
 	<div class="task-interaction-thread" data-threadid="@thread.ThreadID">
 		<div class="task-interaction-header">
 			<span class="user">@(thread.User != null ? thread.User.FormattedName : "missing")</span>
 			<span class="date">@thread.ThreadDate.ToShortDateString()</span>
-			<span class="date">@thread.Posts.Last().PostDate.ToShortDateString()</span>
-			<span class="total-replies">@(thread.Posts.Count-1)</span>
+			<span class="total-replies">@(thread.Posts.Count - 1)</span>
 		</div>
 		<div class="task-interaction-list" style="display:none;">
 			
@@ -28,9 +29,9 @@
 					@if (post.User != null) {
 					<a href="@post.User.ProfileDisplayUrl">
 						<img src="@post.User.ProfileImageUrl" />
-						<span class="name">@(post.User.NickName.IsEmpty() ? post.User.FirstName : post.User.NickName) @(post.User.LastName.Substring(0,1) + ".")</span>
+						<span class="name">@(post.User.NickName.IsEmpty() ? post.User.FirstName : post.User.NickName) @(post.User.LastName.Substring(0, 1) + ".")</span>
 					</a>
-					}
+	 }
 				</div>
 				<div class="post-content">
 					@Html.Raw(post.PostContentFormatted)
@@ -40,7 +41,7 @@
 				</div>
 			</div>	
 	  	  
-		}
+  }
 	  
 			<div class="add-reply">
 				<textarea class="reply-text"></textarea>	
@@ -54,6 +55,11 @@
 	</div>
 }
 </div>
+} else {
+	<div class="interactions-none">
+	No one has turned in an assignment yet, so there are no posts ready for interaction.
+	</div>
+}
 
 <script>
     jQuery(function ($) {
