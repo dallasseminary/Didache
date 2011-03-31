@@ -70,12 +70,11 @@
 					    <li><span>@Resources.labels.submenu_tools:</span></li>
 					    <li><a href="/courses/">@Resources.labels.submenu_archive</a></li>
 					    <li><span>@Resources.labels.submenu_current:</span></li>
-
 					    @{
 							List<Course> courses = Didache.Courses.GetUsersRunningCourses(CourseUserRole.Student);
 							if (courses != null) {
 								foreach (Course course in courses) {
-								<li><a href="/courses/@course.Slug/">@(course.CourseCode + course.Section)</a></li>	
+								<li@Html.Raw(ViewContext.RouteData.Values["slug"] != null && ViewContext.RouteData.Values["slug"].ToString() == course.Slug ? " class=\"selected\"" : "")><a href="/courses/@course.Slug/">@(course.CourseCode + course.Section)</a></li>	
 								}
 							}
 						}
