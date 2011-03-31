@@ -74,7 +74,7 @@
 							List<Course> courses = Didache.Courses.GetUsersRunningCourses(CourseUserRole.Student);
 							if (courses != null) {
 								foreach (Course course in courses) {
-								<li@Html.Raw(ViewContext.RouteData.Values["slug"] != null && ViewContext.RouteData.Values["slug"].ToString() == course.Slug ? " class=\"selected\"" : "")><a href="/courses/@course.Slug/">@(course.CourseCode + course.Section)</a></li>	
+								<li@Html.Raw(ViewContext.RouteData.Values["slug"] != null && ViewContext.RouteData.Values["slug"].ToString() == course.Slug ? " class=\"selected\"" : "")><a href="/courses/@course.Slug@(( ViewContext.RouteData.Values["action"] != null && (new List<string>() {"dashboard","schedule","files","roster","assignments"}).IndexOf(ViewContext.RouteData.Values["action"].ToString()) > -1) ? "/" + ViewContext.RouteData.Values["action"] : "" )">@(course.CourseCode + course.Section)</a></li>	
 								}
 							}
 						}
