@@ -178,15 +178,15 @@ font {
 	
 .block-list-item-label
     { position: absolute; top: 12px; left: -12px; background: url(images/tasktype-label-bg-alt.png); height: 48px; width: 140px;
-    display: block; z-index: 999; font-size: 2em; font-weight: normal; color: #FFF;
-    font-family: "LeagueGothicRegular", "Gill Sans", Arial, sans-serif; letter-spacing: 0; }
+    display: block; z-index: 999; font-size: 1.5em; font-weight: normal; color: #FFF;
+    letter-spacing: 0; }
 .block-list-item-label.completed 
     { background: url(images/tasktype-label-bg-completed.png); }
 .block-list-item-label.skipped 
     { background: url(images/tasktype-label-bg-skipped.png); }
     
 .block-list-item-label span
-    { display: block; line-height: 1; padding: 13px 0 6px 10px; display: inline-block; }
+    { display: block; line-height: 1; padding: 15px 0 6px 10px; display: inline-block; }
 .block-list-item-label span.notify
     { background: #EEE; center top; width: 20px; height: 20px; float: left; border: 1px solid #194e76;
     padding: 0; margin: 13px 0 8px 10px; line-height: 1; display: block; }
