@@ -18,7 +18,7 @@ namespace Didache {
 		public string Name{ get; set; }
 
 		public virtual ICollection<CourseUser> Students { get; set;}
-		//public virtual Profile Facilitator;
+        public virtual User Facilitator { get; set; }
 
 	}
 }

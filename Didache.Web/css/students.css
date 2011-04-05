@@ -334,7 +334,8 @@ ul.course-archive, ul.course-filegroup-files {
 	#schedule-tasks .task-entry .task-info {
 		width: 100px;
 		position: absolute;
-	    left: 10px;
+	    left: 0;
+	    font-weight: bold;
 	    top: 55px;
 	}
 	#schedule-tasks .task-entry .task-info .task-status {
@@ -614,6 +615,7 @@ form.forum-post-new {
 	.task-interaction-thread {
 	    padding: 0;		
 		background: #eee;
+		overflow: hidden;
 	}
 	.task-interaction-thread .task-interaction-header {
 		background: #BBD1E1;
@@ -695,7 +697,7 @@ form.forum-post-new {
 		border-bottom: 1px solid #BBB;
 	}	
 	.task-interaction-thread .add-reply {
-	    margin:0;
+	    margin:0 0 10px;
 	}
 	    .task-interaction-thread .add-reply textarea {
 	        display: block;
@@ -720,6 +722,11 @@ form.forum-post-new {
 	    
 	.task-interactions .task-interaction-thread .thread-starter .user-info img {
 		background: #EEE;
+	}
+	
+	.task-interactions .add-reply a.collapse {
+	    display: inline-block;
+	    margin: 5px 10px 5px 0;
 	}
 	    
 	ul.graded-assignments .skipped {
