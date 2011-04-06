@@ -8,6 +8,7 @@ font {
 #main-column {
 	float: left;
 	width: 690px;
+	
 }
 
 /* unit side bar */
@@ -160,7 +161,7 @@ font {
 	{ color: #DEDEDE; font-size: 18px; margin: 0 0 8px 0;}
 
 .block-list
-	{ background: #efefef; border: solid #CCC; border-width: 0 1px 1px; padding: 0; margin-bottom: 20px; overflow: visible; }	
+	{ background: #efefef; border: solid #CCC; border-width: 0 1px 1px; padding: 0; margin-bottom: 20px; overflow: visible; min-height: 500px;}	
 .block-list .block-list-item
 	{ padding: 25px 30px 15px 135px; margin: 0; overflow: visible; position: relative; min-height: 60px;}
 .block-list .block-list-item:nth-child(odd)
@@ -384,7 +385,7 @@ ul.course-archive, ul.course-filegroup-files {
 
 	.video-list .video-thumb {
 		 width: 100px; 
-		 height: 78px; 
+		 height: 75px; 
 		 border: solid 3px #999; 
 		 margin: 0 auto 8px auto; 
 	}
@@ -395,14 +396,18 @@ ul.course-archive, ul.course-filegroup-files {
 	}
 	.video-list .video-options-container .video-options {
 		 display: none; 
-		 padding: 5px;  
-		 background-image: url(/assets/images/ui/semi-transparent-000000-50.png); 
+		 padding: 5px; 		
+		 width: 90px; 
+		 height: 65px; 
+		 background-color: rgba(0,0,0,0.7);
 	}
 	.video-list .video-options-container .video-options a {
 		 color: #fff; 
 		 font-weight: bold; 
 		 font-size: 11px; 
 		 text-decoration: none;
+		 display: inline-block;
+		 text-shadow: 1px 1px 1px #000;
 	}	
 	.video-list .video-options-container .video-options a:hover {
 		 text-decoration: underline;
@@ -414,10 +419,12 @@ ul.course-archive, ul.course-filegroup-files {
 		 background: #ccc; 
 		 width: 100px; 
 		 margin: 0;  
+		 display: none;
 	}
 	.video-list .progress-percent  {
 		 background: #01b600;
 		 height: 3px; margin: 0;
+		 display: none;
 	}		
 	.video-list .video span {
 		 display: block; 
@@ -442,13 +449,13 @@ ul.course-archive, ul.course-filegroup-files {
 		 background-repeat: no-repeat; 
 	}
 	.video-list .watchvideo {
-		 background-image: url(images/icons/famfamfam_silk_icons/control_play.png); 
+		 background-image: url(images/icons/control_play.png); 
 	}
 	.video-list .slides {
-		 background-image: url(images/icons/famfamfam_silk_icons/picture_save.png); 
+		 background-image: url(images/icons/picture_save.png); 
 	}
 	.video-list .transcript {
-		 background-image: url(images/icons/famfamfam_silk_icons/page_save.png); 
+		 background-image: url(images/icons/page_save.png); 
 	}	
 
 
