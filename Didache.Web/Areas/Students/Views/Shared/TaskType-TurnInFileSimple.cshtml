@@ -3,15 +3,109 @@
 
 @if (Model.TaskCompletionStatus == TaskCompletionStatus.NotStarted) {
 	
-	<form method="post" enctype="multipart/form-data" action="/courses/api/taskfile/@Model.UserID/@Model.TaskID">
-		<input type="file" name="StudentFile" />
-		<br />
-		<input type="submit" value="Turn in Assignment" class="task-submit" />
+	<form id="task-@Model.TaskID-upload-form" method="post" enctype="multipart/form-data" action="/courses/api/taskfile2/@Model.UserID/@Model.TaskID">
+		<input type="file" name="StudentFile" />		
 	</form>
+	
+	<div id="task-@Model.TaskID-upload-report" class="upload-report">
+		<span class="file-name"></span>
+		<progress max="100" value="0">
+		<span class="remove">remove</span>
+	</div>
 
+	<input id="task-@Model.TaskID-button" type="submit" value="Turn in Assignment" class="task-submit-2" disabled="disabled" />
+	
 
 	if (Model.Task.IsSkippable) {
 		<input type="submit" name="TaskStatus" value="Skipped"  />
 	}	
 
+<script>	
+jQuery(function ($) {
+	$('#task-@Model.TaskID-upload-form').fileUpload({
+		formData: {
+			taskID: @Model.TaskID,
+			userID: @Model.UserID
+		},
+		initUpload: function (event, files, index, xhr, handler, callback) {
+			/*
+			var regexp = /\.(png)|(jpg)|(gif)$/i;
+
+			if (!regexp.test(files[index].name)) {
+				alert('cant upload that silly');
+				return;
+			}
+
+			if (files[index].size > 5000000) {
+				alert('file too big');
+				//won't work for IE/Opera 
+				return;
+			}
+			if (index > 0) {
+				alert('too many files');
+				return;
+			}
+			*/
+
+			// show the filename and a progress bar
+			var report = 
+				$('<div class="task-upload-report">' + 
+					'<span class="name">' + files[index].name + '</span>' + 
+					'<progress value="0" max="100" />' + 
+				   '</div>')
+					.appendTo($('#task-@Model.TaskID-upload-report'));
+
+			console.log($('#task-@Model.TaskID-upload-report'));
+			console.log(report);
+
+			handler.report = report;
+
+			callback();
+		},
+		onProgress: function (event, files, index, xhr, handler) {
+			var percent = parseInt(event.loaded / event.total * 100, 10);
+
+			handler
+				.report
+				.find('progress')
+				.attr('value', percent);
+		},
+		// when the upload completes
+		onLoad: function (event, files, index, xhr, handler) {
+			var json = parseResponse(xhr);
+			
+			console.log(json);
+
+			handler
+				.report
+				.find('progress').remove()
+				.end()
+				.find('.task-upload-report').append($('<span class="remove">remove</span>'));	
+
+			$('#task-@Model.TaskID-button').removeAttr('disabled');
+
+		},
+		onError: function (event, files, index, xhr, handler) {
+			// For JSON parsing errors, the load event is saved as handler.originalEvent:
+			if (handler.originalEvent) {
+				/* handle JSON parsing errors ... */
+			} else {
+				/* handle XHR upload errors ... */
+			}
+		}
+	});
+	
+	function parseResponse(xhr) {
+		if (typeof xhr.responseText != 'undefined') {
+			return $.parseJSON(xhr.responseText);
+		} else {
+			// Instead of an XHR object, an iframe is used for legacy browsers:
+			return $.parseJSON(xhr.contents().text());
+		}
+	}
+});
+
+
+
+</script>	
 }
