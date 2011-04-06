@@ -1,0 +1,352 @@
+﻿@model List<CourseFileGroup>
+
+@{
+    ViewBag.Title = "Files";
+}
+@section head {
+	<script src="/js/jquery.fileupload.js"></script>
+	
+
+	<style>
+	.filegroup {
+		background: #ccc;
+		border: solid 1px #333; 
+	}
+
+	.filegroup .files {
+		min-height: 40px;
+		margin: 0 0 0 40px;
+		border: solid 1px #333; 
+	}
+
+	.filegroup .files .coursefile {
+		padding: 2px;	
+	}
+
+	.filegroup .drag-handle {
+		display: inline-block;
+		background: #ff0000;
+		width: 20px;
+		height: 20px;
+	}
+
+	.filegroup .files .coursefile:nth-child(odd){
+		background: #eee;
+	}
+	.filegroup .files .coursefile .file-title {
+		display: inline-block;
+		width: 350px;
+	}
+	.file-name {
+		display: inline-block;
+		width: 350px;
+	}
+	.file-user {
+		display: inline-block;
+		width: 150px;
+	}
+			
+	.upload {
+		position: relative;
+		overflow: hidden;
+		direction: ltr;
+		cursor: pointer;
+		text-align: center;
+		color: #333;
+		font-weight: 700;
+		-moz-border-radius: 10px;
+		-webkit-border-radius: 10px;
+		border-radius: 10px;
+		width: 200px;
+		height: 30px;
+		line-height: 30px;
+		background: paleGreen;
+		border: 1px solid limeGreen;
+		margin: 0 0 0 20px;
+	}
+	.upload input {
+		position: absolute;
+		top: 0;
+		left: 0;
+		opacity: 0;
+		-ms-filter: alpha(opacity=0);
+		filter: alpha(opacity=0);
+		
+		-o-transform: translate(-300px,-300px) scale(10);
+		-moz-transform: translate(-800px,0) scale(10);
+		
+		cursor: pointer;
+		height: 100%;
+		margin: 0;
+	}
+	.upload button {
+		display: none;
+	}
+	</style>
+}
+<!--	
+x display files
+x save data
+x upload files to group
+x sort files
+x sort groups
+x add group
+- find files from other people
+- rename groups
+- delete groups
+- remove files
+-->
+
+<div id="add-file-group">
+<input type="text" id="new-file-group-name" placeholder="Enter a group name..." />
+<input type="button" id="new-file-group-button" value="Add File Group" />
+</div>
+
+<div id="filegroups" data-courseid="@ViewBag.Course.CourseID">
+@foreach(CourseFileGroup group in Model) {
+	
+	<div class="filegroup" data-groupid="@group.GroupID">
+		<span class="group-handle drag-handle"></span>
+		<input class="group-name" value="@group.Name" />
+		
+		<div class="upload">
+			<form action="/admin/courses/fileupload/@ViewBag.Course.CourseID/" enctype="multipart/form-data" method="post">
+				<input type="file" name="file" multiple>
+				<button>Upload</button>
+				<div>Click or drag and drop files</div>			
+			</form>
+		</div>
+		
+		<div class="files">
+		@foreach (CourseFileAssociation cfa in group.CourseFileAssociations) {
+			<div class="coursefile" data-fileid="@cfa.FileID">
+				<span class="file-handle drag-handle"></span>
+				<span class="file-title">@cfa.CourseFile.Title</span>
+				<span class="file-name">@cfa.CourseFile.Filename</span>
+				<span class="file-user">@(cfa.CourseFile.User != null ? cfa.CourseFile.User.FullName : cfa.CourseFile.UserID.ToString())</span>
+			</div>
+		}	
+		</div>
+		
+		@* *@
+	</div>		
+}
+</div>
+
+<script>
+
+
+
+	$(function () {
+
+		// add group
+		$('#new-file-group-button').click(function () {
+
+			var  
+				name = $('#new-file-group-name').val(),
+				courseid = $('#filegroups').data('courseid');
+
+			$.ajax({
+				url: '/admin/courses/AddFileGroup/' + courseid,
+				data: JSON.stringify({ name: name }),
+				type: 'POST',
+				//dataType: 'json',
+				success: function (d) {
+
+					console.log('success',d);
+
+					var newFileArea = $(
+						'<div class="filegroup" data-groupid="' + d.groupid + '">' +
+							'<span class="group-handle drag-handle"></span>' +
+							'<input class="group-name" value="' + d.name + '" />' +
+							'<div class="upload"><form action="/admin/courses/fileupload/' + d.courseid + '/" enctype="multipart/form-data" method="post">' +
+								'<input type="file" name="file" multiple>' +
+								'<button>Upload</button>' +
+								'<div>Click or drag and drop files</div>' +
+							'</form></div>' +
+							'<div class="files"></div>' +
+						'</div>'
+					);
+
+					$('#filegroups').append(newFileArea);
+
+					setupFiles(newFileArea.find('form'));
+					setupDragAndDrop();
+				},
+				error: function (a,b,c) {
+					console.log('error',a,b,c);
+				}
+			});
+
+		});
+
+
+		setupDragAndDrop();
+		setupFiles('.upload form');
+
+	});
+
+
+
+function setupDragAndDrop() {
+
+	// sort the file groups
+
+	$('#filegroups').sortable('destroy').sortable({
+		handle: '.group-handle',
+		update: function (event, ui) {
+			startSaveOrder();
+		},
+		start: cancelSaveOrder
+	}).disableSelection();
+
+	// sort the files
+	$('.files').sortable('destroy').sortable({
+		connectWith: '.files',
+		handle: '.file-handle',
+		update: function (event, ui) {
+			startSaveOrder();
+		},
+		start: cancelSaveOrder
+	}).disableSelection();
+
+	// handle group name changes
+	$('.group-name')
+				.keydown(function () {
+					cancelSaveOrder();
+				})
+				.keyup(function () {
+					startSaveOrder();
+				});
+}
+function setupFiles(selector) {
+
+	// setup upload
+	$(selector).fileUpload({
+		formData: {
+		},
+		initUpload: function (event, files, index, xhr, handler, callback) {
+
+			// from the file input go up to the top element
+			var groupid = $(event.target).closest('.filegroup').data('groupid');
+
+			handler.formData = { groupid: groupid }; // JSON.stringify({ groupid: groupid });
+
+			console.log(groupid, files[index].name);
+
+			callback();
+		},
+		onProgress: function (event, files, index, xhr, handler) {
+			var percent = parseInt(event.loaded / event.total * 100, 10);
+
+			/*
+			handler
+			.report
+			.find('progress')
+			.attr('value', percent);
+			*/
+		},
+		// when the upload completes
+		onLoad: function (event, files, index, xhr, handler) {
+			var json = parseResponse(xhr);
+
+			console.log(json);
+
+			// create node
+			var node = $('<div class="coursefile" data-fileid="' + json.fileid + '">' +
+						'<span class="file-handle drag-handle"></span>' +
+						'<span class="file-title">' + json.title + '</span>' +
+						'<span class="file-name">' + json.filename + '</span>' +
+						'<span class="file-user">' + json.user + '</span>' +
+					'</div>');
+
+			// from the file input go up to the top element
+			$(handler.dropZone).closest('.filegroup').find('.files').append(node);
+
+		},
+		onError: function (event, files, index, xhr, handler) {
+			// For JSON parsing errors, the load event is saved as handler.originalEvent:
+			if (handler.originalEvent) {
+				/* handle JSON parsing errors ... */
+			} else {
+				/* handle XHR upload errors ... */
+			}
+		}
+	});
+} // setupDragAndDrop
+
+	function parseResponse(xhr) {
+		if (typeof xhr.responseText != 'undefined') {
+			return $.parseJSON(xhr.responseText);
+		} else {
+			// Instead of an XHR object, an iframe is used for legacy browsers:
+			return $.parseJSON(xhr.contents().text());
+		}
+	}
+
+
+	var saveTimeout = null;
+	function startSaveOrder() {
+		cancelSaveOrder();
+		saveTimeout = setTimeout(saveOrderChanges, 1000);
+	}
+	function cancelSaveOrder() {
+		if (saveTimeout != null) {
+			clearTimeout(saveTimeout);
+			delete saveTimeout;
+			saveTimeout = null;
+		}
+	}
+
+	function saveOrderChanges() {
+
+		cancelSaveOrder();
+		
+		var fileGroupArray = [],
+			group,
+			file;
+
+		$('.filegroup').each(function (groupSortOrder, groupElement) {
+
+			// store the position of the group
+			group = {
+				groupid: parseInt($(groupElement).data('groupid'), 10),
+				name: $(groupElement).find('.group-name').val(),
+				sortorder: groupSortOrder + 1,
+				files: []
+			};
+			fileGroupArray.push(group);
+
+			$(groupElement).find('.coursefile').each(function (fileSortOrder, fileElement) {
+
+				file = {
+					groupid: group.groupid,
+					fileid: parseInt($(fileElement).data('fileid'), 10),
+					sortorder: fileSortOrder + 1
+				};
+
+				// store the position of the file
+				group.files.push(file);
+
+			});
+		});
+
+		// save the group order
+		console.log('group order', fileGroupArray);
+		console.log(JSON.stringify({ groups: fileGroupArray }));
+
+		$.ajax({
+			url: '/admin/courses/UpdateFileSorting/@ViewBag.Course.CourseID',
+			data: JSON.stringify(fileGroupArray),
+			//data: fileGroupArray,
+			type: 'POST',
+			complete: function(d) {
+
+			}
+		});
+	}
+
+
+	</script>
+
+</div>
