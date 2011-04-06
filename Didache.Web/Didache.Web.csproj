@@ -37,6 +37,9 @@
     <Reference Include="EntityFramework, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.4.1.10311.0\lib\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="JsonFx">
+      <HintPath>..\packages\JsonFx.2.0\lib\.NetFramework 4.0\JsonFx.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
@@ -163,6 +166,9 @@
     <Content Include="css\images\assign-notify.png" />
     <Content Include="css\images\checkbox.gif" />
     <Content Include="css\images\checkbox.png" />
+    <Content Include="css\images\icons\control_play.png" />
+    <Content Include="css\images\icons\page_save.png" />
+    <Content Include="css\images\icons\picture_save.png" />
     <Content Include="css\images\lecture-bg.jpg" />
     <Content Include="css\images\lecture-notify.png" />
     <Content Include="css\images\notify.png" />
@@ -182,17 +188,14 @@
     <Content Include="css\images\_tasktype-label-bg.png" />
     <Content Include="css\layout.css" />
     <Content Include="css\admin.css" />
-    <Content Include="css\courses.css" />
     <Content Include="Didache.Web.Publish.xml" />
     <Content Include="css\type.css" />
     <Content Include="js\jquery-1.5.js" />
     <Content Include="js\jquery-1.5.min.js" />
+    <Content Include="js\jquery.fileupload.js" />
     <Content Include="logout.aspx" />
     <Content Include="css\reset.css" />
     <Content Include="Global.asax" />
-    <Content Include="js\jquery-1.4.4-vsdoc.js" />
-    <Content Include="js\jquery-1.4.4.js" />
-    <Content Include="js\jquery-1.4.4.min.js" />
     <Content Include="js\jquery-ui.js" />
     <Content Include="js\jquery-ui.min.js" />
     <Content Include="js\jquery.expander.js" />
@@ -391,6 +394,9 @@
     <Content Include="Areas\Admin\Views\Campuses\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Courses\Unit.cshtml" />
     <Content Include="Areas\Community\Views\Web.config" />
+    <Content Include="Areas\Students\Views\Shared\Copy of TaskType-TurnInFileSimple.cshtml" />
+    <Content Include="Areas\Students\Views\Shared\Copy of TaskType-TurnInFileForComment.cshtml" />
+    <Content Include="Areas\Admin\Views\Courses\Files.cshtml" />
     <None Include="css\fonts\league\League_Gothic-webfont.eot" />
     <None Include="css\fonts\league\League_Gothic-webfont.ttf" />
     <None Include="css\fonts\league\League_Gothic-webfont.woff" />
