@@ -11,6 +11,16 @@
 <div id="main-column">
     <div class="block-list-header"><h3>Upcoming...</h3></div>
     <div class="block-list">
+
+		@foreach (UserTaskData task in Courses.GetImportantTasksForUser()) {
+		<div class="due-soon">
+			@task.Task.DueDate - @task.Task.Name
+		</div>
+		}
+
+
+
+
         @foreach (Didache.Unit unit in Model.Units) {
             if (unit.StartDate > DateTime.Now) {
 	            <div class="block-list-item">

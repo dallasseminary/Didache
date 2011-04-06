@@ -103,5 +103,21 @@ namespace Didache  {
 				.OrderBy(u => u.SortOrder)
 				.ToList();
 		}
+
+
+		public static List<UserTaskData> GetImportantTasksForUser() {
+
+			User user = Users.GetLoggedInUser();
+
+			return new DidacheDb().UserTasks
+				.Where(utd =>
+						utd.UserID == user.UserID &&
+						utd.Task.Priority > 1 &&
+						utd.Task.DueDate != null &&
+						utd.TaskStatus == 0)
+				.OrderBy(utd =>
+						utd.Task.DueDate)
+				.ToList();
+		}
 	}
 }
