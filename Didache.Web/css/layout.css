@@ -74,8 +74,7 @@ a:active.oe-button
     #profile-display img
 	    { float: right; width: 70px; height: 70px; margin: 0 0 0 20px; border: 1px solid #ccc; background: #fff; padding: 3px; -moz-border-radius: 5px; -webkit-border-radius: 5px;}		
     #profile-display a
-	    { color: #0281CA; font-size: 24px; position: relative; top: 12px; font-weight: normal; /*font-family: Medio, Palatino, "Palatino Linotype", Georgia, Times, "Times New Roman", serif;*/ 
-        font-family: "LeagueGothicRegular", "Gill Sans", Arial, sans-serif; letter-spacing: 0; }
+	    { color: #0281CA; font-size: 24px; position: relative; top: 12px; font-weight: normal; letter-spacing: 0; }
     #profile-display a:hover
 	    { text-decoration: underline;}
 
