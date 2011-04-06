@@ -2,9 +2,10 @@
 
 @{
     ViewBag.Title = Model.CourseCode + Model.Section + " " + Resources.labels.coursetabs_roster;
+    List<CourseUserGroup> groups = ViewBag.UserGroups;
 }
 
-@{ Html.RenderPartial("CourseHeader"); }
+<!--@{Html.RenderPartial("CourseHeader"); }-->
 
 @{ Html.RenderPartial("CourseMenu"); }
 
@@ -14,7 +15,11 @@
 
 	@foreach (Didache.CourseUserGroup group in ViewBag.UserGroups) {
 		<div class="course-group block-list-item">
-			<div class="block-list-item-label"><span>@group.Name</span></div>
+			<div class="block-list-item-label">
+                <span>
+                   @(group.Facilitator == null ? group.Name : group.Facilitator.LastName)
+                </span>
+            </div>
 			<div class="course-group-members">
 			@foreach (CourseUser user in group.Students) {
 				if (user.User != null) {
@@ -30,5 +35,19 @@
 	}
 
 	</div>
+</div>
+<div id="sub-column">
+    <div class="header">
+        @foreach (CourseUser user in Model.CourseUsers) {
+            @Html.Raw(user.RoleID == 3 ? "<h4>" + user.User.FormattedName + "</h4>" : "")
+        }
+    </div>
+    <div class="list">
+        <ul>
+            @foreach (CourseUser user in Model.CourseUsers) {
+                <li>@user.User.FormattedName, @user.RoleID</li>
+            }
+        </ul>
+    </div>
 </div>
 

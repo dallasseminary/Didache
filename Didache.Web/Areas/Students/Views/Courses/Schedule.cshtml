@@ -3,7 +3,7 @@
 	ViewBag.Title = Model.CourseCode + Model.Section + " " + Resources.labels.coursetabs_schedule;
 }
 
-@{Html.RenderPartial("CourseHeader");}
+<!--@{Html.RenderPartial("CourseHeader"); }-->
 
 @{Html.RenderPartial("CourseMenu");}
 
@@ -20,11 +20,11 @@
 		
 		<div class="task-entry block-list-item" id="task-@userTaskData.UserID-@userTaskData.TaskID">
             <div class="block-list-item-label @userTaskData.TaskCompletionStatus.ToString().ToLower()">
-                <span>@(userTaskData.Task.DueDate.HasValue?userTaskData.Task.DueDate.Value.ToShortDateString():"")</span>
+				<span>@userTaskData.TaskCompletionStatus</span>
             </div>			
 			
 			<div class="task-info">
-				<span class="task-status status-@userTaskData.TaskCompletionStatus.ToString().ToLower()">@userTaskData.TaskCompletionStatus</span>				
+                <span class="task-status">@(userTaskData.Task.DueDate.HasValue?userTaskData.Task.DueDate.Value.ToShortDateString():"")</span>				
 			</div>
 
 			<div class="task-details">

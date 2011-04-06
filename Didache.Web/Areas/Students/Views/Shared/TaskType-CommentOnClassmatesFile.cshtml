@@ -9,6 +9,7 @@
 <div class="task-interactions-header">
     <span class="user">Name</span>
     <span class="date">Posted</span>
+    <span class="date">Last Reply</span>
     <span class="total-replies">Replies</span>
     <div class="clear"></div>
 </div>
@@ -18,6 +19,7 @@
 		<div class="task-interaction-header">
 			<span class="user">@(thread.User != null ? thread.User.FormattedName : "missing")</span>
 			<span class="date">@thread.ThreadDate.ToShortDateString()</span>
+			<span class="date">@thread.Posts.Last().PostDate.ToShortDateString()</span>
 			<span class="total-replies">@(thread.Posts.Count - 1)</span>
 		</div>
 		<div class="task-interaction-list" style="display:none;">
@@ -44,9 +46,9 @@
 	  
 			<div class="add-reply">
 				<textarea class="reply-text"></textarea>	
-				<span class="add-reply-button"><input type="button" class="reply-button" value="Add reply" /></span>
+				<span class="add-reply-button"><input type="button" class="reply-button" value="Add reply" /> <a href="javascript:(0)" class="collapse">Close</a></span>
 			</div>	
-				
+		    
 		</div>
 
 	
@@ -67,6 +69,8 @@
         }, function () {
             $(this).siblings('.task-interaction-list').slideUp();
         });
+
+        //$('div.task-interaction a.collapse').siblings(
 
         $('div.task-interaction input.reply-button').click(function () {
 

@@ -76,6 +76,7 @@ namespace Didache  {
 		public static List<CourseUserGroup> GetCourseUserGroups(int courseID) {
 			return new DidacheDb().CourseUserGroups
 				.Include("Students")
+                //.Include("Facilitator")
 				.Where(g => g.CourseID == courseID)
 				.ToList();
 		}

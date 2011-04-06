@@ -25,7 +25,7 @@ font {
     #sub-column #unit-list-header
       { margin: 17px 0 0; }
     #sub-column .header h4
-      { color: #333; /*text-shadow: 0 1px 0 #FFF;*/ font-size: 1.7em; }
+      { color: #333; font-weight: bold; /*text-shadow: 0 1px 0 #FFF; font-size: 1.7em;*/ }
     #sub-column .unit-list, #sub-column .list {
         margin: 0 0 0 10px;
         padding: 10px 0 0;
@@ -156,7 +156,7 @@ font {
 .block-list-header
 	{ background: #194e76; padding: 15px 20px; margin-bottom: 0; border-bottom: 1px #DEDEDE; }
 .block-list-header h3
-	{ color: #FFF; font-size: 24px; margin: 0; }
+	{ color: #FFF; /*font-size: 24px;*/ margin: 0; }
 .block-list-header h4	
 	{ color: #DEDEDE; font-size: 18px; margin: 0 0 8px 0;}
 
@@ -179,15 +179,15 @@ font {
 	
 .block-list-item-label
     { position: absolute; top: 12px; left: -12px; background: url(images/tasktype-label-bg-alt.png); height: 48px; width: 140px;
-    display: block; z-index: 999; font-size: 2em; font-weight: normal; color: #FFF;
-    font-family: "LeagueGothicRegular", "Gill Sans", Arial, sans-serif; letter-spacing: 0; }
+    display: block; z-index: 999; font-size: 1.5em; font-weight: normal; color: #FFF;
+    letter-spacing: 0; }
 .block-list-item-label.completed 
     { background: url(images/tasktype-label-bg-completed.png); }
 .block-list-item-label.skipped 
     { background: url(images/tasktype-label-bg-skipped.png); }
     
 .block-list-item-label span
-    { display: block; line-height: 1; padding: 13px 0 6px 10px; display: inline-block; }
+    { display: block; line-height: 1; padding: 15px 0 6px 10px; display: inline-block; }
 .block-list-item-label span.notify
     { background: #EEE; center top; width: 20px; height: 20px; float: left; border: 1px solid #194e76;
     padding: 0; margin: 13px 0 8px 10px; line-height: 1; display: block; }
@@ -335,7 +335,8 @@ ul.course-archive, ul.course-filegroup-files {
 	#schedule-tasks .task-entry .task-info {
 		width: 100px;
 		position: absolute;
-	    left: 10px;
+	    left: 0;
+	    font-weight: bold;
 	    top: 55px;
 	}
 	#schedule-tasks .task-entry .task-info .task-status {
@@ -591,8 +592,8 @@ form.forum-post-new {
 	color: #fff;
 	margin-top: 10px;
 	padding: 3px 12px;
-	border-radius: 14px;
-	background: #33ee33;
+	/*border-radius: 14px;*/
+	background: #4CBB17;
 	border: 0;
 }
 .task-submit:hover {
@@ -621,6 +622,7 @@ form.forum-post-new {
 	.task-interaction-thread {
 	    padding: 0;		
 		background: #eee;
+		overflow: hidden;
 	}
 	.task-interaction-thread .task-interaction-header {
 		background: #BBD1E1;
@@ -631,7 +633,7 @@ form.forum-post-new {
 		border-bottom: #99B0C0 1px solid;
 	}	
 	.task-interactions .user {
-		width: 360px;
+		width: 300px;
 		margin-right: 8px;
 		float: left;
 		display: block;
@@ -641,13 +643,15 @@ form.forum-post-new {
 		width: 60px;
 		float: left;
 		display: block;
-		margin-right: 20px;
+		margin-right: 15px;
+		text-align: right;
 	}		
 	.task-interactions .task-interaction-header .date, .task-interaction .post-date {
 	    color: #666;
 	    font-style: italic;
 	    font-size: 11px;
 	    font-weight: normal;
+		text-align: right;
 	}
 	.task-interaction .post-date {
 	    display: block;
@@ -656,7 +660,7 @@ form.forum-post-new {
 	    color: #333;
 	}
 	.task-interactions .total-replies {
-		width: 60px;
+		width: 50px;
 		float: left;
 		text-align: right;
 		display: block;
@@ -700,7 +704,7 @@ form.forum-post-new {
 		border-bottom: 1px solid #BBB;
 	}	
 	.task-interaction-thread .add-reply {
-	    margin:0;
+	    margin:0 0 10px;
 	}
 	    .task-interaction-thread .add-reply textarea {
 	        display: block;
@@ -725,6 +729,11 @@ form.forum-post-new {
 	    
 	.task-interactions .task-interaction-thread .thread-starter .user-info img {
 		background: #EEE;
+	}
+	
+	.task-interactions .add-reply a.collapse {
+	    display: inline-block;
+	    margin: 5px 10px 5px 0;
 	}
 	    
 	ul.graded-assignments .skipped {
