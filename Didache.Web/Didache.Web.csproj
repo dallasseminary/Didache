@@ -139,6 +139,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Content Include="js\jquery-1.5.2.min.js" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -397,6 +398,7 @@
     <Content Include="Areas\Students\Views\Shared\Copy of TaskType-TurnInFileSimple.cshtml" />
     <Content Include="Areas\Students\Views\Shared\Copy of TaskType-TurnInFileForComment.cshtml" />
     <Content Include="Areas\Admin\Views\Courses\Files.cshtml" />
+    <Content Include="Areas\Admin\Views\Courses\Outline.cshtml" />
     <None Include="css\fonts\league\League_Gothic-webfont.eot" />
     <None Include="css\fonts\league\League_Gothic-webfont.ttf" />
     <None Include="css\fonts\league\League_Gothic-webfont.woff" />
