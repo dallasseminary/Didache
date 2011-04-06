@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Didache.TaskTypes {
 	public class TaskTypeInfo {
+		public string FullClassName { get; set; }
 		public string ClassName { get; set; }
 		public string FriendlyName { get; set; }
 		public string Description { get; set; }

@@ -81,6 +81,22 @@ namespace Didache  {
 				.ToList();
 		}
 
+
+
+		public static List<Unit> GetCourseUnitsWithTasks(int courseID) {
+			List<Unit> units = new DidacheDb().Units
+				.Include("Tasks")
+				.Where(u => u.CourseID == courseID)
+				.OrderBy(u => u.SortOrder)
+				.ToList();
+
+			foreach (Unit unit in units) {
+				unit.Tasks = unit.Tasks.ToList().OrderBy(t => t.SortOrder).ToList();
+			}
+
+			return units;
+		}
+
 		public static List<Unit> GetCourseUnits(int courseID) {
 			return new DidacheDb().Units
 				.Where(u => u.CourseID == courseID)

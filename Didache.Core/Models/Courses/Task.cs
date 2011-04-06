@@ -15,17 +15,14 @@ namespace Didache {
 		[Key]
 		public int TaskID { get; set; }
 
-		[Display(Name = "Unit ID")]
 		public int UnitID { get; set; }
-
-		[Display(Name = "Course ID")]
+		
 		public int CourseID { get; set; }
 
 		[Display(Name = "Is Active")]
 		public bool IsActive { get; set; }
 
 		[Required]
-		[Display(Name = "Sort Order")]
 		public int SortOrder { get; set; }
 
 		[Required]
@@ -33,22 +30,34 @@ namespace Didache {
 
 		[DataType(DataType.MultilineText)]
 		[AllowHtml]
+		[StringLength(100000)]
 		public string Instructions { get; set; }
 
 		[DataType(DataType.MultilineText)]
 		[AllowHtml]
+		[StringLength(100000)]
 		public string Description { get; set; }
 
 		[DataType(DataType.DateTime)]
+		[Display(Name = "Submission Available")]
+		public DateTime? SubmissionAvailableDate { get; set; }
 
-		[Display(Name = "Due Date")]
+		[DataType(DataType.DateTime)]
+		[Display(Name = "Due")]
 		public DateTime? DueDate { get; set; }
 
-		[Display(Name = "Is Skippable")]
+		[DataType(DataType.DateTime)]
+		[Display(Name = "Instructions Available")]
+		public DateTime? InstructionsAvailableDate { get; set; }
+
+		[Display(Name = "Skippable?")]
 		public bool IsSkippable { get; set; }
 
-		[Display(Name = "Task Type Name")]
+		[Display(Name = "Task Type")]
 		public string TaskTypeName { get; set; }
+
+		[Display(Name = "Priority")]
+		public int Priority { get; set; }
 
 
 		public virtual Unit Unit { get; set; }

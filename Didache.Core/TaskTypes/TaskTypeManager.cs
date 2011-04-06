@@ -21,8 +21,9 @@ namespace Didache.TaskTypes {
 			foreach (Type type in types) {
 				TaskTypeInfo info = new TaskTypeInfo() {
 					TaskType = type,
-					ClassName = type.FullName,
-					FriendlyName = type.Name,
+					FullClassName = type.FullName,
+					ClassName = type.Name,
+					FriendlyName = System.Text.RegularExpressions.Regex.Replace(type.Name, @"\B[A-Z]", " $0"),
 					TaskInstance = (ITaskType) Activator.CreateInstance(type)
 				};
 
@@ -36,7 +37,7 @@ namespace Didache.TaskTypes {
 		public static object ProcessFormCollection(string taskClassName, int taskID, int userID, FormCollection collection, HttpRequestBase request) {
 
 			List<TaskTypeInfo> taskTypes = GetTaskTypes();
-			TaskTypeInfo taskType = taskTypes.SingleOrDefault(i => i.FriendlyName == taskClassName);
+			TaskTypeInfo taskType = taskTypes.SingleOrDefault(i => i.ClassName == taskClassName);
 
 			if (taskType != null) {
 				return taskType.TaskInstance.ProcessFormCollection(taskID, userID, collection, request);

@@ -33,6 +33,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 		public ActionResult Groups(int id) {
 
 			List<CourseUserGroup> groups = Didache.Courses.GetCourseUserGroups(id);
+			ViewBag.Course = Courses.GetCourse(id);
 
 			return View(groups);
 		}
@@ -41,9 +42,87 @@ namespace Didache.Web.Areas.Admin.Controllers
 		public ActionResult Units(int id) {
 
 			List<Unit> units = Didache.Courses.GetCourseUnits(id);
+			ViewBag.Course = Courses.GetCourse(id);
 
 			return View(units);
 		}
+
+		public ActionResult Outline(int id) {
+
+			List<Unit> units = Didache.Courses.GetCourseUnitsWithTasks(id);
+			ViewBag.Course = Courses.GetCourse(id);
+
+			return View(units);
+		}
+
+		[HttpPost]
+		public ActionResult UpdateTask(int id) {
+
+			var didacheDb = new DidacheDb();
+
+			var reader = new JsonFx.Json.JsonReader();
+			dynamic output = reader.Read(HttpUtility.UrlDecode(Request.Form.ToString()));
+
+
+			Task task = didacheDb.Tasks.Find(output.taskid);
+			task.Name = output.name;
+			DateTime dueDate = DateTime.MinValue;
+			if (DateTime.TryParse(output.duedate, out dueDate)) {
+				task.DueDate = dueDate;
+			}
+
+			didacheDb.SaveChanges();
+
+			return Json(new {success= true});
+		}
+
+		[HttpPost]
+		public ActionResult UpdateUnitSorting(int id) {
+
+			var didacheDb = new DidacheDb();
+
+			string data = HttpUtility.UrlDecode(Request.Form.ToString());
+
+			//dynamic newValue = Newtonsoft.Json.JsonConvert.DeserializeObject<System.Dynamic.>(data);
+			var reader = new JsonFx.Json.JsonReader();
+			dynamic output = reader.Read(data);
+
+			foreach (var unitInfo in output) {
+
+				// get and update the unit
+				Unit unit = didacheDb.Units.Find(unitInfo.unitid);
+				unit.SortOrder = unitInfo.sortorder;
+
+
+				foreach (var taskInfo in unitInfo.tasks) {
+					// get and update the task
+					Task task = didacheDb.Tasks.Find(taskInfo.taskid);					
+					task.SortOrder = taskInfo.sortorder;				
+	
+				}
+
+			}
+
+			string errorMessage = "";
+			bool success = false;
+
+			try {
+				didacheDb.SaveChanges();
+				success = true;
+			} catch {
+				var entries = didacheDb.GetValidationErrors();
+				foreach (var entry in entries) {
+					errorMessage += "[" + entry.Entry.Entity.ToString() + "]\n";
+					foreach (var error in entry.ValidationErrors) {
+						errorMessage += error.PropertyName + " = " + error.ErrorMessage + "; ";
+					}
+				}
+			}
+
+			
+			return Json(new { success = success, errorMessage = errorMessage});
+		}
+
 
 		public ActionResult Files(int id) {
 

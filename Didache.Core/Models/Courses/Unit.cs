@@ -36,8 +36,10 @@ namespace Didache {
 		[Display(Name = "End Date")]
 		public DateTime EndDate { get; set; }
 
-		[Required]
+		[DataType(DataType.MultilineText)]
+		[AllowHtml]
 		[Display(Name = "Instructions")]
+		[StringLength(100000)]
 		public string Instructions { get; set; }
 
 		public virtual Course Course { get; set; }
