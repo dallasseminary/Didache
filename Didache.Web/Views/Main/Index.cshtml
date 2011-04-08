@@ -4,3 +4,27 @@
 
 <h2>@Resources.labels.index_title</h2>
 
+<div id="highlight-wrapper">
+    <div class="grid_4 alpha">
+        <div class="side">
+            <h3>Upcoming</h3>
+            @foreach (UserTaskData task in Courses.GetImportantTasksForUser()) {
+		    <div class="due-soon">
+			    @task.Task.DueDate - @task.Task.Name
+		    </div>
+		    }
+
+        </div>
+    </div>
+    <div class="grid_8">
+        <div class="main">
+            <h2>What's Happening on MyDTS<?h2>
+        </div>
+    </div>
+    <div class="grid_4 omega">
+        <div class="side">
+            <h3>Resources</h3>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
