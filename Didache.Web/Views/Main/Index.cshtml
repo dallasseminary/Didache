@@ -1,29 +1,42 @@
 ﻿@{
     ViewBag.Title = "DTS Online Ed";
+    
 }
 
 <h2>@Resources.labels.index_title</h2>
 
-<div id="highlight-wrapper">
-    <div class="grid_4 alpha">
-        <div class="side">
+<div id="dashboard">
+    <div class="side">
+        <div>
             <h3>Upcoming</h3>
             @foreach (UserTaskData task in Courses.GetImportantTasksForUser()) {
 		    <div class="due-soon">
-			    @task.Task.DueDate - @task.Task.Name
+			    <span class="date">@(task.Task.DueDate.HasValue?@task.Task.DueDate.Value.ToShortDateString() : "")</span> - @task.Task.Name
 		    </div>
 		    }
 
         </div>
     </div>
-    <div class="grid_8">
-        <div class="main">
-            <h2>What's Happening on MyDTS<?h2>
+    <div class="main">
+        <div >
+            <h2>What's Happening on MyDTS</h2>
         </div>
     </div>
-    <div class="grid_4 omega">
-        <div class="side">
-            <h3>Resources</h3>
+    <div class="side">
+        <div>
+            <h3>Course Resources</h3>
+            <ul>
+                <li>Download your term calendar</li>
+                <li>Download files from all of your courses</li>
+            </ul>
+
+            <h3>Online Education Resources</h3>
+            <ul>
+                <li>Microsoft Word Compatibility</li>
+                <li>OpenOffice.org</li>
+                <li>Bibliography Software</li>
+                <li>Turabian Format Tutorial</li>
+            <ul>
         </div>
     </div>
     <div class="clear"></div>

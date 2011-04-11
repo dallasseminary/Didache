@@ -187,41 +187,55 @@ a:active.oe-button
  * Dashboard
  */
  
-#highlight-wrapper {
-        background: #EEE;
+#dashboard {
+        background: #FFF;
+        border-width: 0 1px 1px;
+        border-style: solid;
+        border-color: #BDBDBD;
         -webkit-border-radius: 0 0 8px 8px;
-            -moz-border-radius: 0 0 8px 8px;
+           -moz-border-radius: 0 0 8px 8px;
                 border-radius: 0 0 8px 8px;
         margin-bottom: 24px;
         display: block;
     }
 
-    #highlight-wrapper div.main {
-        background: #DDD;
-        -webkit-border-radius: 0 0 8px 8px;
-            -moz-border-radius: 0 0 8px 8px;
-                border-radius: 0 0 8px 8px;
-        padding: 10px 10px 20px;
+    #dashboard div.main {
+        width: 480px;
+        float: left;
     }
 
-    #highlight-wrapper div.grid_4 div.side {
-        width: 220px;
+        #dashboard div.main > div {
+            background: #EFEFEF;
+            -webkit-border-radius: 0 0 8px 8px;
+               -moz-border-radius: 0 0 8px 8px;
+                    border-radius: 0 0 8px 8px;
+            padding: 10px 10px 20px;
+        }
+
+    #dashboard div.side {
+        width: 239px;
+        float: left;
+        margin-top
     }
 
-    #highlight-wrapper div.omega div.side 
+        #dashboard div.side > div {
+            padding: 0 10px 20px;
+        }
+    
+    #dashboard div.omega div.side 
     {
         margin-left: -20px;
     }
 
-    #highlight-wrapper > div > div {
+    #dashboard > div > div {
         padding: 0 10px;
     }
 
-    #highlight-wrapper > div.clear {
+    #dashboard > div.clear {
         padding: 0;
     }
 
-    #highlight-wrapper h2, #highlight-wrapper h3 {
+    #dashboard h2, #dashboard h3 {
         margin-top: 0;
         padding: 5px 10px;
         background: #BDBDBD;
@@ -235,14 +249,21 @@ a:active.oe-button
         border-bottom: none;
     }
 
-    #highlight-wrapper .main > div:first-child h2 {
+    #dashboard .main > div:first-child h2 {
         padding-top: 10px;
         margin-top: -15px;
     }
 
-    #highlight-wrapper h3 {
-        background: #CECECE;
+    #dashboard h2 {
+        background: #bbd1e1;
     }
+    
+    #dashboard ul {
+        margin-bottom: 12px;
+    }
+        #dashboard ul li {
+            margin-bottom; 5px;
+        }
 
     
 /**
