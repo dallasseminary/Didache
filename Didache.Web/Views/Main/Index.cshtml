@@ -9,11 +9,14 @@
     <div class="side">
         <div>
             <h3>Upcoming</h3>
-            @foreach (UserTaskData task in Courses.GetImportantTasksForUser()) {
+			
+			@if (Users.GetLoggedInUser() != null) {
+				 foreach (UserTaskData task in Courses.GetImportantTasksForUser()) {
 		    <div class="due-soon">
-			    <span class="date">@(task.Task.DueDate.HasValue?@task.Task.DueDate.Value.ToShortDateString() : "")</span> - @task.Task.Name
+			    <span class="date">@(task.Task.DueDate.HasValue ? @task.Task.DueDate.Value.ToShortDateString() : "")</span> - @task.Task.Name
 		    </div>
-		    }
+				}
+			}
 
         </div>
     </div>
