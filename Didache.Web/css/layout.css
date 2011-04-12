@@ -70,7 +70,7 @@ a:active.oe-button
 
     /* for profile in header */
     #profile-display
-	    { margin: 0; padding: 10px 0; overflow: auto; text-align: right; width: 400px; float: right;}
+	    { margin: 0; padding: 10px 0; height: 80px; display: inline-block; overflow: auto; text-align: right; width: 400px; float: right;}
     #profile-display img
 	    { float: right; width: 70px; height: 70px; margin: 0 0 0 20px; border: 1px solid #ccc; background: #fff; padding: 3px; -moz-border-radius: 5px; -webkit-border-radius: 5px;}		
     #profile-display a
