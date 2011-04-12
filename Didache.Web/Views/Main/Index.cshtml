@@ -3,20 +3,22 @@
     
 }
 
-<h2>@Resources.labels.index_title</h2>
 
+
+@if (Users.GetLoggedInUser() != null) {
+	
 <div id="dashboard">
     <div class="side">
         <div>
             <h3>Upcoming</h3>
 			
-			@if (Users.GetLoggedInUser() != null) {
-				 foreach (UserTaskData task in Courses.GetImportantTasksForUser()) {
+			
+			@foreach (UserTaskData task in Courses.GetImportantTasksForUser()) {
 		    <div class="due-soon">
 			    <span class="date">@(task.Task.DueDate.HasValue ? @task.Task.DueDate.Value.ToShortDateString() : "")</span> - @task.Task.Name
 		    </div>
-				}
-			}
+   }
+			
 
         </div>
     </div>
@@ -44,3 +46,13 @@
     </div>
     <div class="clear"></div>
 </div>
+	
+} else {
+	
+	<h2>Welcome</h2>
+	
+	<p>This is Dallas Theological Seminary's online education portal. Feel free to check out some classes.</p>
+	
+	<p>Overview video</p>
+
+}
