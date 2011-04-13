@@ -70,6 +70,10 @@ namespace Didache {
 		public virtual ICollection<CourseUser> CourseUsers { get; set; }
 
 		public virtual ICollection<CourseUserGroup> CourseUserGroups { get; set; }
+
+		public override string ToString() {
+			return CourseCode + " - " + Name;
+		}
 	}
 
 

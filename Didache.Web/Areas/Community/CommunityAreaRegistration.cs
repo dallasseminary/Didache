@@ -11,19 +11,13 @@ namespace Didache.Web.Areas.Community {
 		public override void RegisterArea(AreaRegistrationContext context) {
 			context.MapRoute(
 				"Community_default",
-				"profiles",
+				"community",
 				new { controller = "Community", action = "Index" }
 			);
 
 			context.MapRoute(
-				"Community_edit",
-				"Community/edit",
-				new { controller = "Community", action = "Edit" }
-			);
-
-			context.MapRoute(
 				"Community_name",
-				"Community/{name}",
+				"community/{name}",
 				new { controller = "Community", action = "Display" }
 			);
 		}

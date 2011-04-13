@@ -56,8 +56,9 @@
 			
             <div id="profile-display">
             @if (HttpContext.Current.User.Identity.IsAuthenticated) { 
-			    <img alt="@Users.GetLoggedInUser().FormattedName" src="@Users.GetLoggedInUser().ProfileImageUrl" />
-                <a href="@Users.GetLoggedInUser().ProfileDisplayUrl">@Users.GetLoggedInUser().FormattedName</a>
+			    <a href="@Users.GetLoggedInUser().ProfileDisplayUrl">
+					<img alt="@Users.GetLoggedInUser().FormattedName" src="@Users.GetLoggedInUser().ProfileImageUrl" />
+				</a>
 			}
             </div>
             <div class="clear"></div>
@@ -67,7 +68,7 @@
 		<div id="sub-menu">              
             <div class="sub-menu-item @(Request.Url.PathAndQuery == "/" ? " selected" : "")" id="main-menu-home-details">
 				<ul>
-					<li><a href="/dashboard">@Resources.labels.submenu_dashboard</a></li>		
+					<li><a href="/">@Resources.labels.submenu_dashboard</a></li>		
 				</ul>
 			</div>
 			@if (HttpContext.Current.User.Identity.IsAuthenticated) {
@@ -86,10 +87,11 @@
 						}
 				    </ul>
 			    </div>
-                <div class="sub-menu-item @(Request.Url.PathAndQuery.StartsWith("/profiles") ? " selected" : "")" id="main-menu-profile-details">
+                <div class="sub-menu-item @(Request.Url.PathAndQuery.StartsWith("/community") ? " selected" : "")" id="main-menu-profile-details">
 				    <ul>
-					    <li><a href="/profiles/@Users.GetLoggedInUser().ProfileDisplayUrl">@Resources.labels.submenu_view</a></li>
-					    <li><a href="/profiles/edit">@Resources.labels.submenu_edit</a></li>
+					    
+					    <li><a href="/community">@Resources.labels.submenu_community_home</a></li>
+						<li><a href="/@Users.GetLoggedInUser().ProfileDisplayUrl">@Resources.labels.submenu_view</a></li>
 				    </ul>
 			    </div>
                 <div class="sub-menu-item @(Request.Url.PathAndQuery.StartsWith("/admin") ? " selected" : "")" id="main-menu-admin-details">

@@ -1,0 +1,24 @@
+﻿@model List<Course>
+
+@{
+    ViewBag.Title = "People in My Classes";
+}
+
+<h2>Community</h2>
+
+@foreach (Course course in Model) {
+	
+	<div class="course">
+	<h3>@course.ToString()</h3>
+	
+	<ul>
+	@foreach (CourseUser user in course.CourseUsers) {
+		if (user.User != null) {
+			<li><a href="@user.User.ProfileDisplayUrl">@user.User.FormattedName</a></li>
+		}
+	}
+	</ul>
+	</div>
+	
+}
+

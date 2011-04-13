@@ -258,6 +258,9 @@
   <data name="submenu_campuses" xml:space="preserve">
     <value>Campuses</value>
   </data>
+  <data name="submenu_community_home" xml:space="preserve">
+    <value>Classmates</value>
+  </data>
   <data name="submenu_courses" xml:space="preserve">
     <value>Courses</value>
   </data>
@@ -283,7 +286,7 @@
     <value>Users</value>
   </data>
   <data name="submenu_view" xml:space="preserve">
-    <value>View</value>
+    <value>My Profile Page</value>
   </data>
   <data name="tabs_about" xml:space="preserve">
     <value>About</value>
