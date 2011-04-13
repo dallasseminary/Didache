@@ -12,114 +12,30 @@ using Didache.Models;
 namespace Didache.Web.Controllers {
 	public class AccountController : Controller {
 
-		public IFormsAuthenticationService FormsService { get; set; }
-		public IMembershipService MembershipService { get; set; }
+		
+		public ActionResult EditProfile() {
 
-		protected override void Initialize(RequestContext requestContext) {
-			if (FormsService == null) { FormsService = new FormsAuthenticationService(); }
-			if (MembershipService == null) { MembershipService = new AccountMembershipService(); }
+			User user = Users.GetLoggedInUser();
 
-			base.Initialize(requestContext);
-		}
-
-		// **************************************
-		// URL: /Account/LogOn
-		// **************************************
-
-		public ActionResult LogOn() {
-			return View();
+			return View(user);
 		}
 
 		[HttpPost]
-		public ActionResult LogOn(LogOnModel model, string returnUrl) {
-			if (ModelState.IsValid) {
-				if (MembershipService.ValidateUser(model.UserName, model.Password)) {
-					FormsService.SignIn(model.UserName, model.RememberMe);
-					if (Url.IsLocalUrl(returnUrl)) {
-						return Redirect(returnUrl);
-					} else {
-						return RedirectToAction("Index", "Home");
-					}
-				} else {
-					ModelState.AddModelError("", "The user name or password provided is incorrect.");
-				}
+		public ActionResult EditProfile(User model) {
+		
+			DidacheDb db = new DidacheDb();
+			
+			try {
+				model = db.Users.Find(model.UserID);
+
+				UpdateModel(model);
+
+				db.SaveChanges();
+
+			} catch (Exception ex) {
+				ModelState.AddModelError("", "Edit Failure, see inner exception: " + ex.ToString());
 			}
-
-			// If we got this far, something failed, redisplay form
-			return View(model);
+			return RedirectToAction("EditProfile");
 		}
-
-		// **************************************
-		// URL: /Account/LogOff
-		// **************************************
-
-		public ActionResult LogOff() {
-			FormsService.SignOut();
-
-			return RedirectToAction("Index", "Home");
-		}
-
-		// **************************************
-		// URL: /Account/Register
-		// **************************************
-
-		public ActionResult Register() {
-			ViewBag.PasswordLength = MembershipService.MinPasswordLength;
-			return View();
-		}
-
-		[HttpPost]
-		public ActionResult Register(RegisterModel model) {
-			if (ModelState.IsValid) {
-				// Attempt to register the user
-				MembershipCreateStatus createStatus = MembershipService.CreateUser(model.UserName, model.Password, model.Email);
-
-				if (createStatus == MembershipCreateStatus.Success) {
-					FormsService.SignIn(model.UserName, false /* createPersistentCookie */);
-					return RedirectToAction("Index", "Home");
-				} else {
-					ModelState.AddModelError("", AccountValidation.ErrorCodeToString(createStatus));
-				}
-			}
-
-			// If we got this far, something failed, redisplay form
-			ViewBag.PasswordLength = MembershipService.MinPasswordLength;
-			return View(model);
-		}
-
-		// **************************************
-		// URL: /Account/ChangePassword
-		// **************************************
-
-		[Authorize]
-		public ActionResult ChangePassword() {
-			ViewBag.PasswordLength = MembershipService.MinPasswordLength;
-			return View();
-		}
-
-		[Authorize]
-		[HttpPost]
-		public ActionResult ChangePassword(ChangePasswordModel model) {
-			if (ModelState.IsValid) {
-				if (MembershipService.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword)) {
-					return RedirectToAction("ChangePasswordSuccess");
-				} else {
-					ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
-				}
-			}
-
-			// If we got this far, something failed, redisplay form
-			ViewBag.PasswordLength = MembershipService.MinPasswordLength;
-			return View(model);
-		}
-
-		// **************************************
-		// URL: /Account/ChangePasswordSuccess
-		// **************************************
-
-		public ActionResult ChangePasswordSuccess() {
-			return View();
-		}
-
 	}
 }

@@ -17,7 +17,7 @@
 			    <dl>
 				    <dt>Birthday</dt>
 				    <dd>
-					    @Model.BirthDate.Value.ToShortDateString() &nbsp;
+					    @(Model.BirthDate.HasValue ? Model.BirthDate.Value.ToShortDateString() : "") &nbsp;
 				    </dd>
 				    <dt>From</dt>
 				    <dd>

@@ -61,6 +61,60 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Alumni.
+        /// </summary>
+        internal static string commonmenu_alumni {
+            get {
+                return ResourceManager.GetString("commonmenu_alumni", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Book Center.
+        /// </summary>
+        internal static string commonmenu_bookcenter {
+            get {
+                return ResourceManager.GetString("commonmenu_bookcenter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CampusNet.
+        /// </summary>
+        internal static string commonmenu_campusnet {
+            get {
+                return ResourceManager.GetString("commonmenu_campusnet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DTS Website.
+        /// </summary>
+        internal static string commonmenu_dtswebsite {
+            get {
+                return ResourceManager.GetString("commonmenu_dtswebsite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Library.
+        /// </summary>
+        internal static string commonmenu_library {
+            get {
+                return ResourceManager.GetString("commonmenu_library", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Online Ed.
+        /// </summary>
+        internal static string commonmenu_onlineed {
+            get {
+                return ResourceManager.GetString("commonmenu_onlineed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete this item?.
         /// </summary>
         internal static string confirm_delete {
@@ -223,6 +277,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sorry, an error occurred while processing your request.
+        /// </summary>
+        internal static string error_desc {
+            get {
+                return ResourceManager.GetString("error_desc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to by.
         /// </summary>
         internal static string forums_by {
@@ -322,6 +385,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Index Page.
+        /// </summary>
+        internal static string index_title {
+            get {
+                return ResourceManager.GetString("index_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please enter your username and password.
         /// </summary>
         internal static string login_instructions {
@@ -345,6 +417,15 @@ namespace Resources {
         internal static string login_login {
             get {
                 return ResourceManager.GetString("login_login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logout.
+        /// </summary>
+        internal static string login_logout {
+            get {
+                return ResourceManager.GetString("login_logout", resourceCulture);
             }
         }
         
@@ -381,6 +462,114 @@ namespace Resources {
         internal static string login_username {
             get {
                 return ResourceManager.GetString("login_username", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Archive.
+        /// </summary>
+        internal static string submenu_archive {
+            get {
+                return ResourceManager.GetString("submenu_archive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Campuses.
+        /// </summary>
+        internal static string submenu_campuses {
+            get {
+                return ResourceManager.GetString("submenu_campuses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Classmates.
+        /// </summary>
+        internal static string submenu_community_home {
+            get {
+                return ResourceManager.GetString("submenu_community_home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Courses.
+        /// </summary>
+        internal static string submenu_courses {
+            get {
+                return ResourceManager.GetString("submenu_courses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current.
+        /// </summary>
+        internal static string submenu_current {
+            get {
+                return ResourceManager.GetString("submenu_current", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dashboard.
+        /// </summary>
+        internal static string submenu_dashboard {
+            get {
+                return ResourceManager.GetString("submenu_dashboard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        internal static string submenu_edit {
+            get {
+                return ResourceManager.GetString("submenu_edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Files.
+        /// </summary>
+        internal static string submenu_files {
+            get {
+                return ResourceManager.GetString("submenu_files", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sessions.
+        /// </summary>
+        internal static string submenu_sessions {
+            get {
+                return ResourceManager.GetString("submenu_sessions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tools.
+        /// </summary>
+        internal static string submenu_tools {
+            get {
+                return ResourceManager.GetString("submenu_tools", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Users.
+        /// </summary>
+        internal static string submenu_users {
+            get {
+                return ResourceManager.GetString("submenu_users", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to My Profile Page.
+        /// </summary>
+        internal static string submenu_view {
+            get {
+                return ResourceManager.GetString("submenu_view", resourceCulture);
             }
         }
         

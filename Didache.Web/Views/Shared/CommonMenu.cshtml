@@ -13,7 +13,7 @@
 		<div class="grid_6">
 			<div id="dts-account">				
 @if (Request.IsAuthenticated) {	
-	<span class="user">@User.Identity.Name</span> <a href="/logout.aspx">@Resources.labels.login_logout</a>
+	<span class="user">@User.Identity.Name</span> <a href="/account/editprofile">Profile</a> <a href="/logout.aspx">@Resources.labels.login_logout</a>
 } else {	
 	<a href="/loginas.aspx?username=john.locoe">@Resources.labels.login_login</a>
 }

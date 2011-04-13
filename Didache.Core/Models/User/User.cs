@@ -155,5 +155,9 @@ namespace Didache {
 		public Guid AspnetUserID { get; set; }
 		public Guid PersonID { get; set; }
 		public bool IsRegistered { get; set; }
+
+		// preferences
+		public string Language { get; set; }
+		public Double TimezoneOffset { get; set; }
 	}
 }

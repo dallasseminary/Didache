@@ -13,7 +13,9 @@ namespace Didache.Web.Areas.Community.Controllers
 
         public ActionResult Index()
         {
-            return View();
+			List<Course> courses = Courses.GetUsersCourses(CourseUserRole.Student);
+
+			return View(courses);
         }
 
 		public ActionResult Display(string name) {
@@ -30,30 +32,7 @@ namespace Didache.Web.Areas.Community.Controllers
 			return View(user);
 		}
 
-		public ActionResult Edit() {
-			User user = Users.GetLoggedInUser();
-			return View(user);
-		}
-
-		[HttpPost]
-		public ActionResult Edit(User model) {
-			DidacheDb db = new DidacheDb();
-			
-			// EDIT MODE
-			try {
-				model = db.Users.Find(model.UserID);
-
-				UpdateModel(model);
-
-				db.SaveChanges();
-
-				return RedirectToAction("Display", new { name = model.Username });
-			} catch (Exception ex) {
-				ModelState.AddModelError("", "Edit Failure, see inner exception: " + ex.ToString());
-			}
-
-			return View(model);
-		}
+		
 
     }
 }
