@@ -45,7 +45,9 @@
     <div class="list">
         <ul>
             @foreach (CourseUser user in Model.CourseUsers) {
+				if (user.User != null) {
                 <li>@user.User.FormattedName, @user.RoleID</li>
+				}
             }
         </ul>
     </div>
