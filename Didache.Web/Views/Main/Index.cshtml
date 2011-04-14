@@ -26,22 +26,7 @@
         <div >
             <h2>What's Happening on MyDTS</h2>
             <ul>
-            @foreach (Course course in Courses.GetUsersCourses(CourseUserRole.Student)) {
-                foreach (Forum forum in Forums.GetCourseForums(course.CourseID)) {
-                    foreach (Thread thread in forum.Threads) {
-                        int i = 0; while (i < 10) {
-                        <li>
-                            <span class="user-image"></span>
-                            <span class="thread-title">Forums.GetPosts(thread.ThreadID).Last().Subject</span>
-                            <span class="excerpt"><p>@i</p></span>
-                        </li>
-                        
-                        i++;
-                        
-                        }
-                    }
-                }
-            }
+           
             </ul>
         </div>
     </div>
