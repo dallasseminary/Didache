@@ -2,7 +2,8 @@
 		   
 @{
 	ViewBag.Title = Model.CourseCode + Model.Section + " " + Resources.labels.coursetabs_assignments;
-    int i = 1;
+    
+    
 }
 
 <!--@{Html.RenderPartial("CourseHeader"); }-->
@@ -12,43 +13,48 @@
 <div id="main-column">
     <div class="block-list-header"><h3>Assignments</h3></div>
     <div class="block-list">
-            @foreach (Unit unit in Model.Units)
-            {
                 
-                List<UserTaskData> userTasks = null;
+	    <div class="block-list-item">
+            <div class="block-list-item-label">
+                <span>Graded Files</span>
+            </div>
+            <ul class="course-filegroup-files">
 
-                userTasks = Tasks.GetUserTaskDataInUnit(unit.UnitID, Users.GetLoggedInUser().UserID);
+                @foreach (Unit unit in Model.Units)
+                {
                 
-	                <div class="block-list-item">
-                        <div class="block-list-item-label">
-                            <span>Unit @i</span>
-                        </div>
-                        <h5>@unit.Name</h5>
+                    List<UserTaskData> userTasks = null;
 
-                        <ul class="graded-assignments">
-                            @foreach (Didache.UserTaskData userTaskData in userTasks) {
-                                switch (userTaskData.TaskCompletionStatus) {
+                    userTasks = Tasks.GetUserTaskDataInUnit(unit.UnitID, Users.GetLoggedInUser().UserID);
+                                
+                        foreach (Didache.UserTaskData userTaskData in userTasks) {
+                            switch (userTaskData.GradeStatus) {
 	                            
-                                    case TaskCompletionStatus.Completed:    
-                                        <li><strike>@userTaskData.Task.Name</strike></li>;
-                                        break;
+                                case 0:
+                                    <!--li><span class="filename">@userTaskData.Task.Name</span></li-->
+                                    break;
                                     
-                                    case TaskCompletionStatus.Skipped:      
-                                        <li><strike><span class="skipped">@userTaskData.Task.Name</span></strike></li>; 
-                                        break;
-                                    
-                                    case TaskCompletionStatus.NotStarted:   
-                                        <li>@userTaskData.Task.Name</li>
-                                        break;
-                                }
-
+                                case 1:      				
+					                <li>
+                                       
+                                        <a href="/Courses/StudentFile?id=@userTaskData.TempID">
+                                            <span class="filename">@userTaskData.Task.Name</span>
+                                            <span class="type"><img src="/css/images/pdf.png" /></span>
+                                            <span class="size">
+                                                @userTaskData.NumericGrade
+                                                @(userTaskData.LetterGrade.IsEmpty() ? "" : "(@userTaskData.LetterGrade)") 
+                                            </span>
+                                        </a>
+                                    </li>
+                                    break;
                             }
-                        </ul>
+
+                        }
                         
-                        <div class="clear"></div>
-	                </div>
-                { i += 1; }
-            }
+                    <div class="clear"></div>
+                }
+            </ul>
+	    </div>
 
     </div>
 </div>

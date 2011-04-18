@@ -6,6 +6,12 @@
     margin: 0 auto;
     position: relative;
 }
+#main li {
+    margin-bottom: 4px;
+}
+#main ul, #main ol {
+    margin-bottom: 12px;
+}
 a.oe-button 
 {
     background: #DDD;
@@ -29,6 +35,35 @@ a:active.oe-button
     color: #333;
 }
 
+span.icon {
+    padding-left: 20px;
+    min-height: 16px;
+    display: inline-block;
+}
+
+span.icon.pdf {
+    background: url(images/pdf.png) left no-repeat;
+}
+
+span.icon.doc {
+    background: url(images/word.png) left no-repeat;
+}
+
+span.icon.compressed {
+    background: url(images/compress.png) left no-repeat;
+}
+
+span.icon.audio {
+    background: url(images/audio.png) left no-repeat;
+}
+
+span.icon.ppt {
+    background: url(images/powerpoint.png) left no-repeat;
+}
+
+span.icon.excel {
+    background: url(images/excel.png) left no-repeat;
+}
 
 #container-1 {
     background: #EEE;
@@ -221,7 +256,11 @@ a:active.oe-button
         #dashboard div.side > div {
             padding: 0 10px 20px;
         }
-    
+        
+        #dashboard div.side ul ul, #dashboard div.side ul ol, #dashboard div.side ol ul, #dashboard div.side ol ol {
+            margin-left: 12px;
+        }
+        
     #dashboard div.omega div.side 
     {
         margin-left: -20px;

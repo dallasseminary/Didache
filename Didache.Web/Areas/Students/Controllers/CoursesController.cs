@@ -91,6 +91,7 @@ namespace Didache.Web.Areas.Students.Controllers
             Course course = Didache.Courses.GetCourseBySlug(slug);
 
             ViewBag.CourseFileGroups = CourseFiles.GetCourseFileGroups(course.CourseID);
+            ViewBag.StudentFiles = db.StudentFiles;
 
 			return View(course);
 		}
