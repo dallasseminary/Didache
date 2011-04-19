@@ -21,7 +21,7 @@
 	        @foreach (CourseUser user in course.CourseUsers) {
                 if (user.User != null) {
 			        <li>
-                        <a rel="@user.User.ProfileDisplayUrl" href="javascript:void(0)">
+                        <a href="@user.User.ProfileDisplayUrl" rel="slider">
                             <img alt="@user.User.FormattedName" src="@user.User.ProfileImageUrl">
                             <span class="name">@user.User.FormattedName</span>
                             <span class="campus">@user.User.City</span>
@@ -42,7 +42,7 @@
 				                </dd>
                             </dl>
                         </div>
-                        <a href="@user.User.ProfileDisplayUrl">See Full Profile</a>
+                        <a class="profile-link" href="@user.User.ProfileDisplayUrl">See Full Profile</a>
                     </li>
                 }
             }
@@ -55,14 +55,20 @@
 
 <script type="text/javascript">
     jQuery(document).ready(function ($) {
-        $("ul.all-community li").click(function () {
-            $("ul.all-community li").removeClass("selected", "slow");
+        $("a[rel='slider']").attr("href", "javascript:void(0)");
 
-        }).click(function () {
-            var href = $(this).children("a").attr("rel");
-            $(this).addClass("selected", 600);
-        }).click(function () {
-            $(this).children("a").attr("href", href);
+        $("ul.all-community li a[rel='slider']").click(function () {
+            var t = 300;
+
+            // close any open ones
+            $("ul.all-community li.selected img").animate({ height: 32 }, t);
+            $("ul.all-community li.selected").removeClass("selected", t);
+
+            // open the clicked on
+            $(this).parent().addClass("selected", t);
+            $(this).parent().find("img").animate({ height: 150 }, t);
+
         });
+
     });
 </script>   

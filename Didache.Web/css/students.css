@@ -374,6 +374,15 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
             display: block;
             width: 200px;
         }
+    ul.all-community li a.profile-link, ul.all-community li a.profile-link:hover {
+        background: #194e76;
+        color: #FFF;
+        font-weight: bold;
+        padding: 4px;
+        display: block;
+        float: right;
+        margin: 10px;
+    }
     
     
 
