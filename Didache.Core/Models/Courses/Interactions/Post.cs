@@ -26,8 +26,14 @@ namespace Didache {
 		public string PostContent { get; set; }
 		public string PostContentFormatted { get; set; }
 
-		public virtual Thread Thread { get; set; }
+		public virtual InteractionThread Thread { get; set; }
 		public virtual User User { get; set; }
+
+		public string PostUrl {
+			get {
+				return "/courses/" + Thread.Task.Course.Slug + "/schedule/" + Thread.Task.UnitID + "#interaction-" + PostID;
+			}
+		}
 	}
 
 

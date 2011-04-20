@@ -28,6 +28,12 @@ namespace Didache {
 		public string PostContent { get; set; }
 		public string PostContentFormatted { get; set; }
 
+		public string PostUrl {
+			get {
+				return "/courses/" + Thread.Forum.Course.Slug + "/discussion/thread/" + Thread.ThreadID + "#post-" + PostID;
+			}
+		}
+
 		public virtual Thread Thread { get; set; }
 		public virtual User User { get; set; }
 	}

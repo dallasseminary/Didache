@@ -65,14 +65,22 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Activities\ActivityStream.cs" />
+    <Compile Include="Models\Activities\ActivityStreamItemBase.cs" />
+    <Compile Include="Models\Activities\InteractionActivity.cs" />
+    <Compile Include="Models\Activities\ForumReplyActivity.cs" />
+    <Compile Include="Models\Activities\NewFileActivity.cs" />
     <Compile Include="Models\Courses\Campuses.cs" />
-    <Compile Include="Models\Courses\files\BaseFile.cs" />
-    <Compile Include="Models\Courses\files\GradedFile.cs" />
-    <Compile Include="Models\Courses\files\StudentFile.cs" />
-    <Compile Include="Models\Courses\files\CourseFileAssociation.cs" />
-    <Compile Include="Models\Courses\files\CourseFileGroup.cs" />
-    <Compile Include="Models\Courses\files\CourseFile.cs" />
-    <Compile Include="Models\Courses\files\CourseFiles.cs" />
+    <Compile Include="Models\Courses\Files\BaseFile.cs" />
+    <Compile Include="Models\Courses\Files\GradedFile.cs" />
+    <Compile Include="Models\Courses\Files\StudentFile.cs" />
+    <Compile Include="Models\Courses\Files\CourseFileAssociation.cs" />
+    <Compile Include="Models\Courses\Files\CourseFileGroup.cs" />
+    <Compile Include="Models\Courses\Files\CourseFile.cs" />
+    <Compile Include="Models\Courses\Files\CourseFiles.cs" />
+    <Compile Include="Models\Courses\Grading\GradeGroup.cs" />
+    <Compile Include="Models\Courses\Grading\GradeGroups.cs" />
+    <Compile Include="Models\Courses\Grading\GradeItem.cs" />
     <Compile Include="Models\Courses\Interactions\Interactions.cs" />
     <Compile Include="Models\Courses\Interactions\Post.cs" />
     <Compile Include="Models\Courses\Interactions\Thread.cs" />
@@ -93,14 +101,14 @@
     <Compile Include="Models\Forums\Forum.cs" />
     <Compile Include="Models\Courses\Course.cs" />
     <Compile Include="Models\DidacheDb.cs" />
-    <Compile Include="Models\Courses\CourseUserGroup.cs" />
-    <Compile Include="Models\Courses\CourseUser.cs" />
+    <Compile Include="Models\Courses\Users\CourseUserGroup.cs" />
+    <Compile Include="Models\Courses\Users\CourseUser.cs" />
     <Compile Include="Models\Grading\GradingTask.cs" />
     <Compile Include="Models\User\User.cs" />
     <Compile Include="Models\Courses\Session.cs" />
     <Compile Include="Models\Courses\Task.cs" />
     <Compile Include="Models\Courses\Unit.cs" />
-    <Compile Include="Models\Courses\UserTaskData.cs" />
+    <Compile Include="Models\Courses\Users\UserTaskData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TaskTypes\Types\CommentOnClassmatesFile.cs" />
     <Compile Include="TaskTypes\Types\Survey.cs" />
