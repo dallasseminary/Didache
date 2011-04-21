@@ -68,11 +68,15 @@
 }
 
 .drag-handle {
-	width: 20px; 
-	height: 20px;
-	background: red;
 	display: inline-block;
 	cursor: move;
+		
+	background: #FF0000;
+	-webkit-border-radius: 3px;
+		-moz-border-radius: 3px;
+		    border-radius: 3px;
+	width: 24px;
+	height: 24px;	
 }
 
 .nested-list {
@@ -87,7 +91,12 @@
 		}
 	
 		.nested-child-list {
-			padding: 0 0 0 30px;
+			margin: 0 0 0 30px;
+			border: solid 1px #333;
+			border-width: 1px 0 0 1px;
+			-webkit-border-radius: 4px 0 0 0;
+			   -moz-border-radius: 4px 0 0 0;
+					border-radius: 4px 0 0 0;			
 		}
 			.nested-child-item {
 				padding: 5px;
