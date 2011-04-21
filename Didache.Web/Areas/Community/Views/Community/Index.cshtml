@@ -2,23 +2,73 @@
 
 @{
     ViewBag.Title = "People in My Classes";
+    int i = 0;
 }
 
-<h2>Community</h2>
-
+<div id="main-column">
+<div class="block-list-header">
+<h3>People in My Classes</h3>
+</div>
+<div class="block-list">
 @foreach (Course course in Model) {
-	
-	<div class="course">
-	<h3>@course.ToString()</h3>
-	
-	<ul>
-	@foreach (CourseUser user in course.CourseUsers) {
-		if (user.User != null) {
-			<li><a href="@user.User.ProfileDisplayUrl">@user.User.FormattedName</a></li>
-		}
-	}
-	</ul>
-	</div>
-	
+    if (i < 3) {
+	    <div class="block-list-item course">
+	        <div class="block-list-item-label">
+	            <span>@course.CourseCode.ToString()</span>
+	        </div>
+            <h2>@course.Name</h2>
+	        <ul class="all-community">
+	        @foreach (CourseUser user in course.CourseUsers) {
+                if (user.User != null) {
+			        <li>
+                        <a href="@user.User.ProfileDisplayUrl" rel="slider">
+                            <img alt="@user.User.FormattedName" src="@user.User.ProfileImageUrl">
+                            <span class="name">@user.User.FormattedName</span>
+                            <span class="campus">@user.User.City</span>
+                        </a>
+                        <div class="profile">
+                            <dl>
+				                <dt>Birthday</dt>
+				                <dd>
+					                @(user.User.BirthDate.HasValue ? user.User.BirthDate.Value.ToShortDateString() : "") &nbsp;
+				                </dd>
+				                <dt>From</dt>
+				                <dd>
+					                @user.User.Hometown &nbsp;
+				                </dd>
+				                <dt>Alma Mater</dt>
+				                <dd>
+					                @user.User.AlmaMater &nbsp;
+				                </dd>
+                            </dl>
+                        </div>
+                        <a class="profile-link" href="@user.User.ProfileDisplayUrl">See Full Profile</a>
+                    </li>
+                }
+            }
+	        </ul>
+	    </div>
+        @(i++)
+    }
 }
+</div>
 
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $("a[rel='slider']").attr("href", "javascript:void(0)");
+
+        $("ul.all-community li a[rel='slider']").click(function () {
+            var t = 300;
+
+            // close any open ones
+            $("ul.all-community li.selected img").animate({ height: 32 }, t);
+            $("ul.all-community li.selected").removeClass("selected", t);
+
+            // open the clicked on
+            $(this).parent().addClass("selected", t);
+            $(this).parent().find("img").animate({ height: 150 }, t);
+
+        });
+
+    });
+</script>   

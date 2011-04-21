@@ -401,7 +401,6 @@
     <Content Include="Areas\Admin\Views\Courses\DialogLayout.cshtml" />
     <Content Include="Areas\Admin\Views\Courses\DialogClose.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\DateTime.cshtml" />
-    <Content Include="Areas\Admin\Views\Courses\Copy of Units.cshtml" />
     <None Include="css\fonts\league\League_Gothic-webfont.eot" />
     <None Include="css\fonts\league\League_Gothic-webfont.ttf" />
     <None Include="css\fonts\league\League_Gothic-webfont.woff" />

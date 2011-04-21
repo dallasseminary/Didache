@@ -124,19 +124,18 @@ font {
     }
     
 #course-menu
-	{ height: 56px; overflow: visible; margin: 0 0 20px 0; padding: 0; border-bottom: 1px solid #CCC; }
+	{ height: 58px; overflow: visible; margin: 0 0 20px 0; padding: 0; border-bottom: 1px solid #CCC; }
     #course-menu li
-	    { float: left; margin: 0 10px 0 0; height: 54px; display: block; }	
+	    { float: left; margin: 0 12px 0 0; height: 54px; display: block; }	
     #course-menu li:last-child
       { margin: 0; }  
     #course-menu li a
-	    { display: block; width: 120px; padding: 10px 14px; border: 1px solid #DDD; background: #E9E9E9; text-decoration: none;
+	    { display: block; width: 120px; padding: 12px 14px; border: 1px solid #DDD; background: #E9E9E9; text-decoration: none;
         -moz-border-radius-topleft: 3px;
         -moz-border-radius-topright: 3px;
         -webkit-border-top-left-radius: 3px;
         -webkit-border-top-right-radius: 3px;
         border-radius: 3px 3px 0 0;
-        border-bottom-width: 3px;
         border-bottom-color: #CCC }	
     #course-menu li a.last
 	    {   }
@@ -145,7 +144,7 @@ font {
     #course-menu li a:hover span
 	    { color: #0281CA; }				
     #course-menu li a.selected
-	    { background: transparent; border-bottom:5px solid #fff;  }	
+	    { background: #FFF; border-bottom:5px solid #fff; height: 31px;  }	
 
     #course-menu li a span
 	    { color: #222; font-weight: bold; font-size: 14px; display:block; margin: 0 0 5px 0; line-height: 110%;}
@@ -255,15 +254,16 @@ font {
 		background: #ccc;
 	}	*/
 
-/* course archive */
+/* course archive, community index list */
 
-ul.course-archive, ul.course-filegroup-files {
+ul.course-archive, ul.course-filegroup-files, ul.all-community {
     width: 100%;
     overflow: hidden;
 }
 
-    ul.course-archive li, ul.course-filegroup-files li {
+    ul.course-archive li, ul.course-filegroup-files li, ul.all-community li {
         background: #FFF;
+        height: 36px;
         margin: 0 0 10px;
         display: block;
         overflow: hidden;
@@ -273,24 +273,24 @@ ul.course-archive, ul.course-filegroup-files {
         margin-bottom: 3px;
     }
     
-    ul.course-archive li a, ul.course-filegroup-files li a {
+    ul.course-archive li a, ul.course-filegroup-files li a, ul.all-community li a {
         font-weight: normal;
         display: block;
         text-decoration: none;
     }
     
-    ul.course-archive li a, ul.course-filegroup-files li a span {
+    ul.course-archive li a, ul.course-filegroup-files li a span, ul.all-community li a span {
         padding: 10px;
         height: 16px;
     }
     
-    ul.course-archive li a:hover, ul.course-filegroup-files a:hover {
+    ul.course-archive li a:hover, ul.course-filegroup-files a:hover, ul.all-community li a:hover {
         background: #666;
         display: block;
         color: #FFF;
     }
     
-    ul.course-filegroup-files a .type, ul.course-filegroup-files a .size {
+    ul.course-filegroup-files a .type, ul.course-filegroup-files a .size, ul.all-community li a .campus {
         color: #BBB;
         border-left: 1px solid #BBB;
         float: right;
@@ -302,7 +302,7 @@ ul.course-archive, ul.course-filegroup-files {
         width: 65px;
     }
     
-    ul.course-filegroup-files a .filename {
+    ul.course-filegroup-files a .filename, ul.all-community a .name {
         font-weight: bold;
         display: inline-block;
         margin-right: 10px;
@@ -312,15 +312,79 @@ ul.course-archive, ul.course-filegroup-files {
         color: #EEE;
         font-weight: normal;
     }
+    ul.all-community li img {
+	    height: 32px;
+	    padding: 2px;
+	    background: none;
+	    overflow: hidden;
+	    display: block;
+	    margin-right: 10px;
+	    float: left;
+	}
+	    
+	ul.all-community span.campus {
+	    width: 125px;
+	    padding-left: 20px;
+	}
 
     .block-list .block-list-item:nth-child(odd) ul.course-archive li,
-    .block-list .block-list-item:nth-child(odd) ul.course-filegroup-files li {
+    .block-list .block-list-item:nth-child(odd) ul.course-filegroup-files li,
+    .block-list .block-list-item:nth-child(odd) ul.all-community li {
         background: #EEE;
     }
 
     ul.course-archive li a {
         font-weight: bold;
     }
+    
+    ul.all-community li .profile {
+        display: none;
+        float: left;
+        margin-left: 10px;
+    }
+    ul.all-community li.selected {
+        height: auto;
+    }
+        ul.all-community li.selected a:hover {
+            background: none;
+            color: #0000FF;
+        }
+        ul.all-community li.selected img {
+            height: 150px;
+        }
+        ul.all-community li.selected .profile {
+            display: inline-block;
+        }        
+        ul.all-community li.selected .profile dl dt {
+            font-weight: bold;
+            color: #FFF;
+            background: #333;
+            padding: 2px 5px;
+            margin: 0 5px 0 0;
+            display: inline-block;
+            float: left;
+            width: 90px;
+        }
+        
+        ul.all-community li.selected .profile dl dd {
+            font-size: 12px;
+            margin: 0 0 12px;
+            padding: 2px 0 12px 20px;
+            border-bottom: 1px solid #CCC;
+            display: block;
+            width: 200px;
+        }
+    ul.all-community li a.profile-link, ul.all-community li a.profile-link:hover {
+        background: #194e76;
+        color: #FFF;
+        font-weight: bold;
+        padding: 4px;
+        display: block;
+        float: right;
+        margin: 10px;
+    }
+    
+    
 
 #schedule-tasks {
 }

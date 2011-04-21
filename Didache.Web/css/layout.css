@@ -6,6 +6,12 @@
     margin: 0 auto;
     position: relative;
 }
+#main li {
+    margin-bottom: 4px;
+}
+#main ul, #main ol {
+    margin-bottom: 12px;
+}
 a.oe-button 
 {
     background: #DDD;
@@ -29,6 +35,35 @@ a:active.oe-button
     color: #333;
 }
 
+span.icon {
+    padding-left: 20px;
+    min-height: 16px;
+    display: inline-block;
+}
+
+span.icon.pdf {
+    background: url(images/pdf.png) left no-repeat;
+}
+
+span.icon.doc {
+    background: url(images/word.png) left no-repeat;
+}
+
+span.icon.compressed {
+    background: url(images/compress.png) left no-repeat;
+}
+
+span.icon.audio {
+    background: url(images/audio.png) left no-repeat;
+}
+
+span.icon.ppt {
+    background: url(images/powerpoint.png) left no-repeat;
+}
+
+span.icon.excel {
+    background: url(images/excel.png) left no-repeat;
+}
 
 #container-1 {
     background: #EEE;
@@ -70,7 +105,7 @@ a:active.oe-button
 
     /* for profile in header */
     #profile-display
-	    { margin: 0; padding: 10px 0; overflow: auto; text-align: right; width: 400px; float: right;}
+	    { margin: 0; padding: 10px 0; height: 80px; display: inline-block; overflow: auto; text-align: right; width: 400px; float: right;}
     #profile-display img
 	    { float: right; width: 70px; height: 70px; margin: 0 0 0 20px; border: 1px solid #ccc; background: #fff; padding: 3px; -moz-border-radius: 5px; -webkit-border-radius: 5px;}		
     #profile-display a
@@ -221,7 +256,11 @@ a:active.oe-button
         #dashboard div.side > div {
             padding: 0 10px 20px;
         }
-    
+        
+        #dashboard div.side ul ul, #dashboard div.side ul ol, #dashboard div.side ol ul, #dashboard div.side ol ol {
+            margin-left: 12px;
+        }
+        
     #dashboard div.omega div.side 
     {
         margin-left: -20px;
@@ -300,3 +339,16 @@ a:active.oe-button
             display: block;
             width: 350px;
         }
+        
+/**
+ * Breadcrumbs
+ */
+ 
+#breadcrumbs {
+    background: url(images/breadcrumb-home.jpg) left no-repeat;
+    font-size: 12px;
+    line-height: 12px;
+    padding: 2px 0 2px 24px;
+    margin-bottom: 12px;
+    display: block;
+}
