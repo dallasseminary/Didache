@@ -9,11 +9,12 @@
 
 
 
+   <div id="breadcrumbs"><a href="/couses/@ViewContext.RouteData.Values["slug"]/schedule">@Model.Forum.Course.Name</a> &#9654; <a href="/courses/@ViewContext.RouteData.Values["slug"]/discussion/">@Model.Forum.Course.Name Discussion</a> &#9654; <a href="/courses/@ViewContext.RouteData.Values["slug"]/discussion/forum/@Model.Forum.ForumID">@Model.Forum.Name</a></div>
 
     <table class="forum-posts">
         <thead>
             <tr>
-                <th width="200"><a href="/courses/@ViewContext.RouteData.Values["slug"]/discussion/forum/@Model.Forum.ForumID">@Model.Forum.Name</a></th>
+                <th width="200">&nbsp;</th>
                 <td width="720">@Model.Subject</td>
             </tr>
         </thead>

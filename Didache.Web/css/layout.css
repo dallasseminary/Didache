@@ -339,3 +339,16 @@ span.icon.excel {
             display: block;
             width: 350px;
         }
+        
+/**
+ * Breadcrumbs
+ */
+ 
+#breadcrumbs {
+    background: url(images/breadcrumb-home.jpg) left no-repeat;
+    font-size: 12px;
+    line-height: 12px;
+    padding: 2px 0 2px 24px;
+    margin-bottom: 12px;
+    display: block;
+}

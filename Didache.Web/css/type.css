@@ -49,7 +49,8 @@ body
 	font-family: Helvetica, Arial;
 	line-height: 130%;
 }
-    
+
+p { margin-bottom: 12px; }
 
 h1,h2,h3,h4 { font-family: Trebuchet,"Helvetica Neue", Helvetica, Arial, Liberation Sans, sans-serif; line-height: 120%; letter-spacing: -1px; }
 

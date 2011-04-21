@@ -16,7 +16,12 @@
 	.filegroup .files {
 		min-height: 40px;
 		margin: 0 0 0 40px;
-		border: solid 1px #333; 
+		border: solid 1px #333;
+		border-width: 1px 0 0 1px;
+		padding: 5px 0 0 5px;
+		-webkit-border-radius: 4px 0 0 0;
+		   -moz-border-radius: 4px 0 0 0;
+		        border-radius: 4px 0 0 0;
 	}
 
 	.filegroup .files .coursefile {
@@ -25,10 +30,19 @@
 
 	.filegroup .drag-handle {
 		display: inline-block;
-		background: #ff0000;
-		width: 20px;
-		height: 20px;
+		background: #FF0000;
+		-webkit-border-radius: 3px;
+		   -moz-border-radius: 3px;
+		        border-radius: 3px;
+		width: 24px;
+		height: 24px;
 	}
+	    .filegroup .files .drag-handle {
+	        background: #FFF;
+	    }
+	    .filegroup .files .drag-handle img {
+	        margin: 4px;
+	    }
 
 	.filegroup .files .coursefile:nth-child(odd){
 		background: #eee;
@@ -45,7 +59,9 @@
 		display: inline-block;
 		width: 150px;
 	}
-			
+	input.group-name {
+	    margin-bottom: 10px;
+	}		
 	.upload {
 		position: relative;
 		overflow: hidden;
@@ -62,7 +78,7 @@
 		line-height: 30px;
 		background: paleGreen;
 		border: 1px solid limeGreen;
-		margin: 0 0 0 20px;
+		margin: 0 0 10px 40px;
 	}
 	.upload input {
 		position: absolute;
@@ -120,7 +136,7 @@ x add group
 		<div class="files">
 		@foreach (CourseFileAssociation cfa in group.CourseFileAssociations) {
 			<div class="coursefile" data-fileid="@cfa.FileID">
-				<span class="file-handle drag-handle"></span>
+				<span class="file-handle drag-handle"><img src="/css/images/@(cfa.CourseFile.FileType).png"></span>
 				<span class="file-title">@cfa.CourseFile.Title</span>
 				<span class="file-name">@cfa.CourseFile.Filename</span>
 				<span class="file-user">@(cfa.CourseFile.User != null ? cfa.CourseFile.User.FullName : cfa.CourseFile.UserID.ToString())</span>
