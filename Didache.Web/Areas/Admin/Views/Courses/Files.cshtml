@@ -9,16 +9,17 @@
 
 	<style>
 	.filegroup {
-		background: #ccc;
-		border: solid 1px #333; 
+		/*background: #ccc;*/
+		border: solid 3px #EEE; 
+		padding: 5px 0 0 5px;
 	}
 
 	.filegroup .files {
 		min-height: 40px;
 		margin: 0 0 0 40px;
-		border: solid 1px #333;
+		border: solid 1px #DDD;
 		border-width: 1px 0 0 1px;
-		padding: 5px 0 0 5px;
+		padding: 5px;
 		-webkit-border-radius: 4px 0 0 0;
 		   -moz-border-radius: 4px 0 0 0;
 		        border-radius: 4px 0 0 0;
@@ -98,6 +99,9 @@
 	.upload button {
 		display: none;
 	}
+	.ui-sortable-placeholder {
+	    background: #FAE661;
+	}
 	</style>
 }
 <!--	
@@ -122,8 +126,10 @@ x add group
 @foreach(CourseFileGroup group in Model) {
 	
 	<div class="filegroup" data-groupid="@group.GroupID">
-		<span class="group-handle drag-handle"></span>
-		<input class="group-name" value="@group.Name" />
+		<div class="group-header">
+            <span class="group-handle drag-handle"></span>
+		    <input class="group-name" value="@group.Name" />
+        </div>
 		
 		<div class="upload">
 			<form action="/admin/courses/fileupload/@ViewBag.Course.CourseID/" enctype="multipart/form-data" method="post">
