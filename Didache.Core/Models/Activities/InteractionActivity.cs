@@ -9,7 +9,7 @@ namespace Didache {
 		public InteractionPost Post { get; set; }
 
 		public override string FormatActivity() {
-			return User.FormattedName + " responded to <a href=\"" + Post.PostUrl + "\">" + Post.Thread.User.FormattedName + "'s assignment</a>.";
+			return ((User != null) ? "<a href=\"" + User.ProfileDisplayUrl + "\">" + User.FormattedName + "</a>" : "(unknown)") + " responded to <a href=\"" + Post.PostUrl + "\">" + Post.Thread.User.FormattedName + "'s assignment</a>.";
 		}
 	}
 }

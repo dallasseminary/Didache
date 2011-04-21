@@ -10,7 +10,7 @@ namespace Didache {
 		public CourseFile CourseFile { get; set; }
 
 		public override string FormatActivity() {
-			return User.FormattedName + " uploaded <a href=\"" + CourseFile.FileUrl + "\">" + CourseFile.Filename + "</a>";
+			return ((User != null) ? "<a href=\"" + User.ProfileDisplayUrl + "\">" + User.FormattedName + "</a>" : "(unknown)") + " uploaded <a href=\"" + CourseFile.FileUrl + "\">" + CourseFile.Filename + "</a>";
 		}
 	}
 }

@@ -12,6 +12,14 @@
     <div class="block-list-header"><h3>Upcoming...</h3></div>
     <div class="block-list">
 
+		@foreach (ActivityStreamItemBase item in ActivityStream.GetUsersItems(Model.CourseID)) {
+			<div class="activity">
+				<span class="activity-date">@item.ActivityDate</span>
+				<span class="activity-text">@Html.Raw(item.FormatActivity())</span>
+			</div>
+		} 
+
+
 		@foreach (UserTaskData task in Courses.GetImportantTasksForUser()) {
 		<div class="due-soon">
 			@task.Task.DueDate - @task.Task.Name

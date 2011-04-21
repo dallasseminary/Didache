@@ -21,31 +21,43 @@ namespace Didache {
 			return GetUsersItems(courseIDs);
 		}
 
-		public List<ActivityStreamItemBase> GetUsersItems(int courseID) {
-			return GetUsersItems(new[] { courseID });
+		public static List<ActivityStreamItemBase> GetUsersItems(int courseID) {
+			return GetUsersItems(new List<int> { courseID });
 		}
 
-		private List<ActivityStreamItemBase> GetUsersItems(int[] courseIDs) {
+		private static List<ActivityStreamItemBase> GetUsersItems(List<int> courseIDs) {
 
 			List<ActivityStreamItemBase> items = new List<ActivityStreamItemBase>();
 
-
+			var didache = new DidacheDb();
 
 			// discussion replies
-			var posts = didache.Posts.Include("User").Include("Thread.Forum.Course").Where(p => courseIDs.Contains(p.Thread.Forum.CourseID)).Take(20);
+			var posts = didache
+							.Posts
+								.Include("User")
+								.Include("Thread.Forum.Course")
+							.Where(p => courseIDs.Contains(p.Thread.Forum.CourseID))
+							.OrderByDescending(p => p.PostDate)
+							.Take(20);
 			foreach (Post post in posts) {
 				items.Add(new ForumReplyActivity() { User = post.User, ActivityDate = post.PostDate, Post = post });
 			}
 
 			// discussion replies
-			var interactions = didache.InteractionPosts.Include("User").Include("Thread.Task.Course").Where(p => courseIDs.Contains(p.Thread.Task.CourseID)).Take(20);
+			var interactions = didache
+								.InteractionPosts
+									.Include("User")
+									.Include("Thread.Task.Course")
+								.Where(p => courseIDs.Contains(p.Thread.Task.CourseID))
+								.OrderByDescending(p => p.PostDate)
+								.Take(20);
 			foreach (InteractionPost post in interactions) {
 				items.Add(new InteractionActivity() { User = post.User, ActivityDate = post.PostDate, Post = post });
 			}
 
 
 			items.Sort(delegate(ActivityStreamItemBase a, ActivityStreamItemBase b) {
-				return a.ActivityDate.CompareTo(b.ActivityDate);
+				return -a.ActivityDate.CompareTo(b.ActivityDate);
 			});
 
 			return items;
