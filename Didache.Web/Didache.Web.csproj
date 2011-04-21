@@ -137,6 +137,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Content Include="js\admin.js" />
     <Content Include="js\jquery-1.5.2.min.js" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -191,12 +192,27 @@
     <Content Include="css\type.css" />
     <Content Include="js\jquery-1.5.js" />
     <Content Include="js\jquery-1.5.min.js" />
+    <Content Include="js\jquery-ui.min.js" />
     <Content Include="js\jquery.fileupload.js" />
+    <Content Include="js\ui-lightness\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="js\ui-lightness\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="js\ui-lightness\images\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="js\ui-lightness\images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="js\ui-lightness\images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="js\ui-lightness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="js\ui-lightness\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="js\ui-lightness\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="js\ui-lightness\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="js\ui-lightness\images\ui-icons_222222_256x240.png" />
+    <Content Include="js\ui-lightness\images\ui-icons_228ef1_256x240.png" />
+    <Content Include="js\ui-lightness\images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="js\ui-lightness\images\ui-icons_ffd27a_256x240.png" />
+    <Content Include="js\ui-lightness\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="js\ui-lightness\jquery-ui.css" />
     <Content Include="logout.aspx" />
     <Content Include="css\reset.css" />
     <Content Include="Global.asax" />
     <Content Include="js\jquery-ui.js" />
-    <Content Include="js\jquery-ui.min.js" />
     <Content Include="js\jquery.expander.js" />
     <Content Include="js\jquery.unobtrusive-ajax.js" />
     <Content Include="js\jquery.unobtrusive-ajax.min.js" />
@@ -229,7 +245,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\Community\Models\" />
     <Folder Include="Areas\Community\Views\Shared\" />
     <Folder Include="Areas\Students\Models\" />
@@ -383,6 +398,10 @@
     <Content Include="Areas\Community\Views\Community\Display.cshtml" />
     <Content Include="Areas\Community\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Community\Views\Community\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Courses\DialogLayout.cshtml" />
+    <Content Include="Areas\Admin\Views\Courses\DialogClose.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\DateTime.cshtml" />
+    <Content Include="Areas\Admin\Views\Courses\Copy of Units.cshtml" />
     <None Include="css\fonts\league\League_Gothic-webfont.eot" />
     <None Include="css\fonts\league\League_Gothic-webfont.ttf" />
     <None Include="css\fonts\league\League_Gothic-webfont.woff" />

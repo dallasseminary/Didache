@@ -14,6 +14,8 @@ namespace Didache {
 		public int FileID { get; set; }
 		public int GroupID { get; set; }
 		public int SortOrder { get; set; }
+		public DateTime DateAdded { get; set; }
+		public bool IsActive { get; set; }
 
 		public virtual CourseFileGroup CourseFileGroup { get; set; }
 		public virtual CourseFile CourseFile { get; set; }

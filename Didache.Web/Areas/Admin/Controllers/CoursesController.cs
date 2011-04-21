@@ -307,7 +307,8 @@ namespace Didache.Web.Areas.Admin.Controllers
 
 					db.SaveChanges();
 
-					return RedirectToAction("units", new { id = model.CourseID });
+					//return RedirectToAction("units", new { id = model.CourseID });
+					return View("DialogClose");
 				} catch (Exception ex) {
 					ModelState.AddModelError("", "Edit Failure, see inner exception: " + ex.ToString());
 				}
@@ -319,10 +320,12 @@ namespace Didache.Web.Areas.Admin.Controllers
 				if (ModelState.IsValid) {
 					db.Units.Add(model);
 					db.SaveChanges();
-					return RedirectToAction("units", new { id = model.CourseID });
+					//return RedirectToAction("units", new { id = model.CourseID });
 				} else {
-					return View(model);
+					//return View(model);
 				}
+
+				return View("DialogClose");
 			}
 
 		}
@@ -357,7 +360,8 @@ namespace Didache.Web.Areas.Admin.Controllers
 
 					db.SaveChanges();
 
-					return RedirectToAction("tasks", new { id = model.UnitID });					
+					//return RedirectToAction("tasks", new { id = model.UnitID });					
+					return View("DialogClose");
 				} catch (Exception ex) {
 					ModelState.AddModelError("", "Edit Failure, see inner exception: " + ex.ToString());
 				}
@@ -369,10 +373,12 @@ namespace Didache.Web.Areas.Admin.Controllers
 				if (ModelState.IsValid) {
 					db.Tasks.Add(model);
 					db.SaveChanges();
-					return RedirectToAction("tasks", new { id = model.UnitID });
+					//return RedirectToAction("tasks", new { id = model.UnitID });
 				} else {
-					return View(model);
+					//return View(model);
 				}
+
+				return View("DialogClose");
 			}
 
 		}

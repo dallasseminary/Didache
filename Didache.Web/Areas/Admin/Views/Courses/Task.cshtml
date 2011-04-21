@@ -1,13 +1,9 @@
 ﻿@model Didache.Task
 
 @{
+	Layout = "DialogLayout.cshtml";
 	ViewBag.Title = "Edit Task";
 }
-
-<h2>Edit Task</h2>
-
-<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
-<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
@@ -19,7 +15,7 @@
 		@Html.HiddenFor(model => model.CourseID)
 		@Html.HiddenFor(model => model.SortOrder)	
 	
-    <table id="admin-form">
+    <table class="admin-form">
       <tbody>
 	<tr>
 
@@ -93,7 +89,7 @@
             @Html.LabelFor(model => model.DueDate):
         </th>
         <td>
-            @Html.EditorFor(model => model.DueDate)
+            @Html.EditorFor(model => model.DueDate, new{@type="date",@class="date"})
             @Html.ValidationMessageFor(model => model.DueDate)
         </td>
 	</tr>
@@ -133,9 +129,3 @@
         </div>
     
 }
-
-
-<div class="back-to-list">
-    @Html.ActionLink("Back to Tasks", "Tasks")
-</div>
-

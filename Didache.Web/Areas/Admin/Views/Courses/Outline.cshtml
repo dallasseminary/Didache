@@ -4,68 +4,78 @@
 	ViewBag.Title = "Outline";
 }
 
-<style>
-.unit-tasks {
-	margin: 0 0 10px 10px;
-}
-.unit-header {
-	background: darkblue;
-	padding: 5px;
-}
+<h2>Course Outline</h2>
 
-.drag-handle {
-	width: 20px; 
-	height: 20px;
-	background: red;
-	display: inline-block;
+<div id="dialog"><iframe src="/admin/courses/unit/0" frameborder="0"></iframe></div>
 
-}
-#course-units, #course-units ol {
-	list-style-type: decimal;
-}
-#course-units li {
-	list-style-type: decimal;
-	margin: 0 0 0 20px;
-}
-</style>
-
-<h2>Outline</h2>
-
-<ol id="course-units" data-courseid="@ViewBag.Course.CourseID">
+<div id="course-units" data-courseid="@ViewBag.Course.CourseID" class="nested-list">
 	@foreach (Unit unit in Model) {
-	<li class="course-unit" data-unitid="@unit.UnitID">
-		<div class="unit-header">
+	<div class="course-unit nested-item" data-unitid="@unit.UnitID" >
+		<div class="unit-header nested-item-row">
 			<span class="unit-drag-handle drag-handle"></span>
 			<input type="checkbox" class="unit-active" @(unit.IsActive ? "checked=\"checked\"" : "") />
 			<input type="text" class="unit-name" value="@unit.Name" />
 
-			<input type="date" class="unit-start-date" value="@unit.StartDate.ToString("MM/dd/yyyy")" />
-			<input type="date" class="unit-start-end" value="@unit.EndDate.ToString("MM/dd/yyyy")" />
+			<input type="date" class="unit-start-date" value="@unit.StartDate.ToString("yyyy-MM-dd")" />
+			<input type="date" class="unit-start-end" value="@unit.EndDate.ToString("yyyy-MM-dd")" />
 
-			<a class="unit-edit" href="/admin/courses/unit/@unit.UnitID">Edit Unit</a>
+			<a class="unit-edit edit-link" href="/admin/courses/unit/@unit.UnitID">Edit</a>
+			<a class="unit-edit delete-link" href="/admin/courses/deleteunit/@unit.UnitID">Delete</a>
 		</div>
 
-		<ol class="course-tasks">
+		<div class="course-tasks nested-child-list">
 		@foreach (Task task in unit.Tasks) {
-			<li class="course-task" data-taskid="@task.TaskID">
+			<div class="course-task nested-child-item" data-taskid="@task.TaskID">
 				<span class="task-drag-handle drag-handle"></span>
 				<input type="checkbox" class="task-active" @(task.IsActive ? "checked=\"checked\"" : "") />
 				<input type="text" class="task-name" value="@task.Name" />
+				<span class="task-type">@task.TaskTypeName</span>
 	
-				<input type="date" class="task-due-date" value="@(task.DueDate.HasValue ? task.DueDate.Value.ToString("MM/dd/yyyy") : "")" />
+				<input type="date" class="task-due-date" value="@(task.DueDate.HasValue ? task.DueDate.Value.ToString("yyyy-MM-dd") : "")" />
 
 
-				<a class="task-edit" href="/admin/courses/task/@task.TaskID">Edit Task</a>
-			</li>
+				<a class="task-edit edit-link" href="/admin/courses/task/@task.TaskID">Edit</a>
+				<a class="task-edit delete-link" href="/admin/courses/deletetask/@task.TaskID">Delete</a>
+			</div>
 		  }		
-		</ol>
-	</li>
+		</div>
+	</div>
  }
 
-</ol>
+</div>
 
 
 <script>
+
+// dialog
+$('#dialog').dialog({
+    modal: true,
+    autoOpen: false,
+    height: '350',
+    width: '500',
+    draggable: true,
+    resizeable: true,   
+    title: 'Editor'
+});
+
+function openTask(taskID) {
+	$('#dialog iframe').attr('src','/admin/courses/task/' + taskID);
+	$('#dialog').dialog('open');
+}
+function openUnit(unitID) {
+	$('#dialog iframe').attr('src','/admin/courses/unit/' + unitID);
+	$('#dialog').dialog('open');
+}
+
+$('.unit-edit, .task-edit').click(function(e) {
+	e.preventDefault();
+
+	$('#dialog iframe').attr('src', $(this).attr('href'));
+	$('#dialog').dialog('open');
+
+	return false;
+});
+
 
 	// save tasks
 $('.course-task input').change(function () {

@@ -35,8 +35,9 @@
         padding: 0 0 5px 0;
     }
 
+
     .admin input[type=text] {
-	    border: 1px solid #ccc;
+	    /* border: 1px solid #ccc; */
 	    width: 200px;
 	    height: 18px;
     }
@@ -58,3 +59,82 @@
     .admin .back-to-list {
         padding: 30px 0 0 0;
     }
+    
+    
+/* nested lists for course, files, users */
+
+#dialog-container {
+	margin: 20px;
+}
+
+.drag-handle {
+	width: 20px; 
+	height: 20px;
+	background: red;
+	display: inline-block;
+	cursor: move;
+}
+
+.nested-list {
+}
+	.nested-item {
+		border: solid 1px #333;
+	}
+		.nested-item-row {
+			background: #bbb;
+			padding: 5px;
+			overflow:hidden;
+		}
+	
+		.nested-child-list {
+			padding: 0 0 0 30px;
+		}
+			.nested-child-item {
+				padding: 5px;
+				overflow:hidden;
+			}
+			.nested-child-item:nth-child(odd) {
+				background: #eee;
+			}
+.edit-link, .delete-link {
+	float: right;
+	padding: 5px;
+	margin: 0 0 0 5px;
+	display: inline-block;
+	border: solid 1px #666;
+	background: #fff;
+	text-decoration: none;
+	color: #555;
+}
+
+.delete-link {
+	color: #ff0000;
+}
+
+.nested-list input {
+	border-color: transparent;
+	background-color: transparent;
+}
+.nested-list input:hover, .nested-list input:focus {
+	border-color: #333;
+	background-color: #fff;
+}
+
+
+
+#dialog iframe {
+	width: 99%;
+	height: 99%;
+	border: 0;
+	padding: 0;
+	margin: 0;
+}
+
+/* admin tables */
+.admin-form {
+}
+
+.admin-form th{
+	text-align: right;
+	padding: 0 10px 0;
+}
