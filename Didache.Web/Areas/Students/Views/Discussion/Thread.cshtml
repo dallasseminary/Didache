@@ -9,7 +9,7 @@
 
 
 
-   <div id="breadcrumbs"><a href="/couses/@ViewContext.RouteData.Values["slug"]/schedule">@Model.Forum.Course.Name</a> &#9654; <a href="/courses/@ViewContext.RouteData.Values["slug"]/discussion/">@Model.Forum.Course.Name Discussion</a> &#9654; <a href="/courses/@ViewContext.RouteData.Values["slug"]/discussion/forum/@Model.Forum.ForumID">@Model.Forum.Name</a></div>
+   <div id="breadcrumbs"><a href="/courses/@ViewContext.RouteData.Values["slug"]/schedule">@Model.Forum.Course.Name</a> &#9654; <a href="/courses/@ViewContext.RouteData.Values["slug"]/discussion/">@Model.Forum.Course.Name Discussion</a> &#9654; <a href="/courses/@ViewContext.RouteData.Values["slug"]/discussion/forum/@Model.Forum.ForumID">@Model.Forum.Name</a></div>
 
     <table class="forum-posts">
         <thead>
@@ -36,8 +36,31 @@
 		    </th>
 		    <td>
 			    <div class="content">
-                       @Html.Raw(post.PostContentFormatted)
+                    @Html.Raw(post.PostContentFormatted)
 			    </div>
+                <div class="reply-link"><a href="#">Reply</a></div>
+                <div class="add-reply">
+                    <form class="forum-post-new" method="post" action="/courses/@ViewContext.RouteData.Values["slug"]/discussion/reply/@Model.ThreadID">
+	                    <input type="hidden" class="ThreadID" name="ThreadID" value="@Model.ThreadID" />
+	                    <input type="hidden" class="ForumID" name="ForumID" value="@Model.ForumID" />
+	                    <input type="hidden" class="ReplyToPostID" name="ReplyToPostID" value="@post.PostID" />
+					    <input type="hidden" class="Subject"name="Subject" value="RE: @post.Subject" />
+
+	                     <table style="width: 100%;">
+		                    <tbody>
+			                    <tr>
+				                    <td>Message</td>
+				                    <td>
+					                    <textarea id="PostContent" name="PostContent" cols="60" rows="5"></textarea>
+				                    </td>
+			                    </tr>
+		                    </tbody>
+	                     </table>
+
+	                     <input type="submit" value="Submit Reply" />
+
+                    </form>
+                </div>
 		    </td>
 	    </tr>
     }
@@ -70,3 +93,11 @@
 	     <input type="submit" value="Submit Reply" />
 
     </form>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+
+            $(".reply-link a").click().next().hide();
+
+        });
+    </script>

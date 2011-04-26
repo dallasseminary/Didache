@@ -312,6 +312,9 @@ span.icon.excel {
 .profile {
     
 } 
+    .profile .user-info {
+        overflow: hidden;
+    }
     .profile img {
         max-width: 175px;
     }
