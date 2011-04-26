@@ -38,15 +38,15 @@ namespace Didache {
 		[StringLength(100000)]
 		public string Description { get; set; }
 
-		[DataType(DataType.DateTime)]
+		//[DataType(DataType.DateTime)]
 		[Display(Name = "Submission Available")]
 		public DateTime? SubmissionAvailableDate { get; set; }
 
-		[DataType(DataType.DateTime)]
+		//[DataType(DataType.DateTime)]
 		[Display(Name = "Due")]
 		public DateTime? DueDate { get; set; }
 
-		[DataType(DataType.DateTime)]
+		//[DataType(DataType.DateTime)]
 		[Display(Name = "Instructions Available")]
 		public DateTime? InstructionsAvailableDate { get; set; }
 

@@ -25,9 +25,16 @@
     <div class="main">
         <div >
             <h2>What's Happening on MyDTS</h2>
-            <ul>
-           
-            </ul>
+
+			@{ var activities = ActivityStream.GetUsersItems();}
+
+			@foreach (ActivityStreamItemBase item in activities) {
+				<div class="activity">
+					<span class="activity-date">@item.ActivityDate</span>
+					<span class="activity-text">@Html.Raw(item.FormatActivity())</span>
+				</div>
+			} 
+
         </div>
     </div>
     <div class="side">

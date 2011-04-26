@@ -49,6 +49,11 @@ namespace Didache {
 		public DbSet<StudentFile> StudentFiles { get; set; }
 		public DbSet<GradedFile> GradedFiles { get; set; }
 
+
+		// grading
+		public DbSet<GradeGroup> GradeGroups { get; set; }
+		public DbSet<GradeItem> GradeItems { get; set; }
+
 		protected override void OnModelCreating(DbModelBuilder modelBuilder) {
 
 
@@ -131,6 +136,13 @@ namespace Didache {
 				.ToTable("oe_StudentFiles");
 			modelBuilder.Entity<GradedFile>()
 				.ToTable("oe_GradedFiles");
+
+
+			// grading system
+			modelBuilder.Entity<GradeGroup>()
+				.ToTable("oe_GradeGroups");
+			modelBuilder.Entity<GradeItem>()
+				.ToTable("oe_GradeItems");
 
 			// map example
 			/*

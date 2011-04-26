@@ -8,53 +8,28 @@
 	
 
 	<style>
-	.filegroup {
-		/*background: #ccc;*/
-		border: solid 3px #EEE; 
-		padding: 5px 0 0 5px;
-	}
+
 
 	.filegroup .files {
 		min-height: 40px;
-		margin: 0 0 0 40px;
-		border: solid 1px #DDD;
-		border-width: 1px 0 0 1px;
-		padding: 5px;
-		-webkit-border-radius: 4px 0 0 0;
-		   -moz-border-radius: 4px 0 0 0;
-		        border-radius: 4px 0 0 0;
-	}
-
-	.filegroup .files .coursefile {
-		padding: 2px;	
 	}
 
 	.filegroup .drag-handle {
-		display: inline-block;
-		background: #FF0000;
-		-webkit-border-radius: 3px;
-		   -moz-border-radius: 3px;
-		        border-radius: 3px;
-		width: 24px;
-		height: 24px;
+
 	}
-	    .filegroup .files .drag-handle {
-	        background: #FFF;
-	    }
-	    .filegroup .files .drag-handle img {
-	        margin: 4px;
-	    }
+
 
 	.filegroup .files .coursefile:nth-child(odd){
 		background: #eee;
 	}
+
 	.filegroup .files .coursefile .file-title {
 		display: inline-block;
-		width: 350px;
+		width: 300px;
 	}
 	.file-name {
 		display: inline-block;
-		width: 350px;
+		width: 300px;
 	}
 	.file-user {
 		display: inline-block;
@@ -70,16 +45,22 @@
 		cursor: pointer;
 		text-align: center;
 		color: #333;
-		font-weight: 700;
+		font-weight: bold;
 		-moz-border-radius: 10px;
 		-webkit-border-radius: 10px;
 		border-radius: 10px;
-		width: 200px;
+		
+		background: #eee;
+		border: 1px solid #999;
+		
 		height: 30px;
 		line-height: 30px;
+		margin: 5px 30px;
+	}
+	.upload:hover{
 		background: paleGreen;
 		border: 1px solid limeGreen;
-		margin: 0 0 10px 40px;
+		
 	}
 	.upload input {
 		position: absolute;
@@ -117,20 +98,31 @@ x add group
 - remove files
 -->
 
+
+<h2>Course Files</h2>
+
+<div id="dialog"><iframe src="javascript:void(0);" frameborder="0"></iframe></div>
+
+
 <div id="add-file-group">
-<input type="text" id="new-file-group-name" placeholder="Enter a group name..." />
-<input type="button" id="new-file-group-button" value="Add File Group" />
+	<input type="text" id="new-file-group-name" placeholder="Enter a group name..." />
+	<input type="button" id="new-file-group-button" value="Add File Group" />
 </div>
 
-<div id="filegroups" data-courseid="@ViewBag.Course.CourseID">
+<div id="filegroups" class="nested-list" data-courseid="@ViewBag.Course.CourseID">
 @foreach(CourseFileGroup group in Model) {
 	
-	<div class="filegroup" data-groupid="@group.GroupID">
-		<div class="group-header">
-            <span class="group-handle drag-handle"></span>
-		    <input class="group-name" value="@group.Name" />
-        </div>
+
+	<div class="filegroup nested-item" data-groupid="@group.GroupID" class="">
 		
+		<div class="nested-item-row">
+			<span class="group-handle drag-handle"></span>
+			<input class="group-name" value="@group.Name" />
+
+			<a class="filegroup-edit edit-link" href="/admin/courses/filegroup/@group.GroupID">Edit</a>
+			<a class="filegroup-delete delete-link" href="/admin/courses/deletefilegroup/@group.GroupID">Delete</a>
+		</div>
+
 		<div class="upload">
 			<form action="/admin/courses/fileupload/@ViewBag.Course.CourseID/" enctype="multipart/form-data" method="post">
 				<input type="file" name="file" multiple>
@@ -139,13 +131,17 @@ x add group
 			</form>
 		</div>
 		
-		<div class="files">
+		<div class="files nested-child-list">
 		@foreach (CourseFileAssociation cfa in group.CourseFileAssociations) {
-			<div class="coursefile" data-fileid="@cfa.FileID">
-				<span class="file-handle drag-handle"><img src="/css/images/@(cfa.CourseFile.FileType).png"></span>
+			<div class="coursefile nested-child-item" data-fileid="@cfa.FileID">
+				<span class="file-handle drag-handle"></span>
+				<img src="/css/images/@(cfa.CourseFile.FileType).png">
+
 				<span class="file-title">@cfa.CourseFile.Title</span>
-				<span class="file-name">@cfa.CourseFile.Filename</span>
 				<span class="file-user">@(cfa.CourseFile.User != null ? cfa.CourseFile.User.FullName : cfa.CourseFile.UserID.ToString())</span>
+				
+				<a class="file-edit edit-link" href="/admin/courses/file/@cfa.FileID">Edit</a>
+				<a class="file-delete delete-link" href="/admin/courses/deletefile/@cfa.FileID">Delete</a>
 			</div>
 		}	
 		</div>
@@ -156,11 +152,29 @@ x add group
 </div>
 
 <script>
-
-
-
 	$(function () {
 
+		// dialog
+		$('#dialog').dialog({
+			modal: true,
+			autoOpen: false,
+			height: '350',
+			width: '500',
+			draggable: true,
+			resizeable: true,
+			title: 'Editor'
+		});
+
+		$('.file-edit, .filegroup-edit').click(function (e) {
+			e.preventDefault();
+
+			$('#dialog iframe').attr('src', $(this).attr('href'));
+			$('#dialog').dialog('open');
+
+			return false;
+		});
+
+		
 		// add group
 		$('#new-file-group-button').click(function () {
 
