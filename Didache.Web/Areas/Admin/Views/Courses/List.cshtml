@@ -22,8 +22,6 @@
 		<th></th>
 		<th></th>
 		<th></th>
-		<th></th>
-		<th></th>
 	</tr>
 </thead>
 <tbody>
@@ -35,10 +33,10 @@
 		<td>@course.Name</td>
 		<td>@course.StartDate.ToString("MM/dd/yyyy")</td>
 		<td>@course.EndDate.ToString("MM/dd/yyyy")</td>
+		<td><a href="/admin/grading/@course.CourseID">gradebook</a></td>
+		<td><a href="/admin/courses/grading/@course.CourseID">grading</a></td>
 		<td><a href="/admin/courses/files/@course.CourseID">files</a></td>
 		<td><a href="/admin/courses/users/@course.CourseID">users</a></td>
-		<td><a href="/admin/grading/@course.CourseID">grading</a></td>
-		<td><a href="/admin/courses/groups/@course.CourseID">groups</a></td>
 		<td><a href="/admin/courses/outline/@course.CourseID">outline</a></td>
 		<td><a href="/admin/courses/edit/@course.SessionID">edit</a></td>
 	</tr>

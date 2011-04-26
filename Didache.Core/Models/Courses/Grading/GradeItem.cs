@@ -15,6 +15,7 @@ namespace Didache {
 
 		public int GradeGroupID { get; set; }
 		public int TaskID { get; set; }
+		public int SortOrder { get; set; }
 
 		public virtual Task Task { get; set; }
 	}

@@ -30,14 +30,6 @@ namespace Didache.Web.Areas.Admin.Controllers
 			return View("List", courses);
 		}
 
-		public ActionResult Groups(int id) {
-
-			List<CourseUserGroup> groups = Didache.Courses.GetCourseUserGroups(id);
-			ViewBag.Course = Courses.GetCourse(id);
-
-			return View(groups);
-		}
-
 
 		public ActionResult Units(int id) {
 
@@ -45,6 +37,16 @@ namespace Didache.Web.Areas.Admin.Controllers
 			ViewBag.Course = Courses.GetCourse(id);
 
 			return View(units);
+		}
+
+
+		public ActionResult Grading(int id) {
+
+			List<GradeGroup> gradeGroups = Didache.GradeGroups.GetCourseGradeGroups(id);
+			ViewBag.Course = Courses.GetCourse(id);
+			ViewBag.Tasks = Courses.GetTasks(id);
+
+			return View(gradeGroups);
 		}
 
 		public ActionResult Outline(int id) {

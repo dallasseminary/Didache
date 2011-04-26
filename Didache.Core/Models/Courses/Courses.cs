@@ -123,5 +123,14 @@ namespace Didache  {
 				return null;
 			}
 		}
+
+		public static List<Task> GetTasks(int courseID) {
+			return new DidacheDb()
+				.Tasks
+				.Where(t => t.Unit.CourseID == courseID)
+				.OrderBy(t => t.Unit.SortOrder)
+					.ThenBy(t => t.SortOrder)
+				.ToList();
+		}
 	}
 }
