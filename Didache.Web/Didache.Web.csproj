@@ -380,21 +380,22 @@
     <Content Include="Areas\Admin\Views\Courses\DialogLayout.cshtml" />
     <Content Include="Areas\Admin\Views\Courses\DialogClose.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\DateTime.cshtml" />
+    <Content Include="Areas\Admin\Views\Courses\Users.cshtml" />
     <None Include="css\fonts\league\League_Gothic-webfont.eot" />
     <None Include="css\fonts\league\League_Gothic-webfont.ttf" />
     <None Include="css\fonts\league\League_Gothic-webfont.woff" />
     <Content Include="Views\Account\EditProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_GlobalResources\labels.ar-AR.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>labels.ar-AR.Designer.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="App_GlobalResources\labels.es-MX.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>labels.es-MX.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\labels.ar-AR.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>labels.ar-AR.Designer.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
