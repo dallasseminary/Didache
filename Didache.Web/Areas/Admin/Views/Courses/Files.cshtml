@@ -9,6 +9,7 @@
 
 	<style>
 
+
 	.filegroup .files {
 		min-height: 40px;
 	}
@@ -79,6 +80,9 @@
 	.upload button {
 		display: none;
 	}
+	.ui-sortable-placeholder {
+	    background: #FAE661;
+	}
 	</style>
 }
 <!--	
@@ -108,6 +112,7 @@ x add group
 <div id="filegroups" class="nested-list" data-courseid="@ViewBag.Course.CourseID">
 @foreach(CourseFileGroup group in Model) {
 	
+
 	<div class="filegroup nested-item" data-groupid="@group.GroupID" class="">
 		
 		<div class="nested-item-row">

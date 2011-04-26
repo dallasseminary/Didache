@@ -313,7 +313,7 @@ span.icon.excel {
     
 } 
     .profile img {
-        max-width: 260px;
+        max-width: 175px;
     }
 
     .profile dl {
@@ -337,9 +337,12 @@ span.icon.excel {
             padding: 2px 0 12px 20px;
             border-bottom: 1px solid #CCC;
             display: block;
-            width: 350px;
+            width: 300px;
         }
         
+        .profile .block-list .block-list-item {
+            padding: 25px 30px 15px;
+        }
 /**
  * Breadcrumbs
  */
