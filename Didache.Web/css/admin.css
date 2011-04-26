@@ -80,6 +80,7 @@
 }
 
 .nested-list {
+	
 }
 	.nested-item {
 		border: solid 1px #333;
@@ -91,6 +92,7 @@
 		}
 	
 		.nested-child-list {
+			min-height: 150px;
 			margin: 0 0 0 30px;
 			border: solid 1px #333;
 			border-width: 1px 0 0 1px;
@@ -129,7 +131,14 @@
 	background-color: #fff;
 }
 
-
+.nested-main {
+	width: 700px;
+	float: left;
+}
+.nested-sub {
+	width: 240px;
+	float: right;	
+}
 
 #dialog iframe {
 	width: 99%;

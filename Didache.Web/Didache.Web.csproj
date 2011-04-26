@@ -90,21 +90,6 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_GlobalResources\labels.es-MX1.designer.cs">
-      <DependentUpon>labels.es-MX.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="App_GlobalResources\labels.zh-CN1.designer.cs">
-      <DependentUpon>labels.zh-CN.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="App_GlobalResources\labels.zh-TW1.designer.cs">
-      <DependentUpon>labels.zh-TW.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="App_GlobalResources\labels1.designer.cs">
       <DependentUpon>labels.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -252,12 +237,6 @@
     <Folder Include="uploads\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_GlobalResources\labels.es-MX.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>labels.es-MX1.designer.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="App_GlobalResources\labels.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>labels1.designer.cs</LastGenOutput>
@@ -401,10 +380,23 @@
     <Content Include="Areas\Admin\Views\Courses\DialogLayout.cshtml" />
     <Content Include="Areas\Admin\Views\Courses\DialogClose.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\DateTime.cshtml" />
+    <Content Include="Areas\Admin\Views\Courses\Users.cshtml" />
     <None Include="css\fonts\league\League_Gothic-webfont.eot" />
     <None Include="css\fonts\league\League_Gothic-webfont.ttf" />
     <None Include="css\fonts\league\League_Gothic-webfont.woff" />
     <Content Include="Views\Account\EditProfile.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\labels.es-MX.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>labels.es-MX.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\labels.ar-AR.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>labels.ar-AR.Designer.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

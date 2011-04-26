@@ -20,6 +20,12 @@ namespace Didache.Web.Areas.Admin {
 				"admin/{controller}/{action}/{id}",
 				new { controller = "Admin", action = "Index", id = UrlParameter.Optional }
 			);
+
+			context.MapRoute(
+				"Admin_default_2",
+				"admin/{controller}/{action}/{id}/{id2}",
+				new { controller = "Admin", action = "Index", id = UrlParameter.Optional, id2 = UrlParameter.Optional }
+			);
 		}
 	}
 }

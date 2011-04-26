@@ -55,6 +55,14 @@ namespace Didache.Web.Areas.Admin.Controllers
 			return View(units);
 		}
 
+		public ActionResult Users(int id) {
+
+			List<CourseUserGroup> userGroups = Didache.Courses.GetCourseUserGroups(id);
+			ViewBag.Course = Courses.GetCourse(id);
+
+			return View(userGroups);
+		}
+
 		[HttpPost]
 		public ActionResult UpdateTask(int id) {
 
@@ -186,7 +194,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 				file.SaveAs(filePath);
 
 				CourseFile courseFile = new CourseFile();
-				courseFile.UserID = Users.GetLoggedInUser().UserID;
+				courseFile.UserID = Didache.Users.GetLoggedInUser().UserID;
 				courseFile.UniqueID = uniqueID;
 				courseFile.ContentType = file.ContentType;
 				courseFile.Length = file.ContentLength;
@@ -220,7 +228,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 				filelength = (file != null) ? file.ContentLength : 0,
 				filename = originalFilename,
 				title = title,
-				user = Users.GetLoggedInUser().FullName
+				user = Didache.Users.GetLoggedInUser().FullName
 			};
 
 			return Json(returnObject);

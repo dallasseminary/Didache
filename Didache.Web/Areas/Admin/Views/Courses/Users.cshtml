@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Didache.CourseUserGroup>
+
+@{
+    ViewBag.Title = ViewBag.Course.ToString() + " Users";
+}
+<h2>@ViewBag.Course.ToString() Users</h2>
+
+<div class="nested-main">
+
+<div id="course-users" data-courseid="@ViewBag.Course.CourseID" class="nested-list">
+	@foreach (CourseUserGroup group in Model) {
+	<div class="course-group nested-item" data-unitid="@group.GroupID" >
+		<div class="group-header nested-item-row">
+			<input type="text" class="unit-name" value="@group.Name" />
+
+			<a class="group-edit edit-link" href="/admin/courses/group/@group.GroupID">Edit</a>
+			<a class="group-delete delete-link" href="/admin/courses/deletegroup/@group.GroupID">Delete</a>
+		</div>
+
+		<div class="group-users nested-child-list">
+		@foreach (CourseUser user in group.Students) {
+			if (user.User != null) {
+			<div class="course-user nested-child-item" data-taskid="@user.UserID">
+				<span class="user-drag-handle drag-handle"></span>
+				
+				<span class="user-name">@user.User.FormattedNameLastFirst</span>
+
+				<span class="user-id">@user.UserID</span>
+	
+				<a class="task-edit delete-link" href="/admin/courses/removeuser/@ViewBag.Course.CourseID/@user.UserID">Remove</a>
+			
+			</div>
+	  }
+  }		
+		</div>
+	</div>
+ }
+
+</div>
+
+</div>
+
+<div class="nested-sub">
+	<h3>Find USers</h3>
+</div>
