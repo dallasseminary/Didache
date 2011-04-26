@@ -115,35 +115,39 @@
 <table class="grading-grid">
 	<thead>
 		<tr>
-		<% int lastUnitID = 0; %>
-		<% foreach (Task t in ViewBag.AllTasks) { %>
-			<%= (lastUnitID != t.UnitID) ? "<th><span><span class=\"unit\"><span>Unit " + t.Unit.SortOrder + "</span></span></span></th>" : ""%>
-			<% lastUnitID = t.UnitID; %>
-			<th><span><span><span><%= t.Unit.SortOrder + "-" + t.SortOrder + " - " + ((t.Name.Length > 15) ? t.Name.Substring(0, 15) + "..." : t.Name)%></span></span></span></th>
-		<% } %>
+		@{ int lastUnitID = 0; }
+		@foreach (Task t in ViewBag.AllTasks) {
+			if (lastUnitID != t.UnitID) {
+				<th><span><span class="unit"><span>Unit @t.Unit.SortOrder</span></span></span></th>
+			}
+			lastUnitID = t.UnitID;	
+			<th><span><span><span>@t.Unit.SortOrder-@t.SortOrder - @((t.Name.Length > 15) ? t.Name.Substring(0, 15) + "..." : t.Name)</span></span></span></th>
+		}
 		</tr>
 	</thead>
 	<tbody>
 	
-	<%	
+	@{
 		int lastUserID = 0; 
 		lastUnitID = 0; 
-	%>
-
-	<% foreach (UserTaskData d in ViewBag.AllUserTaskData) { %>
+	}
 	
-		<%= (lastUserID != d.UserID) ? "<tr>" : "" %>
+	@foreach (UserTaskData d in ViewBag.AllUserTaskData) {
+	
+		if (lastUserID != d.UserID) {
+			<text><tr></text>
+		}
 		
-		<%= (lastUnitID != d.Task.UnitID) ? "<th>" + ((d.Profile != null) ? d.Profile.FormattedName : d.UserID.ToString()) + "</th>" : ""%>
+		if (lastUnitID != d.Task.UnitID) {
+			<th>@((d.Profile != null) ? d.Profile.FormattedName : d.UserID.ToString())</th>
+		}
 
-		<td><input type="text" style="width:30px;" value="<%= d.NumericGrade %>" data-userid="<%= d.UserID %>" data-taskid="<%= d.TaskID %>" /></td>
+		<td><input type="text" style="width:30px;" value="@d.NumericGrade" data-userid="@d.UserID" data-taskid="@d.TaskID" /></td>
 
-		<% 
-	  lastUserID = d.UserID;
-	  lastUnitID = d.Task.UnitID;
-	  %>
+		lastUserID = d.UserID;
+		lastUnitID = d.Task.UnitID;
 	
-	<% } %>
+	}
 	</tbody>
 </table>
 

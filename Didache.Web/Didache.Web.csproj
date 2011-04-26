@@ -290,9 +290,6 @@
     <Content Include="Areas\Admin\Views\Courses\Task.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\Courses\Groups.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Areas\Admin\Views\Grading\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -381,6 +378,7 @@
     <Content Include="Areas\Admin\Views\Courses\DialogClose.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\DateTime.cshtml" />
     <Content Include="Areas\Admin\Views\Courses\Users.cshtml" />
+    <Content Include="Areas\Admin\Views\Courses\Grading.cshtml" />
     <None Include="css\fonts\league\League_Gothic-webfont.eot" />
     <None Include="css\fonts\league\League_Gothic-webfont.ttf" />
     <None Include="css\fonts\league\League_Gothic-webfont.woff" />
