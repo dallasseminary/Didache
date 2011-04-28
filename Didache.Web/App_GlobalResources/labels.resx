@@ -225,7 +225,7 @@
   <data name="homemenu_message" xml:space="preserve">
     <value>This is the home page where all your stuff should be</value>
   </data>
-  <data name="home_dashboard_heading_coursesresources" xml:space="preserve">
+  <data name="home_dashboard_heading_courseresources" xml:space="preserve">
     <value>Course Resources</value>
   </data>
   <data name="home_dashboard_heading_stream" xml:space="preserve">
@@ -329,5 +329,14 @@
   </data>
   <data name="tabs_tour" xml:space="preserve">
     <value>Tour</value>
+  </data>
+  <data name="home_dashboard_heading_onlineedresources" xml:space="preserve">
+    <value>Online Education Resources</value>
+  </data>
+  <data name="home_dashboard_li_downloadallfiles" xml:space="preserve">
+    <value>Download all files (current courses)</value>
+  </data>
+  <data name="home_dashboard_li_downloadcalendar" xml:space="preserve">
+    <value>Download your term calendar</value>
   </data>
 </root>
