@@ -225,6 +225,15 @@
   <data name="homemenu_message" xml:space="preserve">
     <value>This is the home page where all your stuff should be</value>
   </data>
+  <data name="home_dashboard_heading_coursesresources" xml:space="preserve">
+    <value>Course Resources</value>
+  </data>
+  <data name="home_dashboard_heading_stream" xml:space="preserve">
+    <value>What's Happening on MyDTS</value>
+  </data>
+  <data name="home_dashboard_heading_upcoming" xml:space="preserve">
+    <value>Upcoming</value>
+  </data>
   <data name="index_title" xml:space="preserve">
     <value>Index Page</value>
   </data>

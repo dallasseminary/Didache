@@ -10,8 +10,7 @@
 <div id="dashboard">
     <div class="side">
         <div>
-            <h3>Upcoming</h3>
-			
+            <h3>@Resources.labels.home_dashboard_heading_upcoming</h3>
 			
 			@foreach (UserTaskData task in Courses.GetImportantTasksForUser()) {
 		    <div class="due-soon">
@@ -24,7 +23,7 @@
     </div>
     <div class="main">
         <div >
-            <h2>What's Happening on MyDTS</h2>
+            <h2>@Resources.labels.home_dashboard_heading_stream</h2>
 
 			@{ var activities = ActivityStream.GetUsersItems();}
 
@@ -39,7 +38,7 @@
     </div>
     <div class="side">
         <div>
-            <h3>Course Resources</h3>
+            <h3>@Resources.labels.home_dashboard_heading_courseresources</h3>
             <ul>
                 <li>Download your term calendar</li>
                 <li><span class="icon compressed">Download all files (current courses)</span></li>
@@ -58,7 +57,7 @@
                     </ul>
                 </li>
                 <li><a href="http://library.dts.edu/Pages/RM/Write/turabian_sup.pdf">Turabian Format Tutorial</a></li>
-            <ul>
+            </ul>
         </div>
     </div>
     <div class="clear"></div>
