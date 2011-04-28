@@ -339,4 +339,25 @@
   <data name="home_dashboard_li_downloadcalendar" xml:space="preserve">
     <value>Download your term calendar</value>
   </data>
+  <data name="home_dashboard_heading_bibsoftware" xml:space="preserve">
+    <value>Bibliography Software</value>
+  </data>
+  <data name="home_dashboard_li_endnote" xml:space="preserve">
+    <value>EndNote</value>
+  </data>
+  <data name="home_dashboard_li_msword" xml:space="preserve">
+    <value>Microsoft Word Compatibility Pack</value>
+  </data>
+  <data name="home_dashboard_li_openoffice" xml:space="preserve">
+    <value>OpenOffice.org</value>
+  </data>
+  <data name="home_dashboard_li_styleease" xml:space="preserve">
+    <value>StyleEase</value>
+  </data>
+  <data name="home_dashboard_li_turabianformattutorial" xml:space="preserve">
+    <value>Turabian Format Tutorial</value>
+  </data>
+  <data name="home_dashboard_li_zotero" xml:space="preserve">
+    <value>Zotero (free)</value>
+  </data>
 </root>
