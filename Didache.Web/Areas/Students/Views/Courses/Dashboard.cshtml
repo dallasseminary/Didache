@@ -9,7 +9,7 @@
 @{ Html.RenderPartial("CourseMenu"); }
 
 <div id="main-column">
-    <div class="block-list-header"><h3>Upcoming...</h3></div>
+    <div class="block-list-header"><h3>@Resources.labels.courses_heading_upcoming</h3></div>
     <div class="block-list">
 
 	
@@ -62,7 +62,7 @@
 </div>
 <div id="sub-column">
     <div id="course-description-header" class="header">
-        <h4>Course Description</h4>
+        <h4>@Resources.labels.courses_heading_coursedesc</h4>
     </div>
     <div class="list">
         <p>@Html.Raw(Model.Description)</p>

@@ -360,4 +360,13 @@
   <data name="home_dashboard_li_zotero" xml:space="preserve">
     <value>Zotero (free)</value>
   </data>
+  <data name="courses_heading_assignments" xml:space="preserve">
+    <value>Assignments</value>
+  </data>
+  <data name="courses_heading_coursedesc" xml:space="preserve">
+    <value>Course Description</value>
+  </data>
+  <data name="courses_heading_upcoming" xml:space="preserve">
+    <value>Upcoming...</value>
+  </data>
 </root>
