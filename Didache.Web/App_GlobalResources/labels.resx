@@ -225,6 +225,15 @@
   <data name="homemenu_message" xml:space="preserve">
     <value>This is the home page where all your stuff should be</value>
   </data>
+  <data name="home_dashboard_heading_courseresources" xml:space="preserve">
+    <value>Course Resources</value>
+  </data>
+  <data name="home_dashboard_heading_stream" xml:space="preserve">
+    <value>What's Happening on MyDTS</value>
+  </data>
+  <data name="home_dashboard_heading_upcoming" xml:space="preserve">
+    <value>Upcoming</value>
+  </data>
   <data name="index_title" xml:space="preserve">
     <value>Index Page</value>
   </data>
@@ -320,5 +329,59 @@
   </data>
   <data name="tabs_tour" xml:space="preserve">
     <value>Tour</value>
+  </data>
+  <data name="home_dashboard_heading_onlineedresources" xml:space="preserve">
+    <value>Online Education Resources</value>
+  </data>
+  <data name="home_dashboard_li_downloadallfiles" xml:space="preserve">
+    <value>Download all files (current courses)</value>
+  </data>
+  <data name="home_dashboard_li_downloadcalendar" xml:space="preserve">
+    <value>Download your term calendar</value>
+  </data>
+  <data name="home_dashboard_heading_bibsoftware" xml:space="preserve">
+    <value>Bibliography Software</value>
+  </data>
+  <data name="home_dashboard_li_endnote" xml:space="preserve">
+    <value>EndNote</value>
+  </data>
+  <data name="home_dashboard_li_msword" xml:space="preserve">
+    <value>Microsoft Word Compatibility Pack</value>
+  </data>
+  <data name="home_dashboard_li_openoffice" xml:space="preserve">
+    <value>OpenOffice.org</value>
+  </data>
+  <data name="home_dashboard_li_styleease" xml:space="preserve">
+    <value>StyleEase</value>
+  </data>
+  <data name="home_dashboard_li_turabianformattutorial" xml:space="preserve">
+    <value>Turabian Format Tutorial</value>
+  </data>
+  <data name="home_dashboard_li_zotero" xml:space="preserve">
+    <value>Zotero (free)</value>
+  </data>
+  <data name="courses_heading_archivedcourses" xml:space="preserve">
+    <value>Archived Courses</value>
+  </data>
+  <data name="courses_heading_assignments" xml:space="preserve">
+    <value>Assignments</value>
+  </data>
+  <data name="courses_heading_coursedesc" xml:space="preserve">
+    <value>Course Description</value>
+  </data>
+  <data name="courses_heading_coursefiles" xml:space="preserve">
+    <value>Course Files</value>
+  </data>
+  <data name="courses_heading_courseroster" xml:space="preserve">
+    <value>Course Roster</value>
+  </data>
+  <data name="courses_heading_units" xml:space="preserve">
+    <value>Units</value>
+  </data>
+  <data name="courses_heading_upcoming" xml:space="preserve">
+    <value>Upcoming...</value>
+  </data>
+  <data name="courses_label_gradedfiles" xml:space="preserve">
+    <value>Graded Files</value>
   </data>
 </root>

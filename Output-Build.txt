@@ -1,0 +1,5 @@
+﻿------ Build started: Project: Didache, Configuration: Debug Any CPU ------
+  Didache -> C:\onlineed\Didache\Didache.Core\bin\Debug\Didache.dll
+------ Build started: Project: Didache.Web, Configuration: Debug Any CPU ------
+  Didache.Web -> C:\onlineed\Didache\Didache.Web\bin\Didache.Web.dll
+========== Build: 2 succeeded or up-to-date, 0 failed, 0 skipped ==========

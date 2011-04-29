@@ -1,7 +1,7 @@
 ﻿@model Course
 
 @{
-    ViewBag.Title = Model.CourseCode + Model.Section + " " + Resources.labels.coursetabs_roster;
+	ViewBag.Title = Model.CourseCode + Model.Section + " " + Resources.labels.courses_heading_courseroster;
     List<CourseUserGroup> groups = ViewBag.UserGroups;
 }
 
@@ -10,7 +10,7 @@
 @{ Html.RenderPartial("CourseMenu"); }
 
 <div id="main-column">
-    <div class="block-list-header"><h3>Course Roster</h3></div>
+    <div class="block-list-header"><h3>@Resources.labels.courses_heading_courseroster</h3></div>
 	<div id="course-roster" class="block-list">
 
 	@foreach (Didache.CourseUserGroup group in ViewBag.UserGroups) {

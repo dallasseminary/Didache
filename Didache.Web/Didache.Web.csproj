@@ -122,6 +122,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Content Include="App_Data\DTS_webdata.mdf" />
+    <Content Include="App_Data\DTS_webdata_log.ldf">
+      <DependentUpon>DTS_webdata.mdf</DependentUpon>
+    </Content>
+    <Content Include="App_GlobalResources\readme.txt" />
     <Content Include="js\admin.js" />
     <Content Include="js\jquery-1.5.2.min.js" />
     <Compile Include="Properties\AssemblyInfo.cs" />
