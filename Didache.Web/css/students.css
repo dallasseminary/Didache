@@ -632,8 +632,10 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
 		margin-bottom: 8px;
 		display: inline-block;
 	}
+	.forum-posts .content {
+	    margin-bottom: 15px;
+	}
 .add-post-outer {
-    display: none;
     position: fixed;
     height: 100%;
     width: 100%;
@@ -657,15 +659,31 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
     border: 1px solid #999;
     box-shadow: 0 0 10px #999;
 }
+.reply-link, .thread-link {
+    display: none;
+    margin: 0 0 15px 0;
+}
+.reply-link a, .thread-link a {
+    display: block;
+    float: left;
+    padding: 5px 10px;
+    background: #194e76;
+    color: #FFF;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+}
 .add-reply {
-    display:none;
     overflow: hidden;
+    margin-top: 10px;
+    clear: both;
 }
 .add-reply form.forum-post-new {
     height: auto;
 }
 form.forum-post-new {
     background: #DEDEDE;
+    border: 1px solid #BBB;
     padding: 10px;
     width: 640px;
     height: 300px;
@@ -684,14 +702,20 @@ form.forum-post-new {
     form.forum-post-new textarea {
         padding: 4px;
         font-size: 13px;
+        margin: auto auto;
     }
     form.forum-post-new input[type="submit"] 
     {
-        margin: 0 auto;
+        margin: 8px auto;
         display: block;
         width: 200px;
     }
 
+a.cancel-thread {
+    position: absolute;
+    top: 20px;
+    right: 20px;   
+}
 
 .task-submit {
 	color: #fff;
@@ -712,20 +736,21 @@ form.forum-post-new {
 
 .task-interactions {
 	margin: 10px 0 0 0;
-	border: 1px solid #194e76;
+	/*border: 1px solid #194e76;*/
 }
     .task-interactions-header {
         background: #194e76;
         padding: 5px;
         color: #FFF;
         font-weight: bold;
+        margin-bottom: 4px;
     }
 	.task-interaction {
 		padding: 5px 0;
 		width: 520px;
 	}
 	.task-interaction-thread {
-	    padding: 0;		
+	    margin-bottom: 4px;	
 		background: #eee;
 		overflow: hidden;
 	}
@@ -738,19 +763,23 @@ form.forum-post-new {
 		border-bottom: #99B0C0 1px solid;
 	}	
 	.task-interactions .user {
-		width: 300px;
+		width: 265px;
 		margin-right: 8px;
 		float: left;
 		display: block;
 		font-weight: bold;
 	}		
 	.task-interactions .date {
-		width: 60px;
+		width: 75px;
 		float: left;
 		display: block;
 		margin-right: 15px;
 		text-align: right;
 	}		
+	.task-interaction-list {
+	    border: 4px solid #BBB;
+	    border-width: 0 4px 4px 4px;	
+	}
 	.task-interactions .task-interaction-header .date, .task-interaction .post-date {
 	    color: #666;
 	    font-style: italic;
@@ -828,8 +857,8 @@ form.forum-post-new {
 	    
 	.task-interactions .task-interaction-thread .thread-starter {
 		background: #FFF;
-		border-top: 2px solid #BBB;
-		border-bottom: 2px solid #BBB;
+		border-top: 1px solid #BBB;
+		border-bottom: 1px solid #BBB;
 	}
 	    
 	.task-interactions .task-interaction-thread .thread-starter .user-info img {

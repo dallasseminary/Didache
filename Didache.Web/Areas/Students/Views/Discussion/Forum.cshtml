@@ -8,6 +8,9 @@
 @{Html.RenderPartial("CourseMenu"); }
 
 <div id="breadcrumbs"><a href="/courses/@ViewContext.RouteData.Values["slug"]/schedule">@Model.Course.Name</a> &#9654; <a href="/courses/@ViewContext.RouteData.Values["slug"]/discussion/">@Model.Course.Name Discussion</a></div>
+
+<div class="thread-link"><a href="javascript:void(0)">Add Thread</a><div class="clear"></div></div>
+<div class="clear"></div>
 <table class="forum-threads">
 	<thead>
 		<tr>
@@ -27,29 +30,62 @@
 }
 </tbody>
 </table>
-<div class="add-post-outer"><div class="add-post">
-    <form class="forum-post-new" method="post" action="/courses/@ViewContext.RouteData.Values["slug"]/discussion/createpost">
-        <h2>Add a New Thread</h2>
-	     <input type="hidden" id="ForumID" name="ForumID" value="@Model.ForumID" />
+<div class="thread-link"><a href="javascript:void(0)">Add Thread</a></div>
+<div id="add-post">
+    <div>
+        <form class="forum-post-new" method="post" action="/courses/@ViewContext.RouteData.Values["slug"]/discussion/createpost">
+            <h2>Add a New Thread</h2>
+            <a class="cancel-thread" href="javascript:void(0)">Cancel</a>
+	        <input type="hidden" id="ForumID" name="ForumID" value="@Model.ForumID" />
 
-	     <table style="width: 100%;">
-		    <tbody>
-			    <tr>
-				    <td>Subject</td>
-				    <td>
-					    <input type="text" id="Subject" size="60" name="Subject" value="" />					
-				    </td>
-			    </tr>
-			    <tr>
-				    <td>Message</td>
-				    <td>
-					    <textarea id="PostContent" name="PostContent" cols="60" rows="5"></textarea>
-				    </td>
-			    </tr>
-		    </tbody>
-	     </table>
+	        <table style="width: 100%;">
+		        <tbody>
+			        <tr>
+				        <td>Subject</td>
+				        <td>
+					        <input type="text" id="Subject" size="60" name="Subject" value="" />					
+				        </td>
+			        </tr>
+			        <tr>
+				        <td>Message</td>
+				        <td>
+					        <textarea id="PostContent" name="PostContent" cols="60" rows="5"></textarea>
+				        </td>
+			        </tr>
+		        </tbody>
+	        </table>
 
-	     <input type="submit" value="Submit Reply" />
+	         <input type="submit" value="Create Thread" />
 
-    </form>
-</div></div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $(".thread-link").show();
+
+        $("#add-post").hide().addClass("add-post-outer");
+        $(".add-post-outer > div").addClass("add-post");
+
+        $(".thread-link a").click(function () {
+            $("#add-post").fadeIn("slow");
+        });
+
+        var in_add_post = false;
+        $(".add-post").hover(function () {
+            in_add_post = true;
+        }, function () {
+            in_add_post = false;
+        });
+
+        $("a.cancel-thread").click(function () {
+            $("#add-post").fadeOut("slow");
+        });
+        $("body").mouseup(function () {
+            if (!in_add_post) $('#add-post').fadeOut("slow");
+        });
+
+
+    });
+</script>

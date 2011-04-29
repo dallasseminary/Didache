@@ -71,7 +71,7 @@
 	display: inline-block;
 	cursor: move;
 		
-	background: #FF0000;
+	background: #FFF url(images/icons/drag-handle.jpg) top left no-repeat;
 	-webkit-border-radius: 3px;
 		-moz-border-radius: 3px;
 		    border-radius: 3px;
@@ -83,19 +83,36 @@
 	
 }
 	.nested-item {
-		border: solid 1px #333;
+		/*border: solid 1px #333;*/
+		margin-bottom: 20px;
+		background: #fff;
+		border: 1px solid #BBB;
+		border-width: 0 1px 1px 1px;
+	}
+	.ui-sortable-placeholder {
+		box-shadow: 2px 5px 4px #aaa;
 	}
 		.nested-item-row {
 			background: #bbb;
 			padding: 5px;
 			overflow:hidden;
 		}
+        .nested-item-row > span, .nested-child-item > span {
+            display: inline-block;
+            float: left;
+        }
+        .nested-item-row .name{
+            width: 600px;
+        }
+        .nested-child-item .name {
+                width: 570px;
+        }
 	
 		.nested-child-list {
-			min-height: 150px;
+			/*min-height: 100px;*/
 			margin: 0 0 0 30px;
 			border: solid 1px #333;
-			border-width: 1px 0 0 1px;
+			border-width: 0 /*1px 0 0 1px*/;
 			-webkit-border-radius: 4px 0 0 0;
 			   -moz-border-radius: 4px 0 0 0;
 					border-radius: 4px 0 0 0;			
@@ -103,6 +120,7 @@
 			.nested-child-item {
 				padding: 5px;
 				overflow:hidden;
+		        background: #fff;
 			}
 			.nested-child-item:nth-child(odd) {
 				background: #eee;
@@ -113,6 +131,10 @@
 	margin: 0 0 0 5px;
 	display: inline-block;
 	border: solid 1px #666;
+	-webkit-border-radius: 4px;
+	   -moz-border-radius: 4px;
+	        border-radius: 4px;
+	font-weight: bold;
 	background: #fff;
 	text-decoration: none;
 	color: #555;
@@ -125,6 +147,23 @@
 .nested-list input {
 	border-color: transparent;
 	background-color: transparent;
+}
+.nested-list input[type="checkbox"] {
+    padding: 4px;
+    margin: 6px;   
+    vertical-align: top;
+}
+.nested-list .name input[type="text"] {
+    width: 525px;
+}
+.nested-list .user-name, .nested-list .user-id {
+    width: 200px;
+    margin: 5px 10px;
+}
+.nested-list .task-type, .nested-list input[type="date"] {
+    width: 95px;
+    margin-right: 10px;
+    display: inline-block;
 }
 .nested-list input:hover, .nested-list input:focus {
 	border-color: #333;
