@@ -1,11 +1,11 @@
 ﻿@model List<Didache.Course>
 
 @{
-	ViewBag.Title = Resources.labels.coursemenu_archived_courses;
+	ViewBag.Title = Resources.labels.courses_heading_archivedcourses;
 }
 
 <div id="main-column">
-    <div class="block-list-header"><h3>Archived Courses</h3></div>
+    <div class="block-list-header"><h3>@Resources.labels.courses_heading_archivedcourses</h3></div>
     <div class="block-list">
             @foreach (Session session in Didache.Sessions.GetSessions())
             {

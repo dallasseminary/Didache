@@ -360,13 +360,28 @@
   <data name="home_dashboard_li_zotero" xml:space="preserve">
     <value>Zotero (free)</value>
   </data>
+  <data name="courses_heading_archivedcourses" xml:space="preserve">
+    <value>Archived Courses</value>
+  </data>
   <data name="courses_heading_assignments" xml:space="preserve">
     <value>Assignments</value>
   </data>
   <data name="courses_heading_coursedesc" xml:space="preserve">
     <value>Course Description</value>
   </data>
+  <data name="courses_heading_coursefiles" xml:space="preserve">
+    <value>Course Files</value>
+  </data>
+  <data name="courses_heading_courseroster" xml:space="preserve">
+    <value>Course Roster</value>
+  </data>
+  <data name="courses_heading_units" xml:space="preserve">
+    <value>Units</value>
+  </data>
   <data name="courses_heading_upcoming" xml:space="preserve">
     <value>Upcoming...</value>
+  </data>
+  <data name="courses_label_gradedfiles" xml:space="preserve">
+    <value>Graded Files</value>
   </data>
 </root>
