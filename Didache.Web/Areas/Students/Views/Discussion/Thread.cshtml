@@ -38,7 +38,8 @@
 			    <div class="content">
                     @Html.Raw(post.PostContentFormatted)
 			    </div>
-                <div class="reply-link"><a href="#">Reply</a></div>
+                <div class="reply-link"><a rel="#replyto@(post.PostID)" href="javascript:void(0)">Reply</a><div class="clear"></div></div>
+
                 <div class="add-reply">
                     <form class="forum-post-new" method="post" action="/courses/@ViewContext.RouteData.Values["slug"]/discussion/reply/@Model.ThreadID">
 	                    <input type="hidden" class="ThreadID" name="ThreadID" value="@Model.ThreadID" />
@@ -46,16 +47,9 @@
 	                    <input type="hidden" class="ReplyToPostID" name="ReplyToPostID" value="@post.PostID" />
 					    <input type="hidden" class="Subject"name="Subject" value="RE: @post.Subject" />
 
-	                     <table style="width: 100%;">
-		                    <tbody>
-			                    <tr>
-				                    <td>Message</td>
-				                    <td>
-					                    <textarea id="PostContent" name="PostContent" cols="60" rows="5"></textarea>
-				                    </td>
-			                    </tr>
-		                    </tbody>
-	                     </table>
+                        <h4>Reply to @(post.User.NickName.IsEmpty() ? post.User.FirstName : post.User.NickName) @(post.User.LastName.Substring(0, 1) + ".")</h4>
+
+				         <textarea id="replyto@(post.PostID)" name="PostContent" cols="78" rows="5"></textarea>
 
 	                     <input type="submit" value="Submit Reply" />
 
@@ -95,9 +89,17 @@
     </form>
 
     <script type="text/javascript">
-        jQuery(document).ready(function($) {
+        jQuery(document).ready(function ($) {
+            $(".reply-link").show();
+            $(".add-reply").hide();
 
-            $(".reply-link a").click().next().hide();
+            $(".reply-link a").toggle(function () {
+                $(this).parent().next(".add-reply").slideDown("slow");
+                $(this).text("Cancel Reply");
+            }, function () {
+                $(this).parent().next(".add-reply").slideUp("slow");
+                $(this).text("Reply");
+            });
 
         });
     </script>

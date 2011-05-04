@@ -60,14 +60,22 @@
         $("ul.all-community li a[rel='slider']").click(function () {
             var t = 300;
 
-            // close any open ones
-            $("ul.all-community li.selected img").animate({ height: 32 }, t);
-            $("ul.all-community li.selected").removeClass("selected", t);
+            if ($(this).parent().hasClass("selected")) {
 
-            // open the clicked on
-            $(this).parent().addClass("selected", t);
-            $(this).parent().find("img").animate({ height: 150 }, t);
+                $(this).parent().find("img").animate({ height: 32 }, t);
+                $(this).parent().removeClass("selected", t);
 
+            } else {
+
+                // close any open ones
+                $("ul.all-community li.selected img").animate({ height: 32 }, t);
+                $("ul.all-community li.selected").removeClass("selected", t);
+
+                // open the clicked on
+                $(this).parent().addClass("selected", t);
+                $(this).parent().find("img").animate({ height: 150 }, t);
+
+            }
         });
 
     });

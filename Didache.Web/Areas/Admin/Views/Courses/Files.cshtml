@@ -9,15 +9,29 @@
 
 	<style>
 
-
+    #add-file-group {
+        overflow: hidden;
+        margin-bottom: 10px;
+    }
+    
+        .admin #add-file-group input {
+            padding: 3px;
+            font-size: 14px;
+            width: 400px;
+        }
+        
 	.filegroup .files {
 		min-height: 40px;
 	}
 
-	.filegroup .drag-handle {
-
+	.filegroup .nested-item-row > .drag-handle {
+        background: url(/css/images/icons/filegroup.png) top left no-repeat;
 	}
-
+    
+    .filegroup .file-handle img {
+        background: #FFF;
+        padding: 4px;
+    }
 
 	.filegroup .files .coursefile:nth-child(odd){
 		background: #eee;
@@ -55,7 +69,7 @@
 		
 		height: 30px;
 		line-height: 30px;
-		margin: 5px 30px;
+		margin: 5px 5px 5px 30px;
 	}
 	.upload:hover{
 		background: paleGreen;
@@ -134,8 +148,8 @@ x add group
 		<div class="files nested-child-list">
 		@foreach (CourseFileAssociation cfa in group.CourseFileAssociations) {
 			<div class="coursefile nested-child-item" data-fileid="@cfa.FileID">
-				<span class="file-handle drag-handle"></span>
-				<img src="/css/images/@(cfa.CourseFile.FileType).png">
+				<span class="file-handle drag-handle"><img src="/css/images/@(cfa.CourseFile.FileType).png"></span>
+				
 
 				<span class="file-title">@cfa.CourseFile.Title</span>
 				<span class="file-user">@(cfa.CourseFile.User != null ? cfa.CourseFile.User.FullName : cfa.CourseFile.UserID.ToString())</span>

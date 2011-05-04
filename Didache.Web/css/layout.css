@@ -304,6 +304,47 @@ span.icon.excel {
             margin-bottom; 5px;
         }
 
+
+/**
+ * Stream
+ */
+.activity {
+    display: block;
+    overflow: hidden;
+    margin-bottom: 10px;
+    padding: 0 2px;
+}
+    .activity .activity-user-image {
+        display: block;
+        float: left;
+        width: 55px;
+    }
+    .activity .activity-user-image img {
+        border: 3px solid #194e76;
+    }
+    
+    .activity .activity-info {
+        display: block;
+        float: left;
+        width: 400px;
+    }
+        .activity .activity-text {
+            font-size: 13px;
+            display: block;
+            clear: both;
+            margin: 5px 0 3px;
+        }
+        
+            .activity .activity-text a {
+                font-weight: bold;
+                text-decoration: none;
+            }
+
+        .activity .activity-date {
+            display: block;
+            color: #999;
+            font-size: 11px;
+        }
     
 /**
  * Profiles

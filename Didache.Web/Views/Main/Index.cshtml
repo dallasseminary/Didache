@@ -29,8 +29,11 @@
 
 			@foreach (ActivityStreamItemBase item in activities) {
 				<div class="activity">
-					<span class="activity-date">@item.ActivityDate</span>
-					<span class="activity-text">@Html.Raw(item.FormatActivity())</span>
+                    <span class="activity-user-image"><img src="@item.User.ProfileImageUrl" width="40"></span>
+                    <span class="activity-info">
+					    <span class="activity-text">@Html.Raw(item.FormatActivity())</span>
+					    <span class="activity-date">@item.ActivityDate.ToShortDateString() @@ @item.ActivityDate.ToShortTimeString()</span>
+                    </span>
 				</div>
 			} 
 

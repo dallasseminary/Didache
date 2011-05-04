@@ -13,11 +13,14 @@
 	<div class="course-unit nested-item" data-unitid="@unit.UnitID" >
 		<div class="unit-header nested-item-row">
 			<span class="unit-drag-handle drag-handle"></span>
-			<input type="checkbox" class="unit-active" @(unit.IsActive ? "checked=\"checked\"" : "") />
-			<input type="text" class="unit-name" value="@unit.Name" />
-
-			<input type="date" class="unit-start-date" value="@unit.StartDate.ToString("yyyy-MM-dd")" />
-			<input type="date" class="unit-start-end" value="@unit.EndDate.ToString("yyyy-MM-dd")" />
+			<span class="name">
+                <input type="checkbox" class="unit-active" @(unit.IsActive ? "checked=\"checked\"" : "") />
+			    <input type="text" class="unit-name" value="@unit.Name" />
+            </span>
+            <span class="meta">
+			    <input type="date" class="unit-start-date" value="@unit.StartDate.ToString("yyyy-MM-dd")" />
+			    <input type="date" class="unit-start-end" value="@unit.EndDate.ToString("yyyy-MM-dd")" />
+            </span>
 
 			<a class="unit-edit edit-link" href="/admin/courses/unit/@unit.UnitID">Edit</a>
 			<a class="unit-edit delete-link" href="/admin/courses/deleteunit/@unit.UnitID">Delete</a>
@@ -27,12 +30,16 @@
 		@foreach (Task task in unit.Tasks) {
 			<div class="course-task nested-child-item" data-taskid="@task.TaskID">
 				<span class="task-drag-handle drag-handle"></span>
-				<input type="checkbox" class="task-active" @(task.IsActive ? "checked=\"checked\"" : "") />
-				<input type="text" class="task-name" value="@task.Name" />
-				<span class="task-type">@task.TaskTypeName</span>
-	
-				<input type="date" class="task-due-date" value="@(task.DueDate.HasValue ? task.DueDate.Value.ToString("yyyy-MM-dd") : "")" />
-
+                <span class="name">
+				    <input type="checkbox" class="task-active" @(task.IsActive ? "checked=\"checked\"" : "") />
+				    <input type="text" class="task-name" value="@task.Name" />
+                </span>
+                <span>
+                    <select name="task-type" class="task-type">
+                        <option>@task.TaskTypeName</option>
+                    </select>
+				    <input type="date" class="task-due-date" value="@(task.DueDate.HasValue ? task.DueDate.Value.ToString("yyyy-MM-dd") : "")" />
+                </span>
 
 				<a class="task-edit edit-link" href="/admin/courses/task/@task.TaskID">Edit</a>
 				<a class="task-edit delete-link" href="/admin/courses/deletetask/@task.TaskID">Delete</a>

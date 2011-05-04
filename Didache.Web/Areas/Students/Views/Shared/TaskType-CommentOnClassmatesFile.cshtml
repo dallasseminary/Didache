@@ -46,7 +46,7 @@
 	  
 			<div class="add-reply">
 				<textarea class="reply-text"></textarea>	
-				<span class="add-reply-button"><input type="button" class="reply-button" value="Add reply" /> <a href="javascript:(0)" class="collapse">Close</a></span>
+				<span class="add-reply-button"><input type="button" class="reply-button" value="Add reply" /> <a href="javascript:void(0)" class="collapse">Close</a></span>
 			</div>	
 		    
 		</div>
@@ -70,7 +70,9 @@
             $(this).siblings('.task-interaction-list').slideUp();
         });
 
-        //$('div.task-interaction a.collapse').siblings(
+        $('.add-reply a.collapse').click(function () {
+            $(this).closest('.task-interaction-list').slideUp();
+        });
 
         $('div.task-interaction input.reply-button').click(function () {
 
