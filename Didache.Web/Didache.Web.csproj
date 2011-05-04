@@ -390,15 +390,13 @@
     <Content Include="Views\Account\EditProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_GlobalResources\labels.es-MX.resx">
+    <Content Include="App_GlobalResources\labels.ar.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>labels.es-MX.designer.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_GlobalResources\labels.ar-AR.resx">
+    <Content Include="App_GlobalResources\labels.es.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>labels.ar-AR.Designer.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
