@@ -70,7 +70,7 @@
 .drag-handle {
 	display: inline-block;
 	cursor: move;
-		
+	margin-right: 6px;	
 	background: #FFF url(images/icons/drag-handle.jpg) top left no-repeat;
 	-webkit-border-radius: 3px;
 		-moz-border-radius: 3px;
@@ -150,7 +150,7 @@
 }
 .nested-list input[type="checkbox"] {
     padding: 4px;
-    margin: 6px;   
+    margin: 6px 0;   
     vertical-align: top;
 }
 .nested-list .name input[type="text"] {
