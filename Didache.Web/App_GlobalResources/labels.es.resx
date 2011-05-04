@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="coursemenu_active_courses" xml:space="preserve">
     <value>Cursos activos</value>
@@ -125,6 +125,30 @@
   </data>
   <data name="coursemenu_other_courses" xml:space="preserve">
     <value>Otro</value>
+  </data>
+  <data name="courses_heading_archivedcourses" xml:space="preserve">
+    <value>Archivado Cursos</value>
+  </data>
+  <data name="courses_heading_assignments" xml:space="preserve">
+    <value>Asignaciones</value>
+  </data>
+  <data name="courses_heading_coursedesc" xml:space="preserve">
+    <value>Descripción del curso</value>
+  </data>
+  <data name="courses_heading_coursefiles" xml:space="preserve">
+    <value>Archivos del curso</value>
+  </data>
+  <data name="courses_heading_courseroster" xml:space="preserve">
+    <value>Curso de Registro</value>
+  </data>
+  <data name="courses_heading_units" xml:space="preserve">
+    <value>Unidades</value>
+  </data>
+  <data name="courses_heading_upcoming" xml:space="preserve">
+    <value>Próximos ...</value>
+  </data>
+  <data name="courses_label_gradedfiles" xml:space="preserve">
+    <value>Calificado Archivos</value>
   </data>
   <data name="coursetabs_assignments" xml:space="preserve">
     <value>Cesiones</value>
@@ -158,6 +182,45 @@
   </data>
   <data name="homemenu_message" xml:space="preserve">
     <value>Esta es la página donde todos tus cosas deben</value>
+  </data>
+  <data name="home_dashboard_heading_bibsoftware" xml:space="preserve">
+    <value>Bibliografía Software</value>
+  </data>
+  <data name="home_dashboard_heading_courseresources" xml:space="preserve">
+    <value>Curso de Recursos</value>
+  </data>
+  <data name="home_dashboard_heading_onlineedresources" xml:space="preserve">
+    <value>Recursos en la Red Educación</value>
+  </data>
+  <data name="home_dashboard_heading_stream" xml:space="preserve">
+    <value>¿Qué está pasando en MyDTS</value>
+  </data>
+  <data name="home_dashboard_heading_upcoming" xml:space="preserve">
+    <value>Próximos</value>
+  </data>
+  <data name="home_dashboard_li_downloadallfiles" xml:space="preserve">
+    <value>Descargar todos los archivos (cursos actuales)</value>
+  </data>
+  <data name="home_dashboard_li_downloadcalendar" xml:space="preserve">
+    <value>Descarga tu calendario plazo</value>
+  </data>
+  <data name="home_dashboard_li_endnote" xml:space="preserve">
+    <value>Nota</value>
+  </data>
+  <data name="home_dashboard_li_msword" xml:space="preserve">
+    <value>Paquete de compatibilidad de Microsoft Word</value>
+  </data>
+  <data name="home_dashboard_li_openoffice" xml:space="preserve">
+    <value>OpenOffice.org</value>
+  </data>
+  <data name="home_dashboard_li_styleease" xml:space="preserve">
+    <value>StyleEase</value>
+  </data>
+  <data name="home_dashboard_li_turabianformattutorial" xml:space="preserve">
+    <value>Turabian Formato Tutorial</value>
+  </data>
+  <data name="home_dashboard_li_zotero" xml:space="preserve">
+    <value>Zotero (gratis)</value>
   </data>
   <data name="tabs_admin" xml:space="preserve">
     <value>Admin</value>
