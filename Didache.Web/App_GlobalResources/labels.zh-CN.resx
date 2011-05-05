@@ -127,28 +127,28 @@
     <value>其他</value>
   </data>
   <data name="courses_heading_archivedcourses" xml:space="preserve">
-    <value>Archived Courses</value>
+    <value>存档课程</value>
   </data>
   <data name="courses_heading_assignments" xml:space="preserve">
-    <value>Assignments</value>
+    <value>作业</value>
   </data>
   <data name="courses_heading_coursedesc" xml:space="preserve">
-    <value>Course Description</value>
+    <value>课程简介</value>
   </data>
   <data name="courses_heading_coursefiles" xml:space="preserve">
-    <value>Course Files</value>
+    <value>课程文件</value>
   </data>
   <data name="courses_heading_courseroster" xml:space="preserve">
-    <value>Course Roster</value>
+    <value>课程的花名册</value>
   </data>
   <data name="courses_heading_units" xml:space="preserve">
-    <value>Units</value>
+    <value>单位</value>
   </data>
   <data name="courses_heading_upcoming" xml:space="preserve">
-    <value>Upcoming...</value>
+    <value>即将到来的...</value>
   </data>
   <data name="courses_label_gradedfiles" xml:space="preserve">
-    <value>Graded Files</value>
+    <value>分级文件</value>
   </data>
   <data name="coursetabs_assignments" xml:space="preserve">
     <value>转让</value>
@@ -184,31 +184,31 @@
     <value>这是主页上的所有您的内容应</value>
   </data>
   <data name="home_dashboard_heading_bibsoftware" xml:space="preserve">
-    <value>Bibliography Software</value>
+    <value>参考书目软件</value>
   </data>
   <data name="home_dashboard_heading_courseresources" xml:space="preserve">
-    <value>Course Resources</value>
+    <value>课程资源</value>
   </data>
   <data name="home_dashboard_heading_onlineedresources" xml:space="preserve">
-    <value>Online Education Resources</value>
+    <value>网上教育资源</value>
   </data>
   <data name="home_dashboard_heading_stream" xml:space="preserve">
-    <value>What's Happening on MyDTS</value>
+    <value>所发生的事情对MyDTS</value>
   </data>
   <data name="home_dashboard_heading_upcoming" xml:space="preserve">
-    <value>Upcoming</value>
+    <value>即将举行</value>
   </data>
   <data name="home_dashboard_li_downloadallfiles" xml:space="preserve">
-    <value>Download all files (current courses)</value>
+    <value>下载的所有文件（当前课程）</value>
   </data>
   <data name="home_dashboard_li_downloadcalendar" xml:space="preserve">
-    <value>Download your term calendar</value>
+    <value>下载你的任期日历</value>
   </data>
   <data name="home_dashboard_li_endnote" xml:space="preserve">
     <value>EndNote</value>
   </data>
   <data name="home_dashboard_li_msword" xml:space="preserve">
-    <value>Microsoft Word Compatibility Pack</value>
+    <value>微软Word兼容包</value>
   </data>
   <data name="home_dashboard_li_openoffice" xml:space="preserve">
     <value>OpenOffice.org</value>
@@ -217,10 +217,10 @@
     <value>StyleEase</value>
   </data>
   <data name="home_dashboard_li_turabianformattutorial" xml:space="preserve">
-    <value>Turabian Format Tutorial</value>
+    <value>Turabian格式教程</value>
   </data>
   <data name="home_dashboard_li_zotero" xml:space="preserve">
-    <value>Zotero (free)</value>
+    <value>Zotero的（免费）</value>
   </data>
   <data name="tabs_admin" xml:space="preserve">
     <value>管理员</value>

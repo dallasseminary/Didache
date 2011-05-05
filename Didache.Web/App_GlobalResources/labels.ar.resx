@@ -151,28 +151,28 @@
     <value>أخرى</value>
   </data>
   <data name="courses_heading_archivedcourses" xml:space="preserve">
-    <value>Archived Courses</value>
+    <value>أرشفة المقررات</value>
   </data>
   <data name="courses_heading_assignments" xml:space="preserve">
-    <value>Assignments</value>
+    <value>تعيينات</value>
   </data>
   <data name="courses_heading_coursedesc" xml:space="preserve">
-    <value>Course Description</value>
+    <value>وصف المقرر</value>
   </data>
   <data name="courses_heading_coursefiles" xml:space="preserve">
-    <value>Course Files</value>
+    <value>بالطبع ملفات</value>
   </data>
   <data name="courses_heading_courseroster" xml:space="preserve">
-    <value>Course Roster</value>
+    <value>بطبيعة الحال القائمة</value>
   </data>
   <data name="courses_heading_units" xml:space="preserve">
-    <value>Units</value>
+    <value>وحدات</value>
   </data>
   <data name="courses_heading_upcoming" xml:space="preserve">
-    <value>Upcoming...</value>
+    <value>القادم...</value>
   </data>
   <data name="courses_label_gradedfiles" xml:space="preserve">
-    <value>Graded Files</value>
+    <value>تصنيف الملفات</value>
   </data>
   <data name="coursetabs_assignments" xml:space="preserve">
     <value>تعيينات</value>
@@ -250,31 +250,31 @@
     <value>هذه هي الصفحة الرئيسية حيث كل ما تبذلونه من الاشياء يجب</value>
   </data>
   <data name="home_dashboard_heading_bibsoftware" xml:space="preserve">
-    <value>Bibliography Software</value>
+    <value>ببليوغرافيا برامج</value>
   </data>
   <data name="home_dashboard_heading_courseresources" xml:space="preserve">
-    <value>Course Resources</value>
+    <value>الموضوع : الموارد</value>
   </data>
   <data name="home_dashboard_heading_onlineedresources" xml:space="preserve">
-    <value>Online Education Resources</value>
+    <value>موارد التعليم على الانترنت</value>
   </data>
   <data name="home_dashboard_heading_stream" xml:space="preserve">
-    <value>What's Happening on MyDTS</value>
+    <value>MyDTS ما يحدث في</value>
   </data>
   <data name="home_dashboard_heading_upcoming" xml:space="preserve">
-    <value>Upcoming</value>
+    <value>القادمة</value>
   </data>
   <data name="home_dashboard_li_downloadallfiles" xml:space="preserve">
-    <value>Download all files (current courses)</value>
+    <value>تحميل جميع الملفات (المقررات الحالية)</value>
   </data>
   <data name="home_dashboard_li_downloadcalendar" xml:space="preserve">
-    <value>Download your term calendar</value>
+    <value>تحميل التقويم الخاص الأجل</value>
   </data>
   <data name="home_dashboard_li_endnote" xml:space="preserve">
-    <value>EndNote</value>
+    <value>تعليق ختامي</value>
   </data>
   <data name="home_dashboard_li_msword" xml:space="preserve">
-    <value>Microsoft Word Compatibility Pack</value>
+    <value>حزمة مايكروسوفت كلمة التوافق</value>
   </data>
   <data name="home_dashboard_li_openoffice" xml:space="preserve">
     <value>OpenOffice.org</value>
@@ -283,10 +283,10 @@
     <value>StyleEase</value>
   </data>
   <data name="home_dashboard_li_turabianformattutorial" xml:space="preserve">
-    <value>Turabian Format Tutorial</value>
+    <value>Turabian تنسيق البرنامج التعليمي</value>
   </data>
   <data name="home_dashboard_li_zotero" xml:space="preserve">
-    <value>Zotero (free)</value>
+    <value>Zotero (مجانا)</value>
   </data>
   <data name="index_title" xml:space="preserve">
     <value>مؤشر صفحة</value>
