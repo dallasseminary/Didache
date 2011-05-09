@@ -240,7 +240,7 @@ span.icon.excel {
     }
 
         #dashboard div.main > div {
-            background: #EFEFEF;
+            background: #DEDEDE;
             -webkit-border-radius: 0 0 8px 8px;
                -moz-border-radius: 0 0 8px 8px;
                     border-radius: 0 0 8px 8px;
@@ -312,7 +312,9 @@ span.icon.excel {
     display: block;
     overflow: hidden;
     margin-bottom: 10px;
-    padding: 0 2px;
+    padding: 0;
+    background: #FFF;
+    height: 55px;
 }
     .activity .activity-user-image {
         display: block;
@@ -320,19 +322,22 @@ span.icon.excel {
         width: 55px;
     }
     .activity .activity-user-image img {
-        border: 3px solid #FFF;
+        border-right: 1px solid #BBB;
+        width: 45px;
+        margin: 0;
     }
     
     .activity .activity-info {
         display: block;
         float: left;
         width: 400px;
+        margin-top: 8px;
     }
         .activity .activity-text {
-            font-size: 13px;
+            font-size: 12px;
             display: block;
             clear: both;
-            margin: 5px 0 3px;
+            margin: 0;
         }
         
             .activity .activity-text a {
@@ -342,7 +347,7 @@ span.icon.excel {
 
         .activity .activity-date {
             display: block;
-            color: #999;
+            color: #777;
             font-size: 11px;
         }
     
