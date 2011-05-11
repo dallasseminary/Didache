@@ -71,12 +71,13 @@
 	display: inline-block;
 	cursor: move;
 	margin-right: 6px;	
-	background: #FFF url(images/icons/drag-handle.jpg) top left no-repeat;
-	-webkit-border-radius: 3px;
-		-moz-border-radius: 3px;
-		    border-radius: 3px;
-	width: 24px;
-	height: 24px;	
+	background: #bbb url(images/icons/drag-handle.png) 5px 5px no-repeat;
+	width: 14px;
+	height: 26px;
+	padding: 5px;
+	margin: -5px 10px -5px -5px;
+	position: relative;
+	z-index: 10;	
 }
 
 .nested-list {
@@ -95,6 +96,7 @@
 		.nested-item-row {
 			background: #bbb;
 			padding: 5px;
+			margin-bottom: 5px;
 			overflow:hidden;
 		}
         .nested-item-row > span, .nested-child-item > span {
@@ -102,15 +104,15 @@
             float: left;
         }
         .nested-item-row .name{
-            width: 600px;
+            width: 575px;
         }
         .nested-child-item .name {
-                width: 570px;
+                width: 540px;
         }
 	
 		.nested-child-list {
 			/*min-height: 100px;*/
-			margin: 0 0 0 30px;
+			margin: 0 15px 10px;
 			border: solid 1px #333;
 			border-width: 0 /*1px 0 0 1px*/;
 			-webkit-border-radius: 4px 0 0 0;
@@ -119,11 +121,17 @@
 		}
 			.nested-child-item {
 				padding: 5px;
+				margin-bottom: 3px;
+				border: 1px solid #FFF;
+				border-width: 1px 1px 1px 0;
 				overflow:hidden;
-		        background: #fff;
+		        background: #ddd;
 			}
 			.nested-child-item:nth-child(odd) {
 				background: #eee;
+			}
+			.nested-child-item:hover {
+			    border-color: #bbb;
 			}
 .edit-link, .delete-link {
 	float: right;
@@ -140,10 +148,16 @@
 	color: #555;
 }
 
-.delete-link {
+.delete-link, .edit-link {
 	color: #ff0000;
 	width: 60px;
 	background: url(images/delete-button.png) top left no-repeat;
+}
+
+.edit-link {
+    color: #333;
+	width: 45px;
+	background: url(images/edit-button.png) top left no-repeat;
 }
 
 .nested-list input {
@@ -156,7 +170,7 @@
     vertical-align: top;
 }
 .nested-list .name input[type="text"] {
-    width: 525px;
+    width: 500px;
 	-webkit-border-radius: 2px;
 	   -moz-border-radius: 2px;
 	        border-radius: 2px;

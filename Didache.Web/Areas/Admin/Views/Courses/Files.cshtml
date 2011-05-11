@@ -24,13 +24,16 @@
 		min-height: 40px;
 	}
 
-	.filegroup .nested-item-row > .drag-handle {
-        background: url(/css/images/icons/filegroup.png) top left no-repeat;
+	.filegroup .nested-item-row > .filegroup {
+	    margin: 1px 10px 1px 1px;
 	}
     
-    .filegroup .file-handle img {
-        background: #FFF;
-        padding: 4px;
+    .filegroup .filetype {
+        height: 26px;
+        margin-right: 10px;
+    }
+    .filegroup .filetype img{
+        padding: 5px;
     }
 
 	.filegroup .files .coursefile:nth-child(odd){
@@ -40,6 +43,7 @@
 	.filegroup .files .coursefile .file-title {
 		display: inline-block;
 		width: 300px;
+		margin: 5px 0;
 	}
 	.file-name {
 		display: inline-block;
@@ -48,9 +52,9 @@
 	.file-user {
 		display: inline-block;
 		width: 150px;
+		margin: 5px 0;
 	}
 	input.group-name {
-	    margin-bottom: 10px;
 	}		
 	.upload {
 		position: relative;
@@ -69,7 +73,7 @@
 		
 		height: 30px;
 		line-height: 30px;
-		margin: 5px 5px 5px 30px;
+		margin: 5px 15px 5px;
 	}
 	.upload:hover{
 		background: paleGreen;
@@ -131,6 +135,7 @@ x add group
 		
 		<div class="nested-item-row">
 			<span class="group-handle drag-handle"></span>
+            <span class="filegroup"><img src="/css/images/icons/filegroup.png"></span>
 			<input class="group-name" value="@group.Name" />
 
 			<a class="filegroup-edit edit-link" href="/admin/courses/filegroup/@group.GroupID">Edit</a>
@@ -148,9 +153,9 @@ x add group
 		<div class="files nested-child-list">
 		@foreach (CourseFileAssociation cfa in group.CourseFileAssociations) {
 			<div class="coursefile nested-child-item" data-fileid="@cfa.FileID">
-				<span class="file-handle drag-handle"><img src="/css/images/@(cfa.CourseFile.FileType).png"></span>
+				<span class="file-handle drag-handle"></span>
 				
-
+                <span class="filetype"><img src="/css/images/@(cfa.CourseFile.FileType).png"></span>
 				<span class="file-title">@cfa.CourseFile.Title</span>
 				<span class="file-user">@(cfa.CourseFile.User != null ? cfa.CourseFile.User.FullName : cfa.CourseFile.UserID.ToString())</span>
 				
