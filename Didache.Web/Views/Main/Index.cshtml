@@ -25,19 +25,18 @@
         <div >
             <h2>@Resources.labels.home_dashboard_heading_stream</h2>
 
-			@{ var activities = ActivityStream.GetUsersItems(); int i = 0;}
+			@{ var activities = ActivityStream.GetUsersItems();}
 
-			@if (i < 20) {
-                foreach (ActivityStreamItemBase item in activities) {
-				    <div class="activity">
-                        <span class="activity-user-image"><img src="@item.User.ProfileImageUrl"></span>
-                        <span class="activity-info">
-					        <span class="activity-text">@Html.Raw(item.FormatActivity())</span>
-					        <span class="activity-date">@item.ActivityDate.ToShortDateString() @@ @item.ActivityDate.ToShortTimeString()</span>
-                        </span>
-				    </div>    
-                } i += 1;
-            } 
+			@foreach (ActivityStreamItemBase item in activities) {
+				<div class="activity">
+                    <span class="activity-user-image"><img src="@item.User.ProfileImageUrl"></span>
+                    <span class="activity-info">
+					    <span class="activity-text">@Html.Raw(item.FormatActivity())</span>
+					    <span class="activity-date">@item.ActivityDate.ToShortDateString() @@ @item.ActivityDate.ToShortTimeString()</span>
+                    </span>
+				</div>
+                if (activities.IndexOf(item) == 19) { break; }  
+			} 
 
         </div>
     </div>
