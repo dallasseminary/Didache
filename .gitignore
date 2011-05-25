@@ -9,7 +9,7 @@ Didache.Web/bin/*
 Didache.Web/App_Data/*
 Didache.Web/setup/*
 Didache.Web/uploads/*
-Didache.Web/connectionStrings.config
+*.config
 __DidacheWeb/*
 
 #setup
