@@ -1,4 +1,6 @@
 
+Didache.Web/connectionStrings.config
+
 #ignore Visual studio
 Didache.suo
 Didache.Core/obj/Debug/*	
@@ -9,7 +11,7 @@ Didache.Web/bin/*
 Didache.Web/App_Data/*
 Didache.Web/setup/*
 Didache.Web/uploads/*
-*.config
+
 __DidacheWeb/*
 
 #setup
