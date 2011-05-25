@@ -11,6 +11,8 @@ Didache.Web/setup/*
 Didache.Web/uploads/*
 
 Didache.Web/connectionStrings.config
+*Copy of*
+*.old.*
 
 __DidacheWeb/*
 
