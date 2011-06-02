@@ -56,7 +56,8 @@ namespace Didache.Web.Areas.Students.Controllers
 			if (currentUnit != null) {
 				userTasks = Tasks.GetUserTaskDataInUnit(currentUnit.UnitID, Users.GetLoggedInUser().UserID);
 			}
-			
+
+            ViewBag.UserGroups = Didache.Courses.GetCourseUserGroups(course.CourseID);
 			ViewBag.Units = units;
 			ViewBag.CurrentUnit = currentUnit;
 			ViewBag.UserTasks = userTasks;

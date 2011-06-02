@@ -33,7 +33,7 @@ namespace Didache.Web {
 				SetLanguage(user.Language);
 				HttpContext.Current.Request.Cookies.Add(new HttpCookie("HowLangSet", "database"));
 			} else {
-				// check if there is a value in the cookie
+				// check if there is a value in the cookiez
 				// this is for visitor who set via the drop down list
 				HttpCookie langCookie = HttpContext.Current.Request.Cookies["Language"];
 				if (langCookie != null && langCookie.Value != null) {

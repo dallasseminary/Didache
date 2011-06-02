@@ -276,8 +276,8 @@
   <data name="home_dashboard_li_msword" xml:space="preserve">
     <value>حزمة مايكروسوفت كلمة التوافق</value>
   </data>
-  <data name="home_dashboard_li_openoffice" xml:space="preserve">
-    <value>OpenOffice.org</value>
+  <data name="home_dashboard_li_libreoffice" xml:space="preserve">
+    <value>LibreOffice.org</value>
   </data>
   <data name="home_dashboard_li_styleease" xml:space="preserve">
     <value>StyleEase</value>
