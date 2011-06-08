@@ -4,6 +4,10 @@
     ViewBag.Title = "View";
 }
 
+<div style="padding: 20px; background: red;">
+	<a href="/loginas.aspx?username=@Model.Username">LOGIN AS: @Model.Username</a>
+</div>
+
 <div id="main-column">
     <div class="profile">
         <div class="block-list-header"><h3>@Model.FormattedName</h3></div>
