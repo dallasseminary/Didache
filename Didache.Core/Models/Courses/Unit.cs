@@ -7,6 +7,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Web.Script.Serialization;
+using System.Runtime.Serialization;
+
 
 namespace Didache {
 
@@ -42,6 +45,7 @@ namespace Didache {
 		[StringLength(100000)]
 		public string Instructions { get; set; }
 
+		[ScriptIgnore]
 		public virtual Course Course { get; set; }
 
 		public virtual ICollection<Task> Tasks { get; set; }

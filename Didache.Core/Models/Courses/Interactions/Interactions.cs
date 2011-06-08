@@ -8,14 +8,27 @@ namespace Didache {
 		
 		public static List<InteractionThread> GetInteractionThreads(int taskID) {
 
-			List<InteractionThread> threads = new DidacheDb()
+			DidacheDb db = new DidacheDb();
+
+			User user = Users.GetLoggedInUser();
+			Task task = db.Tasks.Find(taskID);
+			CourseUser courseUser = db.CourseUsers.SingleOrDefault(cu => cu.UserID == user.UserID && cu.CourseID == task.CourseID);
+			List<CourseUser> groupMembers = db.CourseUsers.Where( cu => cu.CourseID == task.CourseID && cu.GroupID == courseUser.GroupID).ToList();
+			List<int> groupMemberUserIds = new List<int>();
+			foreach (CourseUser member in groupMembers) {
+				groupMemberUserIds.Add(member.UserID);	
+			}
+
+	
+			List<InteractionThread> threads = db
 				.InteractionThreads
 				.Include("Posts")
 				.Include("Posts.User")
-				.Where(t => t.TaskID == taskID)
+				.Where(t => t.TaskID == taskID && groupMemberUserIds.Contains(t.UserID) )
 				.OrderByDescending(t => t.ThreadDate)
 				.ToList();
 
+			// sorting the posts in memory!! Yeah, save DB time so we can cripple the web server
 			foreach (InteractionThread thread in threads) {
 				var posts = thread.Posts.ToList();
 
