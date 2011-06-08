@@ -118,18 +118,28 @@
     <Compile Include="Areas\Students\Controllers\DiscussionController.cs" />
     <Compile Include="Areas\Students\StudentsAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ApiController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="socialcounts.php.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="socialcounts.php.designer.cs">
+      <DependentUpon>socialcounts.php.cs</DependentUpon>
     </Compile>
     <Content Include="App_Data\DTS_webdata.mdf" />
     <Content Include="App_Data\DTS_webdata_log.ldf">
       <DependentUpon>DTS_webdata.mdf</DependentUpon>
     </Content>
     <Content Include="App_GlobalResources\readme.txt" />
+    <Content Include="js\jquery-1.6.1.js" />
+    <Content Include="js\jquery-1.6.1.min.js" />
+    <Content Include="reflectiontest.aspx" />
     <Content Include="js\admin.js" />
-    <Content Include="js\jquery-1.5.2.min.js" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="socialcounts.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Didache.mdf" />
@@ -180,8 +190,6 @@
     <Content Include="css\admin.css" />
     <Content Include="Didache.Web.Publish.xml" />
     <Content Include="css\type.css" />
-    <Content Include="js\jquery-1.5.js" />
-    <Content Include="js\jquery-1.5.min.js" />
     <Content Include="js\jquery-ui.min.js" />
     <Content Include="js\jquery.fileupload.js" />
     <Content Include="js\ui-lightness\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
@@ -384,10 +392,12 @@
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\DateTime.cshtml" />
     <Content Include="Areas\Admin\Views\Courses\Users.cshtml" />
     <Content Include="Areas\Admin\Views\Courses\Grading.cshtml" />
+    <Content Include="Areas\Admin\Views\Courses\CourseEditor.cshtml" />
     <None Include="css\fonts\league\League_Gothic-webfont.eot" />
     <None Include="css\fonts\league\League_Gothic-webfont.ttf" />
     <None Include="css\fonts\league\League_Gothic-webfont.woff" />
     <Content Include="Views\Account\EditProfile.cshtml" />
+    <None Include="socialcounts.php" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\labels.ar.resx">
