@@ -1,0 +1,656 @@
+﻿@{
+    ViewBag.Title = "CourseEditor";
+}
+
+<h2>Course Editor</h2>
+
+<fieldset id="course-editor">
+
+<legend>Course Editor</legend>
+	
+	<input type="hidden" id="CourseID" name="CourseID" value="@Model" />
+
+	<table>
+		<tbody>
+			<tr>
+				<th>Code</th>
+				<td><input type="text" name="CourseCode" style="width:80px" placeholder="AA123" /> <input type="text" name="Section" style="width:30px" placeholder="A" /> - <input type="text" name="Name" placeholder="Course Name" /></td>
+			</tr>
+			<tr>
+				<th>Info</th>
+				<td>
+					<select name="SessionID">
+					@foreach (Session session in ViewBag.Sessions) {
+						<option value="@session.SessionID">@session.Name</option>
+					}
+					</select> 
+					<select name="CampusID">
+					@foreach (Campus campus in ViewBag.Campuses) {
+						<option value="@campus.CampusID">@campus.Name</option>
+					}
+					</select> 
+					<input type="checkbox" name="IsActive" id="Course-IsActive" /><label for="Course-IsActive">Is Active</label>
+				</td>
+			</tr>
+			<tr>
+				<th>Dates</th>
+				<td><input type="text" name="StartDate" class="date" value="@ViewBag.Sessions[0].StartDate.ToString("MM/dd/yyyy")" /> - <input type="text" name="EndDate" class="date" value="@ViewBag.Sessions[0].EndDate.ToString("MM/dd/yyyy")" /></td>
+			</tr>
+			<tr>
+				<th>Description</th>
+				<td><textarea name="Description" style="width:500px; height: 100px;"></textarea></td>
+			</tr>
+		</tbody>
+	</table>
+</fieldset>
+
+<input type="button" value="Save" id="save-course" />	
+
+
+<div id="unittask-list">
+	<h2>Course Units</h2>
+
+	<input type="text" id="new-unit-name" /><input type="button" id="new-unit-add" value="Add Unit" />
+
+	<div id="course-units" class="nested-list">
+	
+	
+	</div>
+
+</div>
+
+
+<div id="task-editor">
+	
+	<input type="hidden" name="TaskID" />
+
+    <table class="admin-form">
+      <tbody>
+		<tr>
+			<th>
+				Active
+			</th>
+			<td>
+				<input type="checkbox" name="IsActive" />
+			</td>
+		</tr>
+		<tr>
+			<th>
+				Name
+			</th>
+			<td>
+				<input type="text" name="Name" />
+			</td>
+		</tr>
+		<tr>
+			<th>
+				Completion Method
+			</th>
+			<td>
+				@foreach (Didache.TaskTypes.TaskTypeInfo info in Didache.TaskTypes.TaskTypeManager.GetTaskTypes()) {
+					<input type="radio" value="@info.ClassName" name="TaskTypeName" id="TaskTypeName-@info.FriendlyName" />
+					<label for="TaskTypeName-@info.FriendlyName">@info.FriendlyName</label>
+					<br />
+				}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				Instructions
+			</th>
+			<td>
+				<textarea name="Instructions"></textarea>
+			</td>
+		</tr>
+		<tr>
+			<th>
+				Description
+			</th>
+			<td>
+				<textarea name="Description"></textarea>
+			</td>
+		</tr>
+		<tr>
+			<th>
+				Priority
+			</th>
+			<td>
+				<input type="textbox" name="Priority" />
+			</td>
+		</tr>
+		<tr>
+			<th>
+				Due Date
+			</th>
+			<td>
+				<input type="date" name="DueDate" />
+			</td>
+		</tr>
+		<tr>
+			<th>
+				InstructionsAvailableDate
+			</th>
+			<td>
+				<input type="date" name="InstructionsAvailableDate" />
+			</td>
+		</tr>
+		<tr>
+			<th>
+				SubmissionAvailableDate
+			</th>
+			<td>
+				<input type="date" name="SubmissionAvailableDate" />
+			</td>
+		</tr>
+		<tr>
+			<th>
+				Skippable
+			</th>
+			<td>
+				<input type="checkbox" name="IsSkippable" />
+			</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<input type="button" id="save-task" value="Save Task" />
+
+</div>
+
+
+<div id="unit-editor">
+	<input type="hidden" name="UnitID" />
+
+    <table class="admin-form">
+      <tbody>
+		<tr>
+			<th>
+				Active
+			</th>
+			<td>
+				<input type="checkbox" name="IsActive" />
+			</td>
+		</tr>
+		<tr>
+			<th>
+				Name
+			</th>
+			<td>
+				<input type="text" name="Name" />
+			</td>
+		</tr>
+		<tr>
+			<th>
+				Start Date
+			</th>
+			<td>
+				<input type="date" name="StartDate" />
+			</td>
+		</tr>
+		<tr>
+			<th>
+				End Date
+			</th>
+			<td>
+				<input type="date" name="EndDate" />
+			</td>
+		</tr>
+
+		<tr>
+			<th>
+				Instructions
+			</th>
+			<td>
+				<textarea name="Instructions"></textarea>
+			</td>
+		</tr>
+	
+	</table>
+
+	<input type="button" id="save-unit" value="Save Unit" />
+
+</div>
+
+<script>
+
+	jQuery(document).ready(function () {
+		// load course
+		var courseID = $('#CourseID').val();
+
+		if (courseID > 0) {
+			loadCourse(courseID, fillCourseEditor);
+
+			loadUnits(courseID, null);
+		}
+
+		$('#save-course')
+			.click(function () {
+				var course = {},
+				fields = $('#course-editor input, #course-editor textarea');
+
+				fields.each(function (x) {
+					var field = $(this);
+					if (field.attr('type') == 'checkbox')
+						course[field.attr('name')] = field.is(':checked');
+					else
+						course[field.attr('name')] = field.val();
+				});
+
+				saveCourse(course);
+			});
+
+		$('#save-task')
+			.click(function () {
+				var task = {},
+				fields = $('#task-editor input, #task-editor textarea, #task-editor select');
+
+				fields.each(function (x) {
+					var field = $(this);
+					if (field.attr('type') == 'checkbox')
+						task[field.attr('name')] = field.is(':checked');
+					else
+						task[field.attr('name')] = field.val();
+				});
+
+				saveTask(task);
+			});
+
+
+		$('#save-unit')
+			.click(function () {
+				var unit = {},
+				fields = $('#unit-editor input, #unit-editor textarea, #unit-editor select');
+
+				fields.each(function (x) {
+					var field = $(this);
+					if (field.attr('type') == 'checkbox')
+						unit[field.attr('name')] = field.is(':checked');
+					else
+						unit[field.attr('name')] = field.val();
+				});
+
+				saveUnit(unit);
+			});
+
+
+	});
+
+
+
+	function loadCourse(courseID, callback) {
+		$.ajax({
+			url: '/api/getcourse/' + courseID,
+			success: function (d) {
+				callback(d);
+			}
+		});
+	}
+
+	function fillCourseEditor(course) {
+		for (var prop in course) {
+			$('#course-editor [name="' + prop + '"]').val(course[prop]);
+		}
+	}
+
+	function saveCourse(course, callback) {
+		$.ajax({
+			type: 'POST',
+			url: '/admin/courses/updatecourse/',
+			data: course,
+			success: function (d) {
+
+				console.log(d, d.course);
+
+				$('#CourseID').val(d.course.CourseID);
+
+				if (callback)
+					callback();
+			}
+		});
+	}
+
+	function loadUnits(courseID, callback) {
+		$.ajax({
+			url: '/api/getcourseunits/' + courseID,
+			success: function (d) {
+
+				renderUnits(d);
+
+				setupUnitAndTaskSorting();
+
+				setupUnitAndTaskEditing();
+			}
+		});
+	}
+
+	function renderUnits(units) {
+		
+		var unitArea = $('#course-units');
+
+		for (var unitIndex in units) {
+
+			var unit = units[unitIndex],
+				unitRow = 
+				$('<div class="course-unit nested-item">' + 
+					'<div class="unit-header nested-item-row">' + 
+						'<span class="unit-drag-handle drag-handle"></span>' + 
+						'<span class="name">' +
+							'<input type="checkbox" class="unit-active"  />' +
+							'<input type="text" class="unit-name" value="" />' + 
+						'</span>' + 
+						'<span class="meta">' +
+							'<input type="date" class="unit-start-date" value="" />' +
+							'<input type="date" class="unit-end-date" value="" />' + 
+						'</span>' +
+						'<a class="unit-edit edit-link" href="/admin/courses/unit/0">Edit</a>' +
+						'<a class="unit-edit delete-link" href="/admin/courses/deleteunit/0">Delete</a>' + 
+					'</div>' +
+					'<div class="course-tasks nested-child-list">' + 
+					'</div>' +
+				'</div>'
+				);
+
+			unitArea.append(unitRow);
+
+			updateUnitRow(unitRow, unit);
+
+			for (var taskIndex in unit.Tasks) {
+				renderTask(unit.Tasks[taskIndex], unitRow);
+			}
+				
+		}
+	}
+
+	function updateUnitRow(unitRow, unit) {
+		unitRow.data('unitid', unit.UnitID);
+		unitRow.find('.unit-active')[0].checked = unit.IsActive;
+		unitRow.find('.unit-name').val(unit.Name);
+		unitRow.find('.unit-start-date').val(unit.StartDate == null ? '' : unit.StartDate.replace(' 12:00:00 AM', ''));
+		unitRow.find('.unit-end-date').val(unit.EndDate == null ? '' : unit.EndDate.replace(' 12:00:00 AM', ''));
+		unitRow.find('.unit-edit').attr('href', '/admin/courses/task/' + unit.TaskID);
+		unitRow.find('.unit-delete').attr('href', '/admin/courses/deletetask/' + unit.TaskID);
+	}
+
+	function renderTask(task, unitRow) {
+
+		var taskRow = $(
+			'<div class="course-task nested-child-item">'+
+				'<span class="task-drag-handle drag-handle"></span>'+
+                '<span class="name">'+
+				    '<input type="checkbox" class="task-active"  />'+
+				    '<input type="text" class="task-name" value="" />'+
+                '</span>'+
+				//'<span>'+
+                    //'<select name="task-type" class="task-type">'+
+                    //   ' <option></option>'+
+                    //'</select>'+
+				    '<span class="task-type"></span>' +
+					'<input type="date" class="task-due-date" value="" />'+
+                //'</span>'+
+				'<a class="task-edit edit-link" href="/admin/courses/task/0">Edit</a>'+
+				'<a class="task-delete delete-link" href="/admin/courses/deletetask/0">Delete</a>'+		
+			'</div>');
+
+		unitRow.find('.course-tasks').append(taskRow);
+
+		updateTaskRow(taskRow, task);
+	}
+
+	function updateTaskRow(taskRow, task) {
+		taskRow.data('taskid', task.TaskID);
+		taskRow.find('.task-active')[0].checked = task.IsActive;
+		taskRow.find('.task-type').html(task.TaskTypeName);
+		taskRow.find('.task-name').val(task.Name);
+		taskRow.find('.task-due-date').val(task.DueDate.replace(' 12:00:00 AM', ''));
+		//taskRow.find('.task-due-date').val(task.DueDate);
+		taskRow.find('.task-edit').attr('href', '/admin/courses/task/' + task.TaskID);
+		taskRow.find('.task-delete').attr('href', '/admin/courses/deletetask/' + task.TaskID);
+	}
+
+
+
+	// SORTING
+	// sort units
+	function setupUnitAndTaskSorting() {
+		$('#course-units').sortable('destroy').sortable({
+			handle: '.unit-drag-handle',
+			axis: 'y',
+			update: function (event, ui) {
+				startSaveOrder();
+			},
+			start: cancelSaveOrder
+		}); //.disableSelection();
+
+		// sort tasks
+		$('.course-tasks').sortable('destroy').sortable({
+			handle: '.task-drag-handle',
+			axis: 'y',
+			update: function (event, ui) {
+				startSaveOrder();
+			},
+			start: cancelSaveOrder
+		}); //.disableSelection();
+
+		var saveTimeout = null;
+		function startSaveOrder() {
+			cancelSaveOrder();
+			saveTimeout = setTimeout(saveOrderChanges, 1000);
+		}
+		function cancelSaveOrder() {
+			if (saveTimeout != null) {
+				clearTimeout(saveTimeout);
+				delete saveTimeout;
+				saveTimeout = null;
+			}
+		}
+
+		function saveOrderChanges() {
+
+			cancelSaveOrder();
+
+			var  
+				unitArray = [],
+				unit,
+				task;
+
+			$('.course-unit').each(function (unitSortOrder, unitElement) {
+
+				// store the position of the group
+				unit = {
+					unitid: parseInt($(unitElement).data('unitid'), 10),
+					//name: $(unitElement).find('.unit-name').val(),
+					sortorder: unitSortOrder + 1,
+					tasks: []
+				};
+				unitArray.push(unit);
+
+				$(unitElement).find('.course-task').each(function (taskSortOrder, taskElement) {
+
+					task = {
+						unitid: unit.unitid,
+						taskid: parseInt($(taskElement).data('taskid'), 10),
+						//name: $(taskElement).find('.task-name').val(),
+						sortorder: taskSortOrder + 1
+					};
+
+					// store the position of the file
+					unit.tasks.push(task);
+
+				});
+			});
+
+			// save the group order
+			console.log('group order', unitArray);
+			console.log(JSON.stringify({ units: unitArray }));
+
+			$.ajax({
+				url: '/admin/courses/UpdateUnitSorting/' + $('#CourseID').val(),
+				data: JSON.stringify(unitArray),
+				type: 'POST',
+				//dataType: 'json',
+				success: function (d) {
+					if (d.success) {
+						console.log('saved order')
+					} else {
+						console.log('error' + d.error)
+					}
+				},
+				error: function (d) {
+					console.log('error saving order')
+				}
+			});
+		}
+	}
+
+
+	// unit/task small edits
+	function setupUnitAndTaskEditing() {
+
+		// TASKS
+		$('.course-task input').change(function () {
+			var 
+				row = $(this).closest('.course-task'),
+				task = {
+					TaskID: row.data('taskid'),
+					Name: row.find('.task-name').val(),
+					DueDate: row.find('.task-due-date').val()
+				};
+
+			$.ajax({
+				url: '/admin/courses/UpdateTask/',
+				data:  task ,
+				type: 'POST',
+				success: function (d) {
+					if (d.success) {
+						console.log('saved task');
+						row.effect("highlight");
+					} else {
+						console.log('error' + d.error)
+					}
+				},
+				error: function (d) {
+					console.log('error saving task', d, d.message, d.errors, d.model);
+				}
+			});
+		});
+
+
+		// UNITS
+		$('.unit-header input').change(function () {
+			var 
+				row = $(this).closest('.unit-header'),
+				unit = {
+					UnitID: row.closest('.course-unit').data('unitid'),
+					Name: row.find('.unit-name').val(),
+					StartDate: row.find('.unit-start-date').val(),
+					EndDate: row.find('.unit-end-date').val()
+				};
+
+			$.ajax({
+				url: '/admin/courses/UpdateUnit/',
+				data:  unit ,
+				type: 'POST',
+				success: function (d) {
+					if (d.success) {
+						console.log('saved unit');
+						row.effect("highlight");
+					} else {
+						console.log('error' + d.error)
+					}
+				},
+				error: function (d) {
+					console.log('error saving unit', d, d.message, d.errors, d.model);
+				}
+			});
+		});
+
+		// TASK major
+		$('.course-task .task-edit').click(function (e) {
+			e.preventDefault();
+
+			var taskID = $(this).closest('.course-task').data('taskid');
+
+			loadTask(taskID, fillTaskEditor);
+
+			return false;
+		});
+
+		// UNIT major
+		$('.course-unit .unit-edit').click(function (e) {
+			e.preventDefault();
+
+			var unitID = $(this).closest('.course-unit').data('unitid');
+
+			loadUnit(unitID, fillUnitEditor);
+
+			return false;
+		});
+
+	}
+
+
+	function loadTask(taskID, callback) {
+		$.ajax({
+			url: '/api/gettask/' + taskID,
+			success: function (t) {
+				callback(t);
+			}
+		});
+	}
+
+	function fillTaskEditor(task) {
+		for (var prop in task) {
+			$('#task-editor [name="' + prop + '"]').val(task[prop]);
+		}
+	}
+
+	function saveTask(task, callback) {
+		$.ajax({
+			type: 'POST',
+			url: '/admin/courses/updatetask/',
+			data: task,
+			success: function (d) {
+
+				console.log(d, d.task);
+
+			}
+		});
+	}
+
+
+	// unit task, full editing
+
+	function loadUnit(unitID, callback) {
+		$.ajax({
+			url: '/api/getunit/' + unitID,
+			success: function (t) {
+				callback(t);
+			}
+		});
+	}
+
+	function fillUnitEditor(task) {
+		for (var prop in task) {
+			$('#unit-editor [name="' + prop + '"]').val(task[prop]);
+		}
+	}
+
+	function saveUnit(unit, callback) {
+		$.ajax({
+			type: 'POST',
+			url: '/admin/courses/updateunit/',
+			data: unit,
+			success: function (d) {
+
+				console.log(d, d.task);
+
+			}
+		});
+	}
+
+	
+
+
+
+
+</script>
