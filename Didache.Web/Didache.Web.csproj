@@ -379,7 +379,9 @@
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\DateTime.cshtml" />
     <Content Include="Areas\Admin\Views\Courses\Users.cshtml" />
     <Content Include="Areas\Admin\Views\Courses\Grading.cshtml" />
-    <Content Include="connectionStrings.config" />
+    <Content Include="connectionStrings.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="css\fonts\league\League_Gothic-webfont.eot" />
     <None Include="css\fonts\league\League_Gothic-webfont.ttf" />
     <None Include="css\fonts\league\League_Gothic-webfont.woff" />
