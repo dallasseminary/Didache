@@ -41,10 +41,9 @@ namespace Didache {
 		[Display(Name = "End Date")]
 		public DateTime EndDate { get; set; }
 
-		[Required]
+		//[Required]
 		[DataType(DataType.MultilineText)]
-		[Display(Name = "Description")]
-		
+		[Display(Name = "Description")]		
 		public string Description { get; set; }
 
 		public string Slug {

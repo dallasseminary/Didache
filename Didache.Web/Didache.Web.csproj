@@ -134,6 +134,7 @@
       <DependentUpon>DTS_webdata.mdf</DependentUpon>
     </Content>
     <Content Include="App_GlobalResources\readme.txt" />
+    <Content Include="js\admin\courses.js" />
     <Content Include="js\jquery-1.6.1.js" />
     <Content Include="js\jquery-1.6.1.min.js" />
     <Content Include="reflectiontest.aspx" />
@@ -387,12 +388,11 @@
     <Content Include="Areas\Community\Views\Community\Display.cshtml" />
     <Content Include="Areas\Community\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Community\Views\Community\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Courses\DialogLayout.cshtml" />
-    <Content Include="Areas\Admin\Views\Courses\DialogClose.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\DateTime.cshtml" />
     <Content Include="Areas\Admin\Views\Courses\Users.cshtml" />
     <Content Include="Areas\Admin\Views\Courses\Grading.cshtml" />
     <Content Include="Areas\Admin\Views\Courses\CourseEditor.cshtml" />
+    <Content Include="Areas\Admin\Views\Courses\_CourseHeader.cshtml" />
     <None Include="css\fonts\league\League_Gothic-webfont.eot" />
     <None Include="css\fonts\league\League_Gothic-webfont.ttf" />
     <None Include="css\fonts\league\League_Gothic-webfont.woff" />

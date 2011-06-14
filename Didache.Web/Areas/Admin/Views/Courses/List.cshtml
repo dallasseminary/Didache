@@ -1,14 +1,17 @@
 ﻿@model List<Course>
 
 @{
-    ViewBag.Title = "List";
+    ViewBag.Title = "Courses List";
+}
+@section head {
+<script src="/js/admin/courses.js"></script>
 }
 
 <h2>Courses</h2>
 
-<a class="oe-button" href="/admin/courses/edit/0">New Course</a>
+<button type="button" class="new-button" id="course-create" href="/admin/courses/edit/0">New Course</button>
 
-<table class="admin-list">
+<table class="admin-list" id="course-list">
 <thead>
 	<tr>
 		<th></th>
@@ -26,22 +29,63 @@
 </thead>
 <tbody>
 	@foreach (Course course in Model) {
-	<tr>
-		<td>@course.IsActive</td>
-		<td>@course.CourseCode</td>
-		<td>@course.Section</td>
-		<td>@course.Name</td>
-		<td>@course.StartDate.ToString("MM/dd/yyyy")</td>
-		<td>@course.EndDate.ToString("MM/dd/yyyy")</td>
-		<td><a href="/admin/grading/@course.CourseID">gradebook</a></td>
-		<td><a href="/admin/courses/grading/@course.CourseID">grading</a></td>
-		<td><a href="/admin/courses/files/@course.CourseID">files</a></td>
-		<td><a href="/admin/courses/users/@course.CourseID">users</a></td>
-		<td><a href="/admin/courses/outline/@course.CourseID">outline</a></td>
-		<td><a href="/admin/courses/edit/@course.CourseID">edit</a></td>
-		<td><a href="/admin/courses/courseeditor/@course.CourseID">editor</a></td>
+	<tr class="course-task" data-courseid="@course.CourseID">
+		<td><input type="checkbox" class="course-isactive" @(course.IsActive? " checked" :"") /></td>
+		<td><span class="course-coursecode">@course.CourseCode</span></td>
+		<td><span class="course-section">@course.Section</span></td>
+		<td><span class="course-name">@course.Name</span></td>
+		<td><span class="course-startdate">@course.StartDate.ToString("MM/dd/yyyy")</span></td>
+		<td><span class="course-enddate">@course.EndDate.ToString("MM/dd/yyyy")</span></td>
+		<td><a class="course-grading" href="/admin/courses/grading/@course.CourseID">grading</a></td>
+		<td><a class="course-files" href="/admin/courses/files/@course.CourseID">files</a></td>
+		<td><a class="course-users" href="/admin/courses/users/@course.CourseID">users</a></td>
+		<td><a class="course-units" href="/admin/courses/courseeditor/@course.CourseID">unit/tasks</a></td>
+		<td><a class="course-edit" href="/admin/courses/edit/@course.CourseID">edit</a></td>
 	</tr>
-	}
+
+		<!-- td><a href="/admin/courses/outline/@course.CourseID">outline</a></td>
+		<td><a href="/admin/courses/edit/@course.CourseID">edit</a></td> -->
+	 
+ }
 
 </tbody>
 </table>
+
+<div id="course-editor" class="item-editor">
+	
+	<input type="hidden" id="CourseID" name="CourseID" value="@Model" />
+
+	<table>
+		<tbody>
+			<tr>
+				<th>Code</th>
+				<td><input type="text" name="CourseCode" style="width:80px" placeholder="AA123" /> <input type="text" name="Section" style="width:30px" placeholder="A" /> - <input type="text" name="Name" placeholder="Course Name" /></td>
+			</tr>
+			<tr>
+				<th>Info</th>
+				<td>
+					<select name="SessionID">
+					@foreach (Session session in new DidacheDb().Sessions.OrderBy(s => s.StartDate)) {
+						<option value="@session.SessionID">@session.Name</option>
+	 }
+					</select> 
+					<select name="CampusID">
+					@foreach (Campus campus in new DidacheDb().Campuses.OrderBy(c => c.Name)) {
+						<option value="@campus.CampusID">@campus.Name</option>
+					}
+					</select> 
+					<input type="checkbox" name="IsActive" id="Course-IsActive" /><label for="Course-IsActive">Is Active</label>
+				</td>
+			</tr>
+			<tr>
+				<th>Dates</th>
+				<td><input type="text" name="StartDate" class="date" value="" /> - <input type="text" name="EndDate" class="date" value="" /></td>
+			</tr>
+			<tr>
+				<th>Description</th>
+				<td><textarea name="Description" style="width:400px; height: 100px;"></textarea></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+

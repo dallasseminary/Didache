@@ -210,10 +210,48 @@
 }
 
 /* admin tables */
-.admin-form {
+.item-editor  {
 }
 
-.admin-form th{
+.item-editor  th{
 	text-align: right;
+	vertical-align: top;
 	padding: 0 10px 0;
+}
+
+
+.course-menu {
+	height: 40px;
+	border-bottom: 1px solid #999;
+}
+.course-menu li {
+	display: inline;
+	float: left;
+}
+.course-menu li a {
+	display: block;
+	float: left;
+	margin: 0 20px 0 0;
+	line-height: 1;
+	padding: 10px 20px;
+	height: 19px;
+	border: solid 1px #999;
+	background:#eee;
+	border-width: 1px 1px 0 1px;
+	font-weight: bold;
+	text-decoration: none;
+	color: #333;
+}
+.new-button {
+	display: inline-block;
+	padding: 5px 10px;
+	background: #6ccc70;
+	border: solid 1px #ccc;
+	border-color: #eee #ccc #999 #ccc;
+	color: #fff;
+	text-shadow: #000 0 1px 1px;
+	text-decoration: none;
+	border-radius: 5px;
+	margin: 0 5px 5px 0;
+	cursor: pointer;
 }

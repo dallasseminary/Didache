@@ -1,4 +1,4 @@
-﻿@model List<CourseFileGroup>
+﻿@model Course 
 
 @{
     ViewBag.Title = "Files";
@@ -122,7 +122,7 @@ x add group
 -->
 
 
-<h2>Course Files</h2>
+
 
 <div id="dialog"><iframe src="javascript:void(0);" frameborder="0"></iframe></div>
 
@@ -132,8 +132,8 @@ x add group
 	<input type="button" id="new-file-group-button" value="Add File Group" />
 </div>
 
-<div id="filegroups" class="nested-list" data-courseid="@ViewBag.Course.CourseID">
-@foreach(CourseFileGroup group in Model) {
+<div id="filegroups" class="nested-list" data-courseid="@Model.CourseID">
+@foreach(CourseFileGroup group in ViewBag.CourseFileGroups) {
 	
 
 	<div class="filegroup nested-item" data-groupid="@group.GroupID" class="">
@@ -148,7 +148,7 @@ x add group
 		</div>
 
 		<div class="upload">
-			<form action="/admin/courses/fileupload/@ViewBag.Course.CourseID/" enctype="multipart/form-data" method="post">
+			<form action="/admin/courses/fileupload/@group.CourseID/" enctype="multipart/form-data" method="post">
 				<input type="file" name="file" multiple>
 				<button>Upload</button>
 				<div>Click or drag and drop files</div>			
@@ -397,7 +397,7 @@ function setupFiles(selector) {
 		console.log(JSON.stringify({ groups: fileGroupArray }));
 
 		$.ajax({
-			url: '/admin/courses/UpdateFileSorting/@ViewBag.Course.CourseID',
+			url: '/admin/courses/UpdateFileSorting/@Model.CourseID',
 			data: JSON.stringify(fileGroupArray),
 			//data: fileGroupArray,
 			type: 'POST',

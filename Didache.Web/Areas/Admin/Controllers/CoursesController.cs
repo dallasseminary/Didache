@@ -64,7 +64,9 @@ namespace Didache.Web.Areas.Admin.Controllers
 			ViewBag.Sessions = db.Sessions.OrderByDescending(s => s.StartDate).ToList();
 			ViewBag.Campuses = db.Campuses.OrderBy(s => s.Name).ToList();
 
-			return View(id == null ? 0 : id);
+			Course course = (id == null) ? null : db.Courses.Find(id);
+
+			return View(course);
 		}
 
 		[HttpPost]
@@ -79,24 +81,24 @@ namespace Didache.Web.Areas.Admin.Controllers
 
 					db.SaveChanges();
 
-					return Json(new { success = true, course = serializer.Serialize(model) });
+					return Json(new { success = true, action = "edit", course = serializer.Serialize(model) });
 				} catch (Exception ex) {
 
 					ModelState.AddModelError("", "Edit Failure, see inner exception");
 
 					Response.StatusCode = 500;
-					return Json(new { success = false, message = ex.ToString(), errors = GetErrors() });
+					return Json(new { success = false, action="edit", message = ex.ToString(), errors = GetErrors() });
 				}
 			} else {
 				// ADD MODE
 				if (ModelState.IsValid) {
 					db.Courses.Add(model);
 					db.SaveChanges();
-					return Json(new { success = true, course = serializer.Serialize(model)  });
+					return Json(new { success = true, action = "add", course = serializer.Serialize(model) });
 				} else {
 					
 					Response.StatusCode = 500;
-					return Json(new { success = false, message = "Invalid new model", errors = GetErrors() });
+					return Json(new { success = false, action = "add", message = "Invalid new model", errors = GetErrors() });
 				}
 			}
 		}
@@ -157,7 +159,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 				} catch (Exception ex) {
 
 					Response.StatusCode = 500;
-					return Json(new { success = false, model = serializer.Serialize(model), message = "Update error", errors = GetErrors() });
+					return Json(new { success = false, task = serializer.Serialize(model), message = "Update error", errors = GetErrors() });
 				}				
 			} else {
 
@@ -169,7 +171,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 					return Json(new { success = true, task = serializer.Serialize(model) });
 				} else {
 					Response.StatusCode = 500;
-					return Json(new { success = false, model = serializer.Serialize(model), message = "Add error", errors = GetErrors() });
+					return Json(new { success = false, task = serializer.Serialize(model), message = "Add error", errors = GetErrors() });
 				}				
 			}
 		}
@@ -187,12 +189,12 @@ namespace Didache.Web.Areas.Admin.Controllers
 
 					db.SaveChanges();
 
-					return Json(new { success = true, task = serializer.Serialize(model) });
+					return Json(new { success = true, unit = serializer.Serialize(model) });
 				}
 				catch (Exception ex) {
 
 					Response.StatusCode = 500;
-					return Json(new { success = false, model = serializer.Serialize(model), message = "Update error", errors = GetErrors() });
+					return Json(new { success = false, unit = serializer.Serialize(model), message = "Update error", errors = GetErrors() });
 				}
 			}
 			else {
@@ -202,11 +204,11 @@ namespace Didache.Web.Areas.Admin.Controllers
 					db.Units.Add(model);
 					db.SaveChanges();
 
-					return Json(new { success = true, task = serializer.Serialize(model) });
+					return Json(new { success = true, unit = serializer.Serialize(model) });
 				}
 				else {
 					Response.StatusCode = 500;
-					return Json(new { success = false, model = serializer.Serialize(model), message = "Add error", errors = GetErrors() });
+					return Json(new { success = false, unit = serializer.Serialize(model), message = "Add error", errors = GetErrors() });
 				}
 			}
 		}
@@ -262,10 +264,10 @@ namespace Didache.Web.Areas.Admin.Controllers
 
 		public ActionResult Files(int id) {
 
-			List<CourseFileGroup> groups = CourseFiles.GetCourseFileGroups(id);
-			ViewBag.Course = Courses.GetCourse(id);
+			ViewBag.CourseFileGroups = CourseFiles.GetCourseFileGroups(id);
+			Course course = Courses.GetCourse(id);
 
-			return View(groups);
+			return View(course);
 
 
 		}
