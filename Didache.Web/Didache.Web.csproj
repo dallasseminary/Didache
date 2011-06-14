@@ -134,6 +134,7 @@
       <DependentUpon>DTS_webdata.mdf</DependentUpon>
     </Content>
     <Content Include="App_GlobalResources\readme.txt" />
+    <Content Include="jquerytest.html" />
     <Content Include="js\admin\courses.js" />
     <Content Include="js\jquery-1.6.1.js" />
     <Content Include="js\jquery-1.6.1.min.js" />

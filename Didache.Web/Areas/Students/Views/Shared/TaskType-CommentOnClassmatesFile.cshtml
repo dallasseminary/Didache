@@ -15,7 +15,7 @@
 </div>
 
 @foreach (InteractionThread thread in threads) {
-	<div class="task-interaction-thread" data-threadid="@thread.ThreadID">
+	<div class="task-interaction-thread" id="thread-@thread.ThreadID" data-threadid="@thread.ThreadID">
 		<div class="task-interaction-header">
 			<span class="user">@(thread.User != null ? thread.User.FormattedName : "missing")</span>
 			<span class="date">@thread.ThreadDate.ToShortDateString()</span>
@@ -25,7 +25,7 @@
 		<div class="task-interaction-list" style="display:none;">
 			
 		@foreach (InteractionPost post in thread.Posts) {
-			<div class="task-interaction-post @(post.UserID == thread.UserID ? " thread-starter" : "")">
+			<div class="task-interaction-post id="post-@post.PostID" @(post.UserID == thread.UserID ? " thread-starter" : "")">
 				<div class="user-info">
 					@if (post.User != null) {
 					<a href="@post.User.ProfileDisplayUrl">

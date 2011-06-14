@@ -31,7 +31,7 @@ namespace Didache {
 
 		public string PostUrl {
 			get {
-				return "/courses/" + Thread.Task.Course.Slug + "/schedule/" + Thread.Task.UnitID + "#interaction-" + PostID;
+				return "/courses/" + Thread.Task.Course.Slug + "/schedule/" + Thread.Task.UnitID + "#thread-" + ThreadID;
 			}
 		}
 	}

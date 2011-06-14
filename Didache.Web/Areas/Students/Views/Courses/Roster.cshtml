@@ -43,10 +43,11 @@
         }
     </div>
     <div class="list">
+        <h5>Facilitators</h5>
         <ul>
             @foreach (CourseUser user in Model.CourseUsers) {
-				if (user.User != null) {
-                <li>@user.User.FormattedName, @user.RoleID</li>
+				if (user.RoleID == 8) {
+                <li>@user.User.FormattedName</li>
 				}
             }
         </ul>
