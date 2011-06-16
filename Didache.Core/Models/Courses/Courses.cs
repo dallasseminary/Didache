@@ -37,7 +37,12 @@ namespace Didache  {
 		}
 
 		public static List<Course> GetCurrentlyRunningCourses() {			
-			return new DidacheDb().Courses.Where(c => c.StartDate < DateTime.Now && c.EndDate > DateTime.Now).ToList();			
+			return new DidacheDb().Courses
+					.Where(c => c.StartDate < DateTime.Now && c.EndDate > DateTime.Now)
+					.OrderBy(c => c.CourseCode)
+						.ThenBy(c => c.Section)
+						.ThenBy(c => c.StartDate)
+					.ToList();		
 		}
 
 		public static List<CourseUser> GetUsersInCourse(int courseID, CourseUserRole roleID) {

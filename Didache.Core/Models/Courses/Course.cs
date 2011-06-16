@@ -7,11 +7,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Web.Script.Serialization;
+using System.Runtime.Serialization;
 
 namespace Didache {
 
-
-
+	
 	public class Course {
 		[Key]
 		public int CourseID { get; set; }
@@ -40,9 +41,9 @@ namespace Didache {
 		[Display(Name = "End Date")]
 		public DateTime EndDate { get; set; }
 
-		[Required]
+		//[Required]
 		[DataType(DataType.MultilineText)]
-		[Display(Name = "Description")]
+		[Display(Name = "Description")]		
 		public string Description { get; set; }
 
 		public string Slug {
@@ -54,21 +55,19 @@ namespace Didache {
 
 		// LINKAGES
 
-		// students
-		// profs
-		// groups
-		// tasks
-		// units
+		[ScriptIgnore]
 		public virtual ICollection<Unit> Units { get; set; }
 
-
-		// session
+		[ScriptIgnore]
 		public virtual Session Session { get; set; }
-		// campus
+		
+		[ScriptIgnore]
 		public virtual Campus Campus { get; set; }
 
+		[ScriptIgnore]
 		public virtual ICollection<CourseUser> CourseUsers { get; set; }
 
+		[ScriptIgnore]
 		public virtual ICollection<CourseUserGroup> CourseUserGroups { get; set; }
 
 		public override string ToString() {

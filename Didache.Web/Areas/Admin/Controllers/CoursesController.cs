@@ -4,14 +4,16 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.IO;
+using System.Web.Script.Serialization;
 using Didache;
+
 
 namespace Didache.Web.Areas.Admin.Controllers
 {
     public class CoursesController : Controller
     {
 		private DidacheDb db = new DidacheDb();
-
+		private EntityObjectSerializer serializer = new EntityObjectSerializer();
 		
 		//
         // GET: /Admin/Courses/
@@ -57,6 +59,57 @@ namespace Didache.Web.Areas.Admin.Controllers
 			return View(units);
 		}
 
+		public ActionResult CourseEditor(int? id) {
+
+			ViewBag.Sessions = db.Sessions.OrderByDescending(s => s.StartDate).ToList();
+			ViewBag.Campuses = db.Campuses.OrderBy(s => s.Name).ToList();
+
+			Course course = (id == null) ? null : db.Courses.Find(id);
+
+			return View(course);
+		}
+
+		[HttpPost]
+		[ValidateInput(false)]
+		public ActionResult UpdateCourse(Course model) {
+			if (model.CourseID > 0) {
+				// EDIT MODE
+				try {
+					model = db.Courses.Find(model.CourseID);
+
+					UpdateModel(model);
+
+					db.SaveChanges();
+
+					return Json(new { success = true, action = "edit", course = serializer.Serialize(model) });
+				} catch (Exception ex) {
+
+					ModelState.AddModelError("", "Edit Failure, see inner exception");
+
+					Response.StatusCode = 500;
+					return Json(new { success = false, action="edit", message = ex.ToString(), errors = GetErrors() });
+				}
+			} else {
+				// ADD MODE
+				if (ModelState.IsValid) {
+					db.Courses.Add(model);
+					db.SaveChanges();
+					return Json(new { success = true, action = "add", course = serializer.Serialize(model) });
+				} else {
+					
+					Response.StatusCode = 500;
+					return Json(new { success = false, action = "add", message = "Invalid new model", errors = GetErrors() });
+				}
+			}
+		}
+
+		Dictionary<string,string[]> GetErrors() {
+			return ModelState.ToDictionary(
+						kvp => kvp.Key,
+						kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+					);
+		}
+
 		public ActionResult Users(int id) {
 
 			List<CourseUserGroup> userGroups = Didache.Courses.GetCourseUserGroups(id);
@@ -65,6 +118,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 			return View(userGroups);
 		}
 
+		/*
 		[HttpPost]
 		public ActionResult UpdateTask(int id) {
 
@@ -85,6 +139,80 @@ namespace Didache.Web.Areas.Admin.Controllers
 
 			return Json(new {success= true});
 		}
+		*/
+
+		[HttpPost]
+		//[ValidateInput(false)]
+		public ActionResult UpdateTask(Task model) {
+
+			if (model.TaskID > 0) {
+				// EDIT MODE
+				try {
+					model = db.Tasks.Find(model.TaskID);
+
+					UpdateModel(model);
+
+					db.SaveChanges();
+
+					
+					return Json(new { success = true, task = serializer.Serialize(model) });
+				} catch (Exception ex) {
+
+					Response.StatusCode = 500;
+					return Json(new { success = false, task = serializer.Serialize(model), message = "Update error", errors = GetErrors() });
+				}				
+			} else {
+
+				// ADD MODE
+				if (ModelState.IsValid) {
+					db.Tasks.Add(model);
+					db.SaveChanges();
+
+					return Json(new { success = true, task = serializer.Serialize(model) });
+				} else {
+					Response.StatusCode = 500;
+					return Json(new { success = false, task = serializer.Serialize(model), message = "Add error", errors = GetErrors() });
+				}				
+			}
+		}
+
+		[HttpPost]
+		//[ValidateInput(false)]
+		public ActionResult UpdateUnit(Unit model) {
+
+			if (model.UnitID > 0) {
+				// EDIT MODE
+				try {
+					model = db.Units.Find(model.UnitID);
+
+					UpdateModel(model);
+
+					db.SaveChanges();
+
+					return Json(new { success = true, unit = serializer.Serialize(model) });
+				}
+				catch (Exception ex) {
+
+					Response.StatusCode = 500;
+					return Json(new { success = false, unit = serializer.Serialize(model), message = "Update error", errors = GetErrors() });
+				}
+			}
+			else {
+
+				// ADD MODE
+				if (ModelState.IsValid) {
+					db.Units.Add(model);
+					db.SaveChanges();
+
+					return Json(new { success = true, unit = serializer.Serialize(model) });
+				}
+				else {
+					Response.StatusCode = 500;
+					return Json(new { success = false, unit = serializer.Serialize(model), message = "Add error", errors = GetErrors() });
+				}
+			}
+		}
+
 
 		[HttpPost]
 		public ActionResult UpdateUnitSorting(int id) {
@@ -136,10 +264,10 @@ namespace Didache.Web.Areas.Admin.Controllers
 
 		public ActionResult Files(int id) {
 
-			List<CourseFileGroup> groups = CourseFiles.GetCourseFileGroups(id);
-			ViewBag.Course = Courses.GetCourse(id);
+			ViewBag.CourseFileGroups = CourseFiles.GetCourseFileGroups(id);
+			Course course = Courses.GetCourse(id);
 
-			return View(groups);
+			return View(course);
 
 
 		}
@@ -403,6 +531,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 		}
 
 		[HttpPost]
+		[ValidateInput(false)]
 		public ActionResult Edit(Course model)
 		{
 			if (model.CourseID > 0)

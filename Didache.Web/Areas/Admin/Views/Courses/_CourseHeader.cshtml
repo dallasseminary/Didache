@@ -1,0 +1,10 @@
+﻿@model Didache.Course
+
+<h1>@Model.CourseCode @Model.Section</h1>
+
+<ul class="course-menu">
+	<li><a href="/admin/courses/courseeditor/@Model.CourseID">Units &amp; Tasks</a></li>
+	<li><a href="/admin/courses/files/@Model.CourseID">Files</a></li>
+	<li><a href="/admin/courses/users/@Model.CourseID">Users</a></li>
+	<li><a href="/admin/courses/grading/@Model.CourseID">Grading</a></li>
+</ul>
