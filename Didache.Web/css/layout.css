@@ -105,11 +105,11 @@ span.icon.excel {
 
     /* for profile in header */
     #profile-display
-	    { margin: 0; padding: 10px 0; height: 80px; display: inline-block; overflow: auto; text-align: right; width: 400px; float: right;}
+	    { margin: 0; padding: 10px 0; min-height: 80px; display: inline-block; overflow: auto; text-align: right; width: 400px; float: right;}
     #profile-display img
-	    { float: right; width: 70px; height: 70px; margin: 0 0 0 20px; border: 1px solid #ccc; background: #fff; padding: 3px; -moz-border-radius: 5px; -webkit-border-radius: 5px;}		
+	    { width: 70px; }		
     #profile-display a
-	    { color: #0281CA; font-size: 24px; position: relative; top: 12px; font-weight: normal; letter-spacing: 0; }
+	    { float: right; position: relative; width: 70px; display: block; overflow: hidden; border: 1px solid #ccc; background: #fff; padding: 3px; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;}
     #profile-display a:hover
 	    { text-decoration: underline;}
 
@@ -314,8 +314,13 @@ span.icon.excel {
     margin-bottom: 10px;
     padding: 0;
     background: #FFF;
-    height: 55px;
+    position: relative;
 }
+.activity.prof-file, .activity.graded-assignment {
+    height: 24px;
+    border-bottom: 1px solid #AAA;
+    padding-left: 5px;
+}   
     .activity .activity-user-image {
         display: block;
         float: left;
@@ -324,15 +329,23 @@ span.icon.excel {
     .activity .activity-user-image img {
         border-right: 1px solid #BBB;
         width: 45px;
-        margin: 0;
+        margin: 5px 0 5px 5px;
     }
     
     .activity .activity-info {
         display: block;
         float: left;
-        width: 400px;
-        margin-top: 8px;
+        width: 390px;
+        margin: 4px 0 0 10px;
     }
+        .activity .activity-icon {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            height: 32px;
+            width: 32px;
+            display: block;
+        }
         .activity .activity-text {
             font-size: 12px;
             display: block;
@@ -349,6 +362,32 @@ span.icon.excel {
             display: block;
             color: #777;
             font-size: 11px;
+        }
+        .activity.forum-post .activity-icon {
+            background: url(images/icons/comments.png) no-repeat;
+            background-size: 32px 32px;
+        }
+        .activity.interaction-post .activity-icon {
+            background: url(images/icons/TurnInFileSimple.jpg) no-repeat;
+            background-size: 32px 32px;
+        }
+        .activity.interaction-reply .activity-icon {
+            background: url(images/icons/comments_reply.png) no-repeat;
+            background-size: 32px 32px;
+        }
+        .activity.graded-assignment .activity-icon {
+            background: url(images/icons/SimpleCompletion.jpg) no-repeat 4px 4px;
+            background-size: 16px 16px;
+            bottom: 0;
+            height: 24px;
+            width: 24px;
+        }
+        .activity.prof-file .activity-icon {
+            background: url(images/icons/filegroup.png) no-repeat 4px 4px;
+            background-size: 16px 16px;
+            bottom: 0;
+            height: 24px;
+            width: 24px;
         }
     
 /**

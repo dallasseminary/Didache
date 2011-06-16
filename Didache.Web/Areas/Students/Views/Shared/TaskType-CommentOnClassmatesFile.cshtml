@@ -25,7 +25,7 @@
 		<div class="task-interaction-list" style="display:none;">
 			
 		@foreach (InteractionPost post in thread.Posts) {
-			<div class="task-interaction-post id="post-@post.PostID" @(post.UserID == thread.UserID ? " thread-starter" : "")">
+			<div class="task-interaction-post @(post.UserID == thread.UserID ? " thread-starter" : "")" id="post-@post.PostID">
 				<div class="user-info">
 					@if (post.User != null) {
 					<a href="@post.User.ProfileDisplayUrl">
@@ -64,6 +64,8 @@
 
 <script>
     jQuery(function ($) {
+        var urlHash = self.document.location.hash.substring(1);
+        if (urlHash) { $('div.task-interaction-thread[id=' + urlHash + '] > .task-interaction-list').show(); }
         $('div.task-interaction .task-interaction-header').toggle(function () {
             $(this).siblings('.task-interaction-list').slideDown();
         }, function () {
