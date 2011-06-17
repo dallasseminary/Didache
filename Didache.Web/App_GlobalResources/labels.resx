@@ -378,7 +378,7 @@
   <data name="courses_heading_units" xml:space="preserve">
     <value>Units</value>
   </data>
-  <data name="courses_heading_upcoming" xml:space="preserve">
+  <data name="courses_heading_dashboard" xml:space="preserve">
     <value>Upcoming...</value>
   </data>
   <data name="courses_label_gradedfiles" xml:space="preserve">
