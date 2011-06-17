@@ -16,8 +16,8 @@
 
 		@foreach (ActivityStreamItemBase item in ActivityStream.GetUsersItems(Model.CourseID)) {
 			<div class="activity">
-				<span class="activity-date">@item.ActivityDate</span>
 				<span class="activity-text">@Html.Raw(item.FormatActivity())</span>
+				<span class="activity-date">@item.ActivityDate</span>
 			</div>
 		} 
 
