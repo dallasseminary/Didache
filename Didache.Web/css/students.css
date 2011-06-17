@@ -205,6 +205,9 @@ font {
     margin: 15px 10px;
 }
   
+#block-list > .activity {
+    padding: 5px 10px;
+}
 
 #course-roster {
 	
