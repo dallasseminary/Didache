@@ -5,114 +5,15 @@
 }
 @section head {
 	<script src="/js/jquery.fileupload.js"></script>
-	
-
-	<style>
-
-    #add-file-group {
-        overflow: hidden;
-        margin-bottom: 10px;
-    }
-    
-        .admin #add-file-group input[type="text"] {
-            padding: 3px;
-            font-size: 14px;
-            width: 400px;
-        }
-        .admin #add-file-group input[type="buttno"] {
-            padding: 1px;
-            font-size: 14px;
-            width: 125px;
-        }
-        
-	.filegroup .files {
-		min-height: 40px;
-	}
-
-	.filegroup .nested-item-row > .filegroup {
-	    margin: 1px 10px 1px 1px;
-	}
-    
-    .filegroup .filetype {
-        height: 26px;
-        margin-right: 10px;
-    }
-    .filegroup .filetype img{
-        padding: 5px;
-    }
-
-	.filegroup .files .coursefile:nth-child(odd){
-		background: #eee;
-	}
-
-	.filegroup .files .coursefile .file-title {
-		display: inline-block;
-		width: 300px;
-		margin: 5px 0;
-	}
-	.file-name {
-		display: inline-block;
-		width: 300px;
-	}
-	.file-user {
-		display: inline-block;
-		width: 150px;
-		margin: 5px 0;
-	}
-	input.group-name {
-	}		
-	.upload {
-		position: relative;
-		overflow: hidden;
-		direction: ltr;
-		cursor: pointer;
-		text-align: center;
-		color: #333;
-		font-weight: bold;
-		-moz-border-radius: 10px;
-		-webkit-border-radius: 10px;
-		border-radius: 10px;
-		
-		background: #eee;
-		border: 1px solid #999;
-		
-		height: 30px;
-		line-height: 30px;
-		margin: 5px 15px 5px;
-	}
-	.upload:hover{
-		background: paleGreen;
-		border: 1px solid limeGreen;
-		
-	}
-	.upload input {
-		position: absolute;
-		top: 0;
-		left: 0;
-		opacity: 0;
-		-ms-filter: alpha(opacity=0);
-		filter: alpha(opacity=0);
-		
-		-o-transform: translate(-300px,-300px) scale(10);
-		-moz-transform: translate(-800px,0) scale(10);
-		
-		cursor: pointer;
-		height: 100%;
-		margin: 0;
-	}
-	.upload button {
-		display: none;
-	}
-	.ui-sortable-placeholder {
-	    background: #FAE661;
-	}
-	</style>
+	<script src="/js/admin/courses-common.js"></script>
+	<script src="/js/admin/courses-data.js"></script>
+	<script src="/js/admin/courses-files.js"></script>
 }
 <!--	
 x display files
 x save data
-x upload files to group
-x sort files
+- upload files to group
+- sort files
 x sort groups
 x add group
 - find files from other people
@@ -121,17 +22,46 @@ x add group
 - remove files
 -->
 
+@Html.Partial("_CourseHeader", Model)
 
+<input type="hidden" id="CourseID" name="CourseID" value="@(Model != null ? Model.CourseID : 0)" />
 
+<button type="button" class="new-button" id="add-file-group">Add File Group</button>
 
-<div id="dialog"><iframe src="javascript:void(0);" frameborder="0"></iframe></div>
+<div id="course-file-groups" class="nested-list">
 
-
-<div id="add-file-group">
-	<input type="text" id="new-file-group-name" placeholder="Enter a group name..." />
-	<input type="button" id="new-file-group-button" value="Add File Group" />
 </div>
 
+
+<div id="file-group-editor" class="item-editor">
+	
+	<input type="hidden" name="GroupID" />
+	<input type="hidden" name="CourseID" />
+
+    <table class="admin-form">
+      <tbody>
+		<tr>
+			<th>
+				Active
+			</th>
+			<td>
+				<input type="checkbox" name="IsActive" />
+			</td>
+		</tr>
+		<tr>
+			<th>
+				Name
+			</th>
+			<td>
+				<input type="text" name="Name" />
+			</td>
+		</tr>	
+		</tbody>
+	</table>
+</div>
+
+
+@*
 <div id="filegroups" class="nested-list" data-courseid="@Model.CourseID">
 @foreach(CourseFileGroup group in ViewBag.CourseFileGroups) {
 	
@@ -170,7 +100,7 @@ x add group
 		}	
 		</div>
 		
-		@* *@
+		
 	</div>		
 }
 </div>
@@ -178,25 +108,7 @@ x add group
 <script>
 	$(function () {
 
-		// dialog
-		$('#dialog').dialog({
-			modal: true,
-			autoOpen: false,
-			height: '350',
-			width: '500',
-			draggable: true,
-			resizeable: true,
-			title: 'Editor'
-		});
 
-		$('.file-edit, .filegroup-edit').click(function (e) {
-			e.preventDefault();
-
-			$('#dialog iframe').attr('src', $(this).attr('href'));
-			$('#dialog').dialog('open');
-
-			return false;
-		});
 
 		
 		// add group
@@ -411,3 +323,4 @@ function setupFiles(selector) {
 	</script>
 
 </div>
+*@

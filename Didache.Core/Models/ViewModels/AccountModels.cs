@@ -32,7 +32,7 @@ namespace Didache.Models {
 
 	public class LogOnModel {
 		[Required]
-		[Display(Name = "User name")]
+		[Display(Name = "DTS ID, Email, or Username")]
 		public string UserName { get; set; }
 
 		[Required]

@@ -1,0 +1,45 @@
+﻿@model List<User>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Find Users</h2>
+
+<form action="/admin/users/">
+	<input type="text" name="query" placeholder="name, id, etc." />
+	<input type="submit" value="search" />
+</form>
+
+@if (Model != null && Model.Count > 0) {
+	<table class="admin-list">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>First</th>
+				<th>Last</th>
+				<th>Username</th>
+				<th>Last Activity</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+		@foreach (User user in Model) {
+			<tr>
+				<td>@user.UserID</td>
+				<td>@user.FirstName</td>
+				<td>@user.LastName</td>
+				<td>@user.Username</td>
+				<td>
+					@{ MembershipUser mUser = Membership.GetUser(user.Username, false); }
+					@(mUser != null ? mUser.LastActivityDate.ToString() : "(none)")
+				</td>
+				<td>
+					<a href="/admin/users/edituser/@user.UserID">edit</a>
+				</td>
+			</tr>
+  }
+		</tbody>
+	</table>
+
+}

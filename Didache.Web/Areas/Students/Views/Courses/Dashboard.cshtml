@@ -4,9 +4,9 @@
 	ViewBag.Title = Model.CourseCode + Model.Section + " " + Resources.labels.coursetabs_dashboard;
 }
 
-@{ Html.RenderPartial("CourseHeader"); }
+@Html.Partial("CourseHeader")
 
-@{ Html.RenderPartial("CourseMenu"); }
+@Html.Partial("CourseMenu")
 
 <div id="main-column">
     <div class="block-list-header"><h3>@Resources.labels.courses_heading_upcoming</h3></div>

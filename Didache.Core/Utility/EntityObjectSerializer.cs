@@ -56,7 +56,7 @@ namespace Didache {
 			
 			// get all the System.object properties
 			var properties = from p in type.GetProperties()
-							 where p.CanWrite &&
+							 where /* p.CanWrite && */
 								   p.CanRead &&
 								   _builtInTypes.Contains(p.PropertyType)
 							 select p;

@@ -1,0 +1,69 @@
+﻿@model Didache.User
+
+@{
+    ViewBag.Title = "EditUser";
+}
+
+<h2>EditUser</h2>
+
+<script src="@Url.Content("~/js/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/js/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+	@Html.HiddenFor(m => m.UserID)
+	
+    <fieldset>
+        <legend>User</legend>
+
+		<table>
+			<tbody>
+				<tr>
+					<th>ID</th>
+					<td>@Model.UserID</td>
+				</tr>
+				<tr>
+					<th>Nick</th>
+					<td>@Model.NickName</td>
+				</tr>
+				<tr>
+					<th>First</th>
+					<td>@Model.FirstName</td>
+				</tr>
+				<tr>
+					<th>Middle</th>
+					<td>@Model.MiddleName</td>
+				</tr>
+				<tr>
+					<th>Last</th>
+					<td>@Model.LastName</td>
+				</tr>
+				<tr>
+					<th>Last</th>
+					<td>@Model.LastName</td>
+				</tr>
+				<tr>
+					<th>Email</th>
+					<td>@Model.Email</td>
+				</tr>
+				<tr>
+					<th>Username</th>
+					<td>@Model.Username</td>
+				</tr>
+				<tr>
+					<th>Roles</th>
+					<td>
+						@foreach (string role in ViewBag.AllRoles) {
+							<input type="checkbox" name="roles" value="@role" id="role-@role" @(ViewBag.UsersRoles.Contains(role) ? " checked" : "")	 /><label for="role-@role">@role</label><br />					
+						}		
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}

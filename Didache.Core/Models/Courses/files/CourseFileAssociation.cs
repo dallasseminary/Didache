@@ -7,6 +7,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Web.Script.Serialization;
+using System.Runtime.Serialization;
 
 namespace Didache {
 
@@ -17,7 +19,9 @@ namespace Didache {
 		public DateTime DateAdded { get; set; }
 		public bool IsActive { get; set; }
 
+		[ScriptIgnore]
 		public virtual CourseFileGroup CourseFileGroup { get; set; }
+
 		public virtual CourseFile CourseFile { get; set; }
 	}
 

@@ -51,13 +51,6 @@ namespace Didache.Web.Areas.Admin.Controllers
 			return View(gradeGroups);
 		}
 
-		public ActionResult Outline(int id) {
-
-			List<Unit> units = Didache.Courses.GetCourseUnitsWithTasks(id);
-			ViewBag.Course = Courses.GetCourse(id);
-
-			return View(units);
-		}
 
 		public ActionResult CourseEditor(int? id) {
 
@@ -116,6 +109,48 @@ namespace Didache.Web.Areas.Admin.Controllers
 			ViewBag.Course = Courses.GetCourse(id);
 
 			return View(userGroups);
+		}
+
+		public ActionResult UserGroups(int id) {
+
+			return View(Courses.GetCourse(id));
+		}
+
+		[HttpPost]
+		public ActionResult UpdateUserGroup(CourseUserGroup model) {
+
+			if (model.GroupID > 0) {
+				// EDIT MODE
+				try {
+					model = db.CourseUserGroups.Find(model.GroupID);
+
+					UpdateModel(model);
+
+					db.SaveChanges();
+
+					return Json(new { success = true, action = "edit", model = serializer.Serialize(model) });
+				}
+				catch (Exception ex) {
+
+					ModelState.AddModelError("", "Edit Failure, see inner exception");
+
+					Response.StatusCode = 500;
+					return Json(new { success = false, action = "edit", message = ex.ToString(), errors = GetErrors() });
+				}
+			}
+			else {
+				// ADD MODE
+				if (ModelState.IsValid) {
+					db.CourseUserGroups.Add(model);
+					db.SaveChanges();
+					return Json(new { success = true, action = "add", model = serializer.Serialize(model) });
+				}
+				else {
+
+					Response.StatusCode = 500;
+					return Json(new { success = false, action = "add", message = "Invalid new model", errors = GetErrors() });
+				}
+			}
 		}
 
 		/*
@@ -298,19 +333,21 @@ namespace Didache.Web.Areas.Admin.Controllers
 		public ActionResult FileUpload(int id) {
 
 			// get groupID from form data JSON
+			int courseID = id;
 			int groupID = 0;			
 			string data = Request.Form["groupid"];
 			Int32.TryParse(data, out groupID);
 
 			// prep objects
-			var didacheDb = new DidacheDb();
-	
 			Guid uniqueID = Guid.NewGuid();
 			string originalFilename = "";
 			string originalExtension = "";
 			string title = "";
 			int fileID = 0;
 			HttpPostedFileBase file = null;
+
+			CourseFileAssociation cfa = null;
+			CourseFile courseFile = null;
 
 			// save file
 			if (Request.Files.Count > 0 && Request.Files[0].ContentLength > 0) {
@@ -323,7 +360,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 				string filePath = Path.Combine(HttpContext.Server.MapPath("~/uploads"), uniqueID.ToString() + originalExtension);
 				file.SaveAs(filePath);
 
-				CourseFile courseFile = new CourseFile();
+				courseFile = new CourseFile();
 				courseFile.UserID = Didache.Users.GetLoggedInUser().UserID;
 				courseFile.UniqueID = uniqueID;
 				courseFile.ContentType = file.ContentType;
@@ -333,23 +370,31 @@ namespace Didache.Web.Areas.Admin.Controllers
 				courseFile.Title = title;
 				courseFile.Description = "";
 
-				didacheDb.CourseFiles.Add(courseFile);
-				
-				didacheDb.SaveChanges();
-				fileID = courseFile.FileID;
+				db.CourseFiles.Add(courseFile);				
+				db.SaveChanges();
 
 
 				// create association
-				CourseFileAssociation cfa = new CourseFileAssociation();
-				cfa.FileID = fileID;
+				cfa = new CourseFileAssociation();
+				cfa.FileID = courseFile.FileID;
 				cfa.GroupID = groupID;
 				cfa.SortOrder = 999;
+				cfa.DateAdded = DateTime.Now;
 
-				didacheDb.CourseFileAssociations.Add(cfa);
-				didacheDb.SaveChanges();
+				db.CourseFileAssociations.Add(cfa);
+				db.SaveChanges();
 
 
 			}
+
+			/*
+			return Json(serializer.Serialize(new {
+				success = (file!= null),
+				cfa = cfa
+			}));
+			*/
+
+			return Json(serializer.Serialize(cfa));
 
 			// do processing
 			object returnObject = new {
@@ -375,12 +420,51 @@ namespace Didache.Web.Areas.Admin.Controllers
 			var reader = new JsonFx.Json.JsonReader();
 			dynamic output = reader.Read(data);
 
+
+			// get groups
+			List<CourseFileGroup> groups = db.CourseFileGroups.Where(cfg => cfg.CourseID == id).ToList();
+			List<int> groupIDs = groups.Select(cfg => cfg.GroupID).ToList();
+			// get files
+			List<CourseFileAssociation> courseFiles = db.CourseFileAssociations.Where(cfa => groupIDs.Contains(cfa.GroupID)).ToList();
+
+			foreach (var groupInfo in output) {
+				CourseFileGroup fileGroup = groups.SingleOrDefault(cfg => cfg.GroupID == groupInfo.groupid);
+				fileGroup.SortOrder = groupInfo.sortorder;
+
+				foreach (var fileInfo in groupInfo.files) {
+					CourseFileAssociation currentCourseFile = courseFiles.SingleOrDefault(cfa => cfa.FileID == fileInfo.fileid);
+
+					// has the group changed?
+					if (currentCourseFile.GroupID != fileGroup.GroupID) {
+						
+						// create a new one with the new group
+						CourseFileAssociation newCourseFile = new CourseFileAssociation() {
+							FileID = currentCourseFile.FileID,
+							GroupID = fileGroup.GroupID,
+							DateAdded = currentCourseFile.DateAdded,
+							SortOrder = fileInfo.sortorder
+						};
+
+						db.CourseFileAssociations.Remove(currentCourseFile);
+						db.CourseFileAssociations.Add(newCourseFile);
+
+					}
+					else {
+						// update current one
+						currentCourseFile.SortOrder = fileInfo.sortorder;
+					}
+				
+				}
+			}
+			db.SaveChanges();
+
+			/*
 			foreach (var groupInfo in output) {
 
 				// get and update the group
 				CourseFileGroup fileGroup = didacheDb.CourseFileGroups.Find(groupInfo.groupid);
 				fileGroup.SortOrder = groupInfo.sortorder;
-				fileGroup.Name = groupInfo.name;
+				//fileGroup.Name = groupInfo.name;
 				
 
 				// TEST 2: get all existing, update, remove missing
@@ -414,6 +498,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 				}
 
 			}
+			*/
 
 			didacheDb.SaveChanges();
 
@@ -423,7 +508,144 @@ namespace Didache.Web.Areas.Admin.Controllers
 			return Json(new { success= true});
 		}
 
+		[HttpPost]
+		[ValidateInput(false)]
+		public ActionResult UpdateCourseFileGroup(CourseFileGroup model) {
+			if (model.GroupID > 0) {
+				// EDIT MODE
+				try {
+					model = db.CourseFileGroups.Find(model.GroupID);
 
+					UpdateModel(model);
+
+					db.SaveChanges();
+
+					return Json(new { success = true, action = "edit", courseFileGroup = serializer.Serialize(model) });
+				}
+				catch (Exception ex) {
+
+					ModelState.AddModelError("", "Edit Failure, see inner exception");
+
+					Response.StatusCode = 500;
+					return Json(new { success = false, action = "edit", message = ex.ToString(), errors = GetErrors() });
+				}
+			}
+			else {
+				// ADD MODE
+				if (ModelState.IsValid) {
+					db.CourseFileGroups.Add(model);
+					db.SaveChanges();
+					return Json(new { success = true, action = "add", courseFileGroup = serializer.Serialize(model) });
+				}
+				else {
+
+					Response.StatusCode = 500;
+					return Json(new { success = false, action = "add", message = "Invalid new model", errors = GetErrors() });
+				}
+			}
+		}
+
+		[HttpPost]
+		public ActionResult UpdateUserGroupSorting(int id) {
+
+			var didacheDb = new DidacheDb();
+
+			string data = HttpUtility.UrlDecode(Request.Form.ToString());
+
+			//dynamic newValue = Newtonsoft.Json.JsonConvert.DeserializeObject<System.Dynamic.>(data);
+			var reader = new JsonFx.Json.JsonReader();
+			dynamic output = reader.Read(data);
+
+
+			// get groups
+			List<CourseUserGroup> groups = db.CourseUserGroups.Where(cfg => cfg.CourseID == id).ToList();
+			List<int> groupIDs = groups.Select(cfg => cfg.GroupID).ToList();
+			
+			// get files
+			List<CourseUser> courseUsers = db.CourseUsers.Where(cu => groupIDs.Contains(cu.GroupID)).ToList();
+
+			foreach (var groupInfo in output) {
+				CourseUserGroup userGroup = groups.SingleOrDefault(cug => cug.GroupID == groupInfo.groupid);
+
+				foreach (var userInfo in groupInfo.files) {
+					CourseUser courseUser = courseUsers.SingleOrDefault(cu => cu.UserID == userInfo.userid);
+
+					// has the group changed?
+					if (courseUser.GroupID != userGroup.GroupID) {
+
+						// create a new one with the new group
+						CourseUser newCourseFile = new CourseUser() {
+							UserID = courseUser.UserID,
+							GroupID = userGroup.GroupID,
+							RoleID = (int)CourseUserRole.Student
+						};
+
+						db.CourseUsers.Remove(courseUser);
+						db.CourseUsers.Add(newCourseFile);
+
+					}
+					else {
+						// update current one
+						currentCourseFile.SortOrder = fileInfo.sortorder;
+					}
+
+				}
+			}
+			db.SaveChanges();
+
+			/*
+			foreach (var groupInfo in output) {
+
+				// get and update the group
+				CourseFileGroup fileGroup = didacheDb.CourseFileGroups.Find(groupInfo.groupid);
+				fileGroup.SortOrder = groupInfo.sortorder;
+				//fileGroup.Name = groupInfo.name;
+				
+
+				// TEST 2: get all existing, update, remove missing
+
+
+				// get exsiting files
+				List<CourseFileAssociation> courseFiles = didacheDb.CourseFileAssociations.Where(cfa => cfa.GroupID == fileGroup.GroupID).ToList();
+				
+
+				foreach (var fileInfo in groupInfo.files) {
+					// find the file
+					CourseFileAssociation cfa = courseFiles.Find(c => c.FileID == fileInfo.fileid);
+					if (cfa != null) {
+						// update
+						cfa.SortOrder = fileInfo.sortorder;
+						// add to change list
+						//changedFiles.Add(cfa);
+						courseFiles.Remove(cfa);
+					} else {
+						cfa = new CourseFileAssociation();
+						cfa.GroupID = fileGroup.GroupID;
+						cfa.FileID = fileInfo.fileid;
+						cfa.SortOrder = fileInfo.sortorder;
+						didacheDb.CourseFileAssociations.Add(cfa);
+					}
+				}
+
+				// remove all remaining files
+				foreach (CourseFileAssociation notUpdated in courseFiles) {
+					didacheDb.CourseFileAssociations.Remove(notUpdated);
+				}
+
+			}
+			*/
+
+			didacheDb.SaveChanges();
+
+
+			// need to deserialize this and update all the groups and files
+
+			return Json(new { success = true });
+		}
+
+
+
+		/*
 		public ActionResult Unit(int? id, int? courseID) {
 			Unit unit = db.Units.SingleOrDefault(u => u.UnitID == id);
 			if (unit == null)
@@ -476,7 +698,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 		}
 
 
-
+		
 		public ActionResult Task(int? id, int? unitID) {
 			Task task = db.Tasks.SingleOrDefault(t => t.TaskID == id);
 			if (task == null)
@@ -484,7 +706,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 
 			return View(task);
 		}
-
+		
 		[HttpPost]
 		//[ValidateInput(false)]
 		public ActionResult Task(Task model) {
@@ -521,7 +743,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 
 		}
 
-
+		
 		public ActionResult Edit(int? id)
 		{
 			Course course = db.Courses.SingleOrDefault(s => s.CourseID == id);
@@ -569,6 +791,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 				}
 			}
 		}
+		 * */
 
     }
 }

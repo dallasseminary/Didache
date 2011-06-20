@@ -255,3 +255,104 @@
 	margin: 0 5px 5px 0;
 	cursor: pointer;
 }
+
+
+/* FILES */
+
+    #add-file-group {
+        overflow: hidden;
+        margin-bottom: 10px;
+    }
+    
+        .admin #add-file-group input[type="text"] {
+            padding: 3px;
+            font-size: 14px;
+            width: 400px;
+        }
+        .admin #add-file-group input[type="button"] {
+            padding: 1px;
+            font-size: 14px;
+            width: 125px;
+        }
+        
+	.filegroup .files {
+		min-height: 40px;
+	}
+
+	.filegroup .nested-item-row > .filegroup {
+	    margin: 1px 10px 1px 1px;
+	}
+    
+    .filegroup .filetype {
+        height: 26px;
+        margin-right: 10px;
+    }
+    .filegroup .filetype img{
+        padding: 5px;
+    }
+
+	.filegroup .files .coursefile:nth-child(odd){
+		background: #eee;
+	}
+
+	.filegroup .files .coursefile .file-title {
+		display: inline-block;
+		width: 300px;
+		margin: 5px 0;
+	}
+	.file-name {
+		display: inline-block;
+		width: 300px;
+	}
+	.file-user {
+		display: inline-block;
+		width: 150px;
+		margin: 5px 0;
+	}
+	input.group-name {
+	}		
+	.upload {
+		position: relative;
+		overflow: hidden;
+		direction: ltr;
+		cursor: pointer;
+		text-align: center;
+		color: #333;
+		font-weight: bold;
+		-moz-border-radius: 10px;
+		-webkit-border-radius: 10px;
+		border-radius: 10px;
+		
+		background: #eee;
+		border: 1px solid #999;
+		
+		height: 30px;
+		line-height: 30px;
+		margin: 5px 15px 5px;
+	}
+	.upload:hover{
+		background: paleGreen;
+		border: 1px solid limeGreen;
+		
+	}
+	.upload input {
+		position: absolute;
+		top: 0;
+		left: 0;
+		opacity: 0;
+		-ms-filter: alpha(opacity=0);
+		filter: alpha(opacity=0);
+		
+		-o-transform: translate(-300px,-300px) scale(10);
+		-moz-transform: translate(-800px,0) scale(10);
+		
+		cursor: pointer;
+		height: 100%;
+		margin: 0;
+	}
+	.upload button {
+		display: none;
+	}
+	.ui-sortable-placeholder {
+	    background: #FAE661;
+	}

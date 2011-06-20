@@ -1,14 +1,25 @@
-﻿@model IEnumerable<Didache.CourseUserGroup>
+﻿@model Course
 
 @{
     ViewBag.Title = ViewBag.Course.ToString() + " Users";
 }
-<h2>@ViewBag.Course.ToString() Users</h2>
+
+/*
+- add/edit/delete groups
+- move students around
+- add students
+- add graders, builders, students, and faculty
+*/
+
+@Html.Partial("_CourseHeader", Model)
+
+<input type="hidden" id="CourseID" name="CourseID" value="@(Model != null ? Model.CourseID : 0)" />
+
 
 <div class="nested-main">
 
 <div id="course-users" data-courseid="@ViewBag.Course.CourseID" class="nested-list">
-	@foreach (CourseUserGroup group in Model) {
+	@foreach (CourseUserGroup group in ViewBag.CourseUserGroups) {
 	<div class="course-group nested-item" data-unitid="@group.GroupID" >
 		<div class="group-header nested-item-row">
 			<input type="text" class="unit-name" value="@group.Name" />
