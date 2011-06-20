@@ -16,7 +16,7 @@
 			<div class="block-list-item-label"><span>@group.Name</span></div>
 			<ul class="course-filegroup-files">
 				@foreach (CourseFileAssociation courseFileAssociation in group.CourseFileAssociations) {				
-					<li>
+					<li id="file-@courseFileAssociation.CourseFile.FileID">
                         <a class="file-@courseFileAssociation.CourseFile.FileType" href="@courseFileAssociation.CourseFile.FileUrl">
                             <span class="filename">@courseFileAssociation.CourseFile.Title</span>
                             <span class="type"><img src="/css/images/@(courseFileAssociation.CourseFile.FileType).png" /></span>
