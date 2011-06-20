@@ -144,7 +144,7 @@
   <data name="courses_heading_units" xml:space="preserve">
     <value>單位</value>
   </data>
-  <data name="courses_heading_upcoming" xml:space="preserve">
+  <data name="courses_heading_dashboard" xml:space="preserve">
     <value>即將到來的...</value>
   </data>
   <data name="courses_label_gradedfiles" xml:space="preserve">

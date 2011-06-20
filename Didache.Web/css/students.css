@@ -205,7 +205,8 @@ font {
     margin: 15px 10px;
 }
   
-#block-list > .activity {
+.block-list > .activity {
+    display: block;
     padding: 5px 10px;
 }
 
