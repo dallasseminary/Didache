@@ -15,7 +15,7 @@
         <thead>
             <tr>
                 <th width="200">&nbsp;</th>
-                <td width="720">@Model.Subject</td>
+                <td width="720">@Html.Raw(Model.Subject)</td>
             </tr>
         </thead>
 	    <tbody>
@@ -72,7 +72,7 @@
 			    <tr>
 				    <td>Subject</td>
 				    <td>
-					    <input type="text" id="Subject" size="60" name="Subject" value="RE: @Model.LastPostSubject" />					
+					    <input type="text" id="Subject" size="60" name="Subject" value="RE: @Html.Raw(Model.LastPostSubject)" />					
 				    </td>
 			    </tr>
 			    <tr>
