@@ -5,9 +5,9 @@
     List<CourseUserGroup> groups = ViewBag.UserGroups;
 }
 
-<!--@{Html.RenderPartial("CourseHeader"); }-->
+@Html.Partial("CourseHeader")
 
-@{ Html.RenderPartial("CourseMenu"); }
+@Html.Partial("CourseMenu")
 
 <div id="main-column">
     <div class="block-list-header"><h3>@Resources.labels.courses_heading_courseroster</h3></div>

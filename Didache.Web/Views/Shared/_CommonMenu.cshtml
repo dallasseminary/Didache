@@ -15,7 +15,7 @@
 @if (Request.IsAuthenticated) {	
 	<span class="user">@User.Identity.Name</span> <a href="/account/editprofile">Profile</a> <a href="/logout.aspx">@Resources.labels.login_logout</a>
 } else {	
-	<a href="/loginas.aspx?username=john.locoe">@Resources.labels.login_login</a>
+	<a href="/account/login">@Resources.labels.login_login</a>
 }
 							
 			</div>

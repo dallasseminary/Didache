@@ -111,6 +111,7 @@
     <Compile Include="Areas\Admin\Controllers\SessionsController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Areas\Community\CommunityAreaRegistration.cs" />
     <Compile Include="Areas\Community\Controllers\CommunityController.cs" />
     <Compile Include="Areas\Students\Controllers\ApiController.cs" />
@@ -123,25 +124,24 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="socialcounts.php.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="socialcounts.php.designer.cs">
-      <DependentUpon>socialcounts.php.cs</DependentUpon>
-    </Compile>
     <Content Include="App_Data\DTS_webdata.mdf" />
     <Content Include="App_Data\DTS_webdata_log.ldf">
       <DependentUpon>DTS_webdata.mdf</DependentUpon>
     </Content>
     <Content Include="App_GlobalResources\readme.txt" />
     <Content Include="jquerytest.html" />
-    <Content Include="js\admin\courses.js" />
+    <Content Include="js\admin\courses-users.js" />
+    <Content Include="js\admin\courses-common.js" />
+    <Content Include="js\admin\courses-course.js" />
+    <Content Include="js\admin\courses-data.js" />
+    <Content Include="js\admin\courses-files.js" />
+    <Content Include="js\admin\old\courses-rf.js" />
+    <Content Include="js\admin\courses-unittasks.js" />
+    <Content Include="js\admin\old\courses.js" />
     <Content Include="js\jquery-1.6.1.js" />
     <Content Include="js\jquery-1.6.1.min.js" />
-    <Content Include="reflectiontest.aspx" />
     <Content Include="js\admin.js" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Content Include="socialcounts.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Didache.mdf" />
@@ -249,6 +249,7 @@
     <Folder Include="Areas\Community\Views\Shared\" />
     <Folder Include="Areas\Students\Models\" />
     <Folder Include="supportfiles\be101\" />
+    <Folder Include="tests\" />
     <Folder Include="uploads\" />
   </ItemGroup>
   <ItemGroup>
@@ -279,7 +280,7 @@
     <Content Include="Views\Main\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Shared\CommonMenu.cshtml" />
+    <Content Include="Views\Shared\_CommonMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\Web.config" />
@@ -294,15 +295,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\Courses\List.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Admin\Views\Courses\Units.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Admin\Views\Courses\Tasks.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Admin\Views\Courses\Task.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\Grading\Index.cshtml" />
@@ -380,12 +372,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\Campuses\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Courses\Unit.cshtml" />
     <Content Include="Areas\Community\Views\Web.config" />
     <Content Include="Areas\Students\Views\Shared\Copy of TaskType-TurnInFileSimple.cshtml" />
     <Content Include="Areas\Students\Views\Shared\Copy of TaskType-TurnInFileForComment.cshtml" />
     <Content Include="Areas\Admin\Views\Courses\Files.cshtml" />
-    <Content Include="Areas\Admin\Views\Courses\Outline.cshtml" />
     <Content Include="Areas\Community\Views\Community\Display.cshtml" />
     <Content Include="Areas\Community\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Community\Views\Community\Index.cshtml" />
@@ -394,11 +384,14 @@
     <Content Include="Areas\Admin\Views\Courses\Grading.cshtml" />
     <Content Include="Areas\Admin\Views\Courses\CourseEditor.cshtml" />
     <Content Include="Areas\Admin\Views\Courses\_CourseHeader.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\EditUser.cshtml" />
+    <Content Include="Areas\Admin\Views\Courses\UserGroups.cshtml" />
     <None Include="css\fonts\league\League_Gothic-webfont.eot" />
     <None Include="css\fonts\league\League_Gothic-webfont.ttf" />
     <None Include="css\fonts\league\League_Gothic-webfont.woff" />
     <Content Include="Views\Account\EditProfile.cshtml" />
-    <None Include="socialcounts.php" />
+    <Content Include="Views\Account\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\labels.ar.resx">

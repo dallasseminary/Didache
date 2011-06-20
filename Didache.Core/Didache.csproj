@@ -87,13 +87,14 @@
     <Compile Include="Models\Courses\VideoInfo.cs" />
     <Compile Include="Models\Grading\Grading.cs" />
     <Compile Include="Models\Courses\Courses.cs" />
+    <Compile Include="Models\User\UserRoles.cs" />
     <Compile Include="Models\User\Users.cs" />
     <Compile Include="Models\Courses\Sessions.cs" />
     <Compile Include="Models\Courses\Tasks.cs" />
     <Compile Include="Models\Courses\Units.cs" />
     <Compile Include="Models\Enum\CourseUserRole.cs" />
     <Compile Include="Models\Enum\TaskCompletionStatus.cs" />
-    <Compile Include="Models\Example\AccountModels.cs" />
+    <Compile Include="Models\ViewModels\AccountModels.cs" />
     <Compile Include="Models\Courses\Campus.cs" />
     <Compile Include="Models\Forums\Forums.cs" />
     <Compile Include="Models\Forums\Post.cs" />

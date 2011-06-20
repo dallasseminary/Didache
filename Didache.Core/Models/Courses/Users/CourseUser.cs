@@ -7,6 +7,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Web.Script.Serialization;
+using System.Runtime.Serialization;
 
 namespace Didache {
 	public class CourseUser {
@@ -16,7 +18,9 @@ namespace Didache {
 		public int RoleID { get; set; }
 		public int GroupID { get; set; }
 
+		[ScriptIgnore]
 		public virtual Course Course { get; set; }
+
 		public virtual User User { get; set; }
 	}
 }

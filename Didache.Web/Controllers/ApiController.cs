@@ -29,11 +29,30 @@ namespace Didache.Web.Controllers
 			return Json(serializer.Serialize(Didache.Courses.GetCourseUnitsWithTasks(id)), JsonRequestBehavior.AllowGet);
 		}
 
-		public ActionResult GetCourseFiles(int id) {
+		public ActionResult GetCourseFileGroups(int id) {
 			return Json(serializer.Serialize(Didache.CourseFiles.GetCourseFileGroups(id)), JsonRequestBehavior.AllowGet);
 		}
 
+		public ActionResult GetCourseFile(int id) {
+			return Json(serializer.Serialize(db.CourseFiles.Find(id)), JsonRequestBehavior.AllowGet);
+		}
 
+		public ActionResult GetCourseFileGroup(int id) {
+			return Json(serializer.Serialize(db.CourseFileGroups.Find(id)), JsonRequestBehavior.AllowGet);
+		}
+
+		[Authorize]
+		public ActionResult GetCourseUserGroups(int id) {
+			return Json(serializer.Serialize(Didache.Courses.GetCourseUserGroups(id)), JsonRequestBehavior.AllowGet);
+		}
+
+		[Authorize]
+		public ActionResult GetCourseUserGroup(int id) {
+			CourseUserGroup g = db.CourseUserGroups.Find(id);
+			g.Students = new List<CourseUser>();
+
+			return Json(serializer.Serialize(g), JsonRequestBehavior.AllowGet);
+		}
 
 
     }

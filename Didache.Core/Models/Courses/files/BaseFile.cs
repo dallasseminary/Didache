@@ -7,6 +7,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Web.Script.Serialization;
+using System.Runtime.Serialization;
 
 namespace Didache {
 	public class BaseFile {
@@ -19,6 +21,7 @@ namespace Didache {
 		public int UserID { get; set; }
 		public DateTime UploadedDate { get; set; }
 
+		[ScriptIgnore]
 		public virtual User User { get; set; }
 
 		public string FileType {

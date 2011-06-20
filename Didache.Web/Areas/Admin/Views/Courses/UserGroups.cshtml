@@ -1,0 +1,62 @@
+﻿@model Course
+
+@{
+    ViewBag.Title = Model.ToString() + " Users";
+}
+
+@section head {
+	<script src="/js/admin/courses-common.js"></script>
+	<script src="/js/admin/courses-data.js"></script>
+	<script src="/js/admin/courses-users.js"></script>
+}
+
+@*
+x load/display
+x add groups
+x edit popup / edit inline
+- move students around
+- add students
+- add graders, builders, students, and faculty
+*@
+
+@Html.Partial("_CourseHeader", Model)
+
+<input type="hidden" id="CourseID" name="CourseID" value="@(Model != null ? Model.CourseID : 0)" />
+
+
+
+<div class="nested-main">
+
+	
+<button type="button" class="new-button" id="add-user-group">Add User Group</button>
+
+
+	<div id="course-user-groups" class="nested-list"></div>
+
+</div>
+
+<div class="nested-sub">
+	<h3>Find Users</h3>
+
+	<input type="text" /><input type="button" value="Search" />
+</div>
+
+<div id="user-group-editor" class="item-editor">
+	
+	<input type="hidden" name="GroupID" />
+	<input type="hidden" name="CourseID" />
+
+    <table class="admin-form">
+      <tbody>
+		<tr>
+			<th>
+				Name
+			</th>
+			<td>
+				<input type="text" name="Name" />
+			</td>
+		</tr>	
+		</tbody>
+	</table>
+
+</div>

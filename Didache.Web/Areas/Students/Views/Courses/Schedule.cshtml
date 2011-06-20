@@ -3,9 +3,9 @@
 	ViewBag.Title = Model.CourseCode + Model.Section + " " + Resources.labels.coursetabs_schedule;
 }
 
-<!--@{Html.RenderPartial("CourseHeader"); }-->
+@Html.Partial("CourseHeader")
 
-@{Html.RenderPartial("CourseMenu");}
+@Html.Partial("CourseMenu")
 
 <div id="main-column">
 	

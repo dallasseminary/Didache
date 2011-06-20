@@ -39,7 +39,7 @@
 
 	<div id="dts-common-menu">
         <div class="wrapper">
-		    @{ Html.RenderPartial("CommonMenu"); }
+		    @{ Html.RenderPartial("_CommonMenu"); }
         </div>
 	</div>
 
@@ -51,7 +51,9 @@
                     @if (HttpContext.Current.User.Identity.IsAuthenticated) {
 			        <li><a id="main-menu-courses" href="/courses" @Html.Raw(Request.Url.PathAndQuery.StartsWith("/courses") ? " class=\"selected\"" : "")>@Resources.labels.tabs_courses</a></li>
 			        <li><a id="main-menu-profile" href="/community" @Html.Raw(Request.Url.PathAndQuery.StartsWith("/community") ? " class=\"selected\"" : "")>@Resources.labels.tabs_community</a></li>
-			        <li><a id="main-menu-admin" href="/admin" @Html.Raw(Request.Url.PathAndQuery.StartsWith("/admin") ? " class=\"selected\"" : "")>@Resources.labels.tabs_admin</a></li>
+					}
+					@if (HttpContext.Current.User.IsInRole(UserRoles.Administrator) || HttpContext.Current.User.IsInRole(UserRoles.Builder)) {
+					<li><a id="main-menu-admin" href="/admin" @Html.Raw(Request.Url.PathAndQuery.StartsWith("/admin") ? " class=\"selected\"" : "")>@Resources.labels.tabs_admin</a></li>
 			        }
                 </ul>
             </div>
@@ -96,6 +98,8 @@
 						<li><a href="@Users.GetLoggedInUser().ProfileDisplayUrl">@Resources.labels.submenu_view</a></li>
 				    </ul>
 			    </div>
+		   }
+		   @if (HttpContext.Current.User.IsInRole(UserRoles.Administrator) || HttpContext.Current.User.IsInRole(UserRoles.Builder)) {
                 <div class="sub-menu-item @(Request.Url.PathAndQuery.StartsWith("/admin") ? " selected" : "")" id="main-menu-admin-details">
 				    <ul>
 					    <li><a href="/admin/sessions">@Resources.labels.submenu_sessions</a></li>
