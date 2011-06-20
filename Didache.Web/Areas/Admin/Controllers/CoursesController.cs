@@ -585,8 +585,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 
 					}
 					else {
-						// update current one
-						currentCourseFile.SortOrder = fileInfo.sortorder;
+						// do nothing since we don't care about the order
 					}
 
 				}

@@ -123,8 +123,6 @@
     <Compile Include="TaskTypes\TaskTypeInfo.cs" />
     <Compile Include="TaskTypes\TaskTypeManager.cs" />
     <Compile Include="Utility\EntityObjectSerializer.cs" />
-    <Compile Include="Utility\EntityObjectNestedSerializer.cs" />
-    <Compile Include="Utility\EFObjectConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
