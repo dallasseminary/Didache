@@ -125,6 +125,7 @@ font {
     
 #course-menu
 	{ height: 58px; overflow: visible; margin: 0 0 20px 0; padding: 0; border-bottom: 1px solid #CCC; }
+.admin #course-menu { height: 46px; }
     #course-menu li
 	    { float: left; margin: 0 12px 0 0; height: 54px; display: block; }	
     #course-menu li:last-child
