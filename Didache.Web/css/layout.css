@@ -12,6 +12,13 @@
 #main ul, #main ol {
     margin-bottom: 12px;
 }
+a {
+    color: #194e76;
+    text-decoration: none;   
+}
+a:hover {
+    color: #999;
+}
 a.oe-button 
 {
     background: #DDD;

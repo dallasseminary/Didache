@@ -124,7 +124,7 @@ font {
     }
     
 #course-menu
-	{ height: 58px; overflow: visible; margin: 0 0 20px 0; padding: 0; border-bottom: 1px solid #CCC; }
+	{ height: 58px; overflow: visible; margin: 0 0 20px 0; padding: 0; border-bottom: 1px solid #BBB; }
 .admin #course-menu { height: 46px; }
     #course-menu li
 	    { float: left; margin: 0 12px 0 0; height: 54px; display: block; }	
@@ -148,9 +148,9 @@ font {
 	    { background: #FFF; border-bottom:5px solid #fff; height: 31px;  }	
 
     #course-menu li a span
-	    { color: #222; font-weight: bold; font-size: 14px; display:block; margin: 0 0 5px 0; line-height: 110%;}
+	    { color: #222; font-weight: bold; font-size: 14px; display:block; margin: 0 0 5px 0; line-height: 110%; text-shadow: 0 1px 0 #FFF;}
     #course-menu li a dfn
-	    { color: #666; font-size: 11px; display:block; line-height: 110%; }	
+	    { color: #555; font-size: 11px; display:block; line-height: 110%; }	
 		
 /* common lists on all course pages */
 .block-list-header
@@ -233,6 +233,8 @@ font {
 		height: 200px;
 		float: left;		
 		margin: 5px;
+		display: inline-block;
+		text-align: center;
 	}	
 	#course-roster .course-group-member img {
 		width: 100px;	
@@ -546,77 +548,85 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
 {
     color: #666;
 }
-
 .forum-threads, .forum-posts {
 	border-collapse: collapse;
 	text-align: left;
 	font-size: 14px;
 	margin-bottom: 20px;
-	    -webkit-border-radius: 0 0 4px 4px;
-	       -moz-border-radius: 0 0 4px 4px;
-	            border-radius: 0 0 4px 4px;
+	    -webkit-border-radius: 4px;
+	       -moz-border-radius: 4px;
+	            border-radius: 4px;
         overflow: hidden;
+    border: 1px solid #999;
 }
-    .forum-posts thead tr,  .forum-threads thead tr 
+    .forum-posts .header,  .forum-threads .header 
     {
         background: #194e76;
         color: #FFF;
+        overflow: hidden;
+        text-shadow: -1px 1px 0 #222;
     }
-    .forum-posts thead th,  .forum-threads thead th 
+    .forum-threads .subject, .forum-posts .subject, .forum-posts .content-area { width: 680px; }
+    .forum-threads .name, .forum-posts .poster { width: 190px; }
+    .forum-threads .replies { width: 50px; text-align: center; }
+    .forum-posts .header span,  .forum-threads .header span 
     {
         font-weight: bold;
         font-size: 100%;
-        padding: 5px 10px;   
-        border: 1px solid #333;
+        padding: 5px;   
+        display: block;
+        float: left;
+        margin: 0;
     }
-    .forum-posts thead td,  .forum-threads thead td 
-    {
-        font-size: 100%;
-        padding: 5px 10px;
-        border: 1px solid #333;
-    }
-    .forum-posts thead th a,  .forum-threads thead th a
+    .forum-posts .header a,  .forum-threads .header a
     {
         color: #FFF; 
     }
-    .forum-posts tbody p,  .forum-threads tbody p
+    .forum-posts .post {
+        border-bottom: 1px solid #999;
+        clear: both;
+        overflow: hidden;
+    }
+    .forum-posts .posts .post p,  .forum-threads .threads .thread p
     {
         font-size: 13px;
         line-height: 140%;
         margin-bottom: 12px;
     }
-    .forum-posts tbody li {
+    .forum-posts .posts .post li {
         margin-left: 30px;
     }
-    .forum-posts tbody td.content 
+    .forum-posts .posts .post.content 
     {
         font-size: 13px;
         line-height: 140%;
     }
-	.forum-posts tbody tr:nth-child(odd), .forum-threads tbody tr:nth-child(odd) {
+	.forum-threads div.threads div.thread {
+	    display: block;
+	    clear: both;
+	    overflow: hidden;
+	}
+	.forum-posts div.posts div.post:nth-child(odd), .forum-threads div.threads div.thread:nth-child(odd) {
 		background: #eee;
 	}
-	.forum-posts tbody td, .forum-posts tbody th, .forum-threads tbody td, .forum-threads tbody th{
+	.forum-posts div.posts div.post > div, .forum-threads div.threads div.thread > span {
 		vertical-align: top;
-		text-align: left;
-		padding: 5px 10px;
-		border: solid 1px #BBB;
 		position: relative;
+		padding: 5px;
+		display: block;
+		float: left;
 	}
-	.forum-threads tbody th h3 {
+	.forum-threads h3 {
 	    font-weight: normal;
 	    margin-bottom: 0;
 	}
-	.forum-threads tbody td, forum-posts tbody td {
-		padding: 15px 10px 5px;
-	}
-	.forum-threads tbody td.replies {
+	.forum-threads div.threads div.thread > span.replies {
 	    font-weight: bold;
-	    font-size: 16px;
+	    font-size: 20px;
 	    text-align: center;
-	    padding: 15px 0;
+	    padding: 15px 5px;
 	}
-	.forum-threads .date, .forum-posts tbody .date {
+	.forum-threads .date, .forum-posts .posts .date {
 	    color: #666;
 	    font-size: 10px;
 	    line-height: 100%;
@@ -627,15 +637,24 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
 	    display: block;
 	    margin-bottom: 2px;
 	}
+	.forum-posts .poster {
+	    text-align: center; 
+	    border-right: 1px solid #999;
+	}
 	.forum-posts .post-author, .forum-threads .post-author {
 		width: 100px;
 		margin-bottom: 8px;
 	}
-	.forum-posts .name, .forum-threads .name {
-		font-size: 11px;
+	.forum-posts .name, .forum-threads .threads .name {
+		font-size: 13px;
 		font-weight: bold;
 		margin-bottom: 8px;
 		display: inline-block;
+	}
+	.forum-posts div.posts div.post div.content-area {
+	    border-left: 1px solid #999;
+	    margin-left: -1px;
+	    padding-left: 10px;
 	}
 	.forum-posts .content {
 	    margin-bottom: 15px;
@@ -661,12 +680,13 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
     left: 50%;
     margin-left: -300px;
     z-index: 1000;
+    background: #DEDEDE;
     border: 1px solid #999;
     box-shadow: 0 0 10px #999;
 }
 .reply-link, .thread-link {
     display: none;
-    margin: 0 0 15px 0;
+    margin: 0 0 15px;
 }
 .reply-link a, .thread-link a {
     display: block;
@@ -677,6 +697,14 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
     font-weight: bold;
     text-transform: uppercase;
     text-decoration: none;
+	-webkit-border-radius: 4px;
+	   -moz-border-radius: 4px;
+	        border-radius: 4px;
+	text-shadow: -1px 1px 0 #222;
+	border-color: #99B0C0 #111 #111 #99B0C0;
+	border-width: 1px;
+	border-style: solid;
+    
 }
 .add-reply {
     overflow: hidden;
@@ -687,12 +715,15 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
     height: auto;
 }
 form.forum-post-new {
-    background: #DEDEDE;
-    border: 1px solid #BBB;
+    border-radius: 16px;
+    -webkit-background-clip: border-box;
+            background-clip: border-box;
     padding: 10px;
     width: 640px;
     height: 300px;
     margin: 0 auto 20px;
+    background: #DDD;
+    overflow: hidden;
 }
     form.forum-post-new table td 
     {
@@ -708,6 +739,7 @@ form.forum-post-new {
         padding: 4px;
         font-size: 13px;
         margin: auto auto;
+        max-width: 632px;
     }
     form.forum-post-new input[type="submit"] 
     {
