@@ -103,6 +103,25 @@ namespace Didache {
 			}
 		}
 
+		public string SecureName {
+			get {
+				switch (NameFormat) {
+					// John Charles Dyer
+					case "FF":					
+					// John C. Dyer
+					default:
+					case "FI":
+						return ((String.IsNullOrEmpty(NickName)) ? FirstName : NickName) + " " + LastName.Substring(0, 1);
+					// J. Charles Dyer
+					case "IF":
+						return MiddleName + " " + LastName.Substring(0, 1);
+					// J. C. Dyer
+					case "II":
+						return ((FirstName.Length > 0) ? FirstName.Substring(0, 1) + ". " : "") + ((MiddleName.Length > 0) ? MiddleName.Substring(0, 1) + ". " : "") + " " + LastName;
+				}
+			}
+		}
+
 		public string ProfileImageUrl {
 			get {
 				return "http://www.dts.edu/images/carsphotos/photo.ashx?id=" + UserID;
@@ -159,5 +178,8 @@ namespace Didache {
 		// preferences
 		public string Language { get; set; }
 		public Double TimezoneOffset { get; set; }
+
+
+		// 
 	}
 }

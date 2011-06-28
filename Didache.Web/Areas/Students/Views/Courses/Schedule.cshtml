@@ -7,6 +7,10 @@
 
 @Html.Partial("CourseMenu")
 
+@section head {
+	<script src="/js/students/students.js"></script>
+}
+
 <div id="main-column">
 	
 	<div class="block-list-header"><h3>@(ViewBag.CurrentUnit != null ? "Unit " + ViewBag.CurrentUnit.SortOrder + ": " + ViewBag.CurrentUnit.Name : "")</h3></div>
