@@ -104,12 +104,26 @@ namespace Didache.Web.Areas.Admin.Controllers
 		}
 
 		public ActionResult Users(int id) {
-
-			List<CourseUserGroup> userGroups = Didache.Courses.GetCourseUserGroups(id);
-			ViewBag.Course = Courses.GetCourse(id);
-
-			return View(userGroups);
+			ViewBag.CourseUserGroups = db.CourseUserGroups.Where(cug => cug.CourseID == id).ToList();
+			return View(Courses.GetCourse(id));
 		}
+
+		public ActionResult UpdateUserInCourse(int userID, int courseID, int roleID, int groupID, bool remove) {
+
+			if (remove) {
+				CourseUsers.RemoveUserFromCourse(courseID, userID, (CourseUserRole)roleID);
+			} else {
+				CourseUsers.AddUserToCourse(courseID, userID, groupID, (CourseUserRole)roleID);
+			}
+
+			// get it
+			CourseUser courseUser = db.CourseUsers
+											.Include("User")
+											.SingleOrDefault(cu => cu.UserID == userID && cu.CourseID == courseID && cu.RoleID == roleID);
+
+			return Json(serializer.Serialize(courseUser));
+		}
+
 
 		public ActionResult UserGroups(int id) {
 
@@ -567,7 +581,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 			foreach (var groupInfo in output) {
 				CourseUserGroup userGroup = groups.SingleOrDefault(cug => cug.GroupID == groupInfo.groupid);
 
-				foreach (var userInfo in groupInfo.files) {
+				foreach (var userInfo in groupInfo.users) {
 					CourseUser courseUser = courseUsers.SingleOrDefault(cu => cu.UserID == userInfo.userid);
 
 					// has the group changed?

@@ -82,7 +82,7 @@ namespace Didache {
 			//	.Property(u => u.ID).HasColumnName("UserID");
 
 			modelBuilder.Entity<CourseUser>()
-				.HasKey(cu => new { cu.CourseID, cu.GroupID, cu.UserID, cu.RoleID })
+				.HasKey(cu => new { cu.CourseID, cu.UserID, cu.RoleID })
 				.ToTable("oe_Courses_Users");
 
 			

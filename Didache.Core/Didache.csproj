@@ -71,6 +71,7 @@
     <Compile Include="Models\Activities\ForumReplyActivity.cs" />
     <Compile Include="Models\Activities\NewFileActivity.cs" />
     <Compile Include="Models\Courses\Campuses.cs" />
+    <Compile Include="Models\Courses\CourseUsers.cs" />
     <Compile Include="Models\Courses\Files\BaseFile.cs" />
     <Compile Include="Models\Courses\Files\GradedFile.cs" />
     <Compile Include="Models\Courses\Files\StudentFile.cs" />

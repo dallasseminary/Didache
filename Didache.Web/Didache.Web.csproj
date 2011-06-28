@@ -387,6 +387,7 @@
     <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Users\EditUser.cshtml" />
     <Content Include="Areas\Admin\Views\Courses\UserGroups.cshtml" />
+    <Content Include="Areas\Admin\Views\Courses\Copy of Users.cshtml" />
     <None Include="css\fonts\league\League_Gothic-webfont.eot" />
     <None Include="css\fonts\league\League_Gothic-webfont.ttf" />
     <None Include="css\fonts\league\League_Gothic-webfont.woff" />

@@ -45,10 +45,24 @@ namespace Didache  {
 					.ToList();		
 		}
 
-		public static List<CourseUser> GetUsersInCourse(int courseID, CourseUserRole roleID) {
+		public static List<CourseUser> GetUsersInCourse(int courseID) {
 			return new DidacheDb().CourseUsers
-				.Include("Profile")
-				.Where(cu => cu.CourseID == courseID && cu.RoleID == (int)roleID).ToList();
+				.Include("User")
+				.Where(cu => cu.CourseID == courseID)
+				.OrderBy(cu => cu.RoleID)
+					.ThenBy(cu => cu.GroupID)
+					.ThenBy(cu => cu.User.LastName)
+				.ToList();
+		}
+
+		public static List<CourseUser> GetUsersInCourse(int courseID, CourseUserRole courseUserRole) {
+			return new DidacheDb().CourseUsers
+				.Include("User")
+				.Where(cu => cu.CourseID == courseID && cu.RoleID == (int)courseUserRole)
+				.OrderBy(cu => cu.RoleID)
+					.ThenBy(cu => cu.GroupID)
+					.ThenBy(cu => cu.User.LastName)
+				.ToList();
 		}
 
 		public static List<Course> GetUsersCourses(CourseUserRole roleID) {
@@ -79,11 +93,19 @@ namespace Didache  {
 		}
 
 		public static List<CourseUserGroup> GetCourseUserGroups(int courseID) {
-			return new DidacheDb().CourseUserGroups
-				.Include("Students")
+			List<CourseUserGroup> userGroups = new DidacheDb().CourseUserGroups
+				.Include("Students.User")
                 //.Include("Facilitator")
 				.Where(g => g.CourseID == courseID)
 				.ToList();
+
+			foreach (CourseUserGroup group in userGroups) {
+				List<CourseUser> users = group.Students.ToList();
+				users.Sort(delegate(CourseUser a, CourseUser b) { return a.User.FormattedNameLastFirst.CompareTo(b.User.FormattedNameLastFirst); });
+				group.Students = users;
+			}
+
+			return userGroups;
 		}
 
 

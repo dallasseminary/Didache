@@ -1,7 +1,7 @@
 ﻿@model Course
 
 @{
-    ViewBag.Title = ViewBag.Course.ToString() + " Users";
+    ViewBag.Title = Model.ToString() + " Users";
 }
 
 /*
@@ -11,48 +11,242 @@
 - add graders, builders, students, and faculty
 */
 
+<style>
+#student-column{
+	width: 420px;
+	float: left;
+}
+#admin-column{
+	width: 280px;
+	float: right;
+}
+.role-group {
+	margin: 0 0 40px 0;
+}
+
+.role-group .user span {
+	display: inline-block;
+}
+.role-group .user .user-id {
+	width: 60px;
+}
+.role-group .user .user-name {
+	width: 180px;
+}
+.role-group .user .course-group {
+	width: 100px;
+}
+
+
+.user-remove {
+	text-align: right;
+	color: Red;
+	cursor: pointer;
+	width: 20px;
+}
+	
+.user-search-result {
+	border: 1px solid #eee;
+	background: #eee;
+	padding: 5px;
+	margin: 0 0 5px 0;
+}
+.user-search-result:hover {
+	border: 1px solid #999;
+	background: #f7f7f7;
+}
+.user-search-result .user-id {
+	display: inline-block;
+	width: 80px;
+}
+.user-search-result .add-options span {
+	color: #3333ff;
+	cursor: pointer;
+}
+
+</style>
+
+
 @Html.Partial("_CourseHeader", Model)
 
 <input type="hidden" id="CourseID" name="CourseID" value="@(Model != null ? Model.CourseID : 0)" />
 
+<select id="CourseUserGroups">
+	<option value="0">-- None --</option>
+@foreach (CourseUserGroup group in ViewBag.CourseUserGroups) {
+	<option value="@group.GroupID">@group.Name</option>
+}
+</select>
 
 <div class="nested-main">
 
-<div id="course-users" data-courseid="@ViewBag.Course.CourseID" class="nested-list">
-	@foreach (CourseUserGroup group in ViewBag.CourseUserGroups) {
-	<div class="course-group nested-item" data-unitid="@group.GroupID" >
-		<div class="group-header nested-item-row">
-			<input type="text" class="unit-name" value="@group.Name" />
 
-			<a class="group-edit edit-link" href="/admin/courses/group/@group.GroupID">Edit</a>
-			<a class="group-delete delete-link" href="/admin/courses/deletegroup/@group.GroupID">Delete</a>
-		</div>
+	<div id="student-column">
 
-		<div class="group-users nested-child-list">
-		@foreach (CourseUser user in group.Students) {
-			if (user.User != null) {
-			<div class="course-user nested-child-item" data-taskid="@user.UserID">
-				<span class="user-drag-handle drag-handle"></span>
-				
-				<span class="user-name">@user.User.FormattedNameLastFirst</span>
-
-				<span class="user-id">@user.UserID</span>
-	
-				<a class="task-edit delete-link" href="/admin/courses/removeuser/@ViewBag.Course.CourseID/@user.UserID">Remove</a>
-			
+		<div id="students" class="user-group" data-roleid="@((int)CourseUserRole.Student)">
+			<h3>Students</h3>
+			<div class="role-group">
 			</div>
-	  }
-  }		
 		</div>
-	</div>
- }
 
-</div>
+	</div>
+	<div id="admin-column">
+
+
+		<div id="faculty" class="user-group" data-roleid="@((int)CourseUserRole.Faculty)">
+			<h3>Faculty</h3>
+			<div class="role-group">
+			</div>
+		</div>
+
+		<div id="editors" class="user-group" data-roleid="@((int)CourseUserRole.Editor)">
+			<h3>Editor</h3>
+			<div class="role-group">		
+			</div>
+		</div>
+
+		<div id="faciliators" class="user-group" data-roleid="@((int)CourseUserRole.Faciliator)">
+			<h3>Faciliators</h3>
+			<div class="role-group">		
+			</div>
+		</div>
+
+	</div>
+
 
 </div>
 
 <div class="nested-sub">
 	<h3>Find Users</h3>
 
-	<input type="text" /><input type="button" value="Search" />
+	<input type="text" id="user-search-text" /> <input id="user-search-button" type="button" value="Search" />
+
+	<div id="user-search-results">
+	</div>
+
 </div>
+
+<script>
+	jQuery(document).ready(function ($) {
+		// load all users
+		function loadUsers() {
+			$.ajax({
+				url: '/api/GetCourseUsers/' + $('#CourseID').val(),
+				success: function (d) {
+					for (var i = 0, il = d.length; i < il; i++) {
+						addUser(d[i]);
+					}
+				}
+			});
+		}
+		function addUser(user) {
+			var output = $('.user-group[data-roleid="' + user.RoleID + '"] .role-group'),
+				userRow = $(
+					'<div class="user" data-userid="' + user.UserID + '">' +
+						'<span class="user-id">' + user.UserID + '</span>' +
+						'<span class="user-name">' + user.User.FormattedNameLastFirst + '</span>' +
+						'<span class="user-remove">X</span>' +
+					'</div>').appendTo(output);
+
+			// student
+			if (user.RoleID == 5) {
+				userRow.find('.user-name').after($('#CourseUserGroups').clone().addClass('groupid').val(user.GroupID));
+			}
+
+			return userRow;
+
+		}
+
+		// search for users
+		$('#user-search-button').click(function () {
+
+			$('#user-search-results').html('Searching...');
+
+			$.ajax({
+				url: '/api/FindUsers/',
+				data: { query: $('#user-search-text').val() },
+				success: function (d) {
+					var html = '',
+						user = null;
+					for (var i = 0, il = d.length; i < il; i++) {
+						user = d[i];
+						html +=
+							'<div class="user-search-result" data-userid="' + user.UserID + '">' +
+								'<span class="user-id">' + user.UserID + '</span>' +
+								'<span class="user-name">' + user.FormattedNameLastFirst + '</span>' +
+								'<div class="add-options">' +
+						//'Add as: ' +
+									'<span data-roleid="5">Student</span> | ' +
+									'<span data-roleid="3">Faculty</span> | ' +
+									'<span data-roleid="4">Editor</span> | ' +
+									'<span data-roleid="8">Facilitator</span>' +
+								'</div>' +
+							'</div>';
+					}
+					$('#user-search-results').html(html);
+
+				}
+			});
+		});
+
+		// add user to role buttons
+		$('#user-search-results').delegate('.add-options span', 'click', function () {
+			var roleButton = $(this),
+				roleID = roleButton.data('roleid'),
+				userID = roleButton.closest('.user-search-result').data('userid');
+
+			$.ajax({
+				url: '/admin/courses/UpdateUserInCourse/',
+				type: 'POST',
+				data: { userID: userID, roleID: roleID, courseID: $('#CourseID').val(), groupID: 0, remove: false },
+				success: function (d) {
+					console.log(d);
+
+					var userRow = addUser(d);
+					userRow.effect('highlight');
+				}
+			});
+		});
+
+		// remove user
+		$('.user-group').delegate('.user-remove', 'click', function () {
+			var removeButton = $(this),
+				roleID = removeButton.closest('.user-group').data('roleid'),
+				userID = removeButton.closest('.user').data('userid');
+
+			$.ajax({
+				url: '/admin/courses/UpdateUserInCourse/',
+				type: 'POST',
+				data: { userID: userID, roleID: roleID, courseID: $('#CourseID').val(), groupID: 0, remove: true },
+				success: function (d) {
+					console.log(d);
+
+					removeButton.closest('.user').remove();
+				}
+			});
+		});
+		// remove user
+		$('.user-group').delegate('.groupid', 'change', function () {
+			var groupDropDown = $(this),
+				groupID = groupDropDown.val(),
+				roleID = groupDropDown.closest('.user-group').data('roleid'),
+				userID = groupDropDown.closest('.user').data('userid');
+
+			$.ajax({
+				url: '/admin/courses/UpdateUserInCourse/',
+				type: 'POST',
+				data: { userID: userID, roleID: roleID, courseID: $('#CourseID').val(), groupID: groupID, remove: false },
+				success: function (d) {
+					console.log(d);
+					groupDropDown.effect('highlight');
+				}
+			});
+		});
+
+
+
+		// start up
+		loadUsers();
+
+	});
+</script>
