@@ -42,7 +42,8 @@ namespace Didache.Web.Controllers
 		}
 
 		[Authorize]
-		public ActionResult GetCourseUserGroups(int id) {
+		public ActionResult GetCourseUserGroups(int id) {			
+
 			return Json(serializer.Serialize(Didache.Courses.GetCourseUserGroups(id)), JsonRequestBehavior.AllowGet);
 		}
 
@@ -52,6 +53,35 @@ namespace Didache.Web.Controllers
 			g.Students = new List<CourseUser>();
 
 			return Json(serializer.Serialize(g), JsonRequestBehavior.AllowGet);
+		}
+
+		[Authorize]
+		public ActionResult GetCourseUsers(int id) {
+
+			return Json(serializer.Serialize(Didache.Courses.GetUsersInCourse(id)), JsonRequestBehavior.AllowGet);
+		}
+
+
+		[Authorize]
+		public ActionResult FindUsers(string query) {
+			
+			var dbQuery = db.Users.AsQueryable();
+
+			foreach (String part in query.Split(new char[] {' '})) {
+				if (String.IsNullOrEmpty(part))
+					continue;
+
+				int id = 0;
+				if (Int32.TryParse(part, out id)) {
+					dbQuery = dbQuery.Where(u => u.UserID == id);
+				} else {
+					dbQuery = dbQuery.Where(u => u.LastName == part || u.FirstName == part);
+				}
+			}
+
+			List<User> users = dbQuery.ToList();
+
+			return Json(serializer.Serialize(users.Select(u => new { UserID = u.UserID, FormattedName = u.FormattedName, FormattedNameLastFirst = u.FormattedNameLastFirst, FirstName = u.FirstName, LastName = u.LastName })), JsonRequestBehavior.AllowGet);
 		}
 
 

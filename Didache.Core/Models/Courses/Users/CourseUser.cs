@@ -22,5 +22,14 @@ namespace Didache {
 		public virtual Course Course { get; set; }
 
 		public virtual User User { get; set; }
+
+		public CourseUserRole CourseUserRole {
+			get {
+				return (CourseUserRole)RoleID;
+			}
+			set {
+				RoleID = (int)value;
+			}
+		}
 	}
 }

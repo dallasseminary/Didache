@@ -21,11 +21,11 @@
 
         @foreach (Thread thread in Model.Threads) {
 	        <div class="thread" id="thread-@thread.ThreadID">
-		        <span class="subject"><h3><a href="/courses/@ViewContext.RouteData.Values["slug"]/discussion/thread/@thread.ThreadID">@Html.Raw(thread.Subject)</a></h3><span class="date">Posted by <a href="@thread.Posts.First().User.ProfileDisplayUrl">@(thread.Posts.First().User.NickName.IsEmpty() ? thread.Posts.First().User.FirstName : thread.Posts.First().User.NickName) @(thread.Posts.First().User.LastName.Substring(0, 1) + ".")</a> &mdash; @thread.ThreadDate.ToShortDateString() at @thread.ThreadDate.ToShortTimeString()</span></span>
-		        <span class="name"><span class="last-poster"><a href="@thread.Posts.Last().User.ProfileDisplayUrl">@(thread.Posts.Last().User.NickName.IsEmpty() ? thread.Posts.Last().User.FirstName : thread.Posts.Last().User.NickName) @(thread.Posts.Last().User.LastName.Substring(0, 1) + ".")</a></span> <span class="date">@thread.LastPostDate.ToShortDateString() at @thread.LastPostDate.ToShortTimeString()</span> </span>
+		        <span class="subject"><h3><a href="/courses/@ViewContext.RouteData.Values["slug"]/discussion/thread/@thread.ThreadID">@Html.Raw(thread.Subject)</a></h3><span class="date">Posted by <a href="@thread.Posts.First().User.ProfileDisplayUrl">@thread.Posts.First().User.SecureName</a> &mdash; @thread.ThreadDate.ToShortDateString() at @thread.ThreadDate.ToShortTimeString()</span></span>
+		        <span class="name"><span class="last-poster"><a href="@thread.Posts.Last().User.ProfileDisplayUrl">@thread.Posts.Last().User.SecureName</a></span> <span class="date">@thread.LastPostDate.ToShortDateString() at @thread.LastPostDate.ToShortTimeString()</span> </span>
                 <span class="replies">@thread.TotalReplies</span>
 	        </div>
-        }
+		}
     </div>
 </div>
 <div class="thread-link"><a href="javascript:void(0)">Add Thread</a></div>

@@ -21,11 +21,11 @@
 	        <div class="post">
 		        <div class="poster">							
 			        <a href="@post.User.ProfileDisplayUrl">
-				        <span class="name">@(post.User.NickName.IsEmpty() ? post.User.FirstName : post.User.NickName) @(post.User.LastName.Substring(0, 1) + ".")</span>
+				        <span class="name">@post.User.SecureName</span>
                     </a>
                     <br />
 			        <a href="@post.User.ProfileDisplayUrl">
-				        <img src="@post.User.ProfileImageUrl" alt="@post.UserName" class="post-author" />
+				        <img src="@post.User.ProfileImageUrl" alt="@post.User.SecureName" class="post-author" />
 			        </a>
 			        <div class="date">
 				        @post.PostDate
@@ -44,7 +44,7 @@
 	                        <input type="hidden" class="ReplyToPostID" name="ReplyToPostID" value="@post.PostID" />
 					        <input type="hidden" class="Subject"name="Subject" value="RE: @post.Subject" />
 
-                            <h4>Reply to @(post.User.NickName.IsEmpty() ? post.User.FirstName : post.User.NickName) @(post.User.LastName.Substring(0, 1) + ".")</h4>
+                            <h4>Reply to @post.User.SecureName</h4>
 
 				                <textarea id="replyto@(post.PostID)" name="PostContent" cols="78" rows="5"></textarea>
 

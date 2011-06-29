@@ -35,6 +35,10 @@ namespace Didache {
 		
 		public string TaskData { get; set; }
 
+		public int TempGraderFileID { get; set; }
+		public int TempStudentFileID { get; set; }
+		public int TempPostID { get; set; }
+
 
 		public virtual User Profile { get; set; }
 		public virtual Task Task { get; set; }

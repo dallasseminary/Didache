@@ -280,4 +280,18 @@
 	loadUserGroups(courseID, null);
 
 
+	/** Search **/
+
+	$('#user-search-button').click(function () {
+		var searchText = $('#user-search-text').val();
+
+		$.ajax({
+			url: '/api/findusers/',
+			data: { query: searchText },
+			success: function (d) {
+
+			}
+		});
+	});
+
 });

@@ -17,7 +17,7 @@
 @foreach (InteractionThread thread in threads) {
 	<div class="task-interaction-thread" id="thread-@thread.ThreadID" data-threadid="@thread.ThreadID">
 		<div class="task-interaction-header">
-			<span class="user">@(thread.User != null ? thread.User.FormattedName : "missing")</span>
+			<span class="user">@(thread.User != null ? thread.User.SecureName : "missing")</span>
 			<span class="date">@thread.ThreadDate.ToShortDateString()</span>
 			<span class="date">@thread.Posts.Last().PostDate.ToShortDateString()</span>
 			<span class="total-replies">@(thread.Posts.Count - 1)</span>
@@ -30,7 +30,7 @@
 					@if (post.User != null) {
 					<a href="@post.User.ProfileDisplayUrl">
 						<img src="@post.User.ProfileImageUrl" />
-						<span class="name">@(post.User.NickName.IsEmpty() ? post.User.FirstName : post.User.NickName) @(post.User.LastName.Substring(0, 1) + ".")</span>
+						<span class="name">@post.User.SecureName</span>
 					</a>
 	 }
 				</div>

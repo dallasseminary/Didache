@@ -8,6 +8,7 @@ namespace Didache {
 		Student = 5,
 		Grader = 2,
 		Faculty = 3,
-		Editor = 4
+		Editor = 4,
+		Faciliator = 8
 	}
 }
