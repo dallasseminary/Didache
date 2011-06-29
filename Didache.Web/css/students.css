@@ -658,6 +658,9 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
 	}
 	.forum-posts .content {
 	    margin-bottom: 15px;
+	    display: block;
+	    clear: both;
+	    overflow: hidden;
 	}
 .add-post-outer {
     position: fixed;
