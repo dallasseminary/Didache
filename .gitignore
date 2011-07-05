@@ -9,6 +9,7 @@ Didache.Web/bin/*
 Didache.Web/App_Data/*
 Didache.Web/setup/*
 Didache.Web/uploads/*
+files/*
 
 Didache.Web/connectionStrings.config
 *Copy of*
