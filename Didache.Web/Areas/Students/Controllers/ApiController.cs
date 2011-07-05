@@ -10,48 +10,51 @@ namespace Didache.Web.Areas.Students.Controllers
 {
     public class ApiController : Controller
     {
+		DidacheDb db = new DidacheDb();
+		EntityObjectSerializer serializer = new EntityObjectSerializer();
+
         //
         // GET: /Students/Tasks/
 
+		[Authorize]
 		[HttpPost]
-        public ActionResult TaskStatus(int userID, int taskID, FormCollection collection)
+        public ActionResult TaskStatus(int taskID, FormCollection collection)
         {
-			UserTaskData data = Tasks.GetUserTaskData(taskID, userID);
+			User user = Users.GetLoggedInUser();
+
+			UserTaskData data = Tasks.GetUserTaskData(taskID, user.UserID);
 
 			// load type
-			object returnValue = Didache.TaskTypes.TaskTypeManager.ProcessFormCollection(data.Task.TaskTypeName, taskID, userID, collection, Request);
+			object returnValue = Didache.TaskTypes.TaskTypeManager.ProcessFormCollection(data.Task.TaskTypeName, taskID, user.UserID, collection, Request);
 
 			// do processing
 			return Json(returnValue);
         }
 
 		[HttpPost]
-		public ActionResult TaskFile(int userID, int taskID, FormCollection collection) {
-			UserTaskData data = Tasks.GetUserTaskData(taskID, userID);
-
-
-			// save file
-			foreach (string inputTagName in Request.Files) {
-				HttpPostedFileBase file = Request.Files[inputTagName];
-				if (file.ContentLength > 0) {
-					string filePath = Path.Combine(HttpContext.Server.MapPath("~/uploads"), Path.GetFileName(file.FileName));
-					file.SaveAs(filePath);
-				}
-			}
-
-
+		public ActionResult TaskFile(int taskID, FormCollection collection) {
+			
+			User user = Users.GetLoggedInUser();
+			UserTaskData data = Tasks.GetUserTaskData(taskID, user.UserID);
+	
 			// do processing
-			object returnValue = Didache.TaskTypes.TaskTypeManager.ProcessFormCollection(data.Task.TaskTypeName, taskID, userID, collection, Request);
+			TaskTypeResult returnValue = Didache.TaskTypes.TaskTypeManager.ProcessFormCollection(data.Task.TaskTypeName, taskID, user.UserID, collection, Request);
 
 
+			// TODO: for interactions, we might need to go to an #post-123321
 
-			return Redirect("/courses/" + data.Task.Course.Slug + "/schedule/" + data.Task.UnitID);
+			return Redirect(
+						"/courses/" + data.Task.Course.Slug + "/schedule/" + data.Task.UnitID + 
+						((!String.IsNullOrWhiteSpace(returnValue.UrlHash)) ? "#" + returnValue.UrlHash : "")
+					);
 		}
 
 
 		[HttpPost]
-		public ActionResult TaskFile2(int userID, int taskID, FormCollection collection) {
-			UserTaskData data = Tasks.GetUserTaskData(taskID, userID);
+		public ActionResult TaskFile2(int taskID, FormCollection collection) {
+			User user = Users.GetLoggedInUser();
+			
+			UserTaskData data = Tasks.GetUserTaskData(taskID, user.UserID);
 
 			Guid uniqueID = Guid.NewGuid();
 			string originalFilename = "";
@@ -71,7 +74,7 @@ namespace Didache.Web.Areas.Students.Controllers
 				file.SaveAs(filePath);
 
 				StudentFile studentFile = new StudentFile();
-				studentFile.UserID = userID;
+				studentFile.UserID = user.UserID;
 				studentFile.UniqueID = uniqueID;
 				studentFile.ContentType = file.ContentType;
 				studentFile.Length = file.ContentLength;
@@ -107,24 +110,57 @@ namespace Didache.Web.Areas.Students.Controllers
 			if (Int32.TryParse(collection["threadID"], out threadID)) {
 
 				DidacheDb db = new DidacheDb();
-
-
+				User user = Users.GetLoggedInUser();
 				InteractionThread thread = db.InteractionThreads.Find(threadID);
+				
 				InteractionPost post = new InteractionPost();
 				post.PostContent = collection["text"];
-				post.PostContentFormatted = collection["text"];
+				post.PostContentFormatted = Interactions.FormatPost(collection["text"]);
 				post.IsApproved = true;
-				post.UserID = Users.GetLoggedInUser().UserID;
+				post.UserID = user.UserID;
 				post.PostDate = DateTime.Now;
 				post.ThreadID = threadID;
 				post.TaskID = thread.TaskID;
-				post.Subject = "";
-				post.ReplyToPostID = 0;
+				post.FileID = 0;
+				post.Subject = "RE: " + thread.Subject;
+
+				int replyToPostID = 0;
+				if (!Int32.TryParse(collection["ReplyToPostID"], out replyToPostID)) {
+
+				}
+				post.ReplyToPostID = replyToPostID;
 
 				db.InteractionPosts.Add(post);
 				db.SaveChanges();
 
-				return Json(new {success= true, postID= post.PostID});
+
+				// check for completion
+				// threads for this unit
+				List<InteractionThread> threads = db.InteractionThreads.Where(t => t.TaskID == thread.TaskID).ToList();
+				List<int> threadIDs = threads.Select(t => t.ThreadID).ToList();
+				List<InteractionPost> posts = db.InteractionPosts
+													.Where(p => threadIDs.Contains(p.ThreadID) && p.UserID == user.UserID)
+													.ToList();
+
+				int minimumInteractions = 4; // note: the student's initial task is also counted in this!
+				bool isCompleted = false;
+				if (posts.Count >= minimumInteractions) {
+					isCompleted = true;
+					UserTaskData data = db.UserTasks.SingleOrDefault(ud => ud.UserID == user.UserID && ud.TaskID == thread.TaskID);
+					if (data != null) {
+						data.TaskCompletionStatus = TaskCompletionStatus.Completed;
+						db.SaveChanges();
+					}
+				}
+				// 
+
+				return Json(new { 
+									success = true, 
+									postID = post.PostID, 
+									user = user,
+									post = serializer.Serialize(post),
+									isCompleted = isCompleted
+				});
 
 			} else {
 				return Json(new {success= false});

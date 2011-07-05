@@ -22,7 +22,7 @@
 	@if (ViewBag.UserTasks != null) {	 
 		foreach (Didache.UserTaskData userTaskData in ViewBag.UserTasks) {
 		
-		<div class="task-entry block-list-item" id="task-@userTaskData.UserID-@userTaskData.TaskID">
+		<div class="task-entry block-list-item" id="task-@userTaskData.TaskID" data-taskid="@userTaskData.TaskID" data-tasktype="@userTaskData.Task.TaskTypeName">
             <div class="block-list-item-label @userTaskData.TaskCompletionStatus.ToString().ToLower()">
 				<span>@userTaskData.TaskCompletionStatus</span>
             </div>			
@@ -74,7 +74,7 @@
 
 <script>
 	$('.task-instructions-text').expander({
-		slicePoint: 100
+		slicePoint: 1000
 		, widow: 2
 		//,expandEffect: 'show'
 		, expandText: 'more »'

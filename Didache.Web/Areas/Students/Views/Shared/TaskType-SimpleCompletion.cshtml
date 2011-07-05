@@ -4,15 +4,37 @@
 }
 
 @if (Model.TaskCompletionStatus != TaskCompletionStatus.Completed) {
-	<input type="button" class="mark-completed task-submit" value="Mark Completed"  />
+	<input type="button" class="mark-completed task-submit" value="@Resources.labels.studentschedule_markcompleted" data-taskstatus="@((int)TaskCompletionStatus.Completed)" />
 }
 	
 @if (Model.Task.IsSkippable && Model.TaskCompletionStatus == TaskCompletionStatus.NotStarted) {
-	<input type="button" class="mark-skipped" value="Skip" />
+	<input type="button" class="mark-skipped" value="@Resources.labels.studentschedule_skip" data-taskstatus="@((int)TaskCompletionStatus.Skipped)"  />
 } 
+
+
 
 <script>
 
+if (Didache.TaskTypes["@Model.Task.TaskTypeName"] == null) {
+
+	Didache.TaskTypes["@Model.Task.TaskTypeName"] = function (taskID, node) {
+		node.find('.mark-completed, .mark-skipped').click(function () {
+			var button = $(this),
+			status = parseInt(button.data('taskstatus'), 10);
+
+			sendTaskData(taskID, { TaskStatus: status }, function (d) {
+				setTaskStatus(taskID, status);
+
+				node.find('input[type="button"]').hide();
+			});
+		});
+	}
+}
+
+</script>
+
+<!--
+</script>
 
 jQuery(function ($) {
 	var 
@@ -39,3 +61,5 @@ jQuery(function ($) {
 });
 </script>
 
+
+-->

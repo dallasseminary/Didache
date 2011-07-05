@@ -18,9 +18,9 @@ namespace Didache.Web.Areas.Students {
 
 			// discussion
 			context.MapRoute(
-				"Courses_TaskInfo",
-				"courses/api/{action}/{userid}/{taskid}",
-				new { controller = "Api", action = "taskstatus", userid = UrlParameter.Optional, taskid = UrlParameter.Optional }
+				"Courses_API",
+				"courses/api/{action}/{taskid}",
+				new { controller = "Api", action = "taskstatus", taskid = UrlParameter.Optional }
 			);
 
 

@@ -1,0 +1,41 @@
+﻿@model List<Post>
+
+
+@foreach (Post post in Model) {
+<div class="post">
+	<div class="poster">							
+		<a href="@post.User.ProfileDisplayUrl">
+			<span class="name">@post.User.SecureName</span>
+        </a>
+        <br />
+		<a href="@post.User.ProfileDisplayUrl">
+			<img src="@post.User.ProfileImageUrl" alt="@post.User.SecureName" class="post-author" />
+		</a>
+		<div class="date">
+			@post.PostDate
+		</div>
+	</div>
+	<div class="content-area">
+		<div class="content">
+            @Html.Raw(post.PostContentFormatted)
+		</div>
+        <div class="reply-link"><a rel="#replyto@(post.PostID)" href="javascript:void(0)">Reply</a><div class="clear"></div></div>
+
+        <div class="add-reply">
+            <form class="forum-post-new" method="post" action="/courses/@ViewContext.RouteData.Values["slug"]/discussion/reply/@post.ThreadID">
+	            <input type="hidden" class="ThreadID" name="ThreadID" value="@post.ThreadID" />
+	            <input type="hidden" class="ForumID" name="ForumID" value="@post.ForumID" />
+	            <input type="hidden" class="ReplyToPostID" name="ReplyToPostID" value="@post.PostID" />
+				<input type="hidden" class="Subject"name="Subject" value="RE: @post.Subject" />
+
+                <h4>Reply to @post.User.SecureName</h4>
+
+				    <textarea id="replyto@(post.PostID)" name="PostContent" cols="78" rows="5"></textarea>
+
+	                <input type="submit" value="Submit Reply" />
+
+            </form>
+        </div>
+	</div>
+</div>
+}

@@ -10,6 +10,7 @@ namespace Didache.Web.Areas.Students.Controllers
     {
 		DidacheDb db = new DidacheDb();
 
+		[Authorize]
 		public ActionResult Index() {
 
 			List<Course> courses = null;
@@ -23,7 +24,7 @@ namespace Didache.Web.Areas.Students.Controllers
 			return View(courses);
 		}
 
-
+		[Authorize]
 		public ActionResult Dashboard(string slug) {
 
 			Course course = Didache.Courses.GetCourseBySlug(slug);
@@ -31,6 +32,7 @@ namespace Didache.Web.Areas.Students.Controllers
 			return View(course);
 		}
 
+		[Authorize]
 		public ActionResult Schedule(string slug, int? id) {
 
 			Course course = Didache.Courses.GetCourseBySlug(slug);
@@ -65,6 +67,7 @@ namespace Didache.Web.Areas.Students.Controllers
 			return View(course);
 		}
 
+		[Authorize]
 		public ActionResult Files(string slug) {
 
 			Course course = Didache.Courses.GetCourseBySlug(slug);
@@ -74,6 +77,7 @@ namespace Didache.Web.Areas.Students.Controllers
 			return View(course);
 		}
 
+		[Authorize]
 		public ActionResult Roster(string slug) {
 
 			//List<CourseUser> users = Didache.Courses.GetUsersInCourse(Didache.Courses.GetCourseBySlug(slug).CourseID, CourseUserRole.Student);
@@ -87,6 +91,7 @@ namespace Didache.Web.Areas.Students.Controllers
 			return View(course);
 		}
 
+		[Authorize]
 		public ActionResult Assignments(string slug) {
 
             Course course = Didache.Courses.GetCourseBySlug(slug);
@@ -97,7 +102,7 @@ namespace Didache.Web.Areas.Students.Controllers
 			return View(course);
 		}
 
-
+		[Authorize]
 		public ActionResult CourseFile(int id, string filename) {
 			
 			CourseFile file = new DidacheDb().CourseFiles.Find(id);
@@ -113,12 +118,12 @@ namespace Didache.Web.Areas.Students.Controllers
 			}
 		}
 
+		[Authorize]
 		public ActionResult StudentFile(int id, string filename) {
 
-			CourseFile file = new DidacheDb().CourseFiles.Find(id);
+			StudentFile file = new DidacheDb().StudentFiles.Find(id);
 
-			string basePath = System.Configuration.ConfigurationManager.AppSettings["StudentFilesLocation"];
-			string path = System.IO.Path.Combine(basePath, file.Filename);
+			string path = file.PhysicalPath;
 
 			if (System.IO.File.Exists(path)) {
 
@@ -128,6 +133,7 @@ namespace Didache.Web.Areas.Students.Controllers
 			}
 		}
 
+		[Authorize]
 		public ActionResult GradedFile(int id, string filename) {
 
 			CourseFile file = new DidacheDb().CourseFiles.Find(id);
@@ -143,7 +149,7 @@ namespace Didache.Web.Areas.Students.Controllers
 			}
 		}
 
-
+		[Authorize]
 		public ActionResult DownloadAll(string slug) {
 
 			Course course = Didache.Courses.GetCourseBySlug(slug);
