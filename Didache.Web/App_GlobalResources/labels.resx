@@ -384,4 +384,16 @@
   <data name="courses_label_gradedfiles" xml:space="preserve">
     <value>Graded Files</value>
   </data>
+  <data name="studentschedule_markcompleted" xml:space="preserve">
+    <value>Mark Completed</value>
+  </data>
+  <data name="studentschedule_skip" xml:space="preserve">
+    <value>Skip</value>
+  </data>
+  <data name="studentschedule_submitfordiscussion" xml:space="preserve">
+    <value>Submit Assignment for Discussion</value>
+  </data>
+  <data name="studentschedule_submitfile" xml:space="preserve">
+    <value>Turn in File</value>
+  </data>
 </root>
