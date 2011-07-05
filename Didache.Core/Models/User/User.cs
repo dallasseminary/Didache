@@ -105,6 +105,12 @@ namespace Didache {
 
 		public string SecureName {
 			get {
+
+				if (!String.IsNullOrWhiteSpace(AliasName)) {
+					return AliasName;
+				}
+
+
 				switch (NameFormat) {
 					// John Charles Dyer
 					case "FF":					
@@ -180,6 +186,27 @@ namespace Didache {
 		public Double TimezoneOffset { get; set; }
 
 
-		// 
+		// security
+		public string AliasName { get; set; }
+
+		public int PictureSecurity { get; set; }
+		public int AddressSecurity { get; set; }
+		public int EmailSecurity { get; set; }
+		public int PhoneSecurity { get; set; }
+		public int SpouseSecurity { get; set; }
+		public int ChildrenSecurity { get; set; }
+		public int BiographySecurity { get; set; }
+		public int ScheduleSecurity { get; set; }
+		public int BirthdateSecurity { get; set; }
+
+		public UserSecuritySetting PictureSecuritySetting { get { return (UserSecuritySetting)PictureSecurity; } set { PictureSecurity = (int)value; } }
+		public UserSecuritySetting AddressSecuritySetting { get { return (UserSecuritySetting)AddressSecurity; } set { AddressSecurity = (int)value; } }
+		public UserSecuritySetting EmailSecuritySetting { get { return (UserSecuritySetting)EmailSecurity; } set { EmailSecurity = (int)value; } }
+		public UserSecuritySetting PhoneSecuritySetting { get { return (UserSecuritySetting)PhoneSecurity; } set { PhoneSecurity = (int)value; } }
+		public UserSecuritySetting SpouseSecuritySetting { get { return (UserSecuritySetting)SpouseSecurity; } set { SpouseSecurity = (int)value; } }
+		public UserSecuritySetting ChildrenSecuritySetting { get { return (UserSecuritySetting)ChildrenSecurity; } set { ChildrenSecurity = (int)value; } }
+		public UserSecuritySetting BiographySecuritySetting { get { return (UserSecuritySetting)BiographySecurity; } set { BiographySecurity = (int)value; } }
+		public UserSecuritySetting ScheduleSecuritySetting { get { return (UserSecuritySetting)ScheduleSecurity; } set { ScheduleSecurity = (int)value; } }
+		public UserSecuritySetting BirthdateSecuritySetting { get { return (UserSecuritySetting)BirthdateSecurity; } set { BirthdateSecurity = (int)value; } }
 	}
 }
