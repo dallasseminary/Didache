@@ -54,14 +54,19 @@
             $(".reply-link").show();
             $(".add-reply").hide();
 
-            $(".reply-link a").toggle(function () {
-                $(".add-reply").slideUp("fast");
-                $(".forum-post-new").fadeOut("fast");
-                $(this).parent().next(".add-reply").slideDown("slow");
-                $(this).text("Cancel Reply");
-            }, function () {
-                $(this).parent().next(".add-reply").slideUp("slow");
-                $(this).text("Reply");
+            $(".reply-link a").click(function () {
+                //alert($(this).text());
+                if ($(this).text() == "Reply") {
+                    $(".add-reply").slideUp("fast");
+                    $(".reply-link a").text("Reply");
+                    $(this).parent().next(".add-reply").slideDown("slow");
+                    $(this).text("Cancel Reply");
+                    //$("form.forum-post-new").fadeOut("fast");
+                } else {
+                    $(this).text("Reply");
+                    $(this).parent().next(".add-reply").slideUp("fast");
+                    $(".forum-post-new").fadeIn("fast");
+                }
             });
 
         });
