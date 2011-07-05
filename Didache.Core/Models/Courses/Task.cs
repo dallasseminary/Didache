@@ -62,10 +62,16 @@ namespace Didache {
 		[Display(Name = "Priority")]
 		public int Priority { get; set; }
 
+		[Display(Name = "Related Task")]
+		public int RelatedTaskID { get; set; }
+
+		public string FileTypesAllowed { get; set; }
+
 		[ScriptIgnore]
 		public virtual Unit Unit { get; set; }
 		[ScriptIgnore]
 		public virtual Course Course { get; set; }
+
 	}
 
 }
