@@ -113,17 +113,43 @@
 	$('#course-units').delegate('.add-task', 'click', function (e) {
 		e.preventDefault();
 
-		var button = $(this);
+		var button = $(this),
+			unitID = parseInt(button.closest('.course-unit').data('unitid'));
 
 		clearEditor('#task-editor');
 		$('#task-editor').dialog('open');
-		$('#task-editor').find('[name="UnitID"]').val(button.closest('.course-unit').data('unitid'));
+		$('#task-editor').find('[name="UnitID"]').val(unitID);
 		$('#task-editor').find('[name="CourseID"]').val($('#CourseID').val());
 		$('#task-editor').find('[name="Priority"]').val('0');
 		$('#task-editor').find('input[value="Default"]').attr('checked', true);
 
+		fillRelatedTasks(unitID, 0);
+
 		return false;
 	});
+
+	function fillRelatedTasks(unitID, excludeTaskID) {
+
+		excludeTaskID = parseInt(excludeTaskID);
+
+		var select =
+			$('#task-editor').find('select[name="RelatedTaskID"]')
+				.empty()
+				.append($('<option value="0">--none--</option>'));
+
+
+
+		// grab all tasks in the unit area
+		$('div.course-unit[data-unitid="' + unitID.toString() + '"]').find('.course-task').each(function () {
+			var taskRow = $(this),
+				taskName = taskRow.find('input.task-name').val(),
+				taskID = parseInt(taskRow.data('taskid'), 10);
+
+			if (excludeTaskID !== taskID) {
+				select.append($('<option value="' + taskID + '">' + taskName + '</option>'));
+			}
+		});
+	}
 
 
 	function loadUnits(courseID, callback) {
@@ -392,9 +418,11 @@
 
 		var taskID = $(this).closest('.course-task').data('taskid');
 
-		loadTask(taskID, function (obj) {
+		loadTask(taskID, function (task) {
 
-			fillEditor('#task-editor', obj);
+			fillRelatedTasks(task.UnitID, task.TaskID);
+
+			fillEditor('#task-editor', task);
 
 			$('#task-editor').dialog('open');
 		});

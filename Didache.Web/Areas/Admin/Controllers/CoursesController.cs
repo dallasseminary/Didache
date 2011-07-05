@@ -203,6 +203,15 @@ namespace Didache.Web.Areas.Admin.Controllers
 
 					db.SaveChanges();
 
+					// reciprocate
+					if (model.RelatedTaskID > 0) {
+						Task relatedTask = db.Tasks.Find(model.RelatedTaskID);
+						if (relatedTask != null) {
+							relatedTask.RelatedTaskID = model.TaskID;
+							db.SaveChanges();
+						}
+					}
+
 					
 					return Json(new { success = true, task = serializer.Serialize(model) });
 				} catch (Exception ex) {
@@ -215,6 +224,43 @@ namespace Didache.Web.Areas.Admin.Controllers
 				// ADD MODE
 				if (ModelState.IsValid) {
 					db.Tasks.Add(model);
+					db.SaveChanges();
+
+					// reciprocate
+					if (model.RelatedTaskID > 0) {
+						Task relatedTask = db.Tasks.Find(model.RelatedTaskID);
+						if (relatedTask != null) {
+							relatedTask.RelatedTaskID = model.TaskID;
+							db.SaveChanges();
+						}
+					}
+
+					// create user tasks
+					List<CourseUser> users = db.CourseUsers.Where(cu => cu.CourseID == model.CourseID && cu.RoleID == (int) CourseUserRole.Student).ToList();
+					foreach (CourseUser user in users) {
+
+						UserTaskData utd = new UserTaskData() {
+							TaskID = model.TaskID,
+							GraderComments = "",
+							GraderSubmitDate = null,
+							GraderUserID = 0,
+							GradeStatus = 0,
+							LetterGrade = "",
+							NumericGrade = null,
+							StudentComments = "",
+							StudentSubmitDate = null,
+							TaskCompletionStatus = TaskCompletionStatus.NotStarted,
+							TaskData = "",
+							TempGraderFileID = 0,
+							TempPostID = 0,
+							TempStudentFileID = 0,
+							UserID = user.UserID
+						};
+
+						db.UserTasks.Add(utd);
+
+					}
+
 					db.SaveChanges();
 
 					return Json(new { success = true, task = serializer.Serialize(model) });
