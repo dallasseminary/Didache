@@ -11,14 +11,14 @@ namespace Didache.TaskTypes {
 	// [Display(Name = "Default", Description = "Does nothing (do not use)")]
 	public class Default : ITaskType {
 
-		public object ProcessFormCollection(int taskID, int userID, FormCollection collection, HttpRequestBase request) {
+		public TaskTypeResult ProcessFormCollection(int taskID, int userID, FormCollection collection, HttpRequestBase request) {
 			DidacheDb db = new DidacheDb();
 
 			UserTaskData data = db.UserTasks.SingleOrDefault(d=> d.TaskID == taskID && d.UserID == userID);
 
 			// handle file data
 
-			return new { Success = true };
+			return new TaskTypeResult () { Success = true };
 		}
 	}
 }

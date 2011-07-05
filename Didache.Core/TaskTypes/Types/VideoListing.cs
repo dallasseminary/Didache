@@ -11,7 +11,7 @@ namespace Didache.TaskTypes {
 	//[Display(Name = "Video Listing", Description = "Creates automatic links to video from XML.")]
 	public class VideoListing : ITaskType {
 		
-		public object ProcessFormCollection(int taskID, int userID, FormCollection collection, HttpRequestBase request) {
+		public TaskTypeResult ProcessFormCollection(int taskID, int userID, FormCollection collection, HttpRequestBase request) {
 
 			// just complete it!
 			return new SimpleCompletion().ProcessFormCollection(taskID, userID, collection, request);

@@ -11,14 +11,16 @@ namespace Didache.TaskTypes {
 	//[Display(Name = "Survey", Description = "Student reports on course progress")]
 	public class Survey : ITaskType {
 
-		public object ProcessFormCollection(int taskID, int userID, FormCollection collection, HttpRequestBase request) {
+		public TaskTypeResult ProcessFormCollection(int taskID, int userID, FormCollection collection, HttpRequestBase request) {
 			DidacheDb db = new DidacheDb();
 
 			UserTaskData data = db.UserTasks.SingleOrDefault(d=> d.TaskID == taskID && d.UserID == userID);
 
 			// save completion status!
+			data.TaskCompletionStatus = TaskCompletionStatus.Completed;
+			db.SaveChanges();
 
-			return new { Success = true };
+			return new TaskTypeResult () { Success = true };
 		}
 	}
 }

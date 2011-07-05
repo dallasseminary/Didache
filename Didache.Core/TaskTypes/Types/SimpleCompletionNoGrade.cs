@@ -11,7 +11,7 @@ namespace Didache.TaskTypes {
 	//[Display(Name = "Simple Completion", Description = "Student presses a complete button, then the grade is marked as 100.")]
 	public class SimpleCompletion : ITaskType {
 
-		public object ProcessFormCollection(int taskID, int userID, FormCollection collection, HttpRequestBase request)
+		public TaskTypeResult ProcessFormCollection(int taskID, int userID, FormCollection collection, HttpRequestBase request)
 		{
 			DidacheDb db = new DidacheDb();
 
@@ -27,7 +27,7 @@ namespace Didache.TaskTypes {
 
 			db.SaveChanges();
 
-			return new { Success = true };
+			return new TaskTypeResult () { Success = true };
 		}
 	}
 }

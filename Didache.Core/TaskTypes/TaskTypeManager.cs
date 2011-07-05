@@ -34,7 +34,7 @@ namespace Didache.TaskTypes {
 			return taskTypes;
 		}
 
-		public static object ProcessFormCollection(string taskClassName, int taskID, int userID, FormCollection collection, HttpRequestBase request) {
+		public static TaskTypeResult ProcessFormCollection(string taskClassName, int taskID, int userID, FormCollection collection, HttpRequestBase request) {
 
 			List<TaskTypeInfo> taskTypes = GetTaskTypes();
 			TaskTypeInfo taskType = taskTypes.SingleOrDefault(i => i.ClassName == taskClassName);
