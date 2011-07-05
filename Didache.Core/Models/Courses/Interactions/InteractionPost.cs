@@ -7,6 +7,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Web.Script.Serialization;
+using System.Runtime.Serialization;
 
 namespace Didache {
 
@@ -21,19 +23,26 @@ namespace Didache {
 		public DateTime PostDate { get; set; }
 		public int UserID { get; set; }	
 		public int ReplyToPostID { get; set; }
+		public int FileID { get; set; }
 
 		public string Subject{ get; set; }
 		public string PostContent { get; set; }
 		public string PostContentFormatted { get; set; }
 
+		[ScriptIgnore]
 		public virtual InteractionThread Thread { get; set; }
+		[ScriptIgnore]
 		public virtual User User { get; set; }
+		[ScriptIgnore]
+		public virtual StudentFile File { get; set; }
 
 		public string PostUrl {
 			get {
 				return "/courses/" + Thread.Task.Course.Slug + "/schedule/" + Thread.Task.UnitID + "#thread-" + ThreadID;
 			}
 		}
+
+		
 	}
 
 

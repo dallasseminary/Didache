@@ -14,12 +14,19 @@ namespace Didache {
 	public class InteractionThread {
 		[Key]
 		public int ThreadID { get; set; }
+		
+		[Required]
 		public int TaskID { get; set; }
 
-		[Required]
+		// legacy?
+		//[Required]
+		[DisplayFormat(ConvertEmptyStringToNull = false)]
 		public string Subject { get; set; }
 
+		[Required]
 		public int UserID  { get; set; }
+
+		[Required]
 		public DateTime ThreadDate { get; set; }
 
 		public int TotalReplies { get; set; }

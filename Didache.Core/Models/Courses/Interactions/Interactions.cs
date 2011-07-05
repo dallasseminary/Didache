@@ -36,7 +36,7 @@ namespace Didache {
             User user = Users.GetLoggedInUser();
             Task task = db.Tasks.Find(taskID);
             Course course = Courses.GetCourse(task.CourseID);
-            CourseUser courseUser = course.CourseUsers.SingleOrDefault(u => u.UserID == user.UserID);
+            CourseUser courseUser = course.CourseUsers.SingleOrDefault(u => u.UserID == user.UserID && u.RoleID == (int) CourseUserRole.Student);
             List<int> courseUserIDs = new List<int>();
             foreach (CourseUser cu in course.CourseUsers) {
                 if (cu.GroupID == courseUser.GroupID) { courseUserIDs.Add(cu.UserID); }
@@ -75,6 +75,10 @@ namespace Didache {
 				.ToList();
 
 			// reorder with nesting?
+		}
+
+		public static string FormatPost(String input) {
+			return "<p>" + input.Replace("\r", "").Replace("\n\n", "</p><p>").Replace("\n", "<br>") + "</p>";
 		}
 	}
 }
