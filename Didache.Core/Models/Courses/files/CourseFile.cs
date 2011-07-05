@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.IO;
 
 namespace Didache {
 
@@ -21,6 +22,14 @@ namespace Didache {
 				return "/courses/coursefile/" + FileID + "/" + Filename;
 			}
 		}
+
+
+		public string PhysicalPath {
+			get {
+				return Path.Combine(Settings.CourseFilesLocation, UniqueID + Path.GetExtension(Filename));
+			}
+		}
+
 	}
 
 

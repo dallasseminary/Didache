@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web;
+using System.IO;
 
 namespace Didache  {
 	public class CourseFiles {
@@ -25,6 +27,36 @@ namespace Didache  {
 
 
 			return groups;
+		}
+
+		public static StudentFile SaveStudentFile(int userID, UserTaskData userData, HttpPostedFileBase file) {
+			DidacheDb db = new DidacheDb();
+			
+			StudentFile studentFile = null;
+
+			if (file.ContentLength > 0) {
+
+				// setup data
+				studentFile = new StudentFile();
+				studentFile.UserID = userID;
+				studentFile.UploadedDate = DateTime.Now;
+				studentFile.UniqueID = Guid.NewGuid();
+				studentFile.ContentType = file.ContentType;
+				studentFile.Length = file.ContentLength;		
+
+				// save pyhsical file
+				string extension = Path.GetExtension(file.FileName);
+				string filenameWithoutExtension = Path.GetFileNameWithoutExtension(file.FileName);
+				studentFile.Filename = Path.GetFileName(file.FileName);
+				string savePath = Path.Combine(Settings.StudentFilesLocation, studentFile.UniqueID.ToString() + extension);
+				file.SaveAs(savePath);
+
+				// save file info to DB
+				db.StudentFiles.Add(studentFile);
+				db.SaveChanges();
+			}
+
+			return studentFile;
 		}
 	}
 }

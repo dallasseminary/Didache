@@ -104,5 +104,8 @@ namespace Didache {
 			}
 			return "0 Bytes";
 		}
+
+		public virtual string PhysicalPath { get { return ""; } }
+
 	}
 }
