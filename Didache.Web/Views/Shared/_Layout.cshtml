@@ -46,7 +46,21 @@
 
 	<div id="main">
 		<div id="main-menu">
-			@RenderSection("profileimage",false)
+			@if (IsSectionDefined("profileimage")) {
+				@RenderSection("profileimage",false)
+			} else {
+				if (HttpContext.Current.User.Identity.IsAuthenticated) { 
+					<div id="user-profile">
+					@{ User user = Users.GetLoggedInUser();}
+						<a href="@user.ProfileDisplayUrl">
+							<img alt="@user.FormattedName" src="@user.ProfileImageUrl" />
+							<span class="name">@user.SecureName</span>
+							<span class="title">@user.Country</span>
+						</a>
+					</div>
+				}
+			}
+
 			@Html.Partial("_UserMenu")	
 		</div>
 		
