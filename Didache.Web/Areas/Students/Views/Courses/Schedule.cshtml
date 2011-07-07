@@ -15,34 +15,32 @@
 
 	<div class="main-column">
 	
-		<div class="block-list-header"><h3>@(ViewBag.CurrentUnit != null ? "Unit " + ViewBag.CurrentUnit.SortOrder + ": " + ViewBag.CurrentUnit.Name : "")</h3></div>
-
+		<div class="block-list-header">
+			<h3>@(ViewBag.CurrentUnit != null ? "Unit " + ViewBag.CurrentUnit.SortOrder + ": " + ViewBag.CurrentUnit.Name : "")</h3>
+		</div>
 
 		<div id="schedule-tasks" class="block-list">
-
 	
 		@if (ViewBag.UserTasks != null) {	 
 			foreach (Didache.UserTaskData userTaskData in ViewBag.UserTasks) {
 		
 			<div class="task-entry block-list-item" id="task-@userTaskData.TaskID" data-taskid="@userTaskData.TaskID" data-tasktype="@userTaskData.Task.TaskTypeName">
-				<div class="block-list-item-label @userTaskData.TaskCompletionStatus.ToString().ToLower()">
-					<span>@userTaskData.TaskCompletionStatus</span>
-				</div>			
-			
-				<div class="task-info">
-					<span class="task-status">@(userTaskData.Task.DueDate.HasValue?userTaskData.Task.DueDate.Value.ToShortDateString():"")</span>				
-				</div>
-
-				<div class="task-details">
-					<div class="task-instructions">
-						<div class="task-name">@userTaskData.Task.Name</div>
-					
-						<div class="task-instructions-text">@Html.Raw(userTaskData.Task.Instructions)</div>					
-					</div>	
-											
-					<div class="task-interaction">
-						@{Html.RenderPartial("TaskType-" + userTaskData.Task.TaskTypeName + "", userTaskData);}
+				
+				<div class="task-header">
+					<div class="task-meta">
+						<span class="task-name">@userTaskData.Task.Name</span>
+						<span class="task-due-date">@(userTaskData.Task.DueDate.HasValue ? userTaskData.Task.DueDate.Value.ToShortDateString():"")</span>				
 					</div>
+
+					<div class="task-status status-@userTaskData.TaskCompletionStatus.ToString().ToLower()"></div>
+				</div>	
+				
+				<div class="task-details">
+					<div class="task-instructions-text">@Html.Raw(userTaskData.Task.Instructions)</div>					
+				</div>
+				
+				<div class="task-interaction">
+					@{Html.RenderPartial("TaskType-" + userTaskData.Task.TaskTypeName + "", userTaskData);}
 				</div>
 
 				<div class="clear"></div>

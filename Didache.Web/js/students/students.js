@@ -121,29 +121,25 @@ function setTaskStatus(taskID, status) {
 
 	switch (status) {
 		case 1:
-			area.find('.block-list-item-label')
-				.removeClass('notstarted')
-				.removeClass('skipped')
-				.addClass('completed')
-				.find('span')
-					.html('Completed');
+			area.find('.task-status')
+				.removeClass('status-notstarted')
+				.removeClass('status-skipped')
+				.addClass('status-completed');
 			break;
 		default:
 		case 0:
-			area.find('.block-list-item-labe')
-				.removeClass('completed')
-				.removeClass('skipped')
-				.addClass('notstarted')
+			area.find('.task-status')
+				.removeClass('status-completed')
+				.removeClass('status-skipped')
+				.addClass('status-notstarted')
 				.find('span')
 					.html('Completed');
 			break;
 		case -1:
-			area.find('.block-list-item-labe')
-				.removeClass('notstarted')
-				.removeClass('completed')
-				.addClass('skipped')
-				.find('span')
-					.html('Completed');
+			area.find('.task-status')
+				.removeClass('status-notstarted')
+				.removeClass('status-completed')
+				.addClass('status-skipped');
 			break;
 	}
 }

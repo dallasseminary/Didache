@@ -3,14 +3,16 @@
    
 }
 
+
+<div class="task-buttons">
 @if (Model.TaskCompletionStatus != TaskCompletionStatus.Completed) {
-	<input type="button" class="mark-completed task-submit" value="@Resources.labels.studentschedule_markcompleted" data-taskstatus="@((int)TaskCompletionStatus.Completed)" />
+	<input type="button" class="mark-completed task-submit d-button action" value="@Resources.labels.studentschedule_markcompleted" data-taskstatus="@((int)TaskCompletionStatus.Completed)" />
 }
 	
 @if (Model.Task.IsSkippable && Model.TaskCompletionStatus == TaskCompletionStatus.NotStarted) {
-	<input type="button" class="mark-skipped" value="@Resources.labels.studentschedule_skip" data-taskstatus="@((int)TaskCompletionStatus.Skipped)"  />
+	<input type="button" class="mark-skipped d-button secondary" value="@Resources.labels.studentschedule_skip" data-taskstatus="@((int)TaskCompletionStatus.Skipped)"  />
 } 
-
+</div>
 
 
 <script>

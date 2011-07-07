@@ -84,12 +84,12 @@
 .page-wide .main-column {
 	padding: 20px;
 	float: left;
-	width: 560px;
+	width: 580px;
 	min-height: 600px;
 }
 .page-wide .sub-column {
 	float: right;
-	width: 179px;
+	width: 177px;
 	border-left: solid 1px #ccc;
 	background: #F1F2F4;
 }
@@ -256,4 +256,29 @@
 /* TODO: magical popup? */
 .page-menu li a dfn {
 	display: none;
+}
+
+
+/* buttons */
+.d-button {
+	display: inline-block;
+	line-height: 1;
+	-x-height: 14px;
+	font-size: 12px;
+	padding: 10px;
+	background: #eee;
+	border: solid 1px #ddd;
+	border-radius: 2px;
+}
+.d-button:hover {
+	border-color: #ccc;
+	box-shadow: rgba(50,50,50,0.2) 0 2px 1px;
+}
+.d-button.action {
+	background: #59b14d;
+	border-color: #59b14d;
+	color: #fff;
+}
+.d-button.action:hover {
+	border-color: #197d3f;
 }
