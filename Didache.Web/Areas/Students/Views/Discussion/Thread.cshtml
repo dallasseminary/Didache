@@ -3,11 +3,8 @@
 	ViewBag.Title = "Thread Posts";
 }
 
-@{Html.RenderPartial("CourseHeader"); }
-
-@{Html.RenderPartial("CourseMenu"); }
-
-
+@Html.Partial("_CourseHeader", Model.Forum.Course)
+@Html.Partial("_CourseMenu")
 
    <div id="breadcrumbs"><a href="/courses/@ViewContext.RouteData.Values["slug"]/schedule">@Model.Forum.Course.Name</a> &#9654; <a href="/courses/@ViewContext.RouteData.Values["slug"]/discussion/">@Model.Forum.Course.Name Discussion</a> &#9654; <a href="/courses/@ViewContext.RouteData.Values["slug"]/discussion/forum/@Model.Forum.ForumID">@Model.Forum.Name</a></div>
 

@@ -1,0 +1,939 @@
+﻿/* for older forums posts */
+font {
+	font-size: 12px;
+	line-height: 140%;	
+}
+
+/* student */
+#main-column {
+	float: left;
+	width: 690px;
+	min-height: 500px;
+}
+
+/* unit side bar */
+#sub-column {
+	float: right;
+	width: 270px;
+	border-bottom: 1px solid #CCC;
+}
+
+    #sub-column #right-panel
+      { margin: 0 0 0 20px; }
+    #sub-column .header
+      { padding: 4px 6px; background: #bbd1e1; display: block; margin-top: 16px; }
+    #sub-column #unit-list-header
+      { margin: 17px 0 0; }
+    #sub-column .header h4
+      { color: #333; font-weight: bold; /*text-shadow: 0 1px 0 #FFF; font-size: 1.7em;*/ }
+    #sub-column .unit-list, #sub-column .list {
+        margin: 0 0 0 10px;
+        padding: 10px 0 0;
+        border-right: 1px solid #CCC;
+        
+        border-left-width: 0; position: relative;
+        }
+    #sub-column .unit-list p, #sub-column .list p {
+        margin: 0 10px 12px;
+        font-size: 14px;
+        line-height: 140%;
+    }
+    #sub-column .discussions, #sub-column .faculty, #sub-column .grades
+      { background: #FFF; border: 1px solid #CCC; border-top-width: 0; }
+    #sub-column ol
+      { list-style: none; }
+    #sub-column ol li
+      { list-style: none; padding: 5px; border-bottom: 1px solid #CCC; overflow: hidden; }
+    #sub-column ol li:hover
+      { background: #EEE; }
+    #sub-column ol li:last-child
+      { border: none; }
+    #sub-column .discussions ol li a img
+      { float: left; height: 50px; margin-right: 5px; }
+    #sub-column .faculty ol li a img
+      { float: left; height: 80px; margin-right: 5px; }
+    #sub-column .discussions ol li a span.student-name, 
+    #sub-column .faculty ol li a span.fac-name 
+      { display: inline-block; clear: both; font-weight: bold; color: #333; margin-bottom: 5px; }
+    #sub-column .faculty ol li a span.fac-name 
+      { margin-top: 50px;}
+    #sub-column .discussions ol li a span.post-excerpt,
+    #sub-column .faculty ol li a span.fac-title
+      { display: inline-block; clear: both; font-weight: normal; }
+
+    #sub-column .grades span.total-percent
+      { font-family: "LeagueGothicRegular", "Gill Sans", Arial, sans-serif; letter-spacing: 0; font-size: 1.8em;
+        padding-right: 10px; margin-right: 8px; border-right: 1px solid #AAA; display: inline-block; }
+    #sub-column .grades span.points
+      { font-size: 13px; color: #666; }
+
+    #sub-column .unit-list ol
+	    { list-style-type: decimal;}	
+    #sub-column .unit-list ol li
+	    { list-style-type: decimal; margin: 0; min-height: 36px;
+        overflow: hidden; text-indent: -12px; position: relative; right: 0px;
+        padding: 0; border: none; }
+    #sub-column .unit-list ol li:hover
+      { background: none; }
+    #sub-column .unit-list ol li a
+      { padding: 4px 10px 4px 30px; display: block; text-decoration: none; }
+    #sub-column .unit-list ol li a:hover {
+        background: #f0f0ff;
+        border-left: 10px solid #BBB;
+        padding-left: 20px;
+    }
+    #sub-column .unit-list ol li a.selected {
+        background: #DEDEDE;
+        border-left: 10px solid #BBB;
+        padding-left: 20px;
+    }
+    #sub-column .unit-list .unit-name
+	    { display:block; font-size: 12px; color: #0281CA; line-height: 120%; }
+    #sub-column .unit-list .unit-dates
+	    { display:block; font-size: 11px; padding: 3px 0 0 18px; color: #444;}
+    #sub-column .unit-list li.selected a span.unit-name 
+      { color: #FFF; }
+    #sub-column .unit-list li.selected a span.unit-dates 
+      { color: #DDD; }
+  
+#main-column .unit-list
+	{ margin: 0; }
+#main-column .unit-list li
+	{ margin: 0 0 0 0; padding: 0; overflow: hidden; }
+#main-column .unit-list .unit-name
+	{ display:block; font-size: 12px; color: #0281CA; }
+#main-column .unit-list a:hover .unit-name
+	{ text-decoration: underline; }
+#main-column .unit-list .unit-dates
+	{ display:block; font-size: 11px; padding: 0 0 0 18px; color: #444;}	
+#main-column .unit-list li.selected
+	{ font-weight: bold; background: transparent url(../images/site/unit-selected.png) no-repeat center left;  }
+	
+
+#course-header {}
+    #course-header h2 
+    {
+        margin-bottom: 0;
+    }
+    #course-header p
+    {
+        font-size: 10px;
+        line-height: 13px;
+        color: #666;
+        margin-bottom: 6px;
+    }
+    
+#course-menu
+	{ height: 58px; overflow: visible; margin: 0 0 20px 0; padding: 0; border-bottom: 1px solid #BBB; }
+.admin #course-menu { height: 46px; }
+    #course-menu li
+	    { float: left; margin: 0 12px 0 0; height: 54px; display: block; }	
+    #course-menu li:last-child
+      { margin: 0; }  
+    #course-menu li a
+	    { display: block; width: 120px; padding: 12px 14px; border: 1px solid #DDD; background: #E9E9E9; text-decoration: none;
+        -moz-border-radius-topleft: 3px;
+        -moz-border-radius-topright: 3px;
+        -webkit-border-top-left-radius: 3px;
+        -webkit-border-top-right-radius: 3px;
+        border-radius: 3px 3px 0 0;
+        border-bottom-color: #CCC }	
+    #course-menu li a.last
+	    {   }
+    #course-menu li a:hover
+	    { text-decoration: none; background: #f0f0ff;}			
+    #course-menu li a:hover span
+	    { color: #0281CA; }				
+    #course-menu li a.selected
+	    { background: #FFF; border-bottom:5px solid #fff; height: 31px;  }	
+
+    #course-menu li a span
+	    { color: #222; font-weight: bold; font-size: 14px; display:block; margin: 0 0 5px 0; line-height: 110%; text-shadow: 0 1px 0 #FFF;}
+    #course-menu li a dfn
+	    { color: #555; font-size: 11px; display:block; line-height: 110%; }	
+		
+/* common lists on all course pages */
+.block-list-header
+	{ background: #194e76; padding: 15px 20px; margin-bottom: 0; border-bottom: 1px #DEDEDE; }
+.block-list-header h3
+	{ color: #FFF; /*font-size: 24px;*/ margin: 0; }
+.block-list-header h4	
+	{ color: #DEDEDE; font-size: 18px; margin: 0 0 8px 0;}
+
+.block-list
+	{ background: #efefef; border: solid #CCC; border-width: 0 1px 1px; padding: 0; margin-bottom: 20px; overflow: visible;}	
+.block-list .block-list-item
+	{ padding: 25px 14px 15px 135px; margin: 0; overflow: visible; position: relative; min-height: 60px;}
+.block-list .block-list-item:nth-child(odd)
+  { background: #FFF; border-bottom-color: #CCC;}
+.block-list .block-list-item:last-child
+	{ margin-bottom: 0; }
+	
+
+.block-list-title
+	{ width: 100px; float: left; font-size: 13px; font-weight: bold; }
+.block-list-content
+	{ width: 550px; float: left; font-size: 13px; }	
+.block-list-content li
+	{ margin: 0 0 4px 0; }
+	
+.block-list-item-label
+    { position: absolute; top: 12px; left: -12px; background: url(images/tasktype-label-bg-alt.png); height: 48px; width: 140px;
+    display: block; z-index: 999; font-size: 1.5em; font-weight: normal; color: #FFF;
+    letter-spacing: 0; }
+.block-list-item-label.completed 
+    { background: url(images/tasktype-label-bg-completed.png); }
+.block-list-item-label.skipped 
+    { background: url(images/tasktype-label-bg-skipped.png); }
+    
+.block-list-item-label span
+    { display: block; line-height: 1; padding: 15px 0 6px 10px; display: inline-block; }
+.block-list-item-label span.notify
+    { background: #EEE; center top; width: 20px; height: 20px; float: left; border: 1px solid #194e76;
+    padding: 0; margin: 13px 0 8px 10px; line-height: 1; display: block; }
+.complete .block-list-item-label span.notify
+    { background-color: #3C3 }
+.skipped .block-list-item-label span.notify 
+    { background-color: #C33 }
+.block-list-item .task-info {
+	width: 100px;
+	position: absolute;
+	left: 10px;
+	top: 55px;
+}
+.block-list-item .task-info {
+    display: block;
+    margin: 15px 10px;
+}
+  
+.block-list > .activity {
+    display: block;
+    padding: 5px 10px;
+}
+
+#course-roster {
+	
+}
+	#course-roster .course-group {
+	}
+	/*#course-roster .course-group:nth-child(odd) {
+		background: #FFF;
+	}*/
+	#course-roster .course-group-members {
+		
+	}
+	#course-roster .course-group-name {
+		font-size: 20px;
+		padding: 5px 0;
+		font-weight: bold;
+		display: block;
+	}	
+	#course-roster .course-group-member {
+		width: 120px;
+		height: 200px;
+		float: left;		
+		margin: 5px;
+		display: inline-block;
+		text-align: center;
+	}	
+	#course-roster .course-group-member img {
+		width: 100px;	
+		height: 125px;
+	}	
+	
+/*#schedule-units {	
+}		
+	#schedule-units a{	
+		display: block;
+		margin: 0 0 5px;
+		text-decoration:none;
+	}	
+	#schedule-units a .name{	
+		display: block;
+		font-weight: bold;
+		color: #000;
+	}			
+	#schedule-units a .date{	
+		color: #999;
+		display: block;
+	}				
+	#schedule-units a.selected {	
+		background: #ccc;
+	}	*/
+
+/* course archive, community index list */
+
+ul.course-archive, ul.course-filegroup-files, ul.all-community {
+    width: 100%;
+    overflow: hidden;
+}
+
+    ul.course-archive li, ul.course-filegroup-files li, ul.all-community li {
+        background: #FFF;
+        height: 36px;
+        margin: 0 0 10px;
+        display: block;
+        overflow: hidden;
+    }
+    
+    ul.course-archive li h4 {
+        margin-bottom: 3px;
+    }
+    
+    ul.course-archive li a, ul.course-filegroup-files li a, ul.all-community li a, ul.course-forums li a {
+        font-weight: normal;
+        display: block;
+        text-decoration: none;
+    }
+    
+    ul.course-archive li a, ul.course-filegroup-files li a span, ul.all-community li a span, ul.course-forums li a span {
+        padding: 10px;
+        height: 16px;
+    }
+    
+    ul.course-archive li a:hover, ul.course-filegroup-files a:hover, ul.all-community li a:hover, ul.course-forums li a:hover {
+        background: #666;
+        display: block;
+        color: #FFF;
+    }
+    
+    ul.course-filegroup-files a .type, ul.course-filegroup-files a .size, ul.all-community li a .campus, ul.course-forums li a .forum-description {
+        color: #BBB;
+        border-left: 1px solid #BBB;
+        float: right;
+        text-align: right;
+        display: block;
+    }
+    
+    ul.course-filegroup-files a .size {
+        width: 65px;
+    }
+    
+    ul.course-filegroup-files a .filename, ul.all-community a .name, ul.course-forums li a .name {
+        font-weight: bold;
+        display: inline-block;
+        margin-right: 10px;
+    }
+    
+    ul.course-archive li a:hover h4 {
+        color: #EEE;
+        font-weight: normal;
+    }
+    ul.all-community li img {
+	    height: 32px;
+	    padding: 2px;
+	    background: none;
+	    overflow: hidden;
+	    display: block;
+	    margin-right: 10px;
+	    float: left;
+	}
+	    
+	ul.all-community span.campus {
+	    width: 125px;
+	    padding-left: 20px;
+	}
+
+    .block-list .block-list-item:nth-child(odd) ul.course-archive li,
+    .block-list .block-list-item:nth-child(odd) ul.course-filegroup-files li,
+    .block-list .block-list-item:nth-child(odd) ul.all-community li,
+    .block-list .block-list-item:nth-child(odd) ul.course-forums li {
+        background: #EEE;
+    }
+
+    ul.course-archive li a {
+        font-weight: bold;
+    }
+    
+    ul.all-community li .profile {
+        display: none;
+        float: left;
+        margin-left: 10px;
+    }
+    ul.all-community li.selected {
+        height: auto;
+    }
+        ul.all-community li.selected a:hover {
+            background: none;
+            color: #0000FF;
+        }
+        ul.all-community li.selected img {
+            height: 150px;
+        }
+        ul.all-community li.selected .profile {
+            display: inline-block;
+        }        
+        ul.all-community li.selected .profile dl dt {
+            font-weight: bold;
+            color: #FFF;
+            background: #333;
+            padding: 2px 5px;
+            margin: 0 5px 0 0;
+            display: inline-block;
+            float: left;
+            width: 90px;
+        }
+        
+        ul.all-community li.selected .profile dl dd {
+            font-size: 12px;
+            margin: 0 0 12px;
+            padding: 2px 0 12px 20px;
+            border-bottom: 1px solid #CCC;
+            display: block;
+            width: 200px;
+        }
+    ul.all-community li a.profile-link, ul.all-community li a.profile-link:hover {
+        background: #194e76;
+        color: #FFF;
+        font-weight: bold;
+        padding: 4px;
+        display: block;
+        float: right;
+        margin: 10px;
+    }
+    
+    
+
+#schedule-tasks {
+}
+
+	#schedule-tasks .task-entry {	
+		/*border: solid 1px #666;		*/
+	}
+	#schedule-tasks .task-entry:nth-child(odd) {	
+		background: #FFF;
+	}	
+
+	#schedule-tasks .task-entry .task-info {
+		width: 100px;
+		position: absolute;
+	    left: 0;
+	    font-weight: bold;
+	    top: 55px;
+	}
+	#schedule-tasks .task-entry .task-info .task-status {
+		margin: 5px 15px;
+		display: block;
+	}	
+
+	#schedule-tasks .task-entry .task-details {
+		display: block;
+	}
+	
+	#schedule-tasks .task-entry .task-details .task-instructions {
+	    margin-bottom: 10px;
+	}
+	
+	#schedule-tasks .task-entry .task-details .task-interaction textarea {
+	    width: 478px;
+	    padding: 10px;
+	    -webkit-border-radius: 4px;
+	       -moz-border-radius: 4px;
+	            border-radius: 4px;
+	}
+	
+	#schedule-tasks .task-entry .task-details .task-interaction input[type="text"] {
+	    width: 300px;
+	}
+	
+	#schedule-tasks .task-entry .task-name {
+		font-weight: bold;
+		font-size: 120%;
+		margin: 5px 0;
+	}	
+	
+	
+/* video task */
+.video-list { 
+	overflow: hidden; 
+}
+	.video-list .video { 
+		float: left; 
+		width: 110px; 
+		height: 160px; 
+		margin: 0 15px 15px 0; 
+		text-align: center;
+	}
+
+	.video-list .video-thumb {
+		 width: 100px; 
+		 height: 75px; 
+		 border: solid 3px #999; 
+		 margin: 0 auto 8px auto; 
+	}
+	.video-list .video-options-container {
+		 width: 100px; 
+		 height: 75px; 
+		 text-align: left;
+	}
+	.video-list .video-options-container .video-options {
+		 display: none; 
+		 padding: 5px; 		
+		 width: 90px; 
+		 height: 65px; 
+		 background-color: rgba(0,0,0,0.7);
+	}
+	.video-list .video-options-container .video-options a {
+		 color: #fff; 
+		 font-weight: bold; 
+		 font-size: 11px; 
+		 text-decoration: none;
+		 display: inline-block;
+		 text-shadow: 1px 1px 1px #000;
+	}	
+	.video-list .video-options-container .video-options a:hover {
+		 text-decoration: underline;
+	}		
+	.video-list .video-thumb:hover .video-options-container .video-options {
+		 display: block;
+	}	
+	.video-list .progress-outline  {
+		 background: #ccc; 
+		 width: 100px; 
+		 margin: 0;  
+		 display: none;
+	}
+	.video-list .progress-percent  {
+		 background: #01b600;
+		 height: 3px; margin: 0;
+		 display: none;
+	}		
+	.video-list .video span {
+		 display: block; 
+	}
+	.video-list .video .video-info {
+		 font-size: 12px; 
+		 text-decoration: none;
+	}	
+	.video-list .video .video-info .title {
+		 color: #333; 
+	}	
+	.video-list .video .video-info:hover .title {
+		 text-decoration: underline;
+	}		
+	.video-list .video .video-info .duration {
+		 color: #999; 
+	}	
+	.video-list .icon {
+		 display: block; 
+		 padding: 3px 0 3px 19px; 
+		 background-position: left center; 
+		 background-repeat: no-repeat; 
+	}
+	.video-list .watchvideo {
+		 background-image: url(images/icons/control_play.png); 
+	}
+	.video-list .slides {
+		 background-image: url(images/icons/picture_save.png); 
+	}
+	.video-list .transcript {
+		 background-image: url(images/icons/page_save.png); 
+	}	
+
+
+/* Forums */
+.course-forum 
+{
+    display: block;
+    background: #EEE;
+    border: 1px solid #DCDCDC;
+    margin-bottom: 8px;
+    padding: 4px 8px;
+}
+.course-forum h3 
+{
+    margin-bottom: 0;
+}
+.course-forum p 
+{
+    color: #666;
+}
+.forum-threads, .forum-posts {
+	border-collapse: collapse;
+	text-align: left;
+	font-size: 14px;
+	margin-bottom: 20px;
+	    -webkit-border-radius: 4px;
+	       -moz-border-radius: 4px;
+	            border-radius: 4px;
+        overflow: hidden;
+    border: 1px solid #999;
+}
+    .forum-posts .header,  .forum-threads .header 
+    {
+        background: #194e76;
+        color: #FFF;
+        overflow: hidden;
+        text-shadow: -1px 1px 0 #222;
+    }
+    .forum-threads .subject, .forum-posts .subject, .forum-posts .content-area { width: 680px; }
+    .forum-threads .name, .forum-posts .poster { width: 190px; }
+    .forum-threads .replies { width: 50px; text-align: center; }
+    .forum-posts .header span,  .forum-threads .header span 
+    {
+        font-weight: bold;
+        font-size: 100%;
+        padding: 5px;   
+        display: block;
+        float: left;
+        margin: 0;
+    }
+    .forum-posts .header a,  .forum-threads .header a
+    {
+        color: #FFF; 
+    }
+    .forum-posts .post {
+        border-bottom: 1px solid #999;
+        clear: both;
+        overflow: hidden;
+    }
+    .forum-posts .posts .post p,  .forum-threads .threads .thread p
+    {
+        font-size: 13px;
+        line-height: 140%;
+        margin-bottom: 12px;
+    }
+    .forum-posts .posts .post li {
+        margin-left: 30px;
+    }
+    .forum-posts .posts .post.content 
+    {
+        font-size: 13px;
+        line-height: 140%;
+    }
+	.forum-threads div.threads div.thread {
+	    display: block;
+	    clear: both;
+	    overflow: hidden;
+	}
+	.forum-posts div.posts div.post:nth-child(odd), .forum-threads div.threads div.thread:nth-child(odd) {
+		background: #eee;
+	}
+	.forum-posts div.posts div.post > div, .forum-threads div.threads div.thread > span {
+		vertical-align: top;
+		position: relative;
+		padding: 5px;
+		display: block;
+		float: left;
+	}
+	.forum-threads h3 {
+	    font-weight: normal;
+	    margin-bottom: 0;
+	}
+	.forum-threads div.threads div.thread > span.replies {
+	    font-weight: bold;
+	    font-size: 20px;
+	    text-align: center;
+	    padding: 15px 5px;
+	}
+	.forum-threads .date, .forum-posts .posts .date {
+	    color: #666;
+	    font-size: 10px;
+	    line-height: 100%;
+	    margin-bottom: 10px;
+	}
+	.forum-threads .last-poster {
+	    clear: both;
+	    display: block;
+	    margin-bottom: 2px;
+	}
+	.forum-posts .poster {
+	    text-align: center; 
+	    border-right: 1px solid #999;
+	}
+	.forum-posts .post-author, .forum-threads .post-author {
+		width: 100px;
+		margin-bottom: 8px;
+	}
+	.forum-posts .name, .forum-threads .threads .name {
+		font-size: 13px;
+		font-weight: bold;
+		margin-bottom: 8px;
+		display: inline-block;
+	}
+	.forum-posts div.posts div.post div.content-area {
+	    border-left: 1px solid #999;
+	    margin-left: -1px;
+	    padding-left: 10px;
+	}
+	.forum-posts .content {
+	    margin-bottom: 15px;
+	    display: block;
+	    clear: both;
+	    overflow: hidden;
+	}
+.add-post-outer {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top:0;
+    left: 0;
+    background: rgba(255,255,255,0.7);
+}
+.add-post {
+    display: block;
+    height: 300px;
+    width: 640px;
+	-webkit-border-radius: 16px;
+	   -moz-border-radius: 16px;
+	        border-radius: 16px;
+    overflow: hidden;    
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    margin-left: -300px;
+    z-index: 1000;
+    background: #DEDEDE;
+    border: 1px solid #999;
+    box-shadow: 0 0 10px #999;
+}
+.reply-link, .thread-link {
+    display: none;
+    margin: 0 0 15px;
+}
+.reply-link a, .thread-link a {
+    display: block;
+    float: left;
+    padding: 5px 10px;
+    background: #194e76;
+    color: #FFF;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+	-webkit-border-radius: 4px;
+	   -moz-border-radius: 4px;
+	        border-radius: 4px;
+	text-shadow: -1px 1px 0 #222;
+	border-color: #99B0C0 #111 #111 #99B0C0;
+	border-width: 1px;
+	border-style: solid;
+    
+}
+.add-reply {
+    overflow: hidden;
+    margin-top: 10px;
+    clear: both;
+}
+.add-reply form.forum-post-new {
+    height: auto;
+}
+form.forum-post-new {
+    border-radius: 16px;
+    -webkit-background-clip: border-box;
+            background-clip: border-box;
+    padding: 10px;
+    width: 640px;
+    height: 300px;
+    margin: 0 auto 20px;
+    background: #DDD;
+    overflow: hidden;
+}
+    form.forum-post-new table td 
+    {
+        vertical-align: top;
+        padding: 16px;
+    }
+    form.forum-post-new input[type="text"] 
+    {
+        padding: 6px;
+        font-size: 16px;
+    }
+    form.forum-post-new textarea {
+        padding: 4px;
+        font-size: 13px;
+        margin: auto auto;
+        max-width: 632px;
+    }
+    form.forum-post-new input[type="submit"] 
+    {
+        margin: 8px auto;
+        display: block;
+        width: 200px;
+    }
+
+a.cancel-thread {
+    position: absolute;
+    top: 20px;
+    right: 20px;   
+}
+
+.task-submit {
+	color: #fff;
+	margin-top: 10px;
+	padding: 8px 12px;
+	border-radius: 6px;
+	border: 2px solid #A7DB8F;
+	border-color: #A7DB8F #357318 #357318 #A7DB8F;
+	background: #4CBB17;
+	font-weight: bold;
+	text-shadow: 0px 1px #666;
+	letter-spacing: 0;
+}
+.task-submit:hover {
+	background: #63D92B;
+	cursor: pointer;
+}
+.task-submit:active {
+	border-color: #357318 #A7DB8F #A7DB8F #357318;
+}
+
+
+/** Interactions **/
+
+.task-interactions {
+	margin: 10px 0 0 0;
+	padding: 5px 8px 8px;
+	background: #194e76;
+	/*border-radius: 8px;*/
+	/*border: 1px solid #194e76;*/
+}
+    .task-interactions-header {
+        background: #194e76;
+        padding: 5px;
+        color: #FFF;
+        font-weight: bold;
+        margin-bottom: 4px;
+    }
+	.task-interaction {
+		padding: 5px 0;
+		width: 536px;
+	}
+	.task-interaction-thread {
+	    margin-bottom: 4px;	
+		background: #eee;
+		overflow: hidden;
+		border-radius: 4px;
+		border-bottom: #99B0C0 1px solid;
+		border-left: #99B0C0 1px solid;
+	}
+	.task-interaction-thread .task-interaction-header {
+		background: #BBD1E1;
+		overflow: hidden;
+		color: #222;
+		cursor: pointer;
+		padding: 5px;
+		
+	}	
+	.task-interactions .user {
+		width: 265px;
+		margin-right: 8px;
+		float: left;
+		display: block;
+		font-weight: bold;
+	}		
+	.task-interactions .date {
+		width: 75px;
+		float: left;
+		display: block;
+		margin-right: 15px;
+		text-align: right;
+	}		
+	.task-interaction-list {
+	    border: 1px solid #BBB;
+	    border-width: 0 1px 1px 1px;
+	    padding: 10px;	
+	}
+	.task-interactions .task-interaction-header .date, .task-interaction .post-date {
+	    color: #666;
+	    font-style: italic;
+	    font-size: 11px;
+	    font-weight: normal;
+		text-align: right;
+	}
+	.task-interaction .post-date {
+	    display: block;
+	    text-align: right;
+	    margin-right: 15px;
+	    color: #333;
+	}
+	.task-interactions .total-replies {
+		width: 50px;
+		float: left;
+		text-align: right;
+		display: block;
+	}	
+	
+	.task-interaction-thread .task-interaction-post {
+		overflow: hidden;
+		border-radius: 4px;
+		margin-bottom: 5px;
+	}
+	.task-interaction-thread .task-interaction-post:nth-child(even) {
+		overflow: hidden;		
+		background: #ddd;
+	}			
+	.task-interaction-thread .task-interaction-post .user-info {
+		width: 100px;
+		float: left;
+		margin: 10px;
+		text-align: left;		
+	}	
+	.task-interaction-thread .task-interaction-post .user-info a {
+		text-decoration:none;
+		color: #555;
+		font-wize: 10px;
+	}	
+	.task-interaction-thread .task-interaction-post .user-info img {
+		width: 80px;
+		background: #FFF;
+		padding: 8px;
+		border: 1px solid #BBB;
+		-webkit-border-radius: 3px;
+		   -moz-border-radius: 3px;
+		        border-radius: 3px;		
+	}	
+	.task-interaction-thread .task-interaction-post .user-info span {
+		display: block;	
+	}							
+	.task-interaction-thread .task-interaction-post .post-content {
+		width: 365px;
+		float: left;
+		margin: 8px 5px;
+		padding-bottom: 10px;
+		border-bottom: 1px solid #BBB;
+	}	
+	.task-interaction-thread .add-reply {
+	    margin:0 0 10px;
+	}
+	    .task-interaction-thread .add-reply textarea {
+	        display: block;
+	        clear: both;
+	        margin: 5px 0;
+	    }
+	    .task-interaction-thread .add-reply span.add-reply-button {
+	        text-align: right;
+	        display: block;
+	        width: 100%;
+	    }
+	    .task-interaction-thread .add-reply input[type="button"] {
+	        margin: 0 9px auto 0;
+	        padding: 4px 24px;
+	        background: #DDD;
+	        border: 2px solid #FFF;
+	        border-color: #FFF #333 #333 #FFF;
+	        border-radius: 5px;
+	        cursor: pointer;
+	    }
+	    .task-interaction-thread .add-reply input[type="button"]:active {
+	        background: #CCC;
+	        border-color: #333 #FFF #FFF #333;
+	    }
+	    
+	.task-interactions .task-interaction-thread .thread-starter {
+		background: #FFF;
+		border-top: 1px solid #BBB;
+		border-bottom: 1px solid #BBB;
+	}
+	    
+	.task-interactions .task-interaction-thread .thread-starter .user-info img {
+		background: #EEE;
+	}
+	
+	.task-interactions .add-reply a.collapse {
+	    display: inline-block;
+	    margin: 5px 10px 5px 0;
+	}
+	    
+	ul.graded-assignments .skipped {
+	    color: #BBB;
+	}

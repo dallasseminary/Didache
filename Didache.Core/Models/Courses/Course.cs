@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using System.Web.Script.Serialization;
 using System.Runtime.Serialization;
+using Didache.Models;
 
 namespace Didache {
 
@@ -69,6 +70,69 @@ namespace Didache {
 
 		[ScriptIgnore]
 		public virtual ICollection<CourseUserGroup> CourseUserGroups { get; set; }
+
+		/*
+		public List<User> FacultyUsers {
+			get {
+				return CourseUsers
+							.Where(cu => cu.CourseUserRole == CourseUserRole.Faculty)
+							.Select(cu => cu.User)
+							.ToList();
+			}
+		}
+
+		public string FacultyUsersFormatted {
+			get {
+				return string.Join(", ", FacultyUsers.Select(u => u.LastName).ToArray());
+			}
+		}
+		
+
+		public List<User> FacultyUsers {
+			get {
+				return new DidacheDb()
+							.CourseUsers
+								.Where(cu => cu.CourseID == CourseID && cu.CourseUserRole == CourseUserRole.Faculty)
+								.Select(cu => cu.User)
+								.ToList();
+			}
+		}
+		*/
+
+		public string FacultyLastNames {
+			get {
+				return 
+					string.Join(", ", 
+								CourseUsers
+									.Where(cu => cu.CourseID == CourseID && cu.RoleID == (int) CourseUserRole.Faculty)
+									.Select(cu => cu.User.LastName)
+									.ToArray()
+								);
+				
+			}
+		}
+
+		public string FacultyFullNames {
+			get {
+				List<User> faculty = CourseUsers
+										.Where(cu => cu.CourseID == CourseID && cu.RoleID == (int)CourseUserRole.Faculty)
+										.Select(cu => cu.User)
+										.ToList();
+				switch (faculty.Count) {
+					case 0:
+						return "(no faculty member)";
+					case 1:
+						return faculty[0].FormattedName;
+					case 2:
+						return faculty[0].FormattedName + " &amp; " + faculty[1].FormattedName;
+					default:
+						return string.Join(", ", faculty.GetRange(0, faculty.Count-1).Select(u => u.FormattedName).ToArray()) + ", and " + faculty.Last().FormattedName;
+
+				}
+
+			}
+		}
+
 
 		public override string ToString() {
 			return CourseCode + " - " + Name;

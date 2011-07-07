@@ -1,24 +1,21 @@
-﻿<nav id="dts-common-menu">
-	<div class="container_12">
-		<div class="grid_6">
-			<div id="dts-sites">				
-				<a href="http://www.dts.edu/">@Resources.labels.commonmenu_dtswebsite</a>
-				<a href="http://library.dts.edu/">@Resources.labels.commonmenu_library</a>
-				<a href="http://bookcenter.dts.edu/">@Resources.labels.commonmenu_bookcenter</a>
-				<a href="http://campus.dts.edu/">@Resources.labels.commonmenu_campusnet</a>
-				<a href="http://alumni.dts.edu/">@Resources.labels.commonmenu_alumni</a>				
-				<a href="http://online.dts.edu/">@Resources.labels.commonmenu_onlineed</a>
-			</div>
+﻿<div id="common-menu">
+	<div id="common-wrapper">
+		<div id="site-list">				
+			<a href="http://www.dts.edu/">@Resources.labels.commonmenu_dtswebsite</a>
+			<a href="http://library.dts.edu/">@Resources.labels.commonmenu_library</a>
+			<a href="http://bookcenter.dts.edu/">@Resources.labels.commonmenu_bookcenter</a>
+			<a href="http://campus.dts.edu/">@Resources.labels.commonmenu_campusnet</a>
+			<a href="http://alumni.dts.edu/">@Resources.labels.commonmenu_alumni</a>				
+			<a href="http://@Request.Url.Host/" class="selected">@Resources.labels.commonmenu_onlineed</a>
 		</div>
-		<div class="grid_6">
-			<div id="dts-account">				
+		<div id="account-info">				
 @if (Request.IsAuthenticated) {	
-	<span class="user">@User.Identity.Name</span> <a href="/account/editprofile">Profile</a> <a href="/logout.aspx">@Resources.labels.login_logout</a>
+			<span class="user">@Users.GetLoggedInUser().FormattedName</span>
+			<a href="/account/editprofile">Profile</a>
+			<a href="/logout.aspx">@Resources.labels.login_logout</a>
 } else {	
-	<a href="/account/login">@Resources.labels.login_login</a>
-}
-							
-			</div>
-		</div>			
+			<a href="/account/login">@Resources.labels.login_login</a>
+}	
+		</div>
 	</div>
-</nav>
+</div>

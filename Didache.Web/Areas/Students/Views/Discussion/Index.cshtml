@@ -3,9 +3,9 @@
 	ViewBag.Title = "Forum";
 }
 
-@{Html.RenderPartial("CourseHeader"); }
+@Html.Partial("_CourseHeader", Model[0].Course)
+@Html.Partial("_CourseMenu")
 
-@{Html.RenderPartial("CourseMenu"); }
 
 <div>
     <div class="block-list-header"><h3>Course Forums</h3></div>

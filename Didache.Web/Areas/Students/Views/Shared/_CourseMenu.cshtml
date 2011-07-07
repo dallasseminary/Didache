@@ -1,6 +1,6 @@
 ﻿
 
-<ul id="course-menu">
+<ul id="course-menu" class="page-menu">
 	<li>
 		<a href="/courses/@ViewContext.RouteData.Values["slug"]/dashboard"@(Html.Raw(ViewContext.RouteData.Values["action"].ToString().ToLower() == "dashboard" ? " class=\"selected\"" : ""))>
 			<span>@Html.Raw(Resources.labels.coursetabs_dashboard) </span>

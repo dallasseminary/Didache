@@ -3,82 +3,86 @@
 	ViewBag.Title = Model.CourseCode + Model.Section + " " + Resources.labels.coursetabs_schedule;
 }
 
-@Html.Partial("CourseHeader")
-
-@Html.Partial("CourseMenu")
-
 @section head {
 	<script src="/js/students/students.js"></script>
 }
 
-<div id="main-column">
+<div class="page-wide">
+
+	@Html.Partial("_CourseHeader", Model)
+	@Html.Partial("_CourseMenu")
+
+
+	<div class="main-column">
 	
-	<div class="block-list-header"><h3>@(ViewBag.CurrentUnit != null ? "Unit " + ViewBag.CurrentUnit.SortOrder + ": " + ViewBag.CurrentUnit.Name : "")</h3></div>
+		<div class="block-list-header"><h3>@(ViewBag.CurrentUnit != null ? "Unit " + ViewBag.CurrentUnit.SortOrder + ": " + ViewBag.CurrentUnit.Name : "")</h3></div>
 
 
-	<div id="schedule-tasks" class="block-list">
+		<div id="schedule-tasks" class="block-list">
 
 	
-	@if (ViewBag.UserTasks != null) {	 
-		foreach (Didache.UserTaskData userTaskData in ViewBag.UserTasks) {
+		@if (ViewBag.UserTasks != null) {	 
+			foreach (Didache.UserTaskData userTaskData in ViewBag.UserTasks) {
 		
-		<div class="task-entry block-list-item" id="task-@userTaskData.TaskID" data-taskid="@userTaskData.TaskID" data-tasktype="@userTaskData.Task.TaskTypeName">
-            <div class="block-list-item-label @userTaskData.TaskCompletionStatus.ToString().ToLower()">
-				<span>@userTaskData.TaskCompletionStatus</span>
-            </div>			
+			<div class="task-entry block-list-item" id="task-@userTaskData.TaskID" data-taskid="@userTaskData.TaskID" data-tasktype="@userTaskData.Task.TaskTypeName">
+				<div class="block-list-item-label @userTaskData.TaskCompletionStatus.ToString().ToLower()">
+					<span>@userTaskData.TaskCompletionStatus</span>
+				</div>			
 			
-			<div class="task-info">
-                <span class="task-status">@(userTaskData.Task.DueDate.HasValue?userTaskData.Task.DueDate.Value.ToShortDateString():"")</span>				
-			</div>
-
-			<div class="task-details">
-				<div class="task-instructions">
-					<div class="task-name">@userTaskData.Task.Name</div>
-					
-					<div class="task-instructions-text">@Html.Raw(userTaskData.Task.Instructions)</div>					
-				</div>	
-											
-				<div class="task-interaction">
-					@{Html.RenderPartial("TaskType-" + userTaskData.Task.TaskTypeName + "", userTaskData);}
+				<div class="task-info">
+					<span class="task-status">@(userTaskData.Task.DueDate.HasValue?userTaskData.Task.DueDate.Value.ToShortDateString():"")</span>				
 				</div>
-			</div>
 
-			<div class="clear"></div>
-		</div>
+				<div class="task-details">
+					<div class="task-instructions">
+						<div class="task-name">@userTaskData.Task.Name</div>
+					
+						<div class="task-instructions-text">@Html.Raw(userTaskData.Task.Instructions)</div>					
+					</div>	
+											
+					<div class="task-interaction">
+						@{Html.RenderPartial("TaskType-" + userTaskData.Task.TaskTypeName + "", userTaskData);}
+					</div>
+				</div>
+
+				<div class="clear"></div>
+			</div>
+			}
+		} else {	
+			<text>
+			Select a unit from the menu on the right
+			</text>
 		}
-	} else {	
-		<text>
-		Select a unit from the menu on the right
-		</text>
-	}
 	
+
+		</div>
+
+		<div class="clear"></div>
+	</div>
+
+	<div class="sub-column">
+		
+		<div class="unit-list">
+			
+			<h4>@Resources.labels.courses_heading_units</h4>
+			
+			<ol>
+				@if (ViewBag.Units != null) {
+					foreach (Didache.Unit unit in ViewBag.Units) {		
+						<li><a href="/courses/@unit.Course.Slug/schedule/@unit.UnitID"@Html.Raw((ViewBag.CurrentUnit != null && unit.UnitID == ViewBag.CurrentUnit.UnitID) ? " class=\"selected\"" : "")>
+							<span class="unit-name">@unit.SortOrder. @unit.Name</span>					
+							<span class="unit-dates">@unit.StartDate.ToString("MM/dd/yyyy") - @unit.EndDate.ToString("MM/dd/yyyy")</span>
+						</a></li>
+					}	
+				}
+			</ol>
+		</div>
 
 	</div>
-</div>
-<div id="sub-column">
-    <div id="unit-list-header" class="header"><h4>@Resources.labels.courses_heading_units</h4></div>
-	    <div class="unit-list">
-            <ol>
-		        @if (ViewBag.Units != null) {
-			        foreach (Didache.Unit unit in ViewBag.Units) {		
-				        <li><a href="/courses/@unit.Course.Slug/schedule/@unit.UnitID"@Html.Raw((ViewBag.CurrentUnit != null && unit.UnitID == ViewBag.CurrentUnit.UnitID) ? " class=\"selected\"" : "")>
-					        <span class="unit-name">@unit.SortOrder. @unit.Name</span>					
-					        <span class="unit-dates">@unit.StartDate.ToString("MM/dd/yyyy") - @unit.EndDate.ToString("MM/dd/yyyy")</span>
-				        </a></li>
-			        }	
-		        }
-            </ol>
-	    </div>
 
-</div>
 
-<script>
-	$('.task-instructions-text').expander({
-		slicePoint: 1000
-		, widow: 2
-		//,expandEffect: 'show'
-		, expandText: 'more »'
-		//, userCollapse: false
-		, userCollapseText: '« less'
-	});
-</script>
+	
+
+	<div class="clear"></div>
+	poop
+</div>

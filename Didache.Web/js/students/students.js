@@ -3,6 +3,17 @@ Didache.TaskTypes = [];
 
 jQuery(document).ready(function ($) {
 
+	// shorten task descriptions
+	$('.task-instructions-text').expander({
+		slicePoint: 1000
+		, widow: 2
+		//,expandEffect: 'show'
+		, expandText: 'more »'
+		//, userCollapse: false
+		, userCollapseText: '« less'
+	});
+
+
 	// get all task types
 	$('div.task-entry').each(function () {
 

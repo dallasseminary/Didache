@@ -1,52 +1,52 @@
 ﻿@model Didache.User
 
 @{
-    ViewBag.Title = "View";
+    ViewBag.Title = Model.SecureName;
 }
 
-<div id="main-column">
-    <!--div style="padding: 20px; background: red;">
-        <a href="/loginas.aspx?username=@Model.Username">LOGIN AS @Model.Username</a>
-    </div-->
-    <div class="profile">
-        <div class="block-list-header"><h3>@Model.FormattedName</h3></div>
-        <div class="block-list">
-            <div class="block-list-item">
-                <div class="user-info">
-                    <div style="float: left; width: 190px;">
-	                    <img src="@Model.ProfileImageUrl" alt="@Model.FormattedName" />
-                    </div>
+@section profileimage {
+	<div id="profile-large">
+		<img src="@Model.ProfileImageUrl" alt="@Model.FormattedName" />
+	</div>
+}
 
-                    <div style="float: left; width: 350px;">
+<div class="page-narrow">
+	<div class="main-column">
+		<div class="page-header">
+			<h2>@Model.SecureName</h2>
+			<h3>@Model.Country</h3>
+		</div>
 
-			            <dl>
-				            <dt>Birthday</dt>
-				            <dd>
-					            @(Model.BirthDate.HasValue ? Model.BirthDate.Value.ToShortDateString() : "") &nbsp;
-				            </dd>
-				            <dt>From</dt>
-				            <dd>
-					            @Model.Hometown &nbsp;
-				            </dd>
-				            <dt>Alma Mater</dt>
-				            <dd>
-					            @Model.AlmaMater &nbsp;
-				            </dd>
-				            <dt>Bio</dt>
-				            <dd>
-					            @Model.Bio &nbsp;
-				            </dd>
-                            <dt>Ministry Goals</dt>
-                            <dd>@Model.MinistryGoals &nbsp;</dd>
-                            @if (!Model.Facebook.IsEmpty()) {<dt>Facebook</dt><dd><a href="@Model.Facebook">@Model.Facebook</a></dd>}
-                            @if (!Model.Twitter.IsEmpty()) {<dt>Twitter</dt><dd><a href="http://www.twitter.com/@Model.Twitter">@@@Model.Twitter</a></dd>}
-                            @if (!Model.Website.IsEmpty()) {<dt>Website</dt> <dd><a href="@(!Model.Website.Contains("http://") ? "http://" + Model.Website : Model.Website)">@Model.Website.Replace("http://","")</a></dd>}
 
-			            </dl>
+		<dl>
+			<dt>Birthday</dt>
+			<dd>
+				@(Model.BirthDate.HasValue ? Model.BirthDate.Value.ToShortDateString() : "") &nbsp;
+			</dd>
+			<dt>From</dt>
+			<dd>
+				@Model.Hometown &nbsp;
+			</dd>
+			<dt>Alma Mater</dt>
+			<dd>
+				@Model.AlmaMater &nbsp;
+			</dd>
+			<dt>Bio</dt>
+			<dd>
+				@Model.Bio &nbsp;
+			</dd>
+            <dt>Ministry Goals</dt>
+            <dd>@Model.MinistryGoals &nbsp;</dd>
+            @if (!Model.Facebook.IsEmpty()) {<dt>Facebook</dt><dd><a href="@Model.Facebook">@Model.Facebook</a></dd>}
+            @if (!Model.Twitter.IsEmpty()) {<dt>Twitter</dt><dd><a href="http://www.twitter.com/@Model.Twitter">@@@Model.Twitter</a></dd>}
+            @if (!Model.Website.IsEmpty()) {<dt>Website</dt> <dd><a href="@(!Model.Website.Contains("http://") ? "http://" + Model.Website : Model.Website)">@Model.Website.Replace("http://","")</a></dd>}
 
-                    </div>
-                </div>
-            </div>	
-        </div>
-    </div>
+		</dl>
+
+
+	</div>
+	<div class="sub-column">
+	
+	</div>
+
 </div>

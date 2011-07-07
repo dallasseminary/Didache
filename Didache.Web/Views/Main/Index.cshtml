@@ -4,248 +4,245 @@
 }
 
 
+<div class="page-narrow">
+	<div class="main-column">
+	@if (Users.GetLoggedInUser() != null) {
+		<h2>@Resources.labels.home_dashboard_heading_stream</h2>
+	 
+		<!--#{ var activities = ActivityStream.GetUsersItems();}
 
-@if (Users.GetLoggedInUser() != null) {
+		#foreach (ActivityStreamItemBase item in activities) {
+			<div class="activity">
+                <span class="activity-user-image"><img src="#item.User.ProfileImageUrl"></span>
+                <span class="activity-info">
+					<span class="activity-text">#Html.Raw(item.FormatActivity())</span>
+					<span class="activity-date">#item.ActivityDate.ToShortDateString() @@ #item.ActivityDate.ToShortTimeString()</span>
+                </span>
+			</div>
+            if (activities.IndexOf(item) == 19) { break; }  
+		} -->
+		<div class="activity interaction-reply">
+            <span class="activity-user-image"><img src="http://www.dts.edu/images/carsphotos/photo.ashx?id=911751"></span>
+            <span class="activity-info">
+                <span class="activity-icon"></span>
+				<span class="activity-text"><a href="/community/Charles.Cluchey">Charles Cluchey</a> responded to <a href="/courses/s111-be106ol/schedule/8481#thread-109873">Thomas Walsh's assignment</a></span>
+
+				<span class="activity-date">5/7/2010 @@ 10:39 PM</span>
+            </span>
+		</div>
+        <div class="activity forum-post">
+            <span class="activity-user-image"><img src="http://www.dts.edu/images/carsphotos/photo.ashx?id=595000"></span>
+            <span class="activity-info">
+                <span class="activity-icon"></span>
+				<span class="activity-text"><a href="/community/Raymond.Lo">Raymond W. Lo</a> added a new post to the thread <a href="/courses/sp10-be102ol/discussion/thread/88192#post-390350">Re: Final Exam</a></span>
+
+				<span class="activity-date">5/9/2010 @@ 11:20 PM</span>
+            </span>
+		</div>
+		<div class="activity interaction-post">
+            <span class="activity-user-image"><img src="http://www.dts.edu/images/carsphotos/photo.ashx?id=893224"></span>
+            <span class="activity-info">
+                <span class="activity-icon"></span>
+				<span class="activity-text"><a href="/community/Thomas.Walsh">Thomas Walsh</a> posted <a href="/courses/s111-be106ol/schedule/8481#thread-109873">AutobiographyTPW.doc</a></span>
+
+				<span class="activity-date">5/9/2010 @@ 12:06 PM</span>
+            </span>
+		</div>
+		<div class="activity forum-post">
+            <span class="activity-user-image"><img src="http://www.dts.edu/images/carsphotos/photo.ashx?id=448122"></span>
+            <span class="activity-info">
+                <span class="activity-icon"></span>
+				<span class="activity-text"><a href="/community/Kenneth.Myers">Kenneth C. Myers</a> added a new post to the thread <a href="/courses/sp10-be105ol/discussion/thread/87190#post-390225">Re: The veil of the temple was twenty stories tall?</a></span>
+
+				<span class="activity-date">5/7/2010 @@ 11:02 PM</span>
+            </span>
+		</div>
+		<div class="activity prof-file">
+            <span class="activity-info">
+                <span class="activity-icon"></span>
+				<span class="activity-text"><a href="/community/jallman">James E. Allman</a> added <a href="/courses/s111-be102ol/files#file-227010">Charting Instructions</a> to course files (BE106)</span>
+
+            </span>
+		</div>
+		<div class="activity forum-post">
+            <span class="activity-user-image"><img src="http://www.dts.edu/images/carsphotos/photo.ashx?id=896006"></span>
+            <span class="activity-info">
+                <span class="activity-icon"></span>
+				<span class="activity-text"><a href="/community/Patricia.Holton">Patricia A. Holton</a> added a new post to the thread <a href="/courses/sp10-ce102ol/discussion/thread/89306#post-389931">Question for Dr. Lawson</a></span>
+
+				<span class="activity-date">5/7/2010 @@ 12:24 PM</span>
+            </span>
+		</div>
+		<div class="activity graded-assignment">
+            <span class="activity-info">
+                <span class="activity-icon"></span>
+				<span class="activity-text"><a href="#">Autobiography</a> has been graded.</span>
+            </span>
+		</div>
+		<div class="activity interaction-reply">
+            <span class="activity-user-image"><img src="http://www.dts.edu/images/carsphotos/photo.ashx?id=858188"></span>
+            <span class="activity-info">
+                <span class="activity-icon"></span>
+				<span class="activity-text"><a href="/community/Rachel.Miller">Rachel S. Miller</a> responded to <a href="#">John Locoe's assignment</a></span>
+
+				<span class="activity-date">5/6/2010 @@ 4:17 PM</span>
+            </span>
+		</div>
+		<div class="activity interaction-reply">
+            <span class="activity-user-image"><img src="http://www.dts.edu/images/carsphotos/photo.ashx?id=869444"></span>
+            <span class="activity-info">
+                <span class="activity-icon"></span>
+				<span class="activity-text"><a href="/community/Lucas.Baker">Lucas A. Baker</a> responded to <a href="#">John Locoe's assignment</a></span>
+
+				<span class="activity-date">5/5/2010 @@ 8:19 PM</span>
+            </span>
+		</div>
+		<div class="activity forum-post">
+            <span class="activity-user-image"><img src="http://www.dts.edu/images/carsphotos/photo.ashx?id=876885"></span>
+            <span class="activity-info">
+                <span class="activity-icon"></span>
+				<span class="activity-text"><a href="/community/Carl.Matice">Carl R. Matice</a> added a new post to the thread <a href="/courses/sp10-be107ol/discussion/thread/88771#post-389298">Re: Final Exam</a></span>
+
+				<span class="activity-date">5/5/2010 @@ 2:34 PM</span>
+            </span>
+		</div>
+		<div class="activity interaction-post">
+            <span class="activity-user-image"><img src="http://www.dts.edu/images/carsphotos/photo.ashx?id=912549"></span>
+            <span class="activity-info">
+                <span class="activity-icon"></span>
+				<span class="activity-text"><a href="/community/Andrew.Reese">Andrew P. Reese</a> added a new post to the thread <a href="/courses/sp10-be102ol/discussion/thread/89063#post-389249">Re: Latest time to take Final?</a></span>
+
+				<span class="activity-date">5/5/2010 @@ 10:01 AM</span>
+            </span>
+		</div>
+		<div class="activity interaction-reply">
+            <span class="activity-user-image"><img src="http://www.dts.edu/images/carsphotos/photo.ashx?id=876885"></span>
+            <span class="activity-info">
+                <span class="activity-icon"></span>
+				<span class="activity-text"><a href="/community/Carl.Matice">Carl R. Matice</a> responded to <a href="#">John Locoe's assignment</a></span>
+
+				<span class="activity-date">5/5/2010 @@ 9:27 AM</span>
+            </span>
+		</div>
+		<div class="activity graded-assignment">
+            <span class="activity-info">
+                <span class="activity-icon"></span>
+				<span class="activity-text"><a href="#">Autobiography</a> has been graded.</span>
+            </span>
+		</div>
+		<div class="activity forum-post">
+            <span class="activity-user-image"><img src="http://www.dts.edu/images/carsphotos/photo.ashx?id=38159"></span>
+            <span class="activity-info">
+                <span class="activity-icon"></span>
+				<span class="activity-text"><a href="/community/jallman">James E. Allman</a> added a new post to the thread <a href="/courses/sp10-be102ol/discussion/thread/88944#post-389097">Re: Was the Lord's Supper the Passover meal?</a></span>
+
+				<span class="activity-date">5/4/2010 @@ 10:37 PM</span>
+            </span>
+		</div>
+		<div class="activity interaction-reply">
+            <span class="activity-user-image"><img src="http://www.dts.edu/images/carsphotos/photo.ashx?id=905043"></span>
+            <span class="activity-info">
+                <span class="activity-icon"></span>
+				<span class="activity-text"><a href="/community/Teresa.Jendel">Teresa G. Jendel</a> responded to <a href="#">John Locoe's assignment</a></span>
+
+				<span class="activity-date">5/4/2010 @@ 12:34 PM</span>
+            </span>
+		</div>
+		<div class="activity interaction-reply">
+            <span class="activity-user-image"><img src="http://www.dts.edu/images/carsphotos/photo.ashx?id=905561"></span>
+            <span class="activity-info">
+                <span class="activity-icon"></span>
+				<span class="activity-text"><a href="/community/Karl.Hanschen">Karl H. Hanschen</a> responded to <a href="#">John Locoe's assignment</a></span>
+
+				<span class="activity-date">5/4/2010 @@ 11:55 AM</span>
+            </span>
+		</div>
+		<div class="activity interaction-post">
+            <span class="activity-user-image"><img src="http://www.dts.edu/images/carsphotos/photo.ashx?id=506"></span>
+            <span class="activity-info">
+                <span class="activity-icon"></span>
+				<span class="activity-text"><a href="/community/John.Locoe">John Locoe</a> posted <a href="#">Autobiography.doc</a></span>
+
+				<span class="activity-date">5/3/2010 @@ 6:17 PM</span>
+            </span>
+		</div>
+		<div class="activity forum-post">
+            <span class="activity-user-image"><img src="http://www.dts.edu/images/carsphotos/photo.ashx?id=63838"></span>
+            <span class="activity-info">
+                <span class="activity-icon"></span>
+				<span class="activity-text"><a href="/community/mlawson">Michael S. Lawson</a> added a new post to the thread <a href="/courses/sp10-ce102ol/discussion/thread/88893#post-388303">Re: Dr. Lawson Q on Discipleship</a></span>
+
+				<span class="activity-date">5/3/2010 @@ 8:10 AM</span>
+            </span>
+		</div>
+		<div class="activity interaction-reply">
+            <span class="activity-user-image"><img src="http://www.dts.edu/images/carsphotos/photo.ashx?id=840093"></span>
+            <span class="activity-info">
+                <span class="activity-icon"></span>
+				<span class="activity-text"><a href="/community/Jeffrey.Caldwell">Jeffrey T. Caldwell</a> responded to <a href="#">Josh Bleeker's assignment</a></span>
+
+				<span class="activity-date">5/2/2010 @@ 7:45 PM</span>
+            </span>
+		</div>
+		<div class="activity forum-post">
+            <span class="activity-user-image"><img src="http://www.dts.edu/images/carsphotos/photo.ashx?id=38159"></span>
+            <span class="activity-info">
+                <span class="activity-icon"></span>
+				<span class="activity-text"><a href="/community/jallman">James E. Allman</a> added a new post to the thread <a href="/courses/sp10-be102ol/discussion/thread/88838#post-388153">Re: Temporal and Final Punishment</a></span>
+
+				<span class="activity-date">5/2/2010 @@ 3:44 PM</span>
+            </span>
+		</div>
+	 	 
+	} else {
+	  
+		<h2>Welcome</h2>
 	
-<div id="dashboard">
-    <div class="side">
-        <div>
-            <h3>@Resources.labels.home_dashboard_heading_upcoming</h3>
+		<p>This is Dallas Theological Seminary's online education portal. Feel free to check out some classes.</p>
+	
+		<p>Overview video</p>	  	  
+	}
+	</div>
+
+	<div class="sub-column">
+	
+		@if (User.Identity.IsAuthenticated) {
+		
+			<div class="page-head">
+			<h2>@Resources.labels.home_dashboard_heading_upcoming</h2>
+			</div>
 			
-			@foreach (UserTaskData task in Courses.GetImportantTasksForUser()) {
-		    <div class="due-soon">
-			    <span class="date">@(task.Task.DueDate.HasValue ? @task.Task.DueDate.Value.ToShortDateString() : "")</span> - @task.Task.Name
-		    </div>
-   }
+			foreach (UserTaskData task in Courses.GetImportantTasksForUser()) {
+				<div class="due-soon">
+					<span class="date">@(task.Task.DueDate.HasValue ? @task.Task.DueDate.Value.ToShortDateString() : "")</span> - @task.Task.Name
+				</div>
+			}
+		}			
 			
 
-        </div>
-    </div>
-    <div class="main">
-        <div >
-            <h2>@Resources.labels.home_dashboard_heading_stream</h2>
+        <h3>@Resources.labels.home_dashboard_heading_courseresources</h3>
+        <ul>
+            <li>@Resources.labels.home_dashboard_li_downloadcalendar</li>
+            <li><span class="icon compressed">@Resources.labels.home_dashboard_li_downloadallfiles</span></li>
+        </ul>
 
-			<!--#{ var activities = ActivityStream.GetUsersItems();}
-
-			#foreach (ActivityStreamItemBase item in activities) {
-				<div class="activity">
-                    <span class="activity-user-image"><img src="#item.User.ProfileImageUrl"></span>
-                    <span class="activity-info">
-					    <span class="activity-text">#Html.Raw(item.FormatActivity())</span>
-					    <span class="activity-date">#item.ActivityDate.ToShortDateString() @@ #item.ActivityDate.ToShortTimeString()</span>
-                    </span>
-				</div>
-                if (activities.IndexOf(item) == 19) { break; }  
-			} -->
-				<div class="activity interaction-reply">
-                    <span class="activity-user-image"><img src="http://www.dts.edu/images/carsphotos/photo.ashx?id=911751"></span>
-                    <span class="activity-info">
-                        <span class="activity-icon"></span>
-					    <span class="activity-text"><a href="/community/Charles.Cluchey">Charles Cluchey</a> responded to <a href="/courses/s111-be106ol/schedule/8481#thread-109873">Thomas Walsh's assignment</a></span>
-
-					    <span class="activity-date">5/7/2010 @@ 10:39 PM</span>
-                    </span>
-				</div>
-                <div class="activity forum-post">
-                    <span class="activity-user-image"><img src="http://www.dts.edu/images/carsphotos/photo.ashx?id=595000"></span>
-                    <span class="activity-info">
-                        <span class="activity-icon"></span>
-					    <span class="activity-text"><a href="/community/Raymond.Lo">Raymond W. Lo</a> added a new post to the thread <a href="/courses/sp10-be102ol/discussion/thread/88192#post-390350">Re: Final Exam</a></span>
-
-					    <span class="activity-date">5/9/2010 @@ 11:20 PM</span>
-                    </span>
-				</div>
-				<div class="activity interaction-post">
-                    <span class="activity-user-image"><img src="http://www.dts.edu/images/carsphotos/photo.ashx?id=893224"></span>
-                    <span class="activity-info">
-                        <span class="activity-icon"></span>
-					    <span class="activity-text"><a href="/community/Thomas.Walsh">Thomas Walsh</a> posted <a href="/courses/s111-be106ol/schedule/8481#thread-109873">AutobiographyTPW.doc</a></span>
-
-					    <span class="activity-date">5/9/2010 @@ 12:06 PM</span>
-                    </span>
-				</div>
-				<div class="activity forum-post">
-                    <span class="activity-user-image"><img src="http://www.dts.edu/images/carsphotos/photo.ashx?id=448122"></span>
-                    <span class="activity-info">
-                        <span class="activity-icon"></span>
-					    <span class="activity-text"><a href="/community/Kenneth.Myers">Kenneth C. Myers</a> added a new post to the thread <a href="/courses/sp10-be105ol/discussion/thread/87190#post-390225">Re: The veil of the temple was twenty stories tall?</a></span>
-
-					    <span class="activity-date">5/7/2010 @@ 11:02 PM</span>
-                    </span>
-				</div>
-				<div class="activity prof-file">
-                    <span class="activity-info">
-                        <span class="activity-icon"></span>
-					    <span class="activity-text"><a href="/community/jallman">James E. Allman</a> added <a href="/courses/s111-be102ol/files#file-227010">Charting Instructions</a> to course files (BE106)</span>
-
-                    </span>
-				</div>
-				<div class="activity forum-post">
-                    <span class="activity-user-image"><img src="http://www.dts.edu/images/carsphotos/photo.ashx?id=896006"></span>
-                    <span class="activity-info">
-                        <span class="activity-icon"></span>
-					    <span class="activity-text"><a href="/community/Patricia.Holton">Patricia A. Holton</a> added a new post to the thread <a href="/courses/sp10-ce102ol/discussion/thread/89306#post-389931">Question for Dr. Lawson</a></span>
-
-					    <span class="activity-date">5/7/2010 @@ 12:24 PM</span>
-                    </span>
-				</div>
-				<div class="activity graded-assignment">
-                    <span class="activity-info">
-                        <span class="activity-icon"></span>
-					    <span class="activity-text"><a href="#">Autobiography</a> has been graded.</span>
-                    </span>
-				</div>
-				<div class="activity interaction-reply">
-                    <span class="activity-user-image"><img src="http://www.dts.edu/images/carsphotos/photo.ashx?id=858188"></span>
-                    <span class="activity-info">
-                        <span class="activity-icon"></span>
-					    <span class="activity-text"><a href="/community/Rachel.Miller">Rachel S. Miller</a> responded to <a href="#">John Locoe's assignment</a></span>
-
-					    <span class="activity-date">5/6/2010 @@ 4:17 PM</span>
-                    </span>
-				</div>
-				<div class="activity interaction-reply">
-                    <span class="activity-user-image"><img src="http://www.dts.edu/images/carsphotos/photo.ashx?id=869444"></span>
-                    <span class="activity-info">
-                        <span class="activity-icon"></span>
-					    <span class="activity-text"><a href="/community/Lucas.Baker">Lucas A. Baker</a> responded to <a href="#">John Locoe's assignment</a></span>
-
-					    <span class="activity-date">5/5/2010 @@ 8:19 PM</span>
-                    </span>
-				</div>
-				<div class="activity forum-post">
-                    <span class="activity-user-image"><img src="http://www.dts.edu/images/carsphotos/photo.ashx?id=876885"></span>
-                    <span class="activity-info">
-                        <span class="activity-icon"></span>
-					    <span class="activity-text"><a href="/community/Carl.Matice">Carl R. Matice</a> added a new post to the thread <a href="/courses/sp10-be107ol/discussion/thread/88771#post-389298">Re: Final Exam</a></span>
-
-					    <span class="activity-date">5/5/2010 @@ 2:34 PM</span>
-                    </span>
-				</div>
-				<div class="activity interaction-post">
-                    <span class="activity-user-image"><img src="http://www.dts.edu/images/carsphotos/photo.ashx?id=912549"></span>
-                    <span class="activity-info">
-                        <span class="activity-icon"></span>
-					    <span class="activity-text"><a href="/community/Andrew.Reese">Andrew P. Reese</a> added a new post to the thread <a href="/courses/sp10-be102ol/discussion/thread/89063#post-389249">Re: Latest time to take Final?</a></span>
-
-					    <span class="activity-date">5/5/2010 @@ 10:01 AM</span>
-                    </span>
-				</div>
-				<div class="activity interaction-reply">
-                    <span class="activity-user-image"><img src="http://www.dts.edu/images/carsphotos/photo.ashx?id=876885"></span>
-                    <span class="activity-info">
-                        <span class="activity-icon"></span>
-					    <span class="activity-text"><a href="/community/Carl.Matice">Carl R. Matice</a> responded to <a href="#">John Locoe's assignment</a></span>
-
-					    <span class="activity-date">5/5/2010 @@ 9:27 AM</span>
-                    </span>
-				</div>
-				<div class="activity graded-assignment">
-                    <span class="activity-info">
-                        <span class="activity-icon"></span>
-					    <span class="activity-text"><a href="#">Autobiography</a> has been graded.</span>
-                    </span>
-				</div>
-				<div class="activity forum-post">
-                    <span class="activity-user-image"><img src="http://www.dts.edu/images/carsphotos/photo.ashx?id=38159"></span>
-                    <span class="activity-info">
-                        <span class="activity-icon"></span>
-					    <span class="activity-text"><a href="/community/jallman">James E. Allman</a> added a new post to the thread <a href="/courses/sp10-be102ol/discussion/thread/88944#post-389097">Re: Was the Lord's Supper the Passover meal?</a></span>
-
-					    <span class="activity-date">5/4/2010 @@ 10:37 PM</span>
-                    </span>
-				</div>
-				<div class="activity interaction-reply">
-                    <span class="activity-user-image"><img src="http://www.dts.edu/images/carsphotos/photo.ashx?id=905043"></span>
-                    <span class="activity-info">
-                        <span class="activity-icon"></span>
-					    <span class="activity-text"><a href="/community/Teresa.Jendel">Teresa G. Jendel</a> responded to <a href="#">John Locoe's assignment</a></span>
-
-					    <span class="activity-date">5/4/2010 @@ 12:34 PM</span>
-                    </span>
-				</div>
-				<div class="activity interaction-reply">
-                    <span class="activity-user-image"><img src="http://www.dts.edu/images/carsphotos/photo.ashx?id=905561"></span>
-                    <span class="activity-info">
-                        <span class="activity-icon"></span>
-					    <span class="activity-text"><a href="/community/Karl.Hanschen">Karl H. Hanschen</a> responded to <a href="#">John Locoe's assignment</a></span>
-
-					    <span class="activity-date">5/4/2010 @@ 11:55 AM</span>
-                    </span>
-				</div>
-				<div class="activity interaction-post">
-                    <span class="activity-user-image"><img src="http://www.dts.edu/images/carsphotos/photo.ashx?id=506"></span>
-                    <span class="activity-info">
-                        <span class="activity-icon"></span>
-					    <span class="activity-text"><a href="/community/John.Locoe">John Locoe</a> posted <a href="#">Autobiography.doc</a></span>
-
-					    <span class="activity-date">5/3/2010 @@ 6:17 PM</span>
-                    </span>
-				</div>
-				<div class="activity forum-post">
-                    <span class="activity-user-image"><img src="http://www.dts.edu/images/carsphotos/photo.ashx?id=63838"></span>
-                    <span class="activity-info">
-                        <span class="activity-icon"></span>
-					    <span class="activity-text"><a href="/community/mlawson">Michael S. Lawson</a> added a new post to the thread <a href="/courses/sp10-ce102ol/discussion/thread/88893#post-388303">Re: Dr. Lawson Q on Discipleship</a></span>
-
-					    <span class="activity-date">5/3/2010 @@ 8:10 AM</span>
-                    </span>
-				</div>
-				<div class="activity interaction-reply">
-                    <span class="activity-user-image"><img src="http://www.dts.edu/images/carsphotos/photo.ashx?id=840093"></span>
-                    <span class="activity-info">
-                        <span class="activity-icon"></span>
-					    <span class="activity-text"><a href="/community/Jeffrey.Caldwell">Jeffrey T. Caldwell</a> responded to <a href="#">Josh Bleeker's assignment</a></span>
-
-					    <span class="activity-date">5/2/2010 @@ 7:45 PM</span>
-                    </span>
-				</div>
-				<div class="activity forum-post">
-                    <span class="activity-user-image"><img src="http://www.dts.edu/images/carsphotos/photo.ashx?id=38159"></span>
-                    <span class="activity-info">
-                        <span class="activity-icon"></span>
-					    <span class="activity-text"><a href="/community/jallman">James E. Allman</a> added a new post to the thread <a href="/courses/sp10-be102ol/discussion/thread/88838#post-388153">Re: Temporal and Final Punishment</a></span>
-
-					    <span class="activity-date">5/2/2010 @@ 3:44 PM</span>
-                    </span>
-				</div>
+        <h3>@Resources.labels.home_dashboard_heading_onlineedresources</h3>
+        <ul>
+            <li><a href="http://www.microsoft.com/downloads/details.aspx?FamilyId=941b3470-3ae9-4aee-8f43-c6bb74cd1466&displaylang=en">@Resources.labels.home_dashboard_li_msword</a></li>
+            <li><a href="http://libreoffice.org">@Resources.labels.home_dashboard_li_libreoffice</a></li>
+            <li>
+                <em>@Resources.labels.home_dashboard_heading_bibsoftware</em>
+                <ul>
+                    <li><a href="http://www.zotero.org">@Resources.labels.home_dashboard_li_zotero</a></li>
+                    <li><a href="http://endnote.com">@Resources.labels.home_dashboard_li_endnote</a></li>
+                    <li><a href="http://styleease.com">@Resources.labels.home_dashboard_li_styleease</a></li>
+                </ul>
+            </li>
+            <li><a href="http://library.dts.edu/Pages/RM/Write/turabian_sup.pdf">@Resources.labels.home_dashboard_li_turabianformattutorial</a></li>
+        </ul>
 
 
-        </div>
-    </div>
-    <div class="side">
-        <div>
-            <h3>@Resources.labels.home_dashboard_heading_courseresources</h3>
-            <ul>
-                <li>@Resources.labels.home_dashboard_li_downloadcalendar</li>
-                <li><span class="icon compressed">@Resources.labels.home_dashboard_li_downloadallfiles</span></li>
-            </ul>
+	</div>
 
-            <h3>@Resources.labels.home_dashboard_heading_onlineedresources</h3>
-            <ul>
-                <li><a href="http://www.microsoft.com/downloads/details.aspx?FamilyId=941b3470-3ae9-4aee-8f43-c6bb74cd1466&displaylang=en">@Resources.labels.home_dashboard_li_msword</a></li>
-                <li><a href="http://libreoffice.org">@Resources.labels.home_dashboard_li_libreoffice</a></li>
-                <li>
-                    <em>@Resources.labels.home_dashboard_heading_bibsoftware</em>
-                    <ul>
-                        <li><a href="http://www.zotero.org">@Resources.labels.home_dashboard_li_zotero</a></li>
-                        <li><a href="http://endnote.com">@Resources.labels.home_dashboard_li_endnote</a></li>
-                        <li><a href="http://styleease.com">@Resources.labels.home_dashboard_li_styleease</a></li>
-                    </ul>
-                </li>
-                <li><a href="http://library.dts.edu/Pages/RM/Write/turabian_sup.pdf">@Resources.labels.home_dashboard_li_turabianformattutorial</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="clear"></div>
+
 </div>
-	
-} else {
-	
-	<h2>Welcome</h2>
-	
-	<p>This is Dallas Theological Seminary's online education portal. Feel free to check out some classes.</p>
-	
-	<p>Overview video</p>
-
-}

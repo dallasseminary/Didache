@@ -9,7 +9,6 @@
         currentArea = "admin";
     }
 }
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,9 +18,13 @@
 	<link href="@Url.Content("~/css/type.css")" rel="stylesheet"  />
 	<link href="@Url.Content("~/css/layout.css")" rel="stylesheet"  />
 	<link href="@Url.Content("~/css/students.css")" rel="stylesheet"  />
+
+	@*
+	<link href="@Url.Content("~/css/students.css")" rel="stylesheet"  />
 	<link href="@Url.Content("~/css/admin.css")" rel="stylesheet"  />
 	<link href="@Url.Content("~/css/forms.css")" rel="stylesheet"  />
-    
+    *@
+
 	<link href="@Url.Content("~/js/lib/ui-lightness/jquery-ui.css")" rel="stylesheet"  />
 
 	<script src="@Url.Content("~/js/lib/jquery-1.6.1.min.js")"></script>
@@ -37,12 +40,26 @@
 
 <body>
 
-	<div id="dts-common-menu">
-        <div class="wrapper">
-		    @{ Html.RenderPartial("_CommonMenu"); }
-        </div>
+	@Html.Partial("_CommonMenu")
+	
+	@Html.Partial("_SiteHeader")
+
+	<div id="main">
+		<div id="main-menu">
+			@RenderSection("profileimage",false)
+			@Html.Partial("_UserMenu")	
+		</div>
+		
+		<div id="main-content">
+			@RenderBody()
+		</div>
+
+		<div class="clear"></div>
 	</div>
 
+	@Html.Partial("_SiteFooter")
+
+	@*
     <div id="container-1">
         <div class="wrapper">
 	        <div id="nav">
@@ -69,6 +86,7 @@
         </div>
         <div class="clear"></div>
 	
+
 		<div id="sub-menu">              
             <div class="sub-menu-item @(Request.Url.PathAndQuery == "/" ? " selected" : "")" id="main-menu-home-details">
 				<ul>
@@ -122,7 +140,7 @@
             </div>
 	    </div>
     </div>
+	*@
 
-	<div id="footer"></div>
 </body>
 </html>

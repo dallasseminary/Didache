@@ -5,52 +5,57 @@
     List<CourseUserGroup> groups = ViewBag.UserGroups;
 }
 
-@Html.Partial("CourseHeader")
+<div class="page-wide">
 
-@Html.Partial("CourseMenu")
+@Html.Partial("_CourseHeader", Model)
+@Html.Partial("_CourseMenu")
 
-<div id="main-column">
-    <div class="block-list-header"><h3>@Resources.labels.courses_heading_courseroster</h3></div>
-	<div id="course-roster" class="block-list">
 
-	@foreach (Didache.CourseUserGroup group in ViewBag.UserGroups) {
-		<div class="course-group block-list-item">
-			<div class="block-list-item-label">
-                <span>
-                   @(group.Facilitator == null ? group.Name : group.Facilitator.LastName)
-                </span>
-            </div>
-			<div class="course-group-members">
-			@foreach (CourseUser user in group.Students) {
-				if (user.User != null) {
-				<a class="course-group-member" href="@user.User.ProfileDisplayUrl">				
-					<img src="@user.User.ProfileImageUrl" /><br />
-					<span>@user.User.SecureName</span>
-				</a>
+	<div class="main-column">
+		<div class="block-list-header"><h3>@Resources.labels.courses_heading_courseroster</h3></div>
+		<div id="course-roster" class="block-list">
+
+		@foreach (Didache.CourseUserGroup group in ViewBag.UserGroups) {
+			<div class="course-group block-list-item">
+				<div class="block-list-item-label">
+					<span>
+					   @(group.Facilitator == null ? group.Name : group.Facilitator.LastName)
+					</span>
+				</div>
+				<div class="course-group-members">
+				@foreach (CourseUser user in group.Students) {
+					if (user.User != null) {
+					<a class="course-group-member" href="@user.User.ProfileDisplayUrl">				
+						<img src="@user.User.ProfileImageUrl" /><br />
+						<span>@user.User.SecureName</span>
+					</a>
+					}
 				}
-			}
-            <div class="clear"></div>
+				<div class="clear"></div>
+				</div>
 			</div>
+		}
+
 		</div>
-	}
-
 	</div>
-</div>
-<div id="sub-column">
-    <div class="header">
-        @foreach (CourseUser user in Model.CourseUsers) {
-            @Html.Raw(user.RoleID == 3 ? "<h4>" + user.User.SecureName + "</h4>" : "")
-        }
-    </div>
-    <div class="list">
-        <h5>Facilitators</h5>
-        <ul>
-            @foreach (CourseUser user in Model.CourseUsers) {
-				if (user.RoleID == 8) {
-                <li>@user.User.FormattedName</li>
+	<div class="sub-column">
+		<div class="header">
+			@foreach (CourseUser user in Model.CourseUsers) {
+				@Html.Raw(user.RoleID == 3 ? "<h4>" + user.User.SecureName + "</h4>" : "")
+			}
+		</div>
+		<div class="list">
+			<h5>Facilitators</h5>
+			<ul>
+				@foreach (CourseUser user in Model.CourseUsers) {
+					if (user.RoleID == 8) {
+					<li>@user.User.FormattedName</li>
+					}
 				}
-            }
-        </ul>
-    </div>
-</div>
+			</ul>
+		</div>
+	</div>
 
+	<div class="clear"></div>
+
+</div>
