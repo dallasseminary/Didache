@@ -23,6 +23,8 @@
 		background:  #dddddd; 
 		border-top: solid 1px #bbb;
 		border-bottom: solid 1px #fff;
+		margin: 0 -4px 0 -1px;
+		border: solid 1px #bbb;
 	}
 	.unit-list .unit-name {
 		font-weight: bold;
@@ -51,10 +53,15 @@
 		border: solid 1px #333;
 		border-radius: 50px;
 		position: absolute;
-		right: -7px;
-		top: 10px;
+		right: -10px;
+		top: 10px;		
 		background: #bd1816 url(/css/images/taskstatus-overdue.png) 0 0 no-repeat !important;
 	}
+
+.task-entry {
+	margin: 0 -20px !important;
+	padding: 20px 20px 20px 20px !important;
+}
 
 
 .block-list-header h3 {
@@ -65,9 +72,13 @@
 
 .block-list .block-list-item {
 	color: #222;
-	border-bottom: solid 1px #ddd;
+	border-top: solid 1px #ddd;
 	margin: 10px 0;
 	padding: 10px 0;
+}
+
+.block-list .block-list-item:first-child {
+	border-top: none;
 }
 
 .block-list .block-list-item-label {
@@ -128,7 +139,7 @@
 	width: 500px;
 }
 .task-details {
-	margin: 10px 10px 10px 40px;
+	margin: 10px 10px 10px 0px;
 }
 .task-buttons {
 	text-align: right;
@@ -137,7 +148,7 @@
 	float: right;
 	height: 14px;
 	width: 14px;
-	border: solid 1px #333;
+	border: solid 1px #999;
 	border-radius: 50px;
 }
 .task-status.status-completed{
@@ -399,22 +410,133 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
     overflow: hidden;
     width: 100%;
 }
-.course-group-member {
-    float: left;
-    margin: 0 10px 10px 0;
-    text-align: center;
-    width: 106px;
-    display: block;
-    overflow: hidden;
-    height: 150px
-}
-.course-group-member img {
-    max-width: 115px;
-    max-height:130px;
-}
-.course-group-member span {
-    display: block;
-    text-align: center;
-    white-space: nowrap;
-}    
+	.course-group-member {
+		float: left;
+		margin: 0 10px 10px 0;
+		text-align: center;
+		width: 106px;
+		display: block;
+		overflow: hidden;
+		height: 150px
+	}
+	.course-group-member img {
+		max-width: 115px;
+		max-height:130px;
+	}
+	.course-group-member span {
+		display: block;
+		text-align: center;
+		white-space: nowrap;
+	}    
 
+
+
+/* interactions*/
+.task-interactions-header {
+	display: none;
+}
+.task-interactions {
+	background: #eeeeee;	
+	padding: 10px;
+}
+	.task-interaction-thread {
+		background: #fff;
+		border-top: 10px solid #eeeeee;
+	}
+	.task-interaction-thread:first-child {
+		border-top: none;
+	}	
+
+	.task-interaction-main {
+		padding: 10px;
+		overflow: hidden;
+	}
+		.task-interaction-main .task-interaction-userimage {
+			float: left;
+			width: 40px;
+		}
+		.task-interaction-main .task-interaction-content {
+			float: left;
+			width: 480px;
+			margin: 0 0 0 10px;
+		}	
+		.task-interaction-main .task-interaction-meta {		
+			overflow: hidden;		
+		}
+		.task-interaction-main .task-interaction-meta .user-name {
+			float: left;
+			display: block;
+			margin: 0 10px 0 0 ;
+			font-weight: bold;
+		}	
+		.task-interaction-main .task-interaction-meta .post-date {
+			float: left;
+			display: block;
+			color: #999;
+		}		
+		.task-interaction-main .task-interaction-meta .total-replies {
+			float: right;
+			display: block;
+		}
+		.task-interaction-main .task-interaction-text {
+			margin: 10px 0 0 0;
+		}
+	.task-interaction-list {
+		margin: 0 0 0 60px;
+		
+	}
+		.task-interaction-post {
+			border-top: solid 1px #ddd;
+			overflow: hidden;
+			padding: 15px 0;
+			width: 430px;
+		}
+		.task-interaction-list .task-interaction-userimage {
+			float: left;
+			width: 30px;
+		}
+		.task-interaction-list .task-interaction-content {
+			float: left;
+			width: 390px;
+			margin: 0 0 0 10px;
+		}	
+		.task-interaction-list .task-interaction-meta {		
+			overflow: hidden;		
+		}
+		.task-interaction-list .task-interaction-meta .user-name {
+			float: left;
+			display: block;
+			margin: 0 10px 0 0 ;
+			font-weight: bold;			
+		}	
+		.task-interaction-list .task-interaction-meta .post-date {
+			float: left;
+			display: block;
+			color: #999;
+		}		
+		.task-interaction-list .task-interaction-meta .total-replies {
+			float: right;
+		}
+		.task-interaction-list .task-interaction-text {
+			margin: 10px 0 0 0;
+		}	
+		
+/* super overrider */
+.task-interaction-text, .task-interaction-text font, .task-interaction-text span, .task-interaction-text p {
+	font-family: Arial !important;
+	font-size: 12px !important;
+	line-height: 15px !important;
+}
+		
+.add-reply {
+
+}		
+		
+.add-reply textarea {
+	width: 300px;
+	height: 40px;
+	border: solid 2px #eee;
+	display: block;
+	margin: 0 0 5px 0;
+}
+		

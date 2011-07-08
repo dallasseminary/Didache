@@ -241,6 +241,8 @@ namespace Didache.Web.Areas.Admin.Controllers
 
 						UserTaskData utd = new UserTaskData() {
 							TaskID = model.TaskID,
+							CourseID = model.CourseID,
+							UnitID = model.UnitID,
 							GraderComments = "",
 							GraderSubmitDate = null,
 							GraderUserID = 0,

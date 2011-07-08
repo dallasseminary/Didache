@@ -47,12 +47,12 @@ jQuery(document).ready(function ($) {
 	if (urlHash) { $('div.task-interaction-thread[id=' + urlHash + '] > .task-interaction-list').show(); }
 
 	// open/close threads
-	$('div.task-interaction .task-interaction-header').toggle(function () {
-		$(this).siblings('.task-interaction-list').slideDown();
+	$('div.task-interaction .total-replies').toggle(function () {
+		$(this).closest('.task-interaction-thread').find('.task-interaction-list').slideDown();
 	}, function () {
-		$(this).siblings('.task-interaction-list').slideUp();
+		$(this).closest('.task-interaction-thread').find('.task-interaction-list').slideUp();
 	});
-	$('.add-reply a.collapse').click(function () {
+	$('.add-reply .collapse').click(function () {
 		$(this).closest('.task-interaction-list').slideUp();
 	});
 
@@ -78,15 +78,22 @@ jQuery(document).ready(function ($) {
 					// create response
 					var target = button.closest('.add-reply');
 					$('<div class="task-interaction-post">' +
-						'<div class="user-info">' +
-							'<a href="' + d.user.ProfileUrl + '">' +
-								'<img src="' + d.user.ProfileImageUrl + '" />' +
-								'<span class="name">' + d.user.SecureName + '</span>' +
+						
+						'<div class="task-interaction-userimage">' + 
+							'<a href="' + d.user.ProfileUrl + '">' + 
+								'<img src="' + d.user.ProfileImageUrl + '&width=30&height=30" alt="' + d.user.SecureName + '" />' + 
 							'</a>' +
 						'</div>' +
-						'<div class="post-content">' +
-							d.post.PostContentFormatted +
+						'<div class="task-interaction-content">' +
+							'<div class="task-interaction-meta">' +
+								'<a class="user-name" href="' + d.user.ProfileUrl + '">' + d.user.SecureName + '</a>' +
+								'<span class="post-date">' + d.post.PostDate + '</span>' +
+							'</div>' +
+							'<div class="task-interaction-text">' +
+								d.post.PostContentFormatted +
+							'</div>' +
 						'</div>' +
+
 					'</div>').insertBefore(target);
 
 					// increase reply count
@@ -133,6 +140,7 @@ function setTaskStatus(taskID, status) {
 	switch (status) {
 		case 1:
 			area.find('.task-status')
+				.removeClass('status-overdue')
 				.removeClass('status-notstarted')
 				.removeClass('status-skipped')
 				.addClass('status-completed');
@@ -140,6 +148,7 @@ function setTaskStatus(taskID, status) {
 		default:
 		case 0:
 			area.find('.task-status')
+				.removeClass('status-overdue')
 				.removeClass('status-completed')
 				.removeClass('status-skipped')
 				.addClass('status-notstarted')
@@ -148,6 +157,7 @@ function setTaskStatus(taskID, status) {
 			break;
 		case -1:
 			area.find('.task-status')
+				.removeClass('status-overdue')
 				.removeClass('status-notstarted')
 				.removeClass('status-completed')
 				.addClass('status-skipped');

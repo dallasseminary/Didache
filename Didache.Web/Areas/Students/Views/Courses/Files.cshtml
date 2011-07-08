@@ -20,8 +20,9 @@
 					@foreach (CourseFileAssociation courseFileAssociation in group.CourseFileAssociations) {				
 						<li id="file-@courseFileAssociation.CourseFile.FileID">
 							<a class="file-@courseFileAssociation.CourseFile.FileType" href="@courseFileAssociation.CourseFile.FileUrl">
-								<span class="filename">@courseFileAssociation.CourseFile.Title</span>
 								<span class="type"><img src="/css/images/@(courseFileAssociation.CourseFile.FileType).png" /></span>
+								<span class="filename">@courseFileAssociation.CourseFile.Title</span>
+								
 								<span class="size">@courseFileAssociation.CourseFile.FormattedLength</span>
 							</a>
 						</li>

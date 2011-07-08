@@ -17,36 +17,103 @@
 			<h3>@Model.Country</h3>
 		</div>
 
+		<h4>Contact Info</h4>
 
-		<dl>
-			<dt>Birthday</dt>
-			<dd>
-				@(Model.BirthDate.HasValue ? Model.BirthDate.Value.ToShortDateString() : "") &nbsp;
-			</dd>
-			<dt>From</dt>
-			<dd>
-				@Model.Hometown &nbsp;
-			</dd>
-			<dt>Alma Mater</dt>
-			<dd>
-				@Model.AlmaMater &nbsp;
-			</dd>
-			<dt>Bio</dt>
-			<dd>
-				@Model.Bio &nbsp;
-			</dd>
-            <dt>Ministry Goals</dt>
-            <dd>@Model.MinistryGoals &nbsp;</dd>
-            @if (!Model.Facebook.IsEmpty()) {<dt>Facebook</dt><dd><a href="@Model.Facebook">@Model.Facebook</a></dd>}
-            @if (!Model.Twitter.IsEmpty()) {<dt>Twitter</dt><dd><a href="http://www.twitter.com/@Model.Twitter">@@@Model.Twitter</a></dd>}
-            @if (!Model.Website.IsEmpty()) {<dt>Website</dt> <dd><a href="@(!Model.Website.Contains("http://") ? "http://" + Model.Website : Model.Website)">@Model.Website.Replace("http://","")</a></dd>}
+		<table class="user-profile">			
+			<tr>
+				<th>
+					Email
+				</th>
+				<td>
+					@if (Users.HasPermission(Model.UserID, Model.EmailSecuritySetting)) {
+						@Model.Email
+					}
+				</td>
+			</tr>
+			<tr>
+				<th>
+					Phone
+				</th>
+				<td>
+					@if (Users.HasPermission(Model.UserID, Model.PhoneSecuritySetting)) {
+						@Model.Phone
+					}
+				</td>
+			</tr>
+			<tr>
+				<th>
+					Address
+				</th>
+				<td>
+					@if (Users.HasPermission(Model.UserID, Model.AddressSecuritySetting)) {
+						@Model.Address1<br />
+						@(Model.Address2.IsEmpty() ? "" : @Model.Address2 + "<br />")
+						@(Model.City + " " + Model.State + " " + Model.Zip)<br />
+						@Model.Country
+					}
+				</td>
+			</tr>
+		</table>
 
-		</dl>
+
+		<h4>Personal Info</h4>
+
+		<table class="user-profile">
+			<tr>
+				<th>
+					Birthday
+				</th>
+				<td>
+					@(Model.BirthDate.HasValue ? Model.BirthDate.Value.ToShortDateString() : "")
+				</td>
+			</tr>
+			<tr>
+				<th>
+					From
+				</th>
+				<td>
+					@Model.Hometown
+				</td>
+			</tr>
+			<tr>
+				<th>
+					Alma Mater
+				</th>
+				<td>
+					@Model.AlmaMater
+				</td>
+			</tr>
+			<tr>
+				<th>
+					Bio
+				</th>
+				<td>
+					@Model.Bio
+				</td>
+			</tr>
+			<tr>
+				<th>
+					Bio
+				</th>
+				<td>
+					@Model.Bio
+				</td>
+			</tr>
+		</table>
 
 
 	</div>
 	<div class="sub-column">
 	
+		<h3>Social Media</h3>
+		<ul>
+
+			@if (!Model.Facebook.IsEmpty()) {<li>Facebook<a href="@Model.Facebook">@Model.Facebook</a></li>}
+			@if (!Model.Twitter.IsEmpty()) {<li>Twitter<a href="http://www.twitter.com/@Model.Twitter">@@@Model.Twitter</a></li>}
+			@if (!Model.Website.IsEmpty()) {<li><a href="@(!Model.Website.Contains("http://") ? "http://" + Model.Website : Model.Website)">@Model.Website.Replace("http://","")</a></li>}
+
+		</ul>
+
 	</div>
 
 </div>

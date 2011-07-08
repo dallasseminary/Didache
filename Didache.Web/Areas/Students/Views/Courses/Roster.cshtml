@@ -11,15 +11,21 @@
 @Html.Partial("_CourseMenu")
 
 
-	<div class="main-column">
+	<div class="full-column">
+		@* 
 		<div class="block-list-header"><h3>@Resources.labels.courses_heading_courseroster</h3></div>
+		*@
+
 		<div id="course-roster" class="block-list">
 
-		@foreach (Didache.CourseUserGroup group in ViewBag.UserGroups) {
+		@foreach (CourseUserGroup group in ViewBag.UserGroups) {
 			<div class="course-group block-list-item">
 				<div class="block-list-item-label">
 					<span>
-					   @(group.Facilitator == null ? group.Name : group.Facilitator.LastName)
+						@group.Name 
+						@if (group.Facilitator != null) {
+							<a href="@group.Facilitator.ProfileDisplayUrl">@group.Facilitator.FormattedName</a>
+						}	
 					</span>
 				</div>
 				<div class="course-group-members">

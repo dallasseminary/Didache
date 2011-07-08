@@ -396,4 +396,7 @@
   <data name="studentschedule_submitfile" xml:space="preserve">
     <value>Turn in File</value>
   </data>
+  <data name="interactions_replies" xml:space="preserve">
+    <value>Replies</value>
+  </data>
 </root>

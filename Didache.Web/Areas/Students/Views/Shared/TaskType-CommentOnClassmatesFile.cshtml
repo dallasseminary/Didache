@@ -6,14 +6,97 @@
 
 @if (threads.Count > 0) {
 <div class="task-interactions">
-<div class="task-interactions-header">
-    <span class="user">Name</span>
-    <span class="date">Posted</span>
-    <span class="date">Last Reply</span>
-    <span class="total-replies">Replies</span>
-    <div class="clear"></div>
-</div>
 
+@foreach (InteractionThread thread in threads) {
+	<div class="task-interaction-thread" id="thread-@thread.ThreadID" data-threadid="@thread.ThreadID">
+		
+		<div class="task-interaction-main">
+			<div class="task-interaction-userimage">
+				<a href="@(thread.User != null ? thread.User.ProfileDisplayUrl : "#")">
+					<img src="@(thread.User != null ? thread.User.GetProfileImageUrl(40, 40) : "")" alt="@(thread.User != null ? thread.User.SecureName : "#")"
+				</a>				
+			</div>	
+			<div class="task-interaction-content">			
+				<div class="task-interaction-meta">
+					<a class="user-name" href="@(thread.User != null ? thread.User.ProfileDisplayUrl : "#")">@(thread.User != null ? thread.User.SecureName : "missing")</a>
+					<span class="post-date">@thread.ThreadDate.ToShortDateString()</span>
+					<span class="total-replies">@(thread.Posts.Count - 1) @Resources.labels.interactions_replies</span>
+				</div>
+				<div class="task-interaction-text">
+					@Html.Raw(thread.Posts.First().PostContentFormatted)
+				</div>		
+				@if (thread.Posts.First().FileID > 0) {	
+				<div class="post-file">
+					File: <a href="@thread.Posts.First().File.FileUrl">@thread.Posts.First().File.Filename</a>
+				</div>
+				}
+			</div>
+		</div>
+
+		<div class="task-interaction-list" style="display:none;">
+			
+			@foreach (InteractionPost post in thread.Posts.Skip(1)) {
+				<div class="task-interaction-post @(post.UserID == thread.UserID ? " thread-starter" : "")" id="post-@post.PostID">
+					<div class="task-interaction-userimage">
+						<a href="@(post.User != null ? post.User.ProfileDisplayUrl : "#")">
+							<img src="@(post.User != null ? post.User.GetProfileImageUrl(30, 30) : "")" alt="@(post.User != null ? post.User.SecureName : "#")" />
+						</a>				
+					</div>	
+					<div class="task-interaction-content">			
+						<div class="task-interaction-meta">
+							<a class="user-name" href="@(post.User != null ? post.User.ProfileDisplayUrl : "#")">@(post.User != null ? post.User.SecureName : "missing")</a>
+							<span class="post-date">@post.PostDate.ToShortDateString()</span>						
+						</div>
+						<div class="task-interaction-text">
+							@Html.Raw(post.PostContentFormatted)
+						</div>
+					</div>
+				</div>	
+	  	  
+			}
+
+			@{ User user = Users.GetLoggedInUser(); }
+			<div class="add-reply task-interaction-post">
+				<div class="task-interaction-userimage">
+					<a href="@user.ProfileDisplayUrl">
+						<img src="@user.GetProfileImageUrl(30, 30)" alt="@user.SecureName" />
+					</a>				
+				</div>	
+				<div class="task-interaction-content">			
+					<div class="task-interaction-meta">
+						<a class="user-name" href="@user.ProfileDisplayUrl">@user.SecureName</a>
+					</div>
+					<div class="task-interaction-text">
+						<textarea class="reply-text"></textarea>	
+						<span class="add-reply-button"><input type="button" class="d-button action reply-button" value="Add reply" /> 
+						<input type="button" href="javascript:void(0)" class="d-button collapse" value="Close" />
+					</div>
+				</div>
+			</div>	
+	  
+
+		    
+		</div>
+
+	</div>
+}
+</div>
+}
+		@*
+			<div class="add-reply">
+				<div class="task-interaction-userimage">
+					<a href="@(post.User != null ? post.User.ProfileDisplayUrl : "#")">
+						<img src="@(post.User != null ? post.User.GetProfileImageUrl(30, 30) : "")" alt="@(post.User != null ? post.User.SecureName : "#")"
+					</a>				
+				</div>
+				<div class="task-interaction-userimage">
+
+				<textarea class="reply-text"></textarea>	
+				<a href="javascript:void(0)" class="collapse">Close</a></span>
+			</div>	
+		*@
+
+@*
 @foreach (InteractionThread thread in threads) {
 	<div class="task-interaction-thread" id="thread-@thread.ThreadID" data-threadid="@thread.ThreadID">
 		<div class="task-interaction-header">
@@ -22,6 +105,7 @@
 			<span class="date">@thread.Posts.Last().PostDate.ToShortDateString()</span>
 			<span class="total-replies">@(thread.Posts.Count - 1)</span>
 		</div>
+
 		<div class="task-interaction-list" style="display:none;">
 			
 		@foreach (InteractionPost post in thread.Posts) {
@@ -66,3 +150,4 @@
 	No one has turned in an assignment yet, so there are no posts ready for interaction.
 	</div>
 }
+*@
