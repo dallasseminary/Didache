@@ -227,7 +227,9 @@ a {
 }
 
 .page-menu {
-	background: #999999;
+	background: #f1f2f4;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
 	height: 32px;
 	padding: 0px;
 	list-style-type: none;
@@ -242,7 +244,7 @@ a {
 }
 .page-menu li a {
 	display: block;
-	color: #ddd;
+	color: #888;
 	height: 12px;
 	font-size: 12px;
 	padding: 10px;
@@ -250,8 +252,9 @@ a {
 	margin: 0 0 0 0;
 }
 .page-menu li a:hover{
-	-x-background: #666;
+	background: #999;
 	color: #fff;
+	-x-text-shadow: 0 1px 0 #adadad;
 }
 .page-menu li a.selected {
 	background: #444;
