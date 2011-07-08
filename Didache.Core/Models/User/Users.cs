@@ -12,6 +12,25 @@ namespace Didache  {
 		private static string _userIdKey = "user-id-{0}";
 
 
+		public static bool HasPermission(int profileUserID, UserSecuritySetting setting) {
+			return HasPermission(profileUserID, Users.GetLoggedInUser().UserID, setting);
+		}
+
+		public static bool HasPermission(int profileUserID, int viewerUserID, UserSecuritySetting setting) {
+
+			return true;
+
+			switch (setting) {
+				default:
+				case UserSecuritySetting.Private:
+					return false;
+				case UserSecuritySetting.Public:
+					return true;
+				case UserSecuritySetting.Friends:
+					return true;
+			}
+		}
+
 		public static User GetUser(int id) {
 
 			string key = string.Format(_userIdKey, id);
