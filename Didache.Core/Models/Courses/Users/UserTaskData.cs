@@ -14,9 +14,11 @@ namespace Didache {
 	public class UserTaskData {
 		[Key]
 		public int TempID { get; set; }
-		
-		public int TaskID { get; set; }
+
 		public int UserID { get; set; }
+		public int TaskID { get; set; }
+		public int CourseID { get; set; }
+		public int UnitID { get; set; }		
 
 		public int TaskStatus { get; set; }
 		public TaskCompletionStatus TaskCompletionStatus { get { return (TaskCompletionStatus)TaskStatus; } set { TaskStatus = (int)value; } }
@@ -35,9 +37,10 @@ namespace Didache {
 		
 		public string TaskData { get; set; }
 
-		public int TempGraderFileID { get; set; }
-		public int TempStudentFileID { get; set; }
-		public int TempPostID { get; set; }
+		public int GraderFileID { get; set; }
+		public int StudentFileID { get; set; }
+		public int PostID { get; set; }
+		
 
 
 		public virtual User Profile { get; set; }
