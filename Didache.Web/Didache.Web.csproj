@@ -129,8 +129,9 @@
       <DependentUpon>DTS_webdata.mdf</DependentUpon>
     </Content>
     <Content Include="App_GlobalResources\readme.txt" />
-    <Content Include="css\Copy of layout.css" />
-    <Content Include="css\Copy of students.css" />
+    <Content Include="css\images\dts-logo.png" />
+    <Content Include="css\layout-old.css" />
+    <Content Include="css\students-old.css" />
     <Content Include="js\admin\courses-usergroups.js" />
     <Content Include="js\admin\courses-common.js" />
     <Content Include="js\admin\courses-course.js" />
@@ -395,6 +396,7 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\_SiteHeader.cshtml" />
     <Content Include="Views\Shared\_UserMenu.cshtml" />
+    <Content Include="Views\Shared\_SiteFooter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\labels.ar.resx">

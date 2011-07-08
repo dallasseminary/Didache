@@ -105,6 +105,8 @@ namespace Didache.Web.Controllers {
 
 				db.SaveChanges();
 
+				Users.ClearUserCache(model);
+
 			} catch (Exception ex) {
 				ModelState.AddModelError("", "Edit Failure, see inner exception: " + ex.ToString());
 			}
