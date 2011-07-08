@@ -15,7 +15,7 @@
 
 		@foreach (CourseFileGroup group in ViewBag.CourseFileGroups) {
 			<div class="course-filegroup block-list-item">
-				<div class="block-list-item-label"><span>@group.Name</span></div>
+				<div class="block-list-item-label"><span>@group.Name</span><span class="arrow-border"></span><span class="arrow"></span></div>
 				<ul class="course-filegroup-files">
 					@foreach (CourseFileAssociation courseFileAssociation in group.CourseFileAssociations) {				
 						<li id="file-@courseFileAssociation.CourseFile.FileID">

@@ -61,6 +61,41 @@
 	padding: 10px 0;
 }
 
+.block-list .block-list-item-label {
+    display: block;
+    clear: both;
+    padding: 4px 10px 3px 0;
+    margin-bottom: 10px;
+    border-bottom:1px solid #666;
+    color: #333;
+    font-size: 14px;
+    font-weight: bold;
+    float: left;
+    position: relative;
+}
+/*
+.block-list .block-list-item-label .arrow-border {
+    border-color: transparent transparent transparent #CCC;
+    border-style: solid;
+    border-width: 12px 12px 12px 12px;
+    position: absolute;
+    right: -25px;
+    top: 0;
+    margin-top:-1px;
+    display: block;
+}
+
+.block-list .block-list-item-label .arrow {
+    border-color: transparent transparent transparent #EEE;
+    border-style: solid;
+    border-width: 12px 12px 12px 12px;
+    position: absolute;
+    right: -24px;
+    top: 0;
+    margin-top:-1px;
+    display: block;
+}
+*/
 .task-header {
 	overflow: hidden;
 }
@@ -189,3 +224,163 @@
 	.video-list .transcript {
 		 background-image: url(images/icons/page_save.png); 
 	}	
+
+/* course archive, community index list */
+
+ul.course-archive, ul.course-filegroup-files, ul.all-community {
+    width: 100%;
+    overflow: hidden;
+}
+
+    ul.course-archive li, ul.course-filegroup-files li, ul.all-community li {
+        background: #FFF;
+        max-height: 36px;
+        margin: 0 0 10px;
+        display: block;
+        overflow: hidden;
+    }
+    
+    ul.course-archive li h4 {
+        margin-bottom: 3px;
+    }
+    
+    ul.course-archive li a, ul.course-filegroup-files li a, ul.all-community li a, ul.course-forums li a {
+        font-weight: normal;
+        display: block;
+        text-decoration: none;
+        overflow: hidden;
+    }
+    
+    ul.course-archive li a, ul.course-filegroup-files li a span, ul.all-community li a span, ul.course-forums li a span {
+        padding: 3px 10px;
+    }
+    
+    ul.course-archive li a:hover, ul.course-filegroup-files a:hover, ul.all-community li a:hover, ul.course-forums li a:hover {
+        background: #666;
+        display: block;
+        color: #FFF;
+    }
+    
+    ul.course-filegroup-files a .type, ul.course-filegroup-files a .size, ul.all-community li a .campus, ul.course-forums li a .forum-description {
+        color: #BBB;
+        border-left: 1px solid #BBB;
+        float: right;
+        text-align: right;
+        display: block;
+        min-height: 16px;
+    }
+    ul.course-filegroup-files a .type {
+        height: 16px;
+    }
+    ul.course-filegroup-files a .size {
+        width: 65px;
+    }
+    
+    ul.course-filegroup-files a .filename, ul.all-community a .name, ul.course-forums li a .name {
+        font-weight: bold;
+        display: inline-block;
+        margin-right: 10px;
+    }
+    
+    ul.course-archive li a:hover h4 {
+        color: #EEE;
+        font-weight: normal;
+    }
+    ul.all-community li img {
+	    height: 32px;
+	    padding: 2px;
+	    background: none;
+	    overflow: hidden;
+	    display: block;
+	    margin-right: 10px;
+	    float: left;
+	}
+	    
+	ul.all-community span.campus {
+	    width: 125px;
+	    padding-left: 20px;
+	}
+
+    .block-list .block-list-item:nth-child(odd) ul.course-archive li,
+    .block-list .block-list-item:nth-child(odd) ul.course-filegroup-files li,
+    .block-list .block-list-item:nth-child(odd) ul.all-community li,
+    .block-list .block-list-item:nth-child(odd) ul.course-forums li {
+        background: #EEE;
+    }
+
+    ul.course-archive li a {
+        font-weight: bold;
+    }
+    
+    ul.all-community li .profile {
+        display: none;
+        float: left;
+        margin-left: 10px;
+    }
+    ul.all-community li.selected {
+        height: auto;
+    }
+        ul.all-community li.selected a:hover {
+            background: none;
+            color: #0000FF;
+        }
+        ul.all-community li.selected img {
+            height: 150px;
+        }
+        ul.all-community li.selected .profile {
+            display: inline-block;
+        }        
+        ul.all-community li.selected .profile dl dt {
+            font-weight: bold;
+            color: #FFF;
+            background: #333;
+            padding: 2px 5px;
+            margin: 0 5px 0 0;
+            display: inline-block;
+            float: left;
+            width: 90px;
+        }
+        
+        ul.all-community li.selected .profile dl dd {
+            font-size: 12px;
+            margin: 0 0 12px;
+            padding: 2px 0 12px 20px;
+            border-bottom: 1px solid #CCC;
+            display: block;
+            width: 200px;
+        }
+    ul.all-community li a.profile-link, ul.all-community li a.profile-link:hover {
+        background: #194e76;
+        color: #FFF;
+        font-weight: bold;
+        padding: 4px;
+        display: block;
+        float: right;
+        margin: 10px;
+    }
+    
+/* Roster */
+
+.course-group-members{
+    display: block;
+    overflow: hidden;
+    width: 100%;
+}
+.course-group-member {
+    float: left;
+    margin: 0 10px 10px 0;
+    text-align: center;
+    width: 106px;
+    display: block;
+    overflow: hidden;
+    height: 150px
+}
+.course-group-member img {
+    max-width: 115px;
+    max-height:130px;
+}
+.course-group-member span {
+    display: block;
+    text-align: center;
+    white-space: nowrap;
+}    
