@@ -9,6 +9,10 @@
 	clear: both;
 }
 
+a {
+    color: #2F668F;
+    text-decoration: none;
+}
 /* Common menu */
 #common-menu {
 	background: #333;
@@ -79,7 +83,8 @@
 */
 .page-wide {
 	border: solid 1px #ccc;
-	border-width: 0 1px 1px 1px;	
+	border-width: 0 1px 1px 1px;
+	background: url(images/page-wide-bg.jpg) 0 85px repeat-y;
 }
 .page-wide .main-column {
 	padding: 20px;
@@ -203,6 +208,7 @@
 /* main (middle and right) elements */
 .page-wide .page-header {
 	padding: 20px 20px 20px 20px;
+	background: #FFF;
 }
 .page-narrow .page-header {
 	padding: 0 0 20px 0;
@@ -256,6 +262,10 @@
 /* TODO: magical popup? */
 .page-menu li a dfn {
 	display: none;
+}
+
+.sub-column .header, .sub-column .list {
+    padding: 20px 10px 10px 5px;
 }
 
 

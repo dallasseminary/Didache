@@ -134,10 +134,14 @@ namespace Didache {
 			}
 		}
 
+		public string GetProfileImageUrl(int width, int height) {
+			return "http://www.dts.edu/images/carsphotos/photo.ashx?id=" + UserID + "&width=" + width + "&height=" + height;		
+		}
+
 
 		public string ProfileDisplayUrl {
 			get {
-				return "/community/" + ((Username != "") ? Username : UserID.ToString());
+				return "/community/" + ((Username != "") ? Username.ToLower() : UserID.ToString());
 			}
 		}
 
