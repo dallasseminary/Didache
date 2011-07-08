@@ -40,6 +40,8 @@ namespace Didache {
 						foreach (Task task in tasks) {
 							UserTaskData utd = new UserTaskData() {
 								TaskID = task.TaskID,
+								CourseID = task.CourseID,
+								UnitID = task.UnitID,
 								GraderComments = "",
 								GraderSubmitDate = null,
 								GraderUserID = 0,
