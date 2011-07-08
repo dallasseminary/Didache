@@ -14,6 +14,17 @@ jQuery(document).ready(function ($) {
 	});
 
 
+	// shorten task descriptions
+	$('.task-instructions-completed').expander({
+		slicePoint: 0
+		, widow: 2
+		//,expandEffect: 'show'
+		, expandText: 'show instructions »'
+		//, userCollapse: false
+		, userCollapseText: '« hide'
+	});
+
+
 	// get all task types
 	$('div.task-entry').each(function () {
 

@@ -14,12 +14,13 @@
 		margin: 0;
 		padding: 10px;	
 		text-decoration: none;
+		position: relative;
 	}
 	.unit-list ol li a:hover {
 		background: #e7e7e7;
 	}
 	.unit-list ol li a.selected {
-		background: #dddddd;
+		background:  #dddddd; 
 		border-top: solid 1px #bbb;
 		border-bottom: solid 1px #fff;
 	}
@@ -43,6 +44,16 @@
 		font-weight: normal;
 		font-size: 11px;
 		color: #999;
+	}
+	.unit-list a .unit-overdue {
+		height: 14px;
+		width: 14px;
+		border: solid 1px #333;
+		border-radius: 50px;
+		position: absolute;
+		right: -7px;
+		top: 10px;
+		background: #bd1816 url(/css/images/taskstatus-overdue.png) 0 0 no-repeat !important;
 	}
 
 
@@ -130,7 +141,11 @@
 	border-radius: 50px;
 }
 .task-status.status-completed{
-	background: #59b14d url(/css/images/taskstatus-completed.png) 0 0 no-repeat;
+	-x-background: #59b14d url(/css/images/taskstatus-completed.png) 0 0 no-repeat;
+	background: #cccccc url(/css/images/taskstatus-completed.png) 0 0 no-repeat;
+}
+.task-status.status-overdue {
+	background: #bd1816 url(/css/images/taskstatus-overdue.png) 0 0 no-repeat !important;
 }
 
 
@@ -222,6 +237,26 @@
 	.video-list .transcript {
 		 background-image: url(images/icons/page_save.png); 
 	}	
+
+
+.turn-in-form {
+	margin: 0 0 0 40px;	
+	overflow: hidden;
+}
+
+	.turn-in-form textarea {
+		width: 513px;
+		height: 30px;
+		border: solid 2px #ccc;
+		padding: 10px;
+	}
+	.turn-in-form input[type=file] {
+		width: 300px;
+		float: left;
+	}	
+	.turn-in-form input[type=submit] {
+		float: right;
+	}		
 
 /* course archive, community index list */
 
@@ -382,3 +417,4 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
     text-align: center;
     white-space: nowrap;
 }    
+

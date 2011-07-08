@@ -26,7 +26,7 @@
 				@foreach (CourseUser user in group.Students) {
 					if (user.User != null) {
 					<a class="course-group-member" href="@user.User.ProfileDisplayUrl">				
-						<img src="@user.User.ProfileImageUrl" /><br />
+						<img src="@user.User.GetProfileImageUrl(100,100)" /><br />
 						<span>@user.User.SecureName</span>
 					</a>
 					}

@@ -8,6 +8,7 @@ namespace Didache {
 
 		public static List<UserTaskData> GetUserTaskDataInUnit(int unitID, int userID) {
 			return new DidacheDb().UserTasks
+				.Include("Task")
 				.Where(d => d.UserID == userID && d.Task.UnitID == unitID)
 				.OrderBy(d => d.Task.SortOrder)
 				.ToList();
