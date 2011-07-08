@@ -2,50 +2,48 @@
 
 .unit-list {
 }
-.unit-list h4 {
-	display: none;
-}
-.unit-list ol, .unit-list li  {
-	margin: 0;
-	padding: 0;
-}
-.unit-list ol li a {
-	display: block;
-	margin: 0;
-	padding: 10px;	
-	text-decoration: none;
-}
-.unit-list ol li a:hover {
-	background: #dddddd;
-	border-top: solid 1px #bbb;
-	border-bottom: solid 1px #fff;
-}
-.unit-list ol li a.selected {
-	background: #dddddd;
-	border-top: solid 1px #bbb;
-	border-bottom: solid 1px #fff;
-}
-.unit-list .unit-name {
-	font-weight: bold;
-	display: block;
-	height: 20px;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	color: #111;
-}
-.unit-list .unit-dates {
-	display: block;
-	font-weight: normal;
-	font-size: 11px;
-	color: #999;
-}
-.unit-list .unit-dates {
-	display: block;
-	font-weight: normal;
-	font-size: 11px;
-	color: #999;
-}
+	.unit-list h4 {
+		display: none;
+	}
+	.unit-list ol, .unit-list li  {
+		margin: 0;
+		padding: 0;
+	}
+	.unit-list ol li a {
+		display: block;
+		margin: 0;
+		padding: 10px;	
+		text-decoration: none;
+	}
+	.unit-list ol li a:hover {
+		background: #e7e7e7;
+	}
+	.unit-list ol li a.selected {
+		background: #dddddd;
+		border-top: solid 1px #bbb;
+		border-bottom: solid 1px #fff;
+	}
+	.unit-list .unit-name {
+		font-weight: bold;
+		display: block;
+		height: 20px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		color: #111;
+	}
+	.unit-list .unit-dates {
+		display: block;
+		font-weight: normal;
+		font-size: 11px;
+		color: #999;
+	}
+	.unit-list .unit-dates {
+		display: block;
+		font-weight: normal;
+		font-size: 11px;
+		color: #999;
+	}
 
 
 .block-list-header h3 {
