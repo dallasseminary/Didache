@@ -32,7 +32,7 @@ namespace Didache.TaskTypes {
 			else {
 
 				// save this file, even if somethign messes up with the forums
-				data.TempStudentFileID = studentFile.FileID;
+				data.StudentFileID = studentFile.FileID;
 				db.SaveChanges();
 
 				int interactionTaskID = task.RelatedTaskID;
@@ -80,7 +80,7 @@ namespace Didache.TaskTypes {
 				db.InteractionPosts.Add(post);
 				db.SaveChanges();
 
-				data.TempPostID = post.PostID;
+				data.PostID = post.PostID;
 				data.StudentSubmitDate = DateTime.Now;				
 				data.TaskCompletionStatus = TaskCompletionStatus.Completed;
 			

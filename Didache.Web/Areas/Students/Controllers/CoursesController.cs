@@ -35,11 +35,14 @@ namespace Didache.Web.Areas.Students.Controllers
 		[Authorize]
 		public ActionResult Schedule(string slug, int? id) {
 
+			
 			Course course = Didache.Courses.GetCourseBySlug(slug);
+			User user = Users.GetLoggedInUser();
 			List<Unit> units = Didache.Units.GetCourseUnits(course.CourseID);
 			Unit currentUnit = null;
-			List<UserTaskData> userTasks = null;
+			List<UserTaskData> userTasks = null;			
 
+			// (1) figure out which Unit to show (either by ID or date)
 			if (id.HasValue) {
 				// pick unit specified in URL
 				currentUnit = units.AsQueryable().SingleOrDefault(u => u.UnitID == id.Value);
@@ -54,11 +57,16 @@ namespace Didache.Web.Areas.Students.Controllers
 			}
 
 
-			// get tasks
+			// (2) get tasks
 			if (currentUnit != null) {
-				userTasks = Tasks.GetUserTaskDataInUnit(currentUnit.UnitID, Users.GetLoggedInUser().UserID);
+				userTasks = Tasks.GetUserTaskDataInUnit(currentUnit.UnitID, user.UserID);
 			}
 
+
+			// (3) all other data
+			// TODO: more efficient
+			
+			ViewBag.AllUserTasks = db.UserTasks.Where(ut => ut.UserID == user.UserID && ut.CourseID == course.CourseID).ToList();
             ViewBag.UserGroups = Didache.Courses.GetCourseUserGroups(course.CourseID);
 			ViewBag.Units = units;
 			ViewBag.CurrentUnit = currentUnit;

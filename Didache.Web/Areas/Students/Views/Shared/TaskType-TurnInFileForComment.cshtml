@@ -3,13 +3,13 @@
 
 @if (Model.TaskCompletionStatus == TaskCompletionStatus.NotStarted) {
 	
+	<div class="turn-in-form">
 	<form method="post" enctype="multipart/form-data" action="/courses/api/taskfile/@Model.TaskID">
 		<textarea name="usercomment"></textarea>
-		<br />
 		<input type="file" name="StudentFile" />
-		<br />
-		<input type="submit" value="@Resources.labels.studentschedule_submitfordiscussion" class="task-submit" />
+		<input type="submit" value="@Resources.labels.studentschedule_submitfordiscussion" class="d-button action task-submit" />
 	</form>
+	</div>
 
 	<!--
 	if (Model.Task.IsSkippable) {

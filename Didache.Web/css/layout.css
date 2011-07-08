@@ -91,7 +91,7 @@
 	float: right;
 	width: 177px;
 	border-left: solid 1px #ccc;
-	background: #F1F2F4;
+	background: #f7f7f7; /* #F1F2F4; */
 }
 /* used when you don't need a main & sub */
 .page-wide .full-column {

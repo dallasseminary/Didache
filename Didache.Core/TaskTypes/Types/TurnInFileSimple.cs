@@ -31,7 +31,7 @@ namespace Didache.TaskTypes {
 			} else {
 
 				data.StudentSubmitDate = DateTime.Now;
-				data.TempStudentFileID = studentFile.FileID;
+				data.StudentFileID = studentFile.FileID;
 				data.TaskCompletionStatus = TaskCompletionStatus.Completed;
 
 				db.SaveChanges();

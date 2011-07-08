@@ -251,9 +251,9 @@ namespace Didache.Web.Areas.Admin.Controllers
 							StudentSubmitDate = null,
 							TaskCompletionStatus = TaskCompletionStatus.NotStarted,
 							TaskData = "",
-							TempGraderFileID = 0,
-							TempPostID = 0,
-							TempStudentFileID = 0,
+							GraderFileID = 0,
+							PostID = 0,
+							StudentFileID = 0,
 							UserID = user.UserID
 						};
 
