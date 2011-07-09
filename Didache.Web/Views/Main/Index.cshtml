@@ -206,6 +206,7 @@
 
 	<div class="sub-column">
 	
+		@*
 		@if (User.Identity.IsAuthenticated) {
 		
 			<div class="page-head">
@@ -217,7 +218,8 @@
 					<span class="date">@(task.Task.DueDate.HasValue ? @task.Task.DueDate.Value.ToShortDateString() : "")</span> - @task.Task.Name
 				</div>
 			}
-		}			
+		}	
+		*@		
 			
 
         <h3>@Resources.labels.home_dashboard_heading_courseresources</h3>
@@ -229,16 +231,14 @@
         <h3>@Resources.labels.home_dashboard_heading_onlineedresources</h3>
         <ul>
             <li><a href="http://www.microsoft.com/downloads/details.aspx?FamilyId=941b3470-3ae9-4aee-8f43-c6bb74cd1466&displaylang=en">@Resources.labels.home_dashboard_li_msword</a></li>
-            <li><a href="http://libreoffice.org">@Resources.labels.home_dashboard_li_libreoffice</a></li>
-            <li>
-                <em>@Resources.labels.home_dashboard_heading_bibsoftware</em>
-                <ul>
-                    <li><a href="http://www.zotero.org">@Resources.labels.home_dashboard_li_zotero</a></li>
-                    <li><a href="http://endnote.com">@Resources.labels.home_dashboard_li_endnote</a></li>
-                    <li><a href="http://styleease.com">@Resources.labels.home_dashboard_li_styleease</a></li>
-                </ul>
-            </li>
-            <li><a href="http://library.dts.edu/Pages/RM/Write/turabian_sup.pdf">@Resources.labels.home_dashboard_li_turabianformattutorial</a></li>
+            <li><a href="http://libreoffice.org">@Resources.labels.home_dashboard_li_libreoffice</a></li>            
+        </ul>
+
+        <h3>@Resources.labels.home_dashboard_heading_bibsoftware</h3>
+        <ul>
+            <li><a href="http://www.zotero.org">@Resources.labels.home_dashboard_li_zotero</a></li>
+            <li><a href="http://endnote.com">@Resources.labels.home_dashboard_li_endnote</a></li>
+            <li><a href="http://styleease.com">@Resources.labels.home_dashboard_li_styleease</a></li>
         </ul>
 
 
