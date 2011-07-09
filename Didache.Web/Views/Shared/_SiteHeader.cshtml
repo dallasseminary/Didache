@@ -1,5 +1,27 @@
 ﻿<div id="site-header">	
 	<div class="wrapper">
-		<a href="http://@Request.Url.Host/"><img src="/css/images/dts-logo.png" alt="DTS Home" /></a>
+		<div class="logo">
+			<a href="http://@Request.Url.Host/"><img src="/css/images/dts-logo.png" alt="DTS Home" /></a>
+		</div>
+		<div class="user-settings">
+			@*
+			@if (User.Identity.IsAuthenticated) {
+			<form action="/community/search/">
+				<input type="search" name="q" placeholder="search for friends" />
+			</form>
+			}
+			*@
+			<form action="/account/setlanguage/">
+				@Html.DropDownList("language", new List<SelectListItem> {   
+													new SelectListItem() { Value = "en-US", Text = "English" }, 
+													new SelectListItem() { Value = "es", Text = "Español (Spanish)" }, 
+													new SelectListItem() { Value = "ar", Text = "العربية (Arabic)" }, 
+													new SelectListItem() { Value = "zh-CN", Text = "汉语[简体字] (Simplified)" }, 
+													new SelectListItem() { Value = "zh-TW", Text = "漢語[繁體字] (Traditional)" }
+												})
+
+			</form>
+		</div>
+		<div class="clear"></div>
 	</div>
 </div>
