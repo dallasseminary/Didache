@@ -7,7 +7,7 @@
 	<script src="/js/students/students.js"></script>
 }
 
-<div class="page-wide">
+<div class="page-wide page-split">
 
 	@Html.Partial("_CourseHeader", Model)
 	@Html.Partial("_CourseMenu")
@@ -36,7 +36,7 @@
 				</div>	
 				
 				<div class="task-details">
-					<div class="task-instructions-@(userTaskData.TaskCompletionStatus == TaskCompletionStatus.Completed ? "completed" : "text")">@Html.Raw(userTaskData.Task.Instructions)</div>					
+					<div class="task-instructions-@(userTaskData.TaskCompletionStatus == TaskCompletionStatus.Completed ? "completed" : "text")">@Html.Raw(userTaskData.Task.Description) @Html.Raw(userTaskData.Task.Instructions)</div>					
 				</div>
 				
 				<div class="task-interaction">
