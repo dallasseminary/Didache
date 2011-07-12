@@ -36,11 +36,6 @@ namespace Didache {
 		[StringLength(100000)]
 		public string Instructions { get; set; }
 
-		[DataType(DataType.MultilineText)]
-		[AllowHtml]
-		[StringLength(100000)]
-		public string Description { get; set; }
-
 		//[DataType(DataType.DateTime)]
 		[Display(Name = "Submission Available")]
 		public DateTime? SubmissionAvailableDate { get; set; }
