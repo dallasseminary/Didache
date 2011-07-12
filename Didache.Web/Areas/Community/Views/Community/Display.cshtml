@@ -15,6 +15,11 @@
 		<div class="page-header">
 			<h2>@Model.SecureName</h2>
 			<h3>@Model.Country</h3>
+			@if (Model.UserID == Users.GetLoggedInUser().UserID) {
+				<div class="actions">
+				<a class="d-button edit" href="/account/editprofile">@Resources.labels.profile_edit_button</a>
+				</div>
+			}
 		</div>
 
 		<h4>Contact Info</h4>
@@ -67,28 +72,23 @@
 					@(Model.BirthDate.HasValue ? Model.BirthDate.Value.ToShortDateString() : "")
 				</td>
 			</tr>
+			@if (!Model.Hometown.IsEmpty()) {
 			<tr>
 				<th>
-					From
+					Hometown
 				</th>
 				<td>
 					@Model.Hometown
 				</td>
 			</tr>
+			}
+			
 			<tr>
 				<th>
 					Alma Mater
 				</th>
 				<td>
 					@Model.AlmaMater
-				</td>
-			</tr>
-			<tr>
-				<th>
-					Bio
-				</th>
-				<td>
-					@Model.Bio
 				</td>
 			</tr>
 			<tr>

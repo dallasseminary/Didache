@@ -399,4 +399,7 @@
   <data name="interactions_replies" xml:space="preserve">
     <value>Replies</value>
   </data>
+  <data name="profile_edit_button" xml:space="preserve">
+    <value>Edit Profile</value>
+  </data>
 </root>
