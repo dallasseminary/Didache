@@ -57,9 +57,9 @@ namespace Didache.Web.Controllers {
 
 					Response.Cookies.Add(cookie);
 
-					FormsAuthentication.RedirectFromLoginPage(username, rememberMe);
+					//FormsAuthentication.RedirectFromLoginPage(username, rememberMe);
 
-					/*
+					
 					FormsAuthentication.SetAuthCookie(username, rememberMe);
 					
 					if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/") && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\")) {
@@ -67,7 +67,7 @@ namespace Didache.Web.Controllers {
 					} else {
 						return Redirect("/"); 
 					}
-					 * */
+					 
 				} else {
 					ModelState.AddModelError("", "The user name or password provided is incorrect.");
 				}
@@ -83,7 +83,7 @@ namespace Didache.Web.Controllers {
 		public ActionResult Logout() {
 			FormsAuthentication.SignOut();
 
-			return RedirectToAction("Index", "Home");
+			return Redirect("/");
 		}
 
 		public ActionResult EditProfile() {

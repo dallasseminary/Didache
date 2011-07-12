@@ -12,7 +12,7 @@
 @if (Request.IsAuthenticated) {	
 			<span class="user">@Users.GetLoggedInUser().FormattedName</span>
 			<a href="@Users.GetLoggedInUser().ProfileDisplayUrl">Profile</a>
-			<a href="/logout.aspx">@Resources.labels.login_logout</a>
+			<a href="/account/logout">@Resources.labels.login_logout</a>
 } else {	
 			<a href="/account/login">@Resources.labels.login_login</a>
 }	

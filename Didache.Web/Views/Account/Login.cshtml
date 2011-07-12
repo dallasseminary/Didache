@@ -1,19 +1,23 @@
 ﻿@model Didache.Models.LogOnModel
 
 @{
-    ViewBag.Title = "Login";
+	ViewBag.Title = "Login";
 }
 
-<h2>Login</h2>
+<div class="page-wide">
+	<div class="full-column">
+		<div class="page-header">
+			<h2>@Resources.labels.login_login</h2>
+		</div>
 
 
 @Html.ValidationSummary(true, "Login was unsuccessful. Please correct the errors and try again.")
 
 @using (Html.BeginForm()) {
-
-        <fieldset class="site-form">
-            <legend>Account Information</legend>
-
+	
+	
+	
+			@*
             <div class="editor-label">
                 @Html.LabelFor(m => m.UserName)
             </div>
@@ -34,10 +38,42 @@
                 @Html.CheckBoxFor(m => m.RememberMe)
                 @Html.LabelFor(m => m.RememberMe)
             </div>
+			*@
+	
+	
+            <div class="editor-label">
+                <label for="username">@Resources.labels.login_username</label>
+            </div>
+            <div class="editor-field">
+                <input type="text" id="username" name="username" value="@(Model != null ? Model.UserName : "")" />			
+                @Html.ValidationMessageFor(m => m.UserName)
+            </div>
+	
+            <div class="editor-label">
+                <label for="password">@Resources.labels.login_password</label>
+            </div>	
+            <div class="editor-field">
+                <input type="text" id="password" name="password" value="@(Model != null ? Model.Password : "")" />			
+                @Html.ValidationMessageFor(m => m.Password)
+            </div>
 
-            <p>
-                <input type="submit" value="Log On" />
-            </p>
-        </fieldset>
+            <div class="editor-label">
+				
+				<input type="checkbox" id="RememberMe" name="RememberMe" @(Model != null && Model.RememberMe? "checked=checked" : "") />
+				<label for="RememberMe">@Resources.labels.login_rememberme</label>
+				
 
+            </div>	
+
+			<input type="submit" class="d-button action" value="@Resources.labels.login_login" />
+		   
 }
+
+
+
+
+
+	</div>
+
+</div>
+

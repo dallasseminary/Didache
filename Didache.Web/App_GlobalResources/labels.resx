@@ -253,13 +253,13 @@
     <value>Password</value>
   </data>
   <data name="login_rememberme" xml:space="preserve">
-    <value>Remember me?</value>
+    <value>Keep me logged in</value>
   </data>
   <data name="login_title" xml:space="preserve">
     <value>Login</value>
   </data>
   <data name="login_username" xml:space="preserve">
-    <value>Username</value>
+    <value>DTS ID, Username, or Email</value>
   </data>
   <data name="submenu_archive" xml:space="preserve">
     <value>Archive</value>
