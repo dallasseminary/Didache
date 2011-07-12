@@ -22,12 +22,12 @@
 			}
 		</div>
 
-		<h4>Contact Info</h4>
+		<h4>@Resources.labels.profile_heading_contactinfo</h4>
 
 		<table class="user-profile">			
 			<tr>
 				<th>
-					Email
+					@Resources.labels.profile_label_email
 				</th>
 				<td>
 					@if (Users.HasPermission(Model.UserID, Model.EmailSecuritySetting)) {
@@ -37,7 +37,7 @@
 			</tr>
 			<tr>
 				<th>
-					Phone
+					@Resources.labels.profile_label_phone
 				</th>
 				<td>
 					@if (Users.HasPermission(Model.UserID, Model.PhoneSecuritySetting)) {
@@ -47,7 +47,7 @@
 			</tr>
 			<tr>
 				<th>
-					Address
+					@Resources.labels.profile_label_address
 				</th>
 				<td>
 					@if (Users.HasPermission(Model.UserID, Model.AddressSecuritySetting)) {
@@ -61,12 +61,12 @@
 		</table>
 
 
-		<h4>Personal Info</h4>
+		<h4>@Resources.labels.profile_heading_personalinfo</h4>
 
 		<table class="user-profile">
 			<tr>
 				<th>
-					Birthday
+					@Resources.labels.profile_label_birthday
 				</th>
 				<td>
 					@(Model.BirthDate.HasValue ? Model.BirthDate.Value.ToShortDateString() : "")
@@ -75,25 +75,16 @@
 			@if (!Model.Hometown.IsEmpty()) {
 			<tr>
 				<th>
-					Hometown
+					@Resources.labels.profile_label_hometown
 				</th>
 				<td>
 					@Model.Hometown
 				</td>
 			</tr>
-			}
-			
+			}		
 			<tr>
 				<th>
-					Alma Mater
-				</th>
-				<td>
-					@Model.AlmaMater
-				</td>
-			</tr>
-			<tr>
-				<th>
-					Bio
+					@Resources.labels.profile_label_biography
 				</th>
 				<td>
 					@Model.Bio
@@ -105,11 +96,11 @@
 	</div>
 	<div class="sub-column">
 	
-		<h3>Social Media</h3>
+		<h3>@Resources.labels.profile_heading_socialmedia</h3>
 		<ul>
-
-			@if (!Model.Facebook.IsEmpty()) {<li>Facebook<a href="@Model.Facebook">@Model.Facebook</a></li>}
-			@if (!Model.Twitter.IsEmpty()) {<li>Twitter<a href="http://www.twitter.com/@Model.Twitter">@@@Model.Twitter</a></li>}
+		
+			@if (!Model.Facebook.IsEmpty()) {<li><a href="http://facebook.com/@Model.Facebook">facebook.com/@Model.Facebook</a></li>}
+			@if (!Model.Twitter.IsEmpty()) {<li><a href="http://twitter.com/@Model.Twitter">twitter.com/@Model.Twitter</a></li>}
 			@if (!Model.Website.IsEmpty()) {<li><a href="@(!Model.Website.Contains("http://") ? "http://" + Model.Website : Model.Website)">@Model.Website.Replace("http://","")</a></li>}
 
 		</ul>
