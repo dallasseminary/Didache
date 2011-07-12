@@ -142,7 +142,7 @@ namespace Didache {
 			modelBuilder.Entity<GradeGroup>()
 				.ToTable("oe_GradeGroups");
 			modelBuilder.Entity<GradeItem>()
-				.ToTable("oe_GradeItems");
+				.ToTable("oe_GradeGroups_Items");
 
 			// map example
 			/*
