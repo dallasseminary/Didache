@@ -107,10 +107,14 @@ namespace Didache.Web.Controllers {
 
 				Users.ClearUserCache(model);
 
+				return Redirect(model.ProfileDisplayUrl); // RedirectToAction("EditProfile");
+
 			} catch (Exception ex) {
 				ModelState.AddModelError("", "Edit Failure, see inner exception: " + ex.ToString());
+
+				return View(model);
 			}
-			return RedirectToAction("EditProfile");
+			
 		}
 
 
