@@ -22,11 +22,14 @@ x add group
 - remove files
 -->
 
+<div class="page-wide">
+	<div class="full-column">
+
 @Html.Partial("_CourseHeader", Model)
 
 <input type="hidden" id="CourseID" name="CourseID" value="@(Model != null ? Model.CourseID : 0)" />
 
-<button type="button" class="new-button" id="add-file-group">Add File Group</button>
+<button type="button" class="d-button action" id="add-file-group">Add File Group</button>
 
 <div id="course-file-groups" class="nested-list">
 
@@ -324,3 +327,5 @@ function setupFiles(selector) {
 
 </div>
 *@
+
+</div></div>

@@ -5,34 +5,41 @@
 	 Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Sessions</h2>
+<div class="page-wide">
+	<div class="full-column">
+		<div class="page-header">
+			<h2>Sessions</h2>
+		</div>
 
-<a class="oe-button" href="/admin/sessions/edit/0">New Session</a>
+		<a class="d-button action" href="/admin/sessions/edit/0">New Session</a>
 
-<table class="admin-list">
-<thead>
-	<tr>
-		<th></th>
-		<th>Code</th>
-		<th>Name</th>
-		<th>Start</th>
-		<th>End</th>
-		<th></th>
-		<th></th>
-	</tr>
-</thead>
-<tbody>
-	@foreach (Session session in Model) {
-	<tr>
-		<td>@session.IsActive</td>
-		<td>@session.SessionCode</td>
-		<td>@session.Name</td>
-		<td>@session.StartDate.ToString("MM/dd/yyyy")</td>
-		<td>@session.EndDate.ToString("MM/dd/yyyy")</td>
-		<td><a href="/admin/courses/bysession/@session.SessionID">courses</a></td>
-		<td><a href="/admin/sessions/edit/@session.SessionID">edit</a></td>
-	</tr>
-	}
-</tbody>
-</table>
+		<table class="admin-list">
+		<thead>
+			<tr>
+				<th></th>
+				<th>Code</th>
+				<th>Name</th>
+				<th>Start</th>
+				<th>End</th>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (Session session in Model) {
+			<tr>
+				<td>@session.IsActive</td>
+				<td>@session.SessionCode</td>
+				<td>@session.Name</td>
+				<td>@session.StartDate.ToString("MM/dd/yyyy")</td>
+				<td>@session.EndDate.ToString("MM/dd/yyyy")</td>
+				<td><a href="/admin/courses/bysession/@session.SessionID">courses</a></td>
+				<td><a href="/admin/sessions/edit/@session.SessionID">edit</a></td>
+			</tr>
+			}
+		</tbody>
+		</table>
 
+
+</div>
+</div>

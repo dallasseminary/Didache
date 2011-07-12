@@ -70,7 +70,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 					}
 
 					// add new roles	
-					if (roles.Length > 0) {
+					if (roles != null && roles.Length > 0) {
 						System.Web.Security.Roles.AddUserToRoles(user.Username, roles);
 					}
 

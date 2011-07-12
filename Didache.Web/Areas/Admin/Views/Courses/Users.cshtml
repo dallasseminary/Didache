@@ -64,21 +64,30 @@
 	cursor: pointer;
 }
 
+#find-users {
+	margin: 0 0 20px 0;
+}
+
 </style>
 
+<div class="page-wide">
+	<div class="full-column">
 
 @Html.Partial("_CourseHeader", Model)
 
 <input type="hidden" id="CourseID" name="CourseID" value="@(Model != null ? Model.CourseID : 0)" />
 
-<select id="CourseUserGroups">
-	<option value="0">-- None --</option>
-@foreach (CourseUserGroup group in ViewBag.CourseUserGroups) {
-	<option value="@group.GroupID">@group.Name</option>
-}
-</select>
 
-<div class="nested-main">
+	<div id="find-users">
+		<h3>Find Users</h3>
+
+		<input type="text" id="user-search-text" /> <input id="user-search-button" type="button" value="Search" />
+
+		<div id="user-search-results">
+		</div>
+
+	</div>
+
 
 
 	<div id="student-column">
@@ -113,18 +122,21 @@
 
 	</div>
 
+	
+	
+<select id="CourseUserGroups" style="display: none;">
+	<option value="0">-- None --</option>
+@foreach (CourseUserGroup group in ViewBag.CourseUserGroups) {
+	<option value="@group.GroupID">@group.Name</option>
+}
+</select>
 
 </div>
 
-<div class="nested-sub">
-	<h3>Find Users</h3>
-
-	<input type="text" id="user-search-text" /> <input id="user-search-button" type="button" value="Search" />
-
-	<div id="user-search-results">
-	</div>
-
+<div class="clear"></div>
 </div>
+
+
 
 <script>
 	jQuery(document).ready(function ($) {
