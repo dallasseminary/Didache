@@ -142,7 +142,9 @@
     <Content Include="js\admin\old\courses.js" />
     <Content Include="js\lib\jquery-1.6.1.js" />
     <Content Include="js\lib\jquery-1.6.1.min.js" />
-    <Content Include="js\admin\admin.js" />
+    <Content Include="js\lib\jwysiwyg\jquery.wysiwyg.css" />
+    <Content Include="js\lib\jwysiwyg\jquery.wysiwyg.gif" />
+    <Content Include="js\lib\jwysiwyg\jquery.wysiwyg.js" />
     <Content Include="js\students\students.js" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -231,6 +233,7 @@
     <Content Include="js\lib\MicrosoftMvcValidation.debug.js" />
     <Content Include="js\lib\MicrosoftMvcValidation.js" />
     <Content Include="sql.aspx" />
+    <Content Include="todo.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -386,7 +389,6 @@
     <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Users\EditUser.cshtml" />
     <Content Include="Areas\Admin\Views\Courses\UserGroups.cshtml" />
-    <Content Include="Areas\Admin\Views\Courses\Copy of Users.cshtml" />
     <Content Include="Areas\Students\Views\Discussion\_WritePosts.cshtml" />
     <Content Include="Areas\Students\Views\Shared\TaskType-TurnInFileSimple_DragandDrop.cshtml" />
     <None Include="css\fonts\league\League_Gothic-webfont.eot" />
@@ -397,6 +399,8 @@
     <Content Include="Views\Shared\_SiteHeader.cshtml" />
     <Content Include="Views\Shared\_UserMenu.cshtml" />
     <Content Include="Views\Shared\_SiteFooter.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\SecuritySetting.cshtml" />
+    <Content Include="Views\Shared\_AdminMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\labels.ar.resx">

@@ -117,6 +117,16 @@ a {
 	padding: 20px;
 	min-height: 600px;
 }
+.page-wide .full-column .page-header {
+	padding: 0 20px 20px 20px;
+	margin: 0 -20px 20px -20px;
+	border-bottom: solid 1px #ccc;
+}
+.page-wide .full-column .page-menu {
+	margin: 0 -20px 20px -20px;
+	border-bottom: solid 1px #ccc;
+}
+
 
 
 /* 
@@ -374,7 +384,8 @@ a {
 .user-profile {
 	font-size: 13px;
 	line-height: 15px;
-	width: 500px;
+	width: 550px;
+	margin: 0 0 20px 0;
 }
 .user-profile th, .user-profile td {
 	padding: 5px;
@@ -387,4 +398,7 @@ a {
 }
 .user-profile td{
 	color: #222;
+}
+.user-profile td.security-setting {
+	width: 100px;
 }
