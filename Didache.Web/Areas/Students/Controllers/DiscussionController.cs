@@ -21,6 +21,8 @@ namespace Didache.Web.Areas.Students.Controllers
 			if (forums.Count == 1)
 				return RedirectToAction("Forum", new { slug = slug, id = forums[0].ForumID });
 
+			ViewBag.Course = course;
+
 			return View(forums);
         }
 
