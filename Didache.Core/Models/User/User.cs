@@ -141,7 +141,8 @@ namespace Didache {
 
 		public string ProfileDisplayUrl {
 			get {
-				return "/community/" + ((Username != "") ? Username.ToLower() : UserID.ToString());
+				//return "/community/" + ((Username != "") ? Username.ToLower() : UserID.ToString());
+				return "/community/" + UserID.ToString();
 			}
 		}
 
