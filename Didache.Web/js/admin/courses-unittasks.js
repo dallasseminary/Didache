@@ -7,6 +7,9 @@
 		width: 550,
 		modal: true,
 		title: 'Task Editor',
+		open: function (event, ui) {
+			setupAdminEditors();
+		},
 		buttons: [
 			{
 				text: 'Save Task',
@@ -52,10 +55,13 @@
 
 	$('#unit-editor').dialog({
 		autoOpen: false,
-		height: 300,
+		height: 400,
 		width: 550,
 		modal: true,
 		title: 'Unit Editor',
+		open: function (event, ui) {
+			setupAdminEditors();
+		},
 		buttons: [
 			{
 				text: 'Save Unit',
@@ -190,14 +196,14 @@
 							'<input type="text" class="unit-name" value=""  placeholder="name" />' +
 						'</span>' +
 						'<span class="meta">' +
-							'<input type="date" class="unit-start-date" value="" placeholder="start" />' +
-							'<input type="date" class="unit-end-date" value="" placeholder="end" />' +
+							'<input type="text" class="unit-start-date date" value="" placeholder="start" />' +
+							'<input type="text" class="unit-end-date date" value="" placeholder="end" />' +
 						'</span>' +
 						'<a class="unit-edit edit-link" href="/admin/courses/unit/0">Edit</a>' +
 						'<a class="unit-edit delete-link" href="/admin/courses/deleteunit/0">Delete</a>' +
 					'</div>' +
 					'<div>' +
-						'<button type="button" class="add-task new-button">Add Task</button>' +
+						'<button type="button" class="add-task d-button action">Add Task</button>' +
 					'</div>' +
 					'<div class="course-tasks nested-child-list">' +
 					'</div>' +
@@ -236,7 +242,7 @@
 		//   ' <option></option>'+
 		//'</select>'+
 				    '<span class="task-type"></span>' +
-					'<input type="date" class="task-due-date" value=""  placeholder="due"/>' +
+					'<input type="text" class="task-due-date date" value="" placeholder="due" />' +
 		//'</span>'+
 				'<a class="task-edit edit-link" href="/admin/courses/task/0">Edit</a>' +
 				'<a class="task-delete delete-link" href="/admin/courses/deletetask/0">Delete</a>' +

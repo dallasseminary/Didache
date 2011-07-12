@@ -5,10 +5,14 @@
 	// create course editor for add/edit
 	$('#course-editor').dialog({
 		autoOpen: false,
-		height: 300,
+		height: 360,
 		width: 550,
 		modal: true,
 		title: 'Course Editor',
+
+		open: function (event, ui) {
+			setupAdminEditors();
+		},
 		buttons: [
 			{
 				text: 'Save',
@@ -47,6 +51,8 @@
 		]
 	});
 
+
+
 	// add new
 	$('#course-create').click(function (e) {
 		e.preventDefault();
@@ -70,7 +76,12 @@
 
 			fillEditor('#course-editor', data);
 
+			//setupAdminEditors();
+
 			$('#course-editor').dialog('open');
+
+			// instruciotns HTML
+			//$('#course-editor').find('textarea[name="Description"]').wysiwyg("setContent", "<p>My new content</p>").wysiwyg("destroy")
 
 		});
 

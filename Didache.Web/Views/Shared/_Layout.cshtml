@@ -18,21 +18,27 @@
 	<link href="@Url.Content("~/css/type.css")" rel="stylesheet"  />
 	<link href="@Url.Content("~/css/layout.css")" rel="stylesheet"  />
 	<link href="@Url.Content("~/css/students.css")" rel="stylesheet"  />
-
-	@*
-	<link href="@Url.Content("~/css/students.css")" rel="stylesheet"  />
 	<link href="@Url.Content("~/css/admin.css")" rel="stylesheet"  />
-	<link href="@Url.Content("~/css/forms.css")" rel="stylesheet"  />
-    *@
-
-	<link href="@Url.Content("~/js/lib/ui-lightness/jquery-ui.css")" rel="stylesheet"  />
 
 	<script src="@Url.Content("~/js/lib/jquery-1.6.1.min.js")"></script>
+		
 	<script src="@Url.Content("~/js/lib/jquery-ui.min.js")"></script>
+	<link href="@Url.Content("~/js/lib/ui-lightness/jquery-ui.css")" rel="stylesheet"  />
+	
 	<script src="@Url.Content("~/js/lib/jquery.validate.min.js")" ></script>
 	<script src="@Url.Content("~/js/lib/jquery.validate.unobtrusive.min.js")"></script>
 	<script src="@Url.Content("~/js/lib/jquery.expander.js")"></script>
 	<script src="@Url.Content("~/js/lib/jquery.fileupload.js")"></script>
+
+	<script src="@Url.Content("~/js/lib/jwysiwyg/jquery.wysiwyg.js")"></script>
+	<link href="@Url.Content("~/js/lib/jwysiwyg/jquery.wysiwyg.css")" rel="stylesheet"  />
+	
+	@*
+	<script src="@Url.Content("~/js/lib/cleditor/jquery.cleditor.min.js")"></script>
+	<link href="@Url.Content("~/js/lib/cleditor/jquery.cleditor.css")" rel="stylesheet"  />
+	*@
+	
+
 	<script src="@Url.Content("~/js/main.js")"></script>
 
 	@RenderSection("head",false)
@@ -62,6 +68,10 @@
 			}
 
 			@Html.Partial("_UserMenu")	
+
+			@if (User.IsInRole(UserRoles.Administrator)) {
+				@Html.Partial("_AdminMenu")	
+			}
 		</div>
 		
 		<div id="main-content">
