@@ -9,14 +9,17 @@
 	<script src="/js/admin/courses-unittasks.js"></script>
 }
 
-@Html.Partial("_CourseHeader", Model)
+<div class="page-wide">
+	<div class="full-column">
+		
+		@Html.Partial("_CourseHeader", Model)
 
 
 <input type="hidden" id="CourseID" name="CourseID" value="@(Model != null ? Model.CourseID : 0)" />
 
 <div id="unittask-list">
 	
-	<button type="button" class="new-button" id="add-unit">Add Unit</button>
+	<button type="button" class="d-button action" id="add-unit">Add Unit</button>
 
 	<div id="course-units" class="nested-list">
 	
@@ -34,20 +37,13 @@
 
     <table class="admin-form">
       <tbody>
-		<tr>
-			<th>
-				Active
-			</th>
-			<td>
-				<input type="checkbox" name="IsActive" />
-			</td>
-		</tr>
+
 		<tr>
 			<th>
 				Name
 			</th>
 			<td>
-				<input type="text" name="Name" />
+				<input type="text" name="Name" /> <input type="checkbox" name="IsActive" id="Task-IsActive" /><label for="Task-IsActive">Active</label>
 			</td>
 		</tr>
 		<tr>
@@ -80,21 +76,12 @@
 				<input type="text" name="FileTypesAllowed" />
 			</td>
 		</tr>
-
 		<tr>
 			<th>
 				Instructions
 			</th>
 			<td>
-				<textarea name="Instructions"></textarea>
-			</td>
-		</tr>
-		<tr>
-			<th>
-				Description
-			</th>
-			<td>
-				<textarea name="Description"></textarea>
+				<textarea name="Instructions" class="htmltext-admin"></textarea>
 			</td>
 		</tr>
 		<tr>
@@ -102,7 +89,10 @@
 				Priority
 			</th>
 			<td>
-				<input type="textbox" name="Priority" />
+				<select name="Priority" >
+					<option value="1">Normal (1)</option>
+					<option value="2">High (2)</option>				
+				</select>
 			</td>
 		</tr>
 		<tr>
@@ -110,23 +100,23 @@
 				Due Date
 			</th>
 			<td>
-				<input type="date" name="DueDate" />
+				<input class="date" name="DueDate" />
 			</td>
 		</tr>
 		<tr>
 			<th>
-				InstructionsAvailableDate
+				Instructions
 			</th>
 			<td>
-				<input type="date" name="InstructionsAvailableDate" />
+				<input class="date" name="InstructionsAvailableDate" /> (hide instructions until)
 			</td>
 		</tr>
 		<tr>
 			<th>
-				SubmissionAvailableDate
+				Submission
 			</th>
 			<td>
-				<input type="date" name="SubmissionAvailableDate" />
+				<input class="date" name="SubmissionAvailableDate" /> (don't allow submit until this date)
 			</td>
 		</tr>
 		<tr>
@@ -186,10 +176,11 @@
 				Instructions
 			</th>
 			<td>
-				<textarea name="Instructions"></textarea>
+				<textarea name="Instructions" class="htmltext-admin"></textarea>
 			</td>
 		</tr>
 	
 	</table>
 
+	</div>
 </div>

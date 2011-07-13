@@ -1,11 +1,19 @@
 ﻿@model Didache.Course
 
-<h1>@Model.CourseCode @Model.Section</h1>
+<div class="page-header">
+	<h2>@Model.CourseCode @Model.Section</h2>
+	<h3>@Model.FacultyFullNames</h3>
+</div>
 
-<ul class="course-menu">
-	<li><a href="/admin/courses/courseeditor/@Model.CourseID">Units &amp; Tasks</a></li>
-	<li><a href="/admin/courses/files/@Model.CourseID">Files</a></li>
-	<li><a href="/admin/courses/users/@Model.CourseID">Users</a></li>
-	<li><a href="/admin/courses/usergroups/@Model.CourseID">Groups</a></li>
-	<li><a href="/admin/courses/grading/@Model.CourseID">Grading</a></li>
+<ul class="page-menu">
+	@foreach(var page in new[] {
+								new {Url="courseeditor", Name="Units and Tasks"},
+								new {Url="files", Name="Files"},
+								new {Url="users", Name="Users"},
+								new {Url="usergroups", Name="Groups"},
+								new {Url="grading", Name="Grading"}
+								}
+	) {
+		<li><a href="/admin/courses/@page.Url/@Model.CourseID" @(Request.Url.ToString().Contains(page.Url) ? " class=selected" : "")>@page.Name</a></li>
+	}
 </ul>

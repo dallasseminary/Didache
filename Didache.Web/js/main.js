@@ -6,6 +6,7 @@
 
 
 	// instruactions
+	//$('textarea.htmltext-admin').cleditor({ useCSS: false });
 
 
 });

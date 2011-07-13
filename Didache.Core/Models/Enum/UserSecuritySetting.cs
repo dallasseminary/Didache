@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Didache {
 	public enum UserSecuritySetting {
-		Private = 1,
-		Public = 2,
-		Friends = 3
+		Private = 2,
+		Public = 0,
+		Friends = 1
 	}
 }

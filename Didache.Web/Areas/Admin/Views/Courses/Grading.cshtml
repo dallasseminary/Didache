@@ -1,44 +1,50 @@
-﻿@model List<Didache.GradeGroup>
+﻿@model Course
 
 @{
-	ViewBag.Title = ViewBag.Course.ToString() + " Grading";
+	ViewBag.Title = Model.ToString() + " Grading";
 }
-<h2>@ViewBag.Course.ToString() Grading</h2>
 
-<div class="nested-main">
+<div class="page-wide">
+	<div class="full-column">
 
-<div id="course-users" data-courseid="@ViewBag.Course.CourseID" class="nested-list">
-	@foreach (GradeGroup group in Model) {
-	<div class="gradegroup nested-item" data-gradegroupid="@group.GradeGroupID" >
-		<div class="gradegroup-header nested-item-row">
-			<input type="text" class="gradegroup-name" value="@group.Name" />
-			<input type="number" class="gradegroup-percentage" value="@group.Percentage" />
+		@Html.Partial("_CourseHeader", Model)
 
-			<a class="gradegroup-delete delete-link" href="/admin/courses/deletegroup/@group.GradeGroupID">Delete</a>
+		<div class="nested-main">
+
+			<div id="course-users" data-courseid="@Model.CourseID" class="nested-list">
+				@foreach (GradeGroup group in ViewBag.GradeGroups) {
+				<div class="gradegroup nested-item" data-gradegroupid="@group.GradeGroupID" >
+					<div class="gradegroup-header nested-item-row">
+						<input type="text" class="gradegroup-name" value="@group.Name" />
+						<input type="number" class="gradegroup-percentage" value="@group.Percentage" />
+
+						<a class="gradegroup-delete delete-link" href="/admin/courses/deletegroup/@group.GradeGroupID">Delete</a>
+					</div>
+
+					<div class="gradegroup-items nested-child-list">
+					@foreach (GradeItem gradeItem in group.GradeItems) {
+						<div class="gradeitem nested-child-item" data-gradeitemid="@gradeItem.GradeItemID" data-taskid="@gradeItem.TaskID">
+							<span class="gradeitem-drag-handle drag-handle"></span>
+				
+							<span class="gradeitem-name">@gradeItem.Task.Unit.SortOrder.@gradeItem.Task.SortOrder - @gradeItem.Task.Name</span>					
+						</div>	  
+					}		
+					</div>
+				</div>
+			 }
+
+			</div>
+
 		</div>
 
-		<div class="gradegroup-items nested-child-list">
-		@foreach (GradeItem gradeItem in group.GradeItems) {
-			<div class="gradeitem nested-child-item" data-gradeitemid="@gradeItem.GradeItemID" data-taskid="@gradeItem.TaskID">
-				<span class="gradeitem-drag-handle drag-handle"></span>
-				
-				<span class="gradeitem-name">@gradeItem.Task.Unit.SortOrder.@gradeItem.Task.SortOrder - @gradeItem.Task.Name</span>					
-			</div>	  
-		}		
+		<div class="nested-sub">
+			<h3>All Tasks</h3>
+
+			@foreach (Task task in ViewBag.Tasks) {
+				<div class="task">
+				@task.Unit.SortOrder.@task.SortOrder - @task.Name
+				</div>
+			}
 		</div>
 	</div>
- }
-
-</div>
-
-</div>
-
-<div class="nested-sub">
-	<h3>All Tasks</h3>
-
-	@foreach (Task task in ViewBag.Tasks) {
-		<div class="task">
-		@task.Unit.SortOrder.@task.SortOrder - @task.Name
-		</div>
-	}
 </div>

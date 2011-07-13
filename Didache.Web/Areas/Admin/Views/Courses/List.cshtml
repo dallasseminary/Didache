@@ -9,9 +9,15 @@
 	<script src="/js/admin/courses-course.js"></script>
 }
 
-<h2>Courses</h2>
 
-<button type="button" class="new-button" id="course-create" href="/admin/courses/edit/0">New Course</button>
+<div class="page-wide">
+	<div class="full-column">
+		<div class="page-header">
+			<h2>Courses</h2>
+		</div>
+
+
+<button type="button" class="d-button action" id="course-create" href="/admin/courses/edit/0">New Course</button>
 
 <table class="admin-list" id="course-list">
 <thead>
@@ -22,6 +28,7 @@
 		<th>Name</th>
 		<th>Start</th>
 		<th>End</th>
+		<th></th>
 		<th></th>
 		<th></th>
 		<th></th>
@@ -86,9 +93,11 @@
 			</tr>
 			<tr>
 				<th>Description</th>
-				<td><textarea name="Description" style="width:400px; height: 100px;"></textarea></td>
+				<td><textarea name="Description" class="htmltext-admin"></textarea></td>
 			</tr>
 		</tbody>
 	</table>
 </div>
 
+</div>
+</div>

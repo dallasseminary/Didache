@@ -40,7 +40,7 @@ namespace Didache.Models {
 		[Display(Name = "Password")]
 		public string Password { get; set; }
 
-		[Display(Name = "Remember me?")]
+		[Display(Name = "Remember Me")] //, ResourceType = typeof(Resources.Labels))]
 		public bool RememberMe { get; set; }
 	}
 

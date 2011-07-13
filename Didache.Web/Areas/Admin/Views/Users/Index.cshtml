@@ -4,12 +4,19 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Find Users</h2>
+<div class="page-wide">
+	<div class="page-full">
+		<div class="page-header">
+		
+			<h2>Find Users</h2>
 
-<form action="/admin/users/">
-	<input type="text" name="query" placeholder="name, id, etc." />
-	<input type="submit" value="search" />
-</form>
+			<form action="/admin/users/">
+				<input type="text" name="query" placeholder="name, id, etc." />
+				<input type="submit" value="search" />
+			</form>		
+
+
+
 
 @if (Model != null && Model.Count > 0) {
 	<table class="admin-list">
@@ -43,3 +50,8 @@
 	</table>
 
 }
+
+		
+		</div>
+	</div>
+</div>

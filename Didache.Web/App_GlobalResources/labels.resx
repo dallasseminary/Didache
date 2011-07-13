@@ -253,13 +253,13 @@
     <value>Password</value>
   </data>
   <data name="login_rememberme" xml:space="preserve">
-    <value>Remember me?</value>
+    <value>Keep me logged in</value>
   </data>
   <data name="login_title" xml:space="preserve">
     <value>Login</value>
   </data>
   <data name="login_username" xml:space="preserve">
-    <value>Username</value>
+    <value>DTS ID, Username, or Email</value>
   </data>
   <data name="submenu_archive" xml:space="preserve">
     <value>Archive</value>
@@ -398,5 +398,62 @@
   </data>
   <data name="interactions_replies" xml:space="preserve">
     <value>Replies</value>
+  </data>
+  <data name="profile_edit_button" xml:space="preserve">
+    <value>Edit Profile</value>
+  </data>
+  <data name="profile_heading_contactinfo" xml:space="preserve">
+    <value>Contact Information</value>
+  </data>
+  <data name="profile_heading_personalinfo" xml:space="preserve">
+    <value>Personal Information</value>
+  </data>
+  <data name="profile_heading_preferences" xml:space="preserve">
+    <value>Preferences</value>
+  </data>
+  <data name="profile_heading_socialmedia" xml:space="preserve">
+    <value>Social Media</value>
+  </data>
+  <data name="profile_label_address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="profile_label_biography" xml:space="preserve">
+    <value>Biography</value>
+  </data>
+  <data name="profile_label_birthday" xml:space="preserve">
+    <value>Birthdate</value>
+  </data>
+  <data name="profile_label_email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="profile_label_hometown" xml:space="preserve">
+    <value>Hometown</value>
+  </data>
+  <data name="profile_label_language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="profile_label_phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="profile_label_timezone" xml:space="preserve">
+    <value>Timezone</value>
+  </data>
+  <data name="profile_save_button" xml:space="preserve">
+    <value>Save Profile</value>
+  </data>
+  <data name="profile_security_all" xml:space="preserve">
+    <value>All DTS</value>
+  </data>
+  <data name="profile_security_friends" xml:space="preserve">
+    <value>Classmates</value>
+  </data>
+  <data name="profile_security_private" xml:space="preserve">
+    <value>Private</value>
+  </data>
+  <data name="studentschedule_instructionsnotavailable" xml:space="preserve">
+    <value>The instructions for this assignment will be available {0}.</value>
+  </data>
+  <data name="studentschedule_submissionnotavailable" xml:space="preserve">
+    <value>You will be able to submit this assignment begining {0}.</value>
   </data>
 </root>

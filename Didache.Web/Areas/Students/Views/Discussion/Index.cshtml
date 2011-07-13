@@ -1,9 +1,9 @@
 ﻿@model List<Forum>
 @{
-	ViewBag.Title = "Forum";
+	ViewBag.Title = ViewBag.Course.ToString() + " Forums";
 }
 
-@Html.Partial("_CourseHeader", Model[0].Course)
+@Html.Partial("_CourseHeader", ViewBag.Course)
 @Html.Partial("_CourseMenu")
 
 

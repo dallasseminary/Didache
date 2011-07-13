@@ -1,8 +1,170 @@
 ﻿@model Didache.User
 
 @{
-    ViewBag.Title = "Edit";
+	ViewBag.Title = "Edit";
 }
+
+@using (Html.BeginForm()) {
+<div class="page-narrow">
+	<div class="main-column">
+		
+
+	  
+		<div class="page-header">
+			<h2>@Model.FormattedName</h2>			
+
+			@Html.ValidationSummary(true)	
+		
+			<div class="actions">
+				<input type="submit" class="d-button action" value="@Resources.labels.profile_save_button" />
+			</div>
+		</div>
+
+        
+	  
+		 @Html.HiddenFor(model => model.UserID)
+	  	
+	  
+		<h4>@Resources.labels.profile_heading_preferences</h4>
+		<table class="user-profile">			
+			<tr>
+				<th>
+					@Resources.labels.profile_label_language
+				</th>
+				<td>
+					@Html.DropDownListFor(model => model.Language, new SelectList(new[] {   
+																	new { Key = "en-US", Name = "English" }, 
+																	new { Key = "es", Name = "Español (Spanish)" }, 
+																	new { Key = "ar", Name = "العربية (Arabic)" }, 
+																	new { Key = "zh-CN", Name = "汉语[简体字] (Simplified)" }, 
+																	new { Key = "zh-TW", Name = "漢語[繁體字] (Traditional)" }
+																}, "Key", "Name", ViewBag.Language))
+					@Html.ValidationMessageFor(model => model.Language)				
+				</td>
+			</tr>
+			@*
+			<tr>
+				<th>
+					@Resources.labels.profile_label_timezone
+				</th>
+				<td>
+					@Model.TimezoneOffset			
+				</td>
+			</tr>
+			*@
+		</table>
+
+	  
+		<h4>@Resources.labels.profile_heading_contactinfo</h4>
+
+		<table class="user-profile">			
+			<tr>
+				<th>
+					@Resources.labels.profile_label_email
+				</th>
+				<td>
+					@Model.Email	
+				</td>
+				<td class="security-setting">
+					@Html.EditorFor(model => model.EmailSecuritySetting, "SecuritySetting", "EmailSecurity")	
+				</td>
+			</tr>
+			<tr>
+				<th>
+					@Resources.labels.profile_label_phone
+				</th>
+				<td>				
+					@Model.Phone
+				</td>
+				<td class="security-setting">					
+					@Html.EditorFor(model => model.PhoneSecuritySetting, "SecuritySetting", "PhoneSecurity")	
+				</td>
+			</tr>
+			<tr>
+				<th>
+					@Resources.labels.profile_label_address
+				</th>
+				<td>
+					@if (Users.HasPermission(Model.UserID, Model.AddressSecuritySetting)) {
+						@Model.Address1<br />
+						@(Model.Address2.IsEmpty() ? "" : @Model.Address2 + "<br />")
+						@(Model.City + " " + Model.State + " " + Model.Zip)<br />
+						@Model.Country
+					}
+				</td>
+				<td class="security-setting">					
+					@Html.EditorFor(model => model.AddressSecuritySetting, "SecuritySetting", "AddressSecurity")	
+				</td>
+			</tr>
+		</table>
+
+		<h4>@Resources.labels.profile_heading_personalinfo</h4>
+
+		<table class="user-profile">
+			<tr>
+				<th>
+					@Resources.labels.profile_label_birthday
+				</th>
+				<td>
+					@(Model.BirthDate.HasValue ? Model.BirthDate.Value.ToShortDateString() : "")
+				</td>
+				<td class="security-setting">					
+					@Html.EditorFor(model => model.BirthdateSecuritySetting, "SecuritySetting", "BirthdateSecurity")	
+				</td>
+			</tr>
+			@if (!Model.Hometown.IsEmpty()) {
+			<tr>
+				<th>
+					@Resources.labels.profile_label_hometown
+				</th>
+				<td>
+					@Model.Hometown
+				</td>
+			</tr>
+				}		
+			<tr>
+				<th>
+					@Resources.labels.profile_label_biography
+				</th>
+				<td>
+					<textarea name="Bio">@Model.Bio</textarea>
+				</td>
+				<td class="security-setting">					
+					@Html.EditorFor(model => model.BiographySecuritySetting, "SecuritySetting", "BiographySecurity")	
+				</td>
+			</tr>
+		</table>
+	  
+
+	</div>
+
+	<div class="sub-column">
+	
+		<h3>@Resources.labels.profile_heading_socialmedia</h3>
+
+
+		@Html.LabelFor(model => model.Facebook)<br />
+		@Html.EditorFor(model => model.Facebook)
+
+		@Html.LabelFor(model => model.Twitter)<br />
+		@Html.EditorFor(model => model.Twitter)
+
+		@Html.LabelFor(model => model.Website)<br />
+		@Html.EditorFor(model => model.Website)
+
+		<div style="padding: 10px; border-radius: 10px; background: #ddd; margin: 15px 0 0 0;">
+			This page let's you control who can see your information. 
+			<strong>All DTS</strong> means any DTS student, staff, faculty, or alumni can see the information.
+			<strong>Friends</strong> means only approved students and alumni can see it.
+			<strong>Private</strong> means no one can see it.
+		</div>
+
+	</div>
+</div>
+  }
+
+@*
+
 <div id="edit">
     @using (Html.BeginForm()) {
         @Html.ValidationSummary(true)
@@ -96,3 +258,5 @@
             </p>
     }
 </div>
+
+*@

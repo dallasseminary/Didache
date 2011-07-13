@@ -44,11 +44,10 @@ namespace Didache.Web.Areas.Admin.Controllers
 
 		public ActionResult Grading(int id) {
 
-			List<GradeGroup> gradeGroups = Didache.GradeGroups.GetCourseGradeGroups(id);
-			ViewBag.Course = Courses.GetCourse(id);
+			ViewBag.GradeGroups = Didache.GradeGroups.GetCourseGradeGroups(id);
 			ViewBag.Tasks = Courses.GetTasks(id);
 
-			return View(gradeGroups);
+			return View(Courses.GetCourse(id));
 		}
 
 

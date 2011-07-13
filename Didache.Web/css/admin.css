@@ -5,6 +5,7 @@
 	    border-collapse: collapse;
 	    padding-bottom: 10px;
 	    border-bottom: 5px solid #CCC;
+	    margin: 10px 0 0 0;
     }
 
     .admin-list td, .admin-list th {
@@ -60,6 +61,19 @@
         padding: 30px 0 0 0;
     }
     
+.admin-table th, .admin-table td {
+	padding: 3px 5px;
+	vertical-align: top;
+}    
+
+.admin-table th{
+	width: 100px;
+	text-align: right;
+	font-weight: bold;
+	padding-right: 20px;
+}    
+
+    
     
 /* nested lists for course, files, users */
 
@@ -104,10 +118,10 @@
             float: left;
         }
         .nested-item-row .name{
-            width: 575px;
+            width: 350px;
         }
         .nested-child-item .name {
-                width: 540px;
+        	width: 300px;
         }
 	
 		.nested-child-list {
@@ -170,7 +184,7 @@
     vertical-align: top;
 }
 .nested-list .name input[type="text"] {
-    width: 500px;
+    width: 350px;
 	-webkit-border-radius: 2px;
 	   -moz-border-radius: 2px;
 	        border-radius: 2px;
@@ -192,7 +206,7 @@
     text-overflow: ellipsis;
 }
 .nested-list input:hover, .nested-list input:focus {
-    font-family: Consolas, Lucida Console, "Courier New", Courier, Monospace;
+    -x-font-family: Consolas, Lucida Console, "Courier New", Courier, Monospace;
     color: #303033;
 	border-color: #BBB;
 	background-color: #f0f0ff;
@@ -219,10 +233,14 @@
 .item-editor  {
 }
 
-.item-editor  th{
+.item-editor  th {
 	text-align: right;
 	vertical-align: top;
 	padding: 0 10px 0;
+}
+.item-editor textarea {
+	width: 400px;
+	height: 50px;
 }
 
 
@@ -301,9 +319,11 @@
 		background: #eee;
 	}
 
+
+
 	.filegroup .files .coursefile .file-title {
 		display: inline-block;
-		width: 300px;
+		width: 250px;
 		margin: 5px 0;
 	}
 	.file-name {
@@ -362,3 +382,21 @@
 	.ui-sortable-placeholder {
 	    background: #FAE661;
 	}
+	
+
+#unittask-list .unit-header .name {
+	width: 380px;
+}	
+#unittask-list .unit-header .unit-name {
+	width: 300px;
+}
+#unittask-list .unit-header .date {
+	width: 100px;
+}
+
+#unittask-list .course-task .name {
+	width: 300px;
+}
+#unittask-list .course-task .task-name {
+	width: 250px;
+}

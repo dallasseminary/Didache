@@ -1,4 +1,20 @@
-﻿function clearEditor(id) {
+﻿function setupAdminEditors() {
+	$('textarea.htmltext-admin').wysiwyg("destroy").wysiwyg({
+		rmUnusedControls: true,
+		controls: {
+			bold: { visible: true },
+			italic: { visible: true },
+			underline: { visible: true },
+			strikeThrough: { visible: true },
+			html: { visible: true },
+			createLink: { visible: true },
+		}
+	});
+}
+
+
+
+function clearEditor(id) {
 	var 
 			fields = $(id).find('input,textarea,select');
 

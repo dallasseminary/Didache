@@ -29,7 +29,7 @@
 				<div class="post-file">
 					File: <a href="@thread.Posts.First().File.FileUrl">@thread.Posts.First().File.Filename</a>
 				</div>
-				}
+	}
 			</div>
 		</div>
 
@@ -53,7 +53,7 @@
 					</div>
 				</div>	
 	  	  
-			}
+   }
 
 			@{ User user = Users.GetLoggedInUser(); }
 			<div class="add-reply task-interaction-post">
@@ -81,6 +81,11 @@
 	</div>
 }
 </div>
+}
+else {
+
+	<p>No files to comment on yet! Check back here soon</p>
+
 }
 		@*
 			<div class="add-reply">

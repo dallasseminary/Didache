@@ -7,7 +7,7 @@
 	<script src="/js/students/students.js"></script>
 }
 
-<div class="page-wide">
+<div class="page-wide page-split">
 
 	@Html.Partial("_CourseHeader", Model)
 	@Html.Partial("_CourseMenu")
@@ -34,13 +34,28 @@
 
 					<div class="task-status status-@userTaskData.TaskCompletionStatus.ToString().ToLower() @(@userTaskData.TaskCompletionStatus == TaskCompletionStatus.NotStarted && DateTime.Now > userTaskData.Task.DueDate ? "status-overdue" : "")"></div>
 				</div>	
+
+				
 				
 				<div class="task-details">
-					<div class="task-instructions-@(userTaskData.TaskCompletionStatus == TaskCompletionStatus.Completed ? "completed" : "text")">@Html.Raw(userTaskData.Task.Instructions)</div>					
+					
+					@if (userTaskData.Task.InstructionsAvailableDate.HasValue && userTaskData.Task.InstructionsAvailableDate.Value > DateTime.Now) {
+						<div class="task-instructionsdelayed">
+							@Html.Raw(String.Format(Resources.labels.studentschedule_instructionsnotavailable, userTaskData.Task.InstructionsAvailableDate.Value.ToShortDateString()))
+						</div>
+					} else {						
+						<div class="task-instructions-@(userTaskData.TaskCompletionStatus == TaskCompletionStatus.Completed ? "completed" : "text")">@Html.Raw(userTaskData.Task.Instructions)</div>											
+					}
 				</div>
 				
 				<div class="task-interaction">
-					@{Html.RenderPartial("TaskType-" + userTaskData.Task.TaskTypeName + "", userTaskData);}
+					@if (userTaskData.Task.SubmissionAvailableDate.HasValue && userTaskData.Task.SubmissionAvailableDate.Value > DateTime.Now) {
+						<div class="task-submissiondelayed">
+						@Html.Raw(String.Format(Resources.labels.studentschedule_submissionnotavailable, userTaskData.Task.SubmissionAvailableDate.Value.ToShortDateString()))
+						</div>
+					} else {
+						Html.RenderPartial("TaskType-" + userTaskData.Task.TaskTypeName + "", userTaskData);
+					}					
 				</div>
 
 				<div class="clear"></div>

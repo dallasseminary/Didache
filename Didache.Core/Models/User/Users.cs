@@ -59,7 +59,7 @@ namespace Didache  {
 
 			return user;			
 			
-			return new DidacheDb().Users.SingleOrDefault(u => u.Username == username);
+			//return new DidacheDb().Users.SingleOrDefault(u => u.Username == username);
 		}
 
 

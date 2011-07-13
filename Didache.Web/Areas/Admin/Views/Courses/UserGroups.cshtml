@@ -19,27 +19,30 @@ x edit popup / edit inline
 - add graders, builders, students, and faculty
 *@
 
+<div class="page-wide">
+	<div class="full-column">
+
 @Html.Partial("_CourseHeader", Model)
 
-<input type="hidden" id="CourseID" name="CourseID" value="@(Model != null ? Model.CourseID : 0)" />
+	@*
+	<div class="nested-sub">
+		<h3>Find Users</h3>
+
+		<input type="text" id="user-search-text" /><input type="button" id="user-search-button" value="Search" />
+	</div>
+	*@
 
 
-
-<div class="nested-main">
-
+	<input type="hidden" id="CourseID" name="CourseID" value="@(Model != null ? Model.CourseID : 0)" />
 	
-<button type="button" class="new-button" id="add-user-group">Add User Group</button>
-
+	<button type="button" class="d-button action" id="add-user-group">Add User Group</button>
 
 	<div id="course-user-groups" class="nested-list"></div>
 
+	</div>
 </div>
 
-<div class="nested-sub">
-	<h3>Find Users</h3>
 
-	<input type="text" id="user-search-text" /><input type="button" id="user-search-button" value="Search" />
-</div>
 
 <div id="user-group-editor" class="item-editor">
 	

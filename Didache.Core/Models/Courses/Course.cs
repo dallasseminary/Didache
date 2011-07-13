@@ -101,14 +101,22 @@ namespace Didache {
 
 		public string FacultyLastNames {
 			get {
-				return 
-					string.Join(", ", 
-								CourseUsers
-									.Where(cu => cu.CourseID == CourseID && cu.RoleID == (int) CourseUserRole.Faculty)
+				if (CourseUsers == null) {
+					return "";
+				}
+				else {
+					List<String> facultyLastNames = CourseUsers
+									.Where(cu => cu.CourseID == CourseID && cu.RoleID == (int)CourseUserRole.Faculty && cu.User != null)
 									.Select(cu => cu.User.LastName)
-									.ToArray()
-								);
-				
+									.ToList();
+					if (facultyLastNames.Count == 0) {
+						return "";
+					}
+					else {
+						return string.Join(", ", facultyLastNames.ToArray());
+					}
+				}
+
 			}
 		}
 
