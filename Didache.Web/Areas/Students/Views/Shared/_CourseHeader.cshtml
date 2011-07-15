@@ -3,4 +3,9 @@
 <div id="course-header" class="page-header">
 	<h2>@Model.CourseCode @Model.Section - @Model.Name</h2>
 	<h3>@Html.Raw(Model.FacultyFullNames)</h3>	
+
+	<div class="actions">
+		<a href="/courses/ical/@(Users.GetLoggedInUser().UserID)/@ViewContext.RouteData.Values["slug"]-tasks.ics">ical</a>
+		<a href="/courses/rss/@ViewContext.RouteData.Values["slug"]-itunes.xml">iTunes</a>
+	</div>
 </div>

@@ -53,6 +53,21 @@ namespace Didache.Web.Areas.Students {
 				new { controller = "Courses", action = "DownloadAll" }
 			);
 
+			// iCal
+			context.MapRoute(
+				"Courses_ical",
+				"courses/ical/{userID}/{slug}-{type}.ics",
+				new { controller = "Courses", action = "ical"}
+			);
+
+			// RSS
+			context.MapRoute(
+				"Courses_rss",
+				"courses/rss/{slug}-{type}.xml",
+				new { controller = "Courses", action = "rss" }
+			);
+
+
 			// main six tabs
 			context.MapRoute(
 				"Courses",

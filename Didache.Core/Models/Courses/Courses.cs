@@ -2,29 +2,58 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web;
+using System.Web.Caching;
 
 namespace Didache  {
 	public class Courses {
+
+		private static string _courseById = "course-id-{0}";
+		private static string _courseBySlug = "course-slug-{0}";
+
 		public static Course GetCourse(int courseID) {
-			return new DidacheDb().Courses.SingleOrDefault(c => c.CourseID == courseID);
+
+			string key = string.Format(_courseById, courseID);
+			Course course = (HttpContext.Current != null) ? HttpContext.Current.Cache[key] as Course : null;
+
+			if (course == null) {
+				course = new DidacheDb().Courses.SingleOrDefault(c => c.CourseID == courseID);
+
+				HttpContext.Current.Cache.Add(key, course, null, Cache.NoAbsoluteExpiration, new TimeSpan(1, 0, 0), CacheItemPriority.Default, null);
+			}
+
+
+			return course;
 		}
 
 		public static Course GetCourseBySlug(string slug) {
-			string[] parts = slug.Split(new char[] { '-' });
-			string sessionCode = parts[0].Trim().ToUpper();
-			string courseCode = parts[1].Trim().ToUpper();
 
-			var db = new DidacheDb();
 
-			//Session session = db.Sessions.SingleOrDefault(s => s.SessionCode == sessionCode);
-			//Course course = session.Courses.SingleOrDefault(c => c.CourseCode + c.Section == courseCode);
+			string key = string.Format(_courseBySlug, slug);
+			Course course = (HttpContext.Current != null) ? HttpContext.Current.Cache[key] as Course : null;
 
-			Course course = db.Courses
-								.Include("Session")
-								.Include("Campus")
-								.SingleOrDefault(c => c.CourseCode + c.Section == courseCode && c.Session.SessionCode == sessionCode);
+			if (course == null) {
+				string[] parts = slug.Split(new char[] { '-' });
+				string sessionCode = parts[0].Trim().ToUpper();
+				string courseCode = parts[1].Trim().ToUpper();
+
+				var db = new DidacheDb();
+
+				//Session session = db.Sessions.SingleOrDefault(s => s.SessionCode == sessionCode);
+				//Course course = session.Courses.SingleOrDefault(c => c.CourseCode + c.Section == courseCode);
+
+				course = db.Courses
+									.Include("Session")
+									.Include("Campus")
+									.SingleOrDefault(c => c.CourseCode + c.Section == courseCode && c.Session.SessionCode == sessionCode);
+
+
+				HttpContext.Current.Cache.Add(key, course, null, Cache.NoAbsoluteExpiration, new TimeSpan(1, 0, 0), CacheItemPriority.Default, null);
+			}
+
 
 			return course;
+
 		}
 
 		public static List<Course> GetCoursesBySession(int sessionID) {
