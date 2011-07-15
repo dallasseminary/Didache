@@ -162,7 +162,7 @@
 
 			// student
 			if (user.RoleID == 5) {
-				userRow.find('.user-name').after($('#CourseUserGroups').clone().addClass('groupid').val(user.GroupID));
+				userRow.find('.user-name').after($('#CourseUserGroups').clone().show().addClass('groupid').val(user.GroupID));
 			}
 
 			return userRow;
