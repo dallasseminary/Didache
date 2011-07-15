@@ -138,6 +138,7 @@ namespace Didache  {
 
 			if (user != null) {
 				return new DidacheDb().UserTasks
+					.Include("Course")
 					.Where(utd =>
 							utd.UserID == user.UserID &&
 							utd.Task.Priority > 1 &&
@@ -150,6 +151,28 @@ namespace Didache  {
 				return null;
 			}
 		}
+
+		public static List<UserTaskData> GetImportantTasksForUser( int courseID) {
+
+			User user = Users.GetLoggedInUser();
+
+			if (user != null) {
+				return new DidacheDb().UserTasks
+					.Where(utd =>
+							utd.UserID == user.UserID &&
+							utd.Task.Priority > 1 &&
+							utd.Task.DueDate != null &&
+							utd.TaskStatus == 0 && 
+							utd.CourseID == courseID)
+					.OrderBy(utd =>
+							utd.Task.DueDate)
+					.ToList();
+			}
+			else {
+				return null;
+			}
+		}
+
 
 		public static List<Task> GetTasks(int courseID) {
 			return new DidacheDb()
