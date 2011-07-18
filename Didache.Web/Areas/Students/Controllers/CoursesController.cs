@@ -103,10 +103,19 @@ namespace Didache.Web.Areas.Students.Controllers
 		[Authorize]
 		public ActionResult Assignments(string slug) {
 
+			User user = Users.GetLoggedInUser();
             Course course = Didache.Courses.GetCourseBySlug(slug);
 
-            ViewBag.CourseFileGroups = CourseFiles.GetCourseFileGroups(course.CourseID);
-            ViewBag.StudentFiles = db.StudentFiles;
+            //ViewBag.CourseFileGroups = CourseFiles.GetCourseFileGroups(course.CourseID);
+            //ViewBag.StudentFiles = db.StudentFiles;
+
+
+			ViewBag.AllUserTasks = db.UserTasks
+										.Include("Task.Unit")
+										.Include("StudentFile")
+										.Include("GradedFile")
+										.Where(ut => ut.UserID == user.UserID && ut.CourseID == course.CourseID).ToList();
+
 
 			return View(course);
 		}

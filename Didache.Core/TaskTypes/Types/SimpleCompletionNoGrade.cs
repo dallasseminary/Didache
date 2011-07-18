@@ -18,6 +18,7 @@ namespace Didache.TaskTypes {
 			UserTaskData data = db.UserTasks.SingleOrDefault(d=> d.TaskID == taskID && d.UserID == userID);
 
 			data.TaskCompletionStatus = (TaskCompletionStatus)Int32.Parse(collection["TaskStatus"]);
+			data.StudentSubmitDate = DateTime.Now;
 
 			if (data.TaskCompletionStatus == TaskCompletionStatus.Completed) {
 				data.NumericGrade = 100;

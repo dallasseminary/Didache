@@ -11,54 +11,52 @@
 @Html.Partial("_CourseHeader", Model)
 @Html.Partial("_CourseMenu")
 
-
 	<div class="full-column">
-		<div class="block-list-header"><h3>@Resources.labels.courses_heading_assignments</h3></div>
-		<div class="block-list">
-                
-			<div class="block-list-item">
-				<div class="block-list-item-label">
-					<span>@Resources.labels.courses_label_gradedfiles</span>
-				</div>
-				<ul class="course-filegroup-files">
-
-					@foreach (Unit unit in Model.Units)
-					{
-                
-						List<UserTaskData> userTasks = null;
-
-						userTasks = Tasks.GetUserTaskDataInUnit(unit.UnitID, Users.GetLoggedInUser().UserID);
-                                
-							foreach (Didache.UserTaskData userTaskData in userTasks) {
-								switch (userTaskData.GradeStatus) {
-	                            
-									case 0:
-										<!--li><span class="filename">@userTaskData.Task.Name</span></li-->
-										break;
-                                    
-									case 1:      				
-										<li>
-                                       
-											<a href="/Courses/StudentFile?id=@userTaskData.TempID">
-												<span class="filename">@userTaskData.Task.Name</span>
-												<span class="type"><img src="/css/images/pdf.png" /></span>
-												<span class="size">
-													@userTaskData.NumericGrade
-													@(userTaskData.LetterGrade.IsEmpty() ? "" : "(@userTaskData.LetterGrade)") 
-												</span>
-											</a>
-										</li>
-										break;
-								}
-
-							}
-                        
-						<div class="clear"></div>
+		
+		<table class="assignments-list">
+		@{ Unit unit = null; }
+		
+		@foreach (UserTaskData userTask in ViewBag.AllUserTasks) {
+			if (unit == null || unit.UnitID != userTask.Task.Unit.UnitID) {
+				<tr>
+					<th colspan="6" class="unit-head">Unit @userTask.Task.Unit.SortOrder - @userTask.Task.Unit.Name</th>
+				</tr>
+				<tr>
+					<th>Task</th>
+					<th>Due</th>
+					<th>Status</th>
+					<th></th>
+					<th>Grade</th>
+					<th></th>
+				</tr>				
+				unit = userTask.Task.Unit;
+			}
+		
+			<tr>
+				<td><a href="@userTask.UserTaskUrl">@userTask.Task.Name</a></td>
+				<td>@(userTask.Task.DueDate.HasValue ? userTask.Task.DueDate.Value.ToShortDateString() : "")</td>
+				<td>
+					<span class="task-status status-@userTask.TaskCompletionStatus.ToString().ToLower() @(userTask.TaskCompletionStatus == TaskCompletionStatus.NotStarted && (DateTime.Now > userTask.Task.DueDate || DateTime.Now > userTask.Task.Unit.EndDate) ? "status-overdue" : "")"></span>
+				</td>
+				<td>
+					@(userTask.StudentSubmitDate.HasValue ? userTask.StudentSubmitDate.Value.ToShortDateString() : "")
+					@if (userTask.StudentFileID > 0) {
+						<a href="@userTask.StudentFile.FileUrl">your file</a>
 					}
-				</ul>
-			</div>
+				</td>
+				<td>
+					@userTask.NumericGrade
+				</td>
+				<td>
+					@if (userTask.GraderFileID > 0) {
+						<a href="@userTask.GradedFile.FileUrl">graded file</a>
+					}				
+				</td>
+			</tr>
+		}
+		</table>
 
-		</div>
+
 	</div>
 
 	<div class="clear"></div>
