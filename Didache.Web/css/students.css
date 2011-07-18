@@ -546,7 +546,7 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
 {
     display: block;
 }
-.course-forum h3 
+.course-forum h3
 {
     margin-bottom: 0;
 }
@@ -559,7 +559,7 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
 	text-align: left;
 	font-size: 14px;
     overflow: hidden;
-    border: 1px solid #999;
+    -x-border: 1px solid #999;
 }
     .forum-posts .header,  .forum-threads .header 
     {
@@ -569,8 +569,9 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
         text-shadow: -1px 1px 0 #222;
     }
     .forum-threads .subject, .forum-posts .subject, .forum-posts .content-area { width: 450px; }
-    .forum-threads .name, .forum-posts .poster { width: 190px; }
-    .forum-threads .replies { width: 50px; text-align: center; }
+    .forum-posts .poster { width: 175px; }
+    .forum-threads .replies { width: 225px; text-align: center; }
+    .forum-threads h4  { margin-bottom: 3px; }
     .forum-posts .header span,  .forum-threads .header span 
     {
         font-weight: bold;
@@ -584,10 +585,12 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
     {
         color: #FFF; 
     }
-    .forum-posts .post {
-        border-bottom: 1px solid #999;
+    .forum-posts .post, .forum-threads .thread {
+        border-top: 1px solid #CCC;
         clear: both;
         overflow: hidden;
+        padding-top: 5px;
+        margin-bottom: 10px;
     }
     .forum-posts .posts .post p,  .forum-threads .threads .thread p
     {
@@ -609,7 +612,7 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
 	    overflow: hidden;
 	}
 	.forum-posts div.posts div.post:nth-child(odd), .forum-threads div.threads div.thread:nth-child(odd) {
-		background: #eee;
+		-x-background: #eee;
 	}
 	.forum-posts div.posts div.post > div, .forum-threads div.threads div.thread > span {
 		vertical-align: top;
@@ -623,22 +626,26 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
 	    margin-bottom: 0;
 	}
 	.forum-threads div.threads div.thread > span.replies {
-	    font-weight: bold;
-	    font-size: 20px;
-	    text-align: center;
-	    padding: 15px 5px;
+	    text-align: right;
+	    font-size: 12px;
+	    padding: 8px;
+	    color: #555;
 	}
+	    .forum-threads div.threads div.thread > span.replies span.number {
+	        clear: both;
+	        font-size: 16px;
+	        display: block;
+	        margin-bottom: 2px;
+	    }
+	    .forum-threads .last-poster {
+	    }
 	.forum-threads .date, .forum-posts .posts .date {
 	    color: #666;
 	    font-size: 10px;
 	    line-height: 100%;
 	    margin-bottom: 10px;
 	}
-	.forum-threads .last-poster {
-	    clear: both;
-	    display: block;
-	    margin-bottom: 2px;
-	}
+	
 	.forum-posts .poster {
 	    text-align: center; 
 	    border-right: 1px solid #999;
