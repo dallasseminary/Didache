@@ -40,12 +40,22 @@ namespace Didache {
 		public int GraderFileID { get; set; }
 		public int StudentFileID { get; set; }
 		public int PostID { get; set; }
-		
 
+		public string UserTaskUrl {
+			get {
+				return "/courses/" + Course.Slug + "/schedule/" + UnitID + "#task-" + TaskID;
+			}
+		}
 
 		public virtual User Profile { get; set; }
 		public virtual Task Task { get; set; }
-	
+		public virtual Course Course { get; set; }
+
+		[ForeignKey("StudentFileID")]
+		public virtual StudentFile StudentFile{ get; set; }
+
+		[ForeignKey("GraderFileID")]
+		public virtual GradedFile GradedFile { get; set; }	
 	}
 
 }
