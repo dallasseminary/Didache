@@ -32,7 +32,7 @@
 						<span class="task-due-date">@(userTaskData.Task.DueDate.HasValue ? userTaskData.Task.DueDate.Value.ToShortDateString():"")</span>				
 					</div>
 
-					<div class="task-status status-@userTaskData.TaskCompletionStatus.ToString().ToLower() @(@userTaskData.TaskCompletionStatus == TaskCompletionStatus.NotStarted && DateTime.Now > userTaskData.Task.DueDate ? "status-overdue" : "")"></div>
+					<div class="task-status status-@userTaskData.TaskCompletionStatus.ToString().ToLower() @(userTaskData.TaskCompletionStatus == TaskCompletionStatus.NotStarted && (DateTime.Now > userTaskData.Task.DueDate || DateTime.Now > ViewBag.CurrentUnit.EndDate) ? "status-overdue" : "")"></div>
 				</div>	
 
 				

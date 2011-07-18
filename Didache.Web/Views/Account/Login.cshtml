@@ -53,7 +53,7 @@
                 <label for="password">@Resources.labels.login_password</label>
             </div>	
             <div class="editor-field">
-                <input type="text" id="password" name="password" value="@(Model != null ? Model.Password : "")" />			
+                <input type="password" id="password" name="password" value="@(Model != null ? Model.Password : "")" />			
                 @Html.ValidationMessageFor(m => m.Password)
             </div>
 

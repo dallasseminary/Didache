@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+
 namespace Didache.Web.Areas.Students.Controllers
 {
     public class CoursesController : Controller
@@ -171,6 +172,59 @@ namespace Didache.Web.Areas.Students.Controllers
 			return HttpNotFound("This doesn't work yet");
 			
 		}
+
+		public ActionResult iCal(string slug, string type, int userID) {
+
+			DidacheDb db = new DidacheDb();
+
+			Course course = Didache.Courses.GetCourseBySlug(slug);
+			User user = Users.GetUser(userID);
+
+			List<UserTaskData> userTask = db.UserTasks
+											.Include("Task.Unit")
+											.Where(ut => ut.UserID == user.UserID && ut.CourseID == course.CourseID)
+											.OrderBy(t => t.Task.Unit.SortOrder)
+												.ThenBy(t => t.Task.SortOrder)
+											.ToList();
+
+			List<ICalEvent> iEvents = new List<ICalEvent>();
+
+			foreach (UserTaskData task in userTask) {
+				DateTime dueDate;
+
+				if (task.Task.DueDate.HasValue)
+					dueDate = task.Task.DueDate.Value;
+				else					
+					dueDate = task.Task.Unit.EndDate;
+
+				iEvents.Add(new ICalEvent() {
+					Summary = task.Task.Name + ((task.TaskCompletionStatus == TaskCompletionStatus.Completed) ? " [completed]" : ""),
+					Description = Utility.StripHtml(task.Task.Instructions),
+					Location = "",
+					StartUtc = dueDate.ToUniversalTime(),
+					EndUtc = dueDate.ToUniversalTime()
+				});
+			}
+
+			return new ICalEventResult(
+						course.ToString() + " Tasks",
+						"Dallas Theological Seminary",
+						"", //"DTS-" + course.CourseCode + course.Section + ".ics",
+						iEvents);
+
+		}
+
+		public ActionResult Rss(string slug, string type) {
+			return Json(new { }, JsonRequestBehavior.AllowGet);
+		}
+
+		/*
+		public ActionResult iCalUnits(string slug) {
+
+			Course course = Didache.Courses.GetCourseBySlug(slug);
+
+		}
+		*/
 
     }
 }

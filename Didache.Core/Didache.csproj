@@ -65,6 +65,7 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionResults\iCalResult.cs" />
     <Compile Include="Models\Activities\ActivityStream.cs" />
     <Compile Include="Models\Activities\ActivityStreamItemBase.cs" />
     <Compile Include="Models\Activities\InteractionActivity.cs" />
@@ -127,6 +128,7 @@
     <Compile Include="TaskTypes\TaskTypeManager.cs" />
     <Compile Include="Utility\EntityObjectSerializer.cs" />
     <Compile Include="Utility\Settings.cs" />
+    <Compile Include="Utility\Utility.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
