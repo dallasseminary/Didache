@@ -64,6 +64,8 @@ jQuery(document).ready(function ($) {
 				text = button.closest('.add-reply').find('textarea').prop('disabled', true).val(),
 				threadID = button.closest('.task-interaction-thread').data('threadid');
 
+		showLoading('Saving...');
+
 		$.ajax({
 			url: '/courses/api/interactionreply',
 			type: 'POST',
@@ -78,10 +80,10 @@ jQuery(document).ready(function ($) {
 					// create response
 					var target = button.closest('.add-reply');
 					$('<div class="task-interaction-post">' +
-						
-						'<div class="task-interaction-userimage">' + 
-							'<a href="' + d.user.ProfileUrl + '">' + 
-								'<img src="' + d.user.ProfileImageUrl + '&width=30&height=30" alt="' + d.user.SecureName + '" />' + 
+
+						'<div class="task-interaction-userimage">' +
+							'<a href="' + d.user.ProfileUrl + '">' +
+								'<img src="' + d.user.ProfileImageUrl + '&width=30&height=30" alt="' + d.user.SecureName + '" />' +
 							'</a>' +
 						'</div>' +
 						'<div class="task-interaction-content">' +
@@ -111,6 +113,8 @@ jQuery(document).ready(function ($) {
 						setTaskStatus(taskID, 1);
 					}
 
+					hideLoading();
+
 				} else {
 					alert('there was an error posting');
 					console.log(d);
@@ -126,11 +130,17 @@ jQuery(document).ready(function ($) {
 
 
 function sendTaskData(taskID, data, callback) {
+
+	showLoading('Saving...');
+
 	$.ajax({
 		url: '/courses/api/taskstatus/' + taskID,
 		type: 'POST',
 		data: data,
-		success: callback
+		success: function (x) {
+			hideLoading();
+			callback(x);
+		}
 	});
 }
 
