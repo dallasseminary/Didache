@@ -402,3 +402,15 @@ a {
 .user-profile td.security-setting {
 	width: 100px;
 }
+
+#user-message {
+	position: fixed;
+	top: 40px;
+	left: 50%;
+	margin-left: -200px;
+	width: 400px;
+	padding: 8px;
+	text-align: center;
+	background: #F4F43D;
+	border: solid 1px #E0C79F;
+}
