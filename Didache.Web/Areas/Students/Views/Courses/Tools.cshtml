@@ -1,0 +1,41 @@
+﻿@model Didache.Course
+
+@{
+	ViewBag.Title = Model.CourseCode + Model.Section + " " + Resources.labels.courses_heading_tools;
+}
+
+<div class="page-wide">
+
+@Html.Partial("_CourseHeader", Model)
+@Html.Partial("_CourseMenu")
+
+	<div class="full-column">
+	
+		<h3>@Resources.labels.courses_tools_itunes</h3>
+
+		<p>@Resources.labels.courses_tools_itunes_desc</p>
+
+		<ul>
+			<li>				
+				<a href="http://@(Request.Url.Host)/courses/feed/@(Users.GetLoggedInUser().UserID)/@ViewContext.RouteData.Values["slug"]-all.xml">iTunes RSS Feed</a>			
+			</li>
+		</ul>
+	
+
+		<h3>@Resources.labels.courses_tools_icalendar</h3>
+
+		<p>@Resources.labels.courses_tools_icalendar_desc</p>
+
+		<ul>
+			<li>				
+				<a href="http://@(Request.Url.Host)/courses/ical/@(Users.GetLoggedInUser().UserID)/@ViewContext.RouteData.Values["slug"]-tasks.ics">Download ICS file</a> (Google Calendar)
+			</li>
+			<li>
+				<a href="webcal://@(Request.Url.Host)/courses/ical/@(Users.GetLoggedInUser().UserID)/@ViewContext.RouteData.Values["slug"]-tasks.ics">Import ICS</a> (Apple Mail, Outlook)
+			</li>
+		</ul>
+
+	</div>
+	
+
+</div>

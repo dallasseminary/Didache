@@ -11,6 +11,7 @@ namespace Didache {
 			if (string.IsNullOrEmpty(input))
 				return "";
 
+			input = Regex.Replace(input, @"[\n\r]", " ");
 			input = Regex.Replace(input, @"<(.|\n)*?>", " ");
 			input = Regex.Replace(input, @"\s\s", " ");
 			input = input.Replace("&nbsp;", " ").Trim();

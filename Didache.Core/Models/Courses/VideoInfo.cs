@@ -8,6 +8,7 @@ namespace Didache {
 	public class VideoInfo {
 		public int SortOrder { get; set; }
 		public string Title { get; set; }
+		public string UnitTaskInfo { get; set; }
 		public string Duration { get; set; }
 		public string ThumbnailUrl { get; set; }
 		public string ThumbnailFilename { get; set; }

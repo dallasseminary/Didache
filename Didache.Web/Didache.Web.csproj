@@ -44,6 +44,7 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
@@ -392,6 +393,7 @@
     <Content Include="Areas\Admin\Views\Courses\UserGroups.cshtml" />
     <Content Include="Areas\Students\Views\Discussion\_WritePosts.cshtml" />
     <Content Include="Areas\Students\Views\Shared\TaskType-TurnInFileSimple_DragandDrop.cshtml" />
+    <Content Include="Areas\Students\Views\Courses\Tools.cshtml" />
     <None Include="css\fonts\league\League_Gothic-webfont.eot" />
     <None Include="css\fonts\league\League_Gothic-webfont.ttf" />
     <None Include="css\fonts\league\League_Gothic-webfont.woff" />
