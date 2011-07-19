@@ -456,4 +456,25 @@
   <data name="studentschedule_submissionnotavailable" xml:space="preserve">
     <value>You will be able to submit this assignment begining {0}.</value>
   </data>
+  <data name="courses_heading_tools" xml:space="preserve">
+    <value>Tools</value>
+  </data>
+  <data name="courses_tools_icalendar" xml:space="preserve">
+    <value>Calendar Feed</value>
+  </data>
+  <data name="courses_tools_icalendar_desc" xml:space="preserve">
+    <value>Use the links below to import course requirements into your calendar program (Mac Mail, Outlook, Google Calendar, etc.)</value>
+  </data>
+  <data name="courses_tools_itunes" xml:space="preserve">
+    <value>iTunes Feed</value>
+  </data>
+  <data name="courses_tools_itunes_desc" xml:space="preserve">
+    <value>USe the links below to import course videos, slides, and transcripts into iTunes (or other media software) for offline viewing</value>
+  </data>
+  <data name="coursetabs_tools" xml:space="preserve">
+    <value>Tools</value>
+  </data>
+  <data name="coursetabs_tools_desc" xml:space="preserve">
+    <value>Downloads, Calendars, and RSS feeds</value>
+  </data>
 </root>

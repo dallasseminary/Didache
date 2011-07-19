@@ -10,6 +10,21 @@
 	@Html.Partial("_CourseMenu")
 
 	<div class="main-column">
+
+		
+		@{ CourseFileAssociation syllabus = new DidacheDb().CourseFileAssociations.SingleOrDefault(cfa => cfa.CourseFileGroup.CourseID == Model.CourseID && cfa.CourseFile.Title.Contains("Syllabus"));}
+		@if (syllabus != null) {
+			<a href="@syllabus.CourseFile.FileUrl">Syllabus</a>
+		}
+		
+		@*
+		<div>
+		@foreach (CourseUserGroup user in Courses.get(Users.GetLoggedInUser().UserID)) {
+
+		}
+		</div>
+		*@
+
 		<div class="block-list-header"><h3>@Resources.labels.courses_heading_dashboard</h3></div>
 		<div class="block-list">
 
@@ -40,12 +55,6 @@
 					</div>
 				</div>
 			</div>
-
-			@{ CourseFileAssociation syllabus = new DidacheDb().CourseFileAssociations.SingleOrDefault(cfa => cfa.CourseFileGroup.CourseID == Model.CourseID && cfa.CourseFile.Title.Contains("Syllabus"));}
-			@if (syllabus != null) {
-				<a href="@syllabus.CourseFile.FileUrl">Syllabus</a>
-			}
-
 
 		</div>
 	</div>

@@ -137,7 +137,24 @@ namespace Didache  {
 			return userGroups;
 		}
 
+		public static List<CourseUser> GetUsersInGroup(int groupID) {
+			List<CourseUser> users = new DidacheDb().CourseUsers
+				.Include("User")
+				.Where(cu => cu.GroupID == groupID)
+				.ToList();
 
+			return users;
+		}
+
+		/*
+		public static CourseUserGroup GetCoursesInGroup(int userID) {
+			CourseUserGroup group = new DidacheDb().CourseUserGroups
+				.Where(cu => cu.GroupID == groupID)
+				.ToList();
+
+			return users;
+		}
+		 **/
 
 		public static List<Unit> GetCourseUnitsWithTasks(int courseID) {
 			List<Unit> units = new DidacheDb().Units
