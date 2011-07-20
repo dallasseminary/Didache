@@ -26,6 +26,9 @@
 		margin: 0;
 		-x-border: solid 1px #bbb;
 	}
+	.unit-list ol li:first-child a.selected {
+	    border-top: transparent 1px solid;
+	}
 	.unit-list .unit-name {
 		font-weight: bold;
 		display: block;
@@ -278,7 +281,7 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
 
     ul.course-archive li, ul.course-filegroup-files li, ul.all-community li {
         background: #FFF;
-        max-height: 36px;
+        height: 36px;
         margin: 0 0 10px;
         display: block;
         overflow: hidden;
@@ -296,7 +299,7 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
     }
     
     ul.course-archive li a, ul.course-filegroup-files li a span, ul.all-community li a span, ul.course-forums li a span {
-        padding: 3px 10px;
+        padding: 10px;
     }
     
     ul.course-archive li a:hover, ul.course-filegroup-files a:hover, ul.all-community li a:hover, ul.course-forums li a:hover {
@@ -330,6 +333,16 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
         color: #EEE;
         font-weight: normal;
     }
+    ul.all-community li {
+        width: 366px;
+        border: 1px solid #CCC;
+        margin-right:10px;
+        display: inline-block;
+    }
+    ul.all-community li:nth-child(even) {
+        margin-right: 0;
+        margin-left: 10px;
+    }
     ul.all-community li img {
 	    height: 32px;
 	    padding: 2px;
@@ -339,9 +352,8 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
 	    margin-right: 10px;
 	    float: left;
 	}
-	    
 	ul.all-community span.campus {
-	    width: 125px;
+	    width: 95px;
 	    padding-left: 20px;
 	}
 
@@ -563,13 +575,11 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
 }
     .forum-posts .header,  .forum-threads .header 
     {
-        background: #194e76;
-        color: #FFF;
-        overflow: hidden;
-        text-shadow: -1px 1px 0 #222;
+        -x-text-shadow: -1px 1px 0 #BBB;
     }
-    .forum-threads .subject, .forum-posts .subject, .forum-posts .content-area { width: 450px; }
-    .forum-posts .poster { width: 175px; }
+    .forum-threads .subject {width: 450px;}
+    .forum-posts .subject, .forum-posts .content-area { width: 650px; }
+    .forum-posts .poster { -x-width: 175px; }
     .forum-threads .replies { width: 225px; text-align: center; }
     .forum-threads h4  { margin-bottom: 3px; }
     .forum-posts .header span,  .forum-threads .header span 
@@ -639,6 +649,10 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
 	    }
 	    .forum-threads .last-poster {
 	    }
+	.forum-posts .post-meta {
+	    display: block;
+	    width: 100%;
+	}
 	.forum-threads .date, .forum-posts .posts .date {
 	    color: #666;
 	    font-size: 10px;
@@ -648,10 +662,8 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
 	
 	.forum-posts .poster {
 	    text-align: center; 
-	    border-right: 1px solid #999;
 	}
 	.forum-posts .post-author, .forum-threads .post-author {
-		width: 100px;
 		margin-bottom: 8px;
 	}
 	.forum-posts .name, .forum-threads .threads .name {
@@ -660,9 +672,10 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
 		margin-bottom: 8px;
 		display: inline-block;
 	}
+	.forum-posts .name, .forum-posts .date {
+	    font-size: 11px;
+	}
 	.forum-posts div.posts div.post div.content-area {
-	    border-left: 1px solid #999;
-	    margin-left: -1px;
 	    padding-left: 10px;
 	}
 	.forum-posts .content {
@@ -670,6 +683,12 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
 	    display: block;
 	    clear: both;
 	    overflow: hidden;
+	}
+	.forum-posts .post-body {
+	    color: #666;
+	    font-size: 11px;
+	    line-height: 145%;
+	    width: 500px;
 	}
 .add-post-outer {
     position: fixed;

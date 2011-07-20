@@ -3,21 +3,22 @@
 
 @foreach (Post post in Model) {
 <div class="post">
-	<div class="poster">							
+	<div class="poster">
 		<a href="@post.User.ProfileDisplayUrl">
-			<span class="name">@post.User.SecureName</span>
-        </a>
-        <br />
-		<a href="@post.User.ProfileDisplayUrl">
-			<img src="@post.User.ProfileImageUrl" alt="@post.User.SecureName" class="post-author" />
+			<img src="@post.User.GetProfileImageUrl(60,60)" alt="@post.User.SecureName" class="post-author" />
 		</a>
-		<div class="date">
-			@post.PostDate
-		</div>
 	</div>
 	<div class="content-area">
 		<div class="content">
-            @Html.Raw(post.PostContentFormatted)
+            <div class="post-meta">					
+		        <a href="@post.User.ProfileDisplayUrl">
+			        <span class="name">@post.User.SecureName</span>
+                </a>
+		        <span class="date">
+			        @post.PostDate
+		        </span>
+            </div>
+            <div class="post-body">@Html.Raw(post.PostContentFormatted)</div>
 		</div>
         <div class="reply-link"><a rel="#replyto@(post.PostID)" href="javascript:void(0)">Reply</a><div class="clear"></div></div>
 

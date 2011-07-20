@@ -14,15 +14,14 @@
     if (i < 3) {
 	    <div class="block-list-item course">
 	        <div class="block-list-item-label">
-	            <span>@course.CourseCode.ToString()</span>
+	            <span>@course.CourseCode.ToString() &mdash; @course.Name</span>
 	        </div>
-            <h2>@course.Name</h2>
 	        <ul class="all-community">
 	        @foreach (CourseUser user in course.CourseUsers) {
-                if (user.User != null) {
+                if (user.User != null && user.RoleID == 5) {
 			        <li>
                         <a href="@user.User.ProfileDisplayUrl" rel="slider">
-                            <img alt="@user.User.FormattedName" src="@user.User.ProfileImageUrl">
+                            <img alt="@user.User.FormattedName" src="@user.User.GetProfileImageUrl(150,150)">
                             <span class="name">@user.User.FormattedName</span>
                             <span class="campus">@user.User.City</span>
                         </a>
@@ -54,7 +53,7 @@
 </div>
 
 <script type="text/javascript">
-    jQuery(document).ready(function ($) {
+    /*jQuery(document).ready(function ($) {
         $("a[rel='slider']").attr("href", "javascript:void(0)");
 
         $("ul.all-community li a[rel='slider']").click(function () {
@@ -78,5 +77,5 @@
             }
         });
 
-    });
+    });*/
 </script>   
