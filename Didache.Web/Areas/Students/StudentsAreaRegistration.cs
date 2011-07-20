@@ -56,16 +56,14 @@ namespace Didache.Web.Areas.Students {
 			context.MapRoute(
 				"rss",
 				"courses/feed/{userID}/{slug}-{type}.{extension}",
-				new { controller = "Courses", action="feed" }
+				new { controller = "Courses", action = "feed" }
 			);
 
 			context.MapRoute(
 				"ics",
 				"courses/ical/{userID}/{slug}-{type}.{extension}",
-				new { controller = "Courses", action="ical" }
+				new { controller = "Courses", action = "ical" }
 			);
-
-
 
 			// main six tabs
 			context.MapRoute(

@@ -217,9 +217,9 @@ namespace Didache.Web.Areas.Students.Controllers
 
 				System.Xml.XmlNodeList unitNodes = null;
 				if (selectedUnitNumber > 0)
-					doc.SelectNodes("//unit[@number=" + selectedUnitNumber + "]");
+					unitNodes = doc.SelectNodes("//unit[@number=" + selectedUnitNumber + "]");
 				else
-					doc.SelectNodes("//unit");
+					unitNodes = doc.SelectNodes("//unit");
 
 				foreach (XmlNode uNode in unitNodes) {
 					int unitNumber = 0;
@@ -233,6 +233,9 @@ namespace Didache.Web.Areas.Students.Controllers
 						videosList.Add(new VideoInfo {
 							SortOrder = videoNumber++,
 							UnitTaskInfo = "Unit " + unitNumber + ". Task " + videoNumber + ". ",
+							CourseCode = course.CourseCode,
+							UnitNumber = unitNumber,
+							VideoNumber = videoNumber,
 							Title = vNode.Attributes["name"].Value,
 							Duration = vNode.Attributes["duration"].Value,
 							VideoUrl = String.Format("{0}/{1}/{2}_u{3}_v{4}.mp4",
@@ -312,7 +315,7 @@ namespace Didache.Web.Areas.Students.Controllers
 
 		}
 
-		public ActionResult Rss(string slug, int userID, string type, string extension) {
+		public ActionResult Feed(string slug, int userID, string type, string extension) {
 
 			DidacheDb db = new DidacheDb();
 			Course course = Didache.Courses.GetCourseBySlug(slug);
@@ -320,18 +323,34 @@ namespace Didache.Web.Areas.Students.Controllers
 
 			List<SyndicationItem> items = new List<SyndicationItem>();
 
-			foreach (VideoInfo videoInfo in GetVideoInfo(course)) {
-				SyndicationItem item = new SyndicationItem(
-						videoInfo.Title,
-						videoInfo.Title,
-						new Uri("http://site.com/"), // new Uri(Utility.BaseFullUrl + post.PostUrl),
-						Guid.NewGuid().ToString(), // ?
-						DateTime.Now // need to hook to unit start date
+
+			// get current and next two units for this course
+			DateTime unitStartDate = DateTime.Now.AddDays(21);
+			List<Unit> units = db.Units.Where(u => u.CourseID == course.CourseID && u.StartDate <= unitStartDate).ToList();
+
+			// get all vidoes
+			List<VideoInfo> videoInfos = GetVideoInfo(course);
+
+			foreach (Unit unit in units) {
+
+				foreach (VideoInfo videoInfo in videoInfos.Where(vi=> vi.UnitNumber == unit.SortOrder)) {
+					
+					// VIDEO
+					SyndicationItem item = new SyndicationItem(
+							videoInfo.Title,
+							videoInfo.Title,
+							new Uri("http://site.com/"), // new Uri(Utility.BaseFullUrl + post.PostUrl),
+							String.Format("c{0}u{1}v{2}", videoInfo.CourseCode, videoInfo.UnitNumber, videoInfo.VideoNumber),
+							DateTime.Now // need to hook to unit start date
+						);
+
+					long videoLength = 10000;
+					item.Links.Add(
+						SyndicationLink.CreateMediaEnclosureLink(new Uri("http://online.dts.edu/" + String.Format("download/video/{0}-{1}-{2}-{3}-{4}.mp4", course.CourseID, course.CourseCode, videoInfo.UnitNumber, videoInfo.VideoNumber, userID)), "video/mp4", videoLength)
 					);
 
-				//item.PublishDate = post.PostDate;
-
-				items.Add(item);
+					items.Add(item);
+				}
 			}
 
 			SyndicationFeed feed = new SyndicationFeed(
@@ -349,12 +368,9 @@ namespace Didache.Web.Areas.Students.Controllers
 
 		/*
 		public ActionResult iCalUnits(string slug) {
-
 			Course course = Didache.Courses.GetCourseBySlug(slug);
-
 		}
 		*/
-
     }
 
 

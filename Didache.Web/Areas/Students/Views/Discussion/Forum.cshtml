@@ -15,18 +15,22 @@
 			<div class="thread-link"><a href="javascript:void(0)">Add Thread</a><div class="clear"></div></div>
 			<div class="clear"></div>
 			<div class="forum-threads">
-				<div class="header">
+				<!--div class="header">
 					<span class="subject">Subject</span>
 					<span class="name">Last Poster</span>
 					<span class="replies">Replies</span>
-				</div>
+				</div-->
 				<div class="threads">
 
 					@foreach (Thread thread in Model.Threads) {
 						<div class="thread" id="thread-@thread.ThreadID">
-							<span class="subject"><h3><a href="/courses/@ViewContext.RouteData.Values["slug"]/discussion/thread/@thread.ThreadID">@Html.Raw(thread.Subject)</a></h3><span class="date">Posted by <a href="@thread.Posts.First().User.ProfileDisplayUrl">@thread.Posts.First().User.SecureName</a> &mdash; @thread.ThreadDate.ToShortDateString() at @thread.ThreadDate.ToShortTimeString()</span></span>
-							<span class="name"><span class="last-poster"><a href="@thread.Posts.Last().User.ProfileDisplayUrl">@thread.Posts.Last().User.SecureName</a></span> <span class="date">@thread.LastPostDate.ToShortDateString() at @thread.LastPostDate.ToShortTimeString()</span> </span>
-							<span class="replies">@thread.TotalReplies</span>
+                            <span class="thumb"><img src="@thread.Posts.First().User.GetProfileImageUrl(40,40)" /></span>
+							<span class="subject"><h4><a href="/courses/@ViewContext.RouteData.Values["slug"]/discussion/thread/@thread.ThreadID">@Html.Raw(thread.Subject)</a></h4><span class="date">Posted by <a href="@thread.Posts.First().User.ProfileDisplayUrl">@thread.Posts.First().User.SecureName</a> &mdash; @thread.ThreadDate.ToShortDateString() at @thread.ThreadDate.ToShortTimeString()</span></span>
+							<span class="replies">
+                                <span class="number">@thread.TotalReplies @(thread.TotalReplies == 1 ? "reply" : "replies") </span>
+                                <span class="last-poster">Last by <a href="@thread.Posts.Last().User.ProfileDisplayUrl">@thread.Posts.Last().User.SecureName</a></span>
+                                <span class="date">@thread.LastPostDate.ToShortDateString() at @thread.LastPostDate.ToShortTimeString()</span> </span>
+							
 						</div>
 					}
 				</div>

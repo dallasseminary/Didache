@@ -14,6 +14,12 @@ namespace Didache {
 		public string ThumbnailFilename { get; set; }
 		public string VideoUrl { get; set; }
 		public int PercentComplete { get; set; }
+
+		public string CourseCode  { get; set;}
+		public int UnitNumber { get; set;}
+		public int VideoNumber { get; set;}
+
+
 		public string FormattedDuration {
 			get {
 				string[] parts = Duration.Split(':');
