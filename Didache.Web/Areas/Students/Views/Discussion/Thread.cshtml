@@ -1,69 +1,76 @@
 ﻿@model Thread
 @{
-	ViewBag.Title = "Thread Posts";
+    ViewBag.Title = "Thread Posts";
 }
+
+<div class="page-wide">
 
 @Html.Partial("_CourseHeader", Model.Forum.Course)
 @Html.Partial("_CourseMenu")
 
-   <div id="breadcrumbs"><a href="/courses/@ViewContext.RouteData.Values["slug"]/schedule">@Model.Forum.Course.Name</a> &#9654; <a href="/courses/@ViewContext.RouteData.Values["slug"]/discussion/">@Model.Forum.Course.Name Discussion</a> &#9654; <a href="/courses/@ViewContext.RouteData.Values["slug"]/discussion/forum/@Model.Forum.ForumID">@Model.Forum.Name</a></div>
+	<div class="full-column">
 
-    <div class="forum-posts">
-        <div class="header">
-            <span class="subject"><h2>@Html.Raw(Model.Subject)</h2></span>
-        </div>
-        <div class="posts">
+
+        <div id="breadcrumbs"><a href="/courses/@ViewContext.RouteData.Values["slug"]/schedule">@Model.Forum.Course.Name</a> &#9654; <a href="/courses/@ViewContext.RouteData.Values["slug"]/discussion/">@Model.Forum.Course.Name Discussion</a> &#9654; <a href="/courses/@ViewContext.RouteData.Values["slug"]/discussion/forum/@Model.Forum.ForumID">@Model.Forum.Name</a></div>
+
+        <div class="forum-posts">
+            <div class="header">
+                <span class="subject"><h2>@Html.Raw(Model.Subject)</h2></span>
+            </div>
+            <div class="posts">
 			
-			@Html.Partial("_WritePosts", Model.Posts.ToList())
+			    @Html.Partial("_WritePosts", Model.Posts.ToList())
 
-	    </div>
-    </div>
+	        </div>
+        </div>
 
-    <form class="forum-post-new" method="post" action="/courses/@ViewContext.RouteData.Values["slug"]/discussion/reply/@Model.ThreadID">
-	     <input type="hidden" id="ThreadID" name="ThreadID" value="@Model.ThreadID" />
-	     <input type="hidden" id="ForumID" name="ForumID" value="@Model.ForumID" />
-	     <input type="hidden" id="ReplyToPostID" name="ReplyToPostID" value="@Model.LastPostID" />
+        <form class="forum-post-new" method="post" action="/courses/@ViewContext.RouteData.Values["slug"]/discussion/reply/@Model.ThreadID">
+	         <input type="hidden" id="ThreadID" name="ThreadID" value="@Model.ThreadID" />
+	         <input type="hidden" id="ForumID" name="ForumID" value="@Model.ForumID" />
+	         <input type="hidden" id="ReplyToPostID" name="ReplyToPostID" value="@Model.LastPostID" />
 
-	     <table style="width: 100%;">
-		    <tbody>
-			    <tr>
-				    <td>Subject</td>
-				    <td>
-					    <input type="text" id="Subject" size="60" name="Subject" value="RE: @Html.Raw(Model.LastPostSubject)" />					
-				    </td>
-			    </tr>
-			    <tr>
-				    <td>Message</td>
-				    <td>
-					    <textarea id="PostContent" name="PostContent" cols="60" rows="5"></textarea>
-				    </td>
-			    </tr>
-		    </tbody>
-	     </table>
+	         <table style="width: 100%;">
+		        <tbody>
+			        <tr>
+				        <td>Subject</td>
+				        <td>
+					        <input type="text" id="Subject" size="60" name="Subject" value="RE: @Html.Raw(Model.LastPostSubject)" />					
+				        </td>
+			        </tr>
+			        <tr>
+				        <td>Message</td>
+				        <td>
+					        <textarea id="PostContent" name="PostContent" cols="60" rows="5"></textarea>
+				        </td>
+			        </tr>
+		        </tbody>
+	         </table>
 
-	     <input type="submit" value="Submit Reply" />
+	         <input type="submit" value="Submit Reply" />
 
-    </form>
+        </form>
 
-    <script type="text/javascript">
-        jQuery(document).ready(function ($) {
-            $(".reply-link").show();
-            $(".add-reply").hide();
+        <script type="text/javascript">
+            jQuery(document).ready(function ($) {
+                $(".reply-link").show();
+                $(".add-reply").hide();
 
-            $(".reply-link a").click(function () {
-                //alert($(this).text());
-                if ($(this).text() == "Reply") {
-                    $(".add-reply").slideUp("fast");
-                    $(".reply-link a").text("Reply");
-                    $(this).parent().next(".add-reply").slideDown("slow");
-                    $(this).text("Cancel Reply");
-                    //$("form.forum-post-new").fadeOut("fast");
-                } else {
-                    $(this).text("Reply");
-                    $(this).parent().next(".add-reply").slideUp("fast");
-                    $(".forum-post-new").fadeIn("fast");
-                }
+                $(".reply-link a").click(function () {
+                    //alert($(this).text());
+                    if ($(this).text() == "Reply") {
+                        $(".add-reply").slideUp("fast");
+                        $(".reply-link a").text("Reply");
+                        $(this).parent().next(".add-reply").slideDown("slow");
+                        $(this).text("Cancel Reply");
+                        //$("form.forum-post-new").fadeOut("fast");
+                    } else {
+                        $(this).text("Reply");
+                        $(this).parent().next(".add-reply").slideUp("fast");
+                        $(".forum-post-new").fadeIn("fast");
+                    }
+                });
+
             });
-
-        });
-    </script>
+        </script>
+    </div>
+</div>
