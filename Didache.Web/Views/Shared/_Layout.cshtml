@@ -59,7 +59,7 @@
 					<div id="user-profile">
 					@{ User user = Users.GetLoggedInUser();}
 						<a href="@user.ProfileDisplayUrl">
-							<img alt="@user.FormattedName" src="@user.GetProfileImageUrl(60, 60)" />
+							<img alt="@user.FormattedName" src="@user.GetProfileImageUrl(60, 60)" width="60" height="60" />
 							<span class="name">@user.SecureName</span>
 							<span class="title">@user.Country</span>
 						</a>

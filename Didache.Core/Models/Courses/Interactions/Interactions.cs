@@ -36,11 +36,23 @@ namespace Didache {
             User user = Users.GetLoggedInUser();
             Task task = db.Tasks.Find(taskID);
             Course course = Courses.GetCourse(task.CourseID);
-            CourseUser courseUser = course.CourseUsers.SingleOrDefault(u => u.UserID == user.UserID && u.RoleID == (int) CourseUserRole.Student);
+
+			// find this user's group
+            CourseUser courseUser = course.CourseUsers
+											.SingleOrDefault(u => u.UserID == user.UserID && 
+																  u.RoleID == (int) CourseUserRole.Student);
+
+			// find all the people in the group
             List<int> courseUserIDs = new List<int>();
-            foreach (CourseUser cu in course.CourseUsers) {
-                if (cu.GroupID == courseUser.GroupID) { courseUserIDs.Add(cu.UserID); }
-            }
+			if (courseUser != null) {
+				foreach (CourseUser cu in course.CourseUsers) {
+					if (cu.GroupID == courseUser.GroupID) {
+						courseUserIDs.Add(cu.UserID);
+					}
+				}
+			} else {
+				courseUserIDs = course.CourseUsers.Select(cu => cu.UserID).ToList();
+			}
 
 			List<InteractionThread> threads = db
 				.InteractionThreads

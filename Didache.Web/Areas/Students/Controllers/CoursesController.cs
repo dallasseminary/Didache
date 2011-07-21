@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using System.ServiceModel.Syndication;
+using System.Xml;
 
 namespace Didache.Web.Areas.Students.Controllers
 {
@@ -27,6 +28,14 @@ namespace Didache.Web.Areas.Students.Controllers
 
 		[Authorize]
 		public ActionResult Dashboard(string slug) {
+
+			Course course = Didache.Courses.GetCourseBySlug(slug);
+
+			return View(course);
+		}
+
+		[Authorize]
+		public ActionResult Tools(string slug) {
 
 			Course course = Didache.Courses.GetCourseBySlug(slug);
 
@@ -103,10 +112,19 @@ namespace Didache.Web.Areas.Students.Controllers
 		[Authorize]
 		public ActionResult Assignments(string slug) {
 
+			User user = Users.GetLoggedInUser();
             Course course = Didache.Courses.GetCourseBySlug(slug);
 
-            ViewBag.CourseFileGroups = CourseFiles.GetCourseFileGroups(course.CourseID);
-            ViewBag.StudentFiles = db.StudentFiles;
+            //ViewBag.CourseFileGroups = CourseFiles.GetCourseFileGroups(course.CourseID);
+            //ViewBag.StudentFiles = db.StudentFiles;
+
+
+			ViewBag.AllUserTasks = db.UserTasks
+										.Include("Task.Unit")
+										.Include("StudentFile")
+										.Include("GradedFile")
+										.Where(ut => ut.UserID == user.UserID && ut.CourseID == course.CourseID).ToList();
+
 
 			return View(course);
 		}
@@ -173,7 +191,90 @@ namespace Didache.Web.Areas.Students.Controllers
 			
 		}
 
-		public ActionResult iCal(string slug, string type, int userID) {
+		//
+		// GET: /Feeds/
+		public List<VideoInfo> GetVideoInfo(Course course) {
+			List<VideoInfo> videosList = new List<VideoInfo>();
+
+			string externalThumbBase = "http://dtsoe.s3.amazonaws.com"; // "http://oefiles.dts.edu";
+			string xmlPath = System.Web.HttpContext.Current.Server.MapPath(String.Format("~/supportfiles/{0}/Titles/en-US.xml", course.CourseCode));
+
+
+			if (Request.Url.Host == "online.dts.edu") {
+				xmlPath = @"e:\websites\my.dts.edu\web\playerfiles\" + course.CourseCode + @"\titles\en-US.xml";
+			}
+
+
+			// load XML
+			int selectedUnitNumber = -1;
+
+			if (System.IO.File.Exists(xmlPath)) {
+				System.Xml.XmlDocument doc = new System.Xml.XmlDocument();
+				doc.Load(xmlPath);
+
+				Random random = new Random();
+
+
+				System.Xml.XmlNodeList unitNodes = null;
+				if (selectedUnitNumber > 0)
+					unitNodes = doc.SelectNodes("//unit[@number=" + selectedUnitNumber + "]");
+				else
+					unitNodes = doc.SelectNodes("//unit");
+
+				foreach (XmlNode uNode in unitNodes) {
+					int unitNumber = 0;
+					Int32.TryParse(uNode.Attributes["number"].Value, out unitNumber);
+					System.Xml.XmlNodeList videoNodes = doc.SelectNodes("//unit[@number=" + unitNumber + "]/video");
+
+					foreach (System.Xml.XmlNode vNode in videoNodes) {
+						int videoNumber = 0;
+						Int32.TryParse(vNode.Attributes["number"].Value, out videoNumber);
+
+						videosList.Add(new VideoInfo {
+							SortOrder = videoNumber++,
+							UnitTaskInfo = "Unit " + unitNumber + ". Task " + videoNumber + ". ",
+							CourseCode = course.CourseCode,
+							UnitNumber = unitNumber,
+							VideoNumber = videoNumber,
+							Title = vNode.Attributes["name"].Value,
+							Duration = vNode.Attributes["duration"].Value,
+							VideoUrl = String.Format("{0}/{1}/{2}_u{3}_v{4}.mp4",
+								externalThumbBase,
+								course.CourseCode.ToLower(),
+								course.CourseCode.ToUpper(),
+								unitNumber.ToString().PadLeft(3, '0'),
+								videoNumber.ToString().PadLeft(3, '0')),
+
+							ThumbnailFilename = String.Format("{0}_u{1}_v{2}_thumb.jpg",
+								course.CourseCode.ToUpper(),
+								unitNumber.ToString().PadLeft(3, '0'),
+								videoNumber.ToString().PadLeft(3, '0')),
+
+							//ThumbnailUrl = String.Format("{0}/{1}/videos/{2}_u{3}_v{4}_thumb.jpg", locaThumbBase, Model.Course.CourseCode.ToLower(), Model.Course.CourseCode.ToUpper(), Model.Unit.UnitNumber.ToString().PadLeft(3, '0'), vNode.Attributes["number"].Value.ToString().PadLeft(3, '0')),
+							ThumbnailUrl = String.Format("{0}/{1}/{2}_u{3}_v{4}_thumb.jpg",
+								externalThumbBase,
+								course.CourseCode.ToLower(),
+								course.CourseCode.ToUpper(),
+								unitNumber.ToString().PadLeft(3, '0'),
+								videoNumber.ToString().PadLeft(3, '0')),
+
+							PercentComplete = random.Next(100)
+						});
+					}
+				}
+			}
+			else {
+				//Response.Write("can't find: " + xmlPath);	
+			}
+
+
+			return videosList;
+
+		}
+
+
+
+		public ActionResult iCal(string slug, string type, int userID, string extension) {
 
 			DidacheDb db = new DidacheDb();
 
@@ -194,7 +295,7 @@ namespace Didache.Web.Areas.Students.Controllers
 
 				if (task.Task.DueDate.HasValue)
 					dueDate = task.Task.DueDate.Value;
-				else					
+				else
 					dueDate = task.Task.Unit.EndDate;
 
 				iEvents.Add(new ICalEvent() {
@@ -214,17 +315,98 @@ namespace Didache.Web.Areas.Students.Controllers
 
 		}
 
-		public ActionResult Rss(string slug, string type) {
-			return Json(new { }, JsonRequestBehavior.AllowGet);
+		public ActionResult Feed(string slug, int userID, string type, string extension) {
+
+			DidacheDb db = new DidacheDb();
+			Course course = Didache.Courses.GetCourseBySlug(slug);
+			User user = Users.GetUser(userID);
+
+			List<SyndicationItem> items = new List<SyndicationItem>();
+
+
+			// get current and next two units for this course
+			DateTime unitStartDate = DateTime.Now.AddDays(21);
+			List<Unit> units = db.Units.Where(u => u.CourseID == course.CourseID && u.StartDate <= unitStartDate).ToList();
+
+			// get all vidoes
+			List<VideoInfo> videoInfos = GetVideoInfo(course);
+
+			foreach (Unit unit in units) {
+
+				foreach (VideoInfo videoInfo in videoInfos.Where(vi=> vi.UnitNumber == unit.SortOrder)) {
+					
+					// VIDEO
+					SyndicationItem item = new SyndicationItem(
+							videoInfo.Title,
+							videoInfo.Title,
+							new Uri("http://site.com/"), // new Uri(Utility.BaseFullUrl + post.PostUrl),
+							String.Format("c{0}u{1}v{2}", videoInfo.CourseCode, videoInfo.UnitNumber, videoInfo.VideoNumber),
+							DateTime.Now // need to hook to unit start date
+						);
+
+					long videoLength = 10000;
+					item.Links.Add(
+						SyndicationLink.CreateMediaEnclosureLink(new Uri("http://online.dts.edu/" + String.Format("download/video/{0}-{1}-{2}-{3}-{4}.mp4", course.CourseID, course.CourseCode, videoInfo.UnitNumber, videoInfo.VideoNumber, userID)), "video/mp4", videoLength)
+					);
+
+					items.Add(item);
+				}
+			}
+
+			SyndicationFeed feed = new SyndicationFeed(
+										course.ToString() + " :: RSS",
+										"Video, Slides, and Transcripts",
+										new Uri("http://online.dts.edu/"),
+										items);
+
+
+
+			return new SyndicationResult(feed, extension);
 		}
+
+
 
 		/*
 		public ActionResult iCalUnits(string slug) {
-
 			Course course = Didache.Courses.GetCourseBySlug(slug);
-
 		}
 		*/
-
     }
+
+
+	public class SyndicationResult : ActionResult {
+		public SyndicationFeed Feed { get; set; }
+		public string Type { get; set; }
+
+		public SyndicationResult() { }
+
+		public SyndicationResult(SyndicationFeed feed, string type) {
+			this.Feed = feed;
+			this.Type = type;
+		}
+
+		public override void ExecuteResult(ControllerContext context) {
+
+			SyndicationFeedFormatter formatter = null;
+
+			switch (Type) {
+				default:
+				case "rss":
+					context.HttpContext.Response.ContentType = "application/rss+xml";
+					formatter = new Rss20FeedFormatter(this.Feed);
+
+
+					break;
+				case "atom":
+					context.HttpContext.Response.ContentType = "application/atom+xml";
+					formatter = new Atom10FeedFormatter(this.Feed);
+
+					break;
+			}
+
+			using (XmlWriter writer = XmlWriter.Create(context.HttpContext.Response.Output)) {
+				formatter.WriteTo(writer);
+			}
+		}
+	}
 }

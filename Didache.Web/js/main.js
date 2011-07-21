@@ -9,4 +9,16 @@
 	//$('textarea.htmltext-admin').cleditor({ useCSS: false });
 
 
+	var userMessage = $('<div class="loading" id="user-message"></div>').appendTo($(document.body)).hide();
+
+	window.showLoading = function (msg) {
+		userMessage
+			.html(msg)
+			.show();
+	}
+	window.hideLoading = function () {
+		userMessage
+			.fadeOut();
+	}
+
 });

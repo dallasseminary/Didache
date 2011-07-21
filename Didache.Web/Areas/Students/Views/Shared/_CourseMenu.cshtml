@@ -37,4 +37,10 @@
 			<dfn>@Html.Raw(Resources.labels.coursetabs_discussion_desc)</dfn>
 		</a>
 	</li>
+	<li>
+		<a href="/courses/@ViewContext.RouteData.Values["slug"]/tools"@(Html.Raw(ViewContext.RouteData.Values["action"].ToString().ToLower() == "tools" ? " class=\"selected\"" : ""))>
+			<span>@Html.Raw(Resources.labels.coursetabs_tools)</span>
+			<dfn>@Html.Raw(Resources.labels.coursetabs_tools_desc)</dfn>
+		</a>
+	</li>
 </ul>

@@ -556,6 +556,36 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
 	margin: 0 0 5px 0;
 }
 		
+
+		
+/* assignments list */
+.assignments-list {
+	width: 100%;
+}
+.assignments-list td{
+	padding: 4px;
+}
+
+.assignments-list th {
+	text-align: left;
+	padding: 7px 4px;
+}
+.assignments-list th {
+	background: #F1F2F4;
+}
+.assignments-list th.unit-head {
+	background: none;
+	padding: 20px 0 10px;
+	font-size: 16px;
+	font-weight: bold;
+	color: #666;
+}
+.assignments-list .task-status  {
+	position: relative;
+	float: none;
+	display: inline-block;
+	margin: 0 10px;
+
 /* Forums */
 
 .course-forum 
