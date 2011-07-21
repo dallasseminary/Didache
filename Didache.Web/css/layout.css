@@ -418,3 +418,34 @@ a {
 .user-profile td.security-setting {
 	width: 100px;
 }
+#edit-profile .sub-column label {
+    color: transparent;
+    width: 0;
+    height: 0;
+    background-repeat: no-repeat;
+    display: inline-block;
+    overflow: hidden;
+}
+#edit-profile .sub-column input {
+    padding-left: 20px;
+    height: 18px;
+    border: 1px solid #CCC;
+    border-radius: 3px;
+    margin-bottom: 10px;
+}
+#edit-profile .sub-column input#Facebook {
+    background: url(images/icons/revFacebookBadge.gif) 2px 2px no-repeat;
+    background-size: 16px 16px;
+}
+#edit-profile .sub-column input#Twitter {
+    background: url(images/icons/twitter-badge.png) 2px 2px no-repeat;
+    background-size: 16px 16px;
+}
+#edit-profile .sub-column input#Website {
+    background: url(images/icons/globe.png) 2px 2px no-repeat;
+    background-size: 16px 16px;
+}
+#edit-profile .sub-column input.text-box {
+    width: 80%;
+    display: inline-block;   
+}

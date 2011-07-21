@@ -317,10 +317,14 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
         min-height: 16px;
     }
     ul.course-filegroup-files a .type {
+        float: left;
         height: 16px;
+        border: 1px solid #BBB;
+        border-width: 0 1px 0 0;
     }
     ul.course-filegroup-files a .size {
         width: 65px;
+        border: none;
     }
     
     ul.course-filegroup-files a .filename, ul.all-community a .name, ul.course-forums li a .name {
@@ -417,12 +421,12 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
     
 /* Roster */
 
-.course-group-members{
+.course-group-members, .course-members{
     display: block;
     overflow: hidden;
     width: 100%;
 }
-	.course-group-member {
+	.course-group-member, .course-member {
 		float: left;
 		margin: 0 8px 10px 0;
 		text-align: center;
@@ -431,11 +435,11 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
 		overflow: hidden;
 		height: 150px
 	}
-	.course-group-member img {
+	.course-group-member img, .course-member img {
 		max-width: 115px;
 		max-height:130px;
 	}
-	.course-group-member span {
+	.course-group-member span, .course-member span {
 		display: block;
 		text-align: center;
 		white-space: nowrap;
