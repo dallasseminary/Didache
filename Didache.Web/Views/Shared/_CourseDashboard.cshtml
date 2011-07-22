@@ -1,0 +1,78 @@
+﻿@model Didache.Course
+		   
+<div class="course-dashboard">
+	
+	<div class="course-dashboard-info">
+
+		<div class="course-dashboard-downloads">
+			<h3>@Resources.labels.labels_dashboard_keydownloads</h3>
+
+			@{ CourseFileAssociation syllabus = new DidacheDb().CourseFileAssociations.SingleOrDefault(cfa => cfa.CourseFileGroup.CourseID == Model.CourseID && cfa.CourseFile.Title.Contains("Syllabus"));}
+			@if (syllabus != null) {
+				<a class="d-button" href="@syllabus.CourseFile.FileUrl">@Resources.labels.labels_dashboard_syllabus</a>
+			}
+			<a class="d-button" href="/courses/downloadall/@Model.Slug-Files.zip">@Resources.labels.labels_dashboard_downloadallfiles</a>
+		</div>
+
+		<div class="course-dashboards-assignments">
+			<h3>@Resources.labels.labels_dashboard_keyassignments</h3>
+			
+			
+			@foreach (UserTaskData task in Courses.GetImportantTasksForUser(Model.CourseID)) {        
+				<div class="assignment">
+					<span class="due-date">@task.Task.DueDate.Value.ToShortDateString()</span> 
+					<a class="title" href="/courses/@Model.Slug/schedule/@task.UnitID/#task-@task.TaskID">@task.Task.Name</a>
+				</div>
+			}
+
+		</div>
+
+	</div>
+	<div class="course-dashboard-people">
+		@{ List<CourseUser> courseUsers = new DidacheDb().CourseUsers.Include("User").Where(cu => cu.CourseID == Model.CourseID).ToList();}
+
+		<div class="user-list-large">
+			<h3>@Resources.labels.labels_dashboard_faculty</h3>
+
+			@foreach (CourseUser user in courseUsers.Where(cu => cu.CourseUserRole == CourseUserRole.Faculty).OrderBy(cu => cu.User.LastName)) {
+				<div class="user">
+					<a href="@user.User.ProfileDisplayUrl" title="@user.User.FormattedName">
+						<img src="@user.User.GetProfileImageUrl(40,40)" width="40" height="40" alt="@user.User.FormattedName" />
+						<span>@user.User.FullName</span>
+					</a>
+				</div>
+			}
+			<div class="clear"></div>
+		</div>
+
+		<div class="user-list-large">
+			<h3>@Resources.labels.labels_dashboard_facilitators</h3>
+
+			@foreach (CourseUser user in courseUsers.Where(cu => cu.CourseUserRole == CourseUserRole.Faciliator).OrderBy(cu => cu.User.LastName)) {
+				<div class="user">
+					<a href="@user.User.ProfileDisplayUrl" title="@user.User.FormattedName">
+						<img src="@user.User.GetProfileImageUrl(40,40)" width="40" height="40" />
+						<span>@user.User.FormattedName</span>
+					</a>
+				</div>			
+			}
+			<div class="clear"></div>
+		</div>
+
+		<div class="user-list-small">
+			<h3>@Resources.labels.labels_dashboard_groupmembers</h3>
+
+			@foreach (CourseUser user in courseUsers.Where(cu => cu.CourseUserRole == CourseUserRole.Student && cu.GroupID == courseUsers.SingleOrDefault(thisUser => thisUser.UserID == Users.GetLoggedInUser().UserID).GroupID).OrderBy(cu => cu.User.LastName)) {
+				<div class="user">
+					<a href="@user.User.ProfileDisplayUrl" title="@user.User.FormattedName">
+						<img src="@user.User.GetProfileImageUrl(40, 40)" width="40" height="40" />						
+					</a>
+				</div>				
+			}
+			<div class="clear"></div>
+		</div>
+
+	</div>
+
+	<div class="clear"></div>
+</div>
