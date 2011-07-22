@@ -109,10 +109,12 @@ namespace Didache.Web.Areas.Admin.Controllers
 
 		public ActionResult UpdateUserInCourse(int userID, int courseID, int roleID, int groupID, bool remove) {
 
+			bool added = false;
+
 			if (remove) {
 				CourseUsers.RemoveUserFromCourse(courseID, userID, (CourseUserRole)roleID);
 			} else {
-				CourseUsers.AddUserToCourse(courseID, userID, groupID, (CourseUserRole)roleID);
+				added = CourseUsers.AddUserToCourse(courseID, userID, groupID, (CourseUserRole)roleID);
 			}
 
 			// get it
@@ -120,7 +122,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 											.Include("User")
 											.SingleOrDefault(cu => cu.UserID == userID && cu.CourseID == courseID && cu.RoleID == roleID);
 
-			return Json(serializer.Serialize(courseUser));
+			return Json(serializer.Serialize(new { CourseUser = courseUser, Added = added }));
 		}
 
 
