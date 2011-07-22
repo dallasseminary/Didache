@@ -1,12 +1,38 @@
 ﻿@{
-    ViewBag.Title = "DTS Online Ed";
+	ViewBag.Title = "DTS Online Ed";
     
 }
 
 
 <div class="page-narrow">
 	<div class="main-column">
+
+
+
+
+	
 	@if (Users.GetLoggedInUser() != null) {
+	  
+	 
+		List<Course> currentCourses = Didache.Courses.GetUsersRunningCourses(CourseUserRole.Student);
+   
+		foreach(Course course in currentCourses) {
+
+			<div class="home-dashboard">
+				<h2>@course.CourseCode - @course.Name</h2>
+			
+				@Html.Partial("_CourseDashboard", course)
+			</div>
+		
+		}
+	 
+		@*	
+
+
+		<div style="background: #efecdb; padding: 20px; min-height: 40px;">
+		Course summary
+		</div>	
+
 		<h2>@Resources.labels.home_dashboard_heading_stream</h2>
 	 
 		<!--#{ var activities = ActivityStream.GetUsersItems();}
@@ -193,15 +219,16 @@
 				<span class="activity-date">5/2/2010 @@ 3:44 PM</span>
             </span>
 		</div>
-	 	 
-	} else {
+	 	 *@
+ }
+ else {
 	  
 		<h2>Welcome</h2>
 	
 		<p>This is Dallas Theological Seminary's online education portal. Feel free to check out some classes.</p>
 	
 		<p>Overview video</p>	  	  
-	}
+ }
 	</div>
 
 	<div class="sub-column">

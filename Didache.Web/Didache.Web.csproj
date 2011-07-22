@@ -404,6 +404,7 @@
     <Content Include="Views\Shared\_SiteFooter.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\SecuritySetting.cshtml" />
     <Content Include="Views\Shared\_AdminMenu.cshtml" />
+    <Content Include="Views\Shared\_CourseDashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\labels.ar.resx">
