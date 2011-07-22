@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<course code="BE103" name="Old Testament History II and Poetry">
+  <unit active="true" number="1" name="Introduction and 1 Samuel 1-15">
+    <video active="true" number="1" name="Introduction to the Book of Samuel" speaker="Gene Pond" duration="00:12:24.00" group="1" />
+    <video active="true" number="2" name="The Eli-Samuel Interchange Pt. 1" speaker="Gene Pond" duration="00:11:57.00" group="1" />
+    <video active="true" number="3" name="The Eli-Samuel Interchange Pt. 2" speaker="Gene Pond" duration="00:18:18.00" group="1" />
+    <video active="true" number="4" name="The Journey's of the Ark Pt. 1" speaker="Gene Pond" duration="00:14:19.00" group="1" />
+    <video active="true" number="5" name="The Journey's of the Ark Pt. 2" speaker="Gene Pond" duration="00:09:53.00" group="1" />
+    <video active="true" number="6" name="The Samuel and Saul Narrative Pt. 1" speaker="Gene Pond" duration="00:09:46.00" group="1" />
+    <video active="true" number="7" name="The Samuel and Saul Narrative Pt. 2" speaker="Gene Pond" duration="00:21:21.00" group="1" />
+    <video active="true" number="8" name="The Samuel and Saul Narrative Pt. 3" speaker="Gene Pond" duration="00:15:38.00" group="1" />
+    <video active="true" number="9" name="The Samuel and Saul Narrative Pt. 4" speaker="Gene Pond" duration="00:10:39.00" group="1" />
+  </unit>
+  <unit active="true" number="2" name="1 Samuel 16-2 Samuel 10">
+    <video active="true" number="1" name="The Saul and David Conflict Pt. 1" speaker="Gene Pond" duration="00:14:52.00" group="1" />
+    <video active="true" number="2" name="The Saul and David Conflict Pt. 2" speaker="Gene Pond" duration="00:15:21.00" group="1" />
+    <video active="true" number="3" name="The Saul and David Conflict Pt. 3" speaker="Gene Pond" duration="00:10:47.00" group="1" />
+    <video active="true" number="4" name="The King David Narrative Pt. 1" speaker="Gene Pond" duration="00:15:22.00" group="1" />
+    <video active="true" number="5" name="The King David Narrative Pt. 2" speaker="Gene Pond" duration="00:14:36.00" group="1" />
+  </unit>
+  <unit active="true" number="3" name="2 Samuel 11-1 Kings 10">
+    <video active="true" number="1" name="The Fight over David's Throne Pt. 1" speaker="Gene Pond" duration="00:15:01.00" group="1" />
+    <video active="true" number="2" name="The Fight over David's Throne Pt. 2" speaker="Gene Pond" duration="00:15:20.00" group="1" />
+    <video active="true" number="3" name="The Fight over David's Throne Pt. 3" speaker="Gene Pond" duration="00:07:12.00" group="1" />
+    <video active="true" number="4" name="The Six Appendices" speaker="Gene Pond" duration="00:08:28.00" group="1" />
+    <video active="true" number="5" name="The Books of Kings: Introduction and The United Kingdom under Solomon Pt. 1" speaker="Gene Pond" duration="00:15:25.00" group="1" />
+    <video active="true" number="6" name="The United Kingdom under Solomon Pt. 2" speaker="Gene Pond" duration="00:15:18.00" group="1" />
+  </unit>
+  <unit active="true" number="4" name="1 Kings 11-2 Kings 8">
+    <video active="true" number="1" name="Discussion with Dr. Eugene Merrill" speaker="Gene Pond" duration="00:16:07.00" group="1" />
+    <video active="true" number="2" name="The Split of the Kingdom Pt. 1" speaker="Gene Pond" duration="00:15:13.00" group="1" />
+    <video active="true" number="3" name="The Split of the Kingdom Pt. 2" speaker="Gene Pond" duration="00:15:04.00" group="1" />
+    <video active="true" number="4" name="After the Split of the Kingdom Pt. 1" speaker="Gene Pond" duration="00:08:28.00" group="1" />
+    <video active="true" number="5" name="After the Split of the Kingdom Pt. 2" speaker="Gene Pond" duration="00:14:40.00" group="1" />
+    <video active="true" number="6" name="The Middle of the Monarchy" speaker="Gene Pond" duration="00:15:02.00" group="1" />
+  </unit>
+  <unit active="true" number="5" name="2 Kings 9-25">
+    <video active="true" number="1" name="The Divided Monarchy Pt. 1" speaker="Gene Pond" duration="00:12:50.00" group="1" />
+    <video active="true" number="2" name="The Divided Monarchy Pt. 2" speaker="Gene Pond" duration="00:14:51.00" group="1" />
+    <video active="true" number="3" name="The Divided Monarchy Pt. 3" speaker="Gene Pond" duration="00:08:05.00" group="1" />
+    <video active="true" number="4" name="Transition to a Single Kingdom" speaker="Gene Pond" duration="00:14:55.00" group="1" />
+    <video active="true" number="5" name="The Single Kingdom of Judah" speaker="Gene Pond" duration="00:15:31.00" group="1" />
+  </unit>
+  <unit active="true" number="6" name="1 and 2 Chronicles">
+    <video active="true" number="1" name="Review" speaker="Gene Pond" duration="00:14:00.00" group="1" />
+    <video active="true" number="2" name="Overview of Chronicles" speaker="Gene Pond" duration="00:11:15.00" group="1" />
+    <video active="true" number="3" name="1 Chronicles" speaker="Gene Pond" duration="00:14:32.00" group="1" />
+    <video active="true" number="4" name="2 Chronicles" speaker="Gene Pond" duration="00:17:12.00" group="1" />
+  </unit>
+  <unit active="true" number="7" name="Ezra">
+    <video active="true" number="1" name="After the Exile" speaker="Gene Pond" duration="00:14:43.00" group="1" />
+    <video active="true" number="2" name="Ezra: Introduction and Chapters 1-3" speaker="Gene Pond" duration="00:15:07.00" group="1" />
+    <video active="true" number="3" name="Ezra 4-6" speaker="Gene Pond" duration="00:14:33.00" group="1" />
+    <video active="true" number="4" name="Ezra 7-8" speaker="Gene Pond" duration="00:12:58.00" group="1" />
+    <video active="true" number="5" name="Ezra 9-10" speaker="Gene Pond" duration="00:15:17.00" group="1" />
+  </unit>
+  <unit active="true" number="8" name="Nehemiah and Esther">
+    <video active="true" number="1" name="Nehemiah 1-6 Pt. 1" speaker="Gene Pond" duration="00:15:08.00" group="1" />
+    <video active="true" number="2" name="Nehemiah 1-6 Pt. 2" speaker="Gene Pond" duration="00:14:56.00" group="1" />
+    <video active="true" number="3" name="Nehemiah 7-13" speaker="Gene Pond" duration="00:15:12.00" group="1" />
+    <video active="true" number="4" name="Esther Pt. 1" speaker="Gene Pond" duration="00:15:36.00" group="1" />
+    <video active="true" number="5" name="Esther Pt. 2" speaker="Gene Pond" duration="00:13:19.00" group="1" />
+  </unit>
+</course>

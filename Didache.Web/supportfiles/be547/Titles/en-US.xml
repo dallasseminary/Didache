@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<course code="BE547" name="A Biblical Theology of Suffering, Disability, and the Church">
+  <unit active="true" number="1" name="Intro, Statistics, and Disability Ministry Models">
+    <video active="true" number="1" name="Greetings from Dr. Waters" speaker="Larry Waters" duration="00:02:57.00" group="1" />
+    <video active="true" number="2" name="Theology of Suffering: Joni E. Tada" speaker="Joni E. Tada" duration="00:31:20.00" group="1" />
+    <video active="true" number="3" name="It Is Well" speaker="Daniel Thomson" duration="00:10:40.00" group="1" />
+    <video active="true" number="4" name="Why This Course?" speaker="Daniel Thomson" duration="00:16:49.00" group="1" />
+    <video active="true" number="5" name="Testimony of Jerry Borton" speaker="" duration="00:09:51.00" group="1" />
+    <video active="true" number="6" name="Who are the Disabled?" speaker="Daniel Thomson" duration="00:13:28.00" group="1" />
+    <video active="true" number="7" name="Siebels' Story Part 1" speaker="" duration="00:09:07.00" group="1" />
+    <video active="true" number="8" name="Siebels' Story Part 2" speaker="" duration="00:05:02.00" group="1" />
+    <video active="true" number="9" name="Who are the Disabled Concluded" speaker="Daniel Thomson" duration="00:02:51.00" group="1" />
+    <video active="true" number="10" name="How Do we Do Disability Ministry? Part 1" speaker="Daniel Thomson" duration="00:12:06.00" group="1" />
+    <video active="true" number="11" name="How Do we Do Disability Ministry? Part 2" speaker="Daniel Thomson" duration="00:13:28.00" group="1" />
+  </unit>
+  <unit active="true" number="2" name="Church-based Disability Ministry/Disability Outreach and Inreach">
+    <video active="true" number="1" name="Worship in Signing" speaker="Lisa Smith" duration="00:07:02.00" group="1" />
+    <video active="true" number="2" name="DNA of the Church Part 1" speaker="Jessica Baldridge" duration="00:14:47.00" group="1" />
+    <video active="true" number="3" name="DNA of the Church Part 2" speaker="Jessica Baldridge" duration="00:11:48.00" group="1" />
+    <video active="true" number="4" name="DNA of the Church Q &amp; A Part 1" speaker="Jessica Baldridge" duration="00:19:01.00" group="1" />
+    <video active="true" number="5" name="DNA of the Church Q &amp; A Part 2" speaker="Jessica Baldridge" duration="00:05:11.00" group="1" />
+    <video active="true" number="6" name="Introduction to Disability Inreach/Outreach" speaker="Mike Justice" duration="00:10:53.00" group="1" />
+    <video active="true" number="7" name="Why is a Church-based Disability Ministry Needed?" speaker="Mike Justice" duration="00:21:50.00" group="1" />
+    <video active="true" number="8" name="What Can We Learn From the Disabled About Ministry to the Suffering?" speaker="Mike Justice" duration="00:12:04.00" group="1" />
+    <video active="true" number="9" name="What Does it Mean to ‘Witness by Suffering Well’”?" speaker="Mike Justice" duration="00:06:15.00" group="1" />
+  </unit>
+  <unit active="true" number="3" name="Biblical Suffering in the Pentateuch and the Prophets">
+    <video active="true" number="1" name="Intro to a Biblical Theology of Suffering" speaker="Stephen Bramer" duration="00:09:07.00" group="1" />
+    <video active="true" number="2" name="Perfect Creation and Suffering in the Fall" speaker="Stephen Bramer" duration="00:12:31.00" group="1" />
+    <video active="true" number="3" name="Suffering and Consequences of the Fall" speaker="Stephen Bramer" duration="00:21:21.00" group="1" />
+    <video active="true" number="4" name="Suffering in the Rest of Genesis" speaker="Stephen Bramer" duration="00:16:49.00" group="1" />
+    <video active="true" number="5" name="Suffering in the Rest of the Pentateuch" speaker="Stephen Bramer" duration="00:13:29.00" group="1" />
+    <video active="true" number="6" name="Suffering in the Former Prophets Part 1" speaker="Stephen Bramer" duration="00:18:41.00" group="1" />
+    <video active="true" number="7" name="Suffering in the Former Prophets Part 2" speaker="Stephen Bramer" duration="00:14:51.00" group="1" />
+    <video active="true" number="8" name="Suffering in the Writing Prophets Part 1" speaker="Stephen Bramer" duration="00:17:29.00" group="1" />
+    <video active="true" number="9" name="Suffering in the Writing Prophets Part 2" speaker="Stephen Bramer" duration="00:15:25.00" group="1" />
+  </unit>
+  <unit active="true" number="4" name="Biblical Suffering in the Psalms and Wisdom Literature ">
+    <video active="true" number="1" name="Psalms and Wisdom Literature" speaker="Ron Allen" duration="00:15:36.00" group="1" />
+    <video active="true" number="2" name="Acquainted With Suffering" speaker="Ron Allen" duration="00:16:22.00" group="1" />
+    <video active="true" number="3" name="Proverbs and Qohelet" speaker="Ron Allen" duration="00:09:35.00" group="1" />
+    <video active="true" number="4" name="Psalms of Lament" speaker="Ron Allen" duration="00:07:02.00" group="1" />
+    <video active="true" number="5" name="Psalm 22" speaker="Ron Allen" duration="00:15:30.00" group="1" />
+    <video active="true" number="6" name="Introduction to the Book of Job" speaker="Larry Waters" duration="00:12:36.00" group="1" />
+    <video active="true" number="7" name="The Undeserved Suffering of Job" speaker="Larry Waters" duration="00:20:21.00" group="1" />
+    <video active="true" number="8" name="Faulty Thinking About Suffering from Job’s Friends" speaker="Larry Waters" duration="00:07:55.00" group="1" />
+    <video active="true" number="9" name="Elihu’s Response to Job" speaker="Larry Waters" duration="00:11:46.00" group="1" />
+    <video active="true" number="10" name="God’s Response to Job and Conclusion" speaker="Larry Waters" duration="00:19:54.00" group="1" />
+  </unit>
+  <unit active="true" number="5" name="Biblical Suffering in the Gospels ">
+    <video active="true" number="1" name="Introduction to Suffering in the Gospels" speaker="Mark Bailey" duration="00:11:21.00" group="1" />
+    <video active="true" number="2" name="The Inevitability of Suffering" speaker="Mark Bailey" duration="00:09:31.00" group="1" />
+    <video active="true" number="3" name="Suffering as a Divine Necessity" speaker="Mark Bailey" duration="00:21:07.00" group="1" />
+    <video active="true" number="4" name="Central Themes of Suffering in the Gospel Part 1" speaker="Mark Bailey" duration="00:10:22.00" group="1" />
+    <video active="true" number="5" name="Central Themes of Suffering in the Gospel Part 2" speaker="Mark Bailey" duration="00:18:26.00" group="1" />
+    <video active="true" number="6" name="Responses to Suffering" speaker="Mark Bailey" duration="00:04:31.00" group="1" />
+  </unit>
+  <unit active="true" number="6" name="Suffering in the Pauline Epistles">
+    <video active="true" number="1" name="Reasons for Suffering in 2 Cor. 1:3-11: Reason 1" speaker="Stan Toussaint" duration="00:16:04.00" group="1" />
+    <video active="true" number="2" name="Reasons for Suffering in 2 Cor. 1:3-11: Reason 2" speaker="Stan Toussaint" duration="00:06:44.00" group="1" />
+    <video active="true" number="3" name="Reasons for Suffering in 2 Cor. 1:3-11: Reason 3" speaker="Stan Toussaint" duration="00:14:49.00" group="1" />
+    <video active="true" number="4" name="More Reasons: Suffering as Discipline" speaker="Stan Toussaint" duration="00:14:59.00" group="1" />
+    <video active="true" number="5" name="More Reasons: Suffering in the Hope of Glory" speaker="Stan Toussaint" duration="00:13:03.00" group="1" />
+    <video active="true" number="6" name="More Reasons: Suffering To Display God’s Glory and Suffering as Servants of Christ" speaker="Stan Toussaint" duration="00:08:50.00" group="1" />
+    <video active="true" number="7" name="More Reasons: Suffering as Servants of Christ" speaker="Stan Toussaint" duration="00:07:01.00" group="1" />
+    <video active="true" number="8" name="More Reasons: Suffering as Part of the Spiritual Life" speaker="Stan Toussaint" duration="00:08:14.00" group="1" />
+    <video active="true" number="9" name="More Reasons: Suffering as a Result of Spiritual Failures" speaker="Stan Toussaint" duration="00:09:42.00" group="1" />
+  </unit>
+  <unit active="true" number="7" name="Biblical Suffering in Non-Pauline Epistles and Revelation">
+    <video active="true" number="1" name="The Suffering of Jesus" speaker="Jim Allman" duration="00:18:22.00" group="1" />
+    <video active="true" number="2" name="Human Suffering Pt. 1" speaker="Jim Allman" duration="00:04:50.00" group="1" />
+    <video active="true" number="3" name="Human Suffering Pt. 2" speaker="Jim Allman" duration="00:16:53.00" group="1" />
+    <video active="true" number="4" name="Human Suffering Pt. 3" speaker="Jim Allman" duration="00:16:01.00" group="1" />
+    <video active="true" number="5" name="Human Suffering Pt. 4" speaker="Jim Allman" duration="00:12:15.00" group="1" />
+    <video active="true" number="6" name="Intro and Orientation of the Prophetic Future" speaker="Thomas Constable" duration="00:05:51.00" group="1" />
+    <video active="true" number="7" name="Suffering in Revelation:  Christ, John, the Churches" speaker="Thomas Constable" duration="00:10:36.00" group="1" />
+    <video active="true" number="8" name="Suffering in the Tribulation Pt. 1" speaker="Thomas Constable" duration="00:18:21.00" group="1" />
+    <video active="true" number="9" name="Suffering in the Tribulation Pt. 2" speaker="Thomas Constable" duration="00:16:35.00" group="1" />
+    <video active="true" number="10" name="Suffering in the Tribulation Pt. 3" speaker="Thomas Constable" duration="00:09:45.00" group="1" />
+    <video active="true" number="11" name="Suffering in Revelation: Concluding Thoughts" speaker="Thomas Constable" duration="00:05:36.00" group="1" />
+  </unit>
+  <unit active="true" number="8" name="Theology of Suffering: The Problem of Evil">
+    <video active="true" number="1" name="Intro to the Problem of Evil and Suffering" speaker="Doug Blount" duration="00:16:51.00" group="1" />
+    <video active="true" number="2" name="Logical Problem of Evil Pt.1" speaker="Doug Blount" duration="00:19:20.00" group="1" />
+    <video active="true" number="3" name="Logical Problem of Evil Pt.2" speaker="Doug Blount" duration="00:17:50.00" group="1" />
+    <video active="true" number="4" name="Logical Problem of Evil Pt.3" speaker="Doug Blount" duration="00:05:34.00" group="1" />
+    <video active="true" number="5" name="Defenses of God Permitting Evil" speaker="Doug Blount" duration="00:17:26.00" group="1" />
+    <video active="true" number="6" name="Evidential Problem of Evil" speaker="Doug Blount" duration="00:16:44.00" group="1" />
+    <video active="true" number="7" name="Pastoral Problem of Evil Pt. 1" speaker="Doug Blount" duration="00:13:57.00" group="1" />
+    <video active="true" number="8" name="Pastoral Problem of Evil Pt. 2" speaker="Doug Blount" duration="00:14:48.00" group="1" />
+    <video active="true" number="9" name="Pastoral Problem of Evil Pt. 3" speaker="Doug Blount" duration="00:09:50.00" group="1" />
+    <video active="true" number="10" name="Pastoral Problem of Evil Pt. 4" speaker="Doug Blount" duration="00:13:45.00" group="1" />
+  </unit>
+  <unit active="true" number="9" name="Theology of Suffering: Responding to Evil/ Suffering and The Global View">
+    <video active="true" number="1" name="How Should We Respond to Evil and Suffering Part 1" speaker="Doug Blount" duration="00:19:58.00" group="1" />
+    <video active="true" number="2" name="How Should We Respond to Evil and Suffering Part 2" speaker="Doug Blount" duration="00:15:45.00" group="1" />
+    <video active="true" number="3" name="How Should We Respond to Evil and Suffering Part 3" speaker="Doug Blount" duration="00:12:38.00" group="1" />
+    <video active="true" number="4" name="The Need for Familiarity with Global Suffering" speaker="Jim Neathery" duration="00:19:38.00" group="1" />
+    <video active="true" number="5" name="What do We Mean by Global and Suffering?" speaker="Jim Neathery" duration="00:14:57.00" group="1" />
+    <video active="true" number="6" name="Attempts to Address Global Suffering" speaker="Jim Neathery" duration="00:06:09.00" group="1" />
+    <video active="true" number="7" name="How do We Get Our Heads Around This?" speaker="Jim Neathery" duration="00:06:32.00" group="1" />
+    <video active="true" number="8" name="Enter the Christians" speaker="Jim Neathery" duration="00:05:10.00" group="1" />
+  </unit>
+  <unit active="true" number="10" name="Pastoral Care and Counseling Regarding Disability">
+    <video active="true" number="1" name="Suffering and Pastoral Ministry Part 1" speaker="Vic Anderson" duration="00:19:27.00" group="1" />
+    <video active="true" number="2" name="Suffering and Pastoral Ministry Part 2" speaker="Vic Anderson" duration="00:14:11.00" group="1" />
+    <video active="true" number="3" name="Suffering and Pastoral Ministry Part 3" speaker="Vic Anderson" duration="00:11:32.00" group="1" />
+    <video active="true" number="4" name="Suffering and Pastoral Ministry Part 4" speaker="Vic Anderson" duration="00:12:50.00" group="1" />
+    <video active="true" number="5" name="Counseling and Family Dynamics Part  1" speaker="Gary Barnes" duration="00:17:02.00" group="1" />
+    <video active="true" number="6" name="Counseling and Family Dynamics Part  2" speaker="Gary Barnes" duration="00:16:53.00" group="1" />
+    <video active="true" number="7" name="Counseling and Family Dynamics Part  3" speaker="Gary Barnes" duration="00:13:27.00" group="1" />
+    <video active="true" number="8" name="Counseling and Family Dynamics Part  4" speaker="Gary Barnes" duration="00:17:09.00" group="1" />
+    <video active="true" number="9" name="Counseling and Family Dynamics in the Church Part  1" speaker="Steve Fischer" duration="00:09:37.00" group="1" />
+    <video active="true" number="10" name="Counseling And Family Dynamics in the Church Part  2" speaker="Steve Fischer" duration="00:12:34.00" group="1" />
+    <video active="true" number="11" name="Counseling And Family Dynamics in the Church Part  3" speaker="Steve Fischer" duration="00:14:22.00" group="1" />
+    <video active="true" number="12" name="Counseling And Family Dynamics in the Church Part  4" speaker="Steve Fischer" duration="00:11:57.00" group="1" />
+    <video active="true" number="13" name="Counseling And Family Dynamics in the Church Part  5" speaker="Steve Fischer" duration="00:14:37.00" group="1" />
+    <video active="true" number="14" name="Grief and Loss Part 1" speaker="Linda Marten" duration="00:15:46.00" group="1" />
+    <video active="true" number="15" name="Grief and Loss Part 2" speaker="Linda Marten" duration="00:17:20.00" group="1" />
+    <video active="true" number="16" name="Grief and Loss Part 3" speaker="Linda Marten" duration="00:14:28.00" group="1" />
+    <video active="true" number="17" name="Grief and Loss Part 4" speaker="Linda Marten" duration="00:08:19.00" group="1" />
+  </unit>
+  <unit active="true" number="11" name="Common Disablements: Pediatric and Adult">
+    <video active="true" number="1" name="Pediatric Disablements" speaker="Patricia Evans" duration="00:20:27.00" group="1" />
+    <video active="true" number="2" name="Ministering through Pediatric Disablements: Lana’s Story" speaker="Patricia Evans" duration="00:18:08.00" group="1" />
+    <video active="true" number="3" name="Common Adult Disablements" speaker="Amy Wilson" duration="00:13:46.00" group="1" />
+    <video active="true" number="4" name="Common Adult Disablements:Stroke Part 1" speaker="Amy Wilson" duration="00:10:10.00" group="1" />
+    <video active="true" number="5" name="Common Adult Disablements:Stroke Part 2" speaker="Amy Wilson" duration="00:09:40.00" group="1" />
+    <video active="true" number="6" name="Common Adult Disablements: Spinal Cord" speaker="Amy Wilson" duration="00:12:49.00" group="1" />
+    <video active="true" number="7" name="Common Adult Disablements: Brain Injury and Dementia" speaker="Amy Wilson" duration="00:09:47.00" group="1" />
+    <video active="true" number="8" name="Common Adult Disablements: Help and Hope" speaker="Amy Wilson" duration="00:03:20.00" group="1" />
+  </unit>
+  <unit active="true" number="12" name="Bioethics">
+    <video active="true" number="1" name="Introduction to Dr. Voet and Bioethics Resources" speaker="Richard Voet" duration="00:14:16.00" group="1" />
+    <video active="true" number="2" name="Bioethics 1" speaker="Richard Voet" duration="00:20:49.00" group="1" />
+    <video active="true" number="3" name="Bioethics 2" speaker="Richard Voet" duration="00:18:03.00" group="1" />
+    <video active="true" number="4" name="Bioethics 3" speaker="Richard Voet" duration="00:11:06.00" group="1" />
+    <video active="true" number="5" name="Bioethics 4" speaker="Richard Voet" duration="00:17:49.00" group="1" />
+    <video active="true" number="6" name="Bioethics 5" speaker="Richard Voet" duration="00:8:17.00" group="1" />
+    <video active="true" number="7" name="Bioethics 6" speaker="Richard Voet" duration="00:14:17.00" group="1" />
+    <video active="true" number="8" name="Bioethics 7" speaker="Richard Voet" duration="00:10:31.00" group="1" />
+    <video active="true" number="9" name="Bioethics 8" speaker="Richard Voet" duration="00:12:39.00" group="1" />
+  </unit>
+  <unit active="true" number="13" name="Joni and Friends">
+    <video active="true" number="1" name="Suffering and Disability in our Society Part 1" speaker="Joni E. Tada" duration="00:11:17.00" group="1" />
+    <video active="true" number="2" name="Suffering and Disability in our Society Part 2" speaker="Joni E. Tada" duration="00:17:00.00" group="1" />
+    <video active="true" number="3" name="Suffering and Disability in our Society Part 3" speaker="Joni E. Tada" duration="00:15:13.00" group="1" />
+    <video active="true" number="4" name="Panel Discussion on Suffering Part 1" speaker="" duration="00:08:18.00" group="1" />
+    <video active="true" number="5" name="Panel Discussion on Suffering Part 2" speaker="" duration="00:20:10.00" group="1" />
+    <video active="true" number="6" name="Panel Discussion on Suffering Part 3" speaker="" duration="00:16:19.00" group="1" />
+    <video active="true" number="7" name="Panel Discussion on Suffering Part 4" speaker="" duration="00:12:51.00" group="1" />
+    <video active="true" number="8" name="Julie Mayberry and the I Can Dancers" speaker="" duration="00:14:22.00" group="1" />
+  </unit>
+</course>
