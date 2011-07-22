@@ -1,6 +1,7 @@
 ﻿@model Thread
 @{
     ViewBag.Title = "Thread Posts";
+    User thisUser = Users.GetLoggedInUser();
 }
 
 <div class="page-wide">
@@ -25,28 +26,30 @@
         </div>
 
         <form class="forum-post-new" method="post" action="/courses/@ViewContext.RouteData.Values["slug"]/discussion/reply/@Model.ThreadID">
-	         <input type="hidden" id="ThreadID" name="ThreadID" value="@Model.ThreadID" />
-	         <input type="hidden" id="ForumID" name="ForumID" value="@Model.ForumID" />
-	         <input type="hidden" id="ReplyToPostID" name="ReplyToPostID" value="@Model.LastPostID" />
+	        <input type="hidden" id="ThreadID" name="ThreadID" value="@Model.ThreadID" />
+	        <input type="hidden" id="ForumID" name="ForumID" value="@Model.ForumID" />
+	        <input type="hidden" id="ReplyToPostID" name="ReplyToPostID" value="@Model.LastPostID" />
+			<input type="hidden" id="Subject" name="Subject" value="RE: @Html.Raw(Model.LastPostSubject)" />
 
+            <h3>Add a Reply</h3>
 	         <table style="width: 100%;">
 		        <tbody>
 			        <tr>
-				        <td>Subject</td>
+				        <th>
+		                    <a href="@thisUser.ProfileDisplayUrl">
+			                    <img src="@thisUser.GetProfileImageUrl(40,40)" alt="@thisUser.SecureName" class="post-author" />
+		                    </a>
+                        </th>
 				        <td>
-					        <input type="text" id="Subject" size="60" name="Subject" value="RE: @Html.Raw(Model.LastPostSubject)" />					
+					        <textarea id="PostContent" name="PostContent" cols="60" rows="10"></textarea>
 				        </td>
 			        </tr>
-			        <tr>
-				        <td>Message</td>
-				        <td>
-					        <textarea id="PostContent" name="PostContent" cols="60" rows="5"></textarea>
-				        </td>
-			        </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td><input type="button" class="d-button action reply-button" value="Add Reply" /></td>
+                    </tr>
 		        </tbody>
 	         </table>
-
-	         <input type="submit" value="Submit Reply" />
 
         </form>
 

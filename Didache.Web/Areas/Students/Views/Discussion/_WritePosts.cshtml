@@ -20,7 +20,7 @@
             </div>
             <div class="post-body">@Html.Raw(post.PostContentFormatted)</div>
 		</div>
-        <div class="reply-link"><a rel="#replyto@(post.PostID)" href="javascript:void(0)">Reply</a><div class="clear"></div></div>
+        <div class="reply-link"><a class="d-button edit" rel="#replyto@(post.PostID)" href="javascript:void(0)">Reply</a><div class="clear"></div></div>
 
         <div class="add-reply">
             <form class="forum-post-new" method="post" action="/courses/@ViewContext.RouteData.Values["slug"]/discussion/reply/@post.ThreadID">
@@ -29,11 +29,17 @@
 	            <input type="hidden" class="ReplyToPostID" name="ReplyToPostID" value="@post.PostID" />
 				<input type="hidden" class="Subject"name="Subject" value="RE: @post.Subject" />
 
-                <h4>Reply to @post.User.SecureName</h4>
-
-				    <textarea id="replyto@(post.PostID)" name="PostContent" cols="78" rows="5"></textarea>
-
-	                <input type="submit" value="Submit Reply" />
+                <table>
+                    <tr>
+                        <th>
+                            <img src="@Users.GetLoggedInUser().GetProfileImageUrl(40,40)" alt="@Users.GetLoggedInUser().SecureName" />
+                        </th>
+                        <td>
+                            <textarea id="replyto@(post.PostID)" name="PostContent" cols="50" rows="8"></textarea>
+                            <input type="button" class="d-button action reply-button" value="Add Reply" />
+                        </td>
+                    </tr>
+                </table>
 
             </form>
         </div>

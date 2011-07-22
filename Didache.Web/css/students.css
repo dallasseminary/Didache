@@ -535,6 +535,8 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
 		}
 		.task-interaction-list .task-interaction-text {
 			margin: 10px 0 0 0;
+			font-size: 12px;
+			color: #555;
 		}	
 		
 /* super overrider */
@@ -548,7 +550,7 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
 
 }		
 		
-.add-reply textarea {
+.add-reply textarea, .forum-post-new textarea {
 	width: 300px;
 	height: 40px;
 	border: solid 2px #eee;
@@ -719,8 +721,8 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
 	    overflow: hidden;
 	}
 	.forum-posts .post-body {
-	    color: #666;
-	    font-size: 11px;
+	    color: #555;
+	    font-size: 12px;
 	    line-height: 145%;
 	    width: 500px;
 	}
@@ -754,7 +756,7 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
     margin: 0 0 15px;
 }
 .reply-link a, .thread-link a {
-    display: block;
+    /*display: block;
     float: left;
     padding: 5px 10px;
     background: #194e76;
@@ -762,13 +764,10 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
     font-weight: bold;
     text-transform: uppercase;
     text-decoration: none;
-	-webkit-border-radius: 4px;
-	   -moz-border-radius: 4px;
-	        border-radius: 4px;
-	text-shadow: -1px 1px 0 #222;
+	text-shadow: 0 1px 0 #222;
 	border-color: #99B0C0 #111 #111 #99B0C0;
 	border-width: 1px;
-	border-style: solid;
+	border-style: solid;*/
     
 }
 .add-reply {
@@ -779,21 +778,22 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
 .add-reply form.forum-post-new {
     height: auto;
 }
+.forum-posts .add-reply textarea {
+    width: 425px;
+    height: auto;
+}
 form.forum-post-new {
-    border-radius: 16px;
-    -webkit-background-clip: border-box;
-            background-clip: border-box;
-    padding: 10px;
-    width: 640px;
-    height: 300px;
+    padding: 0;
+    max-width: 620px;
+    display: block;
     margin: 0 auto 20px;
-    background: #DDD;
     overflow: hidden;
+    float: left;
 }
     form.forum-post-new table td 
     {
         vertical-align: top;
-        padding: 16px;
+        padding: 0 16px;
     }
     form.forum-post-new input[type="text"] 
     {
@@ -803,8 +803,8 @@ form.forum-post-new {
     form.forum-post-new textarea {
         padding: 4px;
         font-size: 13px;
-        margin: auto auto;
-        max-width: 632px;
+        margin: auto auto 12px;
+        width: 550px;
     }
     form.forum-post-new input[type="submit"] 
     {
