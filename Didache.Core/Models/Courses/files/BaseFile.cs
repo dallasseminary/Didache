@@ -29,7 +29,7 @@ namespace Didache {
 				string ext = (Filename.IndexOf(".") > -1) ? Filename.Substring(Filename.LastIndexOf(".") + 1) : "";
 				string fileType = "";
 
-				switch (ext) {
+				switch (ext.ToLower()) {
 					default:
 						fileType = "unknown";
 						break;
