@@ -4,9 +4,10 @@
 	
 	List<VideoInfo> Videos = new List<VideoInfo>();
 
-	string externalThumbBase = "http://dtsoe.s3.amazonaws.com"; // "http://oefiles.dts.edu";
+	string externalThumbBase = "http://oefiles.dts.edu"; // "http://dtsoe.s3.amazonaws.com"; // "http://oefiles.dts.edu";
 	string xmlPath = System.Web.HttpContext.Current.Server.MapPath(String.Format("~/supportfiles/{0}/Titles/en-US.xml", Model.Task.Course.CourseCode));
 
+	// Response.Write(xmlPath);
 	
 	if (Request.Url.Host == "online.dts.edu") {
 		xmlPath = @"e:\websites\my.dts.edu\web\playerfiles\" + Model.Task.Course.CourseCode + @"\titles\en-US.xml";
@@ -53,7 +54,7 @@
 @foreach (VideoInfo v in Videos) {
 	<div class="video">
 
-		<div class="video-thumb"  title="You have watched about @((Double)v.Minutes*(Double)v.PercentComplete/100) out of the @v.Minutes minutes in this video">
+		<div class="video-thumb" @* title="You have watched about @((Double)v.Minutes*(Double)v.PercentComplete/100) out of the @v.Minutes minutes in this video" *@>
 			<div class="video-options-container" style="background-image:url(@v.ThumbnailUrl);">
 				<div class="video-options">
 					<a class="icon watchvideo" target="_blank" href="https://my.dts.edu/player4/#course=@Model.Task.Course.CourseCode&unit=@Model.Task.Unit.SortOrder&video=@v.SortOrder">watch</a>

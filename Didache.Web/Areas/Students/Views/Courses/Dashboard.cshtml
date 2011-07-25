@@ -4,67 +4,24 @@
 	ViewBag.Title = Model.CourseCode + Model.Section + " " + Resources.labels.coursetabs_dashboard;
 }
 
-<div class="page-wide">
+<div class="page-wide  page-split">
 
 	@Html.Partial("_CourseHeader", Model)
 	@Html.Partial("_CourseMenu")
 
 	<div class="main-column">
-
 		
-		@{ CourseFileAssociation syllabus = new DidacheDb().CourseFileAssociations.SingleOrDefault(cfa => cfa.CourseFileGroup.CourseID == Model.CourseID && cfa.CourseFile.Title.Contains("Syllabus"));}
-		@if (syllabus != null) {
-			<a href="@syllabus.CourseFile.FileUrl">Syllabus</a>
-		}
-		
-		@*
-		<div>
-		@foreach (CourseUserGroup user in Courses.get(Users.GetLoggedInUser().UserID)) {
+		@Html.Partial("_CourseDashboard", Model)
 
-		}
-		</div>
-		*@
-
-		<div class="block-list-header"><h3>@Resources.labels.courses_heading_dashboard</h3></div>
-		<div class="block-list">
-
-	
-			@*
-			@foreach (ActivityStreamItemBase item in ActivityStream.GetUsersItems(Model.CourseID)) {
-				<div class="activity">
-					<span class="activity-text">@Html.Raw(item.FormatActivity())</span>
-					<span class="activity-date">@item.ActivityDate</span>
-				</div>
-			} 
-			*@
-
-
-    
-			<div class="block-list-item">
-				<div class="task-info">&nbsp;</div>
-				<div class="task-details">
-					<div class="task-instructions">
-						<ul>
-						@foreach (UserTaskData task in Courses.GetImportantTasksForUser(Model.CourseID)) {
-        
-							<li class="task-name">
-								<strong>@task.Task.DueDate.Value.ToShortDateString()</strong> 
-							@task.Task.Name</li>
-						}
-						</ul>
-					</div>
-				</div>
-			</div>
-
-		</div>
 	</div>
 	<div class="sub-column">
-		<div id="course-description-header" class="header">
-			<h4>@Resources.labels.courses_heading_coursedesc</h4>
+		
+		<div class="course-description">
+			<h3>@Resources.labels.courses_heading_coursedesc</h3>
+		
+			<p>@Html.Raw(Utility.StripHtml(Model.Description))</p>
 		</div>
-		<div class="list">
-			<p>@Html.Raw(Model.Description)</p>
-		</div>
+		
 	</div>
 	
 	<div class="clear"></div>

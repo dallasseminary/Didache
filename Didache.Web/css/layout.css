@@ -461,3 +461,101 @@ a {
 	background: #F4F43D;
 	border: solid 1px #E0C79F;
 }
+
+
+.course-description {
+	padding: 10px;
+}
+.course-description p {
+	font-size: 12px;
+}
+
+
+/* dashboards */
+.course-dashboard{
+}
+.course-dashboard h3 {
+	font-size: 13px;
+	font-weight: bold;
+	color: #333;
+}
+
+.course-dashboard-info {
+	width: 320px;
+	float: left;
+}
+	.course-dashboard-downloads {
+		margin: 0 0 20px 0;
+	}
+	.course-dashboard-assignments {
+		margin: 0 0 20px 0;
+	}
+	.course-dashboard-assignments .assigment {
+		overflow: hidden;
+	}		
+	.course-dashboard-assignments .due-date {
+		display: block;
+		float: left;
+		width: 80px;
+		color: #777;
+	}			
+	.course-dashboard-assignments .name {
+		display: block;
+		float: left;
+		width: 200px;
+		color: #222;		
+		font-weight: bold;
+	}				
+
+.course-dashboard-people {
+	width: 220px;
+	float: right;
+}
+	.user-list-large, .user-list-small {
+		clear: both;
+		margin: 0 0 20px 0;
+	}
+
+	.user-list-large .user {
+		height: 40px;
+		margin: 0 10px 10px 0;
+	}
+	.user-list-large .user a {
+		display: block;
+	}	
+	.user-list-large .user a {
+		display: block;
+		overflow: hidden;
+	}	
+	.user-list-large .user a img {
+		width: 40px;
+		height: 40px;
+		margin: 0 10px 0 0;
+		float: left;
+	}	
+	.user-list-large .user a span {
+		width: 160px;
+		height: 20px;
+		margin: 14px 0 0 0;
+		float: left;
+		color: #777;
+	}				
+	
+	.user-list-small .user {
+		float: left;
+		width: 40px;
+		height: 40px;
+		margin: 0 10px 10px 0;
+	}
+
+.home-dashboard {
+	
+	padding: 0 0 10px 0;
+	margin: 0 0 10px 0;
+}
+	
+.home-dashboard h2 {
+	background: #eee;
+	padding: 20px;
+	margin: 0 0 10px;
+}

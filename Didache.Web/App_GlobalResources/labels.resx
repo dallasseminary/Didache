@@ -477,4 +477,25 @@
   <data name="coursetabs_tools_desc" xml:space="preserve">
     <value>Downloads, Calendars, and RSS feeds</value>
   </data>
+  <data name="labels_dashboard_downloadallfiles" xml:space="preserve">
+    <value>Download All Files</value>
+  </data>
+  <data name="labels_dashboard_facilitators" xml:space="preserve">
+    <value>Faciliators</value>
+  </data>
+  <data name="labels_dashboard_faculty" xml:space="preserve">
+    <value>Faculty</value>
+  </data>
+  <data name="labels_dashboard_groupmembers" xml:space="preserve">
+    <value>Group Members</value>
+  </data>
+  <data name="labels_dashboard_keyassignments" xml:space="preserve">
+    <value>Important Assignments</value>
+  </data>
+  <data name="labels_dashboard_keydownloads" xml:space="preserve">
+    <value>Downloads</value>
+  </data>
+  <data name="labels_dashboard_syllabus" xml:space="preserve">
+    <value>Syllabus</value>
+  </data>
 </root>

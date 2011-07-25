@@ -6,7 +6,15 @@ using System.Text;
 namespace Didache {
 	public class CourseUsers {
 
-		public static void AddUserToCourse(int courseID, int userID, int groupID, CourseUserRole userRole) {
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="courseID"></param>
+		/// <param name="userID"></param>
+		/// <param name="groupID"></param>
+		/// <param name="userRole"></param>
+		/// <returns>Whether or not the user was added (false = just updated)</returns>
+		public static bool AddUserToCourse(int courseID, int userID, int groupID, CourseUserRole userRole) {
 
 			DidacheDb db = new DidacheDb();
 
@@ -16,6 +24,9 @@ namespace Didache {
 
 				// update the group
 				courseUser.GroupID = groupID;
+				db.SaveChanges();
+
+				return false;
 			} else {
 				courseUser = new CourseUser() {
 					UserID = userID,
@@ -63,11 +74,12 @@ namespace Didache {
 					}
 				}
 
-				
+				db.SaveChanges();
+				return true;
 
 			}
 
-			db.SaveChanges();
+			
 
 
 		}

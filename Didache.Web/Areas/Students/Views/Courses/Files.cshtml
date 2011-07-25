@@ -36,7 +36,16 @@
 	</div>
 
 	<div class="sub-column">
-		<div id="all-downloads" class="header"><h4><a href="/courses/downloadall/@Model.Slug-Files.zip">Download all files</a></h4></div>
+		
+		<h2>@Resources.labels_dashboard_keydownloads</h2>
+		
+		@{ CourseFileAssociation syllabus = new DidacheDb().CourseFileAssociations.SingleOrDefault(cfa => cfa.CourseFileGroup.CourseID == Model.CourseID && cfa.CourseFile.Title.Contains("Syllabus"));}
+		@if (syllabus != null) {
+			<a class="d-button" href="@syllabus.CourseFile.FileUrl">@Resources.labels_dashboard_syllabus</a>
+		}
+
+		<a href="/courses/downloadall/@Model.Slug-Files.zip">@Resources.labels_dashboard_downloadallfiles</a>
+		
 	</div>
 
 	<div class="clear"></div>

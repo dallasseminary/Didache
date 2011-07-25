@@ -78,9 +78,10 @@ namespace Didache  {
 			return new DidacheDb().CourseUsers
 				.Include("User")
 				.Where(cu => cu.CourseID == courseID)
-				.OrderBy(cu => cu.RoleID)
-					.ThenBy(cu => cu.GroupID)
-					.ThenBy(cu => cu.User.LastName)
+				.OrderBy(cu => cu.User.LastName)
+				//.OrderBy(cu => cu.RoleID)
+				//	.ThenBy(cu => cu.GroupID)
+				//	.ThenBy(cu => cu.User.LastName)
 				.ToList();
 		}
 
