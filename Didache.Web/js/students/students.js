@@ -48,12 +48,27 @@ jQuery(document).ready(function ($) {
 
 	// open/close threads
 	$('div.task-interaction .total-replies').toggle(function () {
-		$(this).closest('.task-interaction-thread').find('.task-interaction-list').slideDown();
+		$(this)
+			.closest('.task-interaction-thread')
+				.find('.task-interaction-list')
+					.slideDown()
+				.end()
+			.find('.task-interaction-main .task-interaction-text')
+				.fadeIn();
 	}, function () {
-		$(this).closest('.task-interaction-thread').find('.task-interaction-list').slideUp();
+		$(this)
+			.closest('.task-interaction-thread')
+				.find('.task-interaction-list')
+					.slideUp()
+			.end()
+			.find('.task-interaction-main .task-interaction-text')
+				.fadeOut();
 	});
+
 	$('.add-reply .collapse').click(function () {
-		$(this).closest('.task-interaction-list').slideUp();
+		$(this)
+		closest('.task-interaction-list')
+				.slideUp();
 	});
 
 	// do reply

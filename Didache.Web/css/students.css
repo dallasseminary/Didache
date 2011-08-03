@@ -475,6 +475,7 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
 			float: left;
 			width: 480px;
 			margin: 0 0 0 10px;
+			
 		}	
 		.task-interaction-main .task-interaction-meta {		
 			overflow: hidden;		
@@ -496,10 +497,11 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
 		}
 		.task-interaction-main .task-interaction-text {
 			margin: 10px 0 0 0;
+			display: none;
 		}
 	.task-interaction-list {
 		margin: 0 0 0 60px;
-		
+		display: none;
 	}
 		.task-interaction-post {
 			border-top: solid 1px #ddd;
@@ -818,7 +820,7 @@ a.cancel-thread {
     top: 20px;
     right: 20px;   
 }
-
+/*
 .task-submit {
 	color: #fff;
 	margin-top: 10px;
@@ -838,3 +840,4 @@ a.cancel-thread {
 .task-submit:active {
 	border-color: #357318 #A7DB8F #A7DB8F #357318;
 }
+*/

@@ -122,7 +122,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 											.Include("User")
 											.SingleOrDefault(cu => cu.UserID == userID && cu.CourseID == courseID && cu.RoleID == roleID);
 
-			return Json(serializer.Serialize(new { CourseUser = courseUser, Added = added }));
+			return Json(serializer.Serialize(courseUser));
 		}
 
 

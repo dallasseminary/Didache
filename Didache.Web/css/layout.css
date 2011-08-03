@@ -354,10 +354,12 @@ a {
 	background: #eee;
 	border: solid 1px #ddd;
 	border-radius: 2px;
+	color: #333;
+	cursor: pointer;
 }
 .d-button:hover, a.d-button:hover {
 	border-color: #ccc;
-	box-shadow: rgba(50,50,50,0.2) 0 2px 1px;
+	box-shadow: rgba(50,50,50,0.2) 0 1px 1px;
 }
 .d-button.action, a.d-button.action {
 	background: #59b14d;
@@ -463,10 +465,10 @@ a {
 }
 
 
-.course-description {
+.sub-column-padding {
 	padding: 10px;
 }
-.course-description p {
+.sub-column-padding p {
 	font-size: 12px;
 }
 
@@ -478,6 +480,8 @@ a {
 	font-size: 13px;
 	font-weight: bold;
 	color: #333;
+	border-bottom: solid 1px #333;
+	padding: 0 0 4px 0;
 }
 
 .course-dashboard-info {
@@ -490,30 +494,47 @@ a {
 	.course-dashboard-assignments {
 		margin: 0 0 20px 0;
 	}
-	.course-dashboard-assignments .assigment {
+	.course-dashboard-assignments .assignment {
 		overflow: hidden;
+		position: relative;
+		margin: 0 0 10px 0;
 	}		
 	.course-dashboard-assignments .due-date {
 		display: block;
-		float: left;
+		position: absolute;
+		top: 0;
+		right: 0;		
 		width: 80px;
-		color: #777;
-	}			
+		color: #aaa; /* #5E98CA; */
+		text-align: right;
+	}
+	.course-dashboard-assignments .overdue {		
+		color: #BD1816;
+	}
 	.course-dashboard-assignments .name {
-		display: block;
-		float: left;
+		display: block;		
 		width: 200px;
-		color: #222;		
+		color: #444;		
 		font-weight: bold;
-	}				
+	}	
+	.course-dashboard-assignments .description {
+		display: block;		
+		width: 320px;
+		color: #444;		
+		height: 14px;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}					
 
 .course-dashboard-people {
-	width: 220px;
+	width: 200px;
 	float: right;
+	padding: 0 10px;
+	background: #f7f7f7;
 }
 	.user-list-large, .user-list-small {
 		clear: both;
-		margin: 0 0 20px 0;
+		margin: 10px 0 ;
 	}
 
 	.user-list-large .user {
@@ -534,7 +555,7 @@ a {
 		float: left;
 	}	
 	.user-list-large .user a span {
-		width: 160px;
+		width: 140px;
 		height: 20px;
 		margin: 14px 0 0 0;
 		float: left;
@@ -555,7 +576,10 @@ a {
 }
 	
 .home-dashboard h2 {
-	background: #eee;
+	background: #F1F2F4;
 	padding: 20px;
-	margin: 0 0 10px;
+	margin: 0 -20px 10px -20px;
+}
+.home-dashboard h2 a {
+	color: #111111;
 }

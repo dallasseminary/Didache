@@ -219,12 +219,10 @@
 				data: { userID: userID, roleID: roleID, courseID: $('#CourseID').val(), groupID: 0, remove: false },
 				success: function (d) {
 					console.log(d);
-
-					if (d.Added) {
-						var userRow = addUser(d.User, true);
-						userRow.effect('highlight');
-					}
-
+					
+					var userRow = addUser(d, true);
+					userRow.effect('highlight');
+					
 					$('#user-search-results').hide();
 				}
 			});

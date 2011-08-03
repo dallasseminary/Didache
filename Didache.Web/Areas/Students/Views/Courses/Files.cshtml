@@ -10,8 +10,7 @@
 
 
 	<div class="main-column">
-		<div class="block-list-header"><h3>@Resources.labels.courses_heading_coursefiles</h3></div>
-		<div id="course-roster" class="block-list">
+		<div id="course-files" class="block-list">
 
 		@foreach (CourseFileGroup group in ViewBag.CourseFileGroups) {
 			<div class="course-filegroup block-list-item">
@@ -37,15 +36,17 @@
 
 	<div class="sub-column">
 		
-		<h2>@Resources.labels_dashboard_keydownloads</h2>
-		
-		@{ CourseFileAssociation syllabus = new DidacheDb().CourseFileAssociations.SingleOrDefault(cfa => cfa.CourseFileGroup.CourseID == Model.CourseID && cfa.CourseFile.Title.Contains("Syllabus"));}
-		@if (syllabus != null) {
-			<a class="d-button" href="@syllabus.CourseFile.FileUrl">@Resources.labels_dashboard_syllabus</a>
-		}
+		<div class="sub-column-padding">
 
-		<a href="/courses/downloadall/@Model.Slug-Files.zip">@Resources.labels_dashboard_downloadallfiles</a>
+			<h3>@Resources.labels.labels_dashboard_keydownloads</h3>
 		
+			@{ CourseFileAssociation syllabus = new DidacheDb().CourseFileAssociations.Where(cfa => cfa.CourseFileGroup.CourseID == Model.CourseID && cfa.CourseFile.Title.Contains("Syllabus")).FirstOrDefault();}
+			@if (syllabus != null) {
+				<a class="d-button" href="@syllabus.CourseFile.FileUrl">@Resources.labels.labels_dashboard_syllabus</a>
+			}
+
+			<a class="d-button" href="/courses/downloadall/@Model.Slug-Files.zip">@Resources.labels.labels_dashboard_downloadallfiles</a>
+		</div>
 	</div>
 
 	<div class="clear"></div>

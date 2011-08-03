@@ -397,7 +397,7 @@
     <value>Turn in File</value>
   </data>
   <data name="interactions_replies" xml:space="preserve">
-    <value>Replies</value>
+    <value>Open [{0} Replies]</value>
   </data>
   <data name="profile_edit_button" xml:space="preserve">
     <value>Edit Profile</value>

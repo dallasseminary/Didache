@@ -7,21 +7,24 @@
 		<div class="course-dashboard-downloads">
 			<h3>@Resources.labels.labels_dashboard_keydownloads</h3>
 
-			@{ CourseFileAssociation syllabus = new DidacheDb().CourseFileAssociations.SingleOrDefault(cfa => cfa.CourseFileGroup.CourseID == Model.CourseID && cfa.CourseFile.Title.Contains("Syllabus"));}
+			@{ CourseFileAssociation syllabus = new DidacheDb().CourseFileAssociations.Where(cfa => cfa.CourseFileGroup.CourseID == Model.CourseID && cfa.CourseFile.Title.Contains("Syllabus")).FirstOrDefault();}
 			@if (syllabus != null) {
 				<a class="d-button" href="@syllabus.CourseFile.FileUrl">@Resources.labels.labels_dashboard_syllabus</a>
 			}
 			<a class="d-button" href="/courses/downloadall/@Model.Slug-Files.zip">@Resources.labels.labels_dashboard_downloadallfiles</a>
 		</div>
 
-		<div class="course-dashboards-assignments">
+		<div class="course-dashboard-assignments">
 			<h3>@Resources.labels.labels_dashboard_keyassignments</h3>
 			
 			
 			@foreach (UserTaskData task in Courses.GetImportantTasksForUser(Model.CourseID)) {        
 				<div class="assignment">
-					<span class="due-date">@task.Task.DueDate.Value.ToShortDateString()</span> 
-					<a class="title" href="/courses/@Model.Slug/schedule/@task.UnitID/#task-@task.TaskID">@task.Task.Name</a>
+					<a class="name" href="/courses/@Model.Slug/schedule/@task.UnitID/#task-@task.TaskID">@task.Task.Name</a>
+					<span class="due-date @(task.TaskCompletionStatus == TaskCompletionStatus.NotStarted && DateTime.Now > task.Task.DueDate.Value ? "overdue" : "")">@task.Task.DueDate.Value.ToShortDateString()</span> 
+					<span class="description">
+					@Utility.StripHtml(task.Task.Instructions)
+					</span>
 				</div>
 			}
 
@@ -72,6 +75,7 @@
 			<div class="clear"></div>
 		</div>
 
+		<div class="clear"></div>
 	</div>
 
 	<div class="clear"></div>

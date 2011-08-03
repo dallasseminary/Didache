@@ -53,6 +53,12 @@ namespace Didache {
 			}
 		}
 
+		public string CourseUrl {
+			get {
+				return "/courses/" + Slug + "/";
+			}
+		}
+
 
 		// LINKAGES
 
