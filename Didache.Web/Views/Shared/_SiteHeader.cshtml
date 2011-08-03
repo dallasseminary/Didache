@@ -11,7 +11,7 @@
 			</form>
 			}
 			*@
-			<form action="/account/setlanguage/">
+			<form action="/account/setlanguage/" id="language-wrapper">
 				@Html.DropDownList("language", new List<SelectListItem> {   
 													new SelectListItem() { Value = "en-US", Text = "English" }, 
 													new SelectListItem() { Value = "es", Text = "Español (Spanish)" }, 

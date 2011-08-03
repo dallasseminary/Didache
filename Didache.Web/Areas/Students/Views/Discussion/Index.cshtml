@@ -3,7 +3,7 @@
 	ViewBag.Title = ViewBag.Course.ToString() + " Forums";
 }
 
-@Html.Partial("_CourseHeader", ViewBag.Course)
+@Html.Partial("_CourseHeader", (Course)ViewBag.Course)
 @Html.Partial("_CourseMenu")
 
 

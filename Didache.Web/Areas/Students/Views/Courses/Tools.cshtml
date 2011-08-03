@@ -15,11 +15,8 @@
 
 		<p>@Resources.labels.courses_tools_itunes_desc</p>
 
-		<ul>
-			<li>				
-				<a href="http://@(Request.Url.Host)/courses/feed/@(Users.GetLoggedInUser().UserID)/@ViewContext.RouteData.Values["slug"]-all.xml">iTunes RSS Feed</a>			
-			</li>
-		</ul>
+		<p><a href="http://@(Request.Url.Host)/courses/feed/@(Users.GetLoggedInUser().UserID)/@ViewContext.RouteData.Values["slug"]-all.xml"><img src="/css/images/itunes-badge.jpg"></a>			
+			</p>
 	
 
 		<h3>@Resources.labels.courses_tools_icalendar</h3>

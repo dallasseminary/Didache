@@ -469,7 +469,7 @@
     <value>iTunes Feed</value>
   </data>
   <data name="courses_tools_itunes_desc" xml:space="preserve">
-    <value>USe the links below to import course videos, slides, and transcripts into iTunes (or other media software) for offline viewing</value>
+    <value>Import course videos, slides, and transcripts into iTunes (or other media software) for offline viewing.</value>
   </data>
   <data name="coursetabs_tools" xml:space="preserve">
     <value>Tools</value>
