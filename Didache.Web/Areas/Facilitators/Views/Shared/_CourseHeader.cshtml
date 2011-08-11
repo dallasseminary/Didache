@@ -1,0 +1,15 @@
+﻿@model Didache.Course
+
+<div class="page-header">
+	<h2>@Model.ToString()</h2>
+</div>
+
+<ul class="page-menu">
+	@foreach(var page in new[] {
+								new {Url="tasklist", Name="Task View"},
+								new {Url="studentlist", Name="Student View"}
+	}
+	) {
+		<li><a href="/grading/@Model.Slug/@page.Url/" @(Request.Url.ToString().Contains(page.Url) ? " class=selected" : "")>@page.Name</a></li>
+ }
+</ul>

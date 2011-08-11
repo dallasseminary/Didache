@@ -1,0 +1,52 @@
+﻿@model List<Course>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="page-wide">
+	<div class="full-column">
+
+		<div class="page-header">
+			<h2>Grading</h2>
+		</div>
+
+		<h3>Courses</h3>
+		<table class="admin-list">
+		<thead>
+			<tr>
+				<th>Course</th>
+				<th>Buttons</th>
+			</tr>
+		</thead>
+
+		<tbody>
+		@foreach (Course course in Model) {
+  
+			<tr>
+				<td>@course.ToString()</td>
+				<td>
+					<a href="/grading/@course.Slug/tasklist">Task List</a>
+					<a href="/grading/@course.Slug/studentlist">Student List</a>
+
+					<a href="/courses/@course.Slug/schedule">Student Schedule</a>
+				</td>
+			</tr>	  
+  
+		}
+		</tbody>
+		</table>
+
+
+		<h3>Past Sessions</h3>
+
+		<ul>
+		@foreach (Session session in ViewBag.Sessions) {
+			<li><a href="/grading/@session.SessionID">@session.Name</a></li>
+		}
+		</ul>
+
+
+	</div>
+</div>
+

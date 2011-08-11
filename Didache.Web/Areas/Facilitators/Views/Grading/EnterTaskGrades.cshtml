@@ -1,0 +1,228 @@
+﻿@model Didache.Course
+
+@{
+	ViewBag.Title = Model.ToString() + " :: " + ((Task)ViewBag.Task).Name;
+}
+
+
+<div class="page-wide">
+	@Html.Partial("_CourseHeader", Model)
+
+	<div class="full-column">
+
+
+		<h2>Grades for @ViewBag.Task.Name</h2>
+		
+		@{ 
+			CourseUserGroup lastGroup = null;
+			int lastGroupID = -1;
+		}
+		
+
+
+			@foreach (CourseUser user in ViewBag.CourseUsers) {
+			   UserTaskData userTaskData = ((List<UserTaskData>)ViewBag.UserTaskData).Where(utd => utd.UserID == user.UserID).FirstOrDefault();
+
+			   if (user.GroupID != lastGroupID) {
+					if (lastGroupID != -1) {
+						@Html.Raw("</tbody></table>")
+						<a class="d-button" href="/grading/@Model.Slug/downloadfiles/@userTaskData.TaskID/@user.GroupID/">Download all files in group</a>
+						<a class="d-button" href="/grading/@Model.Slug/emailgroup/@userTaskData.TaskID/@user.GroupID/">Email Grades to Group</a>			
+					}
+
+					lastGroup = user.Group;
+					lastGroupID = user.GroupID;
+					<h3>@(lastGroup != null ? lastGroup.Name : "No Group")</h3>
+					
+					if (userTaskData.Task.TaskTypeName.Contains("TurnInFile")) {
+
+					}
+	   
+					@Html.Raw("<table class=\"grading-list enter-grades\"><thead><tr>" + 
+								"<th>Name</th>" + 
+								"<th>Student Info</th>" +
+								(userTaskData.Task.TaskTypeName.Contains("TurnInFile") ? "<th>Graded</th>" : "") +						
+								"<th>Grade</th>" + 								
+								"<th>Email</th>" +
+							"</tr></thead>")
+			   }	   
+	   
+	   
+				<tr>
+					<td class="name">@user.User.FormattedName</td>
+					@if (userTaskData != null) {
+					<td class="student-info">						
+						
+							@if (userTaskData.StudentFileID > 0 && userTaskData.StudentFile != null) {
+								<a href="@userTaskData.StudentFile.FileUrl">Student File</a> <a href="/grading/@Model.Slug/removestudentfile/@userTaskData.TaskID/@user.UserID" class="d-button">Remove</a>
+							}
+
+
+							@if (userTaskData.Task.TaskTypeName.IndexOf("CommentOn") > -1) {
+								<a href="/grading/@Model.Slug/userinteractions/@userTaskData.TaskID/@user.UserID/" target="_blank">Interactions</a>
+							}
+							
+						
+					</td>
+					if (userTaskData.Task.TaskTypeName.IndexOf("TurnInFile") > -1) {
+					<td class="grader-file">
+								
+							@if (userTaskData.GraderFileID > 0 && userTaskData.GradedFile != null) {
+								<a href="@userTaskData.GradedFile.FileUrl">Grader File</a> <a href="/grading/@Model.Slug/removegraderfile/@userTaskData.TaskID/@user.UserID" class="d-button">Remove</a>
+							} else {
+								<form class="grading-form" enctype="multipart/form-data" action="/grading/@Model.Slug/uploadgraderfile/@userTaskData.TaskID/@userTaskData.UserID" method="post">
+									<input type="file" name="GradedFile" style="width:100px;" />
+									<input type="submit" value="Upload" class="d-button action" />
+								</form>
+							}
+					</td>
+					}
+					<td class="grade">
+					
+						<input data-action="/grading/@Model.Slug/UpdateUserTaskStatus/@userTaskData.TaskID/@userTaskData.UserID" 
+								class="grader-taskstatus" type="checkbox" value="@userTaskData.TaskStatus" @(userTaskData.TaskCompletionStatus == TaskCompletionStatus.Completed ? " checked" : "")  @(userTaskData.TaskCompletionStatus == TaskCompletionStatus.Skipped ? " disabled" : "") name="TaskStatus" />						
+						
+						<input data-action="/grading/@Model.Slug/UpdateUserTaskNumericGrade/@userTaskData.TaskID/@userTaskData.UserID" 
+								class="grader-numericgrade"  type="text" value="@userTaskData.NumericGrade" name="NumericGrade" placeholder="0-100" style="width: 30px;" />
+
+
+					</td>
+					<td class="send">
+						<button @(userTaskData.GradeSentDate.HasValue ? "" : " disabled") class="d-button send-grade">Email Grade</button>
+					</td>
+					}
+				</tr>
+			}	
+			@Html.Raw("</tbody></table>")	
+
+			<h2>Mass Upload</h2>
+
+			<p>Upload a ZIP file with a bunch of graded files. These should end with some numbers [123,234] which are the task and student ID</p>
+
+			<form id="mass-upload" enctype="multipart/form-data" action="/grading/@Model.Slug/massupload/@ViewBag.Task.TaskID" method="post">
+				<input type="file" name="massfiles" />
+				<br />
+				<input type="submit" value="Upload Files" />
+			</form>
+
+	</div>
+</div>
+
+<script>
+	jQuery(document).ready(function ($) {
+
+		// status
+		$('.grader-taskstatus').click(function () {
+
+			// send status update
+			var statusCheckbox = $(this),
+				data = { TaskStatus:
+							statusCheckbox.is(':disabled') ? -1 :
+								statusCheckbox.is(':checked') ? 1 : 0
+				},
+				url = statusCheckbox.data('action');
+
+			$.ajax({
+				url: url,
+				type: 'post',
+				data: data,
+				success: function (data) {
+					hideLoading();
+					statusCheckbox.closest('tr').effect('highlight');
+				}
+			});
+
+		});
+
+		// grade
+		$('.grader-numericgrade').keydown(function (e) {
+			$(this).closest('tr')
+				.data('sending',false)
+				.addClass('dirty');
+
+			if (e.keyCode == '13') {
+				updateGrade($(this));
+			}
+		});
+		$('.grader-numericgrade').bind('change blur', function () {
+			updateGrade($(this));
+		});
+
+		function updateGrade(numericGrade) {
+
+			// send status update
+			var 
+				data = { NumericGrade: numericGrade.val() },
+				url = numericGrade.data('action'),
+				row = numericGrade.closest('tr'),
+				needsUpdate = row.hasClass('dirty') && !row.data('sending');
+
+			if (needsUpdate) {
+				row.data('sending', true)
+
+				$.ajax({
+					url: url,
+					type: 'post',
+					data: data,
+					success: function (data) {
+						hideLoading();
+
+						row
+							.data('sending',false)
+							.removeClass('dirty')
+							.effect('highlight');
+					}
+				});
+			}
+		}
+
+
+		$('.grading-form').each(function () {
+			var form = $(this);
+			// check for files
+			if (form.find('input[type="file"]').length == 0) {
+
+				// do ajax submit
+				form.submit(function (e) {
+
+					e.preventDefault();
+
+					//var data = form.serialize();
+					//console.log(data);
+
+					var data = {
+						NumericGrade: form.find('input[name="NumericGrade"]').val(),
+						TaskStatus:
+							form.find('input[name="TaskStatus"]').is(':disabled') ? -1 :
+								form.find('input[name="TaskStatus"]').is(':checked') ? 1 : 0,
+						IsAsync: true
+					};
+
+					console.log(data);
+
+
+					showLoading('Saving');
+
+
+
+					$.ajax({
+						url: form.attr('action'),
+						type: 'post',
+						data: data, //JSON.stringify(),
+						success: function (data) {
+							//console.log(data);
+							hideLoading();
+							form.closest('tr').effect('highlight');
+						}
+					});
+
+
+					return false;
+					//showLoading('Saving');
+				});
+
+
+			}
+		});
+	});
+</script>

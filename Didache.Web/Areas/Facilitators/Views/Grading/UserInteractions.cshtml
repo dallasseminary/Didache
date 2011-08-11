@@ -1,0 +1,101 @@
+﻿@model List<InteractionThread>
+
+@{
+	Layout = "";
+    ViewBag.Title = "UserInteractions";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<style>
+	body {
+		font-family: helvetica, arial;
+		font-size: 12px;
+	}
+	
+	.interaction-thread {
+		border: solid 20px #ddd;
+		margin: 20px;
+		width: 570px;
+	}
+	.interaction-post {
+		border-top: solid 1px #666;
+		padding: 10px;
+		overflow: hidden;
+	}
+	
+	.interaction-post.reply {
+		margin-left: 40px;
+	}
+	
+	.interaction-image {
+		float: left;
+		width: 40px;
+	}
+	.interaction-main {
+		float: left;
+		width: 400px;
+		margin: 0 0 0 20px;
+	}	
+	
+	.interaction-info {
+		background: #eee;
+		padding: 5px;
+		margin: 10px 0 0;
+	}
+	
+	.interaction-thread .interaction-post:first-child {
+		border-top: 0;
+	}	
+	.interaction-thread .interaction-post:nth-child(even){
+		xbackground: #efefef;
+	}		
+	
+	.user-highlight {
+		background: #ffedba;
+	}	
+	</style>
+</head>
+<body>
+
+	<h1>@ViewBag.User.FormattedName</h1>
+
+	<h2>Unit @ViewBag.Unit.SortOrder - @ViewBag.Task.Name</h2>
+	<p>Total replies: @ViewBag.TotalReplies </p>
+	<p>Total words: @ViewBag.TotalWords </p>
+
+	@foreach (InteractionThread thread in Model) {
+		<div class="interaction-thread">
+			@foreach (InteractionPost post in thread.Posts) {
+				<div class="interaction-post @(post.UserID == ViewBag.User.UserID ? " user-highlight" : "") @( thread.Posts.First() != post ? "reply" : "") ">
+					<div class="interaction-image">
+						<a href="@post.User.ProfileDisplayUrl"><img src="@post.User.GetProfileImageUrl(40,40)" width="40" height="40" /></a>
+					</div>
+					<div class="interaction-main">
+						<div class="interaction-header">
+							<a href="@post.User.ProfileDisplayUrl">@post.User.FormattedName</a>
+						</div>
+						<div class="interaction-body">
+							@Html.Raw(post.PostContentFormatted)
+						</div>
+						@if (post.FileID > 0) {
+						<div class="interation-file">
+							<a href="@post.File.FileUrl">Download</a>
+						</div>
+						}
+						@if (post.UserID == ViewBag.User.UserID) {
+						<div class="interaction-info">
+							Word count: @(Utility.WordCount(post.PostContentFormatted))
+						</div>
+						}
+					</div>
+				</div>
+			}
+		</div>
+	}
+
+	
+</body>
+</html>
