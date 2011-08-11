@@ -6,12 +6,38 @@ using System.Text;
 namespace Didache {
 	public class Tasks {
 
-		public static List<UserTaskData> GetUserTaskDataInUnit(int unitID, int userID) {
-			return new DidacheDb().UserTasks
-				.Include("Task")
-				.Where(d => d.UserID == userID && d.Task.UnitID == unitID)
-				.OrderBy(d => d.Task.SortOrder)
-				.ToList();
+		public static List<UserTaskData> GetUserTaskDataInUnit(int unitID, int userID, bool createFakeData) {
+
+			DidacheDb db = new DidacheDb();
+			List<UserTaskData> userTasks = null;
+
+			if (createFakeData) {
+				// for graders
+				List<Task> tasks = db.Tasks.Where(t => t.UnitID == unitID).OrderBy(t => t.SortOrder).ToList();
+
+				userTasks = new List<UserTaskData>();
+				foreach (Task task in tasks) {
+					UserTaskData utd = new UserTaskData();
+					utd.Task = task;
+					utd.TaskID = task.TaskID;
+					utd.CourseID = task.CourseID;
+					utd.UnitID = task.UnitID;
+					utd.TaskCompletionStatus = TaskCompletionStatus.NotStarted;
+
+					userTasks.Add(utd);
+				}
+
+			}
+			else {
+				userTasks = db.UserTasks
+					.Include("Task")
+					.Where(d => d.UserID == userID && d.Task.UnitID == unitID)
+					.OrderBy(d => d.Task.SortOrder)
+					.ToList();
+
+			}
+
+			return userTasks;
 		}
 
 		public static UserTaskData GetUserTaskData(int taskID, int userID) {

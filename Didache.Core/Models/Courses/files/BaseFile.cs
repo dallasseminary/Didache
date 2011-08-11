@@ -24,6 +24,12 @@ namespace Didache {
 		[ScriptIgnore]
 		public virtual User User { get; set; }
 
+		public string StoredFilename {
+			get {
+				return UniqueID.ToString() + new System.IO.FileInfo(Filename).Extension;
+			}
+		}
+
 		public string FileType {
 			get {
 				string ext = (Filename.IndexOf(".") > -1) ? Filename.Substring(Filename.LastIndexOf(".") + 1) : "";
@@ -105,7 +111,13 @@ namespace Didache {
 			return "0 Bytes";
 		}
 
-		public virtual string PhysicalPath { get { return ""; } }
+		public virtual string PhysicalPath { 
+			get { 
+				
+				
+				return ""; 
+			} 
+		}
 
 	}
 }

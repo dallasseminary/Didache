@@ -43,13 +43,20 @@ namespace Didache {
 		public DateTime EndDate { get; set; }
 
 		//[Required]
+		[AllowHtml]
 		[DataType(DataType.MultilineText)]
-		[Display(Name = "Description")]		
+		[Display(Name = "Description")]
+		[MaxLength]
 		public string Description { get; set; }
 
 		public string Slug {
 			get {
-				return (Session.SessionCode + "-" + CourseCode + Section).ToLower();
+				if (Session != null) {
+					return (Session.SessionCode + "-" + CourseCode + Section).ToLower();
+				}
+				else {
+					return CourseCode + Section;
+				}
 			}
 		}
 
@@ -76,6 +83,9 @@ namespace Didache {
 
 		[ScriptIgnore]
 		public virtual ICollection<CourseUserGroup> CourseUserGroups { get; set; }
+
+		[ScriptIgnore]
+		public virtual ICollection<CourseFileGroup> CourseFileGroups { get; set; }
 
 		/*
 		public List<User> FacultyUsers {
@@ -149,7 +159,7 @@ namespace Didache {
 
 
 		public override string ToString() {
-			return CourseCode + " - " + Name;
+			return CourseCode + Section + " - " + Name;
 		}
 	}
 

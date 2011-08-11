@@ -42,7 +42,7 @@ namespace Didache {
 		[DataType(DataType.MultilineText)]
 		[AllowHtml]
 		[Display(Name = "Instructions")]
-		[StringLength(100000)]
+		[MaxLength]
 		public string Instructions { get; set; }
 
 		[ScriptIgnore]

@@ -23,5 +23,10 @@ namespace Didache {
 				return Path.Combine(Settings.StudentFilesLocation, UniqueID + Path.GetExtension(Filename));
 			}
 		}
+
+		public static string GetFriendlyFilename(Course course, Unit unit, Task task, User user, string filename) {
+			return course.CourseCode + course.Section + "-Unit" + unit.SortOrder + "-" + task.Name.Replace(" ", "-") + "-" + user.FullName.Replace(" ", "-") + "[" +task.TaskID + "," + user.UserID + "]" + Path.GetExtension(filename);
+		}
+
 	}
 }

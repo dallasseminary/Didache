@@ -20,7 +20,7 @@ namespace Didache {
 		}
 
 
-		public static string Grader {
+		public static string Facilitator {
 			get {
 				return "oe-grader";
 			}
@@ -28,7 +28,7 @@ namespace Didache {
 
 		public static string[] SiteRoles {
 			get {
-				return new string[] { Administrator, Builder, Grader };
+				return new string[] { Administrator, Builder, Facilitator };
 			}
 		}
 

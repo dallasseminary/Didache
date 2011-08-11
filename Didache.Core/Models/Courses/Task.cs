@@ -33,7 +33,7 @@ namespace Didache {
 
 		[DataType(DataType.MultilineText)]
 		[AllowHtml]
-		[StringLength(100000)]
+		[MaxLength]
 		public string Instructions { get; set; }
 
 		//[DataType(DataType.DateTime)]
