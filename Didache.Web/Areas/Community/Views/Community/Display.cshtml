@@ -69,7 +69,7 @@
 					@Resources.labels.profile_label_birthday
 				</th>
 				<td>
-					@(Model.BirthDate.HasValue ? Model.BirthDate.Value.ToShortDateString() : "")
+					@(Model.BirthDate.HasValue ? Model.BirthDate.Value.ToString("MMMM d") : "")
 				</td>
 			</tr>
 			@if (!Model.Hometown.IsEmpty()) {

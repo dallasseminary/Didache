@@ -1,0 +1,63 @@
+﻿@model List<Course>
+
+@{
+    ViewBag.Title = "CloneCourse";
+}
+
+<div class="page-wide">
+	<div class="full-column">
+		
+		<div class="page-header">
+			<h2>Clone Course</h2>
+		</div>
+
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+		<table class="admin-table">
+			<tr>
+				<th>Course to Clone</th>
+				<td>
+					<select name="courseID" id="courseID">
+					@{ int previousSessionID = -1; }
+					@foreach (Course course in Model) {
+						if (previousSessionID != course.SessionID) {
+							if (previousSessionID > -1) {
+								@Html.Raw("</optgroup>")
+							}
+							@Html.Raw("<optgroup label=\"" + course.Session.Name + "\">")
+							previousSessionID = course.SessionID;
+						}
+						<option value="@course.CourseID">@course.CourseCode@course.Section</option>	
+					}
+					@Html.Raw("</optgroup>")
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th>Into Session</th>
+				<td>
+					<select name="sessionID" id="sessionID">
+					
+					@foreach (Session session in ViewBag.Sessions) {
+						
+						<option value="@session.SessionID">@session.Name</option>	
+					}
+					</select>				
+				</td>
+			
+			</tr>
+			<tr>
+				<th>New Start Date</th>
+				<td>
+					<input type="text" class="date" value="@( ((List<Session>)ViewBag.Sessions)[0].StartDate.ToShortDateString())" id="startDate" name="startDate" />
+				</td>			
+			</tr>
+			
+		</table>
+
+	<input type="submit" class="d-button action" value="Clone Course" />
+}
+	</div>
+</div>

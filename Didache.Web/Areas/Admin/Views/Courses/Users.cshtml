@@ -178,12 +178,16 @@
 		// search for users
 		$('#user-search-button').click(function () {
 
-			$('#user-search-results').html('Searching...');
+			$('#user-search-results').empty();
+			showLoading('Searching...');
 
 			$.ajax({
 				url: '/api/FindUsers/',
 				data: { query: $('#user-search-text').val() },
 				success: function (d) {
+
+					hideLoading();
+
 					var html = '',
 						user = null;
 					for (var i = 0, il = d.length; i < il; i++) {
@@ -209,6 +213,10 @@
 
 		// add user to role buttons
 		$('#user-search-results').delegate('.add-options span', 'click', function () {
+
+			showLoading('Adding user...');
+			$('#user-search-results').hide();
+
 			var roleButton = $(this),
 				roleID = roleButton.data('roleid'),
 				userID = roleButton.closest('.user-search-result').data('userid');
@@ -219,11 +227,11 @@
 				data: { userID: userID, roleID: roleID, courseID: $('#CourseID').val(), groupID: 0, remove: false },
 				success: function (d) {
 					console.log(d);
-					
+
 					var userRow = addUser(d, true);
 					userRow.effect('highlight');
-					
-					$('#user-search-results').hide();
+
+					hideLoading();
 				}
 			});
 		});
