@@ -11,13 +11,14 @@
 			</form>
 			}
 			*@
+			@{ string userLanguage = Users.GetUserLanguage(); }
 			<form action="/account/setlanguage/" id="language-wrapper">
 				@Html.DropDownList("language", new List<SelectListItem> {   
-													new SelectListItem() { Value = "en-US", Text = "English" }, 
-													new SelectListItem() { Value = "es", Text = "Español (Spanish)" }, 
-													new SelectListItem() { Value = "ar", Text = "العربية (Arabic)" }, 
-													new SelectListItem() { Value = "zh-CN", Text = "汉语[简体字] (Simplified)" }, 
-													new SelectListItem() { Value = "zh-TW", Text = "漢語[繁體字] (Traditional)" }
+													new SelectListItem() { Value = "en-US", Text = "English", Selected = (userLanguage == "en-US")}, 
+													new SelectListItem() { Value = "es", Text = "Español (Spanish)", Selected = (userLanguage == "es") }, 
+													new SelectListItem() { Value = "ar", Text = "العربية (Arabic)", Selected = (userLanguage == "ar") }, 
+													new SelectListItem() { Value = "zh-CN", Text = "汉语[简体字] (Simplified)", Selected = (userLanguage == "zh-CN") }, 
+													new SelectListItem() { Value = "zh-TW", Text = "漢語[繁體字] (Traditional)", Selected = (userLanguage == "zh-TW") }
 												})
 
 			</form>
@@ -25,3 +26,11 @@
 		<div class="clear"></div>
 	</div>
 </div>
+
+<script>
+	jQuery(document).ready(function ($) {
+		$('#language').change(function () {
+			$(this).closest('form').submit();
+		});
+	});
+</script>

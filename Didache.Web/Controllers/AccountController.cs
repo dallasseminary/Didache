@@ -18,6 +18,35 @@ namespace Didache.Web.Controllers {
 			return View();
 		}
 
+		public ActionResult SetLanguage(string language) {			
+
+			string redirectUrl = (Request.UrlReferrer != null) ? Request.UrlReferrer.ToString() : "/";
+
+			if (User.Identity.IsAuthenticated) {
+
+				User user = db.Users.SingleOrDefault(u => u.Username == User.Identity.Name);
+				if (user != null) {
+					
+					user.Language = language;
+					db.SaveChanges();
+					Users.ClearUserCache(user);
+					
+				}
+
+				return Redirect(redirectUrl);
+
+
+			} else {
+				Response.Cookies.Add(new HttpCookie("Language", language));
+
+				return Redirect(redirectUrl);
+			}
+
+
+			
+		}
+
+
 		//
 		// POST: /Account/LogOn
 
@@ -104,6 +133,9 @@ namespace Didache.Web.Controllers {
 				UpdateModel(model);
 
 				db.SaveChanges();
+
+				// save language to cookie for logout
+				Response.Cookies.Add(new HttpCookie("Language", model.Language));
 
 				Users.ClearUserCache(model);
 

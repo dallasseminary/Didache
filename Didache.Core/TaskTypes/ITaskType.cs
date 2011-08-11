@@ -7,6 +7,6 @@ using System.Web.Mvc;
 
 namespace Didache.TaskTypes {
 	public interface ITaskType {
-		TaskTypeResult ProcessFormCollection(int taskID, int userID, FormCollection collection, HttpRequestBase request);
+		TaskTypeResult ProcessFormCollection(int taskID, int userID, FormCollection collection, HttpRequestBase request);	
 	}
 }

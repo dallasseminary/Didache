@@ -11,7 +11,7 @@
 		<div id="account-info">				
 @if (Request.IsAuthenticated) {	
 			<span class="user">@Users.GetLoggedInUser().FormattedName</span>
-			<a href="@Users.GetLoggedInUser().ProfileDisplayUrl">Profile</a>
+			<a href="@Users.GetLoggedInUser().ProfileDisplayUrl">@Resources.labels.tabs_profile</a>
 			<a href="/account/logout">@Resources.labels.login_logout</a>
 } else {	
 			<a href="/account/login">@Resources.labels.login_login</a>

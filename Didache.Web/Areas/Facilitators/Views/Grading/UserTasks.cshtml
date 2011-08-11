@@ -1,0 +1,70 @@
+﻿@model Didache.Course
+
+@{
+    ViewBag.Title = Model.ToString() + " :: " + ((User)ViewBag.User).FormattedName;
+}
+
+<style>
+.user-unit-grades {
+	border-collapse: collapse;
+}
+.user-unit-grades td {
+	border: solid 1px #666;
+	padding: 3px;
+}
+.user-unit-grades tr:nth-child(odd) {
+	background: #f7f7f7;
+}
+
+</style>
+
+
+<div class="page-wide">
+	<div class="full-column">
+
+		@Html.Partial("_CourseHeader", Model)
+		
+		<h1>@ViewBag.User.FormattedName</h1>
+
+		@{
+			Didache.Unit lastUnit = null;
+			List<UserTaskData> userTaskData = ViewBag.UserTaskData;
+		}
+		
+
+		@foreach (UserTaskData utd in userTaskData) {
+
+			if (lastUnit != utd.Unit) {
+				if (lastUnit != null) {
+					@Html.Raw("</table>")
+				}
+	
+				lastUnit = utd.Unit;
+				<h3>Unit @lastUnit.SortOrder - @lastUnit.Name</h3>
+				@Html.Raw("<table class=\"user-unit-grades grading-list\">")
+			}
+			
+			
+			<tr>
+				<td class="complete">
+					<span class="task-status status-@utd.TaskCompletionStatus.ToString().ToLower()"></span>
+				</td>				
+				<td class="name">@utd.Task.Name</td>				
+				<td class="grade">@utd.NumericGrade</td>
+				<td class="completion">
+					@if (utd.TaskCompletionStatus == TaskCompletionStatus.Completed) {
+						<span class="@(utd.Task.DueDate.HasValue && utd.StudentSubmitDate > utd.Task.DueDate.Value ? "overdue" : "")">@utd.StudentSubmitDate</span>
+					}					
+				</td>								
+				<td class="student-file">
+					@if (utd.StudentFileID > 0) {
+						<a href="@utd.StudentFile.FileUrl">Student File</a>
+					}
+				</td>
+			</tr>
+		}
+
+		@Html.Raw("</table")
+
+	</div>
+</div>

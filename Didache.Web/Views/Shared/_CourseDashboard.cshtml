@@ -11,7 +11,7 @@
 			@if (syllabus != null) {
 				<a class="d-button" href="@syllabus.CourseFile.FileUrl">@Resources.labels.labels_dashboard_syllabus</a>
 			}
-			<a class="d-button" href="/courses/downloadall/@Model.Slug-Files.zip">@Resources.labels.labels_dashboard_downloadallfiles</a>
+			<a class="d-button" href="/courses/downloadall/@(Model.Slug).zip">@Resources.labels.labels_dashboard_downloadallfiles</a>
 		</div>
 
 		<div class="course-dashboard-assignments">
@@ -65,7 +65,7 @@
 		<div class="user-list-small">
 			<h3>@Resources.labels.labels_dashboard_groupmembers</h3>
 
-			@foreach (CourseUser user in courseUsers.Where(cu => cu.CourseUserRole == CourseUserRole.Student && cu.GroupID == courseUsers.SingleOrDefault(thisUser => thisUser.UserID == Users.GetLoggedInUser().UserID).GroupID).OrderBy(cu => cu.User.LastName)) {
+			@foreach (CourseUser user in courseUsers.Where(cu => cu.CourseUserRole == CourseUserRole.Student && cu.GroupID == courseUsers.SingleOrDefault(thisUser => thisUser.UserID == Users.GetLoggedInUser().UserID && thisUser.CourseUserRole == CourseUserRole.Student).GroupID).OrderBy(cu => cu.User.LastName)) {
 				<div class="user">
 					<a href="@user.User.ProfileDisplayUrl" title="@user.User.FormattedName">
 						<img src="@user.User.GetProfileImageUrl(40, 40)" width="40" height="40" />						

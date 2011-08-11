@@ -1,0 +1,22 @@
+﻿@model Didache.Course
+
+@{
+    ViewBag.Title = "Grading: " + Model.ToString();
+}
+
+
+<div class="page-wide">
+	<div class="full-column">
+
+		<div class="page-header">
+			<h2>@Model.ToString()</h2>
+		</div>
+
+		<ul>
+			<li><a href="/grading/@Model.Slug/studentlist">Students Tasks</a></li>
+			<li><a href="/grading/@Model.Slug/tasklist">Task List</a></li>
+		</ul>
+
+
+	</div>
+</div>

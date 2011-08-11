@@ -18,5 +18,11 @@ namespace Didache {
 
 			return input;
 		}
+
+		public static int WordCount(string input) {
+			int wordCount = Regex.Replace(Utility.StripHtml(input), @"\s\s", " ").Trim().Split(new char[] { ' ' }).Length;
+
+			return wordCount;
+		}
 	}
 }

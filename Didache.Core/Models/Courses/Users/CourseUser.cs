@@ -23,6 +23,9 @@ namespace Didache {
 
 		public virtual User User { get; set; }
 
+		[ScriptIgnore]
+		public virtual CourseUserGroup Group { get; set; }
+
 		public CourseUserRole CourseUserRole {
 			get {
 				return (CourseUserRole)RoleID;

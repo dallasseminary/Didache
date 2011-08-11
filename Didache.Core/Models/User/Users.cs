@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Caching;
+using System.Web.Mvc;
+using System.Web.Routing;
+using System.Globalization;
 
 namespace Didache  {
 	public class Users {
@@ -11,6 +14,48 @@ namespace Didache  {
 		private static string _usernameKey = "user-name-{0}";
 		private static string _userIdKey = "user-id-{0}";
 
+
+		public static string GetUserLanguage() {
+			string language = "";
+
+			User user = Users.GetLoggedInUser();
+
+			// is user logged in?
+			if (user != null) {				
+				language = user.Language;
+			} else {
+				// check if there is a value in the cookiez
+				// this is for visitor who set via the drop down list
+				HttpCookie langCookie = HttpContext.Current.Request.Cookies["Language"];
+				if (langCookie != null && langCookie.Value != null) {
+					// use cookie
+					language = langCookie.Value;
+				} else {
+					// use default value from browser
+					language = HttpContext.Current.Request.UserLanguages[0];
+				}
+			}
+
+			return language;
+		}
+
+		public static string GetUserLanguageSetMethod() {
+			string setMethod = "";
+			
+			// is user logged in?
+			if (HttpContext.Current.User.Identity.IsAuthenticated) {
+				setMethod = "database";
+			} else {
+				HttpCookie langCookie = HttpContext.Current.Request.Cookies["Language"];
+				if (langCookie != null && langCookie.Value != null) {
+					setMethod = "cookie";
+				} else {
+					setMethod = "browser";
+				}
+			}
+
+			return setMethod;
+		}
 
 		public static bool HasPermission(int profileUserID, UserSecuritySetting setting) {
 			return HasPermission(profileUserID, Users.GetLoggedInUser().UserID, setting);

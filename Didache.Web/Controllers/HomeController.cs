@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Didache.Web.Controllers
 {
-    public class MainController : Controller
+    public class HomeController : Controller
     {
         //
         // GET: /Home/
@@ -15,6 +15,18 @@ namespace Didache.Web.Controllers
         {
             return View();
         }
+
+		public ActionResult Help() {
+			return View();
+		}
+
+		public ActionResult Tour() {
+			return View();
+		}
+
+		public ActionResult About() {
+			return View();
+		}
 
     }
 }

@@ -1,0 +1,52 @@
+﻿@model Didache.Course
+
+@{
+    ViewBag.Title = "Tasks: " + Model.ToString();
+}
+
+<div class="page-wide">
+	@Html.Partial("_CourseHeader", Model)
+
+	<div class="full-column">
+
+		
+		@foreach (Didache.Unit unit in ViewBag.Units) {
+			<h3>@unit.SortOrder<text>.</text> @unit.Name</h3>
+			
+			<table class="task-grading-list grading-list">
+			@foreach (Task task in unit.Tasks) {
+				<tr>
+					<td class="name">@task.Name</td>
+
+					<td class="download-files">
+						@if (task.TaskTypeName.IndexOf("TurnInFile") > -1) {
+							<text>
+							Downloads <a href="/grading/@Model.Slug/downloadfiles/@task.TaskID">All Files</a>
+							</text>
+		  				
+							foreach(CourseUserGroup group in ViewBag.CourseUserGroups) {
+								<a href="/grading/@Model.Slug/downloadfiles/@task.TaskID/@group.GroupID/">@group.Name</a>
+							}
+		  
+						}
+						
+						@*
+						@if (task.TaskTypeName.IndexOf("Comment") > -1) {
+							<a href="/grading/@Model.Slug/interactions/@task.TaskID">View Interactions</a>
+						}
+						*@
+					</td>
+
+					<td>
+						<a href="/grading/@Model.Slug/entertaskgrades/@task.TaskID">Enter Grades</a>
+					</td>
+
+				</tr>
+			}
+			</table>
+		}
+		
+
+
+	</div>
+</div>

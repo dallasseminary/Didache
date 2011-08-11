@@ -41,14 +41,17 @@ namespace Didache {
 		public int StudentFileID { get; set; }
 		public int PostID { get; set; }
 
+		public DateTime? GradeSentDate { get; set; }
+
 		public string UserTaskUrl {
 			get {
 				return "/courses/" + Course.Slug + "/schedule/" + UnitID + "#task-" + TaskID;
 			}
 		}
 
-		public virtual User Profile { get; set; }
+		public virtual User User { get; set; }
 		public virtual Task Task { get; set; }
+		public virtual Unit Unit { get; set; }
 		public virtual Course Course { get; set; }
 
 		[ForeignKey("StudentFileID")]

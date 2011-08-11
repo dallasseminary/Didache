@@ -498,4 +498,13 @@
   <data name="labels_dashboard_syllabus" xml:space="preserve">
     <value>Syllabus</value>
   </data>
+  <data name="tab_about" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="home_currentcourses" xml:space="preserve">
+    <value>Current Courses</value>
+  </data>
+  <data name="home_nocourses" xml:space="preserve">
+    <value>You don't have any currently active courses</value>
+  </data>
 </root>

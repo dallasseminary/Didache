@@ -10,7 +10,7 @@
     }
 }
 <!DOCTYPE html>
-<html>
+<html lang="@Users.GetUserLanguage()">
 <head>
     <title>@ViewBag.Title</title>
 
@@ -45,6 +45,12 @@
 </head>
 
 <body>
+	
+	@*
+	set = @Request.Cookies["HowLangSet"].Value | 
+	cookie = @(Request.Cookies["Language"] == null ? "(none)" : Request.Cookies["Language"].Value) | 
+	user = @(Users.GetLoggedInUser() == null ? "(none)" : Users.GetLoggedInUser().Language)
+	*@
 
 	@Html.Partial("_CommonMenu")
 	
@@ -68,10 +74,9 @@
 			}
 
 			@Html.Partial("_UserMenu")	
-
-			@if (User.IsInRole(UserRoles.Administrator)) {
-				@Html.Partial("_AdminMenu")	
-			}
+			
+			@Html.Partial("_AdminMenu")	
+			
 		</div>
 		
 		<div id="main-content">
@@ -82,89 +87,6 @@
 	</div>
 
 	@Html.Partial("_SiteFooter")
-
-	@*
-    <div id="container-1">
-        <div class="wrapper">
-	        <div id="nav">
-		        <ul id="main-menu">         
-                    <li><a id="main-menu-home" href="/" @Html.Raw(Request.Url.PathAndQuery == "/" ? " class=\"selected\"" : "")>@Resources.labels.tabs_home</a></li>
-                    @if (HttpContext.Current.User.Identity.IsAuthenticated) {
-			        <li><a id="main-menu-courses" href="/courses" @Html.Raw(Request.Url.PathAndQuery.StartsWith("/courses") ? " class=\"selected\"" : "")>@Resources.labels.tabs_courses</a></li>
-			        <li><a id="main-menu-profile" href="/community" @Html.Raw(Request.Url.PathAndQuery.StartsWith("/community") ? " class=\"selected\"" : "")>@Resources.labels.tabs_community</a></li>
-					}
-					@if (HttpContext.Current.User.IsInRole(UserRoles.Administrator) || HttpContext.Current.User.IsInRole(UserRoles.Builder)) {
-					<li><a id="main-menu-admin" href="/admin" @Html.Raw(Request.Url.PathAndQuery.StartsWith("/admin") ? " class=\"selected\"" : "")>@Resources.labels.tabs_admin</a></li>
-			        }
-                </ul>
-            </div>
-			
-            <div id="profile-display">
-            @if (HttpContext.Current.User.Identity.IsAuthenticated) { 
-			    <a href="@Users.GetLoggedInUser().ProfileDisplayUrl">
-					<img alt="@Users.GetLoggedInUser().FormattedName" src="@Users.GetLoggedInUser().ProfileImageUrl" />
-				</a>
-			}
-            </div>
-            <div class="clear"></div>
-        </div>
-        <div class="clear"></div>
-	
-
-		<div id="sub-menu">              
-            <div class="sub-menu-item @(Request.Url.PathAndQuery == "/" ? " selected" : "")" id="main-menu-home-details">
-				<ul>
-					<li><a href="/">@Resources.labels.submenu_dashboard</a></li>		
-				</ul>
-			</div>
-			@if (HttpContext.Current.User.Identity.IsAuthenticated) {
-                <div class="sub-menu-item @(Request.Url.PathAndQuery.StartsWith("/courses") ? " selected" : "")" id="main-menu-courses-details">
-				    <ul>
-					    <li><span>@Resources.labels.submenu_tools:</span></li>
-					    <li><a href="/courses/">@Resources.labels.submenu_archive</a></li>
-					    <li><span>@Resources.labels.submenu_current:</span></li>
-					    @{
-							List<Course> courses = Didache.Courses.GetUsersRunningCourses(CourseUserRole.Student);
-							if (courses != null) {
-								foreach (Course course in courses) {
-								<li@Html.Raw(ViewContext.RouteData.Values["slug"] != null && ViewContext.RouteData.Values["slug"].ToString() == course.Slug ? " class=\"selected\"" : "")><a href="/courses/@course.Slug@(( ViewContext.RouteData.Values["action"] != null && (new List<string>() {"dashboard","schedule","files","roster","assignments"}).IndexOf(ViewContext.RouteData.Values["action"].ToString()) > -1) ? "/" + ViewContext.RouteData.Values["action"] : "" )">@(course.CourseCode + course.Section)</a></li>	
-								}
-							}
-						}
-				    </ul>
-			    </div>
-                <div class="sub-menu-item @(Request.Url.PathAndQuery.StartsWith("/community") ? " selected" : "")" id="main-menu-profile-details">
-				    <ul>
-					    
-					    <li><a href="/community">@Resources.labels.submenu_community_home</a></li>
-						<li><a href="@Users.GetLoggedInUser().ProfileDisplayUrl">@Resources.labels.submenu_view</a></li>
-				    </ul>
-			    </div>
-		   }
-		   @if (HttpContext.Current.User.IsInRole(UserRoles.Administrator) || HttpContext.Current.User.IsInRole(UserRoles.Builder)) {
-                <div class="sub-menu-item @(Request.Url.PathAndQuery.StartsWith("/admin") ? " selected" : "")" id="main-menu-admin-details">
-				    <ul>
-					    <li><a href="/admin/sessions">@Resources.labels.submenu_sessions</a></li>
-					    <li><a href="/admin/campuses">@Resources.labels.submenu_campuses</a></li>
-					    <li><a href="/admin/courses">@Resources.labels.submenu_courses</a></li>
-					    <li><a href="/admin/files">@Resources.labels.submenu_files</a></li>
-					    <li><a href="/admin/users">@Resources.labels.submenu_users</a></li>
-				    </ul>
-			    </div>
-            }
-	    </div>
-    </div>
-    <div class="clear"></div>
-    <div id="container-2" @( Html.Raw(currentArea.IsEmpty() ? "" :"class=\"" + currentArea + "\"" ))>
-	    <div id="main">
-            <div class="wrapper">
-                @RenderBody()
-
-		        <div class="clear"></div>
-            </div>
-	    </div>
-    </div>
-	*@
 
 </body>
 </html>

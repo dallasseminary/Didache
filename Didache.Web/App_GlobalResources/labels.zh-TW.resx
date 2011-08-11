@@ -117,95 +117,233 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="commonmenu_alumni" xml:space="preserve">
+    <value>校友</value>
+  </data>
+  <data name="commonmenu_bookcenter" xml:space="preserve">
+    <value>購書中心</value>
+  </data>
+  <data name="commonmenu_campusnet" xml:space="preserve">
+    <value>CampusNet</value>
+  </data>
+  <data name="commonmenu_dtswebsite" xml:space="preserve">
+    <value>DTS網站</value>
+  </data>
+  <data name="commonmenu_library" xml:space="preserve">
+    <value>圖書館</value>
+  </data>
+  <data name="commonmenu_onlineed" xml:space="preserve">
+    <value>在線埃德</value>
+  </data>
+  <data name="confirm_delete" xml:space="preserve">
+    <value>你確定要刪除這個項目嗎？</value>
+  </data>
   <data name="coursemenu_active_courses" xml:space="preserve">
-    <value>積極課程</value>
+    <value>活動課程</value>
   </data>
   <data name="coursemenu_archived_courses" xml:space="preserve">
     <value>存檔課程</value>
   </data>
+  <data name="coursemenu_calendar" xml:space="preserve">
+    <value>日曆</value>
+  </data>
   <data name="coursemenu_other_courses" xml:space="preserve">
     <value>其他</value>
   </data>
-  <data name="courses_heading_archivedcourses" xml:space="preserve">
-    <value>存檔課程</value>
-  </data>
-  <data name="courses_heading_assignments" xml:space="preserve">
+  <data name="coursetabs_assignments" xml:space="preserve">
     <value>作業</value>
   </data>
-  <data name="courses_heading_coursedesc" xml:space="preserve">
-    <value>課程簡介</value>
-  </data>
-  <data name="courses_heading_coursefiles" xml:space="preserve">
-    <value>課程文件</value>
-  </data>
-  <data name="courses_heading_courseroster" xml:space="preserve">
-    <value>課程的花名冊</value>
-  </data>
-  <data name="courses_heading_units" xml:space="preserve">
-    <value>單位</value>
-  </data>
-  <data name="courses_heading_dashboard" xml:space="preserve">
-    <value>即將到來的...</value>
-  </data>
-  <data name="courses_label_gradedfiles" xml:space="preserve">
-    <value>分級文件</value>
-  </data>
-  <data name="coursetabs_assignments" xml:space="preserve">
-    <value>名冊</value>
-  </data>
   <data name="coursetabs_assignments_desc" xml:space="preserve">
-    <value>滿足你的同學</value>
+    <value>讓您的分級東西</value>
+  </data>
+  <data name="coursetabs_dashboard" xml:space="preserve">
+    <value>儀表盤</value>
+  </data>
+  <data name="coursetabs_dashboard_desc" xml:space="preserve">
+    <value>你所有的基地</value>
+  </data>
+  <data name="coursetabs_dashboard_desc_long" xml:space="preserve">
+    <value>所有的重要信息類</value>
   </data>
   <data name="coursetabs_discussion" xml:space="preserve">
-    <value>進度表</value>
-  </data>
-  <data name="coursetabs_discussion_desc" xml:space="preserve">
-    <value>日期及轉讓</value>
-  </data>
-  <data name="coursetabs_files" xml:space="preserve">
     <value>討論</value>
   </data>
+  <data name="coursetabs_discussion_desc" xml:space="preserve">
+    <value>課程論壇</value>
+  </data>
+  <data name="coursetabs_files" xml:space="preserve">
+    <value>文件</value>
+  </data>
   <data name="coursetabs_files_desc" xml:space="preserve">
-    <value>留言板</value>
-  </data>
-  <data name="coursetabs_roster" xml:space="preserve">
-    <value>檔案</value>
-  </data>
-  <data name="coursetabs_roster_desc" xml:space="preserve">
     <value>教授的材料</value>
   </data>
+  <data name="coursetabs_roster" xml:space="preserve">
+    <value>名冊</value>
+  </data>
+  <data name="coursetabs_roster_desc" xml:space="preserve">
+    <value>滿足你的同學</value>
+  </data>
   <data name="coursetabs_schedule" xml:space="preserve">
-    <value>轉讓</value>
+    <value>附表</value>
   </data>
   <data name="coursetabs_schedule_desc" xml:space="preserve">
-    <value>讓您的梯度材料</value>
+    <value>日期及分配</value>
+  </data>
+  <data name="error_desc" xml:space="preserve">
+    <value>很抱歉，發生錯誤時處理您的請求</value>
+  </data>
+  <data name="forums_by" xml:space="preserve">
+    <value>經</value>
+  </data>
+  <data name="forums_courseforums" xml:space="preserve">
+    <value>課程論壇</value>
+  </data>
+  <data name="forums_header_forumname" xml:space="preserve">
+    <value>論壇名稱</value>
+  </data>
+  <data name="forums_header_lastpost" xml:space="preserve">
+    <value>最後發表</value>
+  </data>
+  <data name="forums_header_threadsubject" xml:space="preserve">
+    <value>主題</value>
+  </data>
+  <data name="forums_header_totalposts" xml:space="preserve">
+    <value>帖子</value>
+  </data>
+  <data name="forums_header_totalreplies" xml:space="preserve">
+    <value>回复</value>
+  </data>
+  <data name="forums_header_totalthreads" xml:space="preserve">
+    <value>主題</value>
+  </data>
+  <data name="forums_header_totalviews" xml:space="preserve">
+    <value>點擊</value>
+  </data>
+  <data name="forums_replytopost" xml:space="preserve">
+    <value>回复</value>
   </data>
   <data name="homemenu_message" xml:space="preserve">
-    <value>這是主頁上的所有您的內容應</value>
-  </data>
-  <data name="home_dashboard_heading_bibsoftware" xml:space="preserve">
-    <value>參考書目軟件</value>
+    <value>這是主頁，所有你的東西應該​​是</value>
   </data>
   <data name="home_dashboard_heading_courseresources" xml:space="preserve">
     <value>課程資源</value>
   </data>
-  <data name="home_dashboard_heading_onlineedresources" xml:space="preserve">
-    <value>網上教育資源</value>
-  </data>
   <data name="home_dashboard_heading_stream" xml:space="preserve">
-    <value>所發生的事情對 MyDTS</value>
+    <value>所發生的事情上MyDTS</value>
   </data>
   <data name="home_dashboard_heading_upcoming" xml:space="preserve">
-    <value>即將舉行</value>
+    <value>即將開始</value>
+  </data>
+  <data name="index_title" xml:space="preserve">
+    <value>目錄</value>
+  </data>
+  <data name="login_instructions" xml:space="preserve">
+    <value>請輸入您的用戶名和密碼</value>
+  </data>
+  <data name="login_legend" xml:space="preserve">
+    <value>帳戶信息</value>
+  </data>
+  <data name="login_login" xml:space="preserve">
+    <value>登錄</value>
+  </data>
+  <data name="login_logout" xml:space="preserve">
+    <value>登出</value>
+  </data>
+  <data name="login_password" xml:space="preserve">
+    <value>密碼</value>
+  </data>
+  <data name="login_rememberme" xml:space="preserve">
+    <value>記住我登錄</value>
+  </data>
+  <data name="login_title" xml:space="preserve">
+    <value>登錄</value>
+  </data>
+  <data name="login_username" xml:space="preserve">
+    <value>DTS ID，用戶名或電子郵件</value>
+  </data>
+  <data name="submenu_archive" xml:space="preserve">
+    <value>存檔</value>
+  </data>
+  <data name="submenu_campuses" xml:space="preserve">
+    <value>校園</value>
+  </data>
+  <data name="submenu_community_home" xml:space="preserve">
+    <value>同學</value>
+  </data>
+  <data name="submenu_courses" xml:space="preserve">
+    <value>課程</value>
+  </data>
+  <data name="submenu_current" xml:space="preserve">
+    <value>當前</value>
+  </data>
+  <data name="submenu_dashboard" xml:space="preserve">
+    <value>儀表盤</value>
+  </data>
+  <data name="submenu_edit" xml:space="preserve">
+    <value>編輯</value>
+  </data>
+  <data name="submenu_files" xml:space="preserve">
+    <value>文件</value>
+  </data>
+  <data name="submenu_sessions" xml:space="preserve">
+    <value>會議</value>
+  </data>
+  <data name="submenu_tools" xml:space="preserve">
+    <value>工具</value>
+  </data>
+  <data name="submenu_users" xml:space="preserve">
+    <value>用戶</value>
+  </data>
+  <data name="submenu_view" xml:space="preserve">
+    <value>我的個人資料頁</value>
+  </data>
+  <data name="tabs_about" xml:space="preserve">
+    <value>關於</value>
+  </data>
+  <data name="tabs_admin" xml:space="preserve">
+    <value>管理</value>
+  </data>
+  <data name="tabs_community" xml:space="preserve">
+    <value>社區</value>
+  </data>
+  <data name="tabs_contact" xml:space="preserve">
+    <value>聯繫</value>
+  </data>
+  <data name="tabs_courses" xml:space="preserve">
+    <value>課程</value>
+  </data>
+  <data name="tabs_help" xml:space="preserve">
+    <value>幫助</value>
+  </data>
+  <data name="tabs_home" xml:space="preserve">
+    <value>首頁</value>
+  </data>
+  <data name="tabs_login" xml:space="preserve">
+    <value>登錄</value>
+  </data>
+  <data name="tabs_logout" xml:space="preserve">
+    <value>登出</value>
+  </data>
+  <data name="tabs_profile" xml:space="preserve">
+    <value>簡介</value>
+  </data>
+  <data name="tabs_tour" xml:space="preserve">
+    <value>旅遊</value>
+  </data>
+  <data name="home_dashboard_heading_onlineedresources" xml:space="preserve">
+    <value>網絡教育資源</value>
   </data>
   <data name="home_dashboard_li_downloadallfiles" xml:space="preserve">
     <value>下載的所有文件（當前課程）</value>
   </data>
   <data name="home_dashboard_li_downloadcalendar" xml:space="preserve">
-    <value>下載你的任期日曆</value>
+    <value>下載您的任期日曆</value>
+  </data>
+  <data name="home_dashboard_heading_bibsoftware" xml:space="preserve">
+    <value>參考書目軟件</value>
   </data>
   <data name="home_dashboard_li_endnote" xml:space="preserve">
-    <value>EndNote</value>
+    <value>尾注</value>
   </data>
   <data name="home_dashboard_li_msword" xml:space="preserve">
     <value>微軟 Word兼容包</value>
@@ -222,34 +360,151 @@
   <data name="home_dashboard_li_zotero" xml:space="preserve">
     <value>Zotero的（免費）</value>
   </data>
-  <data name="tabs_admin" xml:space="preserve">
-    <value>管理員</value>
+  <data name="courses_heading_archivedcourses" xml:space="preserve">
+    <value>存檔課程</value>
   </data>
-  <data name="tabs_community" xml:space="preserve">
-    <value>社區</value>
+  <data name="courses_heading_assignments" xml:space="preserve">
+    <value>作業</value>
   </data>
-  <data name="tabs_contact" xml:space="preserve">
-    <value>聯繫方式</value>
+  <data name="courses_heading_coursedesc" xml:space="preserve">
+    <value>課程簡介</value>
   </data>
-  <data name="tabs_courses" xml:space="preserve">
-    <value>今學期學科</value>
+  <data name="courses_heading_coursefiles" xml:space="preserve">
+    <value>課程文件</value>
   </data>
-  <data name="tabs_help" xml:space="preserve">
-    <value>聯絡我們</value>
+  <data name="courses_heading_courseroster" xml:space="preserve">
+    <value>課程名冊</value>
   </data>
-  <data name="tabs_home" xml:space="preserve">
-    <value>主頁</value>
+  <data name="courses_heading_units" xml:space="preserve">
+    <value>單位</value>
   </data>
-  <data name="tabs_login" xml:space="preserve">
-    <value>登入</value>
+  <data name="courses_heading_dashboard" xml:space="preserve">
+    <value>即將開始 ... ...</value>
   </data>
-  <data name="tabs_logout" xml:space="preserve">
-    <value>登出</value>
+  <data name="courses_label_gradedfiles" xml:space="preserve">
+    <value>分級文件</value>
   </data>
-  <data name="tabs_profile" xml:space="preserve">
-    <value>外形</value>
+  <data name="studentschedule_markcompleted" xml:space="preserve">
+    <value>標記為已完成</value>
   </data>
-  <data name="tabs_tour" xml:space="preserve">
-    <value>遊覽</value>
+  <data name="studentschedule_skip" xml:space="preserve">
+    <value>跳過</value>
+  </data>
+  <data name="studentschedule_submitfordiscussion" xml:space="preserve">
+    <value>提交討論的分配</value>
+  </data>
+  <data name="studentschedule_submitfile" xml:space="preserve">
+    <value>在打開文件</value>
+  </data>
+  <data name="interactions_replies" xml:space="preserve">
+    <value>打開 [{0}回复]</value>
+  </data>
+  <data name="profile_edit_button" xml:space="preserve">
+    <value>編輯個人資料</value>
+  </data>
+  <data name="profile_heading_contactinfo" xml:space="preserve">
+    <value>聯繫信息</value>
+  </data>
+  <data name="profile_heading_personalinfo" xml:space="preserve">
+    <value>個人信息</value>
+  </data>
+  <data name="profile_heading_preferences" xml:space="preserve">
+    <value>偏好</value>
+  </data>
+  <data name="profile_heading_socialmedia" xml:space="preserve">
+    <value>社會媒體</value>
+  </data>
+  <data name="profile_label_address" xml:space="preserve">
+    <value>地址</value>
+  </data>
+  <data name="profile_label_biography" xml:space="preserve">
+    <value>傳記</value>
+  </data>
+  <data name="profile_label_birthday" xml:space="preserve">
+    <value>生日</value>
+  </data>
+  <data name="profile_label_email" xml:space="preserve">
+    <value>電子郵件</value>
+  </data>
+  <data name="profile_label_hometown" xml:space="preserve">
+    <value>家鄉</value>
+  </data>
+  <data name="profile_label_language" xml:space="preserve">
+    <value>語言</value>
+  </data>
+  <data name="profile_label_phone" xml:space="preserve">
+    <value>電話</value>
+  </data>
+  <data name="profile_label_timezone" xml:space="preserve">
+    <value>時區</value>
+  </data>
+  <data name="profile_save_button" xml:space="preserve">
+    <value>保存配置文件</value>
+  </data>
+  <data name="profile_security_all" xml:space="preserve">
+    <value>所有DTS</value>
+  </data>
+  <data name="profile_security_friends" xml:space="preserve">
+    <value>同學</value>
+  </data>
+  <data name="profile_security_private" xml:space="preserve">
+    <value>私人</value>
+  </data>
+  <data name="studentschedule_instructionsnotavailable" xml:space="preserve">
+    <value>對於這個任務的說明將於 {0}。</value>
+  </data>
+  <data name="studentschedule_submissionnotavailable" xml:space="preserve">
+    <value>您可以提交這項任務開始 {0}。</value>
+  </data>
+  <data name="courses_heading_tools" xml:space="preserve">
+    <value>工具</value>
+  </data>
+  <data name="courses_tools_icalendar" xml:space="preserve">
+    <value>日曆供稿</value>
+  </data>
+  <data name="courses_tools_icalendar_desc" xml:space="preserve">
+    <value>使用下面的鏈接導入課程要求到您的日曆程序（Mac的郵件時，Outlook，谷歌日曆等）</value>
+  </data>
+  <data name="courses_tools_itunes" xml:space="preserve">
+    <value>iTunes的飼料</value>
+  </data>
+  <data name="courses_tools_itunes_desc" xml:space="preserve">
+    <value>當然進口影片，幻燈片和成績單到iTunes（或其他媒體軟件）離線瀏覽。</value>
+  </data>
+  <data name="coursetabs_tools" xml:space="preserve">
+    <value>工具</value>
+  </data>
+  <data name="coursetabs_tools_desc" xml:space="preserve">
+    <value>下載，日曆，和RSS</value>
+  </data>
+  <data name="labels_dashboard_downloadallfiles" xml:space="preserve">
+    <value>下載所有文件</value>
+  </data>
+  <data name="labels_dashboard_facilitators" xml:space="preserve">
+    <value>Faciliators</value>
+  </data>
+  <data name="labels_dashboard_faculty" xml:space="preserve">
+    <value>學院</value>
+  </data>
+  <data name="labels_dashboard_groupmembers" xml:space="preserve">
+    <value>小組成員</value>
+  </data>
+  <data name="labels_dashboard_keyassignments" xml:space="preserve">
+    <value>重要任務</value>
+  </data>
+  <data name="labels_dashboard_keydownloads" xml:space="preserve">
+    <value>下載</value>
+  </data>
+  <data name="labels_dashboard_syllabus" xml:space="preserve">
+    <value>教學大綱</value>
+  </data>
+  <data name="tab_about" xml:space="preserve">
+    <value>關於</value>
+  </data>
+  <data name="home_currentcourses" xml:space="preserve">
+    <value>最新課程</value>
+  </data>
+  <data name="home_nocourses" xml:space="preserve">
+    <value>您沒有任何當前活動課程</value>
   </data>
 </root>

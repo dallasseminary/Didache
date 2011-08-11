@@ -1,0 +1,51 @@
+﻿@model Didache.Course
+
+@{
+    ViewBag.Title = "Students: " + Model.ToString();
+}
+
+
+<div class="page-wide">
+	
+
+	@Html.Partial("_CourseHeader", Model)
+
+	<div class="full-column">
+
+		@{ 
+			CourseUserGroup lastGroup = null;
+			int lastGroupID = -1;
+		}
+
+
+		@foreach (CourseUser user in ViewBag.Users) {
+			if (user.GroupID != lastGroupID) {
+				if (lastGroupID == -1) {
+					@Html.Raw("</table>")			
+				}
+	
+				lastGroup = user.Group;
+				lastGroupID = user.GroupID;
+				<h3>@(lastGroup != null ? lastGroup.Name : "No Group")</h3>
+				@Html.Raw("<table class=\"grading-list\">")
+			}
+			<tr>
+				<td>
+					<a href="/grading/@Model.Slug/usertasks/@user.UserID">@(user.Group != null ? user.Group.Name : "(no group)") - @user.User.FormattedName</a>
+				</td>
+			</tr>
+			
+		}
+		  @Html.Raw("</table>")
+
+		
+		@*
+		<ul>
+			@foreach (CourseUser user in ViewBag.Users) {
+			<li><a href="/grading/@Model.Slug/usertasks/@user.UserID">@(user.Group != null ? user.Group.Name : "(no group)") - @user.User.FormattedName</a></li>
+			}
+		</ul>
+		*@
+
+	</div>
+</div>

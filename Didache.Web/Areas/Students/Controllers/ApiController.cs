@@ -24,8 +24,16 @@ namespace Didache.Web.Areas.Students.Controllers
 
 			UserTaskData data = Tasks.GetUserTaskData(taskID, user.UserID);
 
-			// load type
-			object returnValue = Didache.TaskTypes.TaskTypeManager.ProcessFormCollection(data.Task.TaskTypeName, taskID, user.UserID, collection, Request);
+			object returnValue = null;
+
+			if (data == null) {
+				// fake data for graders/profs
+				returnValue = new TaskTypeResult() { Success = true };
+			}
+			else {
+				// load type
+				returnValue = Didache.TaskTypes.TaskTypeManager.ProcessFormCollection(data.Task.TaskTypeName, taskID, user.UserID, collection, Request);
+			}
 
 			// do processing
 			return Json(returnValue);
@@ -70,7 +78,7 @@ namespace Didache.Web.Areas.Students.Controllers
 				originalExtension = Path.GetExtension(file.FileName);
 
 
-				string filePath = Path.Combine(HttpContext.Server.MapPath("~/uploads"), uniqueID.ToString() + originalExtension);
+				string filePath = Path.Combine(Settings.StudentFilesLocation, uniqueID.ToString() + originalExtension);
 				file.SaveAs(filePath);
 
 				StudentFile studentFile = new StudentFile();

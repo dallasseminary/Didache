@@ -44,7 +44,15 @@ jQuery(document).ready(function ($) {
     // interactions stuff
 
     var urlHash = self.document.location.hash.substring(1);
-    if (urlHash) { $('div.task-interaction-thread[id=' + urlHash + '] > .task-interaction-list').show(); }
+    if (urlHash) { 
+		$('div.task-interaction-thread[id=' + urlHash + ']')
+			.find('.task-interaction-list')
+				.slideDown()
+			.end()
+			.find('.task-interaction-main .task-interaction-text')
+				.fadeIn();		
+		
+	}
 
 	// open/close threads
 	$('div.task-interaction .total-replies').toggle(function () {
@@ -67,7 +75,7 @@ jQuery(document).ready(function ($) {
 
 	$('.add-reply .collapse').click(function () {
 		$(this)
-		closest('.task-interaction-list')
+			.closest('.task-interaction-list')
 				.slideUp();
 	});
 
@@ -114,10 +122,12 @@ jQuery(document).ready(function ($) {
 					'</div>').insertBefore(target);
 
                     // increase reply count
+					/*
                     var replies = button.closest('.task-interaction').find('.total-replies'),
 							count = parseInt(replies.html(), 10);
 
                     replies.html((count + 1).toString());
+					*/
 
                     // clean up
                     button.closest('.add-reply').find('textarea').prop('disabled', false).val('');

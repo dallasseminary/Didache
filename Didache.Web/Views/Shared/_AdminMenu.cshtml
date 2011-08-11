@@ -1,14 +1,22 @@
-﻿	<div id="admin-menu" class="side-menu">
-		<h3>Admin</h3>
+﻿@if (User.IsInRole(UserRoles.Administrator) || User.IsInRole(UserRoles.Facilitator) || User.IsInRole(UserRoles.Builder)) {
+
+	<div id="admin-menu" class="side-menu">
+		<h3>Admin &amp; Grading</h3>
 		
 		<ul>
-			<li><a href="/admin/courses/">Current Courses</a></li>
+			@if (User.IsInRole(UserRoles.Administrator) || User.IsInRole(UserRoles.Builder)) {
+			<li><a href="/admin/courses/">Current Courses</a></li>			
+			}
+			
+			@if (User.IsInRole(UserRoles.Administrator)) {
 			<li><a href="/admin/sessions/">Sessions</a></li>
 			<li><a href="/admin/campuses/">Campuses</a></li>
 			<li><a href="/admin/users/">Users</a></li>
+			}
+			
+			<li><a href="/grading/">Grading</a></li>
 		</ul>
 
 	</div>
 	
-
-
+}

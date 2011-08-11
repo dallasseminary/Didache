@@ -13,18 +13,22 @@
 	
 	@if (Users.GetLoggedInUser() != null) {
 	  
-		<h1>Current Classes</h1>
+		<h1>@Resources.labels.home_currentcourses</h1>
 	 
 		List<Course> currentCourses = Didache.Courses.GetUsersRunningCourses(CourseUserRole.Student);
    
-		foreach(Course course in currentCourses) {
+		if (currentCourses.Count > 0) {
+			foreach(Course course in currentCourses) {
 
-			<div class="home-dashboard">
-				<h2><a href="@course.CourseUrl">@course.CourseCode - @course.Name</a></h2>
+				<div class="home-dashboard">
+					<h2><a href="@course.CourseUrl">@course.CourseCode - @course.Name</a></h2>
 			
-				@Html.Partial("_CourseDashboard", course)
-			</div>
+					@Html.Partial("_CourseDashboard", course)
+				</div>
 		
+			}
+		} else {
+			<p>@Resources.labels.home_nocourses</p>
 		}
 	 
 		@*	

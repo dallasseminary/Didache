@@ -1,4 +1,7 @@
-﻿body {
+﻿html[lang=ar] {
+	direction: rtl;
+}
+body {
 	background: #fff;
 }
 .wrapper {
@@ -157,6 +160,9 @@ select#language {
 	border-bottom: solid 1px #ccc;
 }
 
+.full-column h3, .main-column h3 {
+	margin: 20px 0 10px;
+}
 
 
 /* 
@@ -596,4 +602,79 @@ select#language {
 }
 .home-dashboard h2 a {
 	color: #111111;
+}
+
+
+/* grading */
+.grading-list {
+	margin: 0 0 5px 0;
+	border-collapse: collapse;
+	min-width: 400px;
+}
+.grading-list td {
+	border: solid 1px #666;
+	padding: 3px;
+}
+.grading-list tr:nth-child(odd) {
+	background: #f7f7f7;
+}
+.grading-list thead th {
+	text-align: left;
+	background: #333;
+	border: solid 1px 333;
+	color: #fff;
+	padding: 4px 6px;
+	font-weight: bold;
+}
+.grading-list .dirty {
+	background: #ce8484;
+}
+
+.task-grading-list .name {
+	width: 400px;
+}
+.task-grading-list .download-files {
+	width: 100px;
+}
+.task-grading-list .download-files a{
+	white-space: nowrap;
+}
+
+.enter-grades .name {
+	width: 200px;
+}
+.enter-grades .student-info {
+	width: 150px;
+}
+
+.enter-grades .grader-file {
+	width: 200px;
+}
+
+.enter-grades .grade {
+	width: 70px;
+}
+.enter-grades .send {
+	width: 100px;
+}
+
+	
+	
+.user-unit-grades .complete {
+	width: 20px;
+}
+.user-unit-grades .name {
+	width: 300px;
+}
+.user-unit-grades .completion {
+	width: 150px;
+}
+.user-unit-grades .grade {
+	width: 50px;
+}
+.user-unit-grades .student-file {
+	width: 100px;
+}
+.user-unit-grades .overdue {
+	color: red;
 }

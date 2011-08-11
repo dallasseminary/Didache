@@ -58,7 +58,26 @@ namespace Didache.Web.Controllers
 		[Authorize]
 		public ActionResult GetCourseUsers(int id) {
 
-			return Json(serializer.Serialize(Didache.Courses.GetUsersInCourse(id)), JsonRequestBehavior.AllowGet);
+			//return Json(serializer.Serialize(Didache.Courses.GetUsersInCourse(id)), JsonRequestBehavior.AllowGet);
+
+			return Json(Didache.Courses.GetUsersInCourse(id).Select(u => new {
+								UserID = u.UserID, 
+								CourseID = u.CourseID,
+								GroupID = u.GroupID,
+								RoleID = u.RoleID,
+								User = new {
+									UserID = u.User.UserID,
+									FirstName = u.User.FirstName,
+									MiddleName = u.User.MiddleName,
+									LastName = u.User.LastName,
+									FullName = u.User.FullName,
+									NickName = u.User.NickName,
+									NameFormat = u.User.NameFormat,
+									FormattedName = u.User.FormattedName,
+									FormattedNameLastFirst = u.User.FormattedNameLastFirst,
+									Email = u.User.Email
+								}
+					}), JsonRequestBehavior.AllowGet);
 		}
 
 
