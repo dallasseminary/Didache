@@ -37,6 +37,9 @@
     <Reference Include="EntityFramework, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.4.1.10311.0\lib\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="Ionic.Zip">
+      <HintPath>..\packages\DotNetZip.1.9\lib\Ionic.Zip.dll</HintPath>
+    </Reference>
     <Reference Include="JsonFx, Version=2.0.1106.2610, Culture=neutral, PublicKeyToken=315052dd637f8a52, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\JsonFx.2.0.1106.2610\lib\net40\JsonFx.dll</HintPath>
@@ -107,22 +110,22 @@
     <Compile Include="Areas\Admin\Controllers\CoursesController.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Areas\Admin\Controllers\GradingController.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Areas\Admin\Controllers\SessionsController.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Areas\Community\CommunityAreaRegistration.cs" />
     <Compile Include="Areas\Community\Controllers\CommunityController.cs" />
+    <Compile Include="Areas\Facilitators\Controllers\GradingController.cs" />
+    <Compile Include="Areas\Facilitators\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Facilitators\FacilitatorsAreaRegistration.cs" />
     <Compile Include="Areas\Students\Controllers\ApiController.cs" />
     <Compile Include="Areas\Students\Controllers\CoursesController.cs" />
     <Compile Include="Areas\Students\Controllers\DiscussionController.cs" />
     <Compile Include="Areas\Students\StudentsAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApiController.cs" />
-    <Compile Include="Controllers\MainController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -253,6 +256,7 @@
   <ItemGroup>
     <Folder Include="Areas\Community\Models\" />
     <Folder Include="Areas\Community\Views\Shared\" />
+    <Folder Include="Areas\Facilitators\Models\" />
     <Folder Include="Areas\Students\Models\" />
     <Folder Include="supportfiles\be101\" />
     <Folder Include="tests\" />
@@ -283,7 +287,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Main\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_CommonMenu.cshtml" />
@@ -361,7 +365,10 @@
     <Content Include="Areas\Students\Views\Shared\TaskType-VideoListing.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Students\Views\Shared\TaskType-CommentOnClassmatesFile.cshtml" />
+    <Content Include="Areas\Facilitators\Views\Grading\UserInteractions.cshtml" />
+    <Content Include="Areas\Students\Views\Shared\TaskType-AnswerQuestionForDiscussion.cshtml" />
+    <Content Include="Areas\Admin\Views\Courses\CloneCourse.cshtml" />
+    <None Include="Areas\Students\Views\Shared\TaskType-CommentOnPost.cshtml" />
     <Content Include="Areas\Students\Views\Shared\TaskType-Default.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -394,6 +401,15 @@
     <Content Include="Areas\Students\Views\Discussion\_WritePosts.cshtml" />
     <Content Include="Areas\Students\Views\Shared\TaskType-TurnInFileSimple_DragandDrop.cshtml" />
     <Content Include="Areas\Students\Views\Courses\Tools.cshtml" />
+    <Content Include="Areas\Facilitators\Views\Web.config" />
+    <Content Include="Areas\Facilitators\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Facilitators\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Facilitators\Views\Grading\Index.cshtml" />
+    <Content Include="Areas\Facilitators\Views\Grading\StudentList.cshtml" />
+    <Content Include="Areas\Facilitators\Views\Grading\TaskList.cshtml" />
+    <Content Include="Areas\Facilitators\Views\Shared\_CourseHeader.cshtml" />
+    <Content Include="Areas\Facilitators\Views\Grading\EnterTaskGrades.cshtml" />
+    <Content Include="Areas\Facilitators\Views\Grading\UserTasks.cshtml" />
     <None Include="css\fonts\league\League_Gothic-webfont.eot" />
     <None Include="css\fonts\league\League_Gothic-webfont.ttf" />
     <None Include="css\fonts\league\League_Gothic-webfont.woff" />
@@ -405,6 +421,10 @@
     <Content Include="Views\Shared\EditorTemplates\SecuritySetting.cshtml" />
     <Content Include="Views\Shared\_AdminMenu.cshtml" />
     <Content Include="Views\Shared\_CourseDashboard.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Help.cshtml" />
+    <Content Include="Views\Home\Tour.cshtml" />
+    <Content Include="Views\Account\SetLanguage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\labels.ar.resx">
