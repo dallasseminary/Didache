@@ -117,80 +117,116 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="commonmenu_alumni" xml:space="preserve">
+    <value>Alumni</value>
+  </data>
+  <data name="commonmenu_bookcenter" xml:space="preserve">
+    <value>Book Center</value>
+  </data>
+  <data name="commonmenu_campusnet" xml:space="preserve">
+    <value>CampusNet</value>
+  </data>
+  <data name="commonmenu_dtswebsite" xml:space="preserve">
+    <value>DTS Sitio Web</value>
+  </data>
+  <data name="commonmenu_library" xml:space="preserve">
+    <value>Biblioteca</value>
+  </data>
+  <data name="commonmenu_onlineed" xml:space="preserve">
+    <value>Ed en línea</value>
+  </data>
+  <data name="confirm_delete" xml:space="preserve">
+    <value>¿Está seguro que desea eliminar este elemento?</value>
+  </data>
   <data name="coursemenu_active_courses" xml:space="preserve">
     <value>Cursos activos</value>
   </data>
   <data name="coursemenu_archived_courses" xml:space="preserve">
-    <value>Archivado Cursos</value>
+    <value>Cursos archivados</value>
+  </data>
+  <data name="coursemenu_calendar" xml:space="preserve">
+    <value>Calendario</value>
   </data>
   <data name="coursemenu_other_courses" xml:space="preserve">
     <value>Otro</value>
   </data>
-  <data name="courses_heading_archivedcourses" xml:space="preserve">
-    <value>Archivado Cursos</value>
-  </data>
-  <data name="courses_heading_assignments" xml:space="preserve">
+  <data name="coursetabs_assignments" xml:space="preserve">
     <value>Asignaciones</value>
   </data>
-  <data name="courses_heading_coursedesc" xml:space="preserve">
-    <value>Descripción del curso</value>
-  </data>
-  <data name="courses_heading_coursefiles" xml:space="preserve">
-    <value>Archivos del curso</value>
-  </data>
-  <data name="courses_heading_courseroster" xml:space="preserve">
-    <value>Curso de Registro</value>
-  </data>
-  <data name="courses_heading_units" xml:space="preserve">
-    <value>Unidades</value>
-  </data>
-  <data name="courses_heading_dashboard" xml:space="preserve">
-    <value>Próximos ...</value>
-  </data>
-  <data name="courses_label_gradedfiles" xml:space="preserve">
-    <value>Calificado Archivos</value>
-  </data>
-  <data name="coursetabs_assignments" xml:space="preserve">
-    <value>Cesiones</value>
-  </data>
   <data name="coursetabs_assignments_desc" xml:space="preserve">
-    <value>material clasificado</value>
+    <value>tus cosas clasificado</value>
+  </data>
+  <data name="coursetabs_dashboard" xml:space="preserve">
+    <value>Tablero de instrumentos</value>
+  </data>
+  <data name="coursetabs_dashboard_desc" xml:space="preserve">
+    <value>Toda su base</value>
+  </data>
+  <data name="coursetabs_dashboard_desc_long" xml:space="preserve">
+    <value>Toda la información importante acerca de su clase</value>
   </data>
   <data name="coursetabs_discussion" xml:space="preserve">
     <value>Discusión</value>
   </data>
   <data name="coursetabs_discussion_desc" xml:space="preserve">
-    <value>tablones de mensajes</value>
+    <value>Foros del Curso</value>
   </data>
   <data name="coursetabs_files" xml:space="preserve">
     <value>Archivos</value>
   </data>
   <data name="coursetabs_files_desc" xml:space="preserve">
-    <value>Profesor de materias</value>
+    <value>Materiales Profe</value>
   </data>
   <data name="coursetabs_roster" xml:space="preserve">
     <value>Lista</value>
   </data>
   <data name="coursetabs_roster_desc" xml:space="preserve">
-    <value>Tus compañeros de clase</value>
+    <value>Conoce a tus compañeros de clase</value>
   </data>
   <data name="coursetabs_schedule" xml:space="preserve">
-    <value>Programa</value>
+    <value>Horario</value>
   </data>
   <data name="coursetabs_schedule_desc" xml:space="preserve">
-    <value>fechas y tareas</value>
+    <value>las fechas y las asignaciones</value>
+  </data>
+  <data name="error_desc" xml:space="preserve">
+    <value>Lo sentimos, ha ocurrido un error al procesar su solicitud</value>
+  </data>
+  <data name="forums_by" xml:space="preserve">
+    <value>por</value>
+  </data>
+  <data name="forums_courseforums" xml:space="preserve">
+    <value>Foros del Curso</value>
+  </data>
+  <data name="forums_header_forumname" xml:space="preserve">
+    <value>Nombre del Foro</value>
+  </data>
+  <data name="forums_header_lastpost" xml:space="preserve">
+    <value>Último mensaje</value>
+  </data>
+  <data name="forums_header_threadsubject" xml:space="preserve">
+    <value>Tema</value>
+  </data>
+  <data name="forums_header_totalposts" xml:space="preserve">
+    <value>Mensajes</value>
+  </data>
+  <data name="forums_header_totalreplies" xml:space="preserve">
+    <value>Respuestas</value>
+  </data>
+  <data name="forums_header_totalthreads" xml:space="preserve">
+    <value>Temas</value>
+  </data>
+  <data name="forums_header_totalviews" xml:space="preserve">
+    <value>Puntos de vista</value>
+  </data>
+  <data name="forums_replytopost" xml:space="preserve">
+    <value>Respuesta</value>
   </data>
   <data name="homemenu_message" xml:space="preserve">
-    <value>Esta es la página donde todos tus cosas deben</value>
-  </data>
-  <data name="home_dashboard_heading_bibsoftware" xml:space="preserve">
-    <value>Bibliografía Software</value>
+    <value>Esta es la página principal, donde toda su materia debe ser</value>
   </data>
   <data name="home_dashboard_heading_courseresources" xml:space="preserve">
-    <value>Curso de Recursos</value>
-  </data>
-  <data name="home_dashboard_heading_onlineedresources" xml:space="preserve">
-    <value>Recursos en la Red Educación</value>
+    <value>Recursos del curso</value>
   </data>
   <data name="home_dashboard_heading_stream" xml:space="preserve">
     <value>¿Qué está pasando en MyDTS</value>
@@ -198,32 +234,74 @@
   <data name="home_dashboard_heading_upcoming" xml:space="preserve">
     <value>Próximos</value>
   </data>
-  <data name="home_dashboard_li_downloadallfiles" xml:space="preserve">
-    <value>Descargar todos los archivos (cursos actuales)</value>
+  <data name="index_title" xml:space="preserve">
+    <value>Indice del</value>
   </data>
-  <data name="home_dashboard_li_downloadcalendar" xml:space="preserve">
-    <value>Descarga tu calendario plazo</value>
+  <data name="login_instructions" xml:space="preserve">
+    <value>Por favor ingrese su nombre de usuario y contraseña</value>
   </data>
-  <data name="home_dashboard_li_endnote" xml:space="preserve">
-    <value>Nota</value>
+  <data name="login_legend" xml:space="preserve">
+    <value>Información de la cuenta</value>
   </data>
-  <data name="home_dashboard_li_msword" xml:space="preserve">
-    <value>Paquete de compatibilidad de Microsoft Word</value>
+  <data name="login_login" xml:space="preserve">
+    <value>Login</value>
   </data>
-  <data name="home_dashboard_li_libreoffice" xml:space="preserve">
-    <value>LibreOffice.org</value>
+  <data name="login_logout" xml:space="preserve">
+    <value>Cerrar sesión</value>
   </data>
-  <data name="home_dashboard_li_styleease" xml:space="preserve">
-    <value>StyleEase</value>
+  <data name="login_password" xml:space="preserve">
+    <value>Contraseña</value>
   </data>
-  <data name="home_dashboard_li_turabianformattutorial" xml:space="preserve">
-    <value>Turabian Formato Tutorial</value>
+  <data name="login_rememberme" xml:space="preserve">
+    <value>Recordar mi nombre y en</value>
   </data>
-  <data name="home_dashboard_li_zotero" xml:space="preserve">
-    <value>Zotero (gratis)</value>
+  <data name="login_title" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="login_username" xml:space="preserve">
+    <value>DTS ID, Nombre de usuario o correo electrónico</value>
+  </data>
+  <data name="submenu_archive" xml:space="preserve">
+    <value>Archivo</value>
+  </data>
+  <data name="submenu_campuses" xml:space="preserve">
+    <value>Campus</value>
+  </data>
+  <data name="submenu_community_home" xml:space="preserve">
+    <value>Compañeros de clase</value>
+  </data>
+  <data name="submenu_courses" xml:space="preserve">
+    <value>Cursos</value>
+  </data>
+  <data name="submenu_current" xml:space="preserve">
+    <value>Corriente</value>
+  </data>
+  <data name="submenu_dashboard" xml:space="preserve">
+    <value>Tablero de instrumentos</value>
+  </data>
+  <data name="submenu_edit" xml:space="preserve">
+    <value>Editar</value>
+  </data>
+  <data name="submenu_files" xml:space="preserve">
+    <value>Archivos</value>
+  </data>
+  <data name="submenu_sessions" xml:space="preserve">
+    <value>Sesiones</value>
+  </data>
+  <data name="submenu_tools" xml:space="preserve">
+    <value>Instrumentos</value>
+  </data>
+  <data name="submenu_users" xml:space="preserve">
+    <value>Los usuarios</value>
+  </data>
+  <data name="submenu_view" xml:space="preserve">
+    <value>Mi página Perfil</value>
+  </data>
+  <data name="tabs_about" xml:space="preserve">
+    <value>Sobre</value>
   </data>
   <data name="tabs_admin" xml:space="preserve">
-    <value>Admin</value>
+    <value>Administración</value>
   </data>
   <data name="tabs_community" xml:space="preserve">
     <value>Comunidad</value>
@@ -238,10 +316,10 @@
     <value>Ayuda</value>
   </data>
   <data name="tabs_home" xml:space="preserve">
-    <value>Inicio</value>
+    <value>Casa</value>
   </data>
   <data name="tabs_login" xml:space="preserve">
-    <value>Inicio de sesión</value>
+    <value>Login</value>
   </data>
   <data name="tabs_logout" xml:space="preserve">
     <value>Cerrar sesión</value>
@@ -250,6 +328,183 @@
     <value>Perfil</value>
   </data>
   <data name="tabs_tour" xml:space="preserve">
-    <value>Tour</value>
+    <value>Gira</value>
+  </data>
+  <data name="home_dashboard_heading_onlineedresources" xml:space="preserve">
+    <value>Recursos en la Red Educación</value>
+  </data>
+  <data name="home_dashboard_li_downloadallfiles" xml:space="preserve">
+    <value>Descargar todos los archivos (los actuales cursos)</value>
+  </data>
+  <data name="home_dashboard_li_downloadcalendar" xml:space="preserve">
+    <value>Descarga tu calendario plazo</value>
+  </data>
+  <data name="home_dashboard_heading_bibsoftware" xml:space="preserve">
+    <value>Bibliografía Software</value>
+  </data>
+  <data name="home_dashboard_li_endnote" xml:space="preserve">
+    <value>EndNote</value>
+  </data>
+  <data name="home_dashboard_li_msword" xml:space="preserve">
+    <value>Microsoft Word el paquete de compatibilidad</value>
+  </data>
+  <data name="home_dashboard_li_libreoffice" xml:space="preserve">
+    <value>LibreOffice.org</value>
+  </data>
+  <data name="home_dashboard_li_styleease" xml:space="preserve">
+    <value>StyleEase</value>
+  </data>
+  <data name="home_dashboard_li_turabianformattutorial" xml:space="preserve">
+    <value>Turabian Tutorial Formato</value>
+  </data>
+  <data name="home_dashboard_li_zotero" xml:space="preserve">
+    <value>Zotero (gratis)</value>
+  </data>
+  <data name="courses_heading_archivedcourses" xml:space="preserve">
+    <value>Cursos archivados</value>
+  </data>
+  <data name="courses_heading_assignments" xml:space="preserve">
+    <value>Asignaciones</value>
+  </data>
+  <data name="courses_heading_coursedesc" xml:space="preserve">
+    <value>Descripción del curso</value>
+  </data>
+  <data name="courses_heading_coursefiles" xml:space="preserve">
+    <value>Archivos del curso</value>
+  </data>
+  <data name="courses_heading_courseroster" xml:space="preserve">
+    <value>Curso de lista</value>
+  </data>
+  <data name="courses_heading_units" xml:space="preserve">
+    <value>Unidades</value>
+  </data>
+  <data name="courses_heading_dashboard" xml:space="preserve">
+    <value>Próximos ...</value>
+  </data>
+  <data name="courses_label_gradedfiles" xml:space="preserve">
+    <value>Archivos clasificados</value>
+  </data>
+  <data name="studentschedule_markcompleted" xml:space="preserve">
+    <value>Marcar como completada</value>
+  </data>
+  <data name="studentschedule_skip" xml:space="preserve">
+    <value>Salto</value>
+  </data>
+  <data name="studentschedule_submitfordiscussion" xml:space="preserve">
+    <value>Enviar trabajo para la discusión</value>
+  </data>
+  <data name="studentschedule_submitfile" xml:space="preserve">
+    <value>A su vez en el archivo</value>
+  </data>
+  <data name="interactions_replies" xml:space="preserve">
+    <value>Abrir [{0} Respuestas]</value>
+  </data>
+  <data name="profile_edit_button" xml:space="preserve">
+    <value>Editar Perfil</value>
+  </data>
+  <data name="profile_heading_contactinfo" xml:space="preserve">
+    <value>Información de Contacto</value>
+  </data>
+  <data name="profile_heading_personalinfo" xml:space="preserve">
+    <value>Información Personal</value>
+  </data>
+  <data name="profile_heading_preferences" xml:space="preserve">
+    <value>Preferencias</value>
+  </data>
+  <data name="profile_heading_socialmedia" xml:space="preserve">
+    <value>Social Media</value>
+  </data>
+  <data name="profile_label_address" xml:space="preserve">
+    <value>Dirección</value>
+  </data>
+  <data name="profile_label_biography" xml:space="preserve">
+    <value>Biografía</value>
+  </data>
+  <data name="profile_label_birthday" xml:space="preserve">
+    <value>Fecha de Nacimiento</value>
+  </data>
+  <data name="profile_label_email" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="profile_label_hometown" xml:space="preserve">
+    <value>Procedencia</value>
+  </data>
+  <data name="profile_label_language" xml:space="preserve">
+    <value>Lengua</value>
+  </data>
+  <data name="profile_label_phone" xml:space="preserve">
+    <value>Teléfono</value>
+  </data>
+  <data name="profile_label_timezone" xml:space="preserve">
+    <value>Zona horaria</value>
+  </data>
+  <data name="profile_save_button" xml:space="preserve">
+    <value>Guardar perfil</value>
+  </data>
+  <data name="profile_security_all" xml:space="preserve">
+    <value>Todos los DTS</value>
+  </data>
+  <data name="profile_security_friends" xml:space="preserve">
+    <value>Compañeros de clase</value>
+  </data>
+  <data name="profile_security_private" xml:space="preserve">
+    <value>Privado</value>
+  </data>
+  <data name="studentschedule_instructionsnotavailable" xml:space="preserve">
+    <value>Las instrucciones para esta tarea estará disponible {0}.</value>
+  </data>
+  <data name="studentschedule_submissionnotavailable" xml:space="preserve">
+    <value>Usted será capaz de presentar este principio de asignación {0}.</value>
+  </data>
+  <data name="courses_heading_tools" xml:space="preserve">
+    <value>Instrumentos</value>
+  </data>
+  <data name="courses_tools_icalendar" xml:space="preserve">
+    <value>Calendario de alimentación</value>
+  </data>
+  <data name="courses_tools_icalendar_desc" xml:space="preserve">
+    <value>Utilice los siguientes enlaces para importar los requisitos del curso en su programa de calendario (Mac Mail, Outlook, Google Calendar, etc)</value>
+  </data>
+  <data name="courses_tools_itunes" xml:space="preserve">
+    <value>iTunes de alimentación</value>
+  </data>
+  <data name="courses_tools_itunes_desc" xml:space="preserve">
+    <value>Importar videos por supuesto, diapositivas, y las transcripciones en iTunes (o software de otros medios de comunicación) para verlas sin conexión.</value>
+  </data>
+  <data name="coursetabs_tools" xml:space="preserve">
+    <value>Instrumentos</value>
+  </data>
+  <data name="coursetabs_tools_desc" xml:space="preserve">
+    <value>Descargas, calendarios y fuentes RSS</value>
+  </data>
+  <data name="labels_dashboard_downloadallfiles" xml:space="preserve">
+    <value>Descargar todos los archivos</value>
+  </data>
+  <data name="labels_dashboard_facilitators" xml:space="preserve">
+    <value>Faciliators</value>
+  </data>
+  <data name="labels_dashboard_faculty" xml:space="preserve">
+    <value>Facultad</value>
+  </data>
+  <data name="labels_dashboard_groupmembers" xml:space="preserve">
+    <value>Miembros del Grupo</value>
+  </data>
+  <data name="labels_dashboard_keyassignments" xml:space="preserve">
+    <value>Misiones importantes</value>
+  </data>
+  <data name="labels_dashboard_keydownloads" xml:space="preserve">
+    <value>Descargas</value>
+  </data>
+  <data name="labels_dashboard_syllabus" xml:space="preserve">
+    <value>Plan de estudios</value>
+  </data>
+  <data name="tab_about" xml:space="preserve">
+    <value>Sobre</value>
+  </data>
+  <data name="home_currentcourses" xml:space="preserve">
+    <value>Cursos actuales</value>
+  </data>
+  <data name="home_nocourses" xml:space="preserve">
+    <value>Usted no tiene ningún curso activo</value>
   </data>
 </root>
