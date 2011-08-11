@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.ServiceModel.Syndication;
 using System.Xml;
+using Ionic.Zip;
 
 namespace Didache.Web.Areas.Students.Controllers
 {
@@ -69,7 +70,10 @@ namespace Didache.Web.Areas.Students.Controllers
 
 			// (2) get tasks
 			if (currentUnit != null) {
-				userTasks = Tasks.GetUserTaskDataInUnit(currentUnit.UnitID, user.UserID);
+
+				CourseUser thisUser = db.CourseUsers.SingleOrDefault(cu => cu.UserID == user.UserID && cu.RoleID == (int)CourseUserRole.Student && cu.CourseID == course.CourseID);
+
+				userTasks = Tasks.GetUserTaskDataInUnit(currentUnit.UnitID, user.UserID, (thisUser==null));
 			}
 
 
@@ -163,10 +167,10 @@ namespace Didache.Web.Areas.Students.Controllers
 		[Authorize]
 		public ActionResult GradedFile(int id, string filename) {
 
-			CourseFile file = new DidacheDb().CourseFiles.Find(id);
+			GradedFile file = new DidacheDb().GradedFiles.Find(id);
 
-			string basePath = System.Configuration.ConfigurationManager.AppSettings["GradedFilesLocation"];
-			string path = System.IO.Path.Combine(basePath, file.Filename);
+			string basePath = Settings.GradedFilesLocation;
+			string path = System.IO.Path.Combine(basePath, file.StoredFilename);
 
 			if (System.IO.File.Exists(path)) {
 
@@ -181,14 +185,23 @@ namespace Didache.Web.Areas.Students.Controllers
 
 			Course course = Didache.Courses.GetCourseBySlug(slug);
 
-			string basePath = System.Configuration.ConfigurationManager.AppSettings["StudentFilesLocation"];
-
 			List<CourseFileGroup> groups = CourseFiles.GetCourseFileGroups(course.CourseID);
 
-			// TODO: create zip file	
-			
-			return HttpNotFound("This doesn't work yet");
-			
+		
+			ZipFile zip = new ZipFile();
+
+			foreach (CourseFileGroup group in groups) {
+
+				foreach (CourseFileAssociation cfa in group.CourseFileAssociations) {
+
+					if (System.IO.File.Exists(cfa.CourseFile.PhysicalPath)) {
+
+						ZipEntry entry = zip.AddFile(cfa.CourseFile.PhysicalPath);
+					}
+				}
+			}
+
+			return new ZipFileResult(zip, slug + "-files.zip");
 		}
 
 		//

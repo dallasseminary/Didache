@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Didache.TaskTypes {
 
 	//[Display(Name = "Comment on Classmates paper", Description = "Student must respond to other student's papers.")]
-	public class CommentOnClassmatesFile : ITaskType {
+	public class CommentOnPost : ITaskType {
 
 		public TaskTypeResult ProcessFormCollection(int taskID, int userID, FormCollection collection, HttpRequestBase request) {
 			DidacheDb db = new DidacheDb();

@@ -19,17 +19,31 @@ namespace Didache.Web {
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
 
+
+
+			string[] staticPages = new string[] {"about","tour","help","resources"};
+
+			foreach (string page in staticPages) {
+				routes.MapRoute(
+					"static_" + page, // Route name
+					page, // URL with parameters
+					new { controller = "Home", action = page } // Parameter defaults
+					, new string[] {"Didache.Web.Controllers"}
+				);
+			}
+
 			routes.MapRoute(
 				"Default", // Route name
 				"{controller}/{action}/{id}", // URL with parameters
-				new { controller = "Main", action = "Index", id = UrlParameter.Optional } // Parameter defaults
-				, new string[] {"Didache.Web.Controllers"}
+				new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
+				, new string[] { "Didache.Web.Controllers" }
 			);
 
 		}
 
 		protected void Application_AcquireRequestState(Object sender, EventArgs e) {
-			// is user logged in?
+			/* 
+			 * // is user logged in?
 			if (User.Identity.IsAuthenticated) {
 				User user = Users.GetLoggedInUser();
 				SetLanguage(user.Language);
@@ -49,7 +63,12 @@ namespace Didache.Web {
 					HttpContext.Current.Request.Cookies.Add(new HttpCookie("HowLangSet", "browser"));
 				}
 			}
+			 * */
 
+			string language = Users.GetUserLanguage();
+			string setMethod = Users.GetUserLanguageSetMethod();
+			SetLanguage(language);
+			HttpContext.Current.Request.Cookies.Add(new HttpCookie("HowLangSet", setMethod));
 
 			//base.BeginRequest(sender, e);
 		}

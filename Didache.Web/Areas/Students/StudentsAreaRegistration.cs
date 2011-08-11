@@ -49,7 +49,7 @@ namespace Didache.Web.Areas.Students {
 			);
 			context.MapRoute(
 				"downloadall",
-				"courses/downloadall/{slug}-Files.zip",
+				"courses/downloadall/{slug}.zip",
 				new { controller = "Courses", action = "DownloadAll" }
 			);
 
