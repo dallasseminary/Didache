@@ -3,44 +3,44 @@
 <ul id="course-menu" class="page-menu">
 	<li>
 		<a href="/courses/@ViewContext.RouteData.Values["slug"]/dashboard"@(Html.Raw(ViewContext.RouteData.Values["action"].ToString().ToLower() == "dashboard" ? " class=\"selected\"" : ""))>
-			<span>@Html.Raw(Resources.labels.coursetabs_dashboard) </span>
-			<dfn>@Html.Raw(Resources.labels.coursetabs_dashboard_desc) </dfn>
+			<span>@Html.Raw(Didache.Resources.labels.coursetabs_dashboard) </span>
+			<dfn>@Html.Raw(Didache.Resources.labels.coursetabs_dashboard_desc) </dfn>
 		</a>
 	</li>
 	<li>
 		<a href="/courses/@ViewContext.RouteData.Values["slug"]/schedule"@(Html.Raw(ViewContext.RouteData.Values["action"].ToString().ToLower() == "schedule" ? " class=\"selected\"" : ""))>
-			<span>@Html.Raw(Resources.labels.coursetabs_schedule)</span>
-			<dfn>@Html.Raw(Resources.labels.coursetabs_schedule_desc)</dfn>
+			<span>@Html.Raw(Didache.Resources.labels.coursetabs_schedule)</span>
+			<dfn>@Html.Raw(Didache.Resources.labels.coursetabs_schedule_desc)</dfn>
 		</a>
 	</li>
 	<li>
 		<a href="/courses/@ViewContext.RouteData.Values["slug"]/files"@(Html.Raw(ViewContext.RouteData.Values["action"].ToString().ToLower() == "files" ? " class=\"selected\"" : ""))>
-			<span>@Html.Raw(Resources.labels.coursetabs_files)</span>
-			<dfn>@Html.Raw(Resources.labels.coursetabs_files_desc)</dfn>
+			<span>@Html.Raw(Didache.Resources.labels.coursetabs_files)</span>
+			<dfn>@Html.Raw(Didache.Resources.labels.coursetabs_files_desc)</dfn>
 		</a>
 	</li>
 	<li>
 		<a href="/courses/@ViewContext.RouteData.Values["slug"]/roster"@(Html.Raw(ViewContext.RouteData.Values["action"].ToString().ToLower() == "roster" ? " class=\"selected\"" : ""))>
-			<span>@Html.Raw(Resources.labels.coursetabs_roster)</span>
-			<dfn>@Html.Raw(Resources.labels.coursetabs_roster_desc)</dfn>
+			<span>@Html.Raw(Didache.Resources.labels.coursetabs_roster)</span>
+			<dfn>@Html.Raw(Didache.Resources.labels.coursetabs_roster_desc)</dfn>
 		</a>
 	</li>
 	<li>
 		<a href="/courses/@ViewContext.RouteData.Values["slug"]/assignments"@(Html.Raw(ViewContext.RouteData.Values["action"].ToString().ToLower() == "assignments" ? " class=\"selected\"" : ""))>
-			<span>@Html.Raw(Resources.labels.coursetabs_assignments)</span>
-			<dfn>@Html.Raw(Resources.labels.coursetabs_assignments_desc)</dfn>
+			<span>@Html.Raw(Didache.Resources.labels.coursetabs_assignments)</span>
+			<dfn>@Html.Raw(Didache.Resources.labels.coursetabs_assignments_desc)</dfn>
 		</a>
 	</li>
 	<li>
 		<a href="/courses/@ViewContext.RouteData.Values["slug"]/discussion"@(Html.Raw(HttpContext.Current.Request.Url.ToString().ToLower().IndexOf("/discussion") > 0 ? " class=\"selected\"" : ""))>
-			<span>@Html.Raw(Resources.labels.coursetabs_discussion)</span>
-			<dfn>@Html.Raw(Resources.labels.coursetabs_discussion_desc)</dfn>
+			<span>@Html.Raw(Didache.Resources.labels.coursetabs_discussion)</span>
+			<dfn>@Html.Raw(Didache.Resources.labels.coursetabs_discussion_desc)</dfn>
 		</a>
 	</li>
 	<li>
 		<a href="/courses/@ViewContext.RouteData.Values["slug"]/tools"@(Html.Raw(ViewContext.RouteData.Values["action"].ToString().ToLower() == "tools" ? " class=\"selected\"" : ""))>
-			<span>@Html.Raw(Resources.labels.coursetabs_tools)</span>
-			<dfn>@Html.Raw(Resources.labels.coursetabs_tools_desc)</dfn>
+			<span>@Html.Raw(Didache.Resources.labels.coursetabs_tools)</span>
+			<dfn>@Html.Raw(Didache.Resources.labels.coursetabs_tools_desc)</dfn>
 		</a>
 	</li>
 </ul>

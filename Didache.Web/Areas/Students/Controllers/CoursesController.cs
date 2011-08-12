@@ -127,7 +127,10 @@ namespace Didache.Web.Areas.Students.Controllers
 										.Include("Task.Unit")
 										.Include("StudentFile")
 										.Include("GradedFile")
-										.Where(ut => ut.UserID == user.UserID && ut.CourseID == course.CourseID).ToList();
+										.Where(ut => ut.UserID == user.UserID && ut.CourseID == course.CourseID)
+										.OrderBy(ut => ut.Unit.SortOrder)
+											.ThenBy(ut => ut.Task.SortOrder)
+										.ToList();
 
 
 			return View(course);

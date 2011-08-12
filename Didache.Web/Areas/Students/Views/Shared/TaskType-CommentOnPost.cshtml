@@ -20,7 +20,7 @@
 				<div class="task-interaction-meta">
 					<a class="user-name" href="@(thread.User != null ? thread.User.ProfileDisplayUrl : "#")">@(thread.User != null ? thread.User.SecureName : "missing")</a>
 					<span class="post-date">@thread.ThreadDate.ToShortDateString()</span>
-					<span class="total-replies d-button">@String.Format(Resources.labels.interactions_replies, (thread.Posts.Count - 1))</span>
+					<span class="total-replies d-button">@String.Format(Didache.Resources.labels.interactions_replies, (thread.Posts.Count - 1))</span>
 				</div>
 				<div class="task-interaction-text">
 					@Html.Raw(thread.Posts.First().PostContentFormatted)

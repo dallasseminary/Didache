@@ -1,7 +1,7 @@
 ﻿@model Didache.Course
 
 @{
-	ViewBag.Title = Model.CourseCode + Model.Section + " " + Resources.labels.coursetabs_dashboard;
+	ViewBag.Title = Model.CourseCode + Model.Section + " " + Didache.Resources.labels.coursetabs_dashboard;
 }
 
 <div class="page-wide  page-split">
@@ -17,7 +17,7 @@
 	<div class="sub-column">
 		
 		<div class="sub-column-padding">
-			<h3>@Resources.labels.courses_heading_coursedesc</h3>
+			<h3>@Didache.Resources.labels.courses_heading_coursedesc</h3>
 		
 			<p>@Html.Raw(Utility.StripHtml(Model.Description))</p>
 		</div>

@@ -1,7 +1,7 @@
 ﻿@if (HttpContext.Current.User.Identity.IsAuthenticated) { 
 
 	<div id="courses-menu" class="side-menu">
-		<h3>@Resources.labels.tabs_courses</h3>
+		<h3>@Didache.Resources.labels.tabs_courses</h3>
 		
 		<ul>
 			@{ List<Course> courses = Didache.Courses.GetUsersRunningCourses(CourseUserRole.Student); }
@@ -10,18 +10,18 @@
 				<li@Html.Raw(ViewContext.RouteData.Values["slug"] != null && ViewContext.RouteData.Values["slug"].ToString() == course.Slug ? " class=\"selected\"" : "")><a href="/courses/@course.Slug@(( ViewContext.RouteData.Values["action"] != null && (new List<string>() {"dashboard","schedule","files","roster","assignments"}).IndexOf(ViewContext.RouteData.Values["action"].ToString()) > -1) ? "/" + ViewContext.RouteData.Values["action"] : "" )">@(course.CourseCode + course.Section + " - " + course.FacultyLastNames)</a></li>	
 				}
 			}
-			<li><a href="/courses/">@Resources.labels.submenu_archive</a></li>
+			<li><a href="/courses/">@Didache.Resources.labels.submenu_archive</a></li>
 		</ul>
 
 	</div>
 	
 	
 	<div id="community-menu" class="side-menu">
-		<h3>@Resources.labels.tabs_community</h3>
+		<h3>@Didache.Resources.labels.tabs_community</h3>
 		
 		<ul>
-			<li><a href="/community">@Resources.labels.submenu_community_home</a></li>
-			<li><a href="@Users.GetLoggedInUser().ProfileDisplayUrl">@Resources.labels.submenu_view</a></li>
+			<li><a href="/community">@Didache.Resources.labels.submenu_community_home</a></li>
+			<li><a href="@Users.GetLoggedInUser().ProfileDisplayUrl">@Didache.Resources.labels.submenu_view</a></li>
 		</ul>
 	</div>	
 	
@@ -31,11 +31,11 @@
 
 	
 <div id="community-menu" class="side-menu">
-	<h3>@Resources.labels.tabs_about</h3>
+	<h3>@Didache.Resources.labels.tabs_about</h3>
 		
 	<ul>
-		<li><a href="/tour">@Resources.labels.tabs_tour</a></li>
-		<li><a href="/help">@Resources.labels.tabs_help</a></li>
+		<li><a href="/tour">@Didache.Resources.labels.tabs_tour</a></li>
+		<li><a href="/help">@Didache.Resources.labels.tabs_help</a></li>
 	</ul>
 </div>	
 

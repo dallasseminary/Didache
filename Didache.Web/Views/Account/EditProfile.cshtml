@@ -16,7 +16,7 @@
 			@Html.ValidationSummary(true)	
 		
 			<div class="actions">
-				<input type="submit" class="d-button action" value="@Resources.labels.profile_save_button" />
+				<input type="submit" class="d-button action" value="@Didache.Resources.labels.profile_save_button" />
 			</div>
 		</div>
 
@@ -25,11 +25,11 @@
 		 @Html.HiddenFor(model => model.UserID)
 	  	
 	  
-		<h4>@Resources.labels.profile_heading_preferences</h4>
+		<h4>@Didache.Resources.labels.profile_heading_preferences</h4>
 		<table class="user-profile">			
 			<tr>
 				<th>
-					@Resources.labels.profile_label_language
+					@Didache.Resources.labels.profile_label_language
 				</th>
 				<td>
 					@Html.DropDownListFor(model => model.Language, new SelectList(new[] {   
@@ -45,7 +45,7 @@
 			@*
 			<tr>
 				<th>
-					@Resources.labels.profile_label_timezone
+					@Didache.Resources.labels.profile_label_timezone
 				</th>
 				<td>
 					@Model.TimezoneOffset			
@@ -55,12 +55,12 @@
 		</table>
 
 	  
-		<h4>@Resources.labels.profile_heading_contactinfo</h4>
+		<h4>@Didache.Resources.labels.profile_heading_contactinfo</h4>
 
 		<table class="user-profile">			
 			<tr>
 				<th>
-					@Resources.labels.profile_label_email
+					@Didache.Resources.labels.profile_label_email
 				</th>
 				<td>
 					@Model.Email	
@@ -71,7 +71,7 @@
 			</tr>
 			<tr>
 				<th>
-					@Resources.labels.profile_label_phone
+					@Didache.Resources.labels.profile_label_phone
 				</th>
 				<td>				
 					@Model.Phone
@@ -82,7 +82,7 @@
 			</tr>
 			<tr>
 				<th>
-					@Resources.labels.profile_label_address
+					@Didache.Resources.labels.profile_label_address
 				</th>
 				<td>
 					@if (Users.HasPermission(Model.UserID, Model.AddressSecuritySetting)) {
@@ -98,12 +98,12 @@
 			</tr>
 		</table>
 
-		<h4>@Resources.labels.profile_heading_personalinfo</h4>
+		<h4>@Didache.Resources.labels.profile_heading_personalinfo</h4>
 
 		<table class="user-profile">
 			<tr>
 				<th>
-					@Resources.labels.profile_label_birthday
+					@Didache.Resources.labels.profile_label_birthday
 				</th>
 				<td>
 					@(Model.BirthDate.HasValue ? Model.BirthDate.Value.ToShortDateString() : "")
@@ -115,7 +115,7 @@
 			@if (!Model.Hometown.IsEmpty()) {
 			<tr>
 				<th>
-					@Resources.labels.profile_label_hometown
+					@Didache.Resources.labels.profile_label_hometown
 				</th>
 				<td>
 					@Model.Hometown
@@ -124,7 +124,7 @@
 				}		
 			<tr>
 				<th>
-					@Resources.labels.profile_label_biography
+					@Didache.Resources.labels.profile_label_biography
 				</th>
 				<td>
 					<textarea name="Bio">@Model.Bio</textarea>
@@ -140,7 +140,7 @@
 
 	<div class="sub-column">
 	
-		<h3>@Resources.labels.profile_heading_socialmedia</h3>
+		<h3>@Didache.Resources.labels.profile_heading_socialmedia</h3>
 
 
 		@Html.LabelFor(model => model.Facebook)<br />

@@ -7,7 +7,7 @@
 <div class="page-wide">
 	<div class="full-column">
 		<div class="page-header">
-			<h2>@Resources.labels.login_login</h2>
+			<h2>@Didache.Resources.labels.login_login</h2>
 		</div>
 
 
@@ -42,7 +42,7 @@
 	
 	
             <div class="editor-label">
-                <label for="username">@Resources.labels.login_username</label>
+                <label for="username">@Didache.Resources.labels.login_username</label>
             </div>
             <div class="editor-field">
                 <input type="text" id="username" name="username" value="@(Model != null ? Model.UserName : "")" />			
@@ -50,7 +50,7 @@
             </div>
 	
             <div class="editor-label">
-                <label for="password">@Resources.labels.login_password</label>
+                <label for="password">@Didache.Resources.labels.login_password</label>
             </div>	
             <div class="editor-field">
                 <input type="password" id="password" name="password" value="@(Model != null ? Model.Password : "")" />			
@@ -60,12 +60,12 @@
             <div class="editor-label">
 				
 				<input type="checkbox" id="RememberMe" name="RememberMe" @(Model != null && Model.RememberMe? "checked=checked" : "") />
-				<label for="RememberMe">@Resources.labels.login_rememberme</label>
+				<label for="RememberMe">@Didache.Resources.labels.login_rememberme</label>
 				
 
             </div>	
 
-			<input type="submit" class="d-button action" value="@Resources.labels.login_login" />
+			<input type="submit" class="d-button action" value="@Didache.Resources.labels.login_login" />
 		   
 }
 

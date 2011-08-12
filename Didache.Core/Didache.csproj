@@ -119,7 +119,13 @@
     <Compile Include="Models\Courses\Task.cs" />
     <Compile Include="Models\Courses\Unit.cs" />
     <Compile Include="Models\Courses\Users\UserTaskData.cs" />
+    <Compile Include="Models\ViewModels\HelpModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\labels.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>labels.resx</DependentUpon>
+    </Compile>
     <Compile Include="TaskTypes\Types\CommentOnPost.cs" />
     <Compile Include="TaskTypes\Types\AnswerQuestionForDiscussion.cs" />
     <Compile Include="TaskTypes\Types\Survey.cs" />
@@ -139,6 +145,19 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\labels.ar.resx" />
+    <EmbeddedResource Include="Resources\labels.es.resx" />
+    <EmbeddedResource Include="Resources\labels.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>labels.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\labels.zh-CN.resx" />
+    <EmbeddedResource Include="Resources\labels.zh-TW.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

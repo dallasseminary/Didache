@@ -1,7 +1,7 @@
 ﻿@model Didache.Course
 
 @{
-	ViewBag.Title = Model.CourseCode + Model.Section + " " + Resources.labels.courses_heading_tools;
+	ViewBag.Title = Model.CourseCode + Model.Section + " " + Didache.Resources.labels.courses_heading_tools;
 }
 
 <div class="page-wide">
@@ -11,17 +11,17 @@
 
 	<div class="full-column">
 	
-		<h3>@Resources.labels.courses_tools_itunes</h3>
+		<h3>@Didache.Resources.labels.courses_tools_itunes</h3>
 
-		<p>@Resources.labels.courses_tools_itunes_desc</p>
+		<p>@Didache.Resources.labels.courses_tools_itunes_desc</p>
 
 		<p><a href="http://@(Request.Url.Host)/courses/feed/@(Users.GetLoggedInUser().UserID)/@ViewContext.RouteData.Values["slug"]-all.xml"><img src="/css/images/itunes-badge.jpg"></a>			
 			</p>
 	
 
-		<h3>@Resources.labels.courses_tools_icalendar</h3>
+		<h3>@Didache.Resources.labels.courses_tools_icalendar</h3>
 
-		<p>@Resources.labels.courses_tools_icalendar_desc</p>
+		<p>@Didache.Resources.labels.courses_tools_icalendar_desc</p>
 
 		<ul>
 			<li>				

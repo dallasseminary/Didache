@@ -5,17 +5,17 @@
 	<div class="course-dashboard-info">
 
 		<div class="course-dashboard-downloads">
-			<h3>@Resources.labels.labels_dashboard_keydownloads</h3>
+			<h3>@Didache.Resources.labels.labels_dashboard_keydownloads</h3>
 
 			@{ CourseFileAssociation syllabus = new DidacheDb().CourseFileAssociations.Where(cfa => cfa.CourseFileGroup.CourseID == Model.CourseID && cfa.CourseFile.Title.Contains("Syllabus")).FirstOrDefault();}
 			@if (syllabus != null) {
-				<a class="d-button" href="@syllabus.CourseFile.FileUrl">@Resources.labels.labels_dashboard_syllabus</a>
+				<a class="d-button" href="@syllabus.CourseFile.FileUrl">@Didache.Resources.labels.labels_dashboard_syllabus</a>
 			}
-			<a class="d-button" href="/courses/downloadall/@(Model.Slug).zip">@Resources.labels.labels_dashboard_downloadallfiles</a>
+			<a class="d-button" href="/courses/downloadall/@(Model.Slug).zip">@Didache.Resources.labels.labels_dashboard_downloadallfiles</a>
 		</div>
 
 		<div class="course-dashboard-assignments">
-			<h3>@Resources.labels.labels_dashboard_keyassignments</h3>
+			<h3>@Didache.Resources.labels.labels_dashboard_keyassignments</h3>
 			
 			
 			@foreach (UserTaskData task in Courses.GetImportantTasksForUser(Model.CourseID)) {        
@@ -35,7 +35,7 @@
 		@{ List<CourseUser> courseUsers = new DidacheDb().CourseUsers.Include("User").Where(cu => cu.CourseID == Model.CourseID).ToList();}
 
 		<div class="user-list-large">
-			<h3>@Resources.labels.labels_dashboard_faculty</h3>
+			<h3>@Didache.Resources.labels.labels_dashboard_faculty</h3>
 
 			@foreach (CourseUser user in courseUsers.Where(cu => cu.CourseUserRole == CourseUserRole.Faculty).OrderBy(cu => cu.User.LastName)) {
 				<div class="user">
@@ -49,7 +49,7 @@
 		</div>
 
 		<div class="user-list-large">
-			<h3>@Resources.labels.labels_dashboard_facilitators</h3>
+			<h3>@Didache.Resources.labels.labels_dashboard_facilitators</h3>
 
 			@foreach (CourseUser user in courseUsers.Where(cu => cu.CourseUserRole == CourseUserRole.Faciliator).OrderBy(cu => cu.User.LastName)) {
 				<div class="user">
@@ -63,7 +63,7 @@
 		</div>
 
 		<div class="user-list-small">
-			<h3>@Resources.labels.labels_dashboard_groupmembers</h3>
+			<h3>@Didache.Resources.labels.labels_dashboard_groupmembers</h3>
 
 			@foreach (CourseUser user in courseUsers.Where(cu => cu.CourseUserRole == CourseUserRole.Student && cu.GroupID == courseUsers.SingleOrDefault(thisUser => thisUser.UserID == Users.GetLoggedInUser().UserID && thisUser.CourseUserRole == CourseUserRole.Student).GroupID).OrderBy(cu => cu.User.LastName)) {
 				<div class="user">
