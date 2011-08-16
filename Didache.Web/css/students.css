@@ -254,7 +254,7 @@
 
 
 .turn-in-form {
-	margin: 0 0 0 40px;	
+	margin: 0 0 0 40px;
 	overflow: hidden;
 }
 
@@ -264,9 +264,21 @@
 		border: solid 2px #ccc;
 		padding: 10px;
 	}
+	.transparent-upload {
+	    position: relative;	
+	}
+	.turn-in-form input[type=button] {
+	    width: 215px;
+	}
 	.turn-in-form input[type=file] {
-		width: 300px;
-		float: left;
+		-x-width: 300px;
+		height: 38px;
+		-x-float: left;
+		position: absolute;
+		top:0;
+		left:0;
+		display: block;
+		opacity: 0;
 	}	
 	.turn-in-form input[type=submit] {
 		float: right;
