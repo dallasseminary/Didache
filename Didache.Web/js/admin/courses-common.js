@@ -26,7 +26,8 @@ function clearEditor(id) {
 		} else if (field.prop('tagName') == 'select') {
 			field[0].selectedIndex = 0;
 		} else {
-			field.val('');
+			
+			field.val(field.data('defaultvalue'));
 		}
 	});
 }
