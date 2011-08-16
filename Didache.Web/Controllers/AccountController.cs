@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
 using Didache.Models;
+using System.Net;
 
 namespace Didache.Web.Controllers {
 	public class AccountController : Controller {
@@ -128,18 +129,36 @@ namespace Didache.Web.Controllers {
 			DidacheDb db = new DidacheDb();
 			
 			try {
-				model = db.Users.Find(model.UserID);
+				// store the old email so we can know if it's changed
+				User user = db.Users.Find(model.UserID);
+				string oldEmail = user.Email;
 
-				UpdateModel(model);
-
+				UpdateModel(user);
 				db.SaveChanges();
+
+
+				// change of email changes
+				if (user.Email != oldEmail) {
+
+					// change membership user
+					MembershipUser membershipUser = Membership.GetUser(user.Username, true);
+					membershipUser.Email = model.Email;
+					Membership.UpdateUser(membershipUser);
+
+					// send to CARS
+					// set to CampusNet
+					string transactionUrl = "https://campus.dts.edu/cgi-bin/public/DSchkhold.cgi?id=" + user.UserID.ToString() + "&email=" + user.Email;
+					WebClient webClient = new WebClient();
+					string returnValue = webClient.DownloadString(transactionUrl);
+				}
+
 
 				// save language to cookie for logout
 				Response.Cookies.Add(new HttpCookie("Language", model.Language));
 
 				Users.ClearUserCache(model);
 
-				return Redirect(model.ProfileDisplayUrl); // RedirectToAction("EditProfile");
+				return Redirect(user.ProfileDisplayUrl); // RedirectToAction("EditProfile");
 
 			} catch (Exception ex) {
 				ModelState.AddModelError("", "Edit Failure, see inner exception: " + ex.ToString());
