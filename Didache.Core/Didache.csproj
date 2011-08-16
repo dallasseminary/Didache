@@ -96,6 +96,7 @@
     <Compile Include="Models\Enum\UserSecuritySetting.cs" />
     <Compile Include="Models\Grading\Grading.cs" />
     <Compile Include="Models\Courses\Courses.cs" />
+    <Compile Include="Models\User\DTSUserInfo.cs" />
     <Compile Include="Models\User\UserRoles.cs" />
     <Compile Include="Models\User\Users.cs" />
     <Compile Include="Models\Courses\Sessions.cs" />
@@ -139,6 +140,8 @@
     <Compile Include="TaskTypes\ITaskType.cs" />
     <Compile Include="TaskTypes\TaskTypeInfo.cs" />
     <Compile Include="TaskTypes\TaskTypeManager.cs" />
+    <Compile Include="Utility\CarsConnection.cs" />
+    <Compile Include="Utility\Emails.cs" />
     <Compile Include="Utility\EntityObjectSerializer.cs" />
     <Compile Include="Utility\Settings.cs" />
     <Compile Include="Utility\Utility.cs" />

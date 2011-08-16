@@ -134,17 +134,70 @@
 </div>
 
 <div class="clear"></div>
+
+
+<div id="sync-course">
+	<h2>Sync Users</h2>
+
+	<table class="admin-form">
+		<tr>
+			<th>Session</th>
+			<td><input type="text" id="sync-session-code" value="@Model.Session.SessionCode" placeholder="Session" /> <input type="text" id="sync-session-year" value="@Model.Session.SessionYear" placeholder="Year" /></td>
+		</tr>
+		<tr>
+			<th>Course</th>
+			<td><input type="text" id="sync-course-code" value="@Model.CourseCode" placeholder="Course Code" /> <input type="text" id="sync-course-section" value="@Model.Section" placeholder="Section" /></td>
+		</tr>
+	</table>
+
+	<input id="sync-course-button" type="button" value="Sync Course with CARS" />
+
 </div>
 
+
+</div>
 
 
 <script>
 	jQuery(document).ready(function ($) {
+
+		$('#sync-course-button').click(function () {
+
+			showLoading('Syncing Users...');
+
+			$.ajax({
+				url: '/admin/courses/syncusers/' + $('#CourseID').val(),
+				data: {
+					sessionCode: $('#sync-session-code').val(),
+					sessionYear: $('#sync-session-year').val(),
+					courseCode: $('#sync-course-code').val(),
+					courseSection: $('#sync-course-section').val()
+				},
+				type: 'post',
+				success: function() {
+					loadUsers();
+				}
+			});
+
+
+		});
+
+
+
+
 		// load all users
 		function loadUsers() {
+
+			showLoading('Loading Users...');
+
 			$.ajax({
 				url: '/api/GetCourseUsers/' + $('#CourseID').val(),
 				success: function (d) {
+
+					hideLoading();
+
+					$('.role-group').empty();
+
 					for (var i = 0, il = d.length; i < il; i++) {
 						addUser(d[i], false);
 					}

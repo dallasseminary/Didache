@@ -22,7 +22,7 @@ namespace Didache.Web.Areas.Admin.Controllers
         {
 			List<Course> courses = Didache.Courses.GetCurrentlyRunningCourses();
 
-			return View("List", courses);
+			return View("List", courses);		
         }
 
 		public ActionResult BySession(int id) {
@@ -59,6 +59,15 @@ namespace Didache.Web.Areas.Admin.Controllers
 			Course course = (id == null) ? null : db.Courses.Find(id);
 
 			return View(course);
+		}
+
+		public ActionResult SyncUsers(int id, string sessionYear, string sessionCode, string courseCode, string courseSection) {
+
+			Course course = Courses.GetCourse(id);
+
+			CarsConnection.SyncCourse(id, sessionYear, sessionCode, courseCode, courseSection);
+
+			return Json(new {success= true});
 		}
 
 
