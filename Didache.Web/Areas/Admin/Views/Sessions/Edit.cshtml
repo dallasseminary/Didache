@@ -40,6 +40,15 @@
 	</tr>
 	<tr>
        <th>
+            @Html.LabelFor(model => model.SessionYear):
+        </th>
+        <td>
+            @Html.EditorFor(model => model.SessionYear)
+            @Html.ValidationMessageFor(model => model.SessionYear)
+        </td>
+	</tr>
+	<tr>
+       <th>
             @Html.LabelFor(model => model.Name):
         </th>
         <td>
