@@ -32,15 +32,15 @@ namespace Didache.Models {
 
 	public class LogOnModel {
 		[Required]
-		[Display(Name = "DTS ID, Email, or Username")]
+		[Display(Name = "login_username", ResourceType=typeof(Resources.labels))]
 		public string UserName { get; set; }
 
 		[Required]
 		[DataType(DataType.Password)]
-		[Display(Name = "Password")]
+		[Display(Name = "login_password", ResourceType = typeof(Resources.labels))]
 		public string Password { get; set; }
 
-		[Display(Name = "Remember Me")] //, ResourceType = typeof(Resources.Labels))]
+		[Display(Name = "login_rememberme", ResourceType = typeof(Resources.labels))]
 		public bool RememberMe { get; set; }
 	}
 
