@@ -156,6 +156,10 @@ namespace Didache {
 		public string Zip { get; set; }
 		public string Country { get; set; }
 		public string Phone { get; set; }
+
+		[Required]
+		[DataType(DataType.EmailAddress)]
+		[RegularExpression(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", ErrorMessage="Invalid Email address")]
 		public string Email { get; set; }
 
 		public string Gender { get; set; }
