@@ -15,12 +15,38 @@
 		<div class="page-header">
 			<h2>@Model.SecureName</h2>
 			<h3>@Model.Country</h3>
+
 			@if (Model.UserID == Users.GetLoggedInUser().UserID) {
 				<div class="actions">
 				<a class="d-button edit" href="/account/editprofile">@Didache.Resources.labels.profile_edit_button</a>
 				</div>
 			}
 		</div>
+
+		<div class="profile-constituencies">
+				@if (ViewBag.Degrees != null && ViewBag.Degrees.Count > 0) {
+					<div class="profile-constituency">
+					@Didache.Resources.labels.profile_constituency_alumni<text>:</text>
+					@Html.Raw(String.Join(", ", ((List<Degree>)ViewBag.Degrees).Select(d => d.DegreeEarned + " (" + d.GradYear.ToString() + ")").ToArray()))
+					</div>
+				}
+				@if (ViewBag.Student != null) {
+					<div class="profile-constituency">
+					@Didache.Resources.labels.profile_constituency_student<text>:</text>
+					
+					@(((Student)ViewBag.Student).Degree)
+					<!-- @(((Student)ViewBag.Student).Campus)<text>,</text> -->
+					@(ViewBag.Student.PlannedGradYear > 0 ? ", " + ViewBag.Student.PlannedGradYear: "")
+					</div>
+				}
+				@if (ViewBag.Employees != null && ViewBag.Employees.Count > 0) {
+					<div class="profile-constituency">
+					@Didache.Resources.labels.profile_constituency_staff
+					</div>
+				}
+			</div>
+				
+
 
 		<h4>@Didache.Resources.labels.profile_heading_contactinfo</h4>
 
@@ -35,6 +61,7 @@
 					}
 				</td>
 			</tr>
+			@*
 			<tr>
 				<th>
 					@Didache.Resources.labels.profile_label_phone
@@ -45,6 +72,7 @@
 					}
 				</td>
 			</tr>
+			
 			<tr>
 				<th>
 					@Didache.Resources.labels.profile_label_address
@@ -58,12 +86,14 @@
 					}
 				</td>
 			</tr>
+			*@
 		</table>
 
 
 		<h4>@Didache.Resources.labels.profile_heading_personalinfo</h4>
 
 		<table class="user-profile">
+			@*
 			<tr>
 				<th>
 					@Didache.Resources.labels.profile_label_birthday
@@ -81,7 +111,8 @@
 					@Model.Hometown
 				</td>
 			</tr>
-			}		
+			}
+			*@	
 			<tr>
 				<th>
 					@Didache.Resources.labels.profile_label_biography

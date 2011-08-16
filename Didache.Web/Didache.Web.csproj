@@ -233,6 +233,7 @@
     <Content Include="js\lib\MicrosoftMvcValidation.js" />
     <Content Include="sql.aspx" />
     <Content Include="todo.txt" />
+    <Content Include="tools\loginas.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -346,6 +347,7 @@
     <Content Include="Areas\Admin\Views\Courses\CloneCourse.cshtml" />
     <None Include="Areas\Students\Views\Shared\TaskType-CommentOnPost.cshtml" />
     <Content Include="Areas\Students\Views\Shared\TaskType-Default.cshtml" />
+    <Content Include="Views\Account\Copy of EditProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\students.css" />
