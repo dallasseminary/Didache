@@ -6,11 +6,7 @@
 	<div class="turn-in-form">
 	<form method="post" enctype="multipart/form-data" action="/courses/api/taskfile/@Model.TaskID" id="task-submit-@Model.TaskID">
 		<textarea name="usercomment" class="required"></textarea>
-
-		<div class="transparent-upload">
-			<input type="file" name="StudentFile" class="required" @Html.Raw(!String.IsNullOrEmpty(Model.Task.FileTypesAllowed) ? " accept=\"" + Model.Task.FileTypesAllowed + "\"" : "") data-val-accept="Sorry, accept files with these extensions: @Model.Task.FileTypesAllowed." />
-			<input type="button" value="Upload a file" class="d-button" />
-		</div>
+		<input type="file" name="StudentFile" class="required" @Html.Raw(!String.IsNullOrEmpty(Model.Task.FileTypesAllowed) ? " accept=\"" + Model.Task.FileTypesAllowed + "\"" : "") data-val-accept="Sorry, accept files with these extensions: @Model.Task.FileTypesAllowed." />
 
 		<input type="submit" value="@Didache.Resources.labels.studentschedule_submitfordiscussion" class="d-button action task-submit" />
 
@@ -31,9 +27,7 @@
 <script type="text/javascript">
 	jQuery(function ($) {
 		$(".transparent-upload input[type=file]").change(function () {
-			//var fileName = $(this).val();
-			//$("input[type=button]").attr("value", fileName);
-
+			
 			var fileInput = $(this),
 				filename = fileInput.val();
 
