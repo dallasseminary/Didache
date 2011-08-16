@@ -11,6 +11,9 @@
 				}
 			}
 			<li><a href="/courses/">@Didache.Resources.labels.submenu_archive</a></li>
+			@if (User.IsInRole(UserRoles.Facilitator)) {
+			<li><a href="/grading/">GTA Facilitation</a></li>
+			}
 		</ul>
 
 	</div>
