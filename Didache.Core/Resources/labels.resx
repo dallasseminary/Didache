@@ -364,7 +364,7 @@
     <value>Login</value>
   </data>
   <data name="login_username" xml:space="preserve">
-    <value>DTS ID, Username, or Email</value>
+    <value>DTS ID or Email</value>
   </data>
   <data name="profile_edit_button" xml:space="preserve">
     <value>Edit Profile</value>
@@ -506,5 +506,44 @@
   </data>
   <data name="tab_about" xml:space="preserve">
     <value>About</value>
+  </data>
+  <data name="login_forgotpassword" xml:space="preserve">
+    <value>Forgot ID/Password</value>
+  </data>
+  <data name="login_unsuccessful" xml:space="preserve">
+    <value>Login was unsuccessful. Please correct the errors and try again.</value>
+  </data>
+  <data name="profile_constituency_alumni" xml:space="preserve">
+    <value>Alumni</value>
+  </data>
+  <data name="profile_constituency_faculty" xml:space="preserve">
+    <value>Faculty</value>
+  </data>
+  <data name="profile_constituency_staff" xml:space="preserve">
+    <value>Staff</value>
+  </data>
+  <data name="profile_constituency_student" xml:space="preserve">
+    <value>Student</value>
+  </data>
+  <data name="help_email" xml:space="preserve">
+    <value>Your Email</value>
+  </data>
+  <data name="help_instructions" xml:space="preserve">
+    <value>If you're having a login problem, please use the &lt;a href="http://www.dts.edu/account/resetpassword"&gt;reset password&lt;/a&gt; link to reset your password. If you have a question about an assignment, please contact your professor or facilitator.</value>
+  </data>
+  <data name="help_message" xml:space="preserve">
+    <value>Description of Problem</value>
+  </data>
+  <data name="help_name" xml:space="preserve">
+    <value>Your Name</value>
+  </data>
+  <data name="help_title" xml:space="preserve">
+    <value>Help/Contact</value>
+  </data>
+  <data name="help_submit" xml:space="preserve">
+    <value>Submit Problem</value>
+  </data>
+  <data name="help_submitted" xml:space="preserve">
+    <value>Thanks for your feedback. Someone will response as soon as possible.</value>
   </data>
 </root>

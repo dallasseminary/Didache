@@ -18,12 +18,44 @@ namespace Didache.Web.Controllers
         }
 
 		public ActionResult Help() {
-			return View();
+
+			HelpModel model = new HelpModel();
+			User user = Users.GetLoggedInUser();
+
+			if (user != null) {
+				model.Email = user.Email;
+				model.Name = user.FormattedName;
+			}
+
+			return View(model);
 		}
 
 		[HttpPost]
 		public ActionResult Help(HelpModel model) {
-			return View();
+
+			if (ModelState.IsValid) {
+
+				User user = Users.GetLoggedInUser();
+				List<string> emails = new List<string>() {"babegg@dts.edu","mmckee@dts.edu","coursemanagement@dts.edu"};
+				string lang = Users.GetUserLanguage();
+				
+				if (lang == "zh-TW" || lang == "zh-CN") {
+					emails.Add("eshyu@dts.edu");
+				}
+
+				string message = @"
+Name: " + model.Name + @"
+Email: " + model.Email + @"
+Message: 
+" + model.Message;
+
+
+				Emails.SendEmail("noreply@dts.edu", emails, "Help Request", message);
+
+				model.IsSubmitted = true;
+			}
+
+			return View(model);
 		}
 
 		public ActionResult Tour() {
