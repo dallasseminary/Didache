@@ -54,12 +54,20 @@ namespace Didache {
 		public DbSet<GradeGroup> GradeGroups { get; set; }
 		public DbSet<GradeItem> GradeItems { get; set; }
 
+
+		public DbSet<Student> Students { get; set; }
+		public DbSet<Employee> Employees { get; set; }
+		public DbSet<Degree> Degrees { get; set; }
+
 		protected override void OnModelCreating(DbModelBuilder modelBuilder) {
 
 
 			modelBuilder.Entity<User>()
 				.ToTable("dts_cars_Users");
 
+			modelBuilder.Entity<User>()
+				.Property(u => u.UserID)
+					.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
 			modelBuilder.Entity<Session>()
 				.ToTable("oe_Sessions");
@@ -156,6 +164,17 @@ namespace Didache {
 			//http://johnpapa.net/silverlight/upgrading-to-entity-framework-4-1-rc/
 			// possible silliness
 			//modelBuilder.Entity<Security>().ToTable("Securities"); 
+
+
+			modelBuilder.Entity<Employee>()
+				.ToTable("dts_cars_Users_Employees");
+
+			modelBuilder.Entity<Student>()
+				.ToTable("dts_cars_Users_Students");
+
+			modelBuilder.Entity<Degree>()
+				.ToTable("dts_cars_Degrees");
+
 		}
 	}
 
