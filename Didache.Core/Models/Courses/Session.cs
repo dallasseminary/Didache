@@ -18,9 +18,16 @@ namespace Didache {
 		[Display(Name = "Is Active")]
 		public bool IsActive { get; set; }
 
+		[Display(Name = "Program")]
+		public string Program { get; set; }
+
 		[Required]
 		[Display(Name = "Session Code")]
 		public string SessionCode { get; set; }
+
+		[Required]
+		[Display(Name = "Year")]
+		public int SessionYear { get; set; }
 
 		[Required]
 		public string Name { get; set; }

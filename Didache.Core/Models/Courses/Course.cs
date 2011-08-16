@@ -52,7 +52,7 @@ namespace Didache {
 		public string Slug {
 			get {
 				if (Session != null) {
-					return (Session.SessionCode + "-" + CourseCode + Section).ToLower();
+					return (Session.SessionCode + Session.SessionYear + "-" + CourseCode + Section).ToLower();
 				}
 				else {
 					return CourseCode + Section;

@@ -34,7 +34,7 @@ namespace Didache  {
 
 			if (course == null) {
 				string[] parts = slug.Split(new char[] { '-' });
-				string sessionCode = parts[0].Trim().ToUpper();
+				string sessionInfo = parts[0].Trim().ToUpper();
 				string courseCode = parts[1].Trim().ToUpper();
 
 				var db = new DidacheDb();
@@ -42,10 +42,21 @@ namespace Didache  {
 				//Session session = db.Sessions.SingleOrDefault(s => s.SessionCode == sessionCode);
 				//Course course = session.Courses.SingleOrDefault(c => c.CourseCode + c.Section == courseCode);
 
+				int sessionYear = 0;
+				string sessionCode = "";
+
+				if (sessionInfo.Length >= 5) {
+					if (Int32.TryParse(sessionInfo.Substring(sessionInfo.Length - 4), out sessionYear)) {
+						sessionCode = sessionInfo.Substring(0, sessionInfo.Length - 4);
+					}
+				} else {
+					throw new Exception("Your session is invalid bro");
+				}
+
 				course = db.Courses
 									.Include("Session")
 									.Include("Campus")
-									.SingleOrDefault(c => c.CourseCode + c.Section == courseCode && c.Session.SessionCode == sessionCode);
+									.SingleOrDefault(c => c.CourseCode + c.Section == courseCode && c.Session.SessionCode == sessionCode && c.Session.SessionYear == sessionYear);
 
 
 				HttpContext.Current.Cache.Add(key, course, null, Cache.NoAbsoluteExpiration, new TimeSpan(1, 0, 0), CacheItemPriority.Default, null);
