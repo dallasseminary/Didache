@@ -1,7 +1,7 @@
 ﻿@model Didache.Models.LogOnModel
 
 @{
-	ViewBag.Title = "Login";
+	ViewBag.Title = Didache.Resources.labels.login_login;
 }
 
 <div class="page-wide">
@@ -11,35 +11,55 @@
 		</div>
 
 
-@Html.ValidationSummary(true, "Login was unsuccessful. Please correct the errors and try again.")
+<style>
+.login_box {
+	width: 280px;
+	margin: 20px auto;
+	background: #eee;
+	padding: 20px 40px;
+	border: solid 1px #999;
+	overflow: hidden;
+}
+.login_box label {
+	font-size: 15px;
+}
+.login_box #username, .login_box #password {
+	font-size: 16px;
+	padding: 4px;
+	border: solid 1px #999;
+	margin: 0 0 10px;
+	width: 270px;
+}
+.login_buttons {
+	overflow: hidden;
+	margin: 0 0 10px 0;
+}
+.login_remember {
+	margin: 5px 0 0 0;
+	float: left;
+}
+.login_box #submit {
+	float: right;
+	width: 90px;
+}
+
+.validation-summary-errors {
+	width: 280px;
+	margin: 20px auto;
+	background: #f2a9a9;
+	padding: 20px 40px;
+	border: solid 1px #bd1816;
+	overflow: hidden;	
+	color: #bd1816;
+}
+</style>
+
+
+@Html.ValidationSummary(false, @Didache.Resources.labels.login_unsuccessful)
 
 @using (Html.BeginForm()) {
-	
-	
-	
-			@*
-            <div class="editor-label">
-                @Html.LabelFor(m => m.UserName)
-            </div>
-            <div class="editor-field">
-                @Html.TextBoxFor(m => m.UserName)
-                @Html.ValidationMessageFor(m => m.UserName)
-            </div>
-
-            <div class="editor-label">
-                @Html.LabelFor(m => m.Password)
-            </div>
-            <div class="editor-field">
-                @Html.PasswordFor(m => m.Password)
-                @Html.ValidationMessageFor(m => m.Password)
-            </div>
-
-            <div class="editor-label">
-                @Html.CheckBoxFor(m => m.RememberMe)
-                @Html.LabelFor(m => m.RememberMe)
-            </div>
-			*@
-	
+		
+		<div class="login_box">
 	
             <div class="editor-label">
                 <label for="username">@Didache.Resources.labels.login_username</label>
@@ -57,16 +77,21 @@
                 @Html.ValidationMessageFor(m => m.Password)
             </div>
 
-            <div class="editor-label">
+            <div class="login_buttons">
 				
-				<input type="checkbox" id="RememberMe" name="RememberMe" @(Model != null && Model.RememberMe? "checked=checked" : "") />
-				<label for="RememberMe">@Didache.Resources.labels.login_rememberme</label>
-				
+				<div class="login_remember">
+					<input type="checkbox" id="RememberMe" name="RememberMe" @(Model != null && Model.RememberMe ? "checked=checked" : "") value="true" />
+					<label for="RememberMe">@Didache.Resources.labels.login_rememberme</label>				
+				</div>
+
+				<input type="submit" id="submit" class="d-button action" value="@Didache.Resources.labels.login_login" />
 
             </div>	
 
-			<input type="submit" class="d-button action" value="@Didache.Resources.labels.login_login" />
-		   
+			<a href="http://www.dts.edu/account/resetpassword">@Didache.Resources.labels.login_forgotpassword</a>
+
+			
+		</div>
 }
 
 
