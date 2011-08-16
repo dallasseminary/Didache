@@ -546,4 +546,13 @@
   <data name="help_submitted" xml:space="preserve">
     <value>Thanks for your feedback. Someone will response as soon as possible.</value>
   </data>
+  <data name="studentschedule_choose" xml:space="preserve">
+    <value>Choose</value>
+  </data>
+  <data name="studentschedule_chooseafiletype" xml:space="preserve">
+    <value>Please submit one of the following file types:</value>
+  </data>
+  <data name="studentschedule_file" xml:space="preserve">
+    <value>File</value>
+  </data>
 </root>

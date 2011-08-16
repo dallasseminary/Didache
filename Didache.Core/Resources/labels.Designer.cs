@@ -1078,6 +1078,33 @@ namespace Didache.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Choose.
+        /// </summary>
+        public static string studentschedule_choose {
+            get {
+                return ResourceManager.GetString("studentschedule_choose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please submit one of the following file types:.
+        /// </summary>
+        public static string studentschedule_chooseafiletype {
+            get {
+                return ResourceManager.GetString("studentschedule_chooseafiletype", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File.
+        /// </summary>
+        public static string studentschedule_file {
+            get {
+                return ResourceManager.GetString("studentschedule_file", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The instructions for this assignment will be available {0}..
         /// </summary>
         public static string studentschedule_instructionsnotavailable {
