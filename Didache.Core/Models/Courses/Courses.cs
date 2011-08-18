@@ -79,7 +79,8 @@ namespace Didache  {
 		public static List<Course> GetCurrentlyRunningCourses() {			
 			return new DidacheDb().Courses
 					.Where(c => c.StartDate < DateTime.Now && c.EndDate > DateTime.Now)
-					.OrderBy(c => c.CourseCode)
+					.OrderByDescending(c => c.Session.StartDate)
+						.ThenBy(c => c.CourseCode)
 						.ThenBy(c => c.Section)
 						.ThenBy(c => c.StartDate)
 					.ToList();		
@@ -239,6 +240,144 @@ namespace Didache  {
 				.OrderBy(t => t.Unit.SortOrder)
 					.ThenBy(t => t.SortOrder)
 				.ToList();
+		}
+
+		public static Course CloneCourse(int courseID, int sessionID, DateTime startDate) {
+
+			DidacheDb db = new DidacheDb();
+
+			Course oldCourse = db.Courses
+												.Include("Units.Tasks")
+												.Include("CourseFileGroups.CourseFileAssociations")
+												.SingleOrDefault(c => c.CourseID == courseID);
+
+			int daysToShift = (startDate - oldCourse.StartDate).Days;
+
+			Course newCourse = new Course() {
+				SessionID = sessionID,
+				CampusID = oldCourse.CampusID,
+				IsActive = oldCourse.IsActive,
+				CourseCode = oldCourse.CourseCode,
+				Name = oldCourse.Name,
+				Section = oldCourse.Section,
+				StartDate = oldCourse.StartDate.AddDays(daysToShift),
+				EndDate = oldCourse.EndDate.AddDays(daysToShift),
+				Description = oldCourse.Description
+			};
+
+			db.Courses.Add(newCourse);
+			db.SaveChanges();
+
+			/*
+			} catch (DbEntityValidationException dbEx) {
+				string errors = "";
+				
+				foreach (var validationErrors in dbEx.EntityValidationErrors) {
+					foreach (var validationError in validationErrors.ValidationErrors) {
+						//System.Web.HttpContext.Current.Trace.Warn("Property: {0} Error: {1}", validationError.PropertyName, dbEx);
+						errors += string.Format("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage) + "; ";
+					}
+				}
+
+				throw new Exception(errors);
+			}
+			*/
+
+			foreach (Unit oldUnit in oldCourse.Units) {
+				Unit newUnit = new Unit() {
+					CourseID = newCourse.CourseID,
+					IsActive = oldUnit.IsActive,
+					SortOrder = oldUnit.SortOrder,
+					Name = oldUnit.Name,
+					StartDate = oldUnit.StartDate.AddDays(daysToShift),
+					EndDate = oldUnit.EndDate.AddDays(daysToShift),
+					Instructions = oldUnit.Instructions
+				};
+
+				db.Units.Add(newUnit);
+				db.SaveChanges();
+
+				Dictionary<int, int> taskMap = new Dictionary<int, int>();
+				List<Task> newTasks = new List<Task>();
+
+				foreach (Task oldTask in oldUnit.Tasks) {
+					Task newTask = new Task() {
+						CourseID = newUnit.CourseID,
+						UnitID = newUnit.UnitID,
+						IsActive = oldTask.IsActive,
+						SortOrder = oldTask.SortOrder,
+						Name = oldTask.Name,
+						DueDate = null,
+						FileTypesAllowed = oldTask.FileTypesAllowed,
+						InstructionsAvailableDate = null,
+						IsSkippable = oldTask.IsSkippable,
+						Priority = oldTask.Priority,
+						RelatedTaskID = oldTask.RelatedTaskID,
+						SubmissionAvailableDate = null,
+						TaskID = oldTask.TaskID,
+						TaskTypeName = oldTask.TaskTypeName,
+						Instructions = oldTask.Instructions
+					};
+
+					if (oldTask.DueDate.HasValue)
+						newTask.DueDate = oldTask.DueDate.Value.AddDays(daysToShift);
+
+					if (oldTask.SubmissionAvailableDate.HasValue)
+						newTask.SubmissionAvailableDate = oldTask.SubmissionAvailableDate.Value.AddDays(daysToShift);
+
+					if (oldTask.InstructionsAvailableDate.HasValue)
+						newTask.InstructionsAvailableDate = oldTask.InstructionsAvailableDate.Value.AddDays(daysToShift);
+
+					db.Tasks.Add(newTask);
+
+					db.SaveChanges();
+
+					// store to remap the tasks below
+					newTasks.Add(newTask);
+					taskMap.Add(oldTask.TaskID, newTask.TaskID);
+				}
+			
+				// go back and remap the related tasks
+				List<int> newTaskIds = taskMap.Values.ToList();
+				
+
+				foreach(Task newTask in newTasks) {
+					if (newTask.RelatedTaskID > 0 && taskMap.ContainsKey(newTask.RelatedTaskID)) {
+						newTask.RelatedTaskID = taskMap[newTask.RelatedTaskID];
+					}
+				}
+
+				db.SaveChanges();
+			}
+
+			// FILES
+			foreach (CourseFileGroup oldGroup in oldCourse.CourseFileGroups) {
+				CourseFileGroup newGroup = new CourseFileGroup() {
+					CourseID = newCourse.CourseID,
+					Name = oldGroup.Name,
+					SortOrder = oldGroup.SortOrder
+				};
+
+				db.CourseFileGroups.Add(newGroup);
+				db.SaveChanges();
+
+				foreach (CourseFileAssociation oldFile in oldGroup.CourseFileAssociations) {
+					CourseFileAssociation newFile = new CourseFileAssociation() {
+						GroupID = newGroup.GroupID,
+						FileID = oldFile.FileID,
+						DateAdded = newCourse.StartDate,
+						IsActive = oldFile.IsActive,
+						SortOrder = oldFile.SortOrder
+					};
+
+					db.CourseFileAssociations.Add(newFile);
+				}
+
+				db.SaveChanges();
+
+			}
+
+			return newCourse;
 		}
 	}
 }

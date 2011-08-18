@@ -9,6 +9,8 @@ namespace Didache.Web.Areas.Students.Controllers
 {
     public class DiscussionController : Controller
     {
+		DidacheDb db = new DidacheDb();
+
         //
         // GET: /Courses/Discussion/
 		[Authorize]
@@ -18,8 +20,25 @@ namespace Didache.Web.Areas.Students.Controllers
 			Course course = Courses.GetCourseBySlug(slug);
 			List<Forum> forums = Forums.GetCourseForums(course.CourseID);
 
-			if (forums.Count == 1)
+			// auto create!
+			if (forums.Count == 0) {
+				Forum forum = new Forum() {
+					Name = course.CourseCode + course.Section + " Open Discussion",
+					CourseID = course.CourseID,
+					Description = "Open discussion for course content. This is NOT for interactions",
+					SortOrder = 9999,
+					TotalPosts = 0,
+					TotalThreads = 0
+				};
+				db.Forums.Add(forum);
+				db.SaveChanges();
+
+				forums.Add(forum);
+			}
+				
+			if (forums.Count == 1) {
 				return RedirectToAction("Forum", new { slug = slug, id = forums[0].ForumID });
+			}
 
 			ViewBag.Course = course;
 

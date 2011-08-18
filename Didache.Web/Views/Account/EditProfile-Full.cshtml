@@ -1,0 +1,263 @@
+﻿@model Didache.User
+
+@{
+	ViewBag.Title = "Edit";
+}
+
+@using (Html.BeginForm()) {
+<div id="edit-profile" class="page-narrow">
+	<div class="main-column">
+		
+
+	  
+		<div class="page-header">
+			<h2>@Model.FormattedName</h2>			
+
+			@Html.ValidationSummary(true)	
+		
+			<div class="actions">
+				<input type="submit" class="d-button action" value="@Didache.Resources.labels.profile_save_button" />
+			</div>
+		</div>
+
+        
+	  
+		 @Html.HiddenFor(model => model.UserID)
+	  	
+	  
+		<h4>@Didache.Resources.labels.profile_heading_preferences</h4>
+		<table class="user-profile">			
+			<tr>
+				<th>
+					@Didache.Resources.labels.profile_label_language
+				</th>
+				<td>
+					@Html.DropDownListFor(model => model.Language, new SelectList(new[] {   
+																	new { Key = "en-US", Name = "English" }, 
+																	new { Key = "es", Name = "Español (Spanish)" }, 
+																	new { Key = "ar", Name = "العربية (Arabic)" }, 
+																	new { Key = "zh-CN", Name = "汉语[简体字] (Simplified)" }, 
+																	new { Key = "zh-TW", Name = "漢語[繁體字] (Traditional)" }
+																}, "Key", "Name", ViewBag.Language))
+					@Html.ValidationMessageFor(model => model.Language)				
+				</td>
+			</tr>
+			@*
+			<tr>
+				<th>
+					@Didache.Resources.labels.profile_label_timezone
+				</th>
+				<td>
+					@Model.TimezoneOffset			
+				</td>
+			</tr>
+			*@
+		</table>
+
+	  
+		<h4>@Didache.Resources.labels.profile_heading_contactinfo</h4>
+
+		<table class="user-profile">			
+			<tr>
+				<th>
+					@Didache.Resources.labels.profile_label_email
+				</th>
+				<td>
+					@Model.Email	
+				</td>
+				<td class="security-setting">
+					@Html.EditorFor(model => model.EmailSecuritySetting, "SecuritySetting", "EmailSecurity")	
+				</td>
+			</tr>
+			<tr>
+				<th>
+					@Didache.Resources.labels.profile_label_phone
+				</th>
+				<td>				
+					@Model.Phone
+				</td>
+				<td class="security-setting">					
+					@Html.EditorFor(model => model.PhoneSecuritySetting, "SecuritySetting", "PhoneSecurity")	
+				</td>
+			</tr>
+			<tr>
+				<th>
+					@Didache.Resources.labels.profile_label_address
+				</th>
+				<td>
+					@if (Users.HasPermission(Model.UserID, Model.AddressSecuritySetting)) {
+						@Model.Address1<br />
+						@(Model.Address2.IsEmpty() ? "" : @Model.Address2 + "<br />")
+						@(Model.City + " " + Model.State + " " + Model.Zip)<br />
+						@Model.Country
+					}
+				</td>
+				<td class="security-setting">					
+					@Html.EditorFor(model => model.AddressSecuritySetting, "SecuritySetting", "AddressSecurity")	
+				</td>
+			</tr>
+		</table>
+
+		<h4>@Didache.Resources.labels.profile_heading_personalinfo</h4>
+
+		<table class="user-profile">
+			<tr>
+				<th>
+					@Didache.Resources.labels.profile_label_birthday
+				</th>
+				<td>
+					@(Model.BirthDate.HasValue ? Model.BirthDate.Value.ToShortDateString() : "")
+				</td>
+				<td class="security-setting">					
+					@Html.EditorFor(model => model.BirthdateSecuritySetting, "SecuritySetting", "BirthdateSecurity")	
+				</td>
+			</tr>
+			@if (!Model.Hometown.IsEmpty()) {
+			<tr>
+				<th>
+					@Didache.Resources.labels.profile_label_hometown
+				</th>
+				<td>
+					@Model.Hometown
+				</td>
+			</tr>
+				}		
+			<tr>
+				<th>
+					@Didache.Resources.labels.profile_label_biography
+				</th>
+				<td>
+					<textarea name="Bio">@Model.Bio</textarea>
+				</td>
+				<td class="security-setting">					
+					@Html.EditorFor(model => model.BiographySecuritySetting, "SecuritySetting", "BiographySecurity")	
+				</td>
+			</tr>
+		</table>
+	  
+
+	</div>
+
+	<div class="sub-column">
+	
+		<h3>@Didache.Resources.labels.profile_heading_socialmedia</h3>
+
+
+		@Html.LabelFor(model => model.Facebook)<br />
+		@Html.EditorFor(model => model.Facebook)
+
+		@Html.LabelFor(model => model.Twitter)<br />
+		@Html.EditorFor(model => model.Twitter)
+
+		@Html.LabelFor(model => model.Website)<br />
+		@Html.EditorFor(model => model.Website)
+
+		<div style="padding: 10px; border-radius: 10px; background: #ddd; margin: 15px 0 0 0;">
+			This page let's you control who can see your information. 
+			<strong>All DTS</strong> means any DTS student, staff, faculty, or alumni can see the information.
+			<strong>Friends</strong> means only approved students and alumni can see it.
+			<strong>Private</strong> means no one can see it.
+		</div>
+
+	</div>
+</div>
+
+}
+
+@*
+
+<div id="edit">
+    @using (Html.BeginForm()) {
+        @Html.ValidationSummary(true)
+
+            @Html.HiddenFor(model => model.UserID)
+
+		    <div class="editor-field">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Language)
+                </div>
+				@Html.DropDownListFor(model => model.Language, new SelectList(new[] {   
+																	new { Key = "en-US", Name = "English" }, 
+																	new { Key = "es", Name = "Español (Spanish)" }, 
+																	new { Key = "ar", Name = "العربية (Arabic)" }, 
+																	new { Key = "zh-CN", Name = "汉语[简体字] (Simplified)" }, 
+																	new { Key = "zh-TW", Name = "漢語[繁體字] (Traditional)" }
+																}, "Key", "Name", ViewBag.Language))
+                @Html.ValidationMessageFor(model => model.Language)
+            </div>
+            <br />
+		 
+            <div class="editor-field">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.NickName)
+                </div>
+                @Html.EditorFor(model => model.NickName)
+                @Html.ValidationMessageFor(model => model.NickName)
+            </div>
+            <br />
+            <div class="editor-field">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Hometown)
+                </div>
+                @Html.EditorFor(model => model.Hometown)
+                @Html.ValidationMessageFor(model => model.Hometown)
+            </div>
+
+            <div class="editor-field">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.AlmaMater)
+                </div>
+                @Html.EditorFor(model => model.AlmaMater)
+                @Html.ValidationMessageFor(model => model.AlmaMater)
+            </div>
+
+            <div class="editor-field textarea">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.MinistryGoals)
+                </div>
+                @Html.TextAreaFor(model => model.MinistryGoals)
+                @Html.ValidationMessageFor(model => model.MinistryGoals)
+            </div>
+    
+        <hr />
+
+            <div class="editor-field textarea">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Bio)
+                </div>
+                @Html.TextAreaFor(model => model.Bio)
+                @Html.ValidationMessageFor(model => model.Bio)
+            </div>
+        <hr />
+
+            <div class="editor-field">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Facebook)
+                </div>
+                @Html.EditorFor(model => model.Facebook)
+                @Html.ValidationMessageFor(model => model.Facebook)
+            </div>
+
+            <div class="editor-field">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Twitter)
+                </div>
+                @Html.EditorFor(model => model.Twitter)
+                @Html.ValidationMessageFor(model => model.Twitter)
+            </div>
+
+            <div class="editor-field">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Website)
+                </div>
+                @Html.EditorFor(model => model.Website)
+                @Html.ValidationMessageFor(model => model.Website)
+            </div>
+  
+            <p>
+                <input type="submit" value="Save" />
+            </p>
+    }
+</div>
+
+*@

@@ -191,7 +191,9 @@
 				$('<div class="course-unit nested-item">' +
 					'<div class="unit-header nested-item-row">' +
 						'<span class="unit-drag-handle drag-handle"></span>' +
+
 						'<span class="name">' +
+							'<span class="unit-sortorder">##</span>' +
 							'<input type="checkbox" class="unit-active"  />' +
 							'<input type="text" class="unit-name" value=""  placeholder="name" />' +
 						'</span>' +
@@ -233,8 +235,10 @@
 		var taskRow = $(
 			'<div class="course-task nested-child-item">' +
 				'<span class="task-drag-handle drag-handle"></span>' +
+
                 '<span class="name">' +
-				    '<input type="checkbox" class="task-active"  />' +
+				    '<span class="task-sortorder">##</span>' +
+					'<input type="checkbox" class="task-active"  />' +
 				    '<input type="text" class="task-name" value=""  placeholder="name" />' +
                 '</span>' +
 		//'<span>'+
@@ -268,6 +272,18 @@
 
 
 	// SORTING
+	function updateUnitAndTaskNumbers() {
+
+		$('.course-unit').each(function (i, el) {
+
+			$(this).find('.unit-sortorder').html(i + 1);
+
+			$(this).find('.course-task').each(function (j, el) {
+				$(this).find('.task-sortorder').html(j + 1);
+			});
+		});
+	}
+
 	// sort units
 	function setupUnitAndTaskSorting() {
 		$('#course-units').sortable('destroy').sortable({
@@ -278,6 +294,9 @@
 			},
 			start: cancelSaveOrder
 		}); //.disableSelection();
+
+		updateUnitAndTaskNumbers();
+
 
 		// sort tasks
 		$('.course-tasks').sortable('destroy').sortable({
@@ -305,6 +324,8 @@
 		function saveOrderChanges() {
 
 			cancelSaveOrder();
+
+			showLoading('Saving order');
 
 			var 
 				unitArray = [],
@@ -349,9 +370,15 @@
 				success: function (d) {
 					if (d.success) {
 						console.log('saved order')
+
+						hideLoading();
+
+						updateUnitAndTaskNumbers();
 					} else {
 						console.log('error' + d.error)
 					}
+
+
 				},
 				error: function (d) {
 					console.log('error saving order')

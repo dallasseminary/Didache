@@ -24,11 +24,13 @@
 <thead>
 	<tr>
 		<th></th>
+		<th>Sess</th>
 		<th>Code</th>
 		<th>Sec</th>
 		<th>Name</th>
 		<th>Start</th>
 		<th>End</th>
+		<th></th>
 		<th></th>
 		<th></th>
 		<th></th>
@@ -41,16 +43,21 @@
 	@foreach (Course course in Model) {
 	<tr class="course-task" data-courseid="@course.CourseID">
 		<td><input type="checkbox" class="course-isactive" @(course.IsActive? " checked" :"") /></td>
+		<td><span class="course-session">@course.Session.SessionCode@course.Session.SessionYear</span></td>
 		<td><span class="course-coursecode">@course.CourseCode</span></td>
 		<td><span class="course-section">@course.Section</span></td>
 		<td><span class="course-name">@course.Name</span></td>
 		<td><span class="course-startdate">@course.StartDate.ToString("MM/dd/yyyy")</span></td>
 		<td><span class="course-enddate">@course.EndDate.ToString("MM/dd/yyyy")</span></td>
-		<td><a class="course-grading" href="/admin/courses/grading/@course.CourseID">grading</a></td>
+		@* <td><a class="course-grading" href="/admin/courses/grading/@course.CourseID">grading</a></td> *@
+
+		<td><a class="course-grading" href="/courses/@course.Slug/schedule">view</a></td>
+		<td><a class="course-grading" href="/grading/@course.Slug/tasklist">grade</a></td>
+
 		<td><a class="course-files" href="/admin/courses/files/@course.CourseID">files</a></td>
 		<td><a class="course-users" href="/admin/courses/users/@course.CourseID">users</a></td>
-		<td><a class="course-users" href="/admin/courses/usergroups/@course.CourseID">gropus</a></td>
-		<td><a class="course-units" href="/admin/courses/courseeditor/@course.CourseID">unit/tasks</a></td>
+		<td><a class="course-users" href="/admin/courses/usergroups/@course.CourseID">groups</a></td>
+		<td><a class="course-units" href="/admin/courses/courseeditor/@course.CourseID">tasks</a></td>
 		<td><a class="course-edit" href="/admin/courses/edit/@course.CourseID">edit</a></td>
 	</tr>
 

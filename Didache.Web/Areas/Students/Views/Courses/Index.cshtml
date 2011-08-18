@@ -4,36 +4,32 @@
 	ViewBag.Title = Didache.Resources.labels.courses_heading_archivedcourses;
 }
 
-<div id="main-column">
-    <div class="block-list-header"><h3>@Didache.Resources.labels.courses_heading_archivedcourses</h3></div>
-    <div class="block-list">
-            @foreach (Session session in Didache.Sessions.GetSessions())
-            {
-                if (Model.Find(delegate(Course course) { return course.SessionID == session.SessionID; }) != null)
-                {
-	                <div class="block-list-item">
-                        <div class="block-list-item-label">
-                            <span>@session.Name (@session.SessionCode)</span>
-                        </div>
-                        <h2>
-                            <span></span>
-                        </h2>
+<div class="page-wide">
+	<div class="full-column">
 
-                        <ul class="course-archive">
-                            @foreach (Course course in Model)
-                            {
-                                if (course.SessionID == session.SessionID)
-                                {
-	                                <li>
-                                        <a href="/courses/@course.Slug"><h4>@course.CourseCode - @course.Name</h4></a>
-                                    </li>
-                                }
-                            }
-                        </ul>
+		<div class="page-header">
+			<h2>@Didache.Resources.labels.courses_heading_archivedcourses</h2>
+		</div>
+	
+		@{ Session lastSession = null; }
 
-                        <div class="clear"></div>
-	                </div>
-                } 
-            }
-    </div>
+		@foreach (Course course in Model) {
+			if (lastSession == null || lastSession.SessionID != course.SessionID) {
+				if (lastSession != null) {
+					@Html.Raw("</ul></div>")
+				}
+				
+				@Html.Raw("<div class=\"session-archive\">")
+				<h3>@course.Session.Name</h3>
+				@Html.Raw("<ul>")
+
+				lastSession = course.Session;
+			}
+
+			<li><a href="@course.CourseUrl">@course.CourseCode - @course.Name</a></li>
+			
+		}
+	
+	</div>
+
 </div>

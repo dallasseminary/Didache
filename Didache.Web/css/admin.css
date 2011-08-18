@@ -353,6 +353,7 @@
 		border: 1px solid #999;
 		
 		height: 30px;
+		
 		line-height: 30px;
 		margin: 5px 15px 5px;
 	}
@@ -374,6 +375,7 @@
 		
 		cursor: pointer;
 		height: 100%;
+		width: 100%;
 		margin: 0;
 	}
 	.upload button {
@@ -383,6 +385,11 @@
 	    background: #FAE661;
 	}
 	
+
+.unit-sortorder, .task-sortorder {
+	display: inline-block;
+	margin: 0 5px 0 0;
+}
 
 #unittask-list .unit-header .name {
 	width: 380px;

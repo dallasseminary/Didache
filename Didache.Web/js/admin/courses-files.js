@@ -322,8 +322,10 @@
 			},
 			initUpload: function (event, files, index, xhr, handler, callback) {
 
+				showLoading('Uploading file...');
+
 				// from the file input go up to the top element
-				var groupid = $(event.target).closest('.filegroup').data('groupid');
+				var groupid = $(this.dropZone).closest('.filegroup').data('groupid');
 
 				handler.formData = { groupid: groupid }; // JSON.stringify({ groupid: groupid });
 
@@ -333,6 +335,8 @@
 			},
 			onProgress: function (event, files, index, xhr, handler) {
 				var percent = parseInt(event.loaded / event.total * 100, 10);
+
+				showLoading('Uploading file...' + percent);
 
 				/*
 				handler
@@ -355,6 +359,8 @@
 				console.log(xhr, json);
 
 				renderFileRow(json, $(handler.dropZone).closest('.filegroup'));
+
+				hideLoading();
 
 				/*
 				// create node

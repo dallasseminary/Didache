@@ -175,5 +175,29 @@ namespace Didache.Web.Areas.Students.Controllers
 			}
 
 		}
+
+		[Authorize]
+		[HttpPost]
+		public ActionResult SubmitUnitSurvey(int taskID, UnitSurvey model) {
+
+			User user = Users.GetLoggedInUser();
+			Task task = db.Tasks.Include("Course").SingleOrDefault(t => t.TaskID == taskID);
+
+			model.DateStamp = DateTime.Now;
+			model.UserID = user.UserID;
+
+			db.UnitSurveys.Add(model);
+			db.SaveChanges();
+
+			UserTaskData userTaskData = db.UserTasks.SingleOrDefault(utd => utd.UserID == user.UserID && utd.TaskID == taskID);
+			userTaskData.TaskCompletionStatus = TaskCompletionStatus.Completed;
+			userTaskData.StudentSubmitDate = DateTime.Now;
+			userTaskData.NumericGrade = 100;
+			db.SaveChanges();
+
+			//return Json(new { success = false });
+			return Redirect("/courses/" + task.Course.Slug + "/schedule/" + task.UnitID);
+		}
+
     }
 }

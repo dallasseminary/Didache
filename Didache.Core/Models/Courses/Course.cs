@@ -142,6 +142,9 @@ namespace Didache {
 										.Where(cu => cu.CourseID == CourseID && cu.RoleID == (int)CourseUserRole.Faculty)
 										.Select(cu => cu.User)
 										.ToList();
+
+				faculty = faculty.Where(u => u != null).ToList();
+
 				switch (faculty.Count) {
 					case 0:
 						return "(no faculty member)";

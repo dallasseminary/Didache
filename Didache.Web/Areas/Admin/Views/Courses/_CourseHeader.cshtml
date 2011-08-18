@@ -15,5 +15,7 @@
 								}
 	) {
 		<li><a href="/admin/courses/@page.Url/@Model.CourseID" @(Request.Url.ToString().Contains(page.Url) ? " class=selected" : "")>@page.Name</a></li>
+		
 	}
+	<li><a href="@Model.CourseUrl">Student View</a></li>
 </ul>

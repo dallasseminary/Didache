@@ -147,9 +147,14 @@ namespace Didache.Web.Controllers {
 
 					// send to CARS
 					// set to CampusNet
-					string transactionUrl = "https://campus.dts.edu/cgi-bin/public/DSchkhold.cgi?id=" + user.UserID.ToString() + "&email=" + user.Email;
-					WebClient webClient = new WebClient();
-					string returnValue = webClient.DownloadString(transactionUrl);
+					try {
+						string transactionUrl = "https://campus.dts.edu/cgi-bin/public/DSchkhold.cgi?id=" + user.UserID.ToString() + "&email=" + user.Email;
+						WebClient webClient = new WebClient();
+						string returnValue = webClient.DownloadString(transactionUrl);
+					}
+					catch {
+						// don't worry. be happy.
+					}
 				}
 
 

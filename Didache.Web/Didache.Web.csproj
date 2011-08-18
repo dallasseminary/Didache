@@ -347,7 +347,7 @@
     <Content Include="Areas\Admin\Views\Courses\CloneCourse.cshtml" />
     <None Include="Areas\Students\Views\Shared\TaskType-CommentOnPost.cshtml" />
     <Content Include="Areas\Students\Views\Shared\TaskType-Default.cshtml" />
-    <Content Include="Views\Account\Copy of EditProfile.cshtml" />
+    <Content Include="Views\Account\EditProfile-Full.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\students.css" />
@@ -421,7 +421,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>54969</DevelopmentServerPort>
+          <DevelopmentServerPort>49375</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

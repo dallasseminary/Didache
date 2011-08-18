@@ -7,7 +7,7 @@ using System.Net;
 
 namespace Didache {
 	public class CarsConnection {
-		public static bool SyncCourse(int courseID, string sessionYear, string sessionCode, string courseCode, string section) {
+		public static bool SyncCourse(int courseID, string sessionYear, string sessionCode, string courseCode, string section, string courseHours) {
 			
 			DidacheDb db = new DidacheDb();
 			bool success = false;
@@ -15,11 +15,11 @@ namespace Didache {
 			Course course = db.Courses.Find(courseID);
 
 			// get code from CARS
-			List<CarsStudentUser> users = GetCarsData(sessionYear, sessionCode, courseCode, section);
+			List<CarsStudentUser> users = GetCarsData(sessionYear, sessionCode, courseCode, section, courseHours);
 
 
 			List<CarsStudentUser> toRemove = users.Where(u => u.CarsUserStatus == CarsUserStatus.NotActive).ToList();
-			List<CarsStudentUser> toAdd = users.Where(u => u.CarsUserStatus == CarsUserStatus.NotActive).ToList();
+			List<CarsStudentUser> toAdd = users.Where(u => u.CarsUserStatus == CarsUserStatus.Active).ToList();
 
 			// remove all droppies
 			foreach (CarsStudentUser carsStudentUser in toRemove) {
@@ -104,13 +104,13 @@ namespace Didache {
 			return success;
 		}
 
-		private static List<CarsStudentUser> GetCarsData(string sessionYear, string sessionCode, string courseCode, string section) {
+		private static List<CarsStudentUser> GetCarsData(string sessionYear, string sessionCode, string courseCode, string section, string courseHours) {
 
 			List<CarsStudentUser> users = new List<CarsStudentUser>();
 
 			// get data
 			WebClient webClient = new WebClient();
-			string text = webClient.DownloadString("https://webservices.dts.edu/export/get.aspx?sessionYear=" + sessionYear + "&sessionCode=" + sessionCode + "&courseCode=" + courseCode + "&section=" + section);
+			string text = webClient.DownloadString("https://webservices.dts.edu/export/get.aspx?sessionYear=" + sessionYear + "&sessionCode=" + sessionCode + "&courseCode=" + courseCode + "&section=" + section + (!string.IsNullOrEmpty(courseHours) ? "&hours=" + courseHours : ""));
 
 			// parse it
 			string[] lines = text.Split(new char[] { '\n' });

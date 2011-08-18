@@ -131,7 +131,7 @@
 }
 </select>
 
-</div>
+
 
 <div class="clear"></div>
 
@@ -148,11 +148,22 @@
 			<th>Course</th>
 			<td><input type="text" id="sync-course-code" value="@Model.CourseCode" placeholder="Course Code" /> <input type="text" id="sync-course-section" value="@Model.Section" placeholder="Section" /></td>
 		</tr>
+		<tr>
+			<th>Optional</th>
+			<td><input type="text" id="sync-course-hours" placeholder="Hours" /></td>
+		</tr>
 	</table>
 
 	<input id="sync-course-button" type="button" value="Sync Course with CARS" />
 
 </div>
+
+</div>
+
+
+
+
+
 
 
 </div>
@@ -171,7 +182,8 @@
 					sessionCode: $('#sync-session-code').val(),
 					sessionYear: $('#sync-session-year').val(),
 					courseCode: $('#sync-course-code').val(),
-					courseSection: $('#sync-course-section').val()
+					courseSection: $('#sync-course-section').val(),
+					courseHours: $('#sync-course-hours').val()
 				},
 				type: 'post',
 				success: function() {

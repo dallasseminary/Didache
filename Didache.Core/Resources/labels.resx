@@ -364,7 +364,7 @@
     <value>Login</value>
   </data>
   <data name="login_username" xml:space="preserve">
-    <value>DTS ID or Email</value>
+    <value>DTS ID</value>
   </data>
   <data name="profile_edit_button" xml:space="preserve">
     <value>Edit Profile</value>
@@ -554,5 +554,89 @@
   </data>
   <data name="studentschedule_file" xml:space="preserve">
     <value>File</value>
+  </data>
+  <data name="login_passwordmessage" xml:space="preserve">
+    <value>Your DTS ID is the same here and on CampusNet, but your password may be different. Your default password is your DTS ID and the first initial of your last name (John Doe = 123456d).</value>
+  </data>
+  <data name="survey_footer" xml:space="preserve">
+    <value>Please enter any suggestions or comments you may have for any component within this course thus far that might better help us assist you in this online learning initiative. REMEMBER: If you have any content related questions regarding the course, please contact your GTA. If you experience any technical difficulties that you need assistance with, please email us at coursemanagement@dts.edu.</value>
+  </data>
+  <data name="survey_header_classinteraction" xml:space="preserve">
+    <value>Class Interaction</value>
+  </data>
+  <data name="survey_header_comments" xml:space="preserve">
+    <value>Additional Comments</value>
+  </data>
+  <data name="survey_header_comments_desc" xml:space="preserve">
+    <value>Please enter any suggestions, compliments, or complaints you have for any part of this course or the online education website.</value>
+  </data>
+  <data name="survey_header_devotional" xml:space="preserve">
+    <value>Devotional</value>
+  </data>
+  <data name="survey_header_instructions" xml:space="preserve">
+    <value>After completing the tasks in this unit, please complete this survey, commenting on the class components as they contributed to your learning thus far in this course. Your input is extremely valuable to the further development of this course and DTS's online learning initiative. Please rank each area from 1-5, 1 being the lowest, 5 the highest.</value>
+  </data>
+  <data name="survey_header_learningactivity" xml:space="preserve">
+    <value>Learning Activity</value>
+  </data>
+  <data name="survey_header_navigation" xml:space="preserve">
+    <value>Navigation &amp; Layout</value>
+  </data>
+  <data name="survey_header_reading" xml:space="preserve">
+    <value>Reading</value>
+  </data>
+  <data name="survey_header_service" xml:space="preserve">
+    <value>Service &amp; Support</value>
+  </data>
+  <data name="survey_header_tasks" xml:space="preserve">
+    <value>Assignments</value>
+  </data>
+  <data name="survey_header_video" xml:space="preserve">
+    <value>Video Presentation</value>
+  </data>
+  <data name="survey_header_website" xml:space="preserve">
+    <value>Website Interface</value>
+  </data>
+  <data name="survey_question_clarity" xml:space="preserve">
+    <value>Clarity of Instructions</value>
+  </data>
+  <data name="survey_question_easeofuse" xml:space="preserve">
+    <value>Ease of Use</value>
+  </data>
+  <data name="survey_question_instructionalsupport" xml:space="preserve">
+    <value>Instructional support from TAs/Instructors</value>
+  </data>
+  <data name="survey_question_labels" xml:space="preserve">
+    <value>Clearly labeled pages</value>
+  </data>
+  <data name="survey_question_learningobjectives" xml:space="preserve">
+    <value>Was it driven from and helpful for course objectives?</value>
+  </data>
+  <data name="survey_question_lookandfeel" xml:space="preserve">
+    <value>Layout look and feel</value>
+  </data>
+  <data name="survey_question_qualityvalue" xml:space="preserve">
+    <value>Quality/Value</value>
+  </data>
+  <data name="survey_question_slidesqualityvalue" xml:space="preserve">
+    <value>Quality/Value of Slides</value>
+  </data>
+  <data name="survey_question_techsupport" xml:space="preserve">
+    <value>Technical Support</value>
+  </data>
+  <data name="survey_question_videoqualityvalue" xml:space="preserve">
+    <value>Quality/Value of Video</value>
+  </data>
+  <data name="survey_question_videotechnicalproblems" xml:space="preserve">
+    <value>Technical Problems (5 for no problems)</value>
+  </data>
+  <data name="survey_question_videotranscript" xml:space="preserve">
+    <value>Were the transcripts useful to you?</value>
+  </data>
+  <data name="survey_submitsurvey" xml:space="preserve">
+    <value>Submit Survey</value>
+  </data>
+  <data name="survey_thankyou" xml:space="preserve">
+    <value>Thank you for submitting the survey.</value>
   </data>
 </root>

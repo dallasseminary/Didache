@@ -853,6 +853,15 @@ namespace Didache.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your DTS ID is the same here and on CampusNet, but your password may be different. Your default password is your DTS ID and the first initial of your last name (John Doe = 123456d)..
+        /// </summary>
+        public static string login_passwordmessage {
+            get {
+                return ResourceManager.GetString("login_passwordmessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Keep me logged in.
         /// </summary>
         public static string login_rememberme {
@@ -880,7 +889,7 @@ namespace Didache.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DTS ID or Email.
+        ///   Looks up a localized string similar to DTS ID.
         /// </summary>
         public static string login_username {
             get {
@@ -1263,6 +1272,249 @@ namespace Didache.Resources {
         public static string submenu_view {
             get {
                 return ResourceManager.GetString("submenu_view", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter any suggestions or comments you may have for any component within this course thus far that might better help us assist you in this online learning initiative. REMEMBER: If you have any content related questions regarding the course, please contact your GTA. If you experience any technical difficulties that you need assistance with, please email us at coursemanagement@dts.edu..
+        /// </summary>
+        public static string survey_footer {
+            get {
+                return ResourceManager.GetString("survey_footer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Class Interaction.
+        /// </summary>
+        public static string survey_header_classinteraction {
+            get {
+                return ResourceManager.GetString("survey_header_classinteraction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Additional Comments.
+        /// </summary>
+        public static string survey_header_comments {
+            get {
+                return ResourceManager.GetString("survey_header_comments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter any suggestions, compliments, or complaints you have for any part of this course or the online education website..
+        /// </summary>
+        public static string survey_header_comments_desc {
+            get {
+                return ResourceManager.GetString("survey_header_comments_desc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Devotional.
+        /// </summary>
+        public static string survey_header_devotional {
+            get {
+                return ResourceManager.GetString("survey_header_devotional", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to After completing the tasks in this unit, please complete this survey, commenting on the class components as they contributed to your learning thus far in this course. Your input is extremely valuable to the further development of this course and DTS&apos;s online learning initiative. Please rank each area from 1-5, 1 being the lowest, 5 the highest..
+        /// </summary>
+        public static string survey_header_instructions {
+            get {
+                return ResourceManager.GetString("survey_header_instructions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Learning Activity.
+        /// </summary>
+        public static string survey_header_learningactivity {
+            get {
+                return ResourceManager.GetString("survey_header_learningactivity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Navigation &amp; Layout.
+        /// </summary>
+        public static string survey_header_navigation {
+            get {
+                return ResourceManager.GetString("survey_header_navigation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reading.
+        /// </summary>
+        public static string survey_header_reading {
+            get {
+                return ResourceManager.GetString("survey_header_reading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Service &amp; Support.
+        /// </summary>
+        public static string survey_header_service {
+            get {
+                return ResourceManager.GetString("survey_header_service", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Assignments.
+        /// </summary>
+        public static string survey_header_tasks {
+            get {
+                return ResourceManager.GetString("survey_header_tasks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Video Presentation.
+        /// </summary>
+        public static string survey_header_video {
+            get {
+                return ResourceManager.GetString("survey_header_video", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Website Interface.
+        /// </summary>
+        public static string survey_header_website {
+            get {
+                return ResourceManager.GetString("survey_header_website", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clarity of Instructions.
+        /// </summary>
+        public static string survey_question_clarity {
+            get {
+                return ResourceManager.GetString("survey_question_clarity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ease of Use.
+        /// </summary>
+        public static string survey_question_easeofuse {
+            get {
+                return ResourceManager.GetString("survey_question_easeofuse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Instructional support from TAs/Instructors.
+        /// </summary>
+        public static string survey_question_instructionalsupport {
+            get {
+                return ResourceManager.GetString("survey_question_instructionalsupport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clearly labeled pages.
+        /// </summary>
+        public static string survey_question_labels {
+            get {
+                return ResourceManager.GetString("survey_question_labels", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Was it driven from and helpful for course objectives?.
+        /// </summary>
+        public static string survey_question_learningobjectives {
+            get {
+                return ResourceManager.GetString("survey_question_learningobjectives", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Layout look and feel.
+        /// </summary>
+        public static string survey_question_lookandfeel {
+            get {
+                return ResourceManager.GetString("survey_question_lookandfeel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quality/Value.
+        /// </summary>
+        public static string survey_question_qualityvalue {
+            get {
+                return ResourceManager.GetString("survey_question_qualityvalue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quality/Value of Slides.
+        /// </summary>
+        public static string survey_question_slidesqualityvalue {
+            get {
+                return ResourceManager.GetString("survey_question_slidesqualityvalue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Technical Support.
+        /// </summary>
+        public static string survey_question_techsupport {
+            get {
+                return ResourceManager.GetString("survey_question_techsupport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quality/Value of Video.
+        /// </summary>
+        public static string survey_question_videoqualityvalue {
+            get {
+                return ResourceManager.GetString("survey_question_videoqualityvalue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Technical Problems (5 for no problems).
+        /// </summary>
+        public static string survey_question_videotechnicalproblems {
+            get {
+                return ResourceManager.GetString("survey_question_videotechnicalproblems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Were the transcripts useful to you?.
+        /// </summary>
+        public static string survey_question_videotranscript {
+            get {
+                return ResourceManager.GetString("survey_question_videotranscript", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submit Survey.
+        /// </summary>
+        public static string survey_submitsurvey {
+            get {
+                return ResourceManager.GetString("survey_submitsurvey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thank you for submitting the survey..
+        /// </summary>
+        public static string survey_thankyou {
+            get {
+                return ResourceManager.GetString("survey_thankyou", resourceCulture);
             }
         }
         

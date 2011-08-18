@@ -64,13 +64,20 @@
 
 		<div class="user-list-small">
 			<h3>@Didache.Resources.labels.labels_dashboard_groupmembers</h3>
+			@{ CourseUser currentUserAsStudent = courseUsers.SingleOrDefault(thisUser => thisUser.UserID == Users.GetLoggedInUser().UserID && thisUser.CourseUserRole == CourseUserRole.Student); }
 
-			@foreach (CourseUser user in courseUsers.Where(cu => cu.CourseUserRole == CourseUserRole.Student && cu.GroupID == courseUsers.SingleOrDefault(thisUser => thisUser.UserID == Users.GetLoggedInUser().UserID && thisUser.CourseUserRole == CourseUserRole.Student).GroupID).OrderBy(cu => cu.User.LastName)) {
+			
+			@if (currentUserAsStudent != null) {
+				foreach (CourseUser user in courseUsers.Where(cu => 
+													cu.CourseUserRole == CourseUserRole.Student &&
+													cu.GroupID == currentUserAsStudent.GroupID)
+												.OrderBy(cu => cu.User.LastName)) {
 				<div class="user">
 					<a href="@user.User.ProfileDisplayUrl" title="@user.User.FormattedName">
 						<img src="@user.User.GetProfileImageUrl(40, 40)" width="40" height="40" />						
 					</a>
 				</div>				
+				}
 			}
 			<div class="clear"></div>
 		</div>

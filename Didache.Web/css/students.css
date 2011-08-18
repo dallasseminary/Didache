@@ -262,9 +262,11 @@
 }
 	.turn-in-form textarea {
 		width: 513px;
-		height: 30px;
+		height: 50px;
 		border: solid 2px #ccc;
 		padding: 10px;
+		resize: none;
+		font-family: Helvetica, Arial;
 	}
 	.turn-in-form input[type=submit] {
 		float: right;

@@ -34,8 +34,8 @@ namespace Didache {
 			
 			DidacheDb db = new DidacheDb();
             User user = Users.GetLoggedInUser();
-            Task task = db.Tasks.Find(taskID);
-            Course course = Courses.GetCourse(task.CourseID);
+            Task task = db.Tasks.Include("Course").SingleOrDefault(t => t.TaskID == taskID);
+			Course course = task.Course;
 
 			// find this user's group
             CourseUser courseUser = course.CourseUsers

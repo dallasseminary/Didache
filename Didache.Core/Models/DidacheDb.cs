@@ -48,6 +48,7 @@ namespace Didache {
 		// studnet and graded files
 		public DbSet<StudentFile> StudentFiles { get; set; }
 		public DbSet<GradedFile> GradedFiles { get; set; }
+		public DbSet<UnitSurvey> UnitSurveys { get; set; }
 
 
 		// grading
@@ -151,6 +152,9 @@ namespace Didache {
 				.ToTable("oe_GradeGroups");
 			modelBuilder.Entity<GradeItem>()
 				.ToTable("oe_GradeGroups_Items");
+
+			modelBuilder.Entity<UnitSurvey>()
+				.ToTable("oe_UnitSurveys");
 
 			// map example
 			/*

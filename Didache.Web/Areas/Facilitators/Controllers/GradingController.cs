@@ -100,6 +100,8 @@ namespace Didache.Web.Areas.Facilitators.Controllers
 											//.Include("StudentFile")
 											//.Include("GradedFile")
 											.Where(utd => utd.CourseID == course.CourseID && utd.UserID == user.UserID)
+											.OrderBy(utd => utd.Unit.SortOrder)
+												.ThenBy(utd => utd.Task.SortOrder)
 											.ToList();
 		
 
