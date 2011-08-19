@@ -2,20 +2,25 @@
 
 <div class="page-header">
 	<h2>@Model.CourseCode @Model.Section</h2>
-	<h3>@Model.FacultyFullNames</h3>
+	<h3><a href="/admin/courses/bysession/@Model.SessionID">@Model.Session.Name</a></h3>
 </div>
 
 <ul class="page-menu">
+	
+	<li><a href="@Model.CourseUrl">View</a></li>
+	<li><a href="/grading/@Model.Slug">Grade</a></li>
+
 	@foreach(var page in new[] {
-								new {Url="courseeditor", Name="Units and Tasks"},
+								
 								new {Url="files", Name="Files"},
 								new {Url="users", Name="Users"},
 								new {Url="usergroups", Name="Groups"},
-								new {Url="grading", Name="Grading"}
+								new {Url="courseeditor", Name="Tasks"}					
+								//,new {Url="grading", Name="Grading"}
 								}
 	) {
 		<li><a href="/admin/courses/@page.Url/@Model.CourseID" @(Request.Url.ToString().Contains(page.Url) ? " class=selected" : "")>@page.Name</a></li>
 		
 	}
-	<li><a href="@Model.CourseUrl">Student View</a></li>
+	
 </ul>

@@ -262,6 +262,10 @@
       <Project>{287140B7-0BD7-4F9A-A3B3-2F4ED02C6B72}</Project>
       <Name>Didache</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DTS.Online\DTS.Online.csproj">
+      <Project>{02DD0A3A-3B1C-4BD5-B3C2-AF45E0B76322}</Project>
+      <Name>DTS.Online</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Index.cshtml" />

@@ -10,6 +10,8 @@ using System.Text.RegularExpressions;
 
 namespace Didache.Web.Areas.Facilitators.Controllers
 {
+
+	[AdminBuilderFacilitator]
     public class GradingController : Controller
     {
         //

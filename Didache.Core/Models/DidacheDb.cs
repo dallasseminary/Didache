@@ -16,6 +16,7 @@ namespace Didache {
 
 		}
 
+
 		// course meta
 		public DbSet<Session> Sessions { get; set; }
 		public DbSet<Campus> Campuses { get; set; }

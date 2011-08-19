@@ -8,13 +8,15 @@ using Didache.Models;
 
 namespace Didache.Web.Areas.Admin.Controllers
 {
+
+	[AdminAndBuilder]
     public class UsersController : Controller
     {
         //
         // GET: /Admin/Users/
 		DidacheDb db = new DidacheDb();
 
-		[Authorize(Roles="oe-administrator")]
+		
         public ActionResult Index(string query)
         {
 			List<User> users = null;
@@ -32,8 +34,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 
 			return View(users);
         }
-
-		[Authorize(Roles = "oe-administrator")]
+		
 		public ActionResult EditUser(int? id) {
 			User user = (id.HasValue) ? db.Users.Find(id.Value) : new User();
 
@@ -50,7 +51,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 			return View(user);
 		}
 
-		[Authorize(Roles = "oe-administrator")]
+		
 		[HttpPost]
 		public ActionResult EditUser(User user, string[] roles) {
 

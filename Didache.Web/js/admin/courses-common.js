@@ -39,6 +39,10 @@ function fillEditor(id, obj) {
 			val = (obj[prop] != null) ? obj[prop] : '';
 
 		if (field.attr('type') == 'checkbox') {
+			
+			if (typeof val === 'string')
+				val = (val == 'True');
+
 			field.prop('checked', val);
 		} else if (field.attr('type') == 'radio') {
 			field.parent().find('[value="' + val + '"]').prop('checked', true);

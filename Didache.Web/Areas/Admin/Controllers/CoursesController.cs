@@ -7,9 +7,12 @@ using System.IO;
 using System.Web.Script.Serialization;
 using Didache;
 using System.Data.Entity.Validation;
+using System.Data.Entity;
+using System.Data.SqlClient;
 
 namespace Didache.Web.Areas.Admin.Controllers
 {
+	[AdminAndBuilder]
     public class CoursesController : Controller
     {
 		private DidacheDb db = new DidacheDb();
@@ -17,10 +20,15 @@ namespace Didache.Web.Areas.Admin.Controllers
 		
 		//
         // GET: /Admin/Courses/
+		
 
+		
+		
         public ActionResult Index()
         {
 			List<Course> courses = Didache.Courses.GetCurrentlyRunningCourses();
+
+			ViewBag.Session = null;
 
 			return View("List", courses);		
         }
@@ -28,6 +36,8 @@ namespace Didache.Web.Areas.Admin.Controllers
 		public ActionResult BySession(int id) {
 
 			List<Course> courses = Didache.Courses.GetCoursesBySession(id);
+
+			ViewBag.Session = db.Sessions.Find(id);
 
 			return View("List", courses);
 		}
@@ -549,7 +559,8 @@ namespace Didache.Web.Areas.Admin.Controllers
 							FileID = currentCourseFile.FileID,
 							GroupID = fileGroup.GroupID,
 							DateAdded = currentCourseFile.DateAdded,
-							SortOrder = fileInfo.sortorder
+							SortOrder = fileInfo.sortorder,
+							IsActive = true
 						};
 
 						db.CourseFileAssociations.Remove(currentCourseFile);
@@ -650,6 +661,40 @@ namespace Didache.Web.Areas.Admin.Controllers
 					return Json(new { success = false, action = "add", message = "Invalid new model", errors = GetErrors() });
 				}
 			}
+		}
+
+		[HttpPost]
+		public ActionResult UpdateCourseFileAssociation(int groupID, int fileID, string title, bool isActive) {
+			
+	
+
+			// EDIT MODE
+			try {
+				CourseFileAssociation courseFileAssociation = db.CourseFileAssociations.SingleOrDefault(cfa => cfa.GroupID == groupID && cfa.FileID == fileID);
+
+				courseFileAssociation.CourseFile.Title = title;
+				courseFileAssociation.IsActive = isActive;
+
+				db.SaveChanges();
+
+				/*
+				db.Database.ExecuteSqlCommand(
+						"UPDATE oe_CourseFileGroups_Files SET IsActive=@IsActive WHERE GroupID=@GroupID AND FileID=@FileID;",
+						new SqlParameter("IsActive", isActive),
+						new SqlParameter("GroupID", groupID),
+						new SqlParameter("FileID", fileID));
+				 */
+
+				return Json(new { success = true, action = "edit", isActive=isActive });
+			}
+			catch (Exception ex) {
+
+				ModelState.AddModelError("", "Edit Failure, see inner exception");
+
+				Response.StatusCode = 500;
+				return Json(new { success = false, action = "edit", message = ex.ToString(), errors = GetErrors() });
+			}
+		
 		}
 
 		[HttpPost]

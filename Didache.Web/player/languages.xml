@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<languageSettings>
+	<language code="en-US" name="English" englishName="English" fontName="Verdana" fontSize="11" lineHeight="18" maxCharsPerLine="45" linesToSkip="2" subDirectory="en-US">
+		<entry key="header_title" value="online education" />
+		
+		<entry key="loader_yourCourses" value="Your Courses" />
+		<entry key="loader_videosList" value="Videos List" />
+
+		<entry key="loader_loading" value="Loading..." />
+		<entry key="loader_videoPlayer" value="Loading player" />
+		
+		<entry key="loader_transcript" value="Loading Transcript" />
+		
+		<entry key="loader_slides" value="Loading Slides" />
+		<entry key="loader_slideNumber" value="Slide {0} of {1}" />
+		
+		<entry key="loader_video" value="Loading Video" />
+		<entry key="loader_connecting" value="Connecting to Video Stream" />
+
+		<entry key="loader_serverList" value="Getting server list" />
+		<entry key="loader_connectionError" value="Connection Error" />
+		<entry key="loader_errorGettingServerList" value="There was an error getting the server list. Please load another video." />
+		<entry key="loader_errorConnectingToVideo" value="Failed to connect. This error has been reported to our streaming provider." />
+	
+		<entry key="button_printTranscript" value="print transcript" />
+		<entry key="button_printSlides" value="print slides" />	
+		<entry key="button_reportError" value="report error" />
+		
+		<entry key="radio_autoScroll" value="Automatically scroll the transcript" />	
+		<entry key="radio_autoScroll_unavailable" value="Auto-scroll unavailable" />	
+		<entry key="radio_userScroll" value="Let me scroll the transcript" />
+		
+		<entry key="ddl_loading" value="Loading..." />
+		<entry key="ddl_selectCourse" value="-- Select Course --" />
+		<entry key="ddl_selectUnit" value="-- Select Unit --" />
+		<entry key="ddl_selectVideo" value="-- Select Video --" />
+
+		<entry key="message_illustrationsUnavailable" value="Illustrations currently unavailable for this video." />
+		<entry key="message_noTranscriptCues" value="Transcript is currently only available to be printed for this video." />
+		<entry key="message_noTranscript" value="There is no transcript for this video." />
+		
+		<entry key="message_illustrations_selectVideo" value="Please select a course, unit and video above." />	
+		<entry key="message_illustrations_pressPlay" value="Please press the play button below to begin." />			
+
+		<entry key="message_videoEnded_nextVideoInUnit" value="Would you like to play the next video in this unit?" />	
+		<entry key="message_videoEnded_nextUnitInCourse" value="That was the last video in this unit. Would you like to start the next unit?" />			
+		
+
+		<entry key="messageBox_button_playNextVideo" value="Play Next Video" />	
+		<entry key="messageBox_button_close" value="Close" />
+		<entry key="messageBox_button_reloadVideo" value="Reload Video" />	
+
+		<entry key="bitrate_hi" value="Hi" />
+		<entry key="bitrate_lo" value="Lo" />	
+
+	</language>
+	<language code="zh-TW" name="漢語(繁體字)[T]" englishName="Traditional Chinese" fontName="MS Mincho" fontSize="17" lineHeight="22" maxCharsPerLine="16" linesToSkip="1" subDirectory="zh-TW" >
+		<entry key="header_title" value="網上神學課程" />
+		
+		<entry key="loader_yourCourses" value="你修習的課程" />
+		<entry key="loader_videosList" value="錄影帶目錄" />	
+
+		<entry key="loader_loading" value="進行下載" />				
+		<entry key="loader_videoPlayer" value="錄影帶播放器正進行下載" />
+		
+		<entry key="loader_transcript" value="下載講稿" />
+		
+		<entry key="loader_slides" value="下載幻燈片" />
+		<entry key="loader_slideNumber" value="幻燈片 {0} of {1}" />	
+		
+		<entry key="loader_video" value="下載錄影帶" />
+		<entry key="loader_connecting" value="連結在網上收看錄影帶裝置" />
+				
+		<entry key="loader_serverList" value="接收伺服器目錄" />
+		<entry key="loader_connectionError" value="連結程序出現故障" />
+		<entry key="loader_errorGettingServerList" value="接收伺服器目錄出現故障;請下載另一個錄影帶" />
+		<entry key="loader_errorConnectingToVideo" value="結中斷；已將故障通知有關部門(網上收看錄影帶服務的供應商)" />
+		
+		<entry key="button_printTranscript" value="打印講稿" />
+		<entry key="button_printSlides" value="打印幻燈片和重點" />
+		<entry key="button_reportError" value="滙報故障" />	
+		
+		<entry key="radio_autoScroll" value="自動捲動視窗，閱讀講稿" />
+		<entry key="radio_autoScroll_unavailable" value="暫停使用自動捲動視窗" />		
+		<entry key="radio_userScroll" value="自選捲動視窗，閱讀講稿" />
+		
+		<entry key="ddl_loading" value="進行下載" />
+		<entry key="ddl_selectCourse" value="-- 選擇課程 --" />
+		<entry key="ddl_selectUnit" value="-- 選擇單元 --" />
+		<entry key="ddl_selectVideo" value="-- 選擇錄影帶 --" />
+		
+		<entry key="message_illustrationsUnavailable" value="暫時未能提供有關的圖解說明" />
+		<entry key="message_noTranscriptCues" value="現在只能打印這錄影帶的講稿" />
+		<entry key="message_noTranscript" value="這錄影帶並沒有可供打印的講稿" />
+		
+		<entry key="message_illustrations_selectVideo" value="請選擇上列的課程、單元、和錄影帶" />	
+		<entry key="message_illustrations_pressPlay" value="請按播放鈕，開始播放" />			
+
+		<entry key="message_videoEnded_nextVideoInUnit" value="你是否願意繼續播放這單元的下一個錄影帶？" />	
+		<entry key="message_videoEnded_nextUnitInCourse" value="這是當前單元最後一個錄影帶。你是否願意開始下一個單元？" />					
+
+		<entry key="messageBox_button_playNextVideo" value="播放下一個錄影帶" />	
+		<entry key="messageBox_button_close" value="關閉" />
+		<entry key="messageBox_button_reloadVideo" value="再次下載錄影帶" />
+		
+		<entry key="bitrate_hi" value="高速" />
+		<entry key="bitrate_lo" value="低速" />			
+	</language>
+	
+	
+	<language code="zh-CN" name="汉语(简体字)[S]" englishName="Simplified Chinese" fontName="MS Mincho" fontSize="17" lineHeight="22" maxCharsPerLine="16" linesToSkip="1"  subDirectory="zh-CN">
+		<entry key="header_title" value="网上神学课程" />
+		
+		<entry key="loader_yourCourses" value="你修习的课程" />
+		<entry key="loader_videosList" value="录映带帶目录" />	
+
+		<entry key="loader_loading" value="进行下载" />				
+		<entry key="loader_videoPlayer" value="录映带播放器正进行下载" />
+		
+		<entry key="loader_transcript" value="下载讲稿" />
+		
+		<entry key="loader_slides" value="下载幻灯片" />
+		<entry key="loader_slideNumber" value="幻灯片 {0} of {1}" />	
+		
+		<entry key="loader_video" value="下载录映带" />
+		<entry key="loader_connecting" value="连结在网上收看录映带装置" />
+				
+		<entry key="loader_serverList" value="接收服务器目录" />
+		<entry key="loader_connectionError" value="连结程序出现故障" />
+		<entry key="loader_errorGettingServerList" value="接收服务器目录出現故障;請下載另一個錄影帶" />
+		<entry key="loader_errorConnectingToVideo" value="连结中断；已将故障通知有关部门(网上收看录映带服务的供应商)" />
+		
+		<entry key="button_printTranscript" value="打印讲稿" />
+		<entry key="button_printSlides" value="打印幻灯片和重点" />
+		<entry key="button_reportError" value="汇报故障" />	
+		
+		<entry key="radio_autoScroll" value="自动捲动视窗，阅读讲稿" />
+		<entry key="radio_autoScroll_unavailable" value="暂停使用自动捲动视窗" />		
+		<entry key="radio_userScroll" value="自选捲动视窗，阅读讲稿" />
+		
+		<entry key="ddl_loading" value="进行下载" />
+		<entry key="ddl_selectCourse" value="-- 选择课程 --" />
+		<entry key="ddl_selectUnit" value="-- 选择单元 --" />
+		<entry key="ddl_selectVideo" value="-- 选择录映带 --" />
+		
+		<entry key="message_illustrationsUnavailable" value="暂时未能提供有关的图解说明" />
+		<entry key="message_noTranscriptCues" value="現在只能打印这录映带的讲稿" />
+		<entry key="message_noTranscript" value="这录映带并沒有可供打印的讲稿" />
+		
+		<entry key="message_illustrations_selectVideo" value="请选择上列的课程、单元、和录映带" />	
+		<entry key="message_illustrations_pressPlay" value="请按播放钮，开始播放" />			
+
+		<entry key="message_videoEnded_nextVideoInUnit" value="你是否愿意继读播放这单元的下一个录映带？" />	
+		<entry key="message_videoEnded_nextUnitInCourse" value="这是当前单元最后一个录映带。你是否愿意开始下一个单元？" />					
+
+		<entry key="messageBox_button_playNextVideo" value="播放下一个录映带" />	
+		<entry key="messageBox_button_close" value="关闭" />
+		<entry key="messageBox_button_reloadVideo" value="再次下载录映带" />
+
+		<entry key="bitrate_hi" value="高速" />
+		<entry key="bitrate_lo" value="低速" />			
+	</language>
+
+<language code="es-ES" name="Español" englishName="Spanish" fontName="Verdana" fontSize="11" lineHeight="18" maxCharsPerLine="45" linesToSkip="2" subDirectory="es-ES">
+		<entry key="header_title" value="online education" />
+		
+		<entry key="loader_loading" value="Cargando..." />	
+		<entry key="loader_videoPlayer" value="es: Loading player" />
+		
+		<entry key="loader_transcript" value="Cargando Texto del Video" />
+		
+		<entry key="loader_slides" value="Cargando Imagenes" />
+		<entry key="loader_slideNumber" value="Imagenes {0} of {1}" />		
+		
+		<entry key="loader_video" value="Cargando Video" />
+		<entry key="loader_connecting" value="Conectando al servidor de video" />	
+		
+		<entry key="loader_yourCourses" value="Sus Materias" />
+		<entry key="loader_videosList" value="Lista de Videos" />		
+		
+		<entry key="loader_serverList" value="Reciviendo la lista del servidor" />
+		<entry key="loader_connectionError" value="Hubo un error al tratar de recibir la lista del servidor. Por favor, cargue otro video." />
+		<entry key="loader_errorGettingServerList" value="es: There was an error getting the server list. Please load another video." />
+		<entry key="loader_errorConnectingToVideo" value="es: Failed to connect. This error has been reported to our streaming provider." />
+		
+		<entry key="button_printTranscript" value="Imprimir el texto" />
+		<entry key="button_printSlides" value="Imprimir las imagenes" />	
+		<entry key="button_reportError" value="es: report error" />	
+		
+		<entry key="radio_autoScroll" value="Mover el texto automaticamente " />	
+		<entry key="radio_autoScroll_unavailable" value="No disponible la funcion: Mover el texto automaticamente" />	
+		<entry key="radio_userScroll" value="Mover el texto manualmente" />
+		
+		<entry key="ddl_loading" value="Cargando..." />
+		<entry key="ddl_selectCourse" value="-- Seleccione la materia --" />
+		<entry key="ddl_selectUnit" value="-- Seleccione la unidad --" />
+		<entry key="ddl_selectVideo" value="-- Seleccione el video --" />
+
+		<entry key="message_illustrationsUnavailable" value="Imagenes temporalmente no disponibles para este video." />
+		<entry key="message_noTranscriptCues" value="El texto de este video solo se puede imprimir por el momento ." />
+		<entry key="message_noTranscript" value="es: There is no transcript for this video." />
+		
+		<entry key="message_illustrations_selectVideo" value="es: Please select a course, unit and video above." />	
+		<entry key="message_illustrations_pressPlay" value="es: Please press the play button below to begin." />			
+
+		<entry key="message_videoEnded_nextVideoInUnit" value="ES: Would you like to play the next video in this unit?" />	
+		<entry key="message_videoEnded_nextUnitInCourse" value="ES: That was the last video in this unit. Would you like to start the next unit?" />					
+
+		<entry key="messageBox_button_playNextVideo" value="ES: Play Next Video" />	
+		<entry key="messageBox_button_close" value="ES: Close." />
+		<entry key="messageBox_button_reloadVideo" value="ES: Reload Video." />	
+		
+		<entry key="bitrate_hi" value="alto" />
+		<entry key="bitrate_lo" value="bajo" />			
+	</language>  
+</languageSettings>

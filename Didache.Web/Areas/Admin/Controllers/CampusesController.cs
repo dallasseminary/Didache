@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Didache.Web.Areas.Admin.Controllers
 {
+	[AdminAndBuilder]
     public class CampusesController : Controller
     {
 

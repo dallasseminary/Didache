@@ -7,6 +7,7 @@ using Didache;
 
 namespace Didache.Web.Areas.Students.Controllers
 {
+	[Authorize]
     public class DiscussionController : Controller
     {
 		DidacheDb db = new DidacheDb();

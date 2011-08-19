@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Didache.Web.Areas.Community.Controllers
 {
+	[Authorize]
     public class CommunityController : Controller
     {
         //

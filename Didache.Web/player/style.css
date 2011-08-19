@@ -1,0 +1,43 @@
+﻿
+.video-frame {
+	width: 320px;
+	height: 240px;
+	background: #000;
+	position: relative;
+}
+
+.video-frame .video-controls-overlay {
+	position: absolute;
+	bottom: 0;
+	width: 320px;
+}
+
+.media-playpause
+{
+	width: 60px;	
+}
+
+.media-progress-wrapper {
+	width: 318px;
+	height: 20px;
+	background: #cccccc;
+	border: solid 1px #444;
+	position: relative;
+}
+
+.media-progress-wrapper .media-progress {
+	display: block;
+	width: 0%;
+	height: 100%;
+	background: #393;
+	position: absolute;
+	cursor: pointer;
+}
+.media-progress-wrapper .media-loaded {
+	display: block;
+	width: 0%;
+	height: 100%;
+	background: #222;
+	position: absolute;
+	cursor: pointer;
+}

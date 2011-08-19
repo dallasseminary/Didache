@@ -8,6 +8,7 @@ using System.IO;
 
 namespace Didache.Web.Areas.Students.Controllers
 {
+	[Authorize]
     public class ApiController : Controller
     {
 		DidacheDb db = new DidacheDb();

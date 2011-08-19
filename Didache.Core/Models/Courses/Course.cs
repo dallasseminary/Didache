@@ -42,6 +42,8 @@ namespace Didache {
 		[Display(Name = "End Date")]
 		public DateTime EndDate { get; set; }
 
+		public int VersionNumber { get; set; }
+
 		//[Required]
 		[AllowHtml]
 		[DataType(DataType.MultilineText)]

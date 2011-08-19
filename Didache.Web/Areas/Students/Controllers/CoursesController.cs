@@ -9,6 +9,7 @@ using Ionic.Zip;
 
 namespace Didache.Web.Areas.Students.Controllers
 {
+	[Authorize]
     public class CoursesController : Controller
     {
 		DidacheDb db = new DidacheDb();
