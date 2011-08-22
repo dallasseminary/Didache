@@ -15,6 +15,7 @@
 		<table class="admin-list">
 		<thead>
 			<tr>
+				<th>Session</th>
 				<th>Course</th>
 				<th>Buttons</th>
 			</tr>
@@ -24,12 +25,15 @@
 		@foreach (Course course in Model) {
   
 			<tr>
+				<td>@course.Session.Name</td>
 				<td>@course.ToString()</td>
 				<td>
-					<a href="/grading/@course.Slug/tasklist">Task List</a>
-					<a href="/grading/@course.Slug/studentlist">Student List</a>
-
-					<a href="/courses/@course.Slug/schedule">Student Schedule</a>
+					@*
+					@if (User.IsInRole(UserRoles.Administrator) || ((List<Course>)ViewBag.CoursesAsFacilitator).Count(c =ca
+					*@
+					<a href="/grading/@course.Slug/tasklist">Task List</a> | 
+					<a href="/grading/@course.Slug/studentlist">Student List</a> |
+					<a href="/courses/@course.Slug/schedule">Student View</a>
 				</td>
 			</tr>	  
   

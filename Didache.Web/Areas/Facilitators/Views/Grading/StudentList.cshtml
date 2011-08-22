@@ -20,7 +20,7 @@
 
 		@foreach (CourseUser user in ViewBag.Users) {
 			if (user.GroupID != lastGroupID) {
-				if (lastGroupID == -1) {
+				if (lastGroupID != -1) {
 					@Html.Raw("</table>")			
 				}
 	

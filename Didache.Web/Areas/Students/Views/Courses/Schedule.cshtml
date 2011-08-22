@@ -1,6 +1,6 @@
 ﻿@model Course
 @{
-	ViewBag.Title = Model.CourseCode + Model.Section + " " + Resources.labels.coursetabs_schedule;
+	ViewBag.Title = Model.CourseCode + Model.Section + " " + Didache.Resources.labels.coursetabs_schedule;
 }
 
 @section head {
@@ -41,7 +41,7 @@
 					
 					@if (userTaskData.Task.InstructionsAvailableDate.HasValue && userTaskData.Task.InstructionsAvailableDate.Value > DateTime.Now) {
 						<div class="task-instructionsdelayed">
-							@Html.Raw(String.Format(Resources.labels.studentschedule_instructionsnotavailable, userTaskData.Task.InstructionsAvailableDate.Value.ToShortDateString()))
+							@Html.Raw(String.Format(Didache.Resources.labels.studentschedule_instructionsnotavailable, userTaskData.Task.InstructionsAvailableDate.Value.ToShortDateString()))
 						</div>
 					} else {						
 						<div class="task-instructions-@(userTaskData.TaskCompletionStatus == TaskCompletionStatus.Completed ? "completed" : "text")">@Html.Raw(userTaskData.Task.Instructions)</div>											
@@ -51,7 +51,7 @@
 				<div class="task-interaction">
 					@if (userTaskData.Task.SubmissionAvailableDate.HasValue && userTaskData.Task.SubmissionAvailableDate.Value > DateTime.Now) {
 						<div class="task-submissiondelayed">
-						@Html.Raw(String.Format(Resources.labels.studentschedule_submissionnotavailable, userTaskData.Task.SubmissionAvailableDate.Value.ToShortDateString()))
+						@Html.Raw(String.Format(Didache.Resources.labels.studentschedule_submissionnotavailable, userTaskData.Task.SubmissionAvailableDate.Value.ToShortDateString()))
 						</div>
 					} else {
 						Html.RenderPartial("TaskType-" + userTaskData.Task.TaskTypeName + "", userTaskData);
@@ -77,7 +77,7 @@
 		
 		<div class="unit-list">
 			
-			<h4>@Resources.labels.courses_heading_units</h4>
+			<h4>@Didache.Resources.labels.courses_heading_units</h4>
 			
 			<ol>
 				@if (ViewBag.Units != null) {

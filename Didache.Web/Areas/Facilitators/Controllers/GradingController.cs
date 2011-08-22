@@ -10,6 +10,8 @@ using System.Text.RegularExpressions;
 
 namespace Didache.Web.Areas.Facilitators.Controllers
 {
+
+	[AdminBuilderFacilitator]
     public class GradingController : Controller
     {
         //
@@ -100,6 +102,8 @@ namespace Didache.Web.Areas.Facilitators.Controllers
 											//.Include("StudentFile")
 											//.Include("GradedFile")
 											.Where(utd => utd.CourseID == course.CourseID && utd.UserID == user.UserID)
+											.OrderBy(utd => utd.Unit.SortOrder)
+												.ThenBy(utd => utd.Task.SortOrder)
 											.ToList();
 		
 

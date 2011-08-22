@@ -7,9 +7,12 @@ using System.IO;
 using System.Web.Script.Serialization;
 using Didache;
 using System.Data.Entity.Validation;
+using System.Data.Entity;
+using System.Data.SqlClient;
 
 namespace Didache.Web.Areas.Admin.Controllers
 {
+	[AdminAndBuilder]
     public class CoursesController : Controller
     {
 		private DidacheDb db = new DidacheDb();
@@ -17,17 +20,24 @@ namespace Didache.Web.Areas.Admin.Controllers
 		
 		//
         // GET: /Admin/Courses/
+		
 
+		
+		
         public ActionResult Index()
         {
 			List<Course> courses = Didache.Courses.GetCurrentlyRunningCourses();
 
-			return View("List", courses);
+			ViewBag.Session = null;
+
+			return View("List", courses);		
         }
 
 		public ActionResult BySession(int id) {
 
 			List<Course> courses = Didache.Courses.GetCoursesBySession(id);
+
+			ViewBag.Session = db.Sessions.Find(id);
 
 			return View("List", courses);
 		}
@@ -61,6 +71,15 @@ namespace Didache.Web.Areas.Admin.Controllers
 			return View(course);
 		}
 
+		public ActionResult SyncUsers(int id, string sessionYear, string sessionCode, string courseCode, string courseSection, string courseHours) {
+
+			Course course = Courses.GetCourse(id);
+
+			CarsConnection.SyncCourse(id, sessionYear, sessionCode, courseCode, courseSection, courseHours);
+
+			return Json(new {success= true});
+		}
+
 
 		public ActionResult CloneCourse() {
 
@@ -82,117 +101,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 		public ActionResult CloneCourse(int courseID, int sessionID, DateTime startDate) {
 
 
-			Course oldCourse = db.Courses
-									.Include("Units.Tasks")
-									.Include("CourseFileGroups.CourseFileAssociations")
-									.SingleOrDefault(c=> c.CourseID == courseID);
-
-			int daysToShift = (startDate - oldCourse.StartDate).Days;
-
-			Course newCourse = new Course() {
-				SessionID = sessionID,
-				CampusID = oldCourse.CampusID,
-				IsActive = oldCourse.IsActive,
-				CourseCode = oldCourse.CourseCode,
-				Name = oldCourse.Name,
-				Section = oldCourse.Section,
-				StartDate = oldCourse.StartDate.AddDays(daysToShift),
-				EndDate = oldCourse.EndDate.AddDays(daysToShift),
-				Description = oldCourse.Description
-			};
-
-			db.Courses.Add(newCourse);
-			db.SaveChanges();
-			
-			/*
-			} catch (DbEntityValidationException dbEx) {
-				string errors = "";
-				
-				foreach (var validationErrors in dbEx.EntityValidationErrors) {
-					foreach (var validationError in validationErrors.ValidationErrors) {
-						//System.Web.HttpContext.Current.Trace.Warn("Property: {0} Error: {1}", validationError.PropertyName, dbEx);
-						errors += string.Format("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage) + "; ";
-					}
-				}
-
-				throw new Exception(errors);
-			}
-			*/
-
-			foreach (Unit oldUnit in oldCourse.Units) {
-				Unit newUnit = new Unit() {
-					CourseID = newCourse.CourseID,
-					IsActive = oldUnit.IsActive,
-					SortOrder = oldUnit.SortOrder,
-					Name = oldUnit.Name,
-					StartDate  = oldUnit.StartDate.AddDays(daysToShift),
-					EndDate = oldUnit.EndDate.AddDays(daysToShift),
-					Instructions = oldUnit.Instructions				
-				};
-
-				db.Units.Add(newUnit);
-				db.SaveChanges();
-
-				foreach (Task oldTask in oldUnit.Tasks) {
-					Task newTask = new Task() {
-						CourseID = newUnit.CourseID,
-						UnitID = newUnit.UnitID,
-						IsActive = oldTask.IsActive,
-						SortOrder = oldTask.SortOrder,
-						Name = oldTask.Name,
-						DueDate = null,
-						FileTypesAllowed = oldTask.FileTypesAllowed,
-						InstructionsAvailableDate = null,
-						IsSkippable = oldTask.IsSkippable,
-						Priority = oldTask.Priority,
-						RelatedTaskID = oldTask.RelatedTaskID,
-						SubmissionAvailableDate = null,
-						TaskID = oldTask.TaskID,
-						TaskTypeName = oldTask.TaskTypeName,
-						Instructions = oldTask.Instructions
-					};
-
-					if (oldTask.DueDate.HasValue)
-						newTask.DueDate = oldTask.DueDate.Value.AddDays(daysToShift);
-					
-					if (oldTask.SubmissionAvailableDate.HasValue)
-						newTask.SubmissionAvailableDate = oldTask.SubmissionAvailableDate.Value.AddDays(daysToShift);
-
-					if (oldTask.InstructionsAvailableDate.HasValue)
-						newTask.InstructionsAvailableDate = oldTask.InstructionsAvailableDate.Value.AddDays(daysToShift);
-
-					db.Tasks.Add(newTask);										
-				}
-
-				db.SaveChanges();
-			}
-
-			// FILES
-			foreach (CourseFileGroup oldGroup in oldCourse.CourseFileGroups) {
-				CourseFileGroup newGroup = new CourseFileGroup() {
-					CourseID = newCourse.CourseID,
-					Name = oldGroup.Name,
-					SortOrder = oldGroup.SortOrder
-				};
-
-				db.CourseFileGroups.Add(newGroup);
-				db.SaveChanges();
-
-				foreach (CourseFileAssociation oldFile in oldGroup.CourseFileAssociations) {
-					CourseFileAssociation newFile = new CourseFileAssociation() {
-						GroupID = newGroup.GroupID,
-						FileID = oldFile.FileID,
-						DateAdded = newCourse.StartDate,
-						IsActive = oldFile.IsActive,
-						SortOrder = oldFile.SortOrder
-					};
-
-					db.CourseFileAssociations.Add(newFile);
-				}
-
-				db.SaveChanges();
-
-			}
+			Course newCourse = Courses.CloneCourse(courseID, sessionID, startDate);
 
 			//return Redirect("/admin/courses/bysession/" + sessionID);
 			return Redirect("/admin/courses/courseeditor/" + newCourse.CourseID);
@@ -565,7 +474,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 				originalExtension = Path.GetExtension(file.FileName);
 				title = originalFilename.Replace(originalExtension, ""); ;
 
-				string filePath = Path.Combine(HttpContext.Server.MapPath("~/uploads"), uniqueID.ToString() + originalExtension);
+				string filePath = Path.Combine(Settings.CourseFilesLocation, uniqueID.ToString() + originalExtension);
 				file.SaveAs(filePath);
 
 				courseFile = new CourseFile();
@@ -650,7 +559,8 @@ namespace Didache.Web.Areas.Admin.Controllers
 							FileID = currentCourseFile.FileID,
 							GroupID = fileGroup.GroupID,
 							DateAdded = currentCourseFile.DateAdded,
-							SortOrder = fileInfo.sortorder
+							SortOrder = fileInfo.sortorder,
+							IsActive = true
 						};
 
 						db.CourseFileAssociations.Remove(currentCourseFile);
@@ -751,6 +661,40 @@ namespace Didache.Web.Areas.Admin.Controllers
 					return Json(new { success = false, action = "add", message = "Invalid new model", errors = GetErrors() });
 				}
 			}
+		}
+
+		[HttpPost]
+		public ActionResult UpdateCourseFileAssociation(int groupID, int fileID, string title, bool isActive) {
+			
+	
+
+			// EDIT MODE
+			try {
+				CourseFileAssociation courseFileAssociation = db.CourseFileAssociations.SingleOrDefault(cfa => cfa.GroupID == groupID && cfa.FileID == fileID);
+
+				courseFileAssociation.CourseFile.Title = title;
+				courseFileAssociation.IsActive = isActive;
+
+				db.SaveChanges();
+
+				/*
+				db.Database.ExecuteSqlCommand(
+						"UPDATE oe_CourseFileGroups_Files SET IsActive=@IsActive WHERE GroupID=@GroupID AND FileID=@FileID;",
+						new SqlParameter("IsActive", isActive),
+						new SqlParameter("GroupID", groupID),
+						new SqlParameter("FileID", fileID));
+				 */
+
+				return Json(new { success = true, action = "edit", isActive=isActive });
+			}
+			catch (Exception ex) {
+
+				ModelState.AddModelError("", "Edit Failure, see inner exception");
+
+				Response.StatusCode = 500;
+				return Json(new { success = false, action = "edit", message = ex.ToString(), errors = GetErrors() });
+			}
+		
 		}
 
 		[HttpPost]

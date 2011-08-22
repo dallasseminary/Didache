@@ -150,6 +150,45 @@
   <data name="coursemenu_other_courses" xml:space="preserve">
     <value>Other</value>
   </data>
+  <data name="courses_heading_archivedcourses" xml:space="preserve">
+    <value>Archived Courses</value>
+  </data>
+  <data name="courses_heading_assignments" xml:space="preserve">
+    <value>Assignments</value>
+  </data>
+  <data name="courses_heading_coursedesc" xml:space="preserve">
+    <value>Course Description</value>
+  </data>
+  <data name="courses_heading_coursefiles" xml:space="preserve">
+    <value>Course Files</value>
+  </data>
+  <data name="courses_heading_courseroster" xml:space="preserve">
+    <value>Course Roster</value>
+  </data>
+  <data name="courses_heading_dashboard" xml:space="preserve">
+    <value>Upcoming...</value>
+  </data>
+  <data name="courses_heading_tools" xml:space="preserve">
+    <value>Tools</value>
+  </data>
+  <data name="courses_heading_units" xml:space="preserve">
+    <value>Units</value>
+  </data>
+  <data name="courses_label_gradedfiles" xml:space="preserve">
+    <value>Graded Files</value>
+  </data>
+  <data name="courses_tools_icalendar" xml:space="preserve">
+    <value>Calendar Feed</value>
+  </data>
+  <data name="courses_tools_icalendar_desc" xml:space="preserve">
+    <value>Use the links below to import course requirements into your calendar program (Mac Mail, Outlook, Google Calendar, etc.)</value>
+  </data>
+  <data name="courses_tools_itunes" xml:space="preserve">
+    <value>iTunes Feed</value>
+  </data>
+  <data name="courses_tools_itunes_desc" xml:space="preserve">
+    <value>Import course videos, slides, and transcripts into iTunes (or other media software) for offline viewing.</value>
+  </data>
   <data name="coursetabs_assignments" xml:space="preserve">
     <value>Assignments</value>
   </data>
@@ -189,6 +228,12 @@
   <data name="coursetabs_schedule_desc" xml:space="preserve">
     <value>dates &amp;amp; assignments</value>
   </data>
+  <data name="coursetabs_tools" xml:space="preserve">
+    <value>Tools</value>
+  </data>
+  <data name="coursetabs_tools_desc" xml:space="preserve">
+    <value>Downloads, Calendars, and RSS feeds</value>
+  </data>
   <data name="error_desc" xml:space="preserve">
     <value>Sorry, an error occurred while processing your request</value>
   </data>
@@ -225,8 +270,17 @@
   <data name="homemenu_message" xml:space="preserve">
     <value>This is the home page where all your stuff should be</value>
   </data>
+  <data name="home_currentcourses" xml:space="preserve">
+    <value>Current Courses</value>
+  </data>
+  <data name="home_dashboard_heading_bibsoftware" xml:space="preserve">
+    <value>Bibliography Software</value>
+  </data>
   <data name="home_dashboard_heading_courseresources" xml:space="preserve">
     <value>Course Resources</value>
+  </data>
+  <data name="home_dashboard_heading_onlineedresources" xml:space="preserve">
+    <value>Online Education Resources</value>
   </data>
   <data name="home_dashboard_heading_stream" xml:space="preserve">
     <value>What's Happening on MyDTS</value>
@@ -234,8 +288,59 @@
   <data name="home_dashboard_heading_upcoming" xml:space="preserve">
     <value>Upcoming</value>
   </data>
+  <data name="home_dashboard_li_downloadallfiles" xml:space="preserve">
+    <value>Download all files (current courses)</value>
+  </data>
+  <data name="home_dashboard_li_downloadcalendar" xml:space="preserve">
+    <value>Download your term calendar</value>
+  </data>
+  <data name="home_dashboard_li_endnote" xml:space="preserve">
+    <value>EndNote</value>
+  </data>
+  <data name="home_dashboard_li_libreoffice" xml:space="preserve">
+    <value>LibreOffice.org</value>
+  </data>
+  <data name="home_dashboard_li_msword" xml:space="preserve">
+    <value>Microsoft Word Compatibility Pack</value>
+  </data>
+  <data name="home_dashboard_li_styleease" xml:space="preserve">
+    <value>StyleEase</value>
+  </data>
+  <data name="home_dashboard_li_turabianformattutorial" xml:space="preserve">
+    <value>Turabian Format Tutorial</value>
+  </data>
+  <data name="home_dashboard_li_zotero" xml:space="preserve">
+    <value>Zotero (free)</value>
+  </data>
+  <data name="home_nocourses" xml:space="preserve">
+    <value>You don't have any currently active courses</value>
+  </data>
   <data name="index_title" xml:space="preserve">
     <value>Index Page</value>
+  </data>
+  <data name="interactions_replies" xml:space="preserve">
+    <value>Open [{0} Replies]</value>
+  </data>
+  <data name="labels_dashboard_downloadallfiles" xml:space="preserve">
+    <value>Download All Files</value>
+  </data>
+  <data name="labels_dashboard_facilitators" xml:space="preserve">
+    <value>Faciliators</value>
+  </data>
+  <data name="labels_dashboard_faculty" xml:space="preserve">
+    <value>Faculty</value>
+  </data>
+  <data name="labels_dashboard_groupmembers" xml:space="preserve">
+    <value>Group Members</value>
+  </data>
+  <data name="labels_dashboard_keyassignments" xml:space="preserve">
+    <value>Important Assignments</value>
+  </data>
+  <data name="labels_dashboard_keydownloads" xml:space="preserve">
+    <value>Downloads</value>
+  </data>
+  <data name="labels_dashboard_syllabus" xml:space="preserve">
+    <value>Syllabus</value>
   </data>
   <data name="login_instructions" xml:space="preserve">
     <value>Please enter your username and password</value>
@@ -259,7 +364,76 @@
     <value>Login</value>
   </data>
   <data name="login_username" xml:space="preserve">
-    <value>DTS ID, Username, or Email</value>
+    <value>DTS ID</value>
+  </data>
+  <data name="profile_edit_button" xml:space="preserve">
+    <value>Edit Profile</value>
+  </data>
+  <data name="profile_heading_contactinfo" xml:space="preserve">
+    <value>Contact Information</value>
+  </data>
+  <data name="profile_heading_personalinfo" xml:space="preserve">
+    <value>Personal Information</value>
+  </data>
+  <data name="profile_heading_preferences" xml:space="preserve">
+    <value>Preferences</value>
+  </data>
+  <data name="profile_heading_socialmedia" xml:space="preserve">
+    <value>Social Media</value>
+  </data>
+  <data name="profile_label_address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="profile_label_biography" xml:space="preserve">
+    <value>Biography</value>
+  </data>
+  <data name="profile_label_birthday" xml:space="preserve">
+    <value>Birthdate</value>
+  </data>
+  <data name="profile_label_email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="profile_label_hometown" xml:space="preserve">
+    <value>Hometown</value>
+  </data>
+  <data name="profile_label_language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="profile_label_phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="profile_label_timezone" xml:space="preserve">
+    <value>Timezone</value>
+  </data>
+  <data name="profile_save_button" xml:space="preserve">
+    <value>Save Profile</value>
+  </data>
+  <data name="profile_security_all" xml:space="preserve">
+    <value>All DTS</value>
+  </data>
+  <data name="profile_security_friends" xml:space="preserve">
+    <value>Classmates</value>
+  </data>
+  <data name="profile_security_private" xml:space="preserve">
+    <value>Private</value>
+  </data>
+  <data name="studentschedule_instructionsnotavailable" xml:space="preserve">
+    <value>The instructions for this assignment will be available {0}.</value>
+  </data>
+  <data name="studentschedule_markcompleted" xml:space="preserve">
+    <value>Mark Completed</value>
+  </data>
+  <data name="studentschedule_skip" xml:space="preserve">
+    <value>Skip</value>
+  </data>
+  <data name="studentschedule_submissionnotavailable" xml:space="preserve">
+    <value>You will be able to submit this assignment begining {0}.</value>
+  </data>
+  <data name="studentschedule_submitfile" xml:space="preserve">
+    <value>Turn in File</value>
+  </data>
+  <data name="studentschedule_submitfordiscussion" xml:space="preserve">
+    <value>Submit Assignment for Discussion</value>
   </data>
   <data name="submenu_archive" xml:space="preserve">
     <value>Archive</value>
@@ -330,181 +504,139 @@
   <data name="tabs_tour" xml:space="preserve">
     <value>Tour</value>
   </data>
-  <data name="home_dashboard_heading_onlineedresources" xml:space="preserve">
-    <value>Online Education Resources</value>
-  </data>
-  <data name="home_dashboard_li_downloadallfiles" xml:space="preserve">
-    <value>Download all files (current courses)</value>
-  </data>
-  <data name="home_dashboard_li_downloadcalendar" xml:space="preserve">
-    <value>Download your term calendar</value>
-  </data>
-  <data name="home_dashboard_heading_bibsoftware" xml:space="preserve">
-    <value>Bibliography Software</value>
-  </data>
-  <data name="home_dashboard_li_endnote" xml:space="preserve">
-    <value>EndNote</value>
-  </data>
-  <data name="home_dashboard_li_msword" xml:space="preserve">
-    <value>Microsoft Word Compatibility Pack</value>
-  </data>
-  <data name="home_dashboard_li_libreoffice" xml:space="preserve">
-    <value>LibreOffice.org</value>
-  </data>
-  <data name="home_dashboard_li_styleease" xml:space="preserve">
-    <value>StyleEase</value>
-  </data>
-  <data name="home_dashboard_li_turabianformattutorial" xml:space="preserve">
-    <value>Turabian Format Tutorial</value>
-  </data>
-  <data name="home_dashboard_li_zotero" xml:space="preserve">
-    <value>Zotero (free)</value>
-  </data>
-  <data name="courses_heading_archivedcourses" xml:space="preserve">
-    <value>Archived Courses</value>
-  </data>
-  <data name="courses_heading_assignments" xml:space="preserve">
-    <value>Assignments</value>
-  </data>
-  <data name="courses_heading_coursedesc" xml:space="preserve">
-    <value>Course Description</value>
-  </data>
-  <data name="courses_heading_coursefiles" xml:space="preserve">
-    <value>Course Files</value>
-  </data>
-  <data name="courses_heading_courseroster" xml:space="preserve">
-    <value>Course Roster</value>
-  </data>
-  <data name="courses_heading_units" xml:space="preserve">
-    <value>Units</value>
-  </data>
-  <data name="courses_heading_dashboard" xml:space="preserve">
-    <value>Upcoming...</value>
-  </data>
-  <data name="courses_label_gradedfiles" xml:space="preserve">
-    <value>Graded Files</value>
-  </data>
-  <data name="studentschedule_markcompleted" xml:space="preserve">
-    <value>Mark Completed</value>
-  </data>
-  <data name="studentschedule_skip" xml:space="preserve">
-    <value>Skip</value>
-  </data>
-  <data name="studentschedule_submitfordiscussion" xml:space="preserve">
-    <value>Submit Assignment for Discussion</value>
-  </data>
-  <data name="studentschedule_submitfile" xml:space="preserve">
-    <value>Turn in File</value>
-  </data>
-  <data name="interactions_replies" xml:space="preserve">
-    <value>Open [{0} Replies]</value>
-  </data>
-  <data name="profile_edit_button" xml:space="preserve">
-    <value>Edit Profile</value>
-  </data>
-  <data name="profile_heading_contactinfo" xml:space="preserve">
-    <value>Contact Information</value>
-  </data>
-  <data name="profile_heading_personalinfo" xml:space="preserve">
-    <value>Personal Information</value>
-  </data>
-  <data name="profile_heading_preferences" xml:space="preserve">
-    <value>Preferences</value>
-  </data>
-  <data name="profile_heading_socialmedia" xml:space="preserve">
-    <value>Social Media</value>
-  </data>
-  <data name="profile_label_address" xml:space="preserve">
-    <value>Address</value>
-  </data>
-  <data name="profile_label_biography" xml:space="preserve">
-    <value>Biography</value>
-  </data>
-  <data name="profile_label_birthday" xml:space="preserve">
-    <value>Birthdate</value>
-  </data>
-  <data name="profile_label_email" xml:space="preserve">
-    <value>Email</value>
-  </data>
-  <data name="profile_label_hometown" xml:space="preserve">
-    <value>Hometown</value>
-  </data>
-  <data name="profile_label_language" xml:space="preserve">
-    <value>Language</value>
-  </data>
-  <data name="profile_label_phone" xml:space="preserve">
-    <value>Phone</value>
-  </data>
-  <data name="profile_label_timezone" xml:space="preserve">
-    <value>Timezone</value>
-  </data>
-  <data name="profile_save_button" xml:space="preserve">
-    <value>Save Profile</value>
-  </data>
-  <data name="profile_security_all" xml:space="preserve">
-    <value>All DTS</value>
-  </data>
-  <data name="profile_security_friends" xml:space="preserve">
-    <value>Classmates</value>
-  </data>
-  <data name="profile_security_private" xml:space="preserve">
-    <value>Private</value>
-  </data>
-  <data name="studentschedule_instructionsnotavailable" xml:space="preserve">
-    <value>The instructions for this assignment will be available {0}.</value>
-  </data>
-  <data name="studentschedule_submissionnotavailable" xml:space="preserve">
-    <value>You will be able to submit this assignment begining {0}.</value>
-  </data>
-  <data name="courses_heading_tools" xml:space="preserve">
-    <value>Tools</value>
-  </data>
-  <data name="courses_tools_icalendar" xml:space="preserve">
-    <value>Calendar Feed</value>
-  </data>
-  <data name="courses_tools_icalendar_desc" xml:space="preserve">
-    <value>Use the links below to import course requirements into your calendar program (Mac Mail, Outlook, Google Calendar, etc.)</value>
-  </data>
-  <data name="courses_tools_itunes" xml:space="preserve">
-    <value>iTunes Feed</value>
-  </data>
-  <data name="courses_tools_itunes_desc" xml:space="preserve">
-    <value>Import course videos, slides, and transcripts into iTunes (or other media software) for offline viewing.</value>
-  </data>
-  <data name="coursetabs_tools" xml:space="preserve">
-    <value>Tools</value>
-  </data>
-  <data name="coursetabs_tools_desc" xml:space="preserve">
-    <value>Downloads, Calendars, and RSS feeds</value>
-  </data>
-  <data name="labels_dashboard_downloadallfiles" xml:space="preserve">
-    <value>Download All Files</value>
-  </data>
-  <data name="labels_dashboard_facilitators" xml:space="preserve">
-    <value>Faciliators</value>
-  </data>
-  <data name="labels_dashboard_faculty" xml:space="preserve">
-    <value>Faculty</value>
-  </data>
-  <data name="labels_dashboard_groupmembers" xml:space="preserve">
-    <value>Group Members</value>
-  </data>
-  <data name="labels_dashboard_keyassignments" xml:space="preserve">
-    <value>Important Assignments</value>
-  </data>
-  <data name="labels_dashboard_keydownloads" xml:space="preserve">
-    <value>Downloads</value>
-  </data>
-  <data name="labels_dashboard_syllabus" xml:space="preserve">
-    <value>Syllabus</value>
-  </data>
   <data name="tab_about" xml:space="preserve">
     <value>About</value>
   </data>
-  <data name="home_currentcourses" xml:space="preserve">
-    <value>Current Courses</value>
+  <data name="login_forgotpassword" xml:space="preserve">
+    <value>Forgot ID/Password</value>
   </data>
-  <data name="home_nocourses" xml:space="preserve">
-    <value>You don't have any currently active courses</value>
+  <data name="login_unsuccessful" xml:space="preserve">
+    <value>Login was unsuccessful. Please correct the errors and try again.</value>
+  </data>
+  <data name="profile_constituency_alumni" xml:space="preserve">
+    <value>Alumni</value>
+  </data>
+  <data name="profile_constituency_faculty" xml:space="preserve">
+    <value>Faculty</value>
+  </data>
+  <data name="profile_constituency_staff" xml:space="preserve">
+    <value>Staff</value>
+  </data>
+  <data name="profile_constituency_student" xml:space="preserve">
+    <value>Student</value>
+  </data>
+  <data name="help_email" xml:space="preserve">
+    <value>Your Email</value>
+  </data>
+  <data name="help_instructions" xml:space="preserve">
+    <value>If you're having a login problem, please use the &lt;a href="http://www.dts.edu/account/resetpassword"&gt;reset password&lt;/a&gt; link to reset your password. If you have a question about an assignment, please contact your professor or facilitator.</value>
+  </data>
+  <data name="help_message" xml:space="preserve">
+    <value>Description of Problem</value>
+  </data>
+  <data name="help_name" xml:space="preserve">
+    <value>Your Name</value>
+  </data>
+  <data name="help_title" xml:space="preserve">
+    <value>Help/Contact</value>
+  </data>
+  <data name="help_submit" xml:space="preserve">
+    <value>Submit Problem</value>
+  </data>
+  <data name="help_submitted" xml:space="preserve">
+    <value>Thanks for your feedback. Someone will response as soon as possible.</value>
+  </data>
+  <data name="studentschedule_choose" xml:space="preserve">
+    <value>Choose</value>
+  </data>
+  <data name="studentschedule_chooseafiletype" xml:space="preserve">
+    <value>Please submit one of the following file types:</value>
+  </data>
+  <data name="studentschedule_file" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="login_passwordmessage" xml:space="preserve">
+    <value>Your DTS ID is the same here and on CampusNet, but your password may be different. Your default password is your DTS ID and the first initial of your last name (John Doe = 123456d).</value>
+  </data>
+  <data name="survey_footer" xml:space="preserve">
+    <value>Please enter any suggestions or comments you may have for any component within this course thus far that might better help us assist you in this online learning initiative. REMEMBER: If you have any content related questions regarding the course, please contact your GTA. If you experience any technical difficulties that you need assistance with, please email us at coursemanagement@dts.edu.</value>
+  </data>
+  <data name="survey_header_classinteraction" xml:space="preserve">
+    <value>Class Interaction</value>
+  </data>
+  <data name="survey_header_comments" xml:space="preserve">
+    <value>Additional Comments</value>
+  </data>
+  <data name="survey_header_comments_desc" xml:space="preserve">
+    <value>Please enter any suggestions, compliments, or complaints you have for any part of this course or the online education website.</value>
+  </data>
+  <data name="survey_header_devotional" xml:space="preserve">
+    <value>Devotional</value>
+  </data>
+  <data name="survey_header_instructions" xml:space="preserve">
+    <value>After completing the tasks in this unit, please complete this survey, commenting on the class components as they contributed to your learning thus far in this course. Your input is extremely valuable to the further development of this course and DTS's online learning initiative. Please rank each area from 1-5, 1 being the lowest, 5 the highest.</value>
+  </data>
+  <data name="survey_header_learningactivity" xml:space="preserve">
+    <value>Learning Activity</value>
+  </data>
+  <data name="survey_header_navigation" xml:space="preserve">
+    <value>Navigation &amp; Layout</value>
+  </data>
+  <data name="survey_header_reading" xml:space="preserve">
+    <value>Reading</value>
+  </data>
+  <data name="survey_header_service" xml:space="preserve">
+    <value>Service &amp; Support</value>
+  </data>
+  <data name="survey_header_tasks" xml:space="preserve">
+    <value>Assignments</value>
+  </data>
+  <data name="survey_header_video" xml:space="preserve">
+    <value>Video Presentation</value>
+  </data>
+  <data name="survey_header_website" xml:space="preserve">
+    <value>Website Interface</value>
+  </data>
+  <data name="survey_question_clarity" xml:space="preserve">
+    <value>Clarity of Instructions</value>
+  </data>
+  <data name="survey_question_easeofuse" xml:space="preserve">
+    <value>Ease of Use</value>
+  </data>
+  <data name="survey_question_instructionalsupport" xml:space="preserve">
+    <value>Instructional support from TAs/Instructors</value>
+  </data>
+  <data name="survey_question_labels" xml:space="preserve">
+    <value>Clearly labeled pages</value>
+  </data>
+  <data name="survey_question_learningobjectives" xml:space="preserve">
+    <value>Was it driven from and helpful for course objectives?</value>
+  </data>
+  <data name="survey_question_lookandfeel" xml:space="preserve">
+    <value>Layout look and feel</value>
+  </data>
+  <data name="survey_question_qualityvalue" xml:space="preserve">
+    <value>Quality/Value</value>
+  </data>
+  <data name="survey_question_slidesqualityvalue" xml:space="preserve">
+    <value>Quality/Value of Slides</value>
+  </data>
+  <data name="survey_question_techsupport" xml:space="preserve">
+    <value>Technical Support</value>
+  </data>
+  <data name="survey_question_videoqualityvalue" xml:space="preserve">
+    <value>Quality/Value of Video</value>
+  </data>
+  <data name="survey_question_videotechnicalproblems" xml:space="preserve">
+    <value>Technical Problems (5 for no problems)</value>
+  </data>
+  <data name="survey_question_videotranscript" xml:space="preserve">
+    <value>Were the transcripts useful to you?</value>
+  </data>
+  <data name="survey_submitsurvey" xml:space="preserve">
+    <value>Submit Survey</value>
+  </data>
+  <data name="survey_thankyou" xml:space="preserve">
+    <value>Thank you for submitting the survey.</value>
   </data>
 </root>

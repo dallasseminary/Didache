@@ -257,13 +257,46 @@
 	margin: 0 0 0 40px;
 	overflow: hidden;
 }
-
+.turn-in-form form {
+	overflow: hidden;
+}
 	.turn-in-form textarea {
 		width: 513px;
-		height: 30px;
+		height: 50px;
 		border: solid 2px #ccc;
 		padding: 10px;
+		resize: none;
+		font-family: Helvetica, Arial;
 	}
+	.turn-in-form input[type=submit] {
+		float: right;
+	}	
+	.transparent-upload {
+	    position: relative;	
+	    float: left;
+	    width: 300px;
+	}
+	.turn-in-form .transparent-upload .choose-button {
+	    width: 100px;
+	    display: inline-block;
+	}
+	.turn-in-form .transparent-upload .file-input {
+	    width: 100px;
+	    height: 38px;	    
+		position: absolute;
+		top:0;
+		left:0;
+		display: block;
+		opacity: 0;	    
+	}	
+	
+	.turn-in-form .transparent-upload .file-name {
+	    display: inline-block;
+	    width: 180px;  
+	    margin: 2px;
+	}		
+	
+	/*
 	.transparent-upload {
 	    position: relative;	
 	}
@@ -280,9 +313,7 @@
 		display: block;
 		opacity: 0;
 	}	
-	.turn-in-form input[type=submit] {
-		float: right;
-	}		
+	*/	
 
 /* course archive, community index list */
 

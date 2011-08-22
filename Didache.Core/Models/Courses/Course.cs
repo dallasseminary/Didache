@@ -42,6 +42,8 @@ namespace Didache {
 		[Display(Name = "End Date")]
 		public DateTime EndDate { get; set; }
 
+		public int VersionNumber { get; set; }
+
 		//[Required]
 		[AllowHtml]
 		[DataType(DataType.MultilineText)]
@@ -52,7 +54,7 @@ namespace Didache {
 		public string Slug {
 			get {
 				if (Session != null) {
-					return (Session.SessionCode + "-" + CourseCode + Section).ToLower();
+					return (Session.SessionCode + Session.SessionYear + "-" + CourseCode + Section).ToLower();
 				}
 				else {
 					return CourseCode + Section;
@@ -142,6 +144,9 @@ namespace Didache {
 										.Where(cu => cu.CourseID == CourseID && cu.RoleID == (int)CourseUserRole.Faculty)
 										.Select(cu => cu.User)
 										.ToList();
+
+				faculty = faculty.Where(u => u != null).ToList();
+
 				switch (faculty.Count) {
 					case 0:
 						return "(no faculty member)";

@@ -20,5 +20,11 @@ namespace Didache {
 				return System.Configuration.ConfigurationManager.AppSettings["GradedFilesLocation"];
 			}
 		}
+
+		public static string PlayerFilesLocation {
+			get {
+				return System.Configuration.ConfigurationManager.AppSettings["PlayerFilesLocation"];
+			}
+		}
 	}
 }

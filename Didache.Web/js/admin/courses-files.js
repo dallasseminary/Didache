@@ -232,10 +232,11 @@
 
 	function updateFileRow(taskRow, file) {
 		taskRow.attr('data-fileid', file.FileID);
-		taskRow.find('.file-active').prop('checked', file.IsActive);
+		console.log(file.CourseFile.Title, file.IsActive);
+		taskRow.find('.file-active').prop('checked', (file.IsActive == 'True'));
 		taskRow.find('.file-type img').attr('src', '/css/images/' + file.CourseFile.FileType + '.png');
 		taskRow.find('.file-title').val(file.CourseFile.Title);
-		taskRow.find('.file-user').val((file.CourseFile.User && file.CourseFile.User.FullName) ? file.CourseFile.User.FullName : '');
+		taskRow.find('.file-user').val((file.CourseFile.User && file.CourseFile.User.FullName) ? file.CourseFile.User.FullName : 'no obj');
 		taskRow.find('.file-edit').attr('href', '/admin/courses/file/' + file.FileID);
 		taskRow.find('.file-delete').attr('href', '/admin/courses/deletefile/' + file.FileID);
 	}
@@ -249,22 +250,16 @@
 					Name: row.find('.group-name').val()
 				};
 
-		$.ajax({
-			url: '/admin/courses/UpdateCourseFileGroup/',
-			data: fileGroup,
-			type: 'POST',
-			success: function (d) {
-				if (d.success) {
-					console.log('saved file group');
-					row.effect("highlight");
-				} else {
-					console.log('error' + d.error)
-				}
-			},
-			error: function (d) {
-				console.log('error saving group', d, d.message, d.errors, d.model);
+		saveCourseFileGroup(fileGroup, function (d) {
+			if (d.success) {
+				console.log('saved file group');
+				row.effect("highlight");
+			} else {
+				console.log('error' + d.error)
 			}
 		});
+
+
 	});
 
 	// popup group edit
@@ -312,6 +307,44 @@
 		});
 	}
 
+	/// inline file edit edit
+	$('#course-file-groups').delegate('.coursefile input', 'change', function () {
+		var 
+				row = $(this).closest('.coursefile'),
+				fileAssociation = {
+					groupID: row.closest('.filegroup').data('groupid'),
+					fileID: row.data('fileid'),
+					title: row.find('.file-title').val(),
+					isActive: row.find('.file-active').prop('checked')
+				};
+
+		saveCourseFileAssociation(fileAssociation, function (d) {
+			if (d.success) {
+				console.log('saved file info', d);
+				row.effect("highlight");
+			} else {
+				console.log('error' + d.error)
+			}
+		});
+
+
+	});
+
+	function saveCourseFileAssociation(fileAssociation, callback) {
+		$.ajax({
+			type: 'POST',
+			url: '/admin/courses/UpdateCourseFileAssociation/',
+			data: fileAssociation,
+			success: function (d) {
+
+				//console.log('Saved group', d, callback);
+
+				if (callback)
+					callback(d);
+			}
+		});
+	}
+
 	function setupFileUploading(selector) {
 
 		console.log('uploads for ', selector);
@@ -322,8 +355,10 @@
 			},
 			initUpload: function (event, files, index, xhr, handler, callback) {
 
+				showLoading('Uploading file...');
+
 				// from the file input go up to the top element
-				var groupid = $(event.target).closest('.filegroup').data('groupid');
+				var groupid = $(this.dropZone).closest('.filegroup').data('groupid');
 
 				handler.formData = { groupid: groupid }; // JSON.stringify({ groupid: groupid });
 
@@ -333,6 +368,8 @@
 			},
 			onProgress: function (event, files, index, xhr, handler) {
 				var percent = parseInt(event.loaded / event.total * 100, 10);
+
+				showLoading('Uploading file...' + percent);
 
 				/*
 				handler
@@ -355,6 +392,8 @@
 				console.log(xhr, json);
 
 				renderFileRow(json, $(handler.dropZone).closest('.filegroup'));
+
+				hideLoading();
 
 				/*
 				// create node

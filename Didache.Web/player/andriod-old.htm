@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>HTML5 test</title>
+</head>
+<body>
+	<div id="output"></div>
+	
+<script>
+	var el = document.getElementById('output');
+	var v = document.createElement('video');
+	
+	el.innerHTML += 'userAgen ' + navigator.userAgent + '<br/>';
+	el.innerHTML += 'typeof(v.canPlayType) = ' + typeof(v.canPlayType) + '<br/>';
+	
+	if (typeof(v.canPlayType) != 'undefined') {
+		el.innerHTML += 'v.canPlayType("video/mp4") = ' + v.canPlayType("video/mp4") + '<br/>';
+		el.innerHTML += 'v.canPlayType("video/m4v") = ' + v.canPlayType("video/m4v") + '<br/>';
+		el.innerHTML += 'v.canPlayType("video/mp4; codecs="avc1.42E01E, mp4a.40.2"") = ' + v.canPlayType('video/mp4; codecs="avc1.42E01E, mp4a.40.2"') + '<br/>';
+		el.innerHTML += 'typeof(v.load) = ' + typeof(v.load) + '<br/>';
+		
+	}
+	
+
+</script>	
+</body>
+</html>

@@ -2,14 +2,17 @@
 
 <div class="page-header">
 	<h2>@Model.ToString()</h2>
+	<h3>@Model.Session.Name</h3>
 </div>
 
 <ul class="page-menu">
 	@foreach(var page in new[] {
-								new {Url="tasklist", Name="Task View"},
-								new {Url="studentlist", Name="Student View"}
+								new {Url="tasklist", Name="Task List"},
+								new {Url="studentlist", Name="Student List"}
 	}
 	) {
 		<li><a href="/grading/@Model.Slug/@page.Url/" @(Request.Url.ToString().Contains(page.Url) ? " class=selected" : "")>@page.Name</a></li>
  }
+
+ <li><a href="@Model.CourseUrl">View As Student</a></li>
 </ul>

@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<courses>
+
+  <course code="BC101v2">
+    <language code="en-US" name="Christian Counseling" />
+  </course>
+  <course code="BE101">
+    <language code="en-US" name="Bible Study Methods" />
+    <language code="zh-TW" name="Bible Study Methods" />
+    <language code="zh-CN" name="研经法" />
+  </course>
+  <course code="BE102">
+    <language code="en-US" name="Old Testament History I" />
+    <language code="zh-TW" name="舊約歷史 一" />
+    <language code="zh-CN" name="旧约历史 一   " />
+  </course>
+  <course code="BE103v2">
+    <language code="en-US" name="Old Testament History II and Poetry" />
+  </course>
+  <course code="BE104">
+    <language code="en-US" name="Old Testament Prophets" />
+  </course>
+  <course code="BE105v2">
+    <language code="en-US" name="Gospels" />
+  </course>
+  <course code="BE107">
+    <language code="en-US" name="Hebrews, General Epistles and Revelation" />
+    <language code="zh-TW" name="希伯來書、普通書信及啟示錄" />
+    <language code="zh-CN" name="希伯来书、普通书信及启示录" />
+  </course>
+  <course code="BE109">
+    <language code="en-US" name="Ruth, Psalms, Jonah, and Selected Epistles" />
+    <language code="zh-TW" name="路得記、詩篇、約拿書、特選書信" />
+    <language code="zh-CN" name="路得记、诗篇、约拿书、特选书信" />
+  </course>
+  <course code="BE510">
+    <language code="en-US" name="Life of Christ" />
+    <language code="zh-TW" name="Life of Christ" />
+    <language code="zh-CN" name="Life of Christ" />
+  </course>
+  <course code="BE547">
+    <language code="en-US" name="A Biblical Theology of Suffering, Disability, and the Church" />
+  </course>
+  <course code="CE102">
+    <language code="en-US" name="History and Philosophy of C.E." />
+    <language code="zh-TW" name="基督教教育的歷史與哲學" />
+    <language code="zh-CN" name="基督教教育的历史与哲学" />
+  </course>
+  <course code="CE310">
+    <language code="en-US" name="Christian Higher Education" />
+  </course>
+  <course code="NT101">
+    <language code="en-US" name="Elements of Greek" />
+  </course>
+  <course code="NT102">
+    <language code="en-US" name="Elements of Greek 2" />
+  </course>
+  <course code="NT102v2">
+    <language code="en-US" name="Elements of Greek 2" />
+  </course>
+  <course code="NT111">
+    <language code="en-US" name="New Testament Introduction" />
+  </course>
+  <course code="NT113">
+    <language code="en-US" name="New Testament Introduction" />
+  </course>
+  <course code="PM101">
+    <language code="en-US" name="Spiritual Life" />
+    <language code="zh-TW" name="屬靈生命" />
+    <language code="zh-CN" name="属灵生命" />
+  </course>
+  <course code="PM101v2">
+    <language code="en-US" name="Spiritual Life" />
+  </course>
+  <course code="PM102">
+    <language code="en-US" name="Evangelism" />
+  </course>
+  <course code="PM103">
+    <language code="en-US" name="Expository Preaching 1" />
+  </course>
+  <course code="RS101v2">
+    <language code="en-US" name="Research Methods" />
+    <language code="zh-TW" name="研究方法" />
+    <language code="zh-CN" name="研究方法" />
+  </course>
+  <course code="SF101">
+    <language code="en-US" name="Spiritual Formation" />
+  </course>
+  <course code="SL305">
+    <language code="en-US" name="Leadership" />
+  </course>
+  <course code="SL999">
+    <language code="en-US" name="Servant Leadership Internship" />
+  </course>
+  <course code="ST101">
+    <language code="en-US" name="Introduction to Theology" />
+    <language code="zh-TW" name="神學槪論" />
+    <language code="zh-CN" name="神学概论" />
+  </course>
+  <course code="ST102">
+    <language code="en-US" name="Trinitarianism" />
+    <language code="zh-TW" name="三一神論" />
+    <language code="zh-CN" name="叁一神论" />
+  </course>
+  <course code="ST103">
+    <language code="en-US" name="Angelology, Anthropology, and Hamartiology" />
+    <language code="zh-TW" name="天使論、人論和罪論" />
+    <language code="zh-CN" name="天使论、人论和罪论" />
+  </course>
+  <course code="ST104">
+    <language code="en-US" name="Soteriology" />
+  </course>
+  <course code="WM101">
+    <language code="en-US" name="World Missions" />
+    <language code="zh-TW" name="世界宣教概論" />
+    <language code="zh-CN" name="世界宣教概论" />
+  </course>
+</courses>

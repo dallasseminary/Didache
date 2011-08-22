@@ -1,7 +1,7 @@
 ﻿@model Course
 
 @{
-	ViewBag.Title = Model.CourseCode + Model.Section + " " + Resources.labels.courses_heading_courseroster;
+	ViewBag.Title = Model.CourseCode + Model.Section + " " + Didache.Resources.labels.courses_heading_courseroster;
     List<CourseUserGroup> groups = ViewBag.UserGroups;
 }
 
@@ -13,7 +13,7 @@
 
 	<div class="full-column">
 		@* 
-		<div class="block-list-header"><h3>@Resources.labels.courses_heading_courseroster</h3></div>
+		<div class="block-list-header"><h3>@Didache.Resources.labels.courses_heading_courseroster</h3></div>
 		*@
 
 		<div id="course-roster" class="block-list">

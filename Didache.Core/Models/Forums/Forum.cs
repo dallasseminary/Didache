@@ -22,6 +22,10 @@ namespace Didache {
 		[Required]
 		public string Description { get; set; }
 
+		public int SortOrder { get; set;}
+		public int TotalThreads { get; set; }
+		public int TotalPosts	 { get; set;}
+
 		public virtual Course Course { get; set; }
 		public virtual ICollection<Thread> Threads { get; set; }
 	}

@@ -1,6 +1,6 @@
 ﻿@model Course
 @{
-	ViewBag.Title = Model.CourseCode + Model.Section + " " + Resources.labels.courses_heading_coursefiles;
+	ViewBag.Title = Model.CourseCode + Model.Section + " " + Didache.Resources.labels.courses_heading_coursefiles;
 }
 
 <div class="page-wide page-split">
@@ -38,14 +38,14 @@
 		
 		<div class="sub-column-padding">
 
-			<h3>@Resources.labels.labels_dashboard_keydownloads</h3>
+			<h3>@Didache.Resources.labels.labels_dashboard_keydownloads</h3>
 		
 			@{ CourseFileAssociation syllabus = new DidacheDb().CourseFileAssociations.Where(cfa => cfa.CourseFileGroup.CourseID == Model.CourseID && cfa.CourseFile.Title.Contains("Syllabus")).FirstOrDefault();}
 			@if (syllabus != null) {
-				<a class="d-button" href="@syllabus.CourseFile.FileUrl">@Resources.labels.labels_dashboard_syllabus</a>
+				<a class="d-button" href="@syllabus.CourseFile.FileUrl">@Didache.Resources.labels.labels_dashboard_syllabus</a>
 			}
 
-			<a class="d-button" href="/courses/downloadall/@(Model.Slug).zip">@Resources.labels.labels_dashboard_downloadallfiles</a>
+			<a class="d-button" href="/courses/downloadall/@(Model.Slug).zip">@Didache.Resources.labels.labels_dashboard_downloadallfiles</a>
 		</div>
 	</div>
 

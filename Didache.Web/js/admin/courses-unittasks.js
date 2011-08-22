@@ -191,7 +191,9 @@
 				$('<div class="course-unit nested-item">' +
 					'<div class="unit-header nested-item-row">' +
 						'<span class="unit-drag-handle drag-handle"></span>' +
+
 						'<span class="name">' +
+							'<span class="unit-sortorder">##</span>' +
 							'<input type="checkbox" class="unit-active"  />' +
 							'<input type="text" class="unit-name" value=""  placeholder="name" />' +
 						'</span>' +
@@ -220,7 +222,7 @@
 	function updateUnitRow(unitRow, unit) {
 		//unitRow.data('unitid', unit.UnitID);
 		unitRow.attr('data-unitid', unit.UnitID);
-		unitRow.find('.unit-active').prop('checked', unit.IsActive);
+		unitRow.find('.unit-active').prop('checked', (unit.IsActive == 'True') );
 		unitRow.find('.unit-name').val(unit.Name);
 		unitRow.find('.unit-start-date').val(unit.StartDate == null ? '' : unit.StartDate.replace(' 12:00:00 AM', ''));
 		unitRow.find('.unit-end-date').val(unit.EndDate == null ? '' : unit.EndDate.replace(' 12:00:00 AM', ''));
@@ -233,8 +235,10 @@
 		var taskRow = $(
 			'<div class="course-task nested-child-item">' +
 				'<span class="task-drag-handle drag-handle"></span>' +
+
                 '<span class="name">' +
-				    '<input type="checkbox" class="task-active"  />' +
+				    '<span class="task-sortorder">##</span>' +
+					'<input type="checkbox" class="task-active"  />' +
 				    '<input type="text" class="task-name" value=""  placeholder="name" />' +
                 '</span>' +
 		//'<span>'+
@@ -256,7 +260,7 @@
 	function updateTaskRow(taskRow, task) {
 		//taskRow.data('taskid', task.TaskID);
 		taskRow.attr('data-taskid', task.TaskID);
-		taskRow.find('.task-active').prop('checked', task.IsActive);
+		taskRow.find('.task-active').prop('checked', (task.IsActive == 'True') );
 		taskRow.find('.task-type').html(task.TaskTypeName);
 		taskRow.find('.task-name').val(task.Name);
 		taskRow.find('.task-due-date').val((task.DueDate != null) ? task.DueDate.replace(' 12:00:00 AM', '') : '');
@@ -268,6 +272,18 @@
 
 
 	// SORTING
+	function updateUnitAndTaskNumbers() {
+
+		$('.course-unit').each(function (i, el) {
+
+			$(this).find('.unit-sortorder').html(i + 1);
+
+			$(this).find('.course-task').each(function (j, el) {
+				$(this).find('.task-sortorder').html(j + 1);
+			});
+		});
+	}
+
 	// sort units
 	function setupUnitAndTaskSorting() {
 		$('#course-units').sortable('destroy').sortable({
@@ -278,6 +294,9 @@
 			},
 			start: cancelSaveOrder
 		}); //.disableSelection();
+
+		updateUnitAndTaskNumbers();
+
 
 		// sort tasks
 		$('.course-tasks').sortable('destroy').sortable({
@@ -305,6 +324,8 @@
 		function saveOrderChanges() {
 
 			cancelSaveOrder();
+
+			showLoading('Saving order');
 
 			var 
 				unitArray = [],
@@ -349,9 +370,15 @@
 				success: function (d) {
 					if (d.success) {
 						console.log('saved order')
+
+						hideLoading();
+
+						updateUnitAndTaskNumbers();
 					} else {
 						console.log('error' + d.error)
 					}
+
+
 				},
 				error: function (d) {
 					console.log('error saving order')
@@ -366,6 +393,7 @@
 				row = $(this).closest('.course-task'),
 				task = {
 					TaskID: row.data('taskid'),
+					IsActive: row.find('.task-active').prop('checked'),
 					Name: row.find('.task-name').val(),
 					DueDate: row.find('.task-due-date').val()
 				};
@@ -395,6 +423,7 @@
 				row = $(this).closest('.unit-header'),
 				unit = {
 					UnitID: row.closest('.course-unit').data('unitid'),
+					IsActive: row.find('.unit-active').prop('checked'),
 					Name: row.find('.unit-name').val(),
 					StartDate: row.find('.unit-start-date').val(),
 					EndDate: row.find('.unit-end-date').val()

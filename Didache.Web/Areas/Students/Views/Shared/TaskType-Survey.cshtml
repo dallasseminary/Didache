@@ -1,3 +1,276 @@
 ﻿@model Didache.UserTaskData
+		   	
+@helper CreateFivePointRating(string name) {
+	<text>
+		<fieldset>
+			<span>
+				<label for="@(name)_na">N/A</label>
+				<input type="radio" id="@(name)_na" name="@name" value="-1" class="required" />
+			</span>
+			<span>
+				<label for="@(name)_1">1</label>
+				<input type="radio" id="@(name)_1" name="@name" value="1"  />
+			</span>
+			<span>
+				<label for="@(name)_2">2</label>
+				<input type="radio" id="@(name)_2" name="@name" value="2"  />
+			</span>
+			<span>
+				<label for="@(name)_3">3</label>
+				<input type="radio" id="@(name)_3" name="@name" value="3" />
+			</span>
+			<span>
+				<label for="@(name)_4">4</label>
+				<input type="radio" id="@(name)_4" name="@name" value="4"  />
+			</span>
+			<span>
+				<label for="@(name)_5">5</label>
+				<input type="radio" id="@(name)_5" name="@name" value="5"  />
+			</span>
+		</fieldset>
+	</text>
+}	
 
-SURVEY!!
+@if (Model.TaskCompletionStatus == TaskCompletionStatus.Completed) {
+	@Didache.Resources.labels.survey_thankyou
+}
+else {
+	
+<style>
+.survey-group {
+	border: solid 10px #EEE;
+	padding: 15px;
+	overflow: hidden;
+}
+.survey-group h5 {
+	font-weight: bold;
+	font-size: 13px;
+	color: #666;
+	margin: 20px 0 0 0;
+}
+.survey-group table {
+	width: 100%;
+	border-collapse: collapse;
+}
+.survey-group th, .survey-group td {
+	padding: 0 4px;
+	font-size: 11px;
+}
+.survey-group th {
+	text-align: left;
+	font-weight: bold;
+	padding-top: 5px;
+}
+.survey-group td.label {
+	padding-left: 15px;
+}
+.survey-group td.survey-input {
+	text-align: right;
+	width: 260px;
+}
+.survey-group td.survey-input span {
+	display: inline-block;
+	margin: 0 0 0 6px ;
+}
+.survey-group textarea {
+	width: 520px;
+	height: 80px;
+	resize: none;
+	margin: 0 0 20px 0;
+}
+
+.survey-group .d-button {
+	float: right;
+}
+.survey-group .input-validation-error {
+	outline: dotted 1px #ff0000;
+}
+.survey-group .input-validation-error:focus {
+	outline: dotted 1px #ff0000;
+}
+.survey-group .error {
+	background: pink;
+}
+</style>
+
+	
+<p>@Didache.Resources.labels.survey_header_instructions</p>
+	
+<form action="/courses/api/SubmitUnitSurvey/@Model.TaskID" method="post">
+	
+	<input type="hidden" name="UnitID" value="@Model.UnitID" />
+	<input type="hidden" name="CourseID" value="@Model.CourseID" />
+		
+	<div class="survey-group">
+		<h5>@Didache.Resources.labels.survey_header_tasks</h5>
+
+		<table>
+			<tr>
+				<th colspan="2">@Didache.Resources.labels.survey_header_devotional</th>				
+			</tr>
+			<tr>
+				<td class="label">@Didache.Resources.labels.survey_question_qualityvalue</td>
+				<td class="survey-input">
+					@CreateFivePointRating("DevoValue")
+				</td>
+			</tr>
+
+			<tr>
+				<th colspan="2">@Didache.Resources.labels.survey_header_reading</th>				
+			</tr>
+			<tr>
+				<td class="label">@Didache.Resources.labels.survey_question_qualityvalue</td>
+				<td class="survey-input">
+					@CreateFivePointRating("ReadingValue")
+				</td>
+			</tr>
+			<tr>
+				<td class="label">@Didache.Resources.labels.survey_question_clarity</td>
+				<td class="survey-input">
+					@CreateFivePointRating("ReadingClarity")
+				</td>
+			</tr>
+
+			<tr>
+				<th colspan="2">@Didache.Resources.labels.survey_header_video</th>				
+			</tr>
+			<tr>
+				<td class="label">@Didache.Resources.labels.survey_question_clarity</td>
+				<td class="survey-input">
+					@CreateFivePointRating("VideoClarity")
+				</td>
+			</tr>
+			<tr>
+				<td class="label">@Didache.Resources.labels.survey_question_videotechnicalproblems</td>
+				<td class="survey-input">
+					@CreateFivePointRating("VideoTechnical")
+				</td>
+			</tr>
+			<tr>
+				<td class="label">@Didache.Resources.labels.survey_question_videoqualityvalue</td>
+				<td class="survey-input">
+					@CreateFivePointRating("VideoSlidesValue")
+				</td>
+			</tr>
+			<tr>
+				<td class="label">@Didache.Resources.labels.survey_question_slidesqualityvalue</td>
+				<td class="survey-input">
+					@CreateFivePointRating("VideoValue")
+				</td>
+			</tr>
+			<tr>
+				<td class="label">@Didache.Resources.labels.survey_question_videotranscript</td>
+				<td class="survey-input">
+
+					<span>
+						<label for="VideoTranscripts_no">No</label>
+						<input type="radio" id="VideoTranscripts_no" name="VideoTranscripts" value="0" />
+					</span>
+					<span>
+						<label for="VideoTranscripts_yes">Yes</label>
+						<input type="radio" id="VideoTranscripts_yes" name="VideoTranscripts" value="1" />
+					</span>
+				</td>
+			</tr>
+
+			<tr>
+				<th colspan="2">@Didache.Resources.labels.survey_header_learningactivity</th>				
+			</tr>
+			<tr>
+				<td class="label">@Didache.Resources.labels.survey_question_qualityvalue</td>
+				<td class="survey-input">
+					@CreateFivePointRating("LearningValue")
+				</td>
+			</tr>
+			<tr>
+				<td class="label">@Didache.Resources.labels.survey_question_clarity</td>
+				<td class="survey-input">
+					@CreateFivePointRating("LearningClarity")
+				</td>
+			</tr>
+			<tr>
+				<td class="label">@Didache.Resources.labels.survey_question_learningobjectives</td>
+				<td class="survey-input">
+					@CreateFivePointRating("LearningDriven")
+				</td>
+			</tr>
+
+			<tr>
+				<th colspan="2">@Didache.Resources.labels.survey_header_classinteraction</th>				
+			</tr>
+			<tr>
+				<td class="label">@Didache.Resources.labels.survey_question_qualityvalue</td>
+				<td class="survey-input">
+					@CreateFivePointRating("InteractionValue")
+				</td>
+			</tr>
+			<tr>
+				<td class="label">@Didache.Resources.labels.survey_question_clarity</td>
+				<td class="survey-input">
+					@CreateFivePointRating("InteractionClarity")
+				</td>
+			</tr>
+
+		</table>
+
+		<h5>@Didache.Resources.labels.survey_header_website</h5>
+
+		<table>
+
+			<tr>
+				<th colspan="2">@Didache.Resources.labels.survey_header_navigation</th>				
+			</tr>
+			<tr>
+				<td class="label">@Didache.Resources.labels.survey_question_lookandfeel</td>
+				<td class="survey-input">
+					@CreateFivePointRating("NavigationLayout")
+				</td>
+			</tr>
+			<tr>
+				<td class="label">@Didache.Resources.labels.survey_question_easeofuse</td>
+				<td class="survey-input">
+					@CreateFivePointRating("NavigationEase")
+				</td>
+			</tr>
+			<tr>
+				<td class="label">@Didache.Resources.labels.survey_question_labels</td>
+				<td class="survey-input">
+					@CreateFivePointRating("NavigationLabels")
+				</td>
+			</tr>
+
+			<tr>
+				<th colspan="2">@Didache.Resources.labels.survey_header_service</th>				
+			</tr>
+			<tr>
+				<td class="label">@Didache.Resources.labels.survey_question_instructionalsupport</td>
+				<td class="survey-input">
+					@CreateFivePointRating("ServiceFacilitators")
+				</td>
+			</tr>
+			<tr>
+				<td class="label">@Didache.Resources.labels.survey_question_techsupport</td>
+				<td class="survey-input">
+					@CreateFivePointRating("ServiceTechnical")
+				</td>
+			</tr>
+		</table>
+
+		<h5>@Didache.Resources.labels.survey_header_comments</h5>
+
+		<p>@Didache.Resources.labels.survey_header_comments_desc</p>
+
+		<textarea id="Comments" name="Comments"></textarea>
+
+		<p>@Didache.Resources.labels.survey_footer</p>
+
+
+		<input type="submit" value="@Didache.Resources.labels.survey_submitsurvey" class="d-button action" />
+
+	</div>
+
+	
+
+</form>
+	
+}

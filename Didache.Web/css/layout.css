@@ -84,7 +84,7 @@ a {
     border-radius: 2px;
 }
 select#language {
-    width: 225px;
+    width: 200px;
     border: none;
     padding: 5px;
     background: transparent;  
@@ -440,6 +440,20 @@ select#language {
 .user-profile td.security-setting {
 	width: 100px;
 }
+.profile-constituencies {
+	margin: 0 0 10px;
+}
+
+.profile-constituency {
+	display: inline-block;
+	border: solid 1px #bbb;
+	background: #eee;
+	padding: 2px 5px;
+	font-size: 12px;
+	margin: 0 5px 0 0;
+}
+
+
 #edit-profile .sub-column label {
     color: transparent;
     width: 0;
@@ -677,4 +691,10 @@ select#language {
 }
 .user-unit-grades .overdue {
 	color: red;
+}
+
+
+/* student submissions */
+.input-validation-error {
+	background: #f2a9a9;
 }

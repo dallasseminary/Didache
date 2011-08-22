@@ -3,55 +3,68 @@ Didache.TaskTypes = [];
 
 jQuery(document).ready(function ($) {
 
-    // shorten task descriptions
-    $('.task-instructions-text').expander({
-        slicePoint: 1000
+	// turn in files
+	$(".transparent-upload input[type=file]").change(function () {
+
+		var fileInput = $(this),
+				filename = fileInput.val();
+
+		if (filename.indexOf('\\') > -1)
+			filename = filename.substring(filename.lastIndexOf('\\') + 1);
+
+		fileInput.siblings('.file-name').html(filename);
+
+	});
+
+	// shorten task descriptions
+	$('.task-instructions-text').expander({
+		slicePoint: 1000
 		, widow: 2
-        //,expandEffect: 'show'
+		//,expandEffect: 'show'
 		, expandText: 'more »'
-        //, userCollapse: false
+		//, userCollapse: false
 		, userCollapseText: '« less'
-    });
+	});
 
 
-    // shorten task descriptions
-    $('.task-instructions-completed').expander({
-        slicePoint: 0
+	// shorten task descriptions
+	$('.task-instructions-completed').expander({
+		slicePoint: 0
 		, widow: 2
-        //,expandEffect: 'show'
+		//,expandEffect: 'show'
 		, expandText: 'show instructions »'
-        //, userCollapse: false
+		//, userCollapse: false
 		, userCollapseText: '« hide'
-    });
+	});
 
 
-    // get all task types
-    $('div.task-entry').each(function () {
+	// get all task types
+	$('div.task-entry').each(function () {
 
-        // hook up 
-        var taskNode = $(this),
+		// hook up 
+		var taskNode = $(this),
 			taskID = $(this).data('taskid'),
 			taskType = $(this).data('tasktype'),
 			typeFunction = Didache.TaskTypes[taskType];
 
-        if (typeFunction != null) {
-            typeFunction(taskID, taskNode);
-        }
+		if (typeFunction != null) {
+			typeFunction(taskID, taskNode);
+		}
 
-    });
+	});
 
 
-    // interactions stuff
+	// interactions stuff
 
-    var urlHash = self.document.location.hash.substring(1);
-    if (urlHash) { 
+	var urlHash = self.document.location.hash.substring(1);
+	if (urlHash) {
 		$('div.task-interaction-thread[id=' + urlHash + ']')
 			.find('.task-interaction-list')
 				.slideDown()
 			.end()
 			.find('.task-interaction-main .task-interaction-text')
-				.fadeIn();		
-		
+				.fadeIn();
+
 	}
 
 	// open/close threads
@@ -79,30 +92,30 @@ jQuery(document).ready(function ($) {
 				.slideUp();
 	});
 
-    // do reply
-    $('div.task-interaction input.reply-button').click(function () {
+	// do reply
+	$('div.task-interaction input.reply-button').click(function () {
 
-        var button = $(this).prop('disabled', true),
+		var button = $(this).prop('disabled', true),
 				taskID = button.closest('.task-entry').data('taskid'),
 				text = button.closest('.add-reply').find('textarea').prop('disabled', true).val(),
 				threadID = button.closest('.task-interaction-thread').data('threadid');
 
-        showLoading('Saving...');
+		showLoading('Saving...');
 
-        $.ajax({
-            url: '/courses/api/interactionreply',
-            type: 'POST',
-            data: {
-                text: text,
-                taskID: taskID,
-                threadID: threadID
-            },
-            success: function (d) {
+		$.ajax({
+			url: '/courses/api/interactionreply',
+			type: 'POST',
+			data: {
+				text: text,
+				taskID: taskID,
+				threadID: threadID
+			},
+			success: function (d) {
 
-                if (d.success) {
-                    // create response
-                    var target = button.closest('.add-reply');
-                    $('<div class="task-interaction-post">' +
+				if (d.success) {
+					// create response
+					var target = button.closest('.add-reply');
+					$('<div class="task-interaction-post">' +
 
 						'<div class="task-interaction-userimage">' +
 							'<a href="' + d.user.ProfileUrl + '">' +
@@ -121,34 +134,34 @@ jQuery(document).ready(function ($) {
 
 					'</div>').insertBefore(target);
 
-                    // increase reply count
+					// increase reply count
 					/*
-                    var replies = button.closest('.task-interaction').find('.total-replies'),
-							count = parseInt(replies.html(), 10);
+					var replies = button.closest('.task-interaction').find('.total-replies'),
+					count = parseInt(replies.html(), 10);
 
-                    replies.html((count + 1).toString());
+					replies.html((count + 1).toString());
 					*/
 
-                    // clean up
-                    button.closest('.add-reply').find('textarea').prop('disabled', false).val('');
-                    button.prop('disabled', false);
+					// clean up
+					button.closest('.add-reply').find('textarea').prop('disabled', false).val('');
+					button.prop('disabled', false);
 
-                    // set status
-                    if (d.isCompleted) {
-                        setTaskStatus(taskID, 1);
-                    }
+					// set status
+					if (d.isCompleted) {
+						setTaskStatus(taskID, 1);
+					}
 
-                    hideLoading();
+					hideLoading();
 
-                } else {
-                    alert('there was an error posting');
-                    console.log(d);
-                }
-            }
-        });
+				} else {
+					alert('there was an error posting');
+					console.log(d);
+				}
+			}
+		});
 
 
-    });
+	});
 
 });
 

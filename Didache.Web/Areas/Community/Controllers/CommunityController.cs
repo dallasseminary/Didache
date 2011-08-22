@@ -6,10 +6,15 @@ using System.Web.Mvc;
 
 namespace Didache.Web.Areas.Community.Controllers
 {
+	[Authorize]
     public class CommunityController : Controller
     {
         //
         // GET: /Profiles/Profiles/
+
+		DidacheDb db = new DidacheDb();
+
+
 
         public ActionResult Index()
         {
@@ -28,6 +33,10 @@ namespace Didache.Web.Areas.Community.Controllers
 			} else {
 				user = Users.GetUser(name);
 			}
+
+			ViewBag.Student = db.Students.Find(user.UserID);
+			ViewBag.Degrees = db.Degrees.Where(d => d.UserID == user.UserID).ToList();
+			ViewBag.Employees = db.Employees.Where(d => d.UserID == user.UserID).ToList();
 
 			return View(user);
 		}

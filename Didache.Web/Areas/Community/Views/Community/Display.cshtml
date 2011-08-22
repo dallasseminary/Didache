@@ -15,19 +15,45 @@
 		<div class="page-header">
 			<h2>@Model.SecureName</h2>
 			<h3>@Model.Country</h3>
+
 			@if (Model.UserID == Users.GetLoggedInUser().UserID) {
 				<div class="actions">
-				<a class="d-button edit" href="/account/editprofile">@Resources.labels.profile_edit_button</a>
+				<a class="d-button edit" href="/account/editprofile">@Didache.Resources.labels.profile_edit_button</a>
 				</div>
 			}
 		</div>
 
-		<h4>@Resources.labels.profile_heading_contactinfo</h4>
+		<div class="profile-constituencies">
+				@if (ViewBag.Degrees != null && ViewBag.Degrees.Count > 0) {
+					<div class="profile-constituency">
+					@Didache.Resources.labels.profile_constituency_alumni<text>:</text>
+					@Html.Raw(String.Join(", ", ((List<Degree>)ViewBag.Degrees).Select(d => d.DegreeEarned + " (" + d.GradYear.ToString() + ")").ToArray()))
+					</div>
+				}
+				@if (ViewBag.Student != null) {
+					<div class="profile-constituency">
+					@Didache.Resources.labels.profile_constituency_student<text>:</text>
+					
+					@(((Student)ViewBag.Student).Degree)
+					<!-- @(((Student)ViewBag.Student).Campus)<text>,</text> -->
+					@(ViewBag.Student.PlannedGradYear > 0 ? ", " + ViewBag.Student.PlannedGradYear: "")
+					</div>
+				}
+				@if (ViewBag.Employees != null && ViewBag.Employees.Count > 0) {
+					<div class="profile-constituency">
+					@Didache.Resources.labels.profile_constituency_staff
+					</div>
+				}
+			</div>
+				
+
+
+		<h4>@Didache.Resources.labels.profile_heading_contactinfo</h4>
 
 		<table class="user-profile">			
 			<tr>
 				<th>
-					@Resources.labels.profile_label_email
+					@Didache.Resources.labels.profile_label_email
 				</th>
 				<td>
 					@if (Users.HasPermission(Model.UserID, Model.EmailSecuritySetting)) {
@@ -35,9 +61,10 @@
 					}
 				</td>
 			</tr>
+			@*
 			<tr>
 				<th>
-					@Resources.labels.profile_label_phone
+					@Didache.Resources.labels.profile_label_phone
 				</th>
 				<td>
 					@if (Users.HasPermission(Model.UserID, Model.PhoneSecuritySetting)) {
@@ -45,9 +72,10 @@
 					}
 				</td>
 			</tr>
+			
 			<tr>
 				<th>
-					@Resources.labels.profile_label_address
+					@Didache.Resources.labels.profile_label_address
 				</th>
 				<td>
 					@if (Users.HasPermission(Model.UserID, Model.AddressSecuritySetting)) {
@@ -58,15 +86,17 @@
 					}
 				</td>
 			</tr>
+			*@
 		</table>
 
 
-		<h4>@Resources.labels.profile_heading_personalinfo</h4>
+		<h4>@Didache.Resources.labels.profile_heading_personalinfo</h4>
 
 		<table class="user-profile">
+			@*
 			<tr>
 				<th>
-					@Resources.labels.profile_label_birthday
+					@Didache.Resources.labels.profile_label_birthday
 				</th>
 				<td>
 					@(Model.BirthDate.HasValue ? Model.BirthDate.Value.ToString("MMMM d") : "")
@@ -75,16 +105,17 @@
 			@if (!Model.Hometown.IsEmpty()) {
 			<tr>
 				<th>
-					@Resources.labels.profile_label_hometown
+					@Didache.Resources.labels.profile_label_hometown
 				</th>
 				<td>
 					@Model.Hometown
 				</td>
 			</tr>
-			}		
+			}
+			*@	
 			<tr>
 				<th>
-					@Resources.labels.profile_label_biography
+					@Didache.Resources.labels.profile_label_biography
 				</th>
 				<td>
 					@Model.Bio
@@ -96,7 +127,7 @@
 	</div>
 	<div class="sub-column">
 	
-		<h3>@Resources.labels.profile_heading_socialmedia</h3>
+		<h3>@Didache.Resources.labels.profile_heading_socialmedia</h3>
 		<ul>
 		
 			@if (!Model.Facebook.IsEmpty()) {<li><a href="http://facebook.com/@Model.Facebook">facebook.com/@Model.Facebook</a></li>}

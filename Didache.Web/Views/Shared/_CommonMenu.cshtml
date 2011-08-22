@@ -1,20 +1,20 @@
 ﻿<div id="common-menu">
 	<div id="common-wrapper">
 		<div id="site-list">				
-			<a href="http://www.dts.edu/">@Resources.labels.commonmenu_dtswebsite</a>
-			<a href="http://library.dts.edu/">@Resources.labels.commonmenu_library</a>
-			<a href="http://bookcenter.dts.edu/">@Resources.labels.commonmenu_bookcenter</a>
-			<a href="http://campus.dts.edu/">@Resources.labels.commonmenu_campusnet</a>
-			<a href="http://alumni.dts.edu/">@Resources.labels.commonmenu_alumni</a>				
-			<a href="http://@Request.Url.Host/" class="selected">@Resources.labels.commonmenu_onlineed</a>
+			<a href="http://www.dts.edu/">@Didache.Resources.labels.commonmenu_dtswebsite</a>
+			<a href="http://library.dts.edu/">@Didache.Resources.labels.commonmenu_library</a>
+			<a href="http://bookcenter.dts.edu/">@Didache.Resources.labels.commonmenu_bookcenter</a>
+			<a href="http://alumni.dts.edu/">@Didache.Resources.labels.commonmenu_alumni</a>
+			<a href="http://campus.dts.edu/">@Didache.Resources.labels.commonmenu_campusnet</a>			
+			<a href="http://@Request.Url.Host/" class="selected">@Didache.Resources.labels.commonmenu_onlineed</a>
 		</div>
 		<div id="account-info">				
 @if (Request.IsAuthenticated) {	
 			<span class="user">@Users.GetLoggedInUser().FormattedName</span>
-			<a href="@Users.GetLoggedInUser().ProfileDisplayUrl">@Resources.labels.tabs_profile</a>
-			<a href="/account/logout">@Resources.labels.login_logout</a>
+			<a href="@Users.GetLoggedInUser().ProfileDisplayUrl">@Didache.Resources.labels.tabs_profile</a>
+			<a href="/account/logout">@Didache.Resources.labels.login_logout</a>
 } else {	
-			<a href="/account/login">@Resources.labels.login_login</a>
+			<a href="/account/login">@Didache.Resources.labels.login_login</a>
 }	
 		</div>
 	</div>

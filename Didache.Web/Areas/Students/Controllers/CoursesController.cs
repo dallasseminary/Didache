@@ -9,6 +9,7 @@ using Ionic.Zip;
 
 namespace Didache.Web.Areas.Students.Controllers
 {
+	[Authorize]
     public class CoursesController : Controller
     {
 		DidacheDb db = new DidacheDb();
@@ -127,7 +128,10 @@ namespace Didache.Web.Areas.Students.Controllers
 										.Include("Task.Unit")
 										.Include("StudentFile")
 										.Include("GradedFile")
-										.Where(ut => ut.UserID == user.UserID && ut.CourseID == course.CourseID).ToList();
+										.Where(ut => ut.UserID == user.UserID && ut.CourseID == course.CourseID)
+										.OrderBy(ut => ut.Unit.SortOrder)
+											.ThenBy(ut => ut.Task.SortOrder)
+										.ToList();
 
 
 			return View(course);
@@ -138,14 +142,15 @@ namespace Didache.Web.Areas.Students.Controllers
 			
 			CourseFile file = new DidacheDb().CourseFiles.Find(id);
 
-			string basePath = System.Configuration.ConfigurationManager.AppSettings["CourseFilesLocation"];
-			string path = System.IO.Path.Combine(basePath, file.Filename);
+			//string basePath = Settings.CourseFilesLocation;
+			//string path = System.IO.Path.Combine(basePath, file.Filename);
+			string path = file.PhysicalPath;
 
 			if (System.IO.File.Exists(path)) {
 
-				return File(path, file.ContentType);
+				return File(path, file.ContentType);	
 			} else {
-				return HttpNotFound("Cannot find: " + file.Filename);
+				return HttpNotFound("Cannot find: " + file.Filename + " at " + file.PhysicalPath);
 			}
 		}
 
@@ -196,7 +201,8 @@ namespace Didache.Web.Areas.Students.Controllers
 
 					if (System.IO.File.Exists(cfa.CourseFile.PhysicalPath)) {
 
-						ZipEntry entry = zip.AddFile(cfa.CourseFile.PhysicalPath);
+						ZipEntry entry = zip.AddFile(cfa.CourseFile.PhysicalPath, "");
+						entry.FileName = cfa.CourseFile.Filename;
 					}
 				}
 			}
@@ -387,39 +393,4 @@ namespace Didache.Web.Areas.Students.Controllers
     }
 
 
-	public class SyndicationResult : ActionResult {
-		public SyndicationFeed Feed { get; set; }
-		public string Type { get; set; }
-
-		public SyndicationResult() { }
-
-		public SyndicationResult(SyndicationFeed feed, string type) {
-			this.Feed = feed;
-			this.Type = type;
-		}
-
-		public override void ExecuteResult(ControllerContext context) {
-
-			SyndicationFeedFormatter formatter = null;
-
-			switch (Type) {
-				default:
-				case "rss":
-					context.HttpContext.Response.ContentType = "application/rss+xml";
-					formatter = new Rss20FeedFormatter(this.Feed);
-
-
-					break;
-				case "atom":
-					context.HttpContext.Response.ContentType = "application/atom+xml";
-					formatter = new Atom10FeedFormatter(this.Feed);
-
-					break;
-			}
-
-			using (XmlWriter writer = XmlWriter.Create(context.HttpContext.Response.Output)) {
-				formatter.WriteTo(writer);
-			}
-		}
-	}
 }

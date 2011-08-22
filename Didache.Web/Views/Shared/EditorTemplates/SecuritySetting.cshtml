@@ -1,7 +1,7 @@
 ﻿@model UserSecuritySetting
 
 <select name="@ViewData.TemplateInfo.HtmlFieldPrefix">
-	<option value="@((int)UserSecuritySetting.Public)"@(Model == UserSecuritySetting.Public ? " selected=selected" : "")>@Resources.labels.profile_security_all</option>
-	<option value="@((int)UserSecuritySetting.Friends)"@(Model == UserSecuritySetting.Friends ? " selected=selected" : "")>@Resources.labels.profile_security_friends</option>
-	<option value="@((int)UserSecuritySetting.Private)"@(Model == UserSecuritySetting.Private ? " selected=selected" : "")>@Resources.labels.profile_security_private</option>
+	<option value="@((int)UserSecuritySetting.Public)"@(Model == UserSecuritySetting.Public ? " selected=selected" : "")>@Didache.Resources.labels.profile_security_all</option>
+	<option value="@((int)UserSecuritySetting.Friends)"@(Model == UserSecuritySetting.Friends ? " selected=selected" : "")>@Didache.Resources.labels.profile_security_friends</option>
+	<option value="@((int)UserSecuritySetting.Private)"@(Model == UserSecuritySetting.Private ? " selected=selected" : "")>@Didache.Resources.labels.profile_security_private</option>
 </select>

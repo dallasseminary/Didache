@@ -3,26 +3,30 @@
 	ViewBag.Title = ViewBag.Course.ToString() + " Forums";
 }
 
+<div class="page-wide">
+
 @Html.Partial("_CourseHeader", (Course)ViewBag.Course)
 @Html.Partial("_CourseMenu")
 
 
-<div>
-    <div class="block-list-header"><h3>Course Forums</h3></div>
+	<div class="full-column">
+		<div class="block-list-header"><h3>Course Forums</h3></div>
 
-    <div class="block-list">
-        @foreach (Forum forum in Model) { 
+		<div class="block-list">
+			@foreach (Forum forum in Model) { 
 
-            <div class="block-list-item">
-                <ul class="course-forums">
-	                <li>
-                        <a href="/courses/@ViewContext.RouteData.Values["slug"]/discussion/forum/@forum.ForumID">
-                            <span class="name">@forum.Name</span>
-	                        <span class="forum-description">@forum.Description</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        }
-    </div>
+				<div class="block-list-item">
+					<ul class="course-forums">
+						<li>
+							<a href="/courses/@ViewContext.RouteData.Values["slug"]/discussion/forum/@forum.ForumID">
+								<span class="name">@forum.Name</span>
+								<span class="forum-description">@forum.Description</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			}
+		</div>
+	</div>
+
 </div>

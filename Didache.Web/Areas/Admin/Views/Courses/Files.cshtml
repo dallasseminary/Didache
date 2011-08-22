@@ -4,7 +4,7 @@
     ViewBag.Title = "Files";
 }
 @section head {
-	<script src="/js/jquery.fileupload.js"></script>
+	<script src="/js/lib/jquery.fileupload.js"></script>
 	<script src="/js/admin/courses-common.js"></script>
 	<script src="/js/admin/courses-data.js"></script>
 	<script src="/js/admin/courses-files.js"></script>
@@ -40,6 +40,26 @@ x add group
 	
 	<input type="hidden" name="GroupID" />
 	<input type="hidden" name="CourseID" />
+
+    <table class="admin-form">
+      <tbody>
+		<tr>
+			<th>
+				Name
+			</th>
+			<td>
+				<input type="text" name="Name" />
+			</td>
+		</tr>	
+		</tbody>
+	</table>
+</div>
+
+<div id="file-editor" class="item-editor">
+	
+	<input type="hidden" name="GroupID" />
+	<input type="hidden" name="CourseID" />
+	<input type="hidden" name="FileID" />
 
     <table class="admin-form">
       <tbody>

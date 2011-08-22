@@ -7,13 +7,10 @@
 <div class="page-narrow">
 	<div class="main-column">
 
-
-
-
 	
 	@if (Users.GetLoggedInUser() != null) {
 	  
-		<h1>@Resources.labels.home_currentcourses</h1>
+		<h1>@Didache.Resources.labels.home_currentcourses</h1>
 	 
 		List<Course> currentCourses = Didache.Courses.GetUsersRunningCourses(CourseUserRole.Student);
    
@@ -28,7 +25,7 @@
 		
 			}
 		} else {
-			<p>@Resources.labels.home_nocourses</p>
+			<p>@Didache.Resources.labels.home_nocourses</p>
 		}
 	 
 		@*	
@@ -38,7 +35,7 @@
 		Course summary
 		</div>	
 
-		<h2>@Resources.labels.home_dashboard_heading_stream</h2>
+		<h2>@Didache.Resources.labels.home_dashboard_heading_stream</h2>
 	 
 		<!--#{ var activities = ActivityStream.GetUsersItems();}
 
@@ -230,9 +227,13 @@
 	  
 		<h2>Welcome</h2>
 	
-		<p>This is Dallas Theological Seminary's online education portal. Feel free to check out some classes.</p>
+		<p>This is Dallas Theological Seminary's online education portal. Feel free to check out <a href="http://www.dts.edu/onlineeducation/">some classes</a>.</p>
 	
-		<p>Overview video</p>	  	  
+		<h3>Take a Tour</h3>
+	 
+		<p>If you'd like to know more about how DTS's online education system works, please click on the video below</p>
+	 
+		<a href="/tour"><img src="https://dtsoe.s3.amazonaws.com/preview/dts-oe-preview-20110722.png" width="100%" /></a>
  }
 	</div>
 
@@ -242,7 +243,7 @@
 		@if (User.Identity.IsAuthenticated) {
 		
 			<div class="page-head">
-			<h2>@Resources.labels.home_dashboard_heading_upcoming</h2>
+			<h2>@Didache.Resources.labels.home_dashboard_heading_upcoming</h2>
 			</div>
 			
 			foreach (UserTaskData task in Courses.GetImportantTasksForUser()) {
@@ -254,23 +255,23 @@
 		*@		
 			
 
-        <h3>@Resources.labels.home_dashboard_heading_courseresources</h3>
+        <h3>@Didache.Resources.labels.home_dashboard_heading_courseresources</h3>
         <ul>
-            <li>@Resources.labels.home_dashboard_li_downloadcalendar</li>
-            <li><span class="icon compressed">@Resources.labels.home_dashboard_li_downloadallfiles</span></li>
+            <li>@Didache.Resources.labels.home_dashboard_li_downloadcalendar</li>
+            <li><span class="icon compressed">@Didache.Resources.labels.home_dashboard_li_downloadallfiles</span></li>
         </ul>
 
-        <h3>@Resources.labels.home_dashboard_heading_onlineedresources</h3>
+        <h3>@Didache.Resources.labels.home_dashboard_heading_onlineedresources</h3>
         <ul>
-            <li><a href="http://www.microsoft.com/downloads/details.aspx?FamilyId=941b3470-3ae9-4aee-8f43-c6bb74cd1466&displaylang=en">@Resources.labels.home_dashboard_li_msword</a></li>
-            <li><a href="http://libreoffice.org">@Resources.labels.home_dashboard_li_libreoffice</a></li>            
+            <li><a href="http://www.microsoft.com/downloads/details.aspx?FamilyId=941b3470-3ae9-4aee-8f43-c6bb74cd1466&displaylang=en">@Didache.Resources.labels.home_dashboard_li_msword</a></li>
+            <li><a href="http://libreoffice.org">@Didache.Resources.labels.home_dashboard_li_libreoffice</a></li>            
         </ul>
 
-        <h3>@Resources.labels.home_dashboard_heading_bibsoftware</h3>
+        <h3>@Didache.Resources.labels.home_dashboard_heading_bibsoftware</h3>
         <ul>
-            <li><a href="http://www.zotero.org">@Resources.labels.home_dashboard_li_zotero</a></li>
-            <li><a href="http://endnote.com">@Resources.labels.home_dashboard_li_endnote</a></li>
-            <li><a href="http://styleease.com">@Resources.labels.home_dashboard_li_styleease</a></li>
+            <li><a href="http://www.zotero.org">@Didache.Resources.labels.home_dashboard_li_zotero</a></li>
+            <li><a href="http://endnote.com">@Didache.Resources.labels.home_dashboard_li_endnote</a></li>
+            <li><a href="http://styleease.com">@Didache.Resources.labels.home_dashboard_li_styleease</a></li>
         </ul>
 
 

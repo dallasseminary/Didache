@@ -6,17 +6,17 @@ using System.Web.Mvc;
 
 namespace Didache.Web.Areas.Admin.Controllers
 {
+	[AdminAndBuilder]
     public class SessionsController : Controller
     {
 
 		private DidacheDb db = new DidacheDb();
 
-		[Authorize(Roles="oe-administrator")]
+		
 		public ActionResult Index() {
 			return View(Didache.Sessions.GetSessions());
 		}
 
-		[Authorize(Roles="oe-administrator")]
 		public ActionResult Edit(int? id) {
 			Session session = db.Sessions.SingleOrDefault(s => s.SessionID == id);
 			if (session == null)
@@ -25,7 +25,6 @@ namespace Didache.Web.Areas.Admin.Controllers
 			return View(session);
 		}
 
-		[Authorize(Roles="oe-administrator")]
 		[HttpPost]
 		public ActionResult Edit(Session model) {
 
@@ -59,7 +58,6 @@ namespace Didache.Web.Areas.Admin.Controllers
 
 		}
 
-		[Authorize(Roles="oe-administrator")]
 		[HttpPost]
 		public RedirectToRouteResult Delete(int id, FormCollection collection) {
 			Session session = db.Sessions.Find(id);

@@ -16,7 +16,7 @@ namespace Didache.Web.Areas.Students {
 				new { controller = "Courses", action = "Index" }
 			);
 
-			// discussion
+			// API
 			context.MapRoute(
 				"Courses_API",
 				"courses/api/{action}/{taskid}",

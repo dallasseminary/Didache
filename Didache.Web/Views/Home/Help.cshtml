@@ -1,5 +1,67 @@
-﻿@{
-    ViewBag.Title = "Help";
+﻿@model HelpModel
+
+@{
+	ViewBag.Title = Didache.Resources.labels.help_title;
 }
 
-<h2>Help</h2>
+<style>
+textarea {
+	width: 400px;
+	height: 100px;
+	 resize: none;
+}
+</style>
+
+<div class="page-wide">
+	
+	<div class="page-header">
+		<h2>@Didache.Resources.labels.help_title</h2>
+	</div>
+
+	
+	<div class="full-column">
+		
+		
+				
+		@if (Model.IsSubmitted) {
+			
+			<p>@Html.Raw(Didache.Resources.labels.help_submitted)</p>
+	  
+		} else {
+
+			using (Html.BeginForm()) {
+		
+				<p>@Html.Raw(Didache.Resources.labels.help_instructions)</p>
+
+
+				<table class="user-profile">
+					<tr>
+						<th>@Html.LabelFor(m => m.Name)</th>
+						<td>
+							@Html.EditorFor(m => m.Name)
+							@Html.ValidationMessageFor(m => m.Name)
+						</td>
+					</tr>
+					<tr>
+						<th>@Html.LabelFor(m => m.Email)</th>
+						<td>
+							@Html.EditorFor(m => m.Email)
+							@Html.ValidationMessageFor(m => m.Email)
+						</td>
+					</tr>
+					<tr>
+						<th>@Html.LabelFor(m => m.Message)</th>
+						<td>
+							@Html.TextAreaFor(m => m.Message)
+							@Html.ValidationMessageFor(m => m.Message)
+						</td>
+					</tr>
+		
+				</table>
+
+				<input type="submit" value="@Didache.Resources.labels.help_submit" class="d-button action" />	
+			}
+		}
+	</div>
+
+</div>

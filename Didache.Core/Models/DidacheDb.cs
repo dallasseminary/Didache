@@ -16,6 +16,7 @@ namespace Didache {
 
 		}
 
+
 		// course meta
 		public DbSet<Session> Sessions { get; set; }
 		public DbSet<Campus> Campuses { get; set; }
@@ -48,11 +49,17 @@ namespace Didache {
 		// studnet and graded files
 		public DbSet<StudentFile> StudentFiles { get; set; }
 		public DbSet<GradedFile> GradedFiles { get; set; }
+		public DbSet<UnitSurvey> UnitSurveys { get; set; }
 
 
 		// grading
 		public DbSet<GradeGroup> GradeGroups { get; set; }
 		public DbSet<GradeItem> GradeItems { get; set; }
+
+
+		public DbSet<Student> Students { get; set; }
+		public DbSet<Employee> Employees { get; set; }
+		public DbSet<Degree> Degrees { get; set; }
 
 		protected override void OnModelCreating(DbModelBuilder modelBuilder) {
 
@@ -60,6 +67,9 @@ namespace Didache {
 			modelBuilder.Entity<User>()
 				.ToTable("dts_cars_Users");
 
+			modelBuilder.Entity<User>()
+				.Property(u => u.UserID)
+					.HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
 			modelBuilder.Entity<Session>()
 				.ToTable("oe_Sessions");
@@ -144,6 +154,9 @@ namespace Didache {
 			modelBuilder.Entity<GradeItem>()
 				.ToTable("oe_GradeGroups_Items");
 
+			modelBuilder.Entity<UnitSurvey>()
+				.ToTable("oe_UnitSurveys");
+
 			// map example
 			/*
 			modelBuilder.Entity<WatchList>().HasMany(w => w.Securities)
@@ -156,6 +169,17 @@ namespace Didache {
 			//http://johnpapa.net/silverlight/upgrading-to-entity-framework-4-1-rc/
 			// possible silliness
 			//modelBuilder.Entity<Security>().ToTable("Securities"); 
+
+
+			modelBuilder.Entity<Employee>()
+				.ToTable("dts_cars_Users_Employees");
+
+			modelBuilder.Entity<Student>()
+				.ToTable("dts_cars_Users_Students");
+
+			modelBuilder.Entity<Degree>()
+				.ToTable("dts_cars_Degrees");
+
 		}
 	}
 
