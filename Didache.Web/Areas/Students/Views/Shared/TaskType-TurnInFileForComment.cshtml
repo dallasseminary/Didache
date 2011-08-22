@@ -6,9 +6,11 @@
 	<div class="turn-in-form">
 	<form method="post" enctype="multipart/form-data" action="/courses/api/taskfile/@Model.TaskID">
 		<textarea name="usercomment"></textarea>
-		<div class="transparent-upload"><input type="file" name="StudentFile" />
-        <input type="button" value="Upload a file" class="d-button" />
-		<input type="submit" value="@Resources.labels.studentschedule_submitfordiscussion" class="d-button action task-submit" /></div>
+		<div class="transparent-upload">
+            <input type="file" name="StudentFile" />
+            <input type="button" value="Upload a file" class="d-button" />
+		    <input type="submit" value="@Resources.labels.studentschedule_submitfordiscussion" class="d-button action task-submit" />
+        </div>
 	</form>
 	</div>
 
@@ -24,7 +26,7 @@
     jQuery(function ($) {
         $("form .transparent-upload input[type=file]").change(function () {
             var fileName = $(this).val();
-            $("input[type=button]").attr("value", fileName);
+            $(this).next("input[type=button]").attr("value", fileName);
         });
     });
 </script>
