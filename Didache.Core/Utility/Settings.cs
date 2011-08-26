@@ -26,5 +26,12 @@ namespace Didache {
 				return System.Configuration.ConfigurationManager.AppSettings["PlayerFilesLocation"];
 			}
 		}
+
+		public static bool RequireSsl {
+			get {
+				return System.Configuration.ConfigurationManager.AppSettings["RequireSsl"] == "true" ;
+			}
+		}
+
 	}
 }
