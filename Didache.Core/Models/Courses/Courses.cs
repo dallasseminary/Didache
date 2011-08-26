@@ -33,9 +33,14 @@ namespace Didache  {
 			Course course = (HttpContext.Current != null) ? HttpContext.Current.Cache[key] as Course : null;
 
 			if (course == null) {
-				string[] parts = slug.Split(new char[] { '-' });
-				string sessionInfo = parts[0].Trim().ToUpper();
-				string courseCode = parts[1].Trim().ToUpper();
+				//string[] parts = slug.Split(new char[] { '-' });
+				//string sessionInfo = parts[0].Trim().ToUpper();
+				//string courseCode = parts[1].Trim().ToUpper();
+
+				int firstDash = slug.IndexOf("-");
+				string sessionInfo = slug.Substring(0, firstDash);
+				string courseCode = slug.Substring(firstDash+1);
+
 
 				var db = new DidacheDb();
 
@@ -128,8 +133,16 @@ namespace Didache  {
 		}
 
 		public static List<Course> GetUsersRunningCourses(int userID, CourseUserRole roleID) {
+
+			DateTime targetStartDate = DateTime.Now.AddDays(7);
+			DateTime targetEndDate = DateTime.Now.AddDays(-7);
+
 			return new DidacheDb().Courses
-				.Where(c => c.CourseUsers.Any(cu => cu.UserID == userID && cu.RoleID == (int)roleID) && c.StartDate <= DateTime.Now && c.EndDate >= DateTime.Now)
+				.Where(c => c.CourseUsers.Any(cu => cu.UserID == userID && 
+													cu.RoleID == (int)roleID) && 
+													c.StartDate <= targetStartDate &&
+													c.IsActive == true && 
+													c.EndDate >= targetEndDate)
 				.OrderByDescending(c => c.StartDate)
 				.ToList();
 		}
