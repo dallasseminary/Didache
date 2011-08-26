@@ -70,11 +70,7 @@ namespace DTS.Online {
 			List<OnlineCourse> courses = new List<OnlineCourse>();
 			
 			// get directores
-			string coursePath = HttpContext.Current.Server.MapPath("~/playerfiles/");
-
-			if (HttpContext.Current.Request.Url.Host == "online.dts.edu") {
-				coursePath = @"e:\websites\my.dts.edu\web\playerfiles\";
-			}
+			string coursePath = Settings.PlayerFilesLocation;
 
 			string[] coursesList = Directory.GetDirectories(coursePath);
 			
@@ -114,10 +110,7 @@ namespace DTS.Online {
 			
 			OnlineCourse course = new OnlineCourse(courseCode);
 			bool languageSuccess = false;
-			string coursePath = HttpContext.Current.Server.MapPath("~/playerfiles/");
-			if (HttpContext.Current.Request.Url.Host == "online.dts.edu") {
-				coursePath = @"e:\websites\my.dts.edu\web\playerfiles\";
-			}
+			string coursePath = Settings.PlayerFilesLocation;
 			
 			// try possible languages
 			foreach (string languageCode in _languagesList)
@@ -175,15 +168,8 @@ namespace DTS.Online {
 			}
 			
 			// LOAD videoXmlPath		
-			string videoXmlPath = System.Web.HttpContext.Current.Server.MapPath(String.Format("~/supportfiles/{0}/Titles/en-US.xml", courseCode));
+			string videoXmlPath = Settings.PlayerFilesLocation + courseCode + @"\titles\en-US.xml";
 
-			// Response.Write(xmlPath);
-
-			if (HttpContext.Current.Request.Url.Host == "online.dts.edu") {
-				videoXmlPath = @"e:\websites\my.dts.edu\web\playerfiles\" + courseCode + @"\titles\en-US.xml";
-			}
-
-			//string videoXmlPath = HttpContext.Current.Server.MapPath("~/playerfiles/" + courseCode + "/titles/" + language + ".xml");
 			XmlDocument videosXmlDoc = new XmlDocument();					
 			if (System.IO.File.Exists(videoXmlPath)) {
 				
