@@ -25,7 +25,13 @@ namespace Didache {
 		public int TotalViews { get; set; }
 
 		public string Subject{ get; set; }
+
+		[MaxLength]
+		[AllowHtml]	
 		public string PostContent { get; set; }
+
+		[MaxLength]
+		[AllowHtml]	
 		public string PostContentFormatted { get; set; }
 
 		public string PostUrl {

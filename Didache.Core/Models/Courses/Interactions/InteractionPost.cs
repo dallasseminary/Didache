@@ -26,7 +26,13 @@ namespace Didache {
 		public int FileID { get; set; }
 
 		public string Subject{ get; set; }
+		
+		[MaxLength]
+		[AllowHtml]			
 		public string PostContent { get; set; }
+		
+		[MaxLength]
+		[AllowHtml]
 		public string PostContentFormatted { get; set; }
 
 		[ScriptIgnore]
