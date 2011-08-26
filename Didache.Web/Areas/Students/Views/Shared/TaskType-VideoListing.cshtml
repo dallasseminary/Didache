@@ -1,16 +1,17 @@
 ﻿@model Didache.UserTaskData
 
 @{	
-	
 	List<VideoInfo> Videos = new List<VideoInfo>();
 
-	string externalThumbBase = "http://oefiles.dts.edu"; // "http://dtsoe.s3.amazonaws.com"; // "http://oefiles.dts.edu";
-	string xmlPath = System.Web.HttpContext.Current.Server.MapPath(String.Format("~/supportfiles/{0}/Titles/en-US.xml", Model.Task.Course.CourseCode));
+	string externalThumbBase = "https://dtsoe.s3.amazonaws.com"; // "http://oefiles.dts.edu";
+	string courseCode = Model.Task.Course.CourseCode;
+	string versionInfo = (Model.Task.Course.VersionNumber > 0 ? "v" + Model.Task.Course.VersionNumber : ""); 
+	string xmlPath = System.Web.HttpContext.Current.Server.MapPath(String.Format("~/supportfiles/{0}/Titles/en-US.xml", courseCode + versionInfo));
 
 	// Response.Write(xmlPath);
 	
 	if (Request.Url.Host == "online.dts.edu") {
-		xmlPath = @"e:\websites\my.dts.edu\web\playerfiles\" + Model.Task.Course.CourseCode + @"\titles\en-US.xml";
+		xmlPath = @"e:\websites\my.dts.edu\web\playerfiles\" + courseCode + versionInfo + @"\titles\en-US.xml";
 	}
 			
 
@@ -35,12 +36,12 @@
 							SortOrder = index++,
 							Title = vNode.Attributes["name"].Value,
 							Duration = vNode.Attributes["duration"].Value,
-							VideoUrl = String.Format("{0}/{1}/{2}_u{3}_v{4}.mp4", externalThumbBase, Model.Task.Course.CourseCode.ToLower(), Model.Task.Course.CourseCode.ToUpper(), Model.Task.Unit.SortOrder.ToString().PadLeft(3, '0'), vNode.Attributes["number"].Value.ToString().PadLeft(3, '0')),
+							VideoUrl = String.Format("{0}/{1}/{2}_u{3}_v{4}.mp4", externalThumbBase, courseCode.ToLower() + versionInfo, courseCode.ToUpper() + versionInfo, Model.Task.Unit.SortOrder.ToString().PadLeft(3, '0'), vNode.Attributes["number"].Value.ToString().PadLeft(3, '0')),
 
-							ThumbnailFilename = String.Format("{0}_u{1}_v{2}_thumb.jpg", Model.Task.Course.CourseCode.ToUpper(), Model.Task.Unit.SortOrder.ToString().PadLeft(3, '0'), vNode.Attributes["number"].Value.ToString().PadLeft(3, '0')),
+							ThumbnailFilename = String.Format("{0}_u{1}_v{2}_thumb.jpg", courseCode.ToUpper() + versionInfo, Model.Task.Unit.SortOrder.ToString().PadLeft(3, '0'), vNode.Attributes["number"].Value.ToString().PadLeft(3, '0')),
 
 							//ThumbnailUrl = String.Format("{0}/{1}/videos/{2}_u{3}_v{4}_thumb.jpg", locaThumbBase, Model.Course.CourseCode.ToLower(), Model.Course.CourseCode.ToUpper(), Model.Unit.UnitNumber.ToString().PadLeft(3, '0'), vNode.Attributes["number"].Value.ToString().PadLeft(3, '0')),
-							ThumbnailUrl = String.Format("{0}/{1}/{2}_u{3}_v{4}_thumb.jpg", externalThumbBase, Model.Task.Course.CourseCode.ToLower(), Model.Task.Course.CourseCode.ToUpper(), Model.Task.Unit.SortOrder.ToString().PadLeft(3, '0'), vNode.Attributes["number"].Value.ToString().PadLeft(3, '0')),
+							ThumbnailUrl = String.Format("{0}/{1}/{2}_u{3}_v{4}_thumb.jpg", externalThumbBase, courseCode.ToLower() + versionInfo, courseCode.ToUpper() + versionInfo, Model.Task.Unit.SortOrder.ToString().PadLeft(3, '0'), vNode.Attributes["number"].Value.ToString().PadLeft(3, '0')),
 							PercentComplete = random.Next(100)
 						});
 		}
@@ -57,9 +58,9 @@
 		<div class="video-thumb" @* title="You have watched about @((Double)v.Minutes*(Double)v.PercentComplete/100) out of the @v.Minutes minutes in this video" *@>
 			<div class="video-options-container" style="background-image:url(@v.ThumbnailUrl);">
 				<div class="video-options">
-					<a class="icon watchvideo" target="_blank" href="https://my.dts.edu/player4/#course=@Model.Task.Course.CourseCode&unit=@Model.Task.Unit.SortOrder&video=@v.SortOrder">watch</a>
-					<a class="icon slides" target="_blank" href="https://my.dts.edu/player4/print-slides.aspx?course=@Model.Task.Course.CourseCode&unit=@Model.Task.Unit.SortOrder&video=@v.SortOrder">slides</a>
-					<a class="icon transcript" target="_blank" href="https://my.dts.edu/player4/print-transcript.aspx?@Model.Task.Course.CourseCode&unit=@Model.Task.Unit.SortOrder&video=@v.SortOrder">transcript</a>
+					<a class="icon watchvideo" target="_blank" href="https://my.dts.edu/player4/#course=@(courseCode + versionInfo)&unit=@Model.Task.Unit.SortOrder&video=@v.SortOrder">watch</a>
+					<a class="icon slides" target="_blank" href="https://my.dts.edu/player4/print-slides.aspx?course=@(courseCode + versionInfo)&unit=@Model.Task.Unit.SortOrder&video=@v.SortOrder">slides</a>
+					<a class="icon transcript" target="_blank" href="https://my.dts.edu/player4/print-transcript.aspx?@(courseCode + versionInfo)&unit=@Model.Task.Unit.SortOrder&video=@v.SortOrder">transcript</a>
 				</div>
 			</div>
 			<div class="progress-outline" >

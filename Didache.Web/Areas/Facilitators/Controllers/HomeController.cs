@@ -11,47 +11,31 @@ namespace Didache.Web.Areas.Facilitators.Controllers
         //
         // GET: /Grading/Home/
 
-        public ActionResult Index2()
-        {
-			// get this users courses
-			List<Course> coursesAsFacilitator = Didache.Courses.GetUsersRunningCourses(CourseUserRole.Faciliator);
-			
-			// get all courses if administrator
-			List<Course> allCourses = User.IsInRole(UserRoles.Administrator) ?
-				Didache.Courses.GetCurrentlyRunningCourses() : coursesAsFacilitator;
-
-			ViewBag.CoursesAsFacilitator = coursesAsFacilitator;
-			ViewBag.Sessions = Sessions.GetSessions();
-
-			return View(allCourses);
-        }
-
 		public ActionResult Index(int? sessionID) {
 			
 			// all courses ever
 			List<Course> coursesAsFacilitator = null;
 			List<Course> sessionCourses = null;
+			Session session = null;
 
 			if (sessionID.HasValue) {
 				// get all courses
 				coursesAsFacilitator = Didache.Courses.GetUsersCourses(CourseUserRole.Faciliator);
+				sessionCourses = coursesAsFacilitator.Where(c => c.SessionID == sessionID.Value).ToList();
 
 
-				sessionCourses = (User.IsInRole(UserRoles.Administrator)) ?  
-							Didache.Courses.GetCoursesBySession(sessionID.Value) :
-							coursesAsFacilitator.Where(c => c.SessionID == sessionID.Value).ToList();
+				session = new DidacheDb().Sessions.Find(sessionID.Value);
+
 			} else {
 
 				// just active courses 
 				coursesAsFacilitator = Didache.Courses.GetUsersRunningCourses(CourseUserRole.Faciliator);
 
-				sessionCourses = User.IsInRole(UserRoles.Administrator) ?
-							Didache.Courses.GetCurrentlyRunningCourses() : 
-							coursesAsFacilitator;
+				sessionCourses = coursesAsFacilitator;
 
 			}
 
-													
+			ViewBag.Session = session;					
 			ViewBag.Sessions = Sessions.GetSessions();
 			ViewBag.CoursesAsFacilitator = coursesAsFacilitator;
 

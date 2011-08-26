@@ -221,8 +221,8 @@
 					'<input type="text" class="file-title" />' +
 				'</span>' +
 				'<span class="file-user"></span>' +
-				'<a class="file-edit edit-link" href="javascript:void(0);">Edit</a>' +
-				'<a class="file-delete delete-link" href="javascript:void(0);">Delete</a>' +
+				//'<a class="file-edit edit-link" href="javascript:void(0);">Edit</a>' +
+				//'<a class="file-delete delete-link" href="javascript:void(0);">Delete</a>' +
 			'</div>');
 
 		fileGroupRow.find('.files').append(fileRow);

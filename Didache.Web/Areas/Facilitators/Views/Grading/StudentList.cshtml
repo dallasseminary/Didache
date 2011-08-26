@@ -4,7 +4,11 @@
     ViewBag.Title = "Students: " + Model.ToString();
 }
 
-
+<style>
+.current-facilitator h3 {
+	color: #197d3f;
+}
+</style>
 <div class="page-wide">
 	
 
@@ -21,12 +25,13 @@
 		@foreach (CourseUser user in ViewBag.Users) {
 			if (user.GroupID != lastGroupID) {
 				if (lastGroupID != -1) {
-					@Html.Raw("</table>")			
+					@Html.Raw("</table></div>")			
 				}
 	
 				lastGroup = user.Group;
 				lastGroupID = user.GroupID;
-				<h3>@(lastGroup != null ? lastGroup.Name : "No Group")</h3>
+				@Html.Raw("<div" + (lastGroup != null && lastGroup.Facilitator != null && lastGroup.FacilitatorUserID == Users.GetLoggedInUser().UserID ? " class=\"current-facilitator\"" : "") + ">")
+				<h3>@(lastGroup != null ? lastGroup.Name + (lastGroup.Facilitator != null ? " - " + lastGroup.Facilitator.FormattedName : " (no faciliator assigned)") : "No Group")</h3>
 				@Html.Raw("<table class=\"grading-list\">")
 			}
 			<tr>

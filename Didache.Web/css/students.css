@@ -884,3 +884,17 @@ a.cancel-thread {
 	border-color: #357318 #A7DB8F #A7DB8F #357318;
 }
 */
+
+.task-instructions-text b, .task-instructions-text strong {
+	font-weight: bold;
+}
+.task-instructions-text i, .task-instructions-text em {
+	font-style: italic;
+}
+.task-instructions-text ul {
+	margin: 0 0 0 10px;
+}
+.task-instructions-text ul li {
+	margin: 0 0 0 20px;
+	list-style-type: disc;
+}

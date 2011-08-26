@@ -33,7 +33,7 @@
 			}
 		
 			<tr>
-				<td><a href="@userTask.UserTaskUrl">@userTask.Task.Name</a></td>
+				<td><a href="@userTask.UserTaskUrl">@Html.Raw(userTask.Task.Name)</a></td>
 				<td>@(userTask.Task.DueDate.HasValue ? userTask.Task.DueDate.Value.ToShortDateString() : "")</td>
 				<td>
 					<span class="task-status status-@userTask.TaskCompletionStatus.ToString().ToLower() @(userTask.TaskCompletionStatus == TaskCompletionStatus.NotStarted && (DateTime.Now > userTask.Task.DueDate || DateTime.Now > userTask.Task.Unit.EndDate) ? "status-overdue" : "")"></span>
