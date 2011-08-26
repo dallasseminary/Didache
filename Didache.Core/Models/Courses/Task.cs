@@ -29,6 +29,7 @@ namespace Didache {
 		public int SortOrder { get; set; }
 
 		[Required]
+		[AllowHtml]
 		public string Name { get; set; }
 
 		[DataType(DataType.MultilineText)]
