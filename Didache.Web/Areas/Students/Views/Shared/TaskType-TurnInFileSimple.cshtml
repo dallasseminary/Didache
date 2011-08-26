@@ -6,6 +6,14 @@
 	<div class="turn-in-form">
 	<form method="post" enctype="multipart/form-data" action="/courses/api/taskfile/@Model.TaskID">
 		<textarea name="usercomment"></textarea>
+
+		@*
+		<div class="transparent-upload">
+			<input type="file" name="StudentFile" class="file-input required" @Html.Raw(!String.IsNullOrEmpty(Model.Task.FileTypesAllowed) ? " accept=\"" + Model.Task.FileTypesAllowed + "\"" : "") data-val-accept="Sorry, accept files with these extensions: @Model.Task.FileTypesAllowed." />
+			<input type="button" name="Select File" class="choose-button d-button" value="@Didache.Resources.labels.studentschedule_choose @Html.Raw(!String.IsNullOrEmpty(Model.Task.FileTypesAllowed) ? Model.Task.FileTypesAllowed.Replace("|", ", ") : @Didache.Resources.labels.studentschedule_file)" />
+			<span class="file-name"></span>
+		</div>
+		*@
 		
 		<input type="file" name="StudentFile"  class="required" @Html.Raw(!String.IsNullOrEmpty(Model.Task.FileTypesAllowed) ? " accept=\"" + Model.Task.FileTypesAllowed + "\"" : "") />
 		
@@ -26,3 +34,12 @@
 
 
 }
+
+<script type="text/javascript">
+    jQuery(function ($) {
+        $("form .transparent-upload input[type=file]").change(function () {
+            var fileName = $(this).val();
+            $(this).next("input[type=button]").attr("value", fileName);
+        });
+    });
+</script>

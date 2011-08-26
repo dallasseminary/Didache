@@ -33,3 +33,13 @@
 	-->	
 
 }
+@*
+<script type="text/javascript">
+    jQuery(function ($) {
+        $("form .transparent-upload input[type=file]").change(function () {
+            var fileName = $(this).val();
+            $(this).next("input[type=button]").attr("value", fileName);
+        });
+    });
+</script>
+*@
