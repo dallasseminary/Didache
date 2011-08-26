@@ -49,7 +49,7 @@ string GetCourseString() {
 		<asp:Repeater id="TranscriptTextRepeater" runat="Server" >
 			
 			<ItemTemplate>
-				<p><img src="/playerfiles/<%= Request["Course"] %>/Slides/<%= language %>/<%# ((XmlNode) Container.DataItem).Attributes["slideFileName"].Value %>" /></p>
+				<p><img src="//my.dts.edu/playerfiles/<%= Request["Course"] %>/Slides/<%= language %>/<%# ((XmlNode) Container.DataItem).Attributes["slideFileName"].Value %>" /></p>
 			</ItemTemplate>
 							
 		</asp:Repeater>
