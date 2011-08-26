@@ -16,12 +16,11 @@
 			<div class="course-filegroup block-list-item">
 				<div class="block-list-item-label"><span>@group.Name</span><span class="arrow-border"></span><span class="arrow"></span></div>
 				<ul class="course-filegroup-files">
-					@foreach (CourseFileAssociation courseFileAssociation in group.CourseFileAssociations) {				
+					@foreach (CourseFileAssociation courseFileAssociation in group.CourseFileAssociations.Where(cfa => cfa.IsActive)) {				
 						<li id="file-@courseFileAssociation.CourseFile.FileID">
 							<a class="file-@courseFileAssociation.CourseFile.FileType" href="@courseFileAssociation.CourseFile.FileUrl">
-								<span class="type"><img src="/css/images/@(courseFileAssociation.CourseFile.FileType).png" /></span>
-								<span class="filename">@courseFileAssociation.CourseFile.Title</span>
-								
+								<span class="type"><img src="/css/images/@(courseFileAssociation.CourseFile.FileType).png" alt="courseFileAssociation.CourseFile.FileType" /></span>
+								<span class="filename">@courseFileAssociation.CourseFile.Title</span>								
 								<span class="size">@courseFileAssociation.CourseFile.FormattedLength</span>
 							</a>
 						</li>
@@ -40,7 +39,7 @@
 
 			<h3>@Didache.Resources.labels.labels_dashboard_keydownloads</h3>
 		
-			@{ CourseFileAssociation syllabus = new DidacheDb().CourseFileAssociations.Where(cfa => cfa.CourseFileGroup.CourseID == Model.CourseID && cfa.CourseFile.Title.Contains("Syllabus")).FirstOrDefault();}
+			@{ CourseFileAssociation syllabus = CourseFiles.GetCourseSyllabus(Model.CourseID);}
 			@if (syllabus != null) {
 				<a class="d-button" href="@syllabus.CourseFile.FileUrl">@Didache.Resources.labels.labels_dashboard_syllabus</a>
 			}
