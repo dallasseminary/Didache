@@ -884,3 +884,8 @@ a.cancel-thread {
 	border-color: #357318 #A7DB8F #A7DB8F #357318;
 }
 */
+
+.session-archive ul {
+    border-left: 3px solid #CCC;
+    padding-left: 12px;
+}
