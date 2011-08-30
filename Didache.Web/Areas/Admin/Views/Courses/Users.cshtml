@@ -93,7 +93,7 @@
 	<div id="student-column">
 
 		<div id="students" class="user-group" data-roleid="@((int)CourseUserRole.Student)">
-			<h3>Students</h3>
+			<h3>Students (<span class="group-count">0</span>)</h3>
 			<div class="role-group">
 			</div>
 		</div>
@@ -103,19 +103,19 @@
 
 
 		<div id="faculty" class="user-group" data-roleid="@((int)CourseUserRole.Faculty)">
-			<h3>Faculty</h3>
+			<h3>Faculty (<span class="group-count">0</span>)</h3>
 			<div class="role-group">
 			</div>
 		</div>
 
 		<div id="editors" class="user-group" data-roleid="@((int)CourseUserRole.Editor)">
-			<h3>Editor</h3>
+			<h3>Editor (<span class="group-count">0</span>)</h3>
 			<div class="role-group">		
 			</div>
 		</div>
 
 		<div id="faciliators" class="user-group" data-roleid="@((int)CourseUserRole.Faciliator)">
-			<h3>Faciliators</h3>
+			<h3>Faciliators (<span class="group-count">0</span>)</h3>
 			<div class="role-group">		
 			</div>
 		</div>
@@ -186,7 +186,7 @@
 					courseHours: $('#sync-course-hours').val()
 				},
 				type: 'post',
-				success: function() {
+				success: function () {
 					loadUsers();
 				}
 			});
@@ -236,8 +236,17 @@
 				userRow.find('.user-name').after($('#CourseUserGroups').clone().show().addClass('groupid').val(user.GroupID));
 			}
 
+
+			// do count
+			updateCounts(output.closest('.user-group'));
+
+
 			return userRow;
 
+		}
+
+		function updateCounts(group) {
+			group.find('.group-count').html(group.find('.user').length);
 		}
 
 		// search for users
@@ -270,7 +279,7 @@
 								'</div>' +
 							'</div>';
 					}
-					$('#user-search-results').html(html);
+					$('#user-search-results').html(html).show();
 
 				}
 			});
@@ -296,6 +305,8 @@
 					var userRow = addUser(d, true);
 					userRow.effect('highlight');
 
+					updateCounts(roleButton.closest('.user-group'));
+
 					hideLoading();
 				}
 			});
@@ -314,11 +325,19 @@
 				success: function (d) {
 					console.log(d);
 
+					var group = removeButton.closest('.user-group');
+
+					
+
 					removeButton.closest('.user').remove();
+
+					updateCounts(group);
+
 				}
 			});
 		});
-		// remove user
+
+		// change group
 		$('.user-group').delegate('.groupid', 'change', function () {
 			var groupDropDown = $(this),
 				groupID = groupDropDown.val(),

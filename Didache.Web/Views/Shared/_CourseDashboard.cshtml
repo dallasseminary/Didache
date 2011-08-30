@@ -7,7 +7,8 @@
 		<div class="course-dashboard-downloads">
 			<h3>@Didache.Resources.labels.labels_dashboard_keydownloads</h3>
 
-			@{ CourseFileAssociation syllabus = new DidacheDb().CourseFileAssociations.Where(cfa => cfa.CourseFileGroup.CourseID == Model.CourseID && cfa.CourseFile.Title.Contains("Syllabus")).FirstOrDefault();}
+			@{ CourseFileAssociation syllabus = CourseFiles.GetCourseSyllabus(Model.CourseID);}
+
 			@if (syllabus != null) {
 				<a class="d-button" href="@syllabus.CourseFile.FileUrl">@Didache.Resources.labels.labels_dashboard_syllabus</a>
 			}

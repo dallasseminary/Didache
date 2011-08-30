@@ -130,12 +130,12 @@ namespace Didache {
 
 		public string ProfileImageUrl {
 			get {
-				return "http://www.dts.edu/images/carsphotos/photo.ashx?id=" + UserID;
+				return "//www.dts.edu/images/carsphotos/photo.ashx?id=" + UserID;
 			}
 		}
 
 		public string GetProfileImageUrl(int width, int height) {
-			return "http://www.dts.edu/images/carsphotos/photo.ashx?id=" + UserID + "&width=" + width + "&height=" + height;		
+			return "//www.dts.edu/images/carsphotos/photo.ashx?id=" + UserID + "&width=" + width + "&height=" + height;		
 		}
 
 
@@ -178,6 +178,8 @@ namespace Didache {
         public bool AttemptedGeocode { get; set; }
         public string Hometown { get; set; }
         public string AlmaMater { get; set; }
+
+		[MaxLength]
         public string Bio { get; set; }
         public string MinistryGoals { get; set; }
         public string Facebook { get; set; }

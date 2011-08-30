@@ -28,7 +28,7 @@
 				
 				<div class="task-header">
 					<div class="task-meta">
-						<span class="task-name">@userTaskData.Task.Name</span>
+						<span class="task-name">@Html.Raw(userTaskData.Task.Name)</span>
 						<span class="task-due-date">@(userTaskData.Task.DueDate.HasValue ? userTaskData.Task.DueDate.Value.ToShortDateString():"")</span>				
 					</div>
 

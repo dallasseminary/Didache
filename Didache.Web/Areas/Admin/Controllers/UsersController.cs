@@ -54,7 +54,26 @@ namespace Didache.Web.Areas.Admin.Controllers
 		
 		[HttpPost]
 		public ActionResult EditUser(User user, string[] roles) {
+			if (user.UserID > 0) {
+				user = db.Users.Find(user.UserID);
 
+				// remove current roles
+				string[] currentRoles = System.Web.Security.Roles.GetRolesForUser(user.Username);
+				if (currentRoles.Length > 0) {
+					System.Web.Security.Roles.RemoveUserFromRoles(user.Username, System.Web.Security.Roles.GetRolesForUser(user.Username));
+				}
+
+				// add new roles	
+				if (roles != null && roles.Length > 0) {
+					System.Web.Security.Roles.AddUserToRoles(user.Username, roles);
+				}
+
+				
+
+			}
+
+			return RedirectToAction("Index");
+			/*
 			if (user.UserID > 0) {
 				user = db.Users.Find(user.UserID);
 
@@ -89,7 +108,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 				db.SaveChanges();
 				return RedirectToAction("Index");
 			}
-
+			*/
 			
 
 			

@@ -57,6 +57,16 @@ namespace Didache  {
 			}
 
 			return studentFile;
+		}		
+
+		public static CourseFileAssociation GetCourseSyllabus(int courseID) {
+			return new DidacheDb().CourseFileAssociations.Where(cfa => 
+							cfa.CourseFileGroup.CourseID == courseID && 
+							cfa.IsActive == true &&
+							cfa.CourseFile.Title.Contains("Syllabus"))
+								.OrderBy(cfa=>cfa.SortOrder)
+								.FirstOrDefault();
 		}
+
 	}
 }

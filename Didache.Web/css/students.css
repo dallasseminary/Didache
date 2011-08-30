@@ -888,4 +888,17 @@ a.cancel-thread {
 .session-archive ul {
     border-left: 3px solid #CCC;
     padding-left: 12px;
+    
+.task-instructions-text b, .task-instructions-text strong {
+	font-weight: bold;
+}
+.task-instructions-text i, .task-instructions-text em {
+	font-style: italic;
+}
+.task-instructions-text ul {
+	margin: 0 0 0 10px;
+}
+.task-instructions-text ul li {
+	margin: 0 0 0 20px;
+	list-style-type: disc;
 }

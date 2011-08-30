@@ -92,6 +92,14 @@ namespace Didache.Web {
 			// String.Empty instead of null for empty form fields
 			ModelBinders.Binders.DefaultBinder = new EmptyStringModelBinder();
 		}
+
+		protected void Application_BeginRequest(Object sender, EventArgs e) {
+
+
+			if (Settings.RequireSsl && !HttpContext.Current.Request.IsSecureConnection) {
+				Response.Redirect("https://" + Request.ServerVariables["HTTP_HOST"] + HttpContext.Current.Request.RawUrl);
+			}
+		}
 	}
 
 
