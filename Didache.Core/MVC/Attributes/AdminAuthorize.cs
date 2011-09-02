@@ -32,4 +32,12 @@ namespace Didache {
 			Roles = UserRoles.Facilitator;
 		}
 	}
+
+
+	[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
+	public class AdminFacultyFacilitatorAttribute : AuthorizeAttribute {
+		public AdminFacultyFacilitatorAttribute() {
+			Roles = UserRoles.Administrator + "," + UserRoles.Faculty + "," + UserRoles.Facilitator;
+		}
+	}
 }

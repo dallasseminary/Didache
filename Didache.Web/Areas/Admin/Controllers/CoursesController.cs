@@ -113,9 +113,10 @@ namespace Didache.Web.Areas.Admin.Controllers
 			if (model.CourseID > 0) {
 				// EDIT MODE
 				try {
-					model = db.Courses.Find(model.CourseID);
+					Course course = db.Courses.Find(model.CourseID);
+					course.IsActive = model.IsActive;
 
-					UpdateModel(model);
+					//UpdateModel(model);
 
 					db.SaveChanges();
 
@@ -125,7 +126,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 					ModelState.AddModelError("", "Edit Failure, see inner exception");
 
 					Response.StatusCode = 500;
-					return Json(new { success = false, action="edit", message = ex.ToString(), errors = GetErrors() });
+					return Json(new { success = false, action = "edit", message = ex.ToString(), errors = GetErrors(), course = serializer.Serialize(model) });
 				}
 			} else {
 				// ADD MODE

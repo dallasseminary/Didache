@@ -1,22 +1,41 @@
 ﻿@if (HttpContext.Current.User.Identity.IsAuthenticated) { 
 
+    List<Course> courses = Didache.Courses.GetUsersRunningCourses(CourseUserRole.Student);
+	List<Course> facilitationCourses = Didache.Courses.GetUsersRunningCourses(CourseUserRole.Faciliator, CourseUserRole.Faculty );
+    
 	<div id="courses-menu" class="side-menu">
 		<h3>@Didache.Resources.labels.tabs_courses</h3>
 		
 		<ul>
-			@{ List<Course> courses = Didache.Courses.GetUsersRunningCourses(CourseUserRole.Student); }
+			
 			@if (courses != null) {
 				foreach (Course course in courses) {
 				<li@Html.Raw(ViewContext.RouteData.Values["slug"] != null && ViewContext.RouteData.Values["slug"].ToString() == course.Slug ? " class=\"selected\"" : "")><a href="/courses/@course.Slug@(( ViewContext.RouteData.Values["action"] != null && (new List<string>() {"dashboard","schedule","files","roster","assignments"}).IndexOf(ViewContext.RouteData.Values["action"].ToString()) > -1) ? "/" + ViewContext.RouteData.Values["action"] : "" )">@(course.CourseCode + course.Section + " - " + course.FacultyLastNames)</a></li>	
 				}
 			}
 			<li><a href="/courses/">@Didache.Resources.labels.submenu_archive</a></li>
-			@if (User.IsInRole(UserRoles.Facilitator)) {
-			<li><a href="/grading/">GTA Facilitation</a></li>
-			}
+			
 		</ul>
 
 	</div>
+   
+   
+    if (facilitationCourses.Count > 0) {
+	<div id="facilitator-menu" class="side-menu">
+		<h3>Faculty &amp; GTAs</h3>
+		
+		<ul>
+			@foreach (Course course in facilitationCourses) {
+			<li@Html.Raw(ViewContext.RouteData.Values["slug"] != null && ViewContext.RouteData.Values["slug"].ToString() == course.Slug ? " class=\"selected\"" : "")><a href="/grading/@course.Slug/tasklist">@(course.Session.SessionCode + "-" + course.CourseCode + course.Section + " - " + course.FacultyLastNames)</a></li>	
+			}
+		
+			<li><a href="/grading/">All Courses</a></li>
+			
+		</ul>
+
+	</div>    
+    }
+
 	
 	@*
 	<div id="community-menu" class="side-menu">
@@ -39,7 +58,12 @@
 	<ul>
 		<li><a href="/tour">@Didache.Resources.labels.tabs_tour</a></li>
 		<li><a href="/help">@Didache.Resources.labels.tabs_help</a></li>
+@if (!User.Identity.IsAuthenticated) {
+		<li><a href="/account/login">@Didache.Resources.labels.login_login</a></li>
+}
 	</ul>
 </div>	
+
+
 
 

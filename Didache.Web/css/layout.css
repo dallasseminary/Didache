@@ -440,6 +440,12 @@ select#language {
 .user-profile td.security-setting {
 	width: 100px;
 }
+.user-profile td textarea  {
+	resize: none;
+	width: 400px;
+	height: 100px;
+	font-family: Arial, Sans-Serif;
+}
 .profile-constituencies {
 	margin: 0 0 10px;
 }
@@ -698,3 +704,57 @@ select#language {
 .input-validation-error {
 	background: #f2a9a9;
 }
+
+
+.account-box {
+	width: 280px;
+	margin: 20px auto;
+	background: #eee;
+	padding: 20px 40px;
+	border: solid 1px #999;
+	overflow: hidden;
+}
+	.account-box label {
+		font-size: 15px;
+	}
+	.account-box input[type=text], .account-box input[type=password] {
+		font-size: 16px;
+		padding: 4px;
+		border: solid 1px #999;
+		margin: 0 0 10px;
+		width: 270px;
+	}
+	.login-buttons {
+		overflow: hidden;
+		margin: 0 0 10px 0;
+	}
+	.login-remember {
+		margin: 5px 0 0 0;
+		float: left;
+	}
+	.login-box #submit {
+		float: right;
+		width: 90px;
+	}
+	
+	.field-validation-error {
+		background: #f2a9a9;
+		border: solid 1px #bd1816;	
+		color: #bd1816;
+	}
+
+	.validation-summary-errors {
+		width: 280px;
+		margin: 20px auto;
+		background: #f2a9a9;
+		padding: 20px 40px;
+		border: solid 1px #bd1816;
+		overflow: hidden;	
+		color: #bd1816;
+	}
+
+	.login-message {
+		width: 300px;
+		padding: 15px;
+		margin: 40px auto 0;
+	}

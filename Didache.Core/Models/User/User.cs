@@ -39,6 +39,9 @@ namespace Didache {
 
 			BirthDate = DateTime.MinValue;
 
+			AliasName = "";
+			AliasFirstName = "";
+			AliasLastName = "";
 
 			Username = "";
 			AspnetUserID = Guid.Empty;
@@ -103,17 +106,11 @@ namespace Didache {
 			}
 		}
 
-		public string SecureName {
+		public string ShortName {
 			get {
-
-				if (!String.IsNullOrWhiteSpace(AliasName)) {
-					return AliasName;
-				}
-
-
 				switch (NameFormat) {
 					// John Charles Dyer
-					case "FF":					
+					case "FF":
 					// John C. Dyer
 					default:
 					case "FI":
@@ -128,14 +125,71 @@ namespace Didache {
 			}
 		}
 
+		public string SecureShortName {
+			get {
+
+				if (!String.IsNullOrWhiteSpace(AliasFirstName)) {
+					return AliasFirstName + " " + (AliasLastName.Length > 1 ? AliasLastName.Substring(0,1) + "." : "");
+				} else {
+					return ShortName;
+				}
+			}
+		}
+
+		public string SecureFormattedName {
+			get {
+				if (!String.IsNullOrWhiteSpace(AliasFirstName)) {
+					return AliasFirstName + " " + AliasLastName;
+				} else {
+					return FormattedName;
+				}
+			}
+		}
+
+		public string SecureFirstName {
+			get {
+				if (!String.IsNullOrWhiteSpace(AliasFirstName)) {
+					return AliasFirstName;
+				} else {
+					return FirstName;
+				}
+			}
+		}
+
+		public string SecureLastName {
+			get {
+				if (!String.IsNullOrWhiteSpace(AliasLastName)) {
+					return AliasLastName;
+				} else {
+					return LastName;
+				}
+			}
+		}
+
+		public string SecureFormattedNameLastFirst {
+			get {
+				if (!String.IsNullOrWhiteSpace(AliasFirstName)) {
+					return AliasLastName + ", " + AliasFirstName;
+				} else {
+					return FormattedNameLastFirst;
+				}
+			}
+		}
+
+
 		public string ProfileImageUrl {
 			get {
-				return "//www.dts.edu/images/carsphotos/photo.ashx?id=" + UserID;
+				int userID = (PictureSecuritySetting == UserSecuritySetting.Private) ? 0 : UserID;
+				
+				return "//www.dts.edu/images/carsphotos/photo.ashx?id=" + userID;
 			}
 		}
 
 		public string GetProfileImageUrl(int width, int height) {
-			return "//www.dts.edu/images/carsphotos/photo.ashx?id=" + UserID + "&width=" + width + "&height=" + height;		
+
+			int userID = (PictureSecuritySetting == UserSecuritySetting.Private) ? 0 : UserID;
+				
+			return "//www.dts.edu/images/carsphotos/photo.ashx?id=" + userID + "&width=" + width + "&height=" + height;		
 		}
 
 
@@ -199,6 +253,12 @@ namespace Didache {
 
 		// security
 		public string AliasName { get; set; }
+
+		[Display(Name="Alias First Name")]
+		public string AliasFirstName { get; set; }
+
+		[Display(Name = "Alias Last Name")]
+		public string AliasLastName { get; set; }
 
 		public int PictureSecurity { get; set; }
 		public int AddressSecurity { get; set; }

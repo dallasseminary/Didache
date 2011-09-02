@@ -98,7 +98,7 @@
 				IsActive: isActive.is(':checked')
 			}
 
-		//console.log('saving', course);
+		console.log('saving', course);
 
 		saveCourse(course, function (data) {
 			row.effect('highlight', null, 1000);

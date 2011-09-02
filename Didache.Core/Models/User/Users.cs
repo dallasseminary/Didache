@@ -84,9 +84,10 @@ namespace Didache  {
 			if (user == null) {
 				user = new DidacheDb().Users.SingleOrDefault(u => u.UserID == id);
 
-				HttpContext.Current.Cache.Add(key, user, null, Cache.NoAbsoluteExpiration, new TimeSpan(1, 0, 0), CacheItemPriority.Default, null);
+				if (user != null) {
+					HttpContext.Current.Cache.Add(key, user, null, Cache.NoAbsoluteExpiration, new TimeSpan(1, 0, 0), CacheItemPriority.Default, null);
+				}
 			}
-
 
 			return user;
 		}
@@ -99,7 +100,9 @@ namespace Didache  {
 			if (user == null) {
 				user = new DidacheDb().Users.SingleOrDefault(u => u.Username == username);
 
-				HttpContext.Current.Cache.Add(key, user, null, Cache.NoAbsoluteExpiration, new TimeSpan(1, 0, 0), CacheItemPriority.Default, null);
+				if (user != null) {
+					HttpContext.Current.Cache.Add(key, user, null, Cache.NoAbsoluteExpiration, new TimeSpan(1, 0, 0), CacheItemPriority.Default, null);
+				}
 			}
 
 			return user;			
@@ -117,6 +120,9 @@ namespace Didache  {
 			}
 		}
 
+		public static void ClearUserCache(int userID) {
+			ClearUserCache(Users.GetUser(userID));
+		}
 
 		public static void ClearUserCache(User user) {
 			
@@ -127,6 +133,10 @@ namespace Didache  {
 			key = string.Format(_userIdKey, user.UserID);
 			if (HttpContext.Current.Cache[key] != null)
 				HttpContext.Current.Cache.Remove(key);
+		}
+
+		public static Student GetStudent(int userID) {
+			return new DidacheDb().Students.Find(userID);
 		}
 	}
 }

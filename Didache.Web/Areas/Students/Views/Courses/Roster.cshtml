@@ -24,7 +24,7 @@
 					<span>
 						@group.Name 
 						@if (group.Facilitator != null) {
-							<text>&ndash;</text> <a href="@group.Facilitator.ProfileDisplayUrl">@group.Facilitator.FormattedName</a>
+							<text>&ndash;</text> <a href="@group.Facilitator.ProfileDisplayUrl">@group.Facilitator.SecureFormattedName</a>
 						}	
 					</span>
 				</div>
@@ -32,8 +32,8 @@
 				@foreach (CourseUser user in group.Students) {
 					if (user.User != null) {
 					<a class="course-group-member" href="@user.User.ProfileDisplayUrl">				
-						<img src="@user.User.GetProfileImageUrl(100,100)" alt="@user.User.SecureName" width="100" height="100" /><br />
-						<span>@user.User.SecureName</span>
+						<img src="@user.User.GetProfileImageUrl(100,100)" alt="@user.User.SecureFormattedName" width="100" height="100" /><br />
+						<span>@user.User.SecureShortName</span>
 					</a>
 					}
 				}
@@ -48,7 +48,7 @@
 	<div class="sub-column">
 		<div class="header">
 			@foreach (CourseUser user in Model.CourseUsers) {
-				@Html.Raw(user.RoleID == 3 ? "<h4>" + user.User.SecureName + "</h4>" : "")
+				@Html.Raw(user.RoleID == 3 ? "<h4>" + user.User.SecureShortName + "</h4>" : "")
 			}
 		</div>
 		<div class="list">

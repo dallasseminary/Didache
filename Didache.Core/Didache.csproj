@@ -69,6 +69,7 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\ViewModels\ContactStudents.cs" />
     <Compile Include="MVC\ActionResults\iCalResult.cs" />
     <Compile Include="MVC\ActionResults\SyndicationResult.cs" />
     <Compile Include="MVC\ActionResults\ZipFileResult.cs" />
@@ -132,12 +133,12 @@
       <DependentUpon>labels.resx</DependentUpon>
     </Compile>
     <Compile Include="TaskTypes\Types\CommentOnPost.cs" />
-    <Compile Include="TaskTypes\Types\AnswerQuestionForDiscussion.cs" />
+    <Compile Include="TaskTypes\Types\TurnInFileForComment.cs" />
     <Compile Include="TaskTypes\Types\Survey.cs" />
     <Compile Include="TaskTypes\Types\TaskTypeResult.cs" />
     <Compile Include="TaskTypes\Types\VideoListing.cs" />
     <Compile Include="TaskTypes\Types\Default.cs" />
-    <Compile Include="TaskTypes\Types\TurnInFileForComment.cs" />
+    <Compile Include="TaskTypes\Types\AnswerQuestionForDiscussion.cs" />
     <Compile Include="TaskTypes\Types\TurnInFileSimple.cs" />
     <Compile Include="TaskTypes\Types\SimpleCompletionNoGrade.cs" />
     <Compile Include="TaskTypes\Types\SimpleCompletion.cs" />

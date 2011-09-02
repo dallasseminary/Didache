@@ -407,6 +407,8 @@
     <Content Include="Areas\Facilitators\Views\Grading\UserInteractions.cshtml" />
     <Content Include="Areas\Students\Views\Shared\TaskType-AnswerQuestionForDiscussion.cshtml" />
     <Content Include="Areas\Admin\Views\Courses\CloneCourse.cshtml" />
+    <Content Include="Areas\Facilitators\Views\Grading\Email.cshtml" />
+    <Content Include="Areas\Facilitators\Views\Grading\EmailSuccess.cshtml" />
     <None Include="Areas\Students\Views\Shared\TaskType-CommentOnPost.cshtml" />
     <Content Include="Areas\Students\Views\Shared\TaskType-Default.cshtml" />
     <Content Include="Views\Account\EditProfile-Full.cshtml" />
@@ -416,6 +418,9 @@
     <Content Include="player\user-courses.ashx" />
     <Content Include="player\video-list.ashx" />
     <Content Include="player\web.config" />
+    <Content Include="tools\datetime.aspx" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Account\ChangePasswordSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\students.css" />
@@ -489,7 +494,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>49375</DevelopmentServerPort>
+          <DevelopmentServerPort>54968</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

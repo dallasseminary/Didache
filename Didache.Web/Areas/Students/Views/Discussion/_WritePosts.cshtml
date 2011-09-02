@@ -5,14 +5,14 @@
 <div class="post">
 	<div class="poster">
 		<a href="@post.User.ProfileDisplayUrl">
-			<img src="@post.User.GetProfileImageUrl(60,60)" alt="@post.User.SecureName" class="post-author" />
+			<img src="@post.User.GetProfileImageUrl(60,60)" alt="@post.User.SecureShortName" class="post-author" />
 		</a>
 	</div>
 	<div class="content-area">
 		<div class="content">
             <div class="post-meta">					
 		        <a href="@post.User.ProfileDisplayUrl">
-			        <span class="name">@post.User.SecureName</span>
+			        <span class="name">@post.User.SecureShortName</span>
                 </a>
 		        <span class="date">
 			        @post.PostDate
@@ -20,6 +20,7 @@
             </div>
             <div class="post-body">@Html.Raw(post.PostContentFormatted)</div>
 		</div>
+		@*
         <div class="reply-link"><a class="d-button edit" rel="#replyto@(post.PostID)" href="javascript:void(0)">Reply</a><div class="clear"></div></div>
 
         <div class="add-reply">
@@ -32,7 +33,7 @@
                 <table>
                     <tr>
                         <th>
-                            <img src="@Users.GetLoggedInUser().GetProfileImageUrl(40,40)" alt="@Users.GetLoggedInUser().SecureName" />
+                            <img src="@Users.GetLoggedInUser().GetProfileImageUrl(40,40)" alt="@Users.GetLoggedInUser().SecureShortName" />
                         </th>
                         <td>
                             <textarea id="replyto@(post.PostID)" name="PostContent" cols="50" rows="8"></textarea>
@@ -43,6 +44,7 @@
 
             </form>
         </div>
+		*@
 	</div>
 </div>
 }

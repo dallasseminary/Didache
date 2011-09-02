@@ -125,7 +125,8 @@ namespace Didache {
 				else {
 					List<String> facultyLastNames = CourseUsers
 									.Where(cu => cu.CourseID == CourseID && cu.RoleID == (int)CourseUserRole.Faculty && cu.User != null)
-									.Select(cu => cu.User.LastName)
+									.ToList()
+									.Select(cu => cu.User.SecureLastName)
 									.ToList();
 					if (facultyLastNames.Count == 0) {
 						return "";
@@ -140,23 +141,27 @@ namespace Didache {
 
 		public string FacultyFullNames {
 			get {
-				List<User> faculty = CourseUsers
-										.Where(cu => cu.CourseID == CourseID && cu.RoleID == (int)CourseUserRole.Faculty)
-										.Select(cu => cu.User)
-										.ToList();
+				if (CourseUsers == null) {
+					return "";
+				} else {
+					List<User> faculty = CourseUsers
+											.Where(cu => cu.CourseID == CourseID && cu.RoleID == (int)CourseUserRole.Faculty)
+											.Select(cu => cu.User)
+											.ToList();
 
-				faculty = faculty.Where(u => u != null).ToList();
+					faculty = faculty.Where(u => u != null).ToList();
 
-				switch (faculty.Count) {
-					case 0:
-						return "(no faculty member)";
-					case 1:
-						return faculty[0].FormattedName;
-					case 2:
-						return faculty[0].FormattedName + " &amp; " + faculty[1].FormattedName;
-					default:
-						return string.Join(", ", faculty.GetRange(0, faculty.Count-1).Select(u => u.FormattedName).ToArray()) + ", and " + faculty.Last().FormattedName;
+					switch (faculty.Count) {
+						case 0:
+							return "(no faculty member)";
+						case 1:
+							return faculty[0].SecureFormattedName;
+						case 2:
+							return faculty[0].SecureFormattedName + " &amp; " + faculty[1].SecureFormattedName;
+						default:
+							return string.Join(", ", faculty.GetRange(0, faculty.Count - 1).Select(u => u.SecureFormattedName).ToArray()) + ", and " + faculty.Last().SecureFormattedName;
 
+					}
 				}
 
 			}

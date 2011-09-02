@@ -133,7 +133,7 @@
     <value>圖書館</value>
   </data>
   <data name="commonmenu_onlineed" xml:space="preserve">
-    <value>在線埃德</value>
+    <value>網上教育</value>
   </data>
   <data name="confirm_delete" xml:space="preserve">
     <value>你確定要刪除這個項目嗎？</value>
@@ -151,13 +151,13 @@
     <value>其他</value>
   </data>
   <data name="coursetabs_assignments" xml:space="preserve">
-    <value>作業</value>
+    <value>作業詳情</value>
   </data>
   <data name="coursetabs_assignments_desc" xml:space="preserve">
     <value>讓您的分級東西</value>
   </data>
   <data name="coursetabs_dashboard" xml:space="preserve">
-    <value>儀表盤</value>
+    <value>研習指標</value>
   </data>
   <data name="coursetabs_dashboard_desc" xml:space="preserve">
     <value>你所有的基地</value>
@@ -166,25 +166,25 @@
     <value>所有的重要信息類</value>
   </data>
   <data name="coursetabs_discussion" xml:space="preserve">
-    <value>討論</value>
+    <value>互動討論</value>
   </data>
   <data name="coursetabs_discussion_desc" xml:space="preserve">
     <value>課程論壇</value>
   </data>
   <data name="coursetabs_files" xml:space="preserve">
-    <value>文件</value>
+    <value>課程檔案</value>
   </data>
   <data name="coursetabs_files_desc" xml:space="preserve">
     <value>教授的材料</value>
   </data>
   <data name="coursetabs_roster" xml:space="preserve">
-    <value>名冊</value>
+    <value>分組名單</value>
   </data>
   <data name="coursetabs_roster_desc" xml:space="preserve">
     <value>滿足你的同學</value>
   </data>
   <data name="coursetabs_schedule" xml:space="preserve">
-    <value>附表</value>
+    <value>課程進度</value>
   </data>
   <data name="coursetabs_schedule_desc" xml:space="preserve">
     <value>日期及分配</value>
@@ -277,7 +277,7 @@
     <value>當前</value>
   </data>
   <data name="submenu_dashboard" xml:space="preserve">
-    <value>儀表盤</value>
+    <value>研習指標</value>
   </data>
   <data name="submenu_edit" xml:space="preserve">
     <value>編輯</value>
@@ -328,7 +328,7 @@
     <value>簡介</value>
   </data>
   <data name="tabs_tour" xml:space="preserve">
-    <value>旅遊</value>
+    <value>瀏覽示範</value>
   </data>
   <data name="home_dashboard_heading_onlineedresources" xml:space="preserve">
     <value>網絡教育資源</value>
@@ -379,19 +379,19 @@
     <value>單位</value>
   </data>
   <data name="courses_heading_dashboard" xml:space="preserve">
-    <value>即將開始 ... ...</value>
+    <value>研習指標</value>
   </data>
   <data name="courses_label_gradedfiles" xml:space="preserve">
     <value>分級文件</value>
   </data>
   <data name="studentschedule_markcompleted" xml:space="preserve">
-    <value>標記為已完成</value>
+    <value>完成鍵</value>
   </data>
   <data name="studentschedule_skip" xml:space="preserve">
     <value>跳過</value>
   </data>
   <data name="studentschedule_submitfordiscussion" xml:space="preserve">
-    <value>提交討論的分配</value>
+    <value>遞交作業</value>
   </data>
   <data name="studentschedule_submitfile" xml:space="preserve">
     <value>在打開文件</value>
@@ -472,7 +472,7 @@
     <value>當然進口影片，幻燈片和成績單到iTunes（或其他媒體軟件）離線瀏覽。</value>
   </data>
   <data name="coursetabs_tools" xml:space="preserve">
-    <value>工具</value>
+    <value>操作工具</value>
   </data>
   <data name="coursetabs_tools_desc" xml:space="preserve">
     <value>下載，日曆，和RSS</value>
@@ -481,13 +481,13 @@
     <value>下載所有文件</value>
   </data>
   <data name="labels_dashboard_facilitators" xml:space="preserve">
-    <value>Faciliators</value>
+    <value>助教老師</value>
   </data>
   <data name="labels_dashboard_faculty" xml:space="preserve">
-    <value>學院</value>
+    <value>指導教授</value>
   </data>
   <data name="labels_dashboard_groupmembers" xml:space="preserve">
-    <value>小組成員</value>
+    <value>同組學生</value>
   </data>
   <data name="labels_dashboard_keyassignments" xml:space="preserve">
     <value>重要任務</value>
@@ -506,5 +506,33 @@
   </data>
   <data name="home_nocourses" xml:space="preserve">
     <value>您沒有任何當前活動課程</value>
+  </data>
+  <data name="login_passwordmessage" xml:space="preserve">
+    <value>您的DTS ID (學生證號碼)與您在達拉斯神學院官網CampusNet的學生證號碼是一致的，但是登錄密碼可以不一樣。
+您目前的登錄密碼就是學生證號碼再加上您姓氏的英文字頭一字母。[例如: John Ma的登錄密碼就是123456m]</value>
+  </data>
+  <data name="survey_submitsurvey" xml:space="preserve">
+    <value>遞交問卷</value>
+  </data>
+  <data name="profile_changepassword" xml:space="preserve">
+    <value>更改密碼</value>
+  </data>
+  <data name="changepassword_confirmnewpassword" xml:space="preserve">
+    <value>確認新密碼</value>
+  </data>
+  <data name="changepassword_currentpassword" xml:space="preserve">
+    <value>當前密碼</value>
+  </data>
+  <data name="changepassword_fail" xml:space="preserve">
+    <value>密碼更改成功。請更正錯誤，然後再試一次。</value>
+  </data>
+  <data name="changepassword_newpassword" xml:space="preserve">
+    <value>新密碼</value>
+  </data>
+  <data name="changepassword_nomatch" xml:space="preserve">
+    <value>新密碼和確認密碼不匹配</value>
+  </data>
+  <data name="changepassword_success" xml:space="preserve">
+    <value>您的密碼已成功更改</value>
   </data>
 </root>

@@ -36,7 +36,7 @@ namespace Didache.Web.Controllers
 			if (ModelState.IsValid) {
 
 				User user = Users.GetLoggedInUser();
-				List<string> emails = new List<string>() {"babegg@dts.edu","mmckee@dts.edu","coursemanagement@dts.edu"};
+				List<string> emails = new List<string>() {"babegg@dts.edu","mmckee@dts.edu","coursemanagement@dts.edu", "jdyer@dts.edu"};
 				string lang = Users.GetUserLanguage();
 				
 				if (lang == "zh-TW" || lang == "zh-CN") {
@@ -47,10 +47,12 @@ namespace Didache.Web.Controllers
 Name: " + model.Name + @"
 Email: " + model.Email + @"
 Message: 
-" + model.Message;
+" + model.Message + 
+  
+"\n\nUser Agent: " + Request.UserAgent;
 
 
-				Emails.SendEmail("noreply@dts.edu", emails, "Help Request", message);
+				Emails.SendEmail(model.Email, emails, "Help Request", message);
 
 				model.IsSubmitted = true;
 			}

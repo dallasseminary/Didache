@@ -32,6 +32,7 @@
 		<th>Code</th>
 		<th>Sec</th>
 		<th>Name</th>
+		<th>Profs</th>
 		<th>Start</th>
 		<th>End</th>
 		<th></th>
@@ -51,6 +52,7 @@
 		<td><span class="course-coursecode">@course.CourseCode</span></td>
 		<td><span class="course-section">@course.Section</span></td>
 		<td><span class="course-name">@course.Name</span></td>
+		<td><span class="course-profs">@course.FacultyLastNames</span></td>
 		<td><span class="course-startdate">@course.StartDate.ToString("MM/dd/yyyy")</span></td>
 		<td><span class="course-enddate">@course.EndDate.ToString("MM/dd/yyyy")</span></td>
 		@* <td><a class="course-grading" href="/admin/courses/grading/@course.CourseID">grading</a></td> *@

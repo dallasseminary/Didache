@@ -9,7 +9,7 @@ namespace Didache {
 		public Post Post { get; set; }
 
 		public override string FormatActivity() {
-			return ((User != null) ? "<a href=\"" + User.ProfileDisplayUrl + "\">" + User.SecureName + "</a>" : "(unknown)") + " added a new post to the thread <a href=\"" + Post.PostUrl + "\">" + Post.Thread.Subject + "</a>";
+			return ((User != null) ? "<a href=\"" + User.ProfileDisplayUrl + "\">" + User.SecureShortName + "</a>" : "(unknown)") + " added a new post to the thread <a href=\"" + Post.PostUrl + "\">" + Post.Thread.Subject + "</a>";
 		}
 	}
 }

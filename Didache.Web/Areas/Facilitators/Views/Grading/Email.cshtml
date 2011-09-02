@@ -1,0 +1,169 @@
+﻿@model Didache.Models.ContactStudentsModel
+
+@{
+    ViewBag.Title = "Email";
+}
+
+<style>
+#email-form textarea, 
+#email-form input[type=text],
+#email-form select {
+	width: 400px;
+}
+#EmailText {
+	height: 100px;
+}
+
+.group-members-toggle {
+	cursor: pointer;
+	color: #333;;
+	white-space: nowrap;
+	display: block;
+	background: #eee;
+	padding: 4px;
+}
+.group-list {
+	display: none;
+	border: solid 1px #eee;
+	border-width: 0 1px 1px 1px;
+	padding: 5px;
+}
+.group-label {
+	width: 160px;
+}
+</style>
+
+<div class="page-wide">
+	@Html.Partial("_CourseHeader", Model.Course)
+
+	<div class="full-column">
+
+		<h2>Send Email to Students</h2>
+
+
+		@using (Html.BeginForm()) {
+		<table class="admin-table" id="email-form">
+			<tr>
+				<th>To</th>
+				<td>
+					@*
+					@Html.DropDownListFor(m => m.SelectedGroupID, Model.GroupsSelectList)
+					*@
+
+					<table id="groups-list">
+						<tr>
+							<td>
+								@Html.RadioButton("SelectedGroupID", "-1", (Model.SelectedGroupID == -1), new { id = "SelectedGroup_All" })
+							</td>
+							<td class="group-label">
+								<label for="SelectedGroup_All">All Students</label>
+							</td>
+							<td>
+								@Html.RadioButton("SelectedGroupID", "0", (Model.SelectedGroupID == 0), new { id = "SelectedGroup_Group_0" })
+							</td>
+							<td class="group-label">
+								<label for="SelectedGroup_Group_0">Not in a Group</label> <span class="group-members-toggle"><span>show</span> @Model.Students.Count(cu => cu.GroupID == 0)</span>
+								
+								
+								<div class="group-list">
+								@foreach (CourseUser user in Model.Students.Where(cu => cu.GroupID == 0)) {
+									<a href="@user.User.ProfileDisplayUrl">@user.User.SecureFormattedName</a><br />
+								}
+								</div>	
+													
+							</td>
+
+							@{ int groupNumber = 1; }
+							@foreach (CourseUserGroup group in Model.Course.CourseUserGroups) {
+								groupNumber++;
+								if (groupNumber % 4 == 0) {
+									@Html.Raw("</tr><tr>")
+								}
+								List<CourseUser> users = Model.Students.Where(cu => cu.GroupID == group.GroupID).ToList();
+							
+							<td>
+								@Html.RadioButton("SelectedGroupID", group.GroupID, (Model.SelectedGroupID == group.GroupID), new { id = "SelectedGroup_Group_" + group.GroupID })
+							</td>
+							<td class="group-label">
+								<label for="SelectedGroup_Group_@group.GroupID">@group.Name</label>
+								<span class="group-members-toggle"><span>show</span> @users.Count</span>
+								
+								<div class="group-list">
+								@foreach (CourseUser user in users) {
+									<a href="@user.User.ProfileDisplayUrl">@user.User.SecureFormattedName</a><br />
+		}
+								</div>	
+																
+							</td>
+	   }
+
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<th>@Html.LabelFor(m => m.Subject)</th>
+				<td>
+					@Html.EditorFor(m => m.Subject)
+					@Html.ValidationMessageFor(m => m.Subject)
+				</td>
+			</tr>
+			<tr>
+				<th>@Html.LabelFor(m => m.EmailText)</th>
+				<td>
+					@Html.EditorFor(m => m.EmailText, new { @class = "html-editor" })
+					@Html.ValidationMessageFor(m => m.EmailText)
+				</td>
+			</tr>
+			<tr>
+				<th></th>
+				<td>
+					@Html.EditorFor(m=> m.SendACopy)
+					@Html.LabelFor(m=> m.SendACopy)	
+				</td>
+			</tr>
+		
+		</table>
+
+		<input type="submit" value="Send Emails" />
+	}
+	</div>
+
+</div>
+
+<script>
+	jQuery(document).ready(function ($) {
+		
+		$('#groups-list .group-members-toggle').toggle(function() {
+			$(this)
+				.find('span')
+					.html('hide')
+				.end()
+				.siblings('.group-list')
+					.show();
+		}, function() {
+			$(this)
+				.find('span')
+					.html('show')
+				.end()
+				.siblings('.group-list')
+					.hide();
+		});
+
+
+		$('#EmailText').wysiwyg("destroy").wysiwyg({
+			rmUnusedControls: true,
+			html: '',
+			controls: {
+				bold: { visible: true },
+				italic: { visible: true },
+				underline: { visible: true },
+				strikeThrough: { visible: true },
+				html: { visible: true },
+				createLink: { visible: true },
+				insertOrderedList: { visible: true },
+				insertUnorderedList: { visible: true }
+			}
+		});
+	});
+</script>

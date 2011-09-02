@@ -44,16 +44,17 @@ namespace Didache.Web.Areas.Students.Controllers
 		public ActionResult TaskFile(int taskID, FormCollection collection) {
 			
 			User user = Users.GetLoggedInUser();
-			UserTaskData data = Tasks.GetUserTaskData(taskID, user.UserID);
+			Task task = db.Tasks.Find(taskID);
+			//UserTaskData data = Tasks.GetUserTaskData(taskID, user.UserID);
 	
 			// do processing
-			TaskTypeResult returnValue = Didache.TaskTypes.TaskTypeManager.ProcessFormCollection(data.Task.TaskTypeName, taskID, user.UserID, collection, Request);
+			TaskTypeResult returnValue = Didache.TaskTypes.TaskTypeManager.ProcessFormCollection(task.TaskTypeName, taskID, user.UserID, collection, Request);
 
 
 			// TODO: for interactions, we might need to go to an #post-123321
 
 			return Redirect(
-						"/courses/" + data.Task.Course.Slug + "/schedule/" + data.Task.UnitID + 
+						"/courses/" + task.Course.Slug + "/schedule/" + task.UnitID + 
 						((!String.IsNullOrWhiteSpace(returnValue.UrlHash)) ? "#" + returnValue.UrlHash : "")
 					);
 		}

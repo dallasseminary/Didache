@@ -12,7 +12,10 @@
 
 			<div id="breadcrumbs"><a href="/courses/@ViewContext.RouteData.Values["slug"]/schedule">@Model.Course.ToString()</a> &#9654; <a href="/courses/@ViewContext.RouteData.Values["slug"]/discussion/">@Model.Name</a></div>
 
-			<div class="thread-link"><a href="javascript:void(0)" class="d-button action">Add Thread</a><div class="clear"></div></div>
+			<div class="thread-link">
+				<button class="d-button action">Add Thread</button>
+			</div>
+			
 			<div class="clear"></div>
 			<div class="forum-threads">
 				<!--div class="header">
@@ -28,10 +31,10 @@
 						foreach (Thread thread in Model.Threads) {
 							<div class="thread" id="thread-@thread.ThreadID">
 								<span class="thumb"><img src="@thread.Posts.First().User.GetProfileImageUrl(40,40)" /></span>
-								<span class="subject"><h4><a href="/courses/@ViewContext.RouteData.Values["slug"]/discussion/thread/@thread.ThreadID">@Html.Raw(thread.Subject)</a></h4><span class="date">Posted by <a href="@thread.Posts.First().User.ProfileDisplayUrl">@thread.Posts.First().User.SecureName</a> &mdash; @thread.ThreadDate.ToShortDateString() at @thread.ThreadDate.ToShortTimeString()</span></span>
+								<span class="subject"><h4><a href="/courses/@ViewContext.RouteData.Values["slug"]/discussion/thread/@thread.ThreadID">@Html.Raw(thread.Subject)</a></h4><span class="date">Posted by <a href="@thread.Posts.First().User.ProfileDisplayUrl">@thread.Posts.First().User.SecureShortName</a> &mdash; @thread.ThreadDate.ToShortDateString() at @thread.ThreadDate.ToShortTimeString()</span></span>
 								<span class="replies">
 									<span class="number">@thread.TotalReplies @(thread.TotalReplies == 1 ? "reply" : "replies") </span>
-									<span class="last-poster">Last by <a href="@thread.Posts.Last().User.ProfileDisplayUrl">@thread.Posts.Last().User.SecureName</a></span>
+									<span class="last-poster">Last by <a href="@thread.Posts.Last().User.ProfileDisplayUrl">@thread.Posts.Last().User.SecureShortName</a></span>
 									<span class="date">@thread.LastPostDate.ToShortDateString() at @thread.LastPostDate.ToShortTimeString()</span> </span>
 							
 							</div>
@@ -39,24 +42,28 @@
 					}
 				</div>
 			</div>
-			<div class="thread-link"><a href="javascript:void(0)" class="d-button action">Add Thread</a></div>
-			<div id="add-post">
+			
+			<div class="thread-link">
+				<button class="d-button action">Add Thread</button>
+			</div>
+			
+			<div class="create-thread" id="create-thread">
 				<div>
-					<form class="forum-post-new" method="post" action="/courses/@ViewContext.RouteData.Values["slug"]/discussion/createpost">
+					<form  method="post" action="/courses/@ViewContext.RouteData.Values["slug"]/discussion/createpost/@Model.ForumID">
 						<h2>Add a New Thread</h2>
-						<a class="cancel-thread" href="javascript:void(0)">Cancel</a>
+						
 						<input type="hidden" id="ForumID" name="ForumID" value="@Model.ForumID" />
 
-						<table style="width: 100%;">
+						<table>
 							<tbody>
 								<tr>
-									<td>Subject</td>
+									<th>Subject</th>
 									<td>
 										<input type="text" id="Subject" size="60" name="Subject" value="" />					
 									</td>
 								</tr>
 								<tr>
-									<td>Message</td>
+									<th>Message</th>
 									<td>
 										<textarea id="PostContent" name="PostContent" cols="60" rows="5"></textarea>
 									</td>
@@ -64,7 +71,10 @@
 							</tbody>
 						</table>
 
-						 <input type="submit" value="Create Thread" />
+						<div class="thread-buttons">
+							<button class="d-button cancel-thread">Cancel</button>
+							<input type="submit" class="d-button action" value="Create Thread" />
+						</div>
 
 					</form>
 				</div>
@@ -75,6 +85,22 @@
 
 <script type="text/javascript">
     jQuery(document).ready(function ($) {
+
+		// begin hidden
+        $('#create-thread').hide();
+
+		// show on click
+        $('.thread-link button').click(function () {
+            $('#create-thread').show();
+        });
+
+        $('#create-thread .cancel-thread').click(function () {
+            $('#create-thread').hide();
+        });
+
+
+
+
         $(".thread-link").show();
 
         $("#add-post").hide().addClass("add-post-outer");

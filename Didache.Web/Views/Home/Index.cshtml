@@ -12,22 +12,43 @@
 	  
 		<h1>@Didache.Resources.labels.home_currentcourses</h1>
 	 
-		List<Course> currentCourses = Didache.Courses.GetUsersRunningCourses(CourseUserRole.Student);
-   
-		if (currentCourses.Count > 0) {
-			foreach(Course course in currentCourses) {
+	 List<Course> currentCourses = Didache.Courses.GetUsersRunningCourses(CourseUserRole.Student);
 
-				<div class="home-dashboard">
-					<h2><a href="@course.CourseUrl">@course.CourseCode - @course.Name</a></h2>
+	 if (currentCourses.Count > 0) {
+		 foreach (Course course in currentCourses) {
+
+			<div class="home-dashboard">
+				<h2><a href="@course.CourseUrl">@course.CourseCode - @course.Name</a></h2>
 			
-					@Html.Partial("_CourseDashboard", course)
-				</div>
+				@Html.Partial("_CourseDashboard", course)
+			</div>
 		
-			}
-		} else {
+		 }
+	 } else {
 			<p>@Didache.Resources.labels.home_nocourses</p>
+	 }
+
+
+	 if (User.IsInRole(UserRoles.Faculty) || User.IsInRole(UserRoles.Facilitator)) {
+			
+		<h1>Course to Facilitate</h1>
+			
+		 List<Course> faciliationCourses = Didache.Courses.GetUsersRunningCourses(CourseUserRole.Faculty, CourseUserRole.Faciliator);
+
+		 if (faciliationCourses.Count > 0) {
+			<ul>		
+			@foreach (Course course in faciliationCourses) {			
+				<li><a href="/grading/@course.Slug/tasklist">@course.CourseCode - @course.Name</a></li>
+
+			}
+			</ul>
+		} else {
+			<p>You don't have any current classes to faciliated</p>
 		}
-	 
+
+	}
+		
+		
 		@*	
 
 
@@ -222,8 +243,7 @@
             </span>
 		</div>
 	 	 *@
- }
- else {
+ } else {
 	  
 		<h2>Welcome</h2>
 	
@@ -254,12 +274,13 @@
 		}	
 		*@		
 			
-
+			@*
         <h3>@Didache.Resources.labels.home_dashboard_heading_courseresources</h3>
         <ul>
             <li>@Didache.Resources.labels.home_dashboard_li_downloadcalendar</li>
             <li><span class="icon compressed">@Didache.Resources.labels.home_dashboard_li_downloadallfiles</span></li>
         </ul>
+		*@
 
         <h3>@Didache.Resources.labels.home_dashboard_heading_onlineedresources</h3>
         <ul>

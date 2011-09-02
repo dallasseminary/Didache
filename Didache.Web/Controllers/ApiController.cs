@@ -67,14 +67,10 @@ namespace Didache.Web.Controllers
 								RoleID = u.RoleID,
 								User = new {
 									UserID = u.User.UserID,
-									FirstName = u.User.FirstName,
-									MiddleName = u.User.MiddleName,
-									LastName = u.User.LastName,
-									FullName = u.User.FullName,
-									NickName = u.User.NickName,
-									NameFormat = u.User.NameFormat,
-									FormattedName = u.User.FormattedName,
-									FormattedNameLastFirst = u.User.FormattedNameLastFirst,
+									FirstName = u.User.SecureFirstName,
+									LastName = u.User.SecureLastName,
+									SecureFormattedName = u.User.FormattedName,
+									SecureFormattedNameLastFirst = u.User.FormattedNameLastFirst,
 									Email = u.User.Email
 								}
 					}), JsonRequestBehavior.AllowGet);
@@ -94,7 +90,12 @@ namespace Didache.Web.Controllers
 				if (Int32.TryParse(part, out id)) {
 					dbQuery = dbQuery.Where(u => u.UserID == id);
 				} else {
-					dbQuery = dbQuery.Where(u => u.LastName == part || u.FirstName == part);
+					dbQuery = dbQuery.Where(u => 
+							u.LastName == part ||
+							u.FirstName == part || 
+							u.AliasFirstName == part ||
+							u.AliasLastName == part
+							);
 				}
 			}
 

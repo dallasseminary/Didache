@@ -8,23 +8,33 @@ namespace Didache {
 	public class VideoInfo {
 		public int SortOrder { get; set; }
 		public string Title { get; set; }
+		public string Speaker { get; set; }
 		public string UnitTaskInfo { get; set; }
 		public string Duration { get; set; }
 		public string ThumbnailUrl { get; set; }
 		public string ThumbnailFilename { get; set; }
-		public string VideoUrl { get; set; }
 		public int PercentComplete { get; set; }
 
 		public string CourseCode  { get; set;}
 		public int UnitNumber { get; set;}
 		public int VideoNumber { get; set;}
 
+		public string VideoUrl { get; set; }
+		public string TranscriptUrl { get; set; }
+		public string SlidesUrl { get; set; }
 
 		public string FormattedDuration {
 			get {
 				string[] parts = Duration.Split(':');
 				return String.Format("{0} minutes", Int32.Parse(parts[1]));
 				//return new TimeSpan(0, Int32.Parse(parts[1]), 0).ToString();
+			}
+		}
+
+		public Double TotalSeconds {
+			get {
+				string[] parts = Duration.Split(':');
+				return (Double.Parse(parts[1]) * 60) + Double.Parse(parts[2]);
 			}
 		}
 

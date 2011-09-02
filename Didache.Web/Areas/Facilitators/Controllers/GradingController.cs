@@ -7,11 +7,13 @@ using Ionic.Zip;
 using System.IO;
 using Didache;
 using System.Text.RegularExpressions;
+using Didache;
+using Didache.Models;
 
 namespace Didache.Web.Areas.Facilitators.Controllers
 {
 
-	[AdminBuilderFacilitator]
+	[AdminFacultyFacilitator]
     public class GradingController : Controller
     {
         //
@@ -112,6 +114,8 @@ namespace Didache.Web.Areas.Facilitators.Controllers
 
 			return View(course);
 		}
+
+
 
 		public ActionResult UserInteractions(string slug, int id, int id2) {
 
@@ -499,6 +503,73 @@ namespace Didache.Web.Areas.Facilitators.Controllers
 			}
 
 			return RedirectToAction("EnterTaskGrades", new { slug = slug, id = id });
+		}
+
+
+		public ActionResult Email(string slug) {
+			Course course = Courses.GetCourseBySlug(slug, false);
+			User user = Users.GetLoggedInUser();
+
+			// is the user a grader of this course?
+			CourseUserGroup graderGroup = course.CourseUserGroups.Where(cug => cug.FacilitatorUserID ==  user.UserID).FirstOrDefault();
+
+
+			ContactStudentsModel model = new ContactStudentsModel();
+
+			model.SendACopy = true;
+			model.Course = course;
+			model.Students = db.CourseUsers
+										.Include("Group")
+										.Include("User")
+										.Where(cu => cu.CourseID == course.CourseID && cu.RoleID == (int) CourseUserRole.Student)
+										.OrderBy(cu => cu.GroupID)
+											.ThenBy(cu => cu.User.LastName)
+										.ToList();
+
+			model.SelectedGroupID = (graderGroup != null) ? graderGroup.GroupID : -1;
+			model.Subject = "";
+			model.EmailText = "";
+
+			return View(model);
+		}
+
+		[HttpPost]
+		public ActionResult Email(string slug, ContactStudentsModel model) {
+
+			Course course = Courses.GetCourseBySlug(slug);
+			User user = Users.GetLoggedInUser();
+
+			if (ModelState.IsValid) {
+
+				// get the right users
+				List<User> users = null;
+				if (model.SelectedGroupID == -1) {
+					users = course.CourseUsers.Where(cu=> cu.RoleID == (int) CourseUserRole.Student).Select(cu => cu.User).ToList();
+				} else {
+					users = course.CourseUsers.Where(cu => cu.GroupID == model.SelectedGroupID).Select(cu => cu.User).ToList();
+				}
+
+				if (model.SendACopy) {
+					users.Add(user);
+				}
+
+				// send email to all people
+				foreach (User student in users) {
+					Emails.EnqueueEmail(user.Email, student.Email, model.Subject, model.EmailText, true);
+				}
+
+				
+
+
+				return View("EmailSuccess", course);
+			} else {
+				model.Course = course;
+
+				return View(model);
+			}
+
+
+			
 		}
 
     }

@@ -36,7 +36,7 @@
 						'<span class="name">' +
 							'<input type="text" class="user-group-name" value=""  placeholder="name" />' +
 						'</span>' +
-						'<span class="group-facilitator"></span>' + 
+						'<span class="group-facilitator"></span>' +
 						'<a class="user-group-edit edit-link" href="/admin/courses/userGroup/0">Edit</a>' +
 		//'<a class="user-group-edit delete-link" href="/admin/courses/deleteuserGroup/0">Delete</a>' +
 					'</div>' +
@@ -54,7 +54,7 @@
 
 	function updateUserGroupRow(userGroupRow, userGroup) {
 		userGroupRow.attr('data-groupid', userGroup.GroupID);
-		userGroupRow.find('.group-facilitator').html( userGroup.Facilitator != null ? userGroup.Facilitator.FormattedName : "--none--");
+		userGroupRow.find('.group-facilitator').html(userGroup.Facilitator != null ? userGroup.Facilitator.FormattedName : "--none--");
 		userGroupRow.find('.user-group-name').val(userGroup.Name);
 	}
 
@@ -168,8 +168,11 @@
 						$('#user-group-editor').dialog("close");
 
 						if (isNew) {
-							var groupRow = $('#course-user-groups div[data-groupid="' + data.model.GroupID + '"]');
-							renderUserGroupRow(data.model, groupRow);
+							var userGroupArea = $('#course-user-groups');
+
+							console.log(userGroupArea, data, data.model);
+
+							renderUserGroupRow(data.model, userGroupArea);
 							setupUserSorting();
 						} else {
 							var taskRow = $('#course-user-groups div[data-groupid="' + data.model.GroupID + '"]');

@@ -92,7 +92,7 @@ namespace Didache {
 					//}
 				}
 
-				CourseUsers.AddUserToCourse(courseID, user.UserID, 0, CourseUserRole.Student);
+				CourseUsers.AddUserToCourse(courseID, user.UserID, -1, CourseUserRole.Student);
 			
 			}
 	

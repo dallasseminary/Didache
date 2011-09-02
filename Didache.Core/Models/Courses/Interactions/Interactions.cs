@@ -34,25 +34,72 @@ namespace Didache {
 			
 			DidacheDb db = new DidacheDb();
             User user = Users.GetLoggedInUser();
-            Task task = db.Tasks.Include("Course").SingleOrDefault(t => t.TaskID == taskID);
+            Task task = db.Tasks
+							.Include("Course.CourseUsers")
+							.Include("Course.CourseUserGroups")
+							.SingleOrDefault(t => t.TaskID == taskID);
 			Course course = task.Course;
 
-			// find this user's group
-            CourseUser courseUser = course.CourseUsers
+			/// get all users associations
+            CourseUser courseUserAsStudent = course.CourseUsers
 											.SingleOrDefault(u => u.UserID == user.UserID && 
 																  u.RoleID == (int) CourseUserRole.Student);
+			CourseUser courseUserAsFaculty = course.CourseUsers
+											.SingleOrDefault(u => u.UserID == user.UserID &&
+																  u.RoleID == (int)CourseUserRole.Faculty);
+			CourseUser courseUserAsFaciliator = course.CourseUsers
+											.SingleOrDefault(u => u.UserID == user.UserID &&
+																  u.RoleID == (int)CourseUserRole.Faciliator);
 
-			// find all the people in the group
+			// find out which group(s) this person should be associated with
+			// facilitators can be in many groups
             List<int> courseUserIDs = new List<int>();
-			if (courseUser != null) {
-				foreach (CourseUser cu in course.CourseUsers) {
-					if (cu.GroupID == courseUser.GroupID) {
-						courseUserIDs.Add(cu.UserID);
-					}
-				}
+			List<int> usersGroupIDs = new List<int>();
+			List<CourseUserGroup> usersGroups = new List<CourseUserGroup>();
+
+			// faculty members should see all posts from all groups
+			if (courseUserAsFaculty != null) {
+				//usersGroupIDs = -1;
+				//usersGroup = null;
+				usersGroups = course.CourseUserGroups.ToList();
+				usersGroupIDs = usersGroups.Select(cup => cup.GroupID).ToList();
+
+			// faculitators should see only their group
+			// BUT, for now we have to find that groupID in the groups
+			} else if (courseUserAsFaciliator != null) {
+				usersGroups = course.CourseUserGroups.Where(cup => cup.FacilitatorUserID == user.UserID).ToList();
+				usersGroupIDs = usersGroups.Select(cup => cup.GroupID).ToList();
+
+			// students should just see their group
+			} else if (courseUserAsStudent != null) {
+				usersGroupIDs.Add(courseUserAsStudent.GroupID);
+				usersGroups.AddRange(course.CourseUserGroups.Where(cup => usersGroupIDs.Contains(cup.GroupID)).ToList());
+
 			} else {
+				// should be an adminstrator
+			}
+
+
+			// FIND group members
+			if (usersGroupIDs.Count > 0) {
+				// just members in the group
+				courseUserIDs = course.CourseUsers.Where(cu =>
+															usersGroupIDs.Contains(cu.GroupID) && 
+															cu.RoleID == (int) CourseUserRole.Student).Select(cu => cu.UserID).ToList();
+					
+				// include all facilitators (nasty)
+				courseUserIDs.AddRange(usersGroups.Select(cup => cup.FacilitatorUserID).ToList());
+
+				// always include faculty?
+				courseUserIDs.AddRange(course.CourseUsers.Where(cu => cu.RoleID == (int)CourseUserRole.Faculty).Select(cu => cu.UserID).ToList());
+
+				
+			} else {
+				// faculty should get all members
 				courseUserIDs = course.CourseUsers.Select(cu => cu.UserID).ToList();
 			}
+
+
 
 			List<InteractionThread> threads = db
 				.InteractionThreads

@@ -21,6 +21,7 @@ namespace Didache.Web.Areas.Facilitators.Controllers
 			if (sessionID.HasValue) {
 				// get all courses
 				coursesAsFacilitator = Didache.Courses.GetUsersCourses(CourseUserRole.Faciliator);
+				coursesAsFacilitator.AddRange(Didache.Courses.GetUsersCourses(CourseUserRole.Faculty));
 				sessionCourses = coursesAsFacilitator.Where(c => c.SessionID == sessionID.Value).ToList();
 
 
@@ -30,6 +31,7 @@ namespace Didache.Web.Areas.Facilitators.Controllers
 
 				// just active courses 
 				coursesAsFacilitator = Didache.Courses.GetUsersRunningCourses(CourseUserRole.Faciliator);
+				coursesAsFacilitator.AddRange(Didache.Courses.GetUsersRunningCourses(CourseUserRole.Faculty));
 
 				sessionCourses = coursesAsFacilitator;
 

@@ -187,7 +187,7 @@
     <value>iTunes Feed</value>
   </data>
   <data name="courses_tools_itunes_desc" xml:space="preserve">
-    <value>Import course videos, slides, and transcripts into iTunes (or other media software) for offline viewing.</value>
+    <value>Import course videos, slides, and transcripts into iTunes (or other media software) for offline viewing. In iTunes, copy this URL, click on "Advanced" in the menu, select "Subscribe to Podcast," and then paste the URL.</value>
   </data>
   <data name="coursetabs_assignments" xml:space="preserve">
     <value>Assignments</value>
@@ -313,7 +313,7 @@
     <value>Zotero (free)</value>
   </data>
   <data name="home_nocourses" xml:space="preserve">
-    <value>You don't have any currently active courses</value>
+    <value>You are not registered to take any current classes.</value>
   </data>
   <data name="index_title" xml:space="preserve">
     <value>Index Page</value>
@@ -638,5 +638,29 @@
   </data>
   <data name="survey_thankyou" xml:space="preserve">
     <value>Thank you for submitting the survey.</value>
+  </data>
+  <data name="studentschedule_unitnotactive" xml:space="preserve">
+    <value>This unit is not yet available to view. It will come online soon.</value>
+  </data>
+  <data name="profile_changepassword" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+  <data name="changepassword_confirmnewpassword" xml:space="preserve">
+    <value>Confirm New Password</value>
+  </data>
+  <data name="changepassword_currentpassword" xml:space="preserve">
+    <value>Current Password</value>
+  </data>
+  <data name="changepassword_fail" xml:space="preserve">
+    <value>Password change was unsuccessful. Please correct the errors and try again.</value>
+  </data>
+  <data name="changepassword_newpassword" xml:space="preserve">
+    <value>New Password</value>
+  </data>
+  <data name="changepassword_nomatch" xml:space="preserve">
+    <value>The new password and confirmation password do not match</value>
+  </data>
+  <data name="changepassword_success" xml:space="preserve">
+    <value>Your password was successfully changed</value>
   </data>
 </root>

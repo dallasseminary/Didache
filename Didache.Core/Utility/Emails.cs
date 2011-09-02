@@ -29,13 +29,20 @@ namespace Didache {
 				message.To.Add(new MailAddress(email));
 			
 			
-			message.Subject = "[DTS online] " + subject;
+			message.Subject = "[DTS Online] " + subject;
 			message.BodyEncoding = Encoding.Unicode;
 			message.SubjectEncoding = Encoding.Unicode;
 			message.IsBodyHtml = isHtml;
 			message.Body = body;
 
 			client.Send(message);
+		}
+
+		public static void EnqueueEmail(string fromEmail, string toEmail, string subject, string body, bool isHtml) {
+			
+			// TODO: make this faster by queueing for a later thread
+			
+			SendEmail(fromEmail, toEmail,  subject,  body,  isHtml);
 		}
 	}
 }

@@ -221,7 +221,7 @@
 				userRow = $(
 					'<div class="user" data-userid="' + user.UserID + '">' +
 						'<span class="user-id">' + user.UserID + '</span>' +
-						'<span class="user-name">' + user.User.FormattedNameLastFirst + '</span>' +
+						'<span class="user-name">' + user.User.SecureFormattedNameLastFirst + ' (<a href="/admin/users/edituser/' + user.UserID + '">edit</a>)</span>' +
 						'<span class="user-remove">X</span>' +
 					'</div>');
 

@@ -15,18 +15,23 @@ namespace Didache.Models {
 	public class ChangePasswordModel {
 		[Required]
 		[DataType(DataType.Password)]
-		[Display(Name = "Current password")]
+		//[Display(Name = "Current password")]
+		[Display(Name = "changepassword_currentpassword", ResourceType = typeof(Resources.labels))]
 		public string OldPassword { get; set; }
 
 		[Required]
 		[ValidatePasswordLength]
 		[DataType(DataType.Password)]
-		[Display(Name = "New password")]
+		//[Display(Name = "New password")]
+		[Display(Name = "changepassword_newpassword", ResourceType = typeof(Resources.labels))]
 		public string NewPassword { get; set; }
 
 		[DataType(DataType.Password)]
-		[Display(Name = "Confirm new password")]
-		[Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+		//[Display(Name = "Confirm new password")]
+		[Display(Name = "changepassword_confirmnewpassword", ResourceType = typeof(Resources.labels))]
+		
+		[Compare("NewPassword", ErrorMessageResourceName="changepassword_nomatch", ErrorMessageResourceType= typeof(Resources.labels))]
+		//[Compare("NewPassword",  ErrorMessage = "The new password and confirmation password do not match.")]
 		public string ConfirmPassword { get; set; }
 	}
 

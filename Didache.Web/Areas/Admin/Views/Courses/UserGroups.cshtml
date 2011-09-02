@@ -61,12 +61,12 @@ x edit popup / edit inline
 		</tr>
 		<tr>
 			<th>
-				Faciliator
+				Facilitator
 			</th>
 			<td>
 				<select name="FacilitatorUserID">
 					<option value="0">-- None --</option>
-				@foreach (CourseUser courseUser in Model.CourseUsers.Where(cu => cu.RoleID == (int)CourseUserRole.Faciliator)) {
+				@foreach (CourseUser courseUser in (new DidacheDb()).CourseUsers.Where(cu => cu.CourseID == Model.CourseID && cu.RoleID == (int)CourseUserRole.Faciliator).ToList()) {
 					<option value="@courseUser.UserID">@courseUser.User.FormattedName</option>
 				}
 				</select>

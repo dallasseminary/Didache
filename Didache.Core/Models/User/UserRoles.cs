@@ -22,13 +22,19 @@ namespace Didache {
 
 		public static string Facilitator {
 			get {
-				return "oe-grader";
+				return "oe-facilitator";
+			}
+		}
+
+		public static string Faculty {
+			get {
+				return "oe-faculty";
 			}
 		}
 
 		public static string[] SiteRoles {
 			get {
-				return new string[] { Administrator, Builder, Facilitator };
+				return new string[] { Administrator, Builder, Facilitator, Faculty };
 			}
 		}
 

@@ -25,7 +25,7 @@
 				<th>ID</th>
 				<th>First</th>
 				<th>Last</th>
-				<th>Username</th>
+				<th>Secure Name</th>
 				<th>Last Activity</th>
 				<th></th>
 			</tr>
@@ -36,7 +36,7 @@
 				<td>@user.UserID</td>
 				<td>@user.FirstName</td>
 				<td>@user.LastName</td>
-				<td>@user.Username</td>
+				<td>@user.SecureFormattedName</td>
 				<td>
 					@{ MembershipUser mUser = Membership.GetUser(user.Username, false); }
 					@(mUser != null ? mUser.LastActivityDate.ToString() : "(none)")

@@ -37,6 +37,8 @@ namespace Didache {
 		public int NavigationLabels{ get; set; }
 		public int ServiceFacilitators{ get; set; }
 		public int ServiceTechnical{ get; set; }
+
+		[MaxLength]
 		public string Comments { get; set; }
 
 	}

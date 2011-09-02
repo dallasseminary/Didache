@@ -17,7 +17,7 @@ namespace Didache {
 		public int FacilitatorUserID { get; set; }
 		public string Name{ get; set; }
 
-		public virtual ICollection<CourseUser> Students { get; set; }
+		public virtual ICollection<CourseUser> Students { get; set;}
         
 		[ForeignKey("FacilitatorUserID")]
 		public virtual User Facilitator { get; set; }

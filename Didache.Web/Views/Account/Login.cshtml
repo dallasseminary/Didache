@@ -11,61 +11,12 @@
 		</div>
 
 
-<style>
-.login_box {
-	width: 280px;
-	margin: 20px auto;
-	background: #eee;
-	padding: 20px 40px;
-	border: solid 1px #999;
-	overflow: hidden;
-}
-.login_box label {
-	font-size: 15px;
-}
-.login_box #username, .login_box #password {
-	font-size: 16px;
-	padding: 4px;
-	border: solid 1px #999;
-	margin: 0 0 10px;
-	width: 270px;
-}
-.login_buttons {
-	overflow: hidden;
-	margin: 0 0 10px 0;
-}
-.login_remember {
-	margin: 5px 0 0 0;
-	float: left;
-}
-.login_box #submit {
-	float: right;
-	width: 90px;
-}
-
-.validation-summary-errors {
-	width: 280px;
-	margin: 20px auto;
-	background: #f2a9a9;
-	padding: 20px 40px;
-	border: solid 1px #bd1816;
-	overflow: hidden;	
-	color: #bd1816;
-}
-
-.login_message {
-	width: 300px;
-	padding: 15px;
-	margin: 40px auto 0;
-}
-</style>
-
 
 @Html.ValidationSummary(false, @Didache.Resources.labels.login_unsuccessful)
 
 @using (Html.BeginForm()) {
 		
-		<div class="login_box">
+		<div class="account-box login-box">
 	
             <div class="editor-label">
                 <label for="username">@Didache.Resources.labels.login_username</label>
@@ -83,9 +34,9 @@
                 @Html.ValidationMessageFor(m => m.Password)
             </div>
 
-            <div class="login_buttons">
+            <div class="login-buttons">
 				
-				<div class="login_remember">
+				<div class="login-remember">
 					<input type="checkbox" id="RememberMe" name="RememberMe" @(Model != null && Model.RememberMe ? "checked=checked" : "") value="true" />
 					<label for="RememberMe">@Didache.Resources.labels.login_rememberme</label>				
 				</div>
@@ -99,7 +50,7 @@
 			
 		</div>
 	
-	<div class="login_message">
+	<div class="login-message">
 		@Didache.Resources.labels.login_passwordmessage
 	</div>
 }

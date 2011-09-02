@@ -19,6 +19,8 @@
 			<h3>@(ViewBag.CurrentUnit != null ? "Unit " + ViewBag.CurrentUnit.SortOrder + ": " + ViewBag.CurrentUnit.Name : "")</h3>
 		</div>
 
+		@if (ViewBag.CurrentUnit.IsActive) {
+
 		<div id="schedule-tasks" class="block-list">
 	
 		@if (ViewBag.UserTasks != null) {	 
@@ -69,6 +71,9 @@
 	
 
 		</div>
+      } else {
+		<p>@Didache.Resources.labels.studentschedule_unitnotactive</p>
+      }
 
 		<div class="clear"></div>
 	</div>

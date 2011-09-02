@@ -23,8 +23,10 @@ namespace Didache {
 			if (courseUser != null) {
 
 				// update the group
-				courseUser.GroupID = groupID;
-				db.SaveChanges();
+				if (groupID > 0) {
+					courseUser.GroupID = groupID;
+					db.SaveChanges();
+				}
 
 				return false;
 			} else {

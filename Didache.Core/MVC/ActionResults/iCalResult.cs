@@ -41,15 +41,27 @@ namespace Didache {
 
 			if (_events != null && _events.Count > 0) {
 				foreach (ICalEvent iEvent in _events) {
-					sb.AppendLine(String.Format("DTSTART:{0}",iEvent.StartUtc.ToUniversalTime().ToString("yyyymmddThhiissZ")));
-					sb.AppendLine(String.Format("DTEND:{0}", iEvent.EndUtc.ToUniversalTime().ToString("yyyymmddThhiissZ")));
+					sb.AppendLine("BEGIN:VEVENT");
+					sb.AppendLine("UID:" + iEvent.UID);
+					//sb.AppendLine(String.Format("DTSTART:{0}", iEvent.StartUtc.ToUniversalTime().ToString("yyyyMMddTHHmmssZ")));
+
+					sb.AppendLine(String.Format("DTSTART:{0}", iEvent.StartUtc.ToString("yyyyMMdd")));
+					
+
+					if (iEvent.StartUtc != iEvent.EndUtc)
+						//sb.AppendLine(String.Format("DTEND:{0}", iEvent.EndUtc.ToUniversalTime().ToString("yyyyMMddTHHmmssZ")));
+						sb.AppendLine(String.Format("DTEND:{0}", iEvent.EndUtc.ToString("yyyyMMdd")));
+
+
 					sb.AppendLine(String.Format("SUMMARY:{0}", iEvent.Summary));
-					sb.AppendLine(String.Format("DESCRIPTION:{0}",iEvent.Description));
-					sb.AppendLine(String.Format("LOCATION:{0}", iEvent.Location));
+					sb.AppendLine(String.Format("DESCRIPTION;ENCODING=QUOTED-PRINTABLE:{0}", iEvent.Description));
+					if (!String.IsNullOrWhiteSpace(iEvent.Location))
+						sb.AppendLine(String.Format("LOCATION:{0}", iEvent.Location));
+					sb.AppendLine("END:VEVENT");
 				}
 			}
 
-			sb.AppendLine("END:VCALENDAR");
+			sb.Append("END:VCALENDAR");
 
             context.HttpContext.Response.ContentType = "text/calendar";
 			if (!String.IsNullOrEmpty(_filename)) {
@@ -61,6 +73,7 @@ namespace Didache {
 	}
 
 	public class ICalEvent {
+		public string UID { get; set; }
 		public DateTime StartUtc { get; set;}
         public DateTime EndUtc { get; set;}
         public string Summary { get; set;}

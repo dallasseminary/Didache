@@ -7,7 +7,7 @@
 			underline: { visible: true },
 			strikeThrough: { visible: true },
 			html: { visible: true },
-			createLink: { visible: true },
+			createLink: { visible: true }
 		}
 	});
 }

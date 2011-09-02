@@ -24,7 +24,7 @@
 					<a class="name" href="/courses/@Model.Slug/schedule/@task.UnitID/#task-@task.TaskID">@task.Task.Name</a>
 					<span class="due-date @(task.TaskCompletionStatus == TaskCompletionStatus.NotStarted && DateTime.Now > task.Task.DueDate.Value ? "overdue" : "")">@task.Task.DueDate.Value.ToShortDateString()</span> 
 					<span class="description">
-					@Utility.StripHtml(task.Task.Instructions)
+					@Html.Raw(Utility.StripHtml(task.Task.Instructions))
 					</span>
 				</div>
 			}
@@ -40,9 +40,9 @@
 
 			@foreach (CourseUser user in courseUsers.Where(cu => cu.CourseUserRole == CourseUserRole.Faculty).OrderBy(cu => cu.User.LastName)) {
 				<div class="user">
-					<a href="@user.User.ProfileDisplayUrl" title="@user.User.FormattedName">
-						<img src="@user.User.GetProfileImageUrl(40,40)" width="40" height="40" alt="@user.User.FormattedName" />
-						<span>@user.User.FullName</span>
+					<a href="@user.User.ProfileDisplayUrl" title="@user.User.SecureFormattedName">
+						<img src="@user.User.GetProfileImageUrl(40,40)" width="40" height="40" alt="@user.User.SecureFormattedName" />
+						<span>@user.User.SecureFormattedName</span>
 					</a>
 				</div>
 			}
@@ -54,9 +54,9 @@
 
 			@foreach (CourseUser user in courseUsers.Where(cu => cu.CourseUserRole == CourseUserRole.Faciliator).OrderBy(cu => cu.User.LastName)) {
 				<div class="user">
-					<a href="@user.User.ProfileDisplayUrl" title="@user.User.FormattedName">
+					<a href="@user.User.ProfileDisplayUrl" title="@user.User.SecureFormattedName">
 						<img src="@user.User.GetProfileImageUrl(40,40)" width="40" height="40" />
-						<span>@user.User.FormattedName</span>
+						<span>@user.User.SecureFormattedName</span>
 					</a>
 				</div>			
 			}
@@ -74,7 +74,7 @@
 													cu.GroupID == currentUserAsStudent.GroupID)
 												.OrderBy(cu => cu.User.LastName)) {
 				<div class="user">
-					<a href="@user.User.ProfileDisplayUrl" title="@user.User.FormattedName">
+					<a href="@user.User.ProfileDisplayUrl" title="@user.User.SecureFormattedName">
 						<img src="@user.User.GetProfileImageUrl(40, 40)" width="40" height="40" />						
 					</a>
 				</div>				

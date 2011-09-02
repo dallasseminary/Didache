@@ -1,23 +1,24 @@
 ﻿@model Didache.User
 
 @{
-    ViewBag.Title = Model.SecureName;
+	ViewBag.Title = Model.SecureFormattedName;
 }
 
 @section profileimage {
 	<div id="profile-large">
-		<img src="@Model.ProfileImageUrl" alt="@Model.FormattedName" width="180" />
+		<img src="@Model.ProfileImageUrl" alt="@Model.SecureFormattedName" width="180" />
 	</div>
 }
 
 <div class="page-narrow">
 	<div class="main-column">
 		<div class="page-header">
-			<h2>@Model.SecureName</h2>
+			<h2>@Model.SecureFormattedName</h2>
 			<h3>@Model.Country</h3>
 
 			@if (Model.UserID == Users.GetLoggedInUser().UserID) {
 				<div class="actions">
+				<a class="d-button" href="/account/changepassword">@Didache.Resources.labels.profile_changepassword</a>
 				<a class="d-button edit" href="/account/editprofile">@Didache.Resources.labels.profile_edit_button</a>
 				</div>
 			}

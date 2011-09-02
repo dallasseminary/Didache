@@ -27,7 +27,12 @@ namespace Didache.Web.Areas.Admin.Controllers
 				if (Int32.TryParse(query, out number)) {
 					users = db.Users.Where(u => u.UserID == number).ToList();
 				} else {
-					users = db.Users.Where(u => u.Username == query || (u.FirstName + " " + u.LastName == query) || u.LastName == query).ToList();
+					users = db.Users.Where(u => 
+												u.Username == query || 
+												u.LastName == query ||
+												(u.FirstName + " " + u.LastName == query) || 
+												u.AliasFirstName == query || 
+												u.AliasLastName == query).ToList();
 				}
 
 			}
@@ -51,17 +56,38 @@ namespace Didache.Web.Areas.Admin.Controllers
 			return View(user);
 		}
 
+
+
 		
 		[HttpPost]
-		public ActionResult EditUser(User user, string[] roles) {
-			if (user.UserID > 0) {
-				user = db.Users.Find(user.UserID);
+		public ActionResult EditUser(User model, string[] roles) {
+			if (model.UserID > 0) {
+				User user = db.Users.Find(model.UserID);
+
+				// Update model didn't work, so I'm just doing a simple update of the one propery we're editing
+				user.AliasFirstName = model.AliasFirstName;
+				user.AliasLastName = model.AliasLastName;
+				user.PictureSecuritySetting = model.PictureSecuritySetting;
+				//UpdateModel(user);
+
+
+				db.SaveChanges();
+
+				Users.ClearUserCache(user);
+
 
 				// remove current roles
-				string[] currentRoles = System.Web.Security.Roles.GetRolesForUser(user.Username);
-				if (currentRoles.Length > 0) {
-					System.Web.Security.Roles.RemoveUserFromRoles(user.Username, System.Web.Security.Roles.GetRolesForUser(user.Username));
+				//string[] currentRoles = System.Web.Security.Roles.GetRolesForUser(user.Username);
+				//if (currentRoles.Length > 0) {
+				//	System.Web.Security.Roles.RemoveUserFromRoles(user.Username, System.Web.Security.Roles.GetRolesForUser(user.Username));
+				//}
+
+				foreach (string role in UserRoles.SiteRoles) {
+					if (System.Web.Security.Roles.IsUserInRole(user.Username, role))
+						System.Web.Security.Roles.RemoveUserFromRole(user.Username, role);
 				}
+
+
 
 				// add new roles	
 				if (roles != null && roles.Length > 0) {

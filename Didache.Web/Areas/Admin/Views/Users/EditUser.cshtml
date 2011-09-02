@@ -22,6 +22,14 @@
 					<td>@Model.UserID</td>
 				</tr>
 				<tr>
+					<th>@Html.LabelFor(m=>m.AliasFirstName)</th>
+					<td>@Html.EditorFor(m => m.AliasFirstName)</td>
+				</tr>
+				<tr>
+					<th>@Html.LabelFor(m=>m.AliasLastName)</th>
+					<td>@Html.EditorFor(m => m.AliasLastName)</td>
+				</tr>
+				<tr>
 					<th>Nick</th>
 					<td>@Model.NickName</td>
 				</tr>
@@ -38,16 +46,21 @@
 					<td>@Model.LastName</td>
 				</tr>
 				<tr>
-					<th>Last</th>
-					<td>@Model.LastName</td>
-				</tr>
-				<tr>
 					<th>Email</th>
 					<td>@Model.Email</td>
 				</tr>
 				<tr>
 					<th>Username</th>
 					<td>@Model.Username</td>
+				</tr>
+				<tr>
+					<th>Picture</th>
+					<td>
+						@Html.EditorFor(model => model.PictureSecuritySetting, "SecuritySetting", "PictureSecurity")
+						<br />
+						<img src="@Model.ProfileImageUrl" />
+					
+					</td>
 				</tr>
 				<tr>
 					<th>Roles</th>

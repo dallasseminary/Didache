@@ -118,13 +118,13 @@ jQuery(document).ready(function ($) {
 					$('<div class="task-interaction-post">' +
 
 						'<div class="task-interaction-userimage">' +
-							'<a href="' + d.user.ProfileUrl + '">' +
-								'<img src="' + d.user.ProfileImageUrl + '&width=30&height=30" alt="' + d.user.SecureName + '" />' +
+							'<a href="' + d.user.ProfileDisplayUrl + '">' +
+								'<img src="' + d.user.ProfileImageUrl + '&width=30&height=30" alt="' + d.user.SecureShortName + '" />' +
 							'</a>' +
 						'</div>' +
 						'<div class="task-interaction-content">' +
 							'<div class="task-interaction-meta">' +
-								'<a class="user-name" href="' + d.user.ProfileUrl + '">' + d.user.SecureName + '</a>' +
+								'<a class="user-name" href="' + d.user.ProfileDisplayUrl + '">' + d.user.SecureShortName + '</a>' +
 								'<span class="post-date">' + d.post.PostDate + '</span>' +
 							'</div>' +
 							'<div class="task-interaction-text">' +

@@ -16,7 +16,10 @@
 			<table class="task-grading-list grading-list">
 			@foreach (Task task in unit.Tasks) {
 				<tr>
-					<td class="name">@task.Name</td>
+					<td class="name task-details ">
+						<b>@task.Name</b> @(task.DueDate.HasValue ? "(due: " + task.DueDate.Value.ToString("MM/dd/yy") + ")" : "")
+						<span class="task-instructions">@Html.Raw(task.Instructions)</span>	
+					</td>
 
 					<td class="download-files">
 						@if (task.TaskTypeName.IndexOf("TurnInFile") > -1) {
@@ -50,3 +53,18 @@
 
 	</div>
 </div>
+
+
+<script>
+jQuery(document).ready(function ($) {
+	// shorten task descriptions
+	$('.task-instructions').expander({
+		slicePoint: 20
+		, widow: 2
+		//,expandEffect: 'show'
+		, expandText: 'show »'
+		//, userCollapse: false
+		, userCollapseText: '« hide'
+	});
+});
+</script>

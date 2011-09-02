@@ -75,10 +75,47 @@ namespace Didache.Web.Areas.Students.Controllers
 
 		[Authorize]
 		[HttpPost]
-		public ActionResult CreatePost(string slug, int id, FormCollection collection) {
+		public ActionResult CreatePost(string slug, Thread thread, FormCollection collection) {
 			// add post to post id
 
-			return View();
+			User profile = Users.GetLoggedInUser();
+			DidacheDb db = new DidacheDb();
+
+			// make thread
+			thread.UserID = profile.UserID;
+			thread.TotalReplies = 0;
+			thread.TotalViews = 0;
+			thread.ThreadDate = DateTime.Now;
+			thread.UserName = profile.Username;
+			thread.LastPostUserName = profile.Username;
+			thread.LastPostUserID = profile.UserID;
+			thread.LastPostID = 0;
+			thread.LastPostDate = DateTime.Now;
+			thread.LastPostSubject = collection["Subject"];
+			
+
+			db.Threads.Add(thread);
+			db.SaveChanges();
+
+			// add post to thread
+			Post post = new Post();
+			post.ThreadID = thread.ThreadID;
+			post.ForumID = Int32.Parse(collection["ForumID"]);
+			post.PostDate = DateTime.Now;
+			post.UserID = profile.UserID;
+			post.UserName = profile.FullName;
+			post.ReplyToPostID = 0;
+			post.Subject = collection["Subject"];
+			post.PostContent = collection["PostContent"];
+			post.PostContentFormatted = Forums.FormatPost(post.PostContent);
+
+			
+			db.Posts.Add(post);
+			db.SaveChanges();
+
+
+
+			return RedirectToAction("Thread", new { slug = slug, id = thread.ThreadID });
 		}
 
 		[Authorize]

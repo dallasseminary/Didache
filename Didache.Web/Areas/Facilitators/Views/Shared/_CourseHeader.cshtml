@@ -8,7 +8,8 @@
 <ul class="page-menu">
 	@foreach(var page in new[] {
 								new {Url="tasklist", Name="Task List"},
-								new {Url="studentlist", Name="Student List"}
+								new {Url="studentlist", Name="Student List"},
+                                new {Url="email", Name="Email"}
 	}
 	) {
 		<li><a href="/grading/@Model.Slug/@page.Url/" @(Request.Url.ToString().Contains(page.Url) ? " class=selected" : "")>@page.Name</a></li>

@@ -220,6 +220,7 @@
 					'<input type="checkbox" class="file-active"  />' +
 					'<input type="text" class="file-title" />' +
 				'</span>' +
+				'<span class="file-link"><a href="#">download</a></span>' +
 				'<span class="file-user"></span>' +
 				//'<a class="file-edit edit-link" href="javascript:void(0);">Edit</a>' +
 				//'<a class="file-delete delete-link" href="javascript:void(0);">Delete</a>' +
@@ -237,6 +238,9 @@
 		taskRow.find('.file-type img').attr('src', '/css/images/' + file.CourseFile.FileType + '.png');
 		taskRow.find('.file-title').val(file.CourseFile.Title);
 		taskRow.find('.file-user').val((file.CourseFile.User && file.CourseFile.User.FullName) ? file.CourseFile.User.FullName : 'no obj');
+
+		taskRow.find('.file-link a').attr('href',file.CourseFile.FileUrl).html(file.CourseFile.Filename);
+
 		taskRow.find('.file-edit').attr('href', '/admin/courses/file/' + file.FileID);
 		taskRow.find('.file-delete').attr('href', '/admin/courses/deletefile/' + file.FileID);
 	}

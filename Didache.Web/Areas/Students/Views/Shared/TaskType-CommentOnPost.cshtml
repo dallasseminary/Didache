@@ -13,23 +13,27 @@
 		<div class="task-interaction-main">
 			<div class="task-interaction-userimage">
 				<a href="@(thread.User != null ? thread.User.ProfileDisplayUrl : "#")">
-					<img src="@(thread.User != null ? thread.User.GetProfileImageUrl(40, 40) : "")" alt="@(thread.User != null ? thread.User.SecureName : "#")"
+					<img src="@(thread.User != null ? thread.User.GetProfileImageUrl(40, 40) : "")" alt="@(thread.User != null ? thread.User.SecureShortName : "#")" />
 				</a>				
 			</div>	
 			<div class="task-interaction-content">			
 				<div class="task-interaction-meta">
-					<a class="user-name" href="@(thread.User != null ? thread.User.ProfileDisplayUrl : "#")">@(thread.User != null ? thread.User.SecureName : "missing")</a>
+					<a class="user-name" href="@(thread.User != null ? thread.User.ProfileDisplayUrl : "#")">@(thread.User != null ? thread.User.SecureShortName : "missing")</a>
 					<span class="post-date">@thread.ThreadDate.ToShortDateString()</span>
 					<span class="total-replies d-button">@String.Format(Didache.Resources.labels.interactions_replies, (thread.Posts.Count - 1))</span>
 				</div>
 				<div class="task-interaction-text">
-					@Html.Raw(thread.Posts.First().PostContentFormatted)
+					@{ InteractionPost firstPost = thread.Posts.FirstOrDefault(); }
 
-					@if (thread.Posts.First().FileID > 0) {	
-					<div class="post-file">
-						File: <a href="@thread.Posts.First().File.FileUrl">@thread.Posts.First().File.Filename</a>
-					</div>
-					}
+					@if (firstPost != null) {
+						@Html.Raw(firstPost.PostContentFormatted)
+
+						if (firstPost.FileID > 0) {	
+							<div class="post-file">
+								File: <a href="@firstPost.File.FileUrl">@firstPost.File.Filename</a>
+							</div>
+						}
+                    }
 				</div>		
 
 			</div>
@@ -41,12 +45,12 @@
 				<div class="task-interaction-post @(post.UserID == thread.UserID ? " thread-starter" : "")" id="post-@post.PostID">
 					<div class="task-interaction-userimage">
 						<a href="@(post.User != null ? post.User.ProfileDisplayUrl : "#")">
-							<img src="@(post.User != null ? post.User.GetProfileImageUrl(30, 30) : "")" alt="@(post.User != null ? post.User.SecureName : "#")" />
+							<img src="@(post.User != null ? post.User.GetProfileImageUrl(30, 30) : "")" alt="@(post.User != null ? post.User.SecureShortName : "#")" />
 						</a>				
 					</div>	
 					<div class="task-interaction-content">			
 						<div class="task-interaction-meta">
-							<a class="user-name" href="@(post.User != null ? post.User.ProfileDisplayUrl : "#")">@(post.User != null ? post.User.SecureName : "missing")</a>
+							<a class="user-name" href="@(post.User != null ? post.User.ProfileDisplayUrl : "#")">@(post.User != null ? post.User.SecureShortName : "missing")</a>
 							<span class="post-date">@post.PostDate.ToShortDateString()</span>						
 						</div>
 						<div class="task-interaction-text">
@@ -61,12 +65,12 @@
 			<div class="add-reply task-interaction-post">
 				<div class="task-interaction-userimage">
 					<a href="@user.ProfileDisplayUrl">
-						<img src="@user.GetProfileImageUrl(30, 30)" alt="@user.SecureName" />
+						<img src="@user.GetProfileImageUrl(30, 30)" alt="@user.SecureShortName" />
 					</a>				
 				</div>	
 				<div class="task-interaction-content">			
 					<div class="task-interaction-meta">
-						<a class="user-name" href="@user.ProfileDisplayUrl">@user.SecureName</a>
+						<a class="user-name" href="@user.ProfileDisplayUrl">@user.SecureShortName</a>
 					</div>
 					<div class="task-interaction-text">
 						<textarea class="reply-text"></textarea>	

@@ -601,6 +601,8 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
 	border: solid 2px #eee;
 	display: block;
 	margin: 0 0 5px 0;
+	resize: none;
+	font-family: Arial;
 }
 		
 
@@ -660,7 +662,7 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
     }
     .forum-threads .subject {width: 450px;}
     .forum-posts .subject, .forum-posts .content-area { width: 650px; }
-    .forum-posts .poster { -x-width: 175px; }
+    .forum-posts .poster { width: 60px; }
     .forum-threads .replies { width: 225px; text-align: center; }
     .forum-threads h4  { margin-bottom: 3px; }
     .forum-posts .header span,  .forum-threads .header span 
@@ -771,6 +773,45 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
 	    line-height: 145%;
 	    width: 500px;
 	}
+	
+.create-thread {
+    height: 300px;
+    width: 540px;
+    display: block;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-left: -320px;
+    margin-top: -150px;
+    background: #f7f7f7;
+    padding: 40px;
+    border: solid 1px #999;
+}
+.create-thread .thread-buttons {
+	text-align: right;
+	width: 500px;
+}	
+.create-thread table {
+	width: 500px;
+}
+.create-thread th {
+	width: 80px;
+	text-align: right;
+	color: #444;
+	padding: 2px 10px 0 0;
+	vertical-align: top;
+}
+.create-thread #Subject {
+	width: 400px;	
+}	
+.create-thread #PostContent {
+	width: 400px;	
+	height: 100px;
+	resize: none;
+}	
+	
+	
+	/*
 .add-post-outer {
     position: fixed;
     height: 100%;
@@ -796,6 +837,7 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
     border: 1px solid #999;
     box-shadow: 0 0 10px #999;
 }
+*/
 .reply-link, .thread-link {
     display: none;
     margin: 0 0 15px;
@@ -855,7 +897,7 @@ form.forum-post-new {
     {
         margin: 8px auto;
         display: block;
-        width: 200px;
+        
     }
 
 a.cancel-thread {
@@ -885,16 +927,28 @@ a.cancel-thread {
 }
 */
 
-.task-instructions-text b, .task-instructions-text strong {
+.task-details b, .task-details strong {
 	font-weight: bold;
 }
-.task-instructions-text i, .task-instructions-text em {
+.task-details i, .task-details em {
 	font-style: italic;
 }
-.task-instructions-text ul {
-	margin: 0 0 0 10px;
+.task-details ul {
+	margin: 15px 0 15px 10px;
 }
-.task-instructions-text ul li {
+.task-details ul li {
 	margin: 0 0 0 20px;
 	list-style-type: disc;
+}
+
+.task-details ol {
+	margin: 15px 0 15px 10px;
+}
+.task-details ol li {
+	margin: 0 0 0 20px;
+	list-style-type: decimal;
+}
+
+.task-details p {
+	margin: 15px 0;
 }

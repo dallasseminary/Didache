@@ -32,12 +32,6 @@
 
 	<script src="@Url.Content("~/js/lib/jwysiwyg/jquery.wysiwyg.js")"></script>
 	<link href="@Url.Content("~/js/lib/jwysiwyg/jquery.wysiwyg.css")" rel="stylesheet"  />
-	
-	@*
-	<script src="@Url.Content("~/js/lib/cleditor/jquery.cleditor.min.js")"></script>
-	<link href="@Url.Content("~/js/lib/cleditor/jquery.cleditor.css")" rel="stylesheet"  />
-	*@
-	
 
 	<script src="@Url.Content("~/js/main.js")"></script>
 
@@ -45,12 +39,6 @@
 </head>
 
 <body>
-	
-	@*
-	set = @Request.Cookies["HowLangSet"].Value | 
-	cookie = @(Request.Cookies["Language"] == null ? "(none)" : Request.Cookies["Language"].Value) | 
-	user = @(Users.GetLoggedInUser() == null ? "(none)" : Users.GetLoggedInUser().Language)
-	*@
 
 	@Html.Partial("_CommonMenu")
 	
@@ -65,8 +53,8 @@
 					<div id="user-profile">
 					@{ User user = Users.GetLoggedInUser();}
 						<a href="@user.ProfileDisplayUrl">
-							<img alt="@user.FormattedName" src="@user.GetProfileImageUrl(60, 60)" width="60" height="60" />
-							<span class="name">@user.SecureName</span>
+							<img alt="@user.SecureFormattedName" src="@user.GetProfileImageUrl(60, 60)" width="60" height="60" />
+							<span class="name">@user.SecureShortName</span>
 							<span class="title">@user.Country</span>
 						</a>
 					</div>

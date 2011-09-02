@@ -27,12 +27,16 @@ namespace Didache  {
 		}
 
 		public static Course GetCourseBySlug(string slug) {
+			return GetCourseBySlug(slug, true);
+		}
+
+		public static Course GetCourseBySlug(string slug, bool useCache) {
 
 
 			string key = string.Format(_courseBySlug, slug);
 			Course course = (HttpContext.Current != null) ? HttpContext.Current.Cache[key] as Course : null;
 
-			if (course == null) {
+			if (course == null || !useCache) {
 				//string[] parts = slug.Split(new char[] { '-' });
 				//string sessionInfo = parts[0].Trim().ToUpper();
 				//string courseCode = parts[1].Trim().ToUpper();
@@ -63,8 +67,8 @@ namespace Didache  {
 									.Include("Campus")
 									.SingleOrDefault(c => c.CourseCode + c.Section == courseCode && c.Session.SessionCode == sessionCode && c.Session.SessionYear == sessionYear);
 
-
-				HttpContext.Current.Cache.Add(key, course, null, Cache.NoAbsoluteExpiration, new TimeSpan(1, 0, 0), CacheItemPriority.Default, null);
+				if (course != null) 
+					HttpContext.Current.Cache.Add(key, course, null, Cache.NoAbsoluteExpiration, new TimeSpan(1, 0, 0), CacheItemPriority.Default, null);
 			}
 
 
@@ -132,20 +136,61 @@ namespace Didache  {
 				return null;
 		}
 
+		public static List<Course> GetUsersRunningCourses(CourseUserRole roleID, CourseUserRole roleID2) {
+			User profile = Users.GetLoggedInUser();
+
+			if (profile != null)
+				return GetUsersRunningCourses(profile.UserID, roleID, roleID2);
+			else
+				return null;
+		}
+
 		public static List<Course> GetUsersRunningCourses(int userID, CourseUserRole roleID) {
 
-			DateTime targetStartDate = DateTime.Now.AddDays(7);
-			DateTime targetEndDate = DateTime.Now.AddDays(-7);
+			string key = String.Format("coursess-userrunning-{0}-{1}", userID, roleID);
+			List<Course> courses = (HttpContext.Current != null) ? HttpContext.Current.Cache[key] as List<Course> : null;
 
-			return new DidacheDb().Courses
-				.Where(c => c.CourseUsers.Any(cu => cu.UserID == userID && 
-													cu.RoleID == (int)roleID) && 
-													c.StartDate <= targetStartDate &&
-													c.IsActive == true && 
-													c.EndDate >= targetEndDate)
-				.OrderByDescending(c => c.StartDate)
-				.ToList();
+			bool ignoreCache = true;
+
+			if (courses == null || ignoreCache) {
+
+
+				DateTime targetStartDate = DateTime.Now.AddDays(7);
+				DateTime targetEndDate = DateTime.Now.AddDays(-7);
+
+				courses = new DidacheDb().Courses
+					.Where(c => c.CourseUsers.Any(cu => cu.UserID == userID &&
+														cu.RoleID == (int)roleID) &&
+														c.StartDate <= targetStartDate &&
+														c.EndDate >= targetEndDate)
+					.OrderByDescending(c => c.StartDate)
+					.ToList();
+
+				if (roleID == CourseUserRole.Student)
+					courses = courses.Where(c => c.IsActive).ToList();
+
+				HttpContext.Current.Cache.Add(key, courses, null, Cache.NoAbsoluteExpiration, new TimeSpan(0, 3, 0), CacheItemPriority.Default, null);
+			}
+
+			return courses;
 		}
+
+		public static List<Course> GetUsersRunningCourses(int userID, CourseUserRole roleID, CourseUserRole roleID2) {
+
+			List<Course> courses = GetUsersRunningCourses(userID, roleID);
+			List<Course> courses2 = GetUsersRunningCourses(userID, roleID2);
+
+			foreach (Course course in courses2) {
+				if (courses.Count(c => c.CourseID == course.CourseID) == 0) {
+					courses.Add(course);
+				}
+			}
+
+
+			return courses;
+		}
+
+
 
 		public static List<CourseUserGroup> GetCourseUserGroups(int courseID) {
 			List<CourseUserGroup> userGroups = new DidacheDb().CourseUserGroups

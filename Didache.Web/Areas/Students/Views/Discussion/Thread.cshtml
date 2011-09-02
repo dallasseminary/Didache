@@ -32,12 +32,13 @@
 			<input type="hidden" id="Subject" name="Subject" value="RE: @Html.Raw(Model.LastPostSubject)" />
 
             <h3>Add a Reply</h3>
-	         <table style="width: 100%;">
+	         
+			 <table>
 		        <tbody>
 			        <tr>
 				        <th>
 		                    <a href="@thisUser.ProfileDisplayUrl">
-			                    <img src="@thisUser.GetProfileImageUrl(40,40)" alt="@thisUser.SecureName" class="post-author" />
+			                    <img src="@thisUser.GetProfileImageUrl(40,40)" alt="@thisUser.SecureShortName" class="post-author" />
 		                    </a>
                         </th>
 				        <td>
@@ -46,13 +47,14 @@
 			        </tr>
                     <tr>
                         <td>&nbsp;</td>
-                        <td><input type="button" class="d-button action reply-button" value="Add Reply" /></td>
+                        <td><input type="submit" class="d-button action reply-button" value="Add Reply" /></td>
                     </tr>
 		        </tbody>
 	         </table>
 
         </form>
 
+		@*
         <script type="text/javascript">
             jQuery(document).ready(function ($) {
                 $(".reply-link").show();
@@ -75,5 +77,6 @@
 
             });
         </script>
+		*@
     </div>
 </div>
