@@ -92,8 +92,8 @@ x Can't change languages on the fly
 	function getCourseInfoUrl(courseCode, language) {
 		//return 'en-US.xml';
 
-		return 'https://my.dts.edu/player4/video-list.ashx?course=' + courseCode.toString().toLowerCase() + '&language=' + language + '&' + document.location.search.replace('?','');
-		return 'https://my.dts.edu/playerfiles/' + courseCode.toString().toLowerCase() + '/Titles/' + language + '.xml';
+		return '/player/video-list.ashx?course=' + courseCode.toString().toLowerCase() + '&language=' + language + '&' + document.location.search.replace('?','');
+		return '/playerfiles/' + courseCode.toString().toLowerCase() + '/Titles/' + language + '.xml';
 	}
 
 	function getVideoUrl(courseCode, unitNumber, videoNumber, isLow) {
@@ -112,7 +112,7 @@ x Can't change languages on the fly
 
 		//return 'NT113/Transcripts/en-US/nt113_u001_v001_transcript.xml';
 
-		return 'https://my.dts.edu/playerfiles/' + courseCode.toString().toLowerCase() + '/Transcripts/' + language + '/' + courseCode.toString().toUpperCase().replace('V2', 'v2') + '_u' + unit + '_v' + video + '_transcript.xml';
+		return '/playerfiles/' + courseCode.toString().toLowerCase() + '/Transcripts/' + language + '/' + courseCode.toString().toUpperCase().replace('V2', 'v2') + '_u' + unit + '_v' + video + '_transcript.xml';
 	}
 
 	function getSlidesUrl(courseCode, unitNumber, videoNumber, language) {
@@ -121,7 +121,7 @@ x Can't change languages on the fly
 
 		//return 'NT113/Slides/en-US/nt113_u001_v001_slides.xml';
 
-		return 'https://my.dts.edu/playerfiles/' + courseCode.toString().toLowerCase() + '/Slides/' + language + '/' + courseCode.toString().toUpperCase().replace('V2', 'v2') + '_u' + unit + '_v' + video + '_slides.xml';
+		return '/playerfiles/' + courseCode.toString().toLowerCase() + '/Slides/' + language + '/' + courseCode.toString().toUpperCase().replace('V2', 'v2') + '_u' + unit + '_v' + video + '_slides.xml';
 	}
 
 	function getSlidesBasePath(courseCode, unitNumber, videoNumber, language) {
@@ -130,7 +130,7 @@ x Can't change languages on the fly
 
 		//return 'NT113/Slides/en-US/nt113_u001_v001_slides.xml';
 
-		return 'https://my.dts.edu/playerfiles/' + courseCode.toString().toLowerCase() + '/Slides/' + language + '/';
+		return '/playerfiles/' + courseCode.toString().toLowerCase() + '/Slides/' + language + '/';
 	}
 	
 	var DtsUserControls = function(video) {

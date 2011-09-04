@@ -1,6 +1,8 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+	<meta http-equiv="X-UA-Compatible" content="edge" />
+
 	<title>DTS HTML5 player</title>
 
 	<meta name="viewport" content="width=device-width, height=device-height, user-scalable=yes" />
@@ -19,8 +21,6 @@
 	<div id="video1-frame" class="video-display-abs">	
 		<video id="video1-view" width="320" height="240"></video>
 	</div>
-
-
 
 	<div id="player-container" class="player-container">
 
@@ -129,15 +129,15 @@
 	
 <script type="text/javascript">
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-64595-2']);
-  _gaq.push(['_trackPageview']);
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-64595-14']);
+	_gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+	(function () {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
 
 </script>
 

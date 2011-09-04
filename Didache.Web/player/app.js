@@ -31,7 +31,7 @@ jQuery(document).ready(function($) {
 			extra = '<br /><br /><b>Please note:</b> for the best experience, we recommend <a href="http://google.com/chrome/" target="_blank">Google Chrome</a>, ' + 
 				'<a href="http://apple.com/safari/" target="_blank">Apple Safari</a>, ' + 
 				'or <a href="http://ie.microsoft.com/testdrive/" target="_blank">Internet Explorer 9</a>. ' + 
-				'Other please be sure to update your <a href="http://get.adobe.com/flashplayer/">Flash player</a> to 10.1.';
+				'Other please be sure to update your <a href="http://get.adobe.com/flashplayer/">Flash player</a> to 10.3.';
 	
 		showMessage('Welcome!', 'Please select a class at the top. Then select a unit and video. ' + extra );
 	}
