@@ -12,11 +12,15 @@ namespace Didache  {
 		private static string _courseBySlug = "course-slug-{0}";
 
 		public static Course GetCourse(int courseID) {
+			return GetCourse(courseID, true);
+		}
+
+		public static Course GetCourse(int courseID, bool useCache) {
 
 			string key = string.Format(_courseById, courseID);
 			Course course = (HttpContext.Current != null) ? HttpContext.Current.Cache[key] as Course : null;
 
-			if (course == null) {
+			if (course == null || !useCache) {
 				course = new DidacheDb().Courses.SingleOrDefault(c => c.CourseID == courseID);
 
 				HttpContext.Current.Cache.Add(key, course, null, Cache.NoAbsoluteExpiration, new TimeSpan(1, 0, 0), CacheItemPriority.Default, null);

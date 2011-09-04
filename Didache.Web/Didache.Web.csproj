@@ -311,7 +311,7 @@
     <Folder Include="Areas\Community\Views\Shared\" />
     <Folder Include="Areas\Facilitators\Models\" />
     <Folder Include="Areas\Students\Models\" />
-    <Folder Include="supportfiles\be101\" />
+    <Folder Include="playerfiles\be101\" />
     <Folder Include="tests\" />
     <Folder Include="uploads\" />
   </ItemGroup>

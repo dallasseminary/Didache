@@ -14,7 +14,7 @@ namespace Didache {
 	public class StudentFile : BaseFile {
 		public string FileUrl {
 			get {
-				return "/courses/studentfile/" + FileID + "/" + Filename;
+				return "/courses/studentfile/" + FileID + "/" + Filename.Replace("#", "").Replace("?", "");
 			}
 		}
 

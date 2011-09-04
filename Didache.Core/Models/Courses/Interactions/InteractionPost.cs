@@ -19,6 +19,7 @@ namespace Didache {
 		public int ThreadID { get; set; }
 		public int TaskID { get; set; }
 		public bool IsApproved { get; set; }
+		public bool IsDeleted { get; set; }
 
 		public DateTime PostDate { get; set; }
 		public int UserID { get; set; }	

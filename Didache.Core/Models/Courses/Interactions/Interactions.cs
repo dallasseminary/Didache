@@ -120,6 +120,11 @@ namespace Didache {
 				thread.Posts = posts;
 			}
 
+			// sort the threads by recent posts
+			threads.Sort(delegate(InteractionThread a, InteractionThread b) {
+				return b.Posts.OrderByDescending(p => p.PostDate).FirstOrDefault().PostDate.CompareTo(a.Posts.OrderByDescending(p => p.PostDate).FirstOrDefault().PostDate);
+			});
+
 			return threads;
 		}
 

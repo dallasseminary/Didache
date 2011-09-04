@@ -18,6 +18,8 @@ namespace Didache {
 		[Required]
 		public int TaskID { get; set; }
 
+		public bool IsDeleted { get; set; }
+
 		// legacy?
 		//[Required]
 		[DisplayFormat(ConvertEmptyStringToNull = false)]

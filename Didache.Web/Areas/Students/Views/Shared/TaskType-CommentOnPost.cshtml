@@ -8,7 +8,10 @@
 <div class="task-interactions">
 
 @foreach (InteractionThread thread in threads) {
-	<div class="task-interaction-thread" id="thread-@thread.ThreadID" data-threadid="@thread.ThreadID">
+	
+	if (!thread.IsDeleted || Users.IsAdministratorFacultyOrFacilitator()) {
+	
+	<div class="task-interaction-thread @(thread.IsDeleted  ? "thread-deleted" : "")" id="thread-@thread.ThreadID" data-threadid="@thread.ThreadID">
 		
 		<div class="task-interaction-main">
 			<div class="task-interaction-userimage">
@@ -30,11 +33,16 @@
 
 						if (firstPost.FileID > 0) {	
 							<div class="post-file">
-								File: <a href="@firstPost.File.FileUrl">@firstPost.File.Filename</a>
+								File: <a href="@firstPost.File.FileUrl" target="_blank">@firstPost.File.Filename</a>
 							</div>
 						}
                     }
-				</div>		
+				</div>
+				@if (Users.IsAdministratorFacultyOrFacilitator()) {
+				<div class="task-interaction-admin">
+					<span class="task-interaction-thread-toggle">@(thread.IsDeleted ? "Restore Thread" : "Delete Thread")</span>
+				</div>	
+				}
 
 			</div>
 		</div>
@@ -42,7 +50,8 @@
 		<div class="task-interaction-list">
 			
 			@foreach (InteractionPost post in thread.Posts.Skip(1)) {
-				<div class="task-interaction-post @(post.UserID == thread.UserID ? " thread-starter" : "")" id="post-@post.PostID">
+	   if (!post.IsDeleted || Users.IsAdministratorFacultyOrFacilitator()) {
+				<div class="task-interaction-post @(post.UserID == thread.UserID ? " thread-starter" : "")  @(post.IsDeleted ? "post-deleted" : "")" id="post-@post.PostID" data-postid="@post.PostID">
 					<div class="task-interaction-userimage">
 						<a href="@(post.User != null ? post.User.ProfileDisplayUrl : "#")">
 							<img src="@(post.User != null ? post.User.GetProfileImageUrl(30, 30) : "")" alt="@(post.User != null ? post.User.SecureShortName : "#")" />
@@ -56,12 +65,18 @@
 						<div class="task-interaction-text">
 							@Html.Raw(post.PostContentFormatted)
 						</div>
+						@if (Users.IsAdministratorFacultyOrFacilitator()) {
+						<div class="task-interaction-admin">
+							<span class="task-interaction-post-toggle">@(post.IsDeleted ? "Restore Post" : "Delete Post")</span>
+						</div>	
+						}
 					</div>
 				</div>	
-	  	  
+	   }
    }
 
 			@{ User user = Users.GetLoggedInUser(); }
+			<form>
 			<div class="add-reply task-interaction-post">
 				<div class="task-interaction-userimage">
 					<a href="@user.ProfileDisplayUrl">
@@ -73,7 +88,7 @@
 						<a class="user-name" href="@user.ProfileDisplayUrl">@user.SecureShortName</a>
 					</div>
 					<div class="task-interaction-text">
-						<textarea class="reply-text"></textarea>	
+						<textarea class="reply-text required" ></textarea>	
 						<div class="add-reply-button">
 							<input type="button" class="d-button action reply-button" value="Add reply" /> 
 							<input type="button" class="d-button collapse" value="Close" />
@@ -81,14 +96,16 @@
 					</div>
 				</div>
 			</div>	
+			</form>
 	  
 		</div>
 
 	</div>
+	
+	}
 }
 </div>
-}
-else {
+} else {
 
 	<p>No files to comment on yet! Check back here soon</p>
 

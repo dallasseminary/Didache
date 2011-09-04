@@ -15,7 +15,11 @@
 
 		<p>@Didache.Resources.labels.courses_tools_itunes_desc</p>
 
-		<p><a href="http://@(Request.Url.Host)/courses/feed/@(Users.GetLoggedInUser().UserID)/@ViewContext.RouteData.Values["slug"]-all.xml"><img src="/css/images/itunes-badge.jpg"></a>			
+		<div class="message-warning">
+		The iTunes feed isn't quite working right yet. We'll have it fixed for the second week of class.
+		</div>
+
+		<p><a href="https://@(Request.Url.Host)/courses/feed/@(Users.GetLoggedInUser().UserID)/@ViewContext.RouteData.Values["slug"]-all.xml"><img src="/css/images/itunes-badge.jpg"></a>			
 			</p>
 	
 
@@ -25,7 +29,7 @@
 
 		<ul>
 			<li>				
-				<a href="http://@(Request.Url.Host)/courses/ical/@(Users.GetLoggedInUser().UserID)/@ViewContext.RouteData.Values["slug"]-tasks.ics">Download ICS file</a> (Google Calendar)
+				<a href="https://@(Request.Url.Host)/courses/ical/@(Users.GetLoggedInUser().UserID)/@ViewContext.RouteData.Values["slug"]-tasks.ics">Download ICS file</a> (Google Calendar)
 			</li>
 			<li>
 				<a href="webcal://@(Request.Url.Host)/courses/ical/@(Users.GetLoggedInUser().UserID)/@ViewContext.RouteData.Values["slug"]-tasks.ics">Import ICS</a> (Apple Mail, Outlook)

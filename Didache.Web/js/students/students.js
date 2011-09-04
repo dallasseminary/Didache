@@ -56,15 +56,36 @@ jQuery(document).ready(function ($) {
 
 	// interactions stuff
 
-	var urlHash = self.document.location.hash.substring(1);
-	if (urlHash) {
-		$('div.task-interaction-thread[id=' + urlHash + ']')
+	// find the nearest post
+	var urlHash = self.document.location.hash.toString();
+	if (urlHash.length > 0) {
+		var threadID = urlHash = urlHash.substring(1);
+
+		console.log(threadID, urlHash);
+
+		// make sure we have the thread
+		if (urlHash.indexOf('post') > -1) {
+			// find the thread
+			threadID = $('#' + urlHash).closest('.task-interaction-thread').attr('id');
+		}
+
+		console.log(threadID, urlHash);
+
+		// open the thread
+		$('#' + threadID)
 			.find('.task-interaction-list')
-				.slideDown()
+				.show()
 			.end()
 			.find('.task-interaction-main .task-interaction-text')
-				.fadeIn();
+				.show();
 
+		// find the post if needed and scroll to it
+		if (urlHash.indexOf('post') > -1) {
+			var post = $('#' + urlHash);
+			$(document.body).attr({ scrollTop: post.offset().top });
+			post.effect('highlight');
+
+		}
 	}
 
 	// open/close threads
@@ -93,12 +114,24 @@ jQuery(document).ready(function ($) {
 	});
 
 	// do reply
-	$('div.task-interaction input.reply-button').click(function () {
+	$('div.task-interaction input.reply-button').click(function (e) {
+
+		e.preventDefault();
 
 		var button = $(this).prop('disabled', true),
 				taskID = button.closest('.task-entry').data('taskid'),
 				text = button.closest('.add-reply').find('textarea').prop('disabled', true).val(),
 				threadID = button.closest('.task-interaction-thread').data('threadid');
+
+		// prevent empty responses
+		if (text.length == '') {
+
+			button.closest('.add-reply').find('textarea').prop('disabled', false).val('');
+			button.prop('disabled', false);
+
+			return;
+		}
+
 
 		showLoading('Saving...');
 
@@ -160,10 +193,80 @@ jQuery(document).ready(function ($) {
 			}
 		});
 
+		return false;
+	});
+
+	// admin functions
+	$('.task-interaction-thread-toggle').click(function () {
+
+		showLoading('Updating thread');
+
+		var toggle = $(this),
+			thread = toggle.closest('.task-interaction-thread'),
+			threadID = thread.data('threadid'),
+			isDeleted = thread.hasClass('thread-deleted');
+
+		// send data
+		$.ajax({
+			url: '/courses/api/deletethread',
+			type: 'POST',
+			data: {
+				threadID: threadID,
+				isDeleted: !isDeleted
+			},
+			success: function () {
+				if (isDeleted) {
+					thread.removeClass('thread-deleted');
+					toggle.html('Delete Thread');
+				} else {
+					thread.addClass('thread-deleted');
+					toggle.html('Restore Thread');
+				}
+
+				hideLoading();
+
+			}
+		});
 
 	});
 
-});
+
+	$('.task-interaction-post-toggle').click(function () {
+
+		showLoading('Updating post');
+
+		var toggle = $(this),
+			post = toggle.closest('.task-interaction-post'),
+			postID = post.data('postid'),
+			isDeleted = post.hasClass('post-deleted');
+
+		// send data
+		$.ajax({
+			url: '/courses/api/deletepost',
+			type: 'POST',
+			data: {
+				postID: postID,
+				isDeleted: !isDeleted
+			},
+			success: function () {
+				if (isDeleted) {
+					post.removeClass('post-deleted');
+					toggle.html('Delete Post');
+				} else {
+					post.addClass('post-deleted');
+					toggle.html('Restore Post');
+				}
+
+				hideLoading();
+
+			}
+		});
+
+	});
+
+
+
+});            // document.ready
 
 
 

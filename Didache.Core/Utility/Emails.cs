@@ -30,12 +30,16 @@ namespace Didache {
 			
 			
 			message.Subject = "[DTS Online] " + subject;
-			message.BodyEncoding = Encoding.Unicode;
-			message.SubjectEncoding = Encoding.Unicode;
+			message.BodyEncoding = Encoding.UTF8;
+			message.SubjectEncoding = Encoding.UTF8;
 			message.IsBodyHtml = isHtml;
 			message.Body = body;
 
-			client.Send(message);
+			try {
+				client.Send(message);
+			} catch {
+				System.IO.File.AppendAllText( System.Web.HttpContext.Current.Server.MapPath("~/tools/email.txt"), fromEmail + "\t" + toEmails[0]+ "\t" + subject+ "\n" + body + "\n==================\n"); 
+			}
 		}
 
 		public static void EnqueueEmail(string fromEmail, string toEmail, string subject, string body, bool isHtml) {

@@ -491,6 +491,8 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
 
 
 /* interactions*/
+
+
 .task-interactions-header {
 	display: none;
 }
@@ -582,7 +584,30 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
 			margin: 10px 0 0 0;
 			font-size: 12px;
 			color: #555;
-		}	
+		}
+		
+.thread-deleted, .post-deleted {
+	background: #ffd7d6 !important;
+}	
+	
+	
+/* interaction admin */
+.task-interaction-admin {
+	-x-border: solid 1px #999;
+	background: #eee;
+	padding: 2px;
+	font-size: 10px;
+	margin: 5px 0 0 ;
+}	
+.task-interaction-admin span {
+	cursor: pointer;
+	display: inline-block;
+	padding: 1px 3px;
+}
+.task-interaction-admin span:hover {
+	background: #444;
+	color: #fff;
+}
 		
 /* super overrider */
 .task-interaction-text, .task-interaction-text font, .task-interaction-text span, .task-interaction-text p {

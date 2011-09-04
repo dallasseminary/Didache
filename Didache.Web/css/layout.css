@@ -758,3 +758,30 @@ select#language {
 		padding: 15px;
 		margin: 40px auto 0;
 	}
+	
+/* Messages */
+.message-warning, .message-error, .message-success, .message-info {
+	padding: 8px;
+	margin: 10px 0;
+}
+
+.message-warning {
+	background: #F4F43D;
+	border: solid 1px #E0C79F;
+	-x-color: #E0C79F;
+}	
+.message-error {
+	background: #ff8282;
+	border: solid 1px #b70000;
+	color: #b70000;
+}	
+.message-success {
+	background: #F4F43D;
+	border: solid 1px #E0C79F;
+	color: #E0C79F;
+}	
+.message-info {
+	background: #F4F43D;
+	border: solid 1px #E0C79F;
+	color: #E0C79F;
+}	

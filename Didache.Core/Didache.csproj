@@ -127,6 +127,12 @@
     <Compile Include="Models\ViewModels\HelpModel.cs" />
     <Compile Include="MVC\Attributes\AdminAuthorize.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\emails.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>emails.resx</DependentUpon>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </Compile>
     <Compile Include="Resources\labels.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -158,6 +164,10 @@
     <Content Include="Resources\readme.txt" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\emails.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>emails.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\labels.ar.resx" />
     <EmbeddedResource Include="Resources\labels.es.resx" />
     <EmbeddedResource Include="Resources\labels.resx">

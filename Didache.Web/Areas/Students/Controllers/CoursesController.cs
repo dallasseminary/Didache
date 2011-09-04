@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.ServiceModel.Syndication;
 using System.Xml;
 using System.Text;
+using System.IO;
 using Ionic.Zip;
 
 namespace Didache.Web.Areas.Students.Controllers
@@ -416,6 +417,21 @@ namespace Didache.Web.Areas.Students.Controllers
 			return new SyndicationResult(feed, extension);
 		}
 
+		private class StringWriterWithEncoding : StringWriter {
+			private Encoding _enc;
+			public StringWriterWithEncoding(Encoding NewEncoding)
+				: base() {
+				_enc = NewEncoding;
+			}
+
+			public override System.Text.Encoding Encoding {
+				get {
+					return _enc;
+				}
+			}
+		}
+
+
 		public ActionResult Feed(string slug, int userID, string type, string extension) {
 
 			DidacheDb db = new DidacheDb();
@@ -426,9 +442,12 @@ namespace Didache.Web.Areas.Students.Controllers
 				return HttpNotFound();
 
 			// BEING XML/RSS
-			XmlTextWriter writer = new XmlTextWriter(Response.OutputStream, Encoding.UTF8);
-			Response.ContentType = "application/rss+xml";
-			Response.ContentEncoding = Encoding.UTF8;
+			StringWriter sw = new StringWriterWithEncoding(Encoding.UTF8);
+			
+			XmlTextWriter writer = new XmlTextWriter(sw);
+			writer.Formatting = Formatting.Indented;
+			//Response.ContentType = "application/rss+xml";
+			//Response.ContentEncoding = Encoding.UTF8;
 			writer.WriteStartDocument();
 
 			// write RSS 2.0 starter
@@ -439,7 +458,7 @@ namespace Didache.Web.Areas.Students.Controllers
 
 			writer.WriteElementString("title", "DTS-" + course.CourseCode + course.Section + "-" + course.Name);
 			writer.WriteElementString("link", "https://online.dts.edu/courses/" + course.Slug);
-			writer.WriteElementString("description", course.Description);
+			writer.WriteElementString("description", ""); //course.Description);
 			writer.WriteElementString("language", user.Language);
 			writer.WriteElementString("docs", "http://blogs.law.harvard.edu/tech/rss");
 			writer.WriteElementString("copyright", "This work is copyright 2004-" + DateTime.Now.Year + " by Dallas Theological Seminary and the individual speakers.");
@@ -591,9 +610,10 @@ namespace Didache.Web.Areas.Students.Controllers
 			writer.WriteEndElement(); // channel
 			writer.WriteEndElement(); // rss
 			writer.WriteEndDocument();
+			writer.Flush();
 			writer.Close();
 
-			return null;
+			return Content(sw.ToString(), "text/xml", Encoding.UTF8);
 
 
 		}

@@ -62,6 +62,7 @@ namespace Didache.TaskTypes {
 				InteractionThread thread = new InteractionThread();
 				thread.UserID = userID;
 				thread.TotalReplies = 0;
+				thread.IsDeleted = false;
 				thread.Subject = "Assignment: " + task.Name;
 				thread.TaskID = interactionTaskID;
 				thread.ThreadDate = DateTime.Now;
@@ -70,6 +71,7 @@ namespace Didache.TaskTypes {
 
 				InteractionPost post = new InteractionPost();
 				post.IsApproved = true;
+				post.IsDeleted = false;
 				post.PostContent = request["usercomment"];
 				post.PostContentFormatted = Interactions.FormatPost(request["usercomment"]);
 				post.PostDate = DateTime.Now;

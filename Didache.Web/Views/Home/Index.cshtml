@@ -9,6 +9,13 @@
 
 	
 	@if (Users.GetLoggedInUser() != null) {
+	 
+		<div class="message-warning">
+		Please note: This website is usually only for online and hybrid classes. For regular campus classes, please visit
+		the <a href="https://campus.dts.edu/">CampusNet</a> at <a href="https://campus.dts.edu/">campus.dts.edu</a>. 
+		Any live or hybrid classes using online.dts.edu will be available during the second week of class.  
+		You'll receive an email indicating access is available.
+		</div>
 	  
 		<h1>@Didache.Resources.labels.home_currentcourses</h1>
 	 
@@ -38,8 +45,7 @@
 		 if (faciliationCourses.Count > 0) {
 			<ul>		
 			@foreach (Course course in faciliationCourses) {			
-				<li><a href="/grading/@course.Slug/tasklist">@course.CourseCode - @course.Name</a></li>
-
+				<li><a href="/grading/@course.Slug/tasklist">@course.Session.SessionCode - @course.CourseCode - @course.Name</a></li>
 			}
 			</ul>
 		} else {

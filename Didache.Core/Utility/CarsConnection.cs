@@ -133,6 +133,12 @@ namespace Didache {
 				}
 			}
 
+			// remove all the 'D' if also 'R'
+			List<CarsStudentUser> activeUsers = users.Where(c => c.CarsUserStatus == CarsUserStatus.Active).ToList();
+			users.RemoveAll(delegate(CarsStudentUser userToRemove) {
+				return userToRemove.CarsUserStatus == CarsUserStatus.NotActive && activeUsers.Count(au => au.UserID == userToRemove.UserID) > 0;
+			});
+
 			return users;
 		}
 

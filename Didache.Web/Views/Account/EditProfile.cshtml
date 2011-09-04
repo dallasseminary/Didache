@@ -4,6 +4,11 @@
 	ViewBag.Title = "Edit";
 }
 
+<style>
+.warning {
+	
+</style></stye>
+
 @using (Html.BeginForm()) {
 <div id="edit-profile" class="page-narrow">
 	<div class="main-column">
@@ -20,6 +25,11 @@
 			</div>
 		</div>
 
+
+		<div class="message-warning">
+		<b>Please note:</b> We will be adding additional profile features like the ability to upload a custom profile
+		picture later in the semester. 
+		</div>
         
 	  
 		 @Html.HiddenFor(model => model.UserID)

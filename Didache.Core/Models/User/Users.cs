@@ -11,6 +11,18 @@ using System.Globalization;
 namespace Didache  {
 	public class Users {
 
+		public static bool IsAdministratorFacultyOrFacilitator() {
+			return
+				System.Web.HttpContext.Current != null
+				&& System.Web.HttpContext.Current.User.Identity.IsAuthenticated
+				&& (System.Web.HttpContext.Current.User.IsInRole(UserRoles.Administrator) ||
+					System.Web.HttpContext.Current.User.IsInRole(UserRoles.Facilitator) ||
+					System.Web.HttpContext.Current.User.IsInRole(UserRoles.Faculty));
+
+		}
+
+	
+
 		private static string _usernameKey = "user-name-{0}";
 		private static string _userIdKey = "user-id-{0}";
 

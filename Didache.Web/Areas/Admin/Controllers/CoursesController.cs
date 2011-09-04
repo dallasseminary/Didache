@@ -73,7 +73,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 
 		public ActionResult SyncUsers(int id, string sessionYear, string sessionCode, string courseCode, string courseSection, string courseHours) {
 
-			Course course = Courses.GetCourse(id);
+			Course course = Courses.GetCourse(id, false);
 
 			CarsConnection.SyncCourse(id, sessionYear, sessionCode, courseCode, courseSection, courseHours);
 

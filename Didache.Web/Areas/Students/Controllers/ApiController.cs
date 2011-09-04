@@ -122,11 +122,13 @@ namespace Didache.Web.Areas.Students.Controllers
 				DidacheDb db = new DidacheDb();
 				User user = Users.GetLoggedInUser();
 				InteractionThread thread = db.InteractionThreads.Find(threadID);
+				Task task = db.Tasks.Include("Course").SingleOrDefault(t => t.TaskID == thread.TaskID);
 				
 				InteractionPost post = new InteractionPost();
 				post.PostContent = collection["text"];
 				post.PostContentFormatted = Interactions.FormatPost(collection["text"]);
 				post.IsApproved = true;
+				post.IsDeleted = false;
 				post.UserID = user.UserID;
 				post.PostDate = DateTime.Now;
 				post.ThreadID = threadID;
@@ -162,7 +164,21 @@ namespace Didache.Web.Areas.Students.Controllers
 						db.SaveChanges();
 					}
 				}
-				// 
+				
+				// email responses
+				List<User> emailToUsers = db.InteractionPosts.Where(p => p.ThreadID == threadID).Select(p => p.User).Distinct().ToList();
+				foreach (User emailToUser in emailToUsers) {
+					if (emailToUser.UserID != user.UserID) {
+						string message = string.Format(Didache.Resources.emails.interaction_reply,
+										emailToUser.SecureShortName,
+										user.SecureShortName,
+										post.PostContent,
+										"https://online.dts.edu/courses/" + task.Course.Slug + "/schedule/" + task.UnitID + "#post-" + post.PostID);
+
+						Emails.EnqueueEmail("automated@dts.edu", emailToUser.Email, task.Course.CourseCode + ": Reply to " + task.Name, message, false);
+					}
+				}
+
 
 				return Json(new { 
 									success = true, 
@@ -201,5 +217,28 @@ namespace Didache.Web.Areas.Students.Controllers
 			return Redirect("/courses/" + task.Course.Slug + "/schedule/" + task.UnitID);
 		}
 
+
+
+		[HttpPost]
+		[AdminFacultyFacilitator]
+		public ActionResult DeletePost(int postID, bool isDeleted) {
+
+			InteractionPost post = db.InteractionPosts.Find(postID);
+			post.IsDeleted = isDeleted;
+			db.SaveChanges();
+
+			return Json(new { success = true });
+		}
+
+		[HttpPost]
+		[AdminFacultyFacilitator]
+		public ActionResult DeleteThread(int threadID, bool isDeleted) {
+
+			InteractionThread thread = db.InteractionThreads.Find(threadID);
+			thread.IsDeleted = isDeleted;
+			db.SaveChanges();
+
+			return Json(new { success = true });
+		}
     }
 }

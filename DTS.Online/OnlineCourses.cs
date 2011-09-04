@@ -32,7 +32,7 @@ namespace DTS.Online {
 			foreach (OnlineCourse course in courses) {
 				string dept = course.CourseCode.Substring(0,2);
 				
-				switch (dept) {
+				switch (dept.ToUpper()) {
 					case "BE":
 						courseGroups[0].Courses.Add(course);
 						break;
@@ -149,78 +149,12 @@ namespace DTS.Online {
 		}
 		
 		public static List<OnlineCourseUnit> GetCourseUnits(string courseCode, string language) {
+			
+			XmlDocument videosXmlDoc = GetCourseUnitsXml(courseCode, language);
+			XmlNode rootNode = videosXmlDoc.SelectSingleNode("course");
+
 			List<OnlineCourseUnit> units = new List<OnlineCourseUnit>();
-			
-			bool viewAll = (HttpContext.Current.Request.QueryString["admin"] + "" == "true" || HttpContext.Current.Request.QueryString["alumni"] + "" == "true");
-			
-			// my.dts.edu course units
-			List<Unit> courseUnits = null;
-			User user = Users.GetLoggedInUser();		
-			if (user != null) {
-				// get the courseID by looking at all the user's classes and matching the courseID
-				List<Course> usersCourses = Courses.GetUsersRunningCourses(user.UserID, CourseUserRole.Student); //(int) UserRole.Student);
-				//Course course = usersCourses.SingleOrDefault(uc => uc.CourseCode == courseCode);
 
-				Course course = MatchCourseCode(courseCode, usersCourses);  usersCourses.SingleOrDefault(uc => uc.CourseCode == courseCode);
-
-				if (course != null)
-					courseUnits = course.Units.ToList();
-			}
-			
-			// LOAD videoXmlPath		
-			string videoXmlPath = Settings.PlayerFilesLocation + courseCode + @"\titles\en-US.xml";
-
-			XmlDocument videosXmlDoc = new XmlDocument();					
-			if (System.IO.File.Exists(videoXmlPath)) {
-				
-				// load local file
-
-				XmlTextReader xmlTextReader = new XmlTextReader(videoXmlPath);
-				videosXmlDoc.Load(xmlTextReader);
-			} else {
-				throw new Exception("Can't find " + videoXmlPath);
-			}
-			XmlNode rootNode = videosXmlDoc.SelectSingleNode("course");		
-			
-			
-			// remove inactive units for logged in students, or visitors
-			if (viewAll) {
-				// don't make any changes
-			} else {
-			
-				List<XmlNode> nodesToRemove = new List<XmlNode>();
-					
-				// for people with units, we'll need to check the active status	
-				if (courseUnits != null) {
-					
-					foreach (XmlNode unitNode in rootNode) {
-						int unitNumber = Convert.ToInt32(unitNode.Attributes["number"].Value);
-						
-						// go through the my.dts units
-						foreach (Unit unit in courseUnits) {
-							if (unit.SortOrder == unitNumber && !unit.IsActive) {
-								nodesToRemove.Add(unitNode);				
-							}
-						}														
-					}	
-					
-				// everyone else only gets 2
-				} else {
-									
-					foreach (XmlNode unitNode in rootNode) {
-						int unitNumber = Convert.ToInt32(unitNode.Attributes["number"].Value);
-						if (unitNumber > 2)
-							nodesToRemove.Add(unitNode);					
-					}		
-				
-				}
-				
-				// remove all the inactive units
-				foreach (XmlNode nodeToRemove in nodesToRemove) {
-					rootNode.RemoveChild(nodeToRemove);
-				}	
-			}
-			
 			// create objects	
 			foreach (XmlNode unitNode in rootNode) {
 				int unitNumber = Convert.ToInt32(unitNode.Attributes["number"].Value);
@@ -244,6 +178,82 @@ namespace DTS.Online {
 			
 			
 			return units;
+		}
+
+		public static XmlDocument GetCourseUnitsXml(string courseCode, string language) {
+			List<OnlineCourseUnit> units = new List<OnlineCourseUnit>();
+
+			bool viewAll = (HttpContext.Current.Request.QueryString["admin"] + "" == "true" || HttpContext.Current.Request.QueryString["alumni"] + "" == "true");
+
+			// my.dts.edu course units
+			List<Unit> courseUnits = null;
+			User user = Users.GetLoggedInUser();
+			if (user != null) {
+				// get the courseID by looking at all the user's classes and matching the courseID
+				List<Course> usersCourses = Courses.GetUsersRunningCourses(user.UserID, CourseUserRole.Student); //(int) UserRole.Student);
+				//Course course = usersCourses.SingleOrDefault(uc => uc.CourseCode == courseCode);
+
+				Course course = MatchCourseCode(courseCode, usersCourses); usersCourses.SingleOrDefault(uc => uc.CourseCode == courseCode);
+
+				if (course != null)
+					courseUnits = course.Units.ToList();
+			}
+
+			// LOAD videoXmlPath		
+			string videoXmlPath = Settings.PlayerFilesLocation + courseCode + @"\titles\en-US.xml";
+
+			XmlDocument videosXmlDoc = new XmlDocument();
+			if (System.IO.File.Exists(videoXmlPath)) {
+
+				// load local file
+
+				XmlTextReader xmlTextReader = new XmlTextReader(videoXmlPath);
+				videosXmlDoc.Load(xmlTextReader);
+			} else {
+				throw new Exception("Can't find " + videoXmlPath);
+			}
+			XmlNode rootNode = videosXmlDoc.SelectSingleNode("course");
+
+
+			// remove inactive units for logged in students, or visitors
+			if (viewAll) {
+				// don't make any changes
+			} else {
+
+				List<XmlNode> nodesToRemove = new List<XmlNode>();
+
+				// for people with units, we'll need to check the active status	
+				if (courseUnits != null) {
+
+					foreach (XmlNode unitNode in rootNode) {
+						int unitNumber = Convert.ToInt32(unitNode.Attributes["number"].Value);
+
+						// go through the my.dts units
+						foreach (Unit unit in courseUnits) {
+							if (unit.SortOrder == unitNumber && !unit.IsActive) {
+								nodesToRemove.Add(unitNode);
+							}
+						}
+					}
+
+					// everyone else only gets 2
+				} else {
+
+					foreach (XmlNode unitNode in rootNode) {
+						int unitNumber = Convert.ToInt32(unitNode.Attributes["number"].Value);
+						if (unitNumber > 2)
+							nodesToRemove.Add(unitNode);
+					}
+
+				}
+
+				// remove all the inactive units
+				foreach (XmlNode nodeToRemove in nodesToRemove) {
+					rootNode.RemoveChild(nodeToRemove);
+				}
+			}
+
+			return videosXmlDoc;
 		}
 
 		private static Course MatchCourseCode(string courseCode, List<Course> coursesList) {
