@@ -2,49 +2,55 @@
 <%@ Import Namespace="System.IO" %>
 <%@ Import Namespace="System.Net" %>
 <%@ Import Namespace="System.Xml" %>
+<%@ Import Namespace="DTS.Online" %>
 
 <script runat="server">
 void Page_Load() {
-	string remoteUrl = Request.QueryString["RemoteUrl"] as string;
-	string appRoot = Request.PhysicalApplicationPath;
-	
-	string courseCode = Request["course"]+"";
-	string unitNumber = Request["unit"]+"";
-	string videoNumber = Request["video"]+"";
-	string language = Request["language"]+"";
-	
+
+	string courseCode = Request["course"] + "";
+	string unitNumber = Request["unit"] + "";
+	string videoNumber = Request["video"] + "";
+	string language = Request["language"] + "";
+
 	if (String.IsNullOrEmpty(language)) {
 		language = "en-US";
 	}
 
+
+	// get course info for headers
+	DTS.Online.OnlineCourse course = DTS.Online.OnlineCourses.GetCourse(courseCode);
+
+	// write slides
+	if (String.IsNullOrEmpty(videoNumber)) {
+		OnlineCourseUnit unit = DTS.Online.OnlineCourses.GetCourseUnits(courseCode).SingleOrDefault(u => u.UnitNumber.ToString() == unitNumber);
+		if (unit != null) {
+			foreach (OnlineCourseVideo video in unit.Videos) {
+				Output.Text += WriteSlides(course, courseCode, unit.UnitNumber.ToString(), video.VideoNumber.ToString(), language);
+			}
+		}
+	} else {
+		Output.Text = WriteSlides(course, courseCode, unitNumber, videoNumber, language);
+	}
+}
+
+string WriteSlides(OnlineCourse course, string courseCode, string unitNumber, string videoNumber, string language) {
+
+
+	string slidesUrlBase = "/playerfiles/" + courseCode + "/slides/" + language + "/";
+
 	XmlDocument slidesDoc = null;
 	XmlDocument videoInfoDoc = null;
-	string slidesPath = "/playerfiles/" + courseCode + "/Slides/" + language + "/";
 
-	if (Directory.Exists(appRoot + Path.DirectorySeparatorChar + "playerfiles" + Path.DirectorySeparatorChar + courseCode)) {
+	// construct paths
+	string slidesXmlPath = Didache.Settings.PlayerFilesLocation + courseCode + Path.DirectorySeparatorChar + "Slides" + Path.DirectorySeparatorChar + language + Path.DirectorySeparatorChar + courseCode + "_u" + unitNumber.PadLeft(3, '0') + "_v" + videoNumber.PadLeft(3, '0') + "_slides.xml";
+	string videoInfoXmlPath = Didache.Settings.PlayerFilesLocation + courseCode + Path.DirectorySeparatorChar + "Titles" + Path.DirectorySeparatorChar + language + ".xml";
 	
-
-		// construct paths
-		string slidesXmlPath = appRoot + "playerfiles" + Path.DirectorySeparatorChar + courseCode + Path.DirectorySeparatorChar + "Slides" + Path.DirectorySeparatorChar + language + Path.DirectorySeparatorChar + courseCode + "_u" + unitNumber.PadLeft(3, '0') + "_v" + videoNumber.PadLeft(3, '0') + "_slides.xml";
-		string videoInfoXmlPath = appRoot + "playerfiles" + Path.DirectorySeparatorChar + courseCode + Path.DirectorySeparatorChar + "Titles" + Path.DirectorySeparatorChar + language + ".xml";
-		
-		// load local xml
-		videoInfoDoc = LoadLocalXmlDocument(videoInfoXmlPath);
-		slidesDoc = LoadLocalXmlDocument(slidesXmlPath);
-
-	}
-	else
-	{
-		string slidesXmlPath = slidesPath + "/" + courseCode + "_u" + unitNumber.PadLeft(3, '0') + "_v" + videoNumber.PadLeft(3, '0') + "_slides.xml";
-		string videoInfoXmlPath = remoteUrl + courseCode + "/titles/" + language + ".xml";
-		
-		// load remote XML
-		videoInfoDoc = LoadRemoteXmlDocument(videoInfoXmlPath);
-		slidesDoc = LoadRemoteXmlDocument(slidesXmlPath);
-	}
+	// load local xml
+	videoInfoDoc = LoadLocalXmlDocument(videoInfoXmlPath);
+	slidesDoc = LoadLocalXmlDocument(slidesXmlPath);
 
 	if (videoInfoDoc == null || slidesDoc == null)
-		return;
+		return "";
 	
 
 	// LOAD: video info
@@ -55,8 +61,10 @@ void Page_Load() {
 
 
 	string pageTitle = courseCode.ToUpper() + " Unit " + unitNumber.ToString() + " - " + unitTitle + "<br /> Video " + videoNumber.ToString() + " - " + videoTitle;
+	StringBuilder sb = new StringBuilder();
 
-	Output.Text = "<h1 class=\"title\">" + pageTitle + "</h1>\n";
+
+	sb.AppendLine("<h1 class=\"title\">" + pageTitle + "</h1>\n");
 
 	//LOAD: slides
 	XmlNode slidesRoot = slidesDoc.SelectSingleNode("slides");
@@ -64,14 +72,14 @@ void Page_Load() {
 		slidesRoot = slidesDoc.SelectSingleNode("slideCues");
 	}
 
-	Output.Text += "<table class=\"SlideTable\">\n";
+	sb.AppendLine("<table class=\"SlideTable\">\n");
 
-	
+	// spin through the slides
 	int i = 1;
 	for (i=0; i<slidesRoot.ChildNodes.Count; i++) {
 	
-    string slide1filename = "";
-    string slide2filename = "";
+		string slide1filename = "";
+		string slide2filename = "";
       
 		XmlNode unitNode = slidesRoot.ChildNodes[i];
 		
@@ -79,38 +87,39 @@ void Page_Load() {
 		if (slide1filename == string.Empty)
 			slide1filename = courseCode + "_u" + unitNumber.PadLeft(3, '0') + "_v" + videoNumber.PadLeft(3, '0') + "_s" + (i+1).ToString().PadLeft(3, '0') + ".jpg";
 			
-    // there is at least one more
-		if (i < slidesRoot.ChildNodes.Count-1) {
-      unitNode = slidesRoot.ChildNodes[i+1];
-		
+		// there is at least one more
+		if (i < slidesRoot.ChildNodes.Count - 1) {
+			unitNode = slidesRoot.ChildNodes[i + 1];
+
+			// the slide on the right slide of the table
 			slide2filename = unitNode.Attributes["slideFileName"].Value;
-      if (slide2filename == string.Empty)
-        slide2filename = courseCode + "_u" + unitNumber.PadLeft(3, '0') + "_v" + videoNumber.PadLeft(3, '0') + "_s" + (i+2).ToString().PadLeft(3, '0') + ".jpg";
-	
-		
+			if (slide2filename == string.Empty)
+				slide2filename = courseCode + "_u" + unitNumber.PadLeft(3, '0') + "_v" + videoNumber.PadLeft(3, '0') + "_s" + (i + 2).ToString().PadLeft(3, '0') + ".jpg";
 		}
 	
-		Output.Text += @"
+		sb.AppendLine(@"
 			<tr> 
 				<td>
-					" + String.Format("<img src=\"{0}\" style=\"width:3in;height:2.25in;\" />", ResolveUrl(slidesPath + slide1filename)) + @"
+					" + String.Format("<img src=\"{0}\" style=\"width:3in;height:2.25in;\" />", ResolveUrl(slidesUrlBase + slide1filename)) + @"
 				</td>
 				<td>
-					" + ((slide2filename != "") ? String.Format("<img src=\"{0}\" style=\"width:3in;height:2.25in;\" />", ResolveUrl(slidesPath + slide2filename)) : "") + @"
+					" + ((slide2filename != "") ? String.Format("<img src=\"{0}\" style=\"width:3in;height:2.25in;\" />", ResolveUrl(slidesUrlBase + slide2filename)) : "") + @"
 				</td>
-			</tr>";
+			</tr>");
 
 		if ((i+1) % 6 == 0 && (i+1) < slidesRoot.ChildNodes.Count) {
-			Output.Text += "</table>\n" +
+			sb.AppendLine("</table>\n" +
 						"<h1 class=\"title BreakBefore\">" + pageTitle + "</h1>\n" + 
-						"<table class=\"SlideTable\">\n";
+						"<table class=\"SlideTable\">\n");
 		}
 		
 		if (slide2filename != "")
       i++;
 		
 	}
-	Output.Text += "</table>";
+	sb.AppendLine("</table>");
+
+	return sb.ToString();
 }
 XmlDocument LoadRemoteXmlDocument(string url) {
 	XmlDocument doc = null;
@@ -161,52 +170,53 @@ XmlDocument LoadLocalXmlDocument(string xmlPath) {
 }		
 </script>
 
+<!DOCTYPE html />
 <html>
 <head>
-<style type="text/css">
-body {
-	padding: 0px;
-	margin: auto;
-	text-align: center;
-	font-family: Times New Roman;
-	font-size: 11pt;
-	color: #111;	
-}
-form {
-	padding: 0px;
-}
-.PageTitle {
-	font-size: 12pt;
-	font-family: arial, tahoma, san serif;
+	<style>
+	body {
+		padding: 0px;
+		margin: auto;
+		text-align: center;
+		font-family: Times New Roman;
+		font-size: 11pt;
+		color: #111;	
+	}
+	form {
+		padding: 0px;
+	}
+	.PageTitle {
+		font-size: 12pt;
+		font-family: arial, tahoma, san serif;
 	
-}
-.SlideTable {
-	margin: auto;
-	text-align: left;
-}
-.SlideTable td {
-	padding: .25in;
-}
-.BreakBefore {
-	page-break-before: always;
-}
-textarea {
-	overflow: auto;
-	font-family: arial;
-	font-size: 12pt;
-}
-h1 {
-	padding: 0;
-	margin: 0;
-	font-size: 1.1em;
-}
+	}
+	.SlideTable {
+		margin: auto;
+		text-align: left;
+	}
+	.SlideTable td {
+		padding: .25in;
+	}
+	.BreakBefore {
+		page-break-before: always;
+	}
+	textarea {
+		overflow: auto;
+		font-family: arial;
+		font-size: 12pt;
+	}
+	h1 {
+		padding: 0;
+		margin: 0;
+		font-size: 1.1em;
+	}
 
-#footer {
-	text-align: center;
-	border-top: solid 1px #000;
-}
+	#footer {
+		text-align: center;
+		border-top: solid 1px #000;
+	}
 
-</style>
+	</style>
 </head>
 <body>
 <form runat="server">

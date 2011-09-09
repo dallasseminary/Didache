@@ -2,11 +2,16 @@
 <%@ Import Namespace="System.IO" %>
 <%@ Import Namespace="System.Net" %>
 <%@ Import Namespace="System.Xml" %>
-<%@ Import Namespace="DTS.Online" %>
 
 <script runat="server">
 void Page_Load() {
 
+	// look for local files? or remote?
+	bool useLocalFiles = true;
+	
+	string remoteUrl = Request.QueryString["RemoteUrl"] as string;
+	string appRoot = Request.PhysicalApplicationPath;
+	
 	string language= Request["language"]+"";
 	string courseCode = Request["course"]+"";
 	string unitNumber = Request["unit"]+"";
@@ -16,52 +21,51 @@ void Page_Load() {
 		language = "en-US";
 	}
 
-
-	// get course info for headers
-	DTS.Online.OnlineCourse course = DTS.Online.OnlineCourses.GetCourse(courseCode);
-
-	// write slides
-	if (String.IsNullOrEmpty(videoNumber)) {
-		OnlineCourseUnit unit = DTS.Online.OnlineCourses.GetCourseUnits(courseCode).SingleOrDefault(u => u.UnitNumber.ToString() == unitNumber);
-		if (unit != null) {
-			foreach (OnlineCourseVideo video in unit.Videos) {
-				//Output.Text += WriteSlides(course, courseCode, unit.UnitNumber.ToString(), video.VideoNumber.ToString(), language);
-			}
-		}
-	} else {
-		//Output.Text = WriteSlides(course, courseCode, unitNumber, videoNumber, language);
-	}	
-	
-
+	try {
 		XmlDocument videoInfoDoc = null;
 
 		
-	
-		// construct paths to XML documents
-		string videoInfoXmlPath = Didache.Settings.PlayerFilesLocation + courseCode + Path.DirectorySeparatorChar + "titles" + Path.DirectorySeparatorChar + language + ".xml";
+		//if (Directory.Exists(appRoot + Path.DirectorySeparatorChar + courseCode)) {
+		if (useLocalFiles)
+		{
+
+			// construct paths to XML documents
+			string videoInfoXmlPath = Didache.Settings.PlayerFilesLocation + courseCode + Path.DirectorySeparatorChar + "titles" + Path.DirectorySeparatorChar + language + ".xml";
 			
-		// load local xml
-		videoInfoDoc = LoadLocalXmlDocument(videoInfoXmlPath);
+			// load local xml
+			videoInfoDoc = LoadLocalXmlDocument(videoInfoXmlPath);
 			
+		}
+		else
+		{
+			// load unit/video info file and main nodes
+			string videoInfoXmlUrl = remoteUrl + courseCode + "/titles/" + language + ".xml";
+			videoInfoDoc = LoadRemoteXmlDocument(videoInfoXmlUrl);
+		}
 	
-		XmlNode courseInfoRoot = videoInfoDoc.SelectSingleNode("course");
-		XmlNode unitNode = courseInfoRoot.ChildNodes[Convert.ToInt32(unitNumber) - 1];
+		XmlNode coureInfoRoot = videoInfoDoc.SelectSingleNode("course");
+		XmlNode unitNode = coureInfoRoot.ChildNodes[Convert.ToInt32(unitNumber) - 1];
 		
 		// get the title of the course and title of the unit              
-		CourseTitle.Text = courseInfoRoot.Attributes["code"].Value + ". " + courseInfoRoot.Attributes["name"].Value;
+		CourseTitle.Text = coureInfoRoot.Attributes["code"].Value + ". " + coureInfoRoot.Attributes["name"].Value;
 		UnitTitle.Text = "Unit " + unitNumber + ". " + unitNode.Attributes["name"].Value;
 		
 
 		// create a list of the videos we want to use.		
-		List<String> videoNumbers = new List<String>();
+		string[] videoNumbers = null;
 
 		// single video transcript
-		if (!String.IsNullOrWhiteSpace(videoNumber)) {
-			videoNumbers.Add(videoNumber);
-		} else {
-			
-			for (int i = 0; i < unitNode.ChildNodes.Count; i++) {
-				videoNumbers.Add((i + 1).ToString());
+		if (videoNumber != null)
+		{
+			videoNumbers = new string[] { videoNumber };
+		}
+		else
+		{
+			videoNumbers = new string[unitNode.ChildNodes.Count];
+
+			for (int i = 0; i < unitNode.ChildNodes.Count; i++)
+			{
+				videoNumbers[i] = (i+1).ToString();
 			}
 		}
 
@@ -82,9 +86,15 @@ void Page_Load() {
 				// get the transcript
 				XmlDocument transcriptDoc;
 				
+				if (useLocalFiles) {
 					string transcriptXmlPath = Didache.Settings.PlayerFilesLocation + courseCode + "/transcripts/" + language + "/" + courseCode + "_u" + unitNumber.PadLeft(3, '0') + "_v" + video.PadLeft(3, '0') + "_transcript.xml";
 					transcriptDoc = LoadLocalXmlDocument(transcriptXmlPath);	
+				} else {
+					string transcriptXmlUrl = remoteUrl + courseCode + "/transcripts/" + language + "/" + courseCode + "_u" + unitNumber.PadLeft(3, '0') + "_v" + video.PadLeft(3, '0') + "_transcript.xml";
+					transcriptDoc = LoadRemoteXmlDocument(transcriptXmlUrl);				
+				}
 				
+
 				if (transcriptDoc != null)
 				{
 					XmlNode transcriptRoot = transcriptDoc.SelectSingleNode("transcript");
@@ -107,7 +117,12 @@ void Page_Load() {
 		TranscriptRepeater.DataSource = transcriptsList;
 		TranscriptRepeater.DataBind();	
 
-	
+	} catch (Exception e) {
+
+		Response.Write(e);
+		Message.Text = "There was an error loading this transcript. Please alert <a href=\"mailto:babegg@dts.edu?subject=bad transcript: " + courseCode + " unit " + unitNumber + " video " + videoNumber + "\">Bob Abegg</a>";
+
+	}
 }
     
     
