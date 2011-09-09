@@ -360,7 +360,7 @@ x Can't change languages on the fly
 
 		function loadCourseInfoData() {
 		
-			courseList.attr('disabled', 'disabled');
+			courseList.attr('disabled','disabled');
 			courseList.html('<option>Loading...</option>');
 			unitList.attr('disabled','disabled');
 			videoList.attr('disabled','disabled');		
@@ -496,7 +496,7 @@ x Can't change languages on the fly
 
 		function loadUnits() {
 
-			courseList.attr('disabled', 'disabled');
+			courseList.attr('disabled','disabled');
 
 			// load videos
 			unitList.html('<option>Loading...</option>');
@@ -545,7 +545,7 @@ x Can't change languages on the fly
 					});
 					
 					// reenable the course list
-					courseList.attr('disabled','');
+					courseList.attr('disabled', '');
 
 					// now fill the unit list
 					var optionsHtml = '';
@@ -553,7 +553,7 @@ x Can't change languages on the fly
 						optionsHtml += '<option value="' + unitNumber + '">' + unitNumber.toString() + '. ' + selectedCourseUnits[unitNumber].name + '</option>';
 					}
 					unitList.html( '<option value="">--Select--</option>' + optionsHtml );
-					unitList.attr('disabled','');
+					unitList.attr('disabled', '');
 
 					if (isSwitchingLanguage || isLoadingFromHash) {
 						// select the same unit
@@ -566,7 +566,7 @@ x Can't change languages on the fly
 				},
 				error: function(e) {
 					console.log('ERROR',e);
-					alert('There was an error loading this classes units and video');
+					alert('There was an error loading this classes units and video ' + url + ' ' + e);
 				}
 			});
 		}
@@ -584,7 +584,7 @@ x Can't change languages on the fly
 				optionsHtml += '<option value="' + videoNumber + '">' + videoNumber.toString() + '. ' + selectedUnit.videos[videoNumber].name + ' (' + selectedUnit.videos[videoNumber].speaker + ') ' + selectedUnit.videos[videoNumber].duration.substring(3, selectedUnit.videos[videoNumber].duration.indexOf('.')) + '</option>';
 			}
 			videoList.html( '<option value="">--Select--</option>' + optionsHtml );
-			videoList.attr('disabled','');
+			videoList.attr('disabled', '');
 
 			if (isSwitchingLanguage || isLoadingFromHash) {
 				// select the same unit
@@ -616,10 +616,10 @@ x Can't change languages on the fly
 			//$('#title .downloads .download-video').attr('href', videoUrl);
 			$('#title .downloads .download-slides')
 				.attr('target','_blank')
-				.attr('href', 'https://my.dts.edu/player4/print-slides.aspx?course=' + course + '&unit=' + unit + '&video=' + video + '&language=' + lang);
+				.attr('href', '/player/print-slides.aspx?course=' + course + '&unit=' + unit + '&video=' + video + '&language=' + lang);
 			$('#title .downloads .download-transcript')
 				.attr('target','_blank')
-				.attr('href', 'https://my.dts.edu/player4/print-transcript.aspx?course=' + course + '&unit=' + unit + '&video=' + video + '&language=' + lang);
+				.attr('href', '/player/print-transcript.aspx?course=' + course + '&unit=' + unit + '&video=' + video + '&language=' + lang);
 
 			if (isSwitchingLanguage) {
 				mediaController.changeLanguage(slidesUrl, transcriptUrl, slidesPath);
@@ -663,9 +663,9 @@ x Can't change languages on the fly
 
 				// clear video, unit
 				unitList.html('');
-				unitList.attr('disabled', 'disabled');
+				unitList.attr('disabled','disabled');
 				videoList.html('');
-				videoList.attr('disabled', 'disabled');
+				videoList.attr('disabled','disabled');
 
 				loadCoursesByLanguage();
 			}
