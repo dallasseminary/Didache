@@ -20,7 +20,7 @@ void Page_Load() {
 		OnlineCourseVideo video = course.DefaultCourseData.Units[unitNumber-1].Videos[videoNumber-1];
 		
 		XmlDocument xmlDocument = new XmlDocument();
-		xmlDocument.Load( @"e:\websites\my.dts.edu\web\playerfiles\" + course.CourseCode + "/transcripts/" + language + "/" + video.CourseCode + "_u" + video.UnitNumber.ToString().PadLeft(3,'0') + "_v" + video.VideoNumber.ToString().PadLeft(3,'0') + "_transcript.xml" );
+		xmlDocument.Load(Didache.Settings.PlayerFilesLocation + course.CourseCode + "/transcripts/" + language + "/" + video.CourseCode + "_u" + video.UnitNumber.ToString().PadLeft(3, '0') + "_v" + video.VideoNumber.ToString().PadLeft(3, '0') + "_transcript.xml");
 		
 		TranscriptTextRepeater.DataSource = xmlDocument.SelectSingleNode("transcript").ChildNodes;
 		TranscriptTextRepeater.DataBind();		

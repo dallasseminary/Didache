@@ -21,7 +21,7 @@ void Page_Load() {
 		
 		XmlDocument xmlDocument = new XmlDocument();
 		//xmlDocument.Load( Server.MapPath("~/playerfiles/" + course.CourseCode + "/slides/" + language + "/" + video.CourseCode + "_u" + video.UnitNumber.ToString().PadLeft(3,'0') + "_v" + video.VideoNumber.ToString().PadLeft(3,'0') + "_slides.xml" ));
-		xmlDocument.Load( @"e:\websites\my.dts.edu\web\playerfiles\" + course.CourseCode + "/slides/" + language + "/" + video.CourseCode + "_u" + video.UnitNumber.ToString().PadLeft(3,'0') + "_v" + video.VideoNumber.ToString().PadLeft(3,'0') + "_slides.xml" );
+		xmlDocument.Load( Didache.Settings.PlayerFilesLocation + course.CourseCode + "/slides/" + language + "/" + video.CourseCode + "_u" + video.UnitNumber.ToString().PadLeft(3,'0') + "_v" + video.VideoNumber.ToString().PadLeft(3,'0') + "_slides.xml" );
 		
 		TranscriptTextRepeater.DataSource = xmlDocument.SelectSingleNode("slides").ChildNodes;
 		TranscriptTextRepeater.DataBind();
@@ -49,7 +49,7 @@ string GetCourseString() {
 		<asp:Repeater id="TranscriptTextRepeater" runat="Server" >
 			
 			<ItemTemplate>
-				<p><img src="//my.dts.edu/playerfiles/<%= Request["Course"] %>/Slides/<%= language %>/<%# ((XmlNode) Container.DataItem).Attributes["slideFileName"].Value %>" /></p>
+				<p><img src="/playerfiles/<%= Request["Course"] %>/Slides/<%= language %>/<%# ((XmlNode) Container.DataItem).Attributes["slideFileName"].Value %>" /></p>
 			</ItemTemplate>
 							
 		</asp:Repeater>
