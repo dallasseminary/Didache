@@ -183,7 +183,19 @@ namespace DTS.Online {
 		public static XmlDocument GetCourseUnitsXml(string courseCode, string language) {
 			List<OnlineCourseUnit> units = new List<OnlineCourseUnit>();
 
-			bool viewAll = (HttpContext.Current.Request.QueryString["admin"] + "" == "true" || HttpContext.Current.Request.QueryString["alumni"] + "" == "true");
+			bool viewAll = (
+					HttpContext.Current.Request.QueryString["admin"] + "" == "true" || 
+					HttpContext.Current.Request.QueryString["alumni"] + "" == "true" ||
+					HttpContext.Current.User.IsInRole("oe-transcriber") ||
+					HttpContext.Current.User.IsInRole("oe-administrator") ||
+					HttpContext.Current.User.IsInRole("oe-faculty") ||
+					HttpContext.Current.User.IsInRole("oe-grader") ||
+					
+					courseCode.ToLower() == "st106" ||
+					courseCode.ToLower() == "be547" 
+
+
+					);
 
 			// my.dts.edu course units
 			List<Unit> courseUnits = null;
@@ -193,7 +205,8 @@ namespace DTS.Online {
 				List<Course> usersCourses = Courses.GetUsersRunningCourses(user.UserID, CourseUserRole.Student); //(int) UserRole.Student);
 				//Course course = usersCourses.SingleOrDefault(uc => uc.CourseCode == courseCode);
 
-				Course course = MatchCourseCode(courseCode, usersCourses); usersCourses.SingleOrDefault(uc => uc.CourseCode == courseCode);
+				Course course = MatchCourseCode(courseCode, usersCourses); 
+				usersCourses.SingleOrDefault(uc => uc.CourseCode == courseCode);
 
 				if (course != null)
 					courseUnits = course.Units.ToList();
