@@ -45,6 +45,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 
 			ViewBag.UsersRoles = System.Web.Security.Roles.GetRolesForUser(user.Username).ToList();
 			ViewBag.AllRoles = UserRoles.SiteRoles.ToList();
+			ViewBag.UsersCourses = Courses.GetUsersCourses(user.UserID, CourseUserRole.Student);
 
 			/*
 			foreach (string role in UserRoles.SiteRoles) {

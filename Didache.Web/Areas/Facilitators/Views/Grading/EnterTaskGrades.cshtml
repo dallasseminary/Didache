@@ -4,6 +4,46 @@
 	ViewBag.Title = Model.ToString() + " :: " + ((Task)ViewBag.Task).Name;
 }
 
+<style>
+.grader-interaction td, .grader-interaction th {
+	padding: 3px;
+}
+.grader-interaction th {
+	padding-left: 10px;
+	font-weight: bold;
+}
+
+.grader-interaction input[type=file] {
+	width: 100px;
+}
+
+#email-form {
+	display: none;
+	position: fixed;
+	width: 500px;
+	padding: 10px;
+	top: 100px;
+	left: 50%;
+	margin-left: -250px;
+
+	background: #eee;
+	border: solid 1px #666;
+	
+}
+#email-form .email-body{
+	background: #fff;
+	border: solid 1px #aaa;
+	padding: 5px;
+}
+#email-form .email-body textarea{
+	width: 300px;
+	height: 100px;
+	background: #eeeeff;
+}
+.overdue {
+	color: #ff0000;
+}
+</style>
 
 <div class="page-wide">
 	@Html.Partial("_CourseHeader", Model)
@@ -12,12 +52,65 @@
 
 
 		<h2>Grades for @ViewBag.Task.Name</h2>
+
+		<p>Instructions: @Html.Raw(ViewBag.Task.Instructions)</p>
+
+		<h3>Toggle Assignments</h3>
+
+		<select id="toggle-assignments">
+			<option value="all">Show All Assignments</option>
+			<option value="ungraded">Only UN-graded</option>
+			<option value="graded">Only graded</option>
+		</select>
+
+		@*
+		@if (ViewBag.Task.DueDate.HasValue) {
+			<p>Due Date: @ViewBag.Task.DueDate.Value.ToString("MM/dd/yy")</p>
+		}
+		*@
 		
 		@{ 
 			CourseUserGroup lastGroup = null;
 			int lastGroupID = -1;
 		}
 		
+			<div id="email-form">
+				
+				<h2>Student's Comments</h2>
+				<span class="student-comments"></span>
+
+				<h2>Grading Email</h2>
+				<table class="admin-table">
+					<tr>
+						<th>To:</th>
+						<td><span class="student-name"></span></td>
+					</tr>
+					<tr>
+						<th>Subject</th>
+						<td><span class="email-subject"></span></td>
+					</tr>
+					<tr>
+						<th>Email</th>
+						<td>
+							<div class="email-body">
+								The assignment <span class="task-name"></span> in <span class="course-name"></span> 
+								has been graded by <span class="grader-name"></span>.
+								<br /><br />
+								Grade: <span class="numeric-grade"></span>
+								<br />
+								Graded File: <span class="graded-file-url"></span><br />
+								Grader Comments<br /><br />
+								<textarea class="email-text"></textarea>
+							</div>						
+						</td>
+					</tr>
+					
+				</table>
+
+				<input type="button" class="send-graded-email d-button action" value="Send Email" />
+				<input type="button" class="cancel-graded-email d-button" value="Cancel" />
+
+			</div>
 
 
 			@foreach (CourseUser user in ViewBag.CourseUsers) {
@@ -26,8 +119,28 @@
 			   if (user.GroupID != lastGroupID) {
 					if (lastGroupID != -1) {
 						@Html.Raw("</tbody></table>")
-						<a class="d-button" href="/grading/@Model.Slug/downloadfiles/@userTaskData.TaskID/@user.GroupID/">Download all files in group</a>
-						<a class="d-button" href="/grading/@Model.Slug/emailgroup/@userTaskData.TaskID/@user.GroupID/">Email Grades to Group</a>			
+
+						<table class="grader-interaction">
+						<tr>
+							<th>Download</th>
+							<td><a class="d-button" href="/grading/@Model.Slug/downloadfiles/@userTaskData.TaskID/@lastGroupID/">All Files</a> <a class="d-button" href="/grading/@Model.Slug/downloadfiles/@userTaskData.TaskID/@lastGroupID/?excludeUngraded=true">Ungraded Files</a>
+							<th>Upload</th>
+							<td>
+								<form class="mass-upload" enctype="multipart/form-data" action="/grading/@Model.Slug/massupload/@ViewBag.Task.TaskID" method="post">
+									<input type="file" name="massfiles" />
+									<input type="submit" class="d-button" value="Upload Files" />
+								</form>	
+							</td>
+							<!--
+							<th>Email</th>
+							<td>
+								<a class="d-button" href="/grading/@Model.Slug/emailgroup/@userTaskData.TaskID/@user.GroupID/">Email Grades to Group</a>
+							</td>
+							-->
+						</tr>
+						</table>
+						
+								
 					}
 
 					lastGroup = user.Group;
@@ -38,23 +151,43 @@
 
 					}
 	   
-					@Html.Raw("<table class=\"grading-list enter-grades\"><thead><tr>" + 
-								"<th>Name</th>" + 
+					@Html.Raw("<table class=\"grading-list enter-grades\"><thead><tr>" +
+								"<th>Name</th>" +
 								"<th>Student Info</th>" +
-								(userTaskData.Task.TaskTypeName.Contains("TurnInFile") ? "<th>Graded</th>" : "") +						
-								"<th>Grade</th>" + 								
+								(userTaskData.Task.TaskTypeName.Contains("TurnInFile") ? "<th>Graded</th>" : "") +
+								"<th>Grade</th>" +
 								"<th>Email</th>" +
 							"</tr></thead>")
 			   }	   
 	   
 	   
-				<tr>
+				<tr class="grade-row" data-userid="@user.UserID" data-taskid="@(userTaskData != null ? userTaskData.TaskID.ToString() : "")">
 					<td class="name">@user.User.FormattedName</td>
 					@if (userTaskData != null) {
 					<td class="student-info">						
 						
 							@if (userTaskData.StudentFileID > 0 && userTaskData.StudentFile != null) {
-								<a href="@userTaskData.StudentFile.FileUrl">Student File</a> <a href="/grading/@Model.Slug/removestudentfile/@userTaskData.TaskID/@user.UserID" class="d-button">Remove</a>
+								@* <a href="@userTaskData.StudentFile.FileUrl">Student File</a> *@
+		   
+								<a href="/courses/studentfile/@userTaskData.StudentFileID/@StudentFile.GetFriendlyFilename(Model, userTaskData.Unit, userTaskData.Task, userTaskData.User, userTaskData.StudentFile.Filename)">Student File</a>
+				
+								<a href="/grading/@Model.Slug/removestudentfile/@userTaskData.TaskID/@user.UserID" class="d-button">Remove</a>
+							}
+							
+							<br />
+
+							@if (userTaskData.StudentSubmitDate.HasValue) {
+								<text>submitted:</text> <span class="student-submitted">
+								@if (userTaskData.Task.DueDate.HasValue && userTaskData.StudentSubmitDate.Value > userTaskData.Task.DueDate.Value) {
+									<span class="overdue">@userTaskData.StudentSubmitDate.Value.ToString("MM/dd hh:mm tt")</span>
+								} else {
+									@userTaskData.StudentSubmitDate.Value.ToString("MM/dd hh:mm tt")
+								}
+								</span>
+							}
+							
+							@if (userTaskData.PostID > 0) {
+								<a href="/courses/@Model.Slug/schedule/@userTaskData.UnitID#thread-@userTaskData.Post.ThreadID" target="_blank">thread</a>
 							}
 
 
@@ -85,34 +218,143 @@
 						<input data-action="/grading/@Model.Slug/UpdateUserTaskNumericGrade/@userTaskData.TaskID/@userTaskData.UserID" 
 								class="grader-numericgrade"  type="text" value="@userTaskData.NumericGrade" name="NumericGrade" placeholder="0-100" style="width: 30px;" />
 
+						
 
 					</td>
 					<td class="send">
-						@*
-						<button @(userTaskData.GradeSentDate.HasValue ? "" : " disabled") class="d-button send-grade">Email Grade</button>
-						*@
-						TODO: email student
+						<button class="d-button send-grade" @(userTaskData.NumericGrade.HasValue ? "" : " style=\"display:none;\"")>Email Grade</button>
+						<br />
+						<span class="grade-sent-date">@(userTaskData.GradeSentDate.HasValue ? userTaskData.GradeSentDate.Value.ToString("MM/dd hh:mm tt") : "")</span>
 					</td>
-					}
+	 }
 				</tr>
-			}	
+   }	
 			@Html.Raw("</tbody></table>")	
 
-			<h2>Mass Upload</h2>
+			<table class="grader-interaction">
+				<tr>
+					<th>Download</th>
+					<td><a class="d-button" href="/grading/@Model.Slug/downloadfiles/@ViewBag.Task.TaskID/@lastGroupID/">All files</a> <a class="d-button" href="/grading/@Model.Slug/downloadfiles/@ViewBag.Task.TaskID/@lastGroupID/?excludeUngraded=true">Ungraded files</a>
+					<th>Upload</th>
+					<td>
+						<form class="mass-upload" enctype="multipart/form-data" action="/grading/@Model.Slug/massupload/@ViewBag.Task.TaskID" method="post">
+							<input type="file" name="massfiles" />
+							<input type="submit" class="d-button" value="Upload Files" />
+						</form>	
+					</td>
+					<!--
+					<th>Email</th>
+					<td>
+						<a class="d-button" href="/grading/@Model.Slug/emailgroup/@ViewBag.Task.TaskID/@lastGroupID/">Email Grades to Group</a>
+					</td>
+					-->
+				</tr>
+			</table>
 
-			<p>Upload a ZIP file with a bunch of graded files. These should end with some numbers [123,234] which are the task and student ID</p>
-
-			<form id="mass-upload" enctype="multipart/form-data" action="/grading/@Model.Slug/massupload/@ViewBag.Task.TaskID" method="post">
-				<input type="file" name="massfiles" />
-				<br />
-				<input type="submit" value="Upload Files" />
-			</form>
 
 	</div>
 </div>
 
 <script>
 	jQuery(document).ready(function ($) {
+
+		// TOGGLE
+		$('#toggle-assignments').change(function () {
+
+			var selection = $(this).val();
+
+			console.log(selection);
+
+			$('tr.grade-row').each(function () {
+				var tr = $(this),
+					hasGrade = tr.find('.grader-numericgrade').val() != '',
+					isVisible = tr.is(':visible'),
+					showIt = (selection == 'all' || (selection == 'ungraded' && !hasGrade) || (selection == 'graded' && hasGrade));
+
+				console.log(tr, hasGrade, isVisible, showIt);
+
+				if (showIt && !isVisible) {
+					tr.show();
+				} else if (!showIt && isVisible) {
+					tr.hide();
+				}
+			});
+		});
+
+
+		// email grade
+		$('.send-grade').click(function () {
+			// show form
+			showLoading('Loading data');
+
+			var emailButton = $(this),
+				row = emailButton.closest('tr'),
+				taskID = row.data('taskid'),
+				userID = row.data('userid');
+
+			$.ajax({
+				url: '/grading/@Model.Slug/getusertaskdata/' + taskID + '/' + userID,
+				success: function (d) {
+
+					hideLoading();
+
+					// fill in stuff
+					var emailForm = $('#email-form');
+
+					emailForm.data('currentdata', d);
+
+					emailForm.find('.student-comments').html(d.StudentComments);
+					emailForm.find('.email-text').val(d.GraderComments)
+					emailForm.find('.student-name').html(d.User.SecureFormattedName);
+					emailForm.find('.email-subject').html(d.Course.CourseCode + d.Course.Section + ' - ' + d.Task.Name + ' Grade');
+					emailForm.find('.task-name').html(d.Task.Name);
+					emailForm.find('.course-name').html(d.Course.CourseCode + d.Course.Section);
+					emailForm.find('.numeric-grade').html(row.find('.grader-numericgrade').val());
+
+
+
+					if (d.GradedFile != null) {
+						emailForm.find('.graded-file-url').html('https://online.dts.edu' + d.GradedFile.FileUrl);
+					}
+
+					emailForm.show();
+				}
+			});
+
+		});
+
+
+		$('.send-graded-email').click(function () {
+			var emailForm = $('#email-form'),
+				currentdata = emailForm.data('currentdata');
+
+			showLoading('Sending email...');
+
+			$.ajax({
+				url: '/grading/@Model.Slug/SendGradedEmail/' + currentdata.TaskID + '/' + currentdata.UserID,
+				type: 'POST',
+				data: {
+					emailText: emailForm.find('.email-text').val()
+				},
+				success: function (d) {
+
+					// update date sent?
+					$('tr[data-userid="' + currentdata.UserID + '"] .grade-sent-date').html('sent');
+
+					hideLoading();
+
+					emailForm.hide();
+				}
+			});
+
+		});
+
+
+		$('.cancel-graded-email').click(function () {
+			$('#email-form').hide();
+		});
+
+
 
 		// status
 		$('.grader-taskstatus').click(function () {
@@ -140,7 +382,7 @@
 		// grade
 		$('.grader-numericgrade').keydown(function (e) {
 			$(this).closest('tr')
-				.data('sending',false)
+				.data('sending', false)
 				.addClass('dirty');
 
 			if (e.keyCode == '13') {
@@ -170,8 +412,16 @@
 					success: function (data) {
 						hideLoading();
 
+						// toggle email button based on grade
+						if (numericGrade.val() == '') {
+							row.find('.send-grade').hide();
+						} else {
+							row.find('.send-grade').show();
+						}
+
+
 						row
-							.data('sending',false)
+							.data('sending', false)
 							.removeClass('dirty')
 							.effect('highlight');
 					}

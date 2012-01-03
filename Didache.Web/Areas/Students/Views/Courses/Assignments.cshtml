@@ -17,9 +17,15 @@
 		@{ Unit unit = null; }
 		
 		@foreach (UserTaskData userTask in ViewBag.AllUserTasks) {
+			if (userTask != null && userTask.Task != null && userTask.Task.Unit != null) {
+	  
 			if (unit == null || unit.UnitID != userTask.Task.Unit.UnitID) {
 				<tr>
-					<th colspan="6" class="unit-head">Unit @userTask.Task.Unit.SortOrder - @userTask.Task.Unit.Name</th>
+					<th colspan="6" class="unit-head">
+						@if (userTask.Task != null && userTask.Task.Unit != null) {
+							<text>Unit</text> @userTask.Task.Unit.SortOrder <text>-</text> @userTask.Task.Unit.Name
+						}
+					</th>
 				</tr>
 				<tr>
 					<th>Task</th>
@@ -36,7 +42,7 @@
 				<td><a href="@userTask.UserTaskUrl">@Html.Raw(userTask.Task.Name)</a></td>
 				<td>@(userTask.Task.DueDate.HasValue ? userTask.Task.DueDate.Value.ToShortDateString() : "")</td>
 				<td>
-					<span class="task-status status-@userTask.TaskCompletionStatus.ToString().ToLower() @(userTask.TaskCompletionStatus == TaskCompletionStatus.NotStarted && (DateTime.Now > userTask.Task.DueDate || DateTime.Now > userTask.Task.Unit.EndDate) ? "status-overdue" : "")"></span>
+					<span class="task-status status-@userTask.TaskCompletionStatus.ToString().ToLower() @(userTask.TaskCompletionStatus == TaskCompletionStatus.NotStarted && ((userTask.Task.DueDate.HasValue && DateTime.Now > userTask.Task.DueDate) || DateTime.Now.Date > userTask.Task.Unit.EndDate) ? "status-overdue" : "")"></span>
 				</td>
 				<td>
 					@(userTask.StudentSubmitDate.HasValue ? userTask.StudentSubmitDate.Value.ToShortDateString() : "")
@@ -53,6 +59,9 @@
 					}				
 				</td>
 			</tr>
+			} else {
+				<!-- trouble: taskID=@userTask.TaskID, unitID=@userTask.UnitID  -->	
+			}
 		}
 		</table>
 

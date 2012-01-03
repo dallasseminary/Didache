@@ -4,6 +4,8 @@
 	List<InteractionThread> threads = Interactions.GetInteractionThreads(Model.TaskID);
 }
 
+
+
 @if (threads.Count > 0) {
 <div class="task-interactions">
 
@@ -13,15 +15,18 @@
 	
 	<div class="task-interaction-thread @(thread.IsDeleted  ? "thread-deleted" : "")" id="thread-@thread.ThreadID" data-threadid="@thread.ThreadID">
 		
-		<div class="task-interaction-main">
+		<div class="task-interaction-main @(Courses.IsUserFaculty(Model.CourseID , thread.User.UserID) ? "user-faculty" : "") @(Courses.IsUserFacilitator(Model.CourseID , thread.User.UserID) ? "user-facilitator" : "")">
 			<div class="task-interaction-userimage">
-				<a href="@(thread.User != null ? thread.User.ProfileDisplayUrl : "#")">
-					<img src="@(thread.User != null ? thread.User.GetProfileImageUrl(40, 40) : "")" alt="@(thread.User != null ? thread.User.SecureShortName : "#")" />
-				</a>				
+				<a href="@(thread.User != null ? thread.User.ProfileDisplayUrl : "#")" style="background-image:url(@(thread.User != null ? thread.User.GetProfileImageUrl(40, 40) : ""));"></a>				
 			</div>	
 			<div class="task-interaction-content">			
 				<div class="task-interaction-meta">
-					<a class="user-name" href="@(thread.User != null ? thread.User.ProfileDisplayUrl : "#")">@(thread.User != null ? thread.User.SecureShortName : "missing")</a>
+					<a class="user-name" href="@(thread.User != null ? thread.User.ProfileDisplayUrl : "#")">
+						@(thread.User != null ? thread.User.SecureShortName : "missing") 
+					</a>
+						@Html.Raw(Courses.IsUserFaculty(Model.CourseID, thread.UserID) ? "<span class=\"usertag\">faculty</span>" : "")
+						@Html.Raw(Courses.IsUserFacilitator(Model.CourseID, thread.UserID) ? "<span class=\"usertag\">facilitator</span>" : "")
+				
 					<span class="post-date">@thread.ThreadDate.ToShortDateString()</span>
 					<span class="total-replies d-button">@String.Format(Didache.Resources.labels.interactions_replies, (thread.Posts.Count - 1))</span>
 				</div>
@@ -51,15 +56,18 @@
 			
 			@foreach (InteractionPost post in thread.Posts.Skip(1)) {
 	   if (!post.IsDeleted || Users.IsAdministratorFacultyOrFacilitator()) {
-				<div class="task-interaction-post @(post.UserID == thread.UserID ? " thread-starter" : "")  @(post.IsDeleted ? "post-deleted" : "")" id="post-@post.PostID" data-postid="@post.PostID">
+				<div class="task-interaction-post @(post.UserID == thread.UserID ? " thread-starter" : "")  @(post.IsDeleted ? "post-deleted" : "") @(Courses.IsUserFaculty(Model.CourseID , post.User.UserID) ? "user-faculty" : "") @(Courses.IsUserFacilitator(Model.CourseID , post.User.UserID) ? "user-facilitator" : "")" id="post-@post.PostID" data-postid="@post.PostID">
 					<div class="task-interaction-userimage">
-						<a href="@(post.User != null ? post.User.ProfileDisplayUrl : "#")">
-							<img src="@(post.User != null ? post.User.GetProfileImageUrl(30, 30) : "")" alt="@(post.User != null ? post.User.SecureShortName : "#")" />
+						<a href="@(post.User != null ? post.User.ProfileDisplayUrl : "#")" style="background-image:url(@(post.User != null ? post.User.GetProfileImageUrl(30, 30) : ""));">
 						</a>				
 					</div>	
 					<div class="task-interaction-content">			
 						<div class="task-interaction-meta">
 							<a class="user-name" href="@(post.User != null ? post.User.ProfileDisplayUrl : "#")">@(post.User != null ? post.User.SecureShortName : "missing")</a>
+							@Html.Raw(Courses.IsUserFaculty(Model.CourseID , post.UserID) ? "<span class=\"usertag\">faculty</span>" : "")
+							@Html.Raw(Courses.IsUserFacilitator(Model.CourseID, post.UserID) ? "<span class=\"usertag\">facilitator</span>" : "")
+				
+							
 							<span class="post-date">@post.PostDate.ToShortDateString()</span>						
 						</div>
 						<div class="task-interaction-text">
@@ -88,7 +96,7 @@
 						<a class="user-name" href="@user.ProfileDisplayUrl">@user.SecureShortName</a>
 					</div>
 					<div class="task-interaction-text">
-						<textarea class="reply-text required" ></textarea>	
+						<textarea class="reply-text required" cols="50" rows="5" ></textarea>	
 						<div class="add-reply-button">
 							<input type="button" class="d-button action reply-button" value="Add reply" /> 
 							<input type="button" class="d-button collapse" value="Close" />

@@ -1,4 +1,4 @@
-﻿html[lang=ar] {
+﻿dirtyhtml[lang=ar] {
 	direction: rtl;
 }
 body {
@@ -646,7 +646,7 @@ select#language {
 	padding: 4px 6px;
 	font-weight: bold;
 }
-.grading-list .dirty {
+.grading-list tr.dirty {
 	background: #ce8484;
 }
 

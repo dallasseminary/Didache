@@ -15,9 +15,7 @@
 
 		<p>@Didache.Resources.labels.courses_tools_itunes_desc</p>
 
-		<div class="message-warning">
-		The iTunes feed isn't quite working right yet. We'll have it fixed for the second week of class.
-		</div>
+		<p>https://@(Request.Url.Host)/courses/feed/@(Users.GetLoggedInUser().UserID)/@ViewContext.RouteData.Values["slug"]-all.xml</p>
 
 		<p><a href="https://@(Request.Url.Host)/courses/feed/@(Users.GetLoggedInUser().UserID)/@ViewContext.RouteData.Values["slug"]-all.xml"><img src="/css/images/itunes-badge.jpg"></a>			
 			</p>

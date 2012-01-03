@@ -59,10 +59,11 @@ namespace Didache.Web.Areas.Students.Controllers
 			// (1) figure out which Unit to show (either by ID or date)
 			if (id.HasValue) {
 				// pick unit specified in URL
-				currentUnit = units.AsQueryable().SingleOrDefault(u => u.UnitID == id.Value);
+				currentUnit = units.SingleOrDefault(u => u.UnitID == id.Value);
 			} else {
 				// pick current URL by date
-				currentUnit = units.AsQueryable().SingleOrDefault(u => u.StartDate <= DateTime.Now && u.EndDate >= DateTime.Now);
+				DateTime now = DateTime.Now.Date;
+				currentUnit = units.SingleOrDefault(u => u.StartDate <= now && u.EndDate >= now);
 			}
 
 			// fallback to first unit
@@ -76,15 +77,17 @@ namespace Didache.Web.Areas.Students.Controllers
 
 				CourseUser thisUser = db.CourseUsers.SingleOrDefault(cu => cu.UserID == user.UserID && cu.RoleID == (int)CourseUserRole.Student && cu.CourseID == course.CourseID);
 
-				userTasks = Tasks.GetUserTaskDataInUnit(currentUnit.UnitID, user.UserID, (thisUser==null));
+				userTasks = Tasks.GetUserTaskDataInUnit(currentUnit.UnitID, user.UserID, (thisUser == null)).Where(ut => ut.Task.IsActive).ToList();
+			} else {
+				// return ERROR?
 			}
 
 
 			// (3) all other data
-			// TODO: more efficient
+			// TODO: more efficient?
 			
-			ViewBag.AllUserTasks = db.UserTasks.Where(ut => ut.UserID == user.UserID && ut.CourseID == course.CourseID).ToList();
-            ViewBag.UserGroups = Didache.Courses.GetCourseUserGroups(course.CourseID);
+			ViewBag.AllUserTasks = db.UserTasks.Where(ut => ut.UserID == user.UserID && ut.CourseID == course.CourseID && ut.Task.IsActive).ToList();
+            //ViewBag.UserGroups = Didache.Courses.GetCourseUserGroups(course.CourseID);
 			ViewBag.Units = units;
 			ViewBag.CurrentUnit = currentUnit;
 			ViewBag.UserTasks = userTasks;
@@ -130,11 +133,10 @@ namespace Didache.Web.Areas.Students.Controllers
 										.Include("Task.Unit")
 										.Include("StudentFile")
 										.Include("GradedFile")
-										.Where(ut => ut.UserID == user.UserID && ut.CourseID == course.CourseID)
+										.Where(ut => ut.UserID == user.UserID && ut.CourseID == course.CourseID && ut.Task.IsActive)
 										.OrderBy(ut => ut.Unit.SortOrder)
 											.ThenBy(ut => ut.Task.SortOrder)
 										.ToList();
-
 
 			return View(course);
 		}
@@ -253,7 +255,7 @@ namespace Didache.Web.Areas.Students.Controllers
 						Int32.TryParse(vNode.Attributes["number"].Value, out videoNumber);
 
 						videosList.Add(new VideoInfo {
-							SortOrder = videoNumber++,
+							SortOrder = videoNumber,
 							UnitTaskInfo = "Unit " + unitNumber + ". Task " + videoNumber + ". ",
 							CourseCode = course.CourseCode,
 							UnitNumber = unitNumber,
@@ -321,10 +323,10 @@ namespace Didache.Web.Areas.Students.Controllers
 			Course course = Didache.Courses.GetCourseBySlug(slug);
 			User user = Users.GetUser(userID);
 
-			if (user == null)
+			if (user == null || course == null)
 				return HttpNotFound();
 
-			List<UserTaskData> userTask = db.UserTasks
+			List<UserTaskData> userTasks = db.UserTasks
 											.Include("Task.Unit")
 											.Where(ut => ut.UserID == user.UserID && ut.CourseID == course.CourseID)
 											.OrderBy(t => t.Task.Unit.SortOrder)
@@ -333,18 +335,21 @@ namespace Didache.Web.Areas.Students.Controllers
 
 			List<ICalEvent> iEvents = new List<ICalEvent>();
 
-			foreach (UserTaskData task in userTask) {
+			foreach (UserTaskData userTask in userTasks) {
 				DateTime dueDate;
 
-				if (task.Task.DueDate.HasValue)
-					dueDate = task.Task.DueDate.Value;
+				if (userTask.Unit == null)
+					continue;
+
+				if (userTask.Task.DueDate.HasValue)
+					dueDate = userTask.Task.DueDate.Value;
 				else
-					dueDate = task.Task.Unit.EndDate;
+					dueDate = userTask.Task.Unit.EndDate;
 
 				iEvents.Add(new ICalEvent() {
-					UID = task.TaskID.ToString(),
-					Summary = task.Task.Name + " (Unit " + task.Unit.SortOrder.ToString() + ")" +  ((task.TaskCompletionStatus == TaskCompletionStatus.Completed) ? " [completed]" : ""),
-					Description = Utility.StripHtml(task.Task.Instructions),
+					UID = userTask.TaskID.ToString(),
+					Summary = userTask.Task.Name + " (Unit " + userTask.Unit.SortOrder.ToString() + ")" +  ((userTask.TaskCompletionStatus == TaskCompletionStatus.Completed) ? " [completed]" : ""),
+					Description = Utility.StripHtml(userTask.Task.Instructions),
 					Location = "",
 					//StartUtc = dueDate.ToUniversalTime(),
 					//EndUtc = dueDate.ToUniversalTime()
@@ -438,7 +443,7 @@ namespace Didache.Web.Areas.Students.Controllers
 			Course course = Didache.Courses.GetCourseBySlug(slug);
 			User user = Users.GetUser(userID);
 
-			if (user == null)
+			if (user == null || course == null)
 				return HttpNotFound();
 
 			// BEING XML/RSS
@@ -489,7 +494,7 @@ namespace Didache.Web.Areas.Students.Controllers
 					writer.WriteStartElement("item");
 
 					writer.WriteElementString("title", String.Format("{0} unit {1} video {2}", course.CourseCode, unit.SortOrder, videoInfo.SortOrder));
-					writer.WriteElementString("link", "https://my.dts.edu/courses/" + course.Slug + "/schedule/" + unit.UnitID.ToString());
+					writer.WriteElementString("link", videoInfo.VideoUrl);
 					writer.WriteElementString("description", videoInfo.Title);
 
 					writer.WriteElementString("author", videoInfo.Speaker);

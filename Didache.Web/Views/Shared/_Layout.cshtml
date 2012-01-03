@@ -12,7 +12,12 @@
 <!DOCTYPE html>
 <html lang="@Users.GetUserLanguage()">
 <head>
+	<meta charset="utf-8" /> 
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge;chrome=1" /> 
+
     <title>@ViewBag.Title</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 	<link href="@Url.Content("~/css/reset.css")" rel="stylesheet"  />
 	<link href="@Url.Content("~/css/type.css")" rel="stylesheet"  />
@@ -20,7 +25,7 @@
 	<link href="@Url.Content("~/css/students.css")" rel="stylesheet"  />
 	<link href="@Url.Content("~/css/admin.css")" rel="stylesheet"  />
 
-	<script src="@Url.Content("~/js/lib/jquery-1.6.1.min.js")"></script>
+	<script src="@Url.Content("~/js/lib/jquery-1.6.4.min.js")"></script>
 		
 	<script src="@Url.Content("~/js/lib/jquery-ui.min.js")"></script>
 	<link href="@Url.Content("~/js/lib/ui-lightness/jquery-ui.css")" rel="stylesheet"  />
@@ -29,11 +34,16 @@
 	<script src="@Url.Content("~/js/lib/jquery.validate.unobtrusive.min.js")"></script>
 	<script src="@Url.Content("~/js/lib/jquery.expander.js")"></script>
 	<script src="@Url.Content("~/js/lib/jquery.fileupload.js")"></script>
+	<script src="@Url.Content("~/js/lib/jquery.autoexpand.js")"></script>
+
 
 	<script src="@Url.Content("~/js/lib/jwysiwyg/jquery.wysiwyg.js")"></script>
 	<link href="@Url.Content("~/js/lib/jwysiwyg/jquery.wysiwyg.css")" rel="stylesheet"  />
 
 	<script src="@Url.Content("~/js/main.js")"></script>
+
+	<meta name="description" content="Dallas Theological Seminary's award-winning online education and degrees portal. HTML5 powered!" />
+	<meta name="keywords" content="seminary, online, education, degree, bible, thm, mdiv, dmin, phd, theology, jesus, god, christian, christianity, home, houston, austin, tampa, knoxville, atlanta, san antonio" />
 
 	@RenderSection("head",false)
 </head>

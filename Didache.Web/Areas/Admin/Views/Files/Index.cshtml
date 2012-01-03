@@ -1,0 +1,81 @@
+﻿@using Didache.HtmlHelpers
+@model List<CourseFile>
+@{
+    ViewBag.Title = "Files List";
+}
+
+<div class="page-wide">
+	<div class="full-column">
+		<div class="page-header">
+		
+			<h2>Files System</h2>
+
+		</div>
+
+		<form action="/admin/files/">
+			<table >
+				<thead>
+					<tr></tr>
+						<th>Title</th>
+						<th>User</th>
+						<th>Course</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><input type="text" id="title" name="title" /></td>
+						<td>@Html.DropDownList("userID", (SelectList) ViewBag.UserSelectList)</td>
+						<td>
+							@Html.DropDownGroupList("courseID", (List<Didache.HtmlHelpers.GroupedSelectListItem>) ViewBag.CourseGroupList)
+						</td>
+						<td><input type="submit" value="Get Files" /></td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+
+
+		<div>
+		@if (Model != null) {
+			<h3>Total: @Model.Count</h3>
+			<table class="admin-list">
+				<thead>
+					<tr>
+						<th>Title / Filename</th>
+					
+						<th>User</th>
+						<th>Courses</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+				@foreach (CourseFile file in Model) {
+					<tr>
+						<td>@file.Title<br /><a href="@file.FileUrl">@file.Filename</a></td>
+					
+						<td>@file.User.FormattedName</td>
+						<td>
+							@foreach (CourseFileAssociation cfa in file.CourseFileAssociations) {
+								if (cfa.CourseFileGroup.Course != null) {
+									@cfa.CourseFileGroup.Course.Session.SessionCode@cfa.CourseFileGroup.Course.Session.SessionYear 
+									<text>-</text> 
+										@cfa.CourseFileGroup.Course.CourseCode@cfa.CourseFileGroup.Course.Section<br />
+								}
+							}
+						</td>
+						<td>
+							<a href="/admin/files/edit/@file.FileID" class="edit-link">edit</a>
+							<!-- <a href="/admin/files/delete/@file.FileID" class="delete-link">delete</a> -->
+						</td>
+					</tr>
+				}
+				</tbody>
+			</table>
+		}	
+		</div>
+
+		
+	</div>
+</div>		
+		 
+

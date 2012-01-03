@@ -24,7 +24,12 @@
 
 		@Html.Partial("_CourseHeader", Model)
 		
-		<h1>@ViewBag.User.FormattedName</h1>
+		<h1>
+			<img src="@( ((User)ViewBag.User).GetProfileImageUrl(60,60))" width="60" height="60" style="float: left;" />
+			@ViewBag.User.FormattedName
+		</h1>
+
+		<div class="clear"></div>
 
 		@{
 			Didache.Unit lastUnit = null;
@@ -58,7 +63,7 @@
 				</td>								
 				<td class="student-file">
 					@if (utd.StudentFileID > 0) {
-						<a href="@utd.StudentFile.FileUrl">Student File</a>
+						<a href="/courses/studentfile/@utd.StudentFileID/@StudentFile.GetFriendlyFilename(utd.Course, utd.Unit, utd.Task, utd.User, utd.StudentFile.Filename)">Student File</a>
 					}
 				</td>
 			</tr>

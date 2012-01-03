@@ -162,6 +162,13 @@
 	background: #bd1816 url(/css/images/taskstatus-overdue.png) 0 0 no-repeat !important;
 }
 
+.percent-complete {
+	width: 50px;
+	font-size: 14px;
+	padding: 7px;
+	text-align: center;
+	border: solid 1px #999;
+}
 
 /* video */
 /* video task */
@@ -508,6 +515,27 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
 		border-top: none;
 	}	
 
+	/*
+	.user-facilitator .user-name {
+		color: #422f8e;
+	}
+	.user-faculty .user-name{
+		color: #422f8e;
+	}
+	*/
+	
+	.usertag {
+		display: inline-block;
+		font-size: 10px;
+		padding: 1px 2px;
+		background: #ffda6b;
+		border: solid 1px #ffca2b;
+		color: #967f3a;
+		float: left;
+		margin: 0 10px 0 0;
+		line-height: 1;
+	}
+
 	.task-interaction-main {
 		padding: 10px;
 		overflow: hidden;
@@ -515,6 +543,12 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
 		.task-interaction-main .task-interaction-userimage {
 			float: left;
 			width: 40px;
+		}
+		.task-interaction-main .task-interaction-userimage a {
+			display: block;
+			width: 40px;
+			height: 40px;
+			background-color: #999;
 		}
 		.task-interaction-main .task-interaction-content {
 			float: left;
@@ -544,6 +578,10 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
 			margin: 10px 0 0 0;
 			display: none;
 		}
+		/*.task-interaction-main .task-interaction-text .reply-text {
+			font-size: 
+		}
+*/		
 	.task-interaction-list {
 		margin: 0 0 0 60px;
 		display: none;
@@ -557,6 +595,13 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
 		.task-interaction-list .task-interaction-userimage {
 			float: left;
 			width: 30px;
+		}
+		
+		.task-interaction-list .task-interaction-userimage a {
+			display: block;
+			width: 30px;
+			height: 30px;
+			background: #999;
 		}
 		.task-interaction-list .task-interaction-content {
 			float: left;
@@ -621,13 +666,14 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
 }		
 		
 .add-reply textarea, .forum-post-new textarea {
-	width: 300px;
-	height: 40px;
+	width: 380px;
+	height: 50px;
 	border: solid 2px #eee;
 	display: block;
 	margin: 0 0 5px 0;
 	resize: none;
 	font-family: Arial;
+	font-size: 12px;
 }
 		
 

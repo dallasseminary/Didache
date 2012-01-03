@@ -39,7 +39,13 @@
 				<td>@user.SecureFormattedName</td>
 				<td>
 					@{ MembershipUser mUser = Membership.GetUser(user.Username, false); }
-					@(mUser != null ? mUser.LastActivityDate.ToString() : "(none)")
+					@if (mUser != null) { 
+						@mUser.LastActivityDate.ToString() <a href="/tools/loginas.aspx?username=@user.Username">login as</a>
+
+					} else {
+						<text>(no login)</text>
+						
+					}
 				</td>
 				<td>
 					<a href="/admin/users/edituser/@user.UserID">edit</a>
@@ -50,6 +56,11 @@
 	</table>
 
 }
+
+<div class="message-warning">
+If you can't find a user and can't sync them in, then please visit <a href="https://www.dts.edu/admin/cars.importdata.aspx">CARS importer</a> 
+and check off "Profiles" and "Students"
+</div>
 
 		
 		</div>

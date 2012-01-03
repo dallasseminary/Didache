@@ -24,7 +24,10 @@
 		<div id="schedule-tasks" class="block-list">
 	
 		@if (ViewBag.UserTasks != null) {	 
+		
+	  
 			foreach (Didache.UserTaskData userTaskData in ViewBag.UserTasks) {
+				if (userTaskData.Task.IsActive) {
 		
 			<div class="task-entry block-list-item" id="task-@userTaskData.TaskID" data-taskid="@userTaskData.TaskID" data-tasktype="@userTaskData.Task.TaskTypeName">
 				
@@ -34,7 +37,7 @@
 						<span class="task-due-date">@(userTaskData.Task.DueDate.HasValue ? userTaskData.Task.DueDate.Value.ToShortDateString():"")</span>				
 					</div>
 
-					<div class="task-status status-@userTaskData.TaskCompletionStatus.ToString().ToLower() @(userTaskData.TaskCompletionStatus == TaskCompletionStatus.NotStarted && (DateTime.Now > userTaskData.Task.DueDate || DateTime.Now > ViewBag.CurrentUnit.EndDate) ? "status-overdue" : "")"></div>
+					<div class="task-status status-@userTaskData.TaskCompletionStatus.ToString().ToLower() @(userTaskData.TaskCompletionStatus == TaskCompletionStatus.NotStarted && ((userTaskData.Task.DueDate.HasValue && DateTime.Now.Date > userTaskData.Task.DueDate.Value.Date) || DateTime.Now.Date > ViewBag.CurrentUnit.EndDate.Date) ? "status-overdue" : "")"></div>
 				</div>	
 
 				
@@ -62,7 +65,10 @@
 
 				<div class="clear"></div>
 			</div>
+				}
 			}
+			
+			@* <text>Count: </text> @ViewBag.UserTasks.Count *@
 		} else {	
 			<text>
 			Select a unit from the menu on the right
@@ -91,7 +97,7 @@
 							<span class="unit-name">@unit.SortOrder. @unit.Name</span>					
 							<span class="unit-dates">@unit.StartDate.ToString("MM/dd/yyyy") - @unit.EndDate.ToString("MM/dd/yyyy")</span>
 
-							@if (DateTime.Now > unit.EndDate && ((List<UserTaskData>) ViewBag.AllUserTasks).Count(utd => utd.TaskCompletionStatus == TaskCompletionStatus.NotStarted && utd.UnitID == unit.UnitID) > 0 ) {
+							@if (DateTime.Now.Date > unit.EndDate.Date && ((List<UserTaskData>) ViewBag.AllUserTasks).Count(utd => utd.TaskCompletionStatus == TaskCompletionStatus.NotStarted && utd.UnitID == unit.UnitID) > 0 ) {
 								<span class="unit-overdue"></span>
 							}
 

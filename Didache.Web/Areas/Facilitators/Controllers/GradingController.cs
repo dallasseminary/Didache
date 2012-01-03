@@ -20,6 +20,7 @@ namespace Didache.Web.Areas.Facilitators.Controllers
         // GET: /Facilitators/Grading/
 
 		DidacheDb db = new DidacheDb();
+		EntityObjectSerializer serializer = new EntityObjectSerializer();
 
         public ActionResult Index(string slug) {
 			Course course = Courses.GetCourseBySlug(slug);
@@ -50,6 +51,11 @@ namespace Didache.Web.Areas.Facilitators.Controllers
 								.Where(u => u.CourseID == course.CourseID)
 								.OrderBy (u=> u.SortOrder)
 								.ToList();
+
+			foreach (Unit unit in units) {
+				unit.Tasks = unit.Tasks.Where(t => t.IsActive).ToList();
+			}
+
 			ViewBag.Units = units;
 			ViewBag.CourseUserGroups = db.CourseUserGroups.Where(cug => cug.CourseID == course.CourseID)
 								.OrderBy(cug => cug.Name)
@@ -66,7 +72,7 @@ namespace Didache.Web.Areas.Facilitators.Controllers
 											.Include("User")
 											.Include("StudentFile")
 											.Include("GradedFile")
-											.Where(utd => utd.CourseID == course.CourseID && utd.TaskID == task.TaskID)
+											.Where(utd => utd.CourseID == course.CourseID && utd.TaskID == task.TaskID && utd.Task.IsActive)
 											.ToList();
 
 			List<CourseUser> users = db.CourseUsers
@@ -103,7 +109,7 @@ namespace Didache.Web.Areas.Facilitators.Controllers
 											.Include("Task")
 											//.Include("StudentFile")
 											//.Include("GradedFile")
-											.Where(utd => utd.CourseID == course.CourseID && utd.UserID == user.UserID)
+											.Where(utd => utd.CourseID == course.CourseID && utd.UserID == user.UserID && utd.Task.IsActive)
 											.OrderBy(utd => utd.Unit.SortOrder)
 												.ThenBy(utd => utd.Task.SortOrder)
 											.ToList();
@@ -167,8 +173,32 @@ namespace Didache.Web.Areas.Facilitators.Controllers
 
 			UserTaskData userTaskData = db.UserTasks.SingleOrDefault(utd => utd.TaskID == id && utd.UserID == id2);
 
+			// is this a post?
+			if (userTaskData.PostID > 0) {
+
+				// get the thread
+				InteractionPost post = db.InteractionPosts.Find(userTaskData.PostID);
+				InteractionThread thread = db.InteractionThreads.Include("posts").Where(t => t.ThreadID == post.ThreadID).SingleOrDefault();
+
+				if (thread.Posts.Count == 1) {
+					db.Database.ExecuteSqlCommand("DELETE FROM oe_interactions_threads WHERE threadid = {0}", thread.ThreadID);
+					db.Database.ExecuteSqlCommand("DELETE FROM oe_interactions_posts WHERE postid = {0}", post.PostID);
+					//db.InteractionPosts.Remove(post);
+					//db.InteractionThreads.Remove(thread);
+
+				} else {
+					thread.IsDeleted = true;
+				}
+
+
+				userTaskData.PostID = 0;
+				
+			}
+
+
 			userTaskData.StudentFileID = 0;
 			userTaskData.StudentSubmitDate = null;
+			userTaskData.TaskCompletionStatus = TaskCompletionStatus.NotStarted;
 
 			db.SaveChanges();
 
@@ -192,7 +222,7 @@ namespace Didache.Web.Areas.Facilitators.Controllers
 		}
 
 
-		public ActionResult DownloadFiles(string slug, int id, int? id2) {
+		public ActionResult DownloadFiles(string slug, int id, int? id2, bool excludeUngraded = false) {
 
 			Course course = Courses.GetCourseBySlug(slug);
 			Task task = db.Tasks.Find(id);
@@ -214,12 +244,16 @@ namespace Didache.Web.Areas.Facilitators.Controllers
 			ZipFile zip = new ZipFile();
 
 			foreach (UserTaskData utd in userTasks) {
-				
-				if (System.IO.File.Exists(utd.StudentFile.PhysicalPath)) {
-				
-					ZipEntry entry = zip.AddFile(utd.StudentFile.PhysicalPath);
-					// customize file
-					entry.FileName = StudentFile.GetFriendlyFilename(course, unit, task, utd.User, utd.StudentFile.Filename);
+
+				// get all or get just ungraded
+				if (!excludeUngraded || utd.GraderFileID == 0) {
+
+					if (System.IO.File.Exists(utd.StudentFile.PhysicalPath)) {
+
+						ZipEntry entry = zip.AddFile(utd.StudentFile.PhysicalPath);
+						// customize file
+						entry.FileName = StudentFile.GetFriendlyFilename(course, unit, task, utd.User, utd.StudentFile.Filename);
+					}
 				}
 			}
 
@@ -237,18 +271,18 @@ namespace Didache.Web.Areas.Facilitators.Controllers
 				userTask.GraderUserID = user.UserID;
 
 				// enter grade
-				int numericGradeInt = -1;
-				if (Int32.TryParse(numericGrade, out numericGradeInt)) {
+				Double numericGradeNum = -1;
+				if (Double.TryParse(numericGrade, out numericGradeNum)) {
 
-					if (userTask.NumericGrade != numericGradeInt) {
+					if (userTask.NumericGrade != numericGradeNum) {
 						userTask.GraderSubmitDate = DateTime.Now;
 					}
 
-					userTask.NumericGrade = numericGradeInt;
+					userTask.NumericGrade = numericGradeNum;
 
 				}
 				else {
-					if (userTask.NumericGrade != numericGradeInt) {
+					if (userTask.NumericGrade != numericGradeNum) {
 						userTask.GraderSubmitDate = DateTime.Now;
 					}
 
@@ -302,7 +336,7 @@ namespace Didache.Web.Areas.Facilitators.Controllers
 
 			if (userTask != null) {
 
-				userTask.GraderUserID = user.UserID;
+				
 
 				// is there a file?
 				Guid uniqueID = Guid.NewGuid();
@@ -329,15 +363,17 @@ namespace Didache.Web.Areas.Facilitators.Controllers
 					gradedFile.Filename = originalFilename;
 					gradedFile.UploadedDate = DateTime.Now;
 
+					// save the file to the database
 					db.GradedFiles.Add(gradedFile);
 					db.SaveChanges();
 
-					fileID = gradedFile.FileID;
-
-					userTask.GraderFileID = fileID;
+					// update teh File ID and grader userid
+					userTask.GraderUserID = user.UserID;
+					userTask.GraderFileID = gradedFile.FileID;
+					db.SaveChanges();
 				}
 
-				db.SaveChanges();
+				
 			}
 			
 			// when a file is uploaded
@@ -570,6 +606,42 @@ namespace Didache.Web.Areas.Facilitators.Controllers
 
 
 			
+		}
+
+		public ActionResult GetUserTaskData(string slug, int id, int id2) {
+			UserTaskData userTaskData = db.UserTasks
+											.Include("User")
+											.Include("Task")
+											.Where(utd => utd.UserID == id2 && utd.TaskID == id)
+											.SingleOrDefault();
+
+			return Json(serializer.Serialize(userTaskData), JsonRequestBehavior.AllowGet);
+		}
+
+		[HttpPost]
+		public ActionResult SendGradedEmail(string slug, int id, int id2, string emailText) {
+			
+			User graderUser = Users.GetLoggedInUser();
+
+			UserTaskData userTaskData = db.UserTasks
+											.Include("User")
+											.Include("Task")
+											.Where(utd => utd.UserID == id2 && utd.TaskID == id)
+											.SingleOrDefault();
+
+			userTaskData.GraderComments = emailText;
+			userTaskData.GraderUserID = graderUser.UserID;
+			userTaskData.GradeSentDate = DateTime.Now;
+
+			db.SaveChanges();
+
+			// send email
+			string subject = Emails.FormatEmail(Didache.Resources.emails.gradedtask_subject, userTaskData.Course, null, userTaskData.Task, null, null, null, null, null);
+			string body = Emails.FormatEmail(Didache.Resources.emails.gradedtask_body, userTaskData.Course, null, userTaskData.Task, graderUser, null, userTaskData, null, null);
+
+			Emails.EnqueueEmail(graderUser.Email, userTaskData.User.Email, subject, body, false);
+
+			return Json(new {success= true}, JsonRequestBehavior.AllowGet);
 		}
 
     }

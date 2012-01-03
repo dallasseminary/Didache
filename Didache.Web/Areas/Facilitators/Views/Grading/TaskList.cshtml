@@ -14,7 +14,7 @@
 			<h3>@unit.SortOrder<text>.</text> @unit.Name</h3>
 			
 			<table class="task-grading-list grading-list">
-			@foreach (Task task in unit.Tasks) {
+			@foreach (Task task in unit.Tasks.OrderBy(t=>t.SortOrder)) {
 				<tr>
 					<td class="name task-details ">
 						<b>@task.Name</b> @(task.DueDate.HasValue ? "(due: " + task.DueDate.Value.ToString("MM/dd/yy") + ")" : "")

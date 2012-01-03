@@ -136,8 +136,17 @@ namespace Didache.Web.Areas.Students.Controllers
 			post.PostContent = collection["PostContent"];
 			post.PostContentFormatted = Forums.FormatPost(post.PostContent);
 
-			DidacheDb db = new DidacheDb();
 			db.Posts.Add(post);
+			db.SaveChanges();
+
+			Thread thread = db.Threads.Include("Posts").FirstOrDefault(t => t.ThreadID == id);
+
+			thread.LastPostDate = DateTime.Now;
+			thread.LastPostID = post.PostID;
+			thread.LastPostUserID = profile.UserID;
+			thread.TotalReplies = thread.Posts.Count - 1;
+			thread.LastPostSubject = post.Subject;
+
 			db.SaveChanges();
 
 			return RedirectToAction("Thread", new { slug = slug, id = id });

@@ -59,6 +59,7 @@ namespace Didache.Web.Areas.Students {
 				new { controller = "Courses", action = "feed" }
 			);
 
+			// ical
 			context.MapRoute(
 				"ics",
 				"courses/ical/{userID}/{slug}-{type}.{extension}",

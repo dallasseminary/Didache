@@ -73,6 +73,10 @@
 	padding-right: 20px;
 }    
 
+.admin-table td input[type=text], .admin-table td select, .admin-table td textarea {
+	width: 400px;
+}
+
     
     
 /* nested lists for course, files, users */

@@ -30,8 +30,17 @@
         </td>
 	</tr>
 	<tr>
+        <th>
+            @Html.LabelFor(model => model.Program):
+        </th>
+        <td>
+            @Html.EditorFor(model => model.Program)
+            @Html.ValidationMessageFor(model => model.Program)
+        </td>
+	</tr>
+	<tr>
        <th>
-            @Html.LabelFor(model => model.SessionCode):
+            @Html.LabelFor(model => model.SessionCode):	
         </th>
         <td>
             @Html.EditorFor(model => model.SessionCode)

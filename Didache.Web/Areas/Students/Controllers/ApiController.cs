@@ -169,11 +169,25 @@ namespace Didache.Web.Areas.Students.Controllers
 				List<User> emailToUsers = db.InteractionPosts.Where(p => p.ThreadID == threadID).Select(p => p.User).Distinct().ToList();
 				foreach (User emailToUser in emailToUsers) {
 					if (emailToUser.UserID != user.UserID) {
-						string message = string.Format(Didache.Resources.emails.interaction_reply,
+
+						string message = Emails.FormatEmail(Didache.Resources.emails.interaction_reply,
+									task.Course,
+									null,
+									task,
+									user,
+									emailToUser,
+									null,
+									post,
+									null);
+
+
+						/*
+						 * string message = string.Format(Didache.Resources.emails.interaction_reply,
 										emailToUser.SecureShortName,
 										user.SecureShortName,
 										post.PostContent,
 										"https://online.dts.edu/courses/" + task.Course.Slug + "/schedule/" + task.UnitID + "#post-" + post.PostID);
+						*/
 
 						Emails.EnqueueEmail("automated@dts.edu", emailToUser.Email, task.Course.CourseCode + ": Reply to " + task.Name, message, false);
 					}

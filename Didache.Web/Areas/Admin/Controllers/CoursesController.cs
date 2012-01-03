@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.IO;
 using System.Web.Script.Serialization;
 using Didache;
+using Didache.Models;
 using System.Data.Entity.Validation;
 using System.Data.Entity;
 using System.Data.SqlClient;
@@ -98,10 +99,10 @@ namespace Didache.Web.Areas.Admin.Controllers
 		}
 
 		[HttpPost]
-		public ActionResult CloneCourse(int courseID, int sessionID, DateTime startDate) {
+		public ActionResult CloneCourse(int courseID, int sessionID, DateTime startDate, string courseCode, string section) {
 
 
-			Course newCourse = Courses.CloneCourse(courseID, sessionID, startDate);
+			Course newCourse = Courses.CloneCourse(courseID, sessionID, startDate, courseCode, section);
 
 			//return Redirect("/admin/courses/bysession/" + sessionID);
 			return Redirect("/admin/courses/courseeditor/" + newCourse.CourseID);
@@ -114,9 +115,10 @@ namespace Didache.Web.Areas.Admin.Controllers
 				// EDIT MODE
 				try {
 					Course course = db.Courses.Find(model.CourseID);
-					course.IsActive = model.IsActive;
+					
+					//course.IsActive = model.IsActive;
 
-					//UpdateModel(model);
+					TryUpdateModel(course);
 
 					db.SaveChanges();
 
@@ -424,6 +426,30 @@ namespace Didache.Web.Areas.Admin.Controllers
 
 
 		}
+
+
+		public ActionResult Surveys(int id) {
+
+			List<UnitSurvey> surveys = db.UnitSurveys
+										.Include("User")
+										.Where(us => us.CourseID == id)
+										.OrderBy(us => us.UnitID)
+										.ToList();
+
+			List<UnitSurveyGroup> unitGroups = new List<UnitSurveyGroup>();
+			
+			foreach (int unitID in surveys.Select(us => us.UnitID).Distinct()) {
+				UnitSurveyGroup group = new UnitSurveyGroup();
+				group.Unit = db.Units.Find(unitID);
+				group.UnitSurveys = surveys.Where(us => us.UnitID == unitID).ToList();
+				unitGroups.Add(group);
+			}
+			
+			ViewBag.Course = Courses.GetCourse(id);
+			ViewBag.Surveys = surveys;
+			return View(unitGroups);
+		}
+
 
 		[HttpPost]
 		public ActionResult AddFileGroup(int id) {

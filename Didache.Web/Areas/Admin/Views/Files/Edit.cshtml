@@ -1,0 +1,67 @@
+﻿@model Didache.CourseFile
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="page-wide">
+	<div class="full-column">
+
+		<h2>File Editor</h2>
+
+@* @using (Html.BeginForm()) { *@
+<form enctype="multipart/form-data" method="post">
+
+    @Html.ValidationSummary(true)
+
+	@Html.HiddenFor(m => m.FileID)
+		<table class="admin-table">
+			<tr>
+				<th>@Html.LabelFor(m => m.Filename)</th>
+				<td>@Html.TextBoxFor(m => m.Filename) @Model.FormattedLength</td>
+			</tr>
+			<tr>
+				<th>@Html.LabelFor(m => m.Title)</th>
+				<td>@Html.TextBoxFor(m => m.Title)</td>
+			</tr>		
+			<tr>
+				<th>@Html.LabelFor(m => m.ContentType)</th>
+				<td>@Html.TextBoxFor(m => m.ContentType)</td>
+			</tr>
+			<tr>
+				<th>@Html.LabelFor(m => m.Description)</th>
+				<td>@Html.TextAreaFor(m => m.Description)</td>
+			</tr>
+			<tr>
+				<th>Courses</th>
+				<td>
+				@foreach (CourseFileAssociation cfa in Model.CourseFileAssociations) {
+					if (cfa.CourseFileGroup.Course != null) {
+						@cfa.CourseFileGroup.Course.Session.SessionCode@cfa.CourseFileGroup.Course.Session.SessionYear 
+						<text>-</text> 
+						@cfa.CourseFileGroup.Course.CourseCode@cfa.CourseFileGroup.Course.Section<br />
+					}
+				}
+				</td>
+			</tr>
+			<tr>
+				<th>Current file</th>
+				<td>
+					<a href="@Model.FileUrl">@Model.Filename</a>
+				</td>
+			</tr>
+			<tr>
+				<th>Replace File</th>
+				<td>
+					<input type="file" id="ReplacementFile" name="ReplacementFile" />
+				</td>
+			</tr>
+		</table>
+	
+	
+		<input type="submit" value="Update" />
+</form>
+@* } *@
+
+	</div>
+</div>

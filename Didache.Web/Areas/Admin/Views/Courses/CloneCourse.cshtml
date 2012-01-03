@@ -29,7 +29,7 @@
 							@Html.Raw("<optgroup label=\"" + course.Session.Name + "\">")
 							previousSessionID = course.SessionID;
 						}
-						<option value="@course.CourseID">@course.CourseCode@course.Section</option>	
+						<option value="@course.CourseID" data-coursecode="@course.CourseCode" data-section="@course.Section">@course.CourseCode@course.Section</option>	
 					}
 					@Html.Raw("</optgroup>")
 					</select>
@@ -54,6 +54,13 @@
 					<input type="text" class="date" value="@( ((List<Session>)ViewBag.Sessions)[0].StartDate.ToShortDateString())" id="startDate" name="startDate" />
 				</td>			
 			</tr>
+			<tr>
+				<th>New Code/Section</th>
+				<td>
+					<input type="text" name="courseCode"  id="courseCode" placeholder="AA123" style="width: 100px;" />
+					<input type="text" name="section" id="section" placeholder="OL" style="width: 60px;" />
+				</td>
+			</tr>
 			
 		</table>
 
@@ -61,3 +68,21 @@
 }
 	</div>
 </div>
+
+<script>
+	jQuery(document).ready(function ($) {
+		$('#courseID').change(function () {
+			// find the selection option
+			var selectedOption = $(this).find('option:selected'),
+				courseCode = selectedOption.data('coursecode'),
+				section = selectedOption.data('section');
+
+			if ($('#courseCode').val() == '')
+				$('#courseCode').val(courseCode);
+
+			if ($('#section').val() == '')
+				$('#section').val(section);
+
+		});
+	});
+</script>

@@ -17,6 +17,11 @@ namespace Didache.Web.Controllers
             return View();
         }
 
+
+		public ActionResult Resources() {
+			return View();
+		}
+
 		public ActionResult Help() {
 
 			HelpModel model = new HelpModel();
@@ -43,7 +48,9 @@ namespace Didache.Web.Controllers
 					emails.Add("eshyu@dts.edu");
 				}
 
-				string message = @"
+				string message = 
+					((user != null)  ? "ID: " + user.UserID + " https://online.dts.edu/admin/users/edituser/" + user.UserID + "\n" : "") +
+@"
 Name: " + model.Name + @"
 Email: " + model.Email + @"
 Message: 

@@ -20,6 +20,7 @@
 if (Didache.TaskTypes["@Model.Task.TaskTypeName"] == null) {
 
 	Didache.TaskTypes["@Model.Task.TaskTypeName"] = function (taskID, node) {
+		
 		node.find('.mark-completed, .mark-skipped').click(function () {
 			var button = $(this),
 			status = parseInt(button.data('taskstatus'), 10);
@@ -34,34 +35,3 @@ if (Didache.TaskTypes["@Model.Task.TaskTypeName"] == null) {
 }
 
 </script>
-
-<!--
-</script>
-
-jQuery(function ($) {
-	var 
-		userID = @Model.UserID,
-		taskID = @Model.TaskID,
-		area = $('#task-' + userID + '-' + taskID + '');
-	
-	area.find('.mark-completed').click(function () {
-		var button = $(this);
-
-		sendTaskData(userID,taskID,{TaskStatus: 1},function(d) {
-			setTaskStatus(userID,taskID,1);
-			button.hide();
-		});
-	});
-	area.find('.mark-skipped').click(function () {
-		var button = $(this);
-
-		sendTaskData(userID,taskID,{TaskStatus: -1},function(d) {
-			setTaskStatus(userID,taskID,-1);
-			button.hide();
-		});
-	});
-});
-</script>
-
-
--->

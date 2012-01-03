@@ -1,0 +1,197 @@
+﻿@model List<Didache.Models.UnitSurveyGroup>
+
+@{
+    ViewBag.Title =  ((Course)ViewBag.Course).ToString() + "Surveys";
+}
+
+
+
+<style>
+.unit-surveys {
+	border-collapse: collapse;
+}
+.unit-surveys thead th {
+	background: #ccc;
+	padding: 5px;
+	text-align: left;
+}
+
+
+
+.unit-surveys tbody th {
+	background: #eee;
+	padding: 5px;
+	text-align: left;
+}
+
+.unit-surveys tbody tr td:first-child {
+	padding: 5px;
+	font-weight: bold;
+	text-align: left;
+	background: none;
+}
+
+
+.unit-surveys tbody td {
+	padding:5px;
+}
+
+#survey-comments {
+	width: 550px;	
+}
+.survey-comment {
+	border-bottom: solid 1px #eee;
+	margin: 0 0 10px 0;
+	overflow: hidden;
+}
+
+.survey-comment img {
+	float: left;
+	margin: 0 10px 10px 0;
+}
+
+.survey-comment .user {
+	font-weight: bold;
+}
+</style>
+
+
+<div class="page-wide">
+	<div class="full-column">
+
+		<h2>@( ((Course)ViewBag.Course).ToString() ) Survey</h2>
+
+
+<h3>Unit Averages</h3>
+<table class="unit-surveys">
+	<thead>
+		<tr>
+			<th>Category</th>
+			@foreach(Didache.Models.UnitSurveyGroup group in Model) {
+			<th>Unit @group.Unit.SortOrder</th>
+			}
+		</tr>
+	</thead>
+	<tbody>
+
+
+		<tr>
+			<th colspan="@(1+Model.Count)">Devotional</th>
+		</tr>
+
+		<tr>
+			<td>Quality/Value</td>
+			@foreach(Didache.Models.UnitSurveyGroup group in Model) {
+			<td>@group.UnitSurveys.Average(s => s.DevoValue).ToString("#.##")</td>
+			}
+		</tr>
+
+		<tr>
+			<th colspan="@(1+Model.Count)">Weekly Reading</th>
+		</tr>
+		<tr>
+			<td>Clarity of Instructions</td>
+			@foreach(Didache.Models.UnitSurveyGroup group in Model) {
+			<td>@group.UnitSurveys.Average(s => s.ReadingClarity).ToString("#.##")</td>
+			}
+		</tr>
+		<tr>
+			<td>Quality/Value</td>
+			@foreach(Didache.Models.UnitSurveyGroup group in Model) {
+			<td>@group.UnitSurveys.Average(s => s.ReadingValue).ToString("#.##")</td>
+			}
+		</tr>
+
+
+		<tr>
+			<th colspan="@(1+Model.Count)">Video Presentation</th>
+		</tr>
+		<tr>
+			<td>Clarity of Instructions</td>
+			@foreach(Didache.Models.UnitSurveyGroup group in Model) {
+			<td>@group.UnitSurveys.Average(s => s.VideoClarity).ToString("#.##")</td>
+			}
+		</tr>
+		<tr>
+			<td>Technical Problems (5 for no problems) </td>
+			@foreach(Didache.Models.UnitSurveyGroup group in Model) {
+			<td>@group.UnitSurveys.Average(s => s.VideoTechnical).ToString("#.##")</td>
+			}
+		</tr>
+		<tr>
+			<td>Quality/Value of video</td>
+			@foreach(Didache.Models.UnitSurveyGroup group in Model) {
+			<td>@group.UnitSurveys.Average(s => s.VideoValue).ToString("#.##")</td>
+			}
+		</tr>
+		<tr>
+			<td>Quality/Value of slides</td>
+			@foreach(Didache.Models.UnitSurveyGroup group in Model) {
+			<td>@group.UnitSurveys.Average(s => s.VideoSlidesValue).ToString("#.##")</td>
+			}
+		</tr>
+		<tr>
+			<td>Were the transcripts useful to you?</td>
+			@foreach(Didache.Models.UnitSurveyGroup group in Model) {
+			<td>@group.UnitSurveys.Average(s => s.VideoTranscripts).ToString("#.##")</td>
+			}
+		</tr>
+
+		<tr>
+			<th colspan="@(1+Model.Count)">Learning Activity</th>
+		</tr>
+		<tr>
+			<td>Clarity of Instructions</td>
+			@foreach(Didache.Models.UnitSurveyGroup group in Model) {
+			<td>@group.UnitSurveys.Average(s => s.LearningClarity).ToString("#.##")</td>
+			}
+		</tr>
+		<tr>
+			<td>Quality/Value</td>
+			@foreach(Didache.Models.UnitSurveyGroup group in Model) {
+			<td>@group.UnitSurveys.Average(s => s.LearningValue).ToString("#.##")</td>
+			}
+		</tr>
+		<tr>
+			<td>Was it driven from and helpful for course objectives?</td>
+			@foreach(Didache.Models.UnitSurveyGroup group in Model) {
+			<td>@group.UnitSurveys.Average(s => s.LearningDriven).ToString("#.##")</td>
+			}
+		</tr>
+
+		<tr>
+			<th colspan="@(1+Model.Count)">Class Interaction</th>
+		</tr>
+		<tr>
+			<td>Clarity of Instructions</td>
+			@foreach(Didache.Models.UnitSurveyGroup group in Model) {
+			<td>@group.UnitSurveys.Average(s => s.InteractionClarity).ToString("#.##")</td>
+			}
+		</tr>
+		<tr>
+			<td>Quality/Value</td>
+			@foreach(Didache.Models.UnitSurveyGroup group in Model) {
+			<td>@group.UnitSurveys.Average(s => s.InteractionValue).ToString("#.##")</td>
+			}
+		</tr>
+
+
+	</tbody>
+</table>
+
+<div id="survey-comments">
+@foreach (Didache.Models.UnitSurveyGroup group in Model) {
+	<h3>Unit @group.Unit.SortOrder Comments</h3>
+	
+	foreach (UnitSurvey survey in group.UnitSurveys.Where(s => s.Comments != "")) {
+	<div class="survey-comment">
+		<img src="@survey.User.GetProfileImageUrl(40,40)" width="40" height="40" />
+		<p><span class="user"><a href="@survey.User.ProfileDisplayUrl">@survey.User.FormattedName</a></span> <a href="/admin/users/edituser/@survey.User.UserID">edit</a></p>
+		<p>@survey.Comments</p>
+	</div>
+	}
+}
+</div>
+
+</div>
+</div>

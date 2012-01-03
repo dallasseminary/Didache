@@ -1,7 +1,8 @@
 ﻿@model Didache.UserTaskData
 
 
-@if (Model.TaskCompletionStatus == TaskCompletionStatus.NotStarted || Model.TaskCompletionStatus == TaskCompletionStatus.Skipped) {
+@if (Model.TaskCompletionStatus == TaskCompletionStatus.NotStarted || 
+	 (!Model.Task.DueDate.HasValue || DateTime.Now < Model.Task.DueDate.Value)) {
 	
 	<div class="turn-in-form">
 	<form method="post" enctype="multipart/form-data" action="/courses/api/taskfile/@Model.TaskID">

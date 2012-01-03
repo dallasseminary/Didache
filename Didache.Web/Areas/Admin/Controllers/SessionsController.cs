@@ -20,7 +20,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 		public ActionResult Edit(int? id) {
 			Session session = db.Sessions.SingleOrDefault(s => s.SessionID == id);
 			if (session == null)
-				session = new Session() { SessionID = 0 };
+				session = new Session() { SessionID = 0, StartDate=DateTime.Now, EndDate=DateTime.Now.AddMonths(4), Program="MAST", SessionYear = DateTime.Now.Year+1, SessionCode="FA", Name = "Fall " + (DateTime.Now.Year+1).ToString() };
 
 			return View(session);
 		}

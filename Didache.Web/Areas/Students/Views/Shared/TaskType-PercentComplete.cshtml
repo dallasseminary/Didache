@@ -1,0 +1,60 @@
+﻿@model Didache.UserTaskData
+@{
+   
+}
+
+
+<div class="task-buttons">
+@if (
+		Model.TaskCompletionStatus != TaskCompletionStatus.Completed || 
+		(Model.TaskCompletionStatus == TaskCompletionStatus.Completed && Model.Task.DueDate.HasValue && DateTime.Now < Model.Task.DueDate.Value) ||
+		(Model.TaskCompletionStatus == TaskCompletionStatus.Completed && !Model.Task.DueDate.HasValue && DateTime.Now < Model.Unit.EndDate)
+	) {
+	
+	<input type="number" class="percent-complete" max="100" min="0" placeholder="0-100" value="@(Model.NumericGrade.HasValue ? Model.NumericGrade.Value.ToString() : "")" data-val="true" data-val-range-max="130" data-val-range-min="1" />
+	<input type="button" class="mark-completed task-submit d-button action" value="@Didache.Resources.labels.studentschedule_recordpercentcomplete" data-taskstatus="@((int)TaskCompletionStatus.Completed)" />
+	
+}
+</div>
+
+
+<script>
+
+if (Didache.TaskTypes["@Model.Task.TaskTypeName"] == null) {
+
+	Didache.TaskTypes["@Model.Task.TaskTypeName"] = function (taskID, node) {
+
+		node.find('.percent-complete').bind('keyup change', function () {
+			var percentInput =$(this),
+				value = parseInt(percentInput.val(), 10);
+
+			if (!isNaN(value) && value >= 0 && value <= 100) {
+				percentInput.removeClass('input-validation-error');
+			} else {
+				percentInput.addClass('input-validation-error');
+			}
+		});
+
+		node.find('.mark-completed, .mark-skipped').click(function () {
+			var button = $(this),
+				status = parseInt(button.data('taskstatus'), 10),
+				percentComplete = parseInt(node.find('.percent-complete').val(), 10);
+
+			if (!isNaN(percentComplete) && percentComplete >= 0 && percentComplete <= 100) {
+
+				node.find('.percent-complete').prop('disabled', true);
+
+
+				sendTaskData(taskID, { TaskStatus: status, PercentComplete: percentComplete }, function (d) {
+					setTaskStatus(taskID, status);
+
+					node.find('.percent-complete').prop('disabled', false);
+					node.find('input[type="button"]').effect('highlight');
+				});
+
+			}
+		});
+	}
+}
+
+</script>

@@ -10,6 +10,8 @@
 			<h2>Edit User</h2>
 		</div>
 
+		<p><a href="/tools/loginas.aspx?username=@Model.Username">Login as @Model.SecureFormattedName</a></p>
+
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
@@ -68,6 +70,22 @@
 						@foreach (string role in ViewBag.AllRoles) {
 							<input type="checkbox" name="roles" value="@role" id="role-@role" @(ViewBag.UsersRoles.Contains(role) ? " checked" : "")	 /><label for="role-@role">@role</label><br />					
 						}		
+					</td>
+				</tr>
+				<tr>
+					<th>Courses</th>
+					<td>
+						<table>
+							@foreach (Course course in ViewBag.UsersCourses) {
+							<tr>
+								<td>@course.Session.SessionCode @course.Session.SessionYear</td>
+								<td>@course.CourseCode @course.Section</td>
+								<td><a href="@course.CourseUrl">student view</a></td>
+								<td><a href="/admin/courses/courseeditor/@course.CourseID">edit tasks</a></td>
+							</tr>
+							}
+						
+						</table>
 					</td>
 				</tr>
 			</tbody>
