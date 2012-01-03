@@ -2,11 +2,14 @@
 
 
 	// date editors
-	$('input.date, input[type=date]').datepicker();
+	$('input.date, input[type=date]').datepicker({ dateFormat: 'yy-mm-dd' });
 
 
 	// instruactions
 	//$('textarea.htmltext-admin').cleditor({ useCSS: false });
+
+	// 
+	$('.task-interaction-post textarea').autoResize();
 
 
 	var userMessage = $('<div class="loading" id="user-message"></div>').appendTo($(document.body)).hide();

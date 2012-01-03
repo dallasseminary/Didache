@@ -1,4 +1,7 @@
-﻿var Didache = window.Didache || {};
+﻿if (typeof window.console == 'undefined')
+	window.console = { log: function () { } };
+
+var Didache = window.Didache || {};
 Didache.TaskTypes = [];
 
 jQuery(document).ready(function ($) {
@@ -61,7 +64,7 @@ jQuery(document).ready(function ($) {
 	if (urlHash.length > 0) {
 		var threadID = urlHash = urlHash.substring(1);
 
-		console.log(threadID, urlHash);
+		//console.log(threadID, urlHash);
 
 		// make sure we have the thread
 		if (urlHash.indexOf('post') > -1) {
@@ -69,7 +72,7 @@ jQuery(document).ready(function ($) {
 			threadID = $('#' + urlHash).closest('.task-interaction-thread').attr('id');
 		}
 
-		console.log(threadID, urlHash);
+		//console.log(threadID, urlHash);
 
 		// open the thread
 		$('#' + threadID)
