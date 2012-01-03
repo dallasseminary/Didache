@@ -30,6 +30,13 @@ namespace Didache {
 			}
 		}
 
+		public string EncodedFilename {
+			get {
+				return Filename.Replace("#", "").Replace("?", "").Replace("&", "").Replace("%", "");
+				//return System.Web.HttpUtility.UrlEncode(Filename.Replace("#", "").Replace("?", "").Replace("&", "").Replace("%", ""));
+			}
+		}
+
 		public string FileType {
 			get {
 				string ext = (Filename.IndexOf(".") > -1) ? Filename.Substring(Filename.LastIndexOf(".") + 1) : "";

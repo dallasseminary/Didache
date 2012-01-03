@@ -16,13 +16,17 @@ namespace Didache {
 				List<Task> tasks = db.Tasks.Where(t => t.UnitID == unitID).OrderBy(t => t.SortOrder).ToList();
 
 				userTasks = new List<UserTaskData>();
+				
 				foreach (Task task in tasks) {
-					UserTaskData utd = new UserTaskData();
-					utd.Task = task;
-					utd.TaskID = task.TaskID;
-					utd.CourseID = task.CourseID;
-					utd.UnitID = task.UnitID;
-					utd.TaskCompletionStatus = TaskCompletionStatus.NotStarted;
+					UserTaskData utd = new UserTaskData() {
+						TaskID = task.TaskID,
+						CourseID = task.CourseID,
+						UnitID = task.UnitID,
+						TaskCompletionStatus = TaskCompletionStatus.NotStarted,
+						Task = task
+					};
+
+					//utd.Task = task;
 
 					userTasks.Add(utd);
 				}

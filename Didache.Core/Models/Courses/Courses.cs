@@ -23,7 +23,8 @@ namespace Didache  {
 			if (course == null || !useCache) {
 				course = new DidacheDb().Courses.SingleOrDefault(c => c.CourseID == courseID);
 
-				HttpContext.Current.Cache.Add(key, course, null, Cache.NoAbsoluteExpiration, new TimeSpan(1, 0, 0), CacheItemPriority.Default, null);
+				if (course != null)
+					HttpContext.Current.Cache.Add(key, course, null, Cache.NoAbsoluteExpiration, new TimeSpan(1, 0, 0), CacheItemPriority.Default, null);
 			}
 
 
@@ -282,6 +283,7 @@ namespace Didache  {
 					.Where(utd =>
 							utd.UserID == user.UserID &&
 							utd.Task.Priority > 1 &&
+							utd.Task.IsActive == true && 
 							utd.Task.DueDate != null &&
 							utd.TaskStatus == 0 && 
 							utd.CourseID == courseID)
@@ -304,7 +306,7 @@ namespace Didache  {
 				.ToList();
 		}
 
-		public static Course CloneCourse(int courseID, int sessionID, DateTime startDate) {
+		public static Course CloneCourse(int courseID, int sessionID, DateTime startDate, string courseCode, string section) {
 
 			DidacheDb db = new DidacheDb();
 
@@ -319,9 +321,9 @@ namespace Didache  {
 				SessionID = sessionID,
 				CampusID = oldCourse.CampusID,
 				IsActive = oldCourse.IsActive,
-				CourseCode = oldCourse.CourseCode,
+				CourseCode = !String.IsNullOrWhiteSpace(courseCode) ? courseCode : oldCourse.CourseCode,
 				Name = oldCourse.Name,
-				Section = oldCourse.Section,
+				Section = !String.IsNullOrWhiteSpace(section) ? section : oldCourse.Section,
 				StartDate = oldCourse.StartDate.AddDays(daysToShift),
 				EndDate = oldCourse.EndDate.AddDays(daysToShift),
 				Description = oldCourse.Description
@@ -441,5 +443,28 @@ namespace Didache  {
 
 			return newCourse;
 		}
+
+
+		public static bool IsUserFaculty(int courseID, int userID) {
+			return IsUserInCourseRole(courseID, userID, CourseUserRole.Faculty);
+		}
+		public static bool IsUserFacilitator(int courseID, int userID) {
+			return IsUserInCourseRole(courseID, userID, CourseUserRole.Faciliator);
+		}
+		public static bool IsUserInCourseRole(int courseID, int userID, CourseUserRole courseUserRole) {
+			string key = string.Format("courserole-{0}-{1}-{2}", courseID, userID, courseUserRole);
+			bool isInRole = false;
+
+			if (System.Web.HttpContext.Current.Cache[key] != null) {
+				isInRole = (bool)System.Web.HttpContext.Current.Cache[key];
+			} else {
+				isInRole = new DidacheDb().CourseUsers.Count(cu => cu.UserID == userID && cu.CourseID == courseID && cu.RoleID == (int)courseUserRole) > 0;
+				System.Web.HttpContext.Current.Cache.Insert(key, isInRole, null, DateTime.Now.AddMinutes(30), Cache.NoSlidingExpiration);
+			}
+
+			return isInRole;
+
+		}
+	
 	}
 }

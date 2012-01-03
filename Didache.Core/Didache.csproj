@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\ViewModels\ContactStudents.cs" />
+    <Compile Include="Models\ViewModels\UnitSurveyGroup.cs" />
     <Compile Include="MVC\ActionResults\iCalResult.cs" />
     <Compile Include="MVC\ActionResults\SyndicationResult.cs" />
     <Compile Include="MVC\ActionResults\ZipFileResult.cs" />
@@ -139,6 +140,7 @@
       <DependentUpon>labels.resx</DependentUpon>
     </Compile>
     <Compile Include="TaskTypes\Types\CommentOnPost.cs" />
+    <Compile Include="TaskTypes\Types\PercentComplete.cs" />
     <Compile Include="TaskTypes\Types\TurnInFileForComment.cs" />
     <Compile Include="TaskTypes\Types\Survey.cs" />
     <Compile Include="TaskTypes\Types\TaskTypeResult.cs" />
@@ -154,6 +156,7 @@
     <Compile Include="Utility\CarsConnection.cs" />
     <Compile Include="Utility\Emails.cs" />
     <Compile Include="Utility\EntityObjectSerializer.cs" />
+    <Compile Include="Utility\HtmlHelpers\DropDownGroupList.cs" />
     <Compile Include="Utility\Settings.cs" />
     <Compile Include="Utility\Utility.cs" />
   </ItemGroup>
@@ -177,6 +180,7 @@
     <EmbeddedResource Include="Resources\labels.zh-CN.resx" />
     <EmbeddedResource Include="Resources\labels.zh-TW.resx" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

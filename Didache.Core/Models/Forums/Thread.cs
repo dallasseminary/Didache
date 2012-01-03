@@ -32,6 +32,14 @@ namespace Didache {
 		public int TotalViews { get; set; }
 		public int TotalReplies { get; set; }
 
+		
+		//[ForeignKey("LastPostID")]
+		//public virtual Post LastPost { get; set; }
+		[ForeignKey("LastPostUserID")]
+		public virtual User LastPostUser { get; set; }
+		[ForeignKey("UserID")]
+		public virtual User User { get; set; }
+	
 
 		public virtual Forum Forum { get; set; }
 		public virtual ICollection<Post> Posts { get; set; }

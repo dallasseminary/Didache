@@ -610,7 +610,7 @@ namespace Didache.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Thanks for your feedback. Someone will response as soon as possible..
+        ///   Looks up a localized string similar to Thanks for your feedback. Someone will respond as soon as possible..
         /// </summary>
         public static string help_submitted {
             get {
@@ -1195,6 +1195,33 @@ namespace Didache.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Record % Complete.
+        /// </summary>
+        public static string studentschedule_recordpercentcomplete {
+            get {
+                return ResourceManager.GetString("studentschedule_recordpercentcomplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you need to resubmit your file, please contact your facilitator..
+        /// </summary>
+        public static string studentschedule_resubmitfile_contactfacilitator {
+            get {
+                return ResourceManager.GetString("studentschedule_resubmitfile_contactfacilitator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have already submitted this assignment. But since it is before the due date and no one has repsonded to your post, you can resubmit it replacing your earlier file..
+        /// </summary>
+        public static string studentschedule_resubmitfile_message {
+            get {
+                return ResourceManager.GetString("studentschedule_resubmitfile_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Skip.
         /// </summary>
         public static string studentschedule_skip {
@@ -1690,11 +1717,101 @@ namespace Didache.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Resources.
+        /// </summary>
+        public static string tabs_resources {
+            get {
+                return ResourceManager.GetString("tabs_resources", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tour.
         /// </summary>
         public static string tabs_tour {
             get {
                 return ResourceManager.GetString("tabs_tour", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to hours.
+        /// </summary>
+        public static string videos_hours {
+            get {
+                return ResourceManager.GetString("videos_hours", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to minutes.
+        /// </summary>
+        public static string videos_minutes {
+            get {
+                return ResourceManager.GetString("videos_minutes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Print all slides.
+        /// </summary>
+        public static string videos_printallslides {
+            get {
+                return ResourceManager.GetString("videos_printallslides", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Print all transcripts.
+        /// </summary>
+        public static string videos_printalltranscripts {
+            get {
+                return ResourceManager.GetString("videos_printalltranscripts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to seconds.
+        /// </summary>
+        public static string videos_seconds {
+            get {
+                return ResourceManager.GetString("videos_seconds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to slides.
+        /// </summary>
+        public static string videos_slides {
+            get {
+                return ResourceManager.GetString("videos_slides", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Time.
+        /// </summary>
+        public static string videos_totaltime {
+            get {
+                return ResourceManager.GetString("videos_totaltime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to transcript.
+        /// </summary>
+        public static string videos_transcript {
+            get {
+                return ResourceManager.GetString("videos_transcript", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to watch.
+        /// </summary>
+        public static string videos_watch {
+            get {
+                return ResourceManager.GetString("videos_watch", resourceCulture);
             }
         }
     }

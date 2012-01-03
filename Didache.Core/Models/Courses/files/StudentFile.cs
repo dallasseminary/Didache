@@ -8,13 +8,14 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Didache {
 
 	public class StudentFile : BaseFile {
 		public string FileUrl {
 			get {
-				return "/courses/studentfile/" + FileID + "/" + Filename.Replace("#", "").Replace("?", "");
+				return "/courses/studentfile/" + FileID + "/" + EncodedFilename;
 			}
 		}
 
@@ -25,7 +26,11 @@ namespace Didache {
 		}
 
 		public static string GetFriendlyFilename(Course course, Unit unit, Task task, User user, string filename) {
-			return course.CourseCode + course.Section + "-Unit" + unit.SortOrder + "-" + task.Name.Replace(" ", "-") + "-" + user.FullName.Replace(" ", "-") + "[" +task.TaskID + "," + user.UserID + "]" + Path.GetExtension(filename);
+			return Regex.Replace(course.CourseCode + course.Section + 
+				"-Unit" + unit.SortOrder + "-" + 
+				task.Name.Replace(" ", "-") + "-" +
+				user.FullName.Replace(" ", "-"), @"[\*\!\$\%\?;:]", "")
+				+ "[" + task.TaskID + "," + user.UserID + "]" + Path.GetExtension(filename);
 		}
 
 	}

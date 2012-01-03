@@ -24,14 +24,17 @@ namespace Didache {
 		public TaskCompletionStatus TaskCompletionStatus { get { return (TaskCompletionStatus)TaskStatus; } set { TaskStatus = (int)value; } }
 
 		public DateTime? StudentSubmitDate { get; set; }
+		
+		[MaxLength]
 		public string StudentComments { get; set; }
 
 		public string LetterGrade { get; set; }
-		public int? NumericGrade { get; set; }
+		public Double? NumericGrade { get; set; }
 
 		public int GradeStatus { get; set; }
 		public DateTime? GraderSubmitDate { get; set; }
 
+		[MaxLength]
 		public string GraderComments { get; set; }
 		public int GraderUserID { get; set; }
 		
@@ -53,6 +56,8 @@ namespace Didache {
 		public virtual Task Task { get; set; }
 		public virtual Unit Unit { get; set; }
 		public virtual Course Course { get; set; }
+
+		public virtual InteractionPost Post { get; set; }
 
 		[ForeignKey("StudentFileID")]
 		public virtual StudentFile StudentFile{ get; set; }

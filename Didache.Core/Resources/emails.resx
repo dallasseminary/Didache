@@ -117,17 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="interaction_reply" xml:space="preserve">
-    <value>Hi {0},
+  <data name="gradedtask_body" xml:space="preserve">
+    <value>The assignment {task-name} in {course-code} has been graded by {fromuser-secureformattedname}. 
 
-{1} replied to your post on http://online.dts.edu/ saying
+Grade: {usertaskdata-numericgrade}
+Graded File: {usertaskdata-gradedfile-url}
+Grader Comments: 
+{usertaskdata-gradercomments}
+
+Your File: {usertaskdata-studentfile-url}
+Your Comments:
+{usertaskdata-studentcomments}</value>
+  </data>
+  <data name="gradedtask_subject" xml:space="preserve">
+    <value>{course-code} - {task-name} graded</value>
+  </data>
+  <data name="interaction_reply" xml:space="preserve">
+    <value>Hi {touser-secureshortname},
+
+{fromuser-secureshortname} added a reply to a thread in which you have participated at https://online.dts.edu/
 
 --------------------------------
-{2}
+{interactionpost-postcontent}
 --------------------------------
 
 See the complete thread here:
-{3}
+{interactionpost-posturl}
+
+Please note: we will be adding some features in the coming weeks to give you greater control over which notifications you receive.
 
 DTS Online</value>
   </data>

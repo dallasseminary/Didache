@@ -62,29 +62,33 @@ namespace Didache {
 							 select p;
 
 			// add them to the dictionary
-			var result = properties.ToDictionary(
-						  property => property.Name,
-						  property => (Object)(property.GetValue(obj, null)
-									  == null
-									  ? ""
-									  : property.GetValue(obj, null).ToString().Trim())
-						  );
+			try {
+				var result = properties.ToDictionary(
+							  property => property.Name,
+							  property => (Object)(property.GetValue(obj, null)
+										  == null
+										  ? ""
+										  : property.GetValue(obj, null).ToString().Trim())
+							  );
 
-			// grab objects (not int, string, etc.)
-			var complexProperties = from p in type.GetProperties()
-									where p.CanWrite &&
-											p.CanRead &&
-											p.GetCustomAttributes(typeof(ScriptIgnoreAttribute), true).Length == 0 &&
-											!_builtInTypes.Contains(p.PropertyType)
-									select p;
+				// grab objects (not int, string, etc.)
+				var complexProperties = from p in type.GetProperties()
+										where p.CanWrite &&
+												p.CanRead &&
+												p.GetCustomAttributes(typeof(ScriptIgnoreAttribute), true).Length == 0 &&
+												!_builtInTypes.Contains(p.PropertyType)
+										select p;
 
-			// spin through the sub classes and make them
-			foreach (var property in complexProperties) {
-				//var js = new ObjectToDictionaryNew();
-				result.Add(property.Name, Serialize(property.GetValue(obj, null)));
+				// spin through the sub classes and make them
+				foreach (var property in complexProperties) {
+					//var js = new ObjectToDictionaryNew();
+					result.Add(property.Name, Serialize(property.GetValue(obj, null)));
+				}
+
+				return result;
+			} catch {
+				return null;
 			}
-
-			return result;
 		}
 	}
 }

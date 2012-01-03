@@ -61,16 +61,45 @@ namespace Didache.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hi {0},
+        ///   Looks up a localized string similar to The assignment {task-name} in {course-code} has been graded by {fromuser-secureformattedname}. 
         ///
-        ///{1} replied to your post on http://online.dts.edu/ saying
+        ///Grade: {usertaskdata-numericgrade}
+        ///Graded File: {usertaskdata-gradedfile-url}
+        ///Grader Comments: 
+        ///{usertaskdata-gradercomments}
+        ///
+        ///Your File: {usertaskdata-studentfile-url}
+        ///Your Comments:
+        ///{usertaskdata-studentcomments}.
+        /// </summary>
+        public static string gradedtask_body {
+            get {
+                return ResourceManager.GetString("gradedtask_body", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {course-code} - {task-name} graded.
+        /// </summary>
+        public static string gradedtask_subject {
+            get {
+                return ResourceManager.GetString("gradedtask_subject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hi {touser-secureshortname},
+        ///
+        ///{fromuser-secureshortname} added a reply to a thread in which you have participated at https://online.dts.edu/
         ///
         ///--------------------------------
-        ///{2}
+        ///{interactionpost-postcontent}
         ///--------------------------------
         ///
         ///See the complete thread here:
-        ///{3}
+        ///{interactionpost-posturl}
+        ///
+        ///Please note: we will be adding some features in the coming weeks to give you greater control over which notifications you receive.
         ///
         ///DTS Online.
         /// </summary>

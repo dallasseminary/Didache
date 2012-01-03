@@ -41,5 +41,7 @@ namespace Didache {
 		[MaxLength]
 		public string Comments { get; set; }
 
+		public virtual User User { get; set; }
+
 	}
 }

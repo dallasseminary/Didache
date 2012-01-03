@@ -15,7 +15,7 @@ namespace Didache {
 
 		public string FileUrl {
 			get {
-				return "/courses/gradedfile/" + FileID + "/" + Filename;
+				return "/courses/gradedfile/" + FileID + "/" + EncodedFilename;
 			}
 		}
 

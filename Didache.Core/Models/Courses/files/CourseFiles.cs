@@ -34,7 +34,9 @@ namespace Didache  {
 			
 			StudentFile studentFile = null;
 
-			if (file.ContentLength > 0) {
+			if (file.ContentLength > 0) {		
+
+
 
 				// setup data
 				studentFile = new StudentFile();
@@ -42,13 +44,23 @@ namespace Didache  {
 				studentFile.UploadedDate = DateTime.Now;
 				studentFile.UniqueID = Guid.NewGuid();
 				studentFile.ContentType = file.ContentType;
-				studentFile.Length = file.ContentLength;		
+				studentFile.Length = file.ContentLength;
 
-				// save pyhsical file
+				// setup physical file
 				string extension = Path.GetExtension(file.FileName);
 				string filenameWithoutExtension = Path.GetFileNameWithoutExtension(file.FileName);
 				studentFile.Filename = Path.GetFileName(file.FileName);
 				string savePath = Path.Combine(Settings.StudentFilesLocation, studentFile.UniqueID.ToString() + extension);
+
+				// check file type
+				if (!String.IsNullOrWhiteSpace(userData.Task.FileTypesAllowed)) {
+
+
+
+					// fail?
+				}
+
+
 				file.SaveAs(savePath);
 
 				// save file info to DB

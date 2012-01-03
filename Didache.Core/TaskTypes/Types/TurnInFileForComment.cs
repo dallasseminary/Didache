@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.IO;
 using System.ComponentModel.DataAnnotations;
 
 namespace Didache.TaskTypes {
@@ -56,20 +57,40 @@ namespace Didache.TaskTypes {
 				//	return new TaskTypeResult() { Success = false, Message = "No related task" };
 				//}
 
+				InteractionThread thread = null;
+				InteractionPost post = null;
+				bool isNewPost = true;
 
+				// check for existing thread/post
+				if (data != null && data.PostID > 0) {
+					post = db.InteractionPosts.SingleOrDefault(p => p.PostID == data.PostID);
+					if (post != null) {
+						thread = db.InteractionThreads.SingleOrDefault(t => t.ThreadID == post.ThreadID);
+
+						if (thread != null) {
+							isNewPost = false;
+						}
+					}
+				}
 
 				// CREATE POST
-				InteractionThread thread = new InteractionThread();
+				if (isNewPost) {
+					thread = new InteractionThread();
+				}
 				thread.UserID = userID;
 				thread.TotalReplies = 0;
 				thread.IsDeleted = false;
 				thread.Subject = "Assignment: " + task.Name;
 				thread.TaskID = interactionTaskID;
 				thread.ThreadDate = DateTime.Now;
-				db.InteractionThreads.Add(thread);
+				if (isNewPost) {
+					db.InteractionThreads.Add(thread);
+				}
 				db.SaveChanges();
 
-				InteractionPost post = new InteractionPost();
+				if (isNewPost) {
+					post = new InteractionPost();
+				}
 				post.IsApproved = true;
 				post.IsDeleted = false;
 				post.PostContent = request["usercomment"];
@@ -81,7 +102,9 @@ namespace Didache.TaskTypes {
 				post.Subject = "RE: Assignment: " + task.Name;
 				post.TaskID = interactionTaskID;
 				post.FileID = studentFile.FileID;
-				db.InteractionPosts.Add(post);
+				if (isNewPost) {
+					db.InteractionPosts.Add(post);
+				}
 				db.SaveChanges();
 
 				if (data != null) {

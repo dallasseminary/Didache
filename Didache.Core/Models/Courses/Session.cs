@@ -18,6 +18,7 @@ namespace Didache {
 		[Display(Name = "Is Active")]
 		public bool IsActive { get; set; }
 
+		[Required]
 		[Display(Name = "Program")]
 		public string Program { get; set; }
 

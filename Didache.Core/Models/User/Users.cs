@@ -44,7 +44,11 @@ namespace Didache  {
 					language = langCookie.Value;
 				} else {
 					// use default value from browser
-					language = HttpContext.Current.Request.UserLanguages[0];
+					if (HttpContext.Current.Request.UserLanguages != null && HttpContext.Current.Request.UserLanguages.Length > 0) {
+						language = HttpContext.Current.Request.UserLanguages[0];
+					} else {
+						language = "en-US";
+					}
 				}
 			}
 
@@ -94,7 +98,7 @@ namespace Didache  {
 			User user = (HttpContext.Current != null) ? HttpContext.Current.Cache[key] as User : null;
 
 			if (user == null) {
-				user = new DidacheDb().Users.SingleOrDefault(u => u.UserID == id);
+				user = new DidacheDb().Users.FirstOrDefault(u => u.UserID == id);
 
 				if (user != null) {
 					HttpContext.Current.Cache.Add(key, user, null, Cache.NoAbsoluteExpiration, new TimeSpan(1, 0, 0), CacheItemPriority.Default, null);
@@ -110,7 +114,7 @@ namespace Didache  {
 			User user = (HttpContext.Current != null) ? HttpContext.Current.Cache[key] as User : null;
 
 			if (user == null) {
-				user = new DidacheDb().Users.SingleOrDefault(u => u.Username == username);
+				user = new DidacheDb().Users.FirstOrDefault(u => u.Username == username);
 
 				if (user != null) {
 					HttpContext.Current.Cache.Add(key, user, null, Cache.NoAbsoluteExpiration, new TimeSpan(1, 0, 0), CacheItemPriority.Default, null);
@@ -148,7 +152,7 @@ namespace Didache  {
 		}
 
 		public static Student GetStudent(int userID) {
-			return new DidacheDb().Students.Find(userID);
+			return new DidacheDb().Students.Where(u => u.UserID == userID).FirstOrDefault();
 		}
 	}
 }

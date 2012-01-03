@@ -5,6 +5,19 @@ using System.Text;
 
 namespace Didache {
 	public class Interactions {
+
+		public static int GetActiveReplyCount(int postID) {
+			DidacheDb db = new DidacheDb();
+
+			InteractionPost post = db.InteractionPosts.SingleOrDefault(p=>p.PostID == postID);
+
+			if (post == null) {
+				return 0;
+			} else {
+				return db.InteractionPosts.Count(p => p.ThreadID == post.ThreadID && p.IsDeleted == false);
+			}
+
+		}
 		
 		public static List<InteractionThread> GetInteractionThreads(int taskID) {
 			/*
@@ -64,7 +77,7 @@ namespace Didache {
 				usersGroups = course.CourseUserGroups.ToList();
 				usersGroupIDs = usersGroups.Select(cup => cup.GroupID).ToList();
 
-			// faculitators should see only their group
+			// facilitators should see only their group
 			// BUT, for now we have to find that groupID in the groups
 			} else if (courseUserAsFaciliator != null) {
 				usersGroups = course.CourseUserGroups.Where(cup => cup.FacilitatorUserID == user.UserID).ToList();
@@ -100,7 +113,7 @@ namespace Didache {
 			}
 
 
-
+			// Finally get some data
 			List<InteractionThread> threads = db
 				.InteractionThreads
 				.Include("Posts")
@@ -108,6 +121,22 @@ namespace Didache {
 				.Where(t => t.TaskID == taskID && courseUserIDs.Contains(t.UserID))
 				.OrderByDescending(t => t.ThreadDate)
 				.ToList();
+
+			// SORTING
+
+			// pull facilitators to the top
+			List<InteractionThread> facilitatorThreads = threads.FindAll(t => course.CourseUsers.Where(cu => cu.CourseUserRole == CourseUserRole.Faciliator).Select(cu => cu.UserID).Contains(t.UserID));
+			foreach (InteractionThread thread in facilitatorThreads) {
+				threads.Remove(thread);
+			}
+			threads.InsertRange(0, facilitatorThreads);
+
+			// pull faculty to the very top
+			List<InteractionThread> facultyThreads = threads.FindAll(t => course.CourseUsers.Where(cu => cu.CourseUserRole == CourseUserRole.Faculty).Select(cu => cu.UserID).Contains(t.UserID));
+			foreach (InteractionThread thread in facultyThreads) {
+				threads.Remove(thread);
+			}
+			threads.InsertRange(0, facultyThreads);
 
 			// sorting the posts in memory!! Yeah, save DB time so we can cripple the web server
 			foreach (InteractionThread thread in threads) {
@@ -122,7 +151,7 @@ namespace Didache {
 
 			// sort the threads by recent posts
 			threads.Sort(delegate(InteractionThread a, InteractionThread b) {
-				return b.Posts.OrderByDescending(p => p.PostDate).FirstOrDefault().PostDate.CompareTo(a.Posts.OrderByDescending(p => p.PostDate).FirstOrDefault().PostDate);
+				return (b.Posts.Count > 0 && a.Posts.Count > 0) ? b.Posts.OrderByDescending(p => p.PostDate).FirstOrDefault().PostDate.CompareTo(a.Posts.OrderByDescending(p => p.PostDate).FirstOrDefault().PostDate) : 0;
 			});
 
 			return threads;

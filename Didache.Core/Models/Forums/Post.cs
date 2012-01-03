@@ -40,7 +40,13 @@ namespace Didache {
 			}
 		}
 
+		//[ForeignKey("ForumID")]
+		//public virtual Forum Forum { get; set; }
+
+		//[ForeignKey("ThreadID")]
 		public virtual Thread Thread { get; set; }
+
+		//[ForeignKey("UserID")]
 		public virtual User User { get; set; }
 	}
 

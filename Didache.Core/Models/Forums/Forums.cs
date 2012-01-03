@@ -10,7 +10,7 @@ namespace Didache {
 		}
 
 		public static List<Thread> GetThreads(int forumID) {
-			return new DidacheDb().Threads.Where(t => t.ForumID == forumID).ToList();
+			return new DidacheDb().Threads.Where(t => t.ForumID == forumID).OrderBy(t => t.LastPostDate).ToList();
 		}
 
 		public static List<Post> GetPosts(int threadID) {
@@ -18,11 +18,18 @@ namespace Didache {
 		}
 
 		public static Forum GetForum(int forumID, bool includeThreads) {
+			Forum forum = null;
+			
 			if (includeThreads) {
-				return new DidacheDb().Forums.Include("Threads").SingleOrDefault(f => f.ForumID == forumID);
+				forum = new DidacheDb().Forums.Include("Threads").SingleOrDefault(f => f.ForumID == forumID);
+
+				forum.Threads = forum.Threads.OrderByDescending(t => t.LastPostDate).ToList();
+
 			} else {
-				return new DidacheDb().Forums.SingleOrDefault(f => f.ForumID == forumID);
+				forum = new DidacheDb().Forums.SingleOrDefault(f => f.ForumID == forumID);
 			}
+
+			return forum;
 		}
 
 		public static Thread GetThread(int threadID, bool includePosts) {

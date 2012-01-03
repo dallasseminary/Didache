@@ -7,6 +7,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Web.Script.Serialization;
+using System.Runtime.Serialization;
 using System.IO;
 
 namespace Didache {
@@ -19,7 +21,7 @@ namespace Didache {
 
 		public string FileUrl {
 			get {
-				return "/courses/coursefile/" + FileID + "/" + Filename;
+				return "/courses/coursefile/" + FileID + "/" + EncodedFilename;
 			}
 		}
 
@@ -29,6 +31,10 @@ namespace Didache {
 				return Path.Combine(Settings.CourseFilesLocation, UniqueID + Path.GetExtension(Filename));
 			}
 		}
+
+
+		[ScriptIgnore]
+		public virtual List<CourseFileAssociation> CourseFileAssociations { get; set; }
 
 	}
 

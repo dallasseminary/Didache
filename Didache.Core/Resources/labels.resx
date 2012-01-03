@@ -544,7 +544,7 @@
     <value>Submit Problem</value>
   </data>
   <data name="help_submitted" xml:space="preserve">
-    <value>Thanks for your feedback. Someone will response as soon as possible.</value>
+    <value>Thanks for your feedback. Someone will respond as soon as possible.</value>
   </data>
   <data name="studentschedule_choose" xml:space="preserve">
     <value>Choose</value>
@@ -662,5 +662,44 @@
   </data>
   <data name="changepassword_success" xml:space="preserve">
     <value>Your password was successfully changed</value>
+  </data>
+  <data name="studentschedule_resubmitfile_message" xml:space="preserve">
+    <value>You have already submitted this assignment. But since it is before the due date and no one has repsonded to your post, you can resubmit it replacing your earlier file.</value>
+  </data>
+  <data name="studentschedule_resubmitfile_contactfacilitator" xml:space="preserve">
+    <value>If you need to resubmit your file, please contact your facilitator.</value>
+  </data>
+  <data name="tabs_resources" xml:space="preserve">
+    <value>Resources</value>
+  </data>
+  <data name="studentschedule_recordpercentcomplete" xml:space="preserve">
+    <value>Record % Complete</value>
+  </data>
+  <data name="videos_hours" xml:space="preserve">
+    <value>hours</value>
+  </data>
+  <data name="videos_minutes" xml:space="preserve">
+    <value>minutes</value>
+  </data>
+  <data name="videos_printallslides" xml:space="preserve">
+    <value>Print all slides</value>
+  </data>
+  <data name="videos_printalltranscripts" xml:space="preserve">
+    <value>Print all transcripts</value>
+  </data>
+  <data name="videos_seconds" xml:space="preserve">
+    <value>seconds</value>
+  </data>
+  <data name="videos_slides" xml:space="preserve">
+    <value>slides</value>
+  </data>
+  <data name="videos_totaltime" xml:space="preserve">
+    <value>Total Time</value>
+  </data>
+  <data name="videos_transcript" xml:space="preserve">
+    <value>transcript</value>
+  </data>
+  <data name="videos_watch" xml:space="preserve">
+    <value>watch</value>
   </data>
 </root>

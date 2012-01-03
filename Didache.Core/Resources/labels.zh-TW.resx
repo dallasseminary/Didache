@@ -166,7 +166,7 @@
     <value>所有的重要信息類</value>
   </data>
   <data name="coursetabs_discussion" xml:space="preserve">
-    <value>互動討論</value>
+    <value>課程報告</value>
   </data>
   <data name="coursetabs_discussion_desc" xml:space="preserve">
     <value>課程論壇</value>
@@ -534,5 +534,32 @@
   </data>
   <data name="changepassword_success" xml:space="preserve">
     <value>您的密碼已成功更改</value>
+  </data>
+  <data name="videos_hours" xml:space="preserve">
+    <value>小時</value>
+  </data>
+  <data name="videos_minutes" xml:space="preserve">
+    <value>分鐘</value>
+  </data>
+  <data name="videos_printallslides" xml:space="preserve">
+    <value>打印所有幻燈片</value>
+  </data>
+  <data name="videos_printalltranscripts" xml:space="preserve">
+    <value>打印所有成績單</value>
+  </data>
+  <data name="videos_seconds" xml:space="preserve">
+    <value>秒</value>
+  </data>
+  <data name="videos_slides" xml:space="preserve">
+    <value>抄本</value>
+  </data>
+  <data name="videos_totaltime" xml:space="preserve">
+    <value>總時間</value>
+  </data>
+  <data name="videos_transcript" xml:space="preserve">
+    <value>幻燈片</value>
+  </data>
+  <data name="videos_watch" xml:space="preserve">
+    <value>手錶</value>
   </data>
 </root>
