@@ -33,7 +33,7 @@ x Can't change languages on the fly
 				((seconds < 10) ? '0' : '') + seconds.toString();
 		}
 	}
-	
+
 	function convertSecondsToTimecode(seconds) {
 		seconds = Math.round(seconds);
 		minutes = Math.floor(seconds / 60);
@@ -42,8 +42,8 @@ x Can't change languages on the fly
 		seconds = (seconds >= 10) ? seconds : "0" + seconds;
 		return minutes + ":" + seconds;
 	}
-	
-	
+
+
 	function convertTimecodeToSeconds(timecode) {
 		timecode = timecode.replace(/&#xD;/g, '').replace(/&#xA;/g, '');
 
@@ -61,11 +61,11 @@ x Can't change languages on the fly
 		else
 			return -1;
 	}
-	
+
 	// class=be101&unit=1 ==> {class: 'be1o1', unit: 1}
 	function parseTokens(input) {
 		var tokens = {};
-		var parts = input.replace('#','').split('&');
+		var parts = input.replace('#', '').split('&');
 		for (var i in parts) {
 			var p = parts[i].split('=');
 			tokens[p[0]] = p[1];
@@ -80,7 +80,7 @@ x Can't change languages on the fly
 			parts.push(i + '=' + tokens[i]);
 		}
 		return parts.join('&');
-	}	
+	}
 
 	window.videoUtils = {
 		convertSecondsToTimecode: convertSecondsToTimecode,
@@ -92,7 +92,7 @@ x Can't change languages on the fly
 	function getCourseInfoUrl(courseCode, language) {
 		//return 'en-US.xml';
 
-		return '/player/video-list.ashx?course=' + courseCode.toString().toLowerCase() + '&language=' + language + '&' + document.location.search.replace('?','');
+		return 'video-list.ashx?course=' + courseCode.toString().toLowerCase() + '&language=' + language + '&' + document.location.search.replace('?', '');
 		return '/playerfiles/' + courseCode.toString().toLowerCase() + '/Titles/' + language + '.xml';
 	}
 
@@ -132,116 +132,122 @@ x Can't change languages on the fly
 
 		return '/playerfiles/' + courseCode.toString().toLowerCase() + '/Slides/' + language + '/';
 	}
-	
-	var DtsUserControls = function(video) {
-	
+
+	var DtsUserControls = function (video) {
+
+		if (navigator.userAgent.match(/iPad/i) != null) {
+			
+			video.setAttribute('controls','controls');
+		}
+
 		var loaded = false;
-	
+
 		var controls = $('#video1-controls');
 		/*
 		controls.css('opacity', 0.3);
 		video.addEventListener('loadeddata', function() {
-				controls.css('opacity', 1);
+		controls.css('opacity', 1);
 		});
 		*/
-	
+
 		var playPauseButton = $('#video1-playpause');
 		var muteButton = $('#video1-mute');
 		var toggleTranscriptButton = $('#video1-toggle-transcript');
-		
+
 		var currentTime = $('#video1-currentTime');
 		var duration = $('#video1-duration');
-		
+
 		var progressWrapper = $('#video1-progress-wrapper');
 		var progreesLoaded = $('#video1-loaded');
-		var progressPosition= $('#video1-progress');
+		var progressPosition = $('#video1-progress');
 		var progressHandle = $('.media-progress-handle');
-	
+
 		// PLAY/PAUSE button
-		playPauseButton.bind('click',function() {
+		playPauseButton.bind('click', function () {
 			console.log('play/pause clicked', video);
 			if (video.paused)
 				video.play();
 			else
 				video.pause();
 		});
-		
+
 		function handlePlayerState(e) {
 			video = e.target;
-		
-			console.log('state',e.type, e);
-		
+
+			console.log('state change: ' + e.type, e);
+
 			switch (e.type) {
 				case 'playing':
-				case 'play':					
+				case 'play':
 					playPauseButton.find('.play').hide();
 					playPauseButton.find('.pause').css('display', 'block');
 					break;
 				case 'paused':
 				case 'pause':
 					playPauseButton.find('.pause').hide();
-					playPauseButton.find('.play').css('display', 'block');				
-					break;			
+					playPauseButton.find('.play').css('display', 'block');
+					break;
+				case 'loadstart':
+					progreesLoaded.width('0%');
+					progressPosition.width('0%');
 			}
 		}
+
 		// events
-		
-		var events = 'loaded loadeddata play playing pause paused stop seeking seeked'.split(' ');
-		for (var i=0; i<events.length; i++) {
+		var events = 'loadstart abort loadedmetadata loadeddata play playing pause paused stop seeking seeked canplay canplaythrough waiting'.split(' ');
+		for (var i = 0; i < events.length; i++) {
 			console.log('adding', events[i]);
 			video.addEventListener(events[i], handlePlayerState, true);
 		}
-		
-	
-	
+
 		// MUTE: todo
 		muteButton.toggle(
-			 
-			function (){
+
+			function () {
 				video.setMuted(true);
 				$(this).find('.mute').hide();
 				$(this).find('.unmute').css('display', 'block');
 			},
-			function() {	
+			function () {
 				video.setMuted(false);
 				$(this).find('.mute').css('display', 'block');
 				$(this).find('.unmute').hide();
 			});
-					
+
 		// TRANSCRIPT
 		toggleTranscriptButton.toggle(
-			 
-			function (){
+
+			function () {
 				$('#transcript').hide();
 				$(this).find('.transcript-on').hide();
-				$(this).find('.transcript-off').css('display', 'block');				
+				$(this).find('.transcript-off').css('display', 'block');
 			},
-			function() {	
+			function () {
 				$('#transcript').show();
 				$(this).find('.transcript-on').css('display', 'block');
 				$(this).find('.transcript-off').hide();
 			});
-	
-	
+
+
 		// DURATION/PROGRESS
-		video.addEventListener('timeupdate', function() {
-			currentTime.html(  convertSecondsToTimecode(video.currentTime)  );
-			
+		video.addEventListener('timeupdate', function () {
+			currentTime.html(convertSecondsToTimecode(video.currentTime));
+
 			if (!isNaN(video.duration)) {
-				duration.html(  convertSecondsToTimecode(video.duration)  );
-			
+				duration.html(convertSecondsToTimecode(video.duration));
+
 				// bars
-				var percent = (video.currentTime / video.duration * 100);				
-				progressPosition.width(percent.toString() + '%');			
+				var percent = (video.currentTime / video.duration * 100);
+				progressPosition.width(percent.toString() + '%');
 			}
 		}, false);
 
 
 		video.addEventListener('progress', function (e) {
-			
-			if (e.target == null)	
+
+			if (e.target == null)
 				return;
-			
+
 			var percent = 0;
 
 			// flash/silverlight (html5 early browsers)
@@ -251,28 +257,34 @@ x Can't change languages on the fly
 			} else if (e.target.buffered && e.target.buffered.end) {
 				try {
 					percent = e.target.buffered.end() / e.target.duration;
-				} catch (e) {}
-			}			
-			
+				} catch (e) { }
+			}
+
 			try {
 				progreesLoaded.width(progressWrapper.width() * percent);
-			} catch(e) {}
-			
-			
+			} catch (e) { }
+
+
 		}, false);
 
-		progressWrapper.bind('click', function (e) {
+		function handleProgressClick(e) {
+			console.log('clicked progressWrapper');
+
 			// mouse position relative to the object!
-			var x = e.pageX;
-			var offset = progressWrapper.offset();		
-			var percentage = ((x - offset.left) / progressWrapper.outerWidth(true));
-			var newTime = percentage * video.duration;
+			var x = e.pageX,
+				offset = progressWrapper.offset(),
+				percentage = ((x - offset.left) / progressWrapper.outerWidth(true)),
+				newTime = percentage * video.duration;
 
 			video.setCurrentTime(newTime);
-		}, false);		
-	
+		}
+
+		progressWrapper.bind('click', handleProgressClick);
+		//progreesLoaded.bind('click', handleProgressClick);
+		//progressPosition.bind('click', handleProgressClick);
+
 	};
-	
+
 
 	var DtsCoursesController = function (id, player, mediaController) {
 
@@ -286,11 +298,11 @@ x Can't change languages on the fly
 		*/
 
 		var defaultLanguages = {
-			"en-US": { "name": "English", 	"englishName": "English", dir: 'ltr' },
-			"zh-TW": { "name": "漢語(繁體字)t",	"englishName": "Traditional Chinese", dir: 'ltr' },
-			"zh-CN": { "name": "汉语(简体字)s",	"englishName": "Simplified Chinese", dir: 'ltr' },
-			"es-ES": { "name": "Español", 	"englishName": "Spanish", dir: 'ltr' },
-			"ar-AR": { "name": "العربية", 				"englishName": "Arabic", "dir": "rtl" }		
+			"en-US": { "name": "English", "englishName": "English", dir: 'ltr' },
+			"zh-TW": { "name": "漢語(繁體字)t", "englishName": "Traditional Chinese", dir: 'ltr' },
+			"zh-CN": { "name": "汉语(简体字)s", "englishName": "Simplified Chinese", dir: 'ltr' },
+			"es-ES": { "name": "Español", "englishName": "Spanish", dir: 'ltr' },
+			"ar-AR": { "name": "العربية", "englishName": "Arabic", "dir": "rtl" }
 		};
 
 		var container = $('#' + id);
@@ -298,9 +310,9 @@ x Can't change languages on the fly
 		var unitList = $('.unit-list');
 		var videoList = $('.video-list');
 		var languageList = $('.language-list');
-		
+
 		var downloadBtn = $('#title .downloads .download-video');
-		downloadBtn.bind('click', function() {
+		downloadBtn.bind('click', function () {
 			var course = getSelectedCourse();
 			var unit = getSelectedUnit();
 			var video = getSelectedVideo();
@@ -309,21 +321,21 @@ x Can't change languages on the fly
 			// load video
 			var loVideo = getVideoUrl(course, unit, video, true);
 			var hiVideo = getVideoUrl(course, unit, video, false);
-			
+
 			if (videoList[0].selectedIndex > 0) {
-				
-				showMessage('Download Video', 
+
+				showMessage('Download Video',
 					'<div class="video-downloads">' +
-						'<a href="' + loVideo + '" class="button" target="_blank">Lo Quality Video</a>' + 
-						'<a href="' + hiVideo + '" class="button" target="_blank">Hi Quality Video</a>' + 
+						'<a href="' + loVideo + '" class="button" target="_blank">Lo Quality Video</a>' +
+						'<a href="' + hiVideo + '" class="button" target="_blank">Hi Quality Video</a>' +
 						'<br />' +
-						((unitList[0].options.length > 0) ? '<a href="/student/courserssfeed.aspx?course=' + course + '" class="button rss" target="_blank">Subscribe in iTunes</a>' : '') + 
+						((unitList[0].options.length > 0) ? '<a href="/student/courserssfeed.aspx?course=' + course + '" class="button rss" target="_blank">Subscribe in iTunes</a>' : '') +
 					'</div>'
 				);
 			}
-			
+
 		})
-		
+
 
 		var courseInfoData = [];
 		var selectedCourseUnits = {};
@@ -355,45 +367,47 @@ x Can't change languages on the fly
 			for (var langCode in defaultLanguages) {
 				langHtml += '<option value="' + langCode + '">' + defaultLanguages[langCode].name + '</option>';
 			}
-			languageList.html( langHtml );
+			languageList.html(langHtml);
 		}
 
 		function loadCourseInfoData() {
-		
-			courseList.attr('disabled','disabled');
+
+			courseList.attr('disabled', 'disabled');
 			courseList.html('<option>Loading...</option>');
-			unitList.attr('disabled','disabled');
-			videoList.attr('disabled','disabled');		
-		
+			unitList.attr('disabled', 'disabled');
+			videoList.attr('disabled', 'disabled');
+
 			$.ajax({
 				type: 'GET',
 				//url: 'dts-courses-list.xml',
 				url: 'user-courses.ashx' + document.location.search,
 				success: function (data) {
-					
+
+					console.log('Got classes list');
+
 					// parse course structure
 					var xml = $(data);
 
-					xml.find('course').each(function() {
+					xml.find('course').each(function () {
 						var courseCode = $(this).attr('code');
 						var courseInfo = [];
-						
-						$(this).find('language').each(function() {
-							courseInfo.push({ code: $(this).attr('code'), name: $(this).attr('name') });						
+
+						$(this).find('language').each(function () {
+							courseInfo.push({ code: $(this).attr('code'), name: $(this).attr('name') });
 						});
-					
+
 						courseInfoData[courseCode] = courseInfo;
 					});
 
 					// now fill in the main dropdownlist
 					loadCoursesByLanguage();
-					
+
 					loadClassFromHash();
 				},
-				error: function(e) {
-					console.log('ERROR',e);
+				error: function (e) {
+					console.log('ERROR', e);
 					alert('There was an error loading the class list');
-					
+
 				}
 			});
 		}
@@ -412,54 +426,54 @@ x Can't change languages on the fly
 					if (courseLanguages[i].code == selectedLang) {
 						htmlOptions += '<option value="' + courseCode + '">' + courseCode.replace('v2', '') + ': ' + courseLanguages[i].name + ((courseCode.indexOf('v2') > -1) ? ' (2)' : '') + '</option>'; ;
 					}
-				}				
+				}
 			}
-			
-			courseList.attr('disabled','');
-			courseList.html( '<option value="">--Select--</option>' + htmlOptions );
+
+			courseList.prop('disabled', false);
+			courseList.html('<option value="">--Select--</option>' + htmlOptions);
 		}
-		
+
 		function loadClassFromHash() {
 			var hashValues = parseTokens(document.location.hash);
 
 			// language
-			if (typeof(hashValues.language) != 'undefined') {
-				languageList.val( hashValues.language );	
-				setLanguage();	
-			}	
-			
+			if (typeof (hashValues.language) != 'undefined') {
+				languageList.val(hashValues.language);
+				setLanguage();
+			}
+
 			// select course
-			if (typeof(hashValues.course) != 'undefined') {
-			
+			if (typeof (hashValues.course) != 'undefined') {
+
 				// check of there is an option with the exact value
 				if (courseList.find('option[value=' + hashValues.course + ']').length > 1) {
-					courseList.val( hashValues.course );
+					courseList.val(hashValues.course);
 				} else {
 					// look for BE101 in the <option>s and then use that to select BE101v2
-					
+
 					console.log('checking for class');
-					console.log('--' + courseList.find('option[value*=' + hashValues.course + ']').attr('value') );
-					
-					courseList.val( courseList.find('option[value*=' + hashValues.course + ']').attr('value') );
+					console.log('--' + courseList.find('option[value*=' + hashValues.course + ']').attr('value'));
+
+					courseList.val(courseList.find('option[value*=' + hashValues.course + ']').attr('value'));
 				}
-					
+
 				// store unit and video
-				if (typeof(hashValues.unit) != 'undefined' && typeof(hashValues.video) != 'undefined') {
-					
+				if (typeof (hashValues.unit) != 'undefined' && typeof (hashValues.video) != 'undefined') {
+
 					selectedUnit = hashValues.unit;
 					selectedVideo = hashValues.video;
-					
-					isLoadingFromHash = true;													
+
+					isLoadingFromHash = true;
 				}
-				
+
 				loadUnits();
 			}
-								
+
 			// TODO: the rest of the class
 		}
-		
+
 		function updateHash() {
-			document.location.hash = tokensToString({course: courseList.val(), unit: unitList.val(), video: videoList.val(), language: languageList.val()});
+			document.location.hash = tokensToString({ course: courseList.val(), unit: unitList.val(), video: videoList.val(), language: languageList.val() });
 		}
 
 		function loadLanguagesForCourse() {
@@ -478,31 +492,31 @@ x Can't change languages on the fly
 				for (var i = 0; i < courseLanguages.length; i++) {
 					langHtml += '<option value="' + courseLanguages[i].code + '">' + defaultLanguages[courseLanguages[i].code].name + '</option>';
 				}
-				languageList.html( langHtml ); 
+				languageList.html(langHtml);
 			}
 
 			// attempt to reselect the same one
 			languageList.val(currentLang);
 		}
-		
+
 		function setLanguage() {
-										
+
 			var lang = getSelectedLanguage();
-			
-			$('body').attr('lang',lang);
+
+			$('body').attr('lang', lang);
 			$('.transcript').attr('dir', defaultLanguages[lang].dir);
-			
+
 		}
 
 		function loadUnits() {
 
-			courseList.attr('disabled','disabled');
+			courseList.attr('disabled', 'disabled');
 
 			// load videos
 			unitList.html('<option>Loading...</option>');
-			unitList.attr('disabled','disabled');
+			unitList.attr('disabled', 'disabled');
 			//videoList.html('<option>Loading...</option>');
-			videoList.attr('disabled','disabled');
+			videoList.attr('disabled', 'disabled');
 
 			var selectedLang = getSelectedLanguage();
 			var courseCode = getSelectedCourse();
@@ -512,23 +526,23 @@ x Can't change languages on the fly
 			$.ajax({
 				url: url,
 				success: function (data) {
-					
+
 					selectedCourseUnits = {};
-					
+
 					var xml = $(data);
-					
-					xml.find('unit').each(function() {
+
+					xml.find('unit').each(function () {
 						var unitNode = $(this);
-						var unitNumber = parseInt(unitNode.attr('number'));					
+						var unitNumber = parseInt(unitNode.attr('number'));
 						var unitInfo = {
 							number: unitNumber,
 							name: unitNode.attr('name'),
 							videos: {}
 						}
-						
-						unitNode.find('video').each(function() {
+
+						unitNode.find('video').each(function () {
 							var videoNode = $(this);
-							
+
 							var videoNumber = parseInt(videoNode.attr('number'));
 							var videoInfo = {
 								number: videoNumber,
@@ -537,23 +551,23 @@ x Can't change languages on the fly
 								duration: videoNode.attr('duration')
 							}
 
-							unitInfo.videos[videoNumber] = videoInfo;							
+							unitInfo.videos[videoNumber] = videoInfo;
 						});
-						
+
 						selectedCourseUnits[unitNumber] = unitInfo;
-					
+
 					});
-					
+
 					// reenable the course list
-					courseList.attr('disabled', '');
+					courseList.prop('disabled', false);
 
 					// now fill the unit list
 					var optionsHtml = '';
 					for (var unitNumber in selectedCourseUnits) {
 						optionsHtml += '<option value="' + unitNumber + '">' + unitNumber.toString() + '. ' + selectedCourseUnits[unitNumber].name + '</option>';
 					}
-					unitList.html( '<option value="">--Select--</option>' + optionsHtml );
-					unitList.attr('disabled', '');
+					unitList.html('<option value="">--Select--</option>' + optionsHtml);
+					unitList.prop('disabled', false);
 
 					if (isSwitchingLanguage || isLoadingFromHash) {
 						// select the same unit
@@ -561,11 +575,11 @@ x Can't change languages on the fly
 
 						// do the next step
 						loadVideos();
-					}					
-					
+					}
+
 				},
-				error: function(e) {
-					console.log('ERROR',e);
+				error: function (e) {
+					console.log('ERROR', e);
 					alert('There was an error loading this classes units and video ' + url + ' ' + e);
 				}
 			});
@@ -583,8 +597,8 @@ x Can't change languages on the fly
 				//console.log(videoNumber);
 				optionsHtml += '<option value="' + videoNumber + '">' + videoNumber.toString() + '. ' + selectedUnit.videos[videoNumber].name + ' (' + selectedUnit.videos[videoNumber].speaker + ') ' + selectedUnit.videos[videoNumber].duration.substring(3, selectedUnit.videos[videoNumber].duration.indexOf('.')) + '</option>';
 			}
-			videoList.html( '<option value="">--Select--</option>' + optionsHtml );
-			videoList.attr('disabled', '');
+			videoList.html('<option value="">--Select--</option>' + optionsHtml);
+			videoList.prop('disabled', false);
 
 			if (isSwitchingLanguage || isLoadingFromHash) {
 				// select the same unit
@@ -610,30 +624,36 @@ x Can't change languages on the fly
 
 			// change the title
 			var videoNode = selectedCourseUnits[unit].videos[getSelectedVideo()];
-			$('#title h1').html(  course + ': ' + videoNode.name + ' with ' + videoNode.speaker );
+			$('#title h1').html(course + ': ' + videoNode.name + ' with ' + videoNode.speaker);
 
 			// update download buttons
 			//$('#title .downloads .download-video').attr('href', videoUrl);
 			$('#title .downloads .download-slides')
-				.attr('target','_blank')
+				.attr('target', '_blank')
 				.attr('href', '/player/print-slides.aspx?course=' + course + '&unit=' + unit + '&video=' + video + '&language=' + lang);
 			$('#title .downloads .download-transcript')
-				.attr('target','_blank')
+				.attr('target', '_blank')
 				.attr('href', '/player/print-transcript.aspx?course=' + course + '&unit=' + unit + '&video=' + video + '&language=' + lang);
+
 
 			if (isSwitchingLanguage) {
 				mediaController.changeLanguage(slidesUrl, transcriptUrl, slidesPath);
 
 			} else {
+				console.log('loading: ' + videoUrl);
+
+				//player.setSrc(videoUrl);
+				//player.load();
+
 				mediaController.loadClass(videoUrl, slidesUrl, transcriptUrl, slidesPath);
 			}
-			
+
 			// reset for next one
 			isSwitchingLanguage = false;
-			isLoadingFromHash = false;				
+			isLoadingFromHash = false;
 			selectedUnit = 0;
-			selectedVideo = 0;							
-			
+			selectedVideo = 0;
+
 			// update URL for snazzy users
 			updateHash();
 		}
@@ -642,8 +662,8 @@ x Can't change languages on the fly
 			console.log('language changed', e);
 
 			var lang = getSelectedLanguage();
-			
-			setLanguage();			
+
+			setLanguage();
 
 			// if video is playing
 			if (videoList[0].selectedIndex > 0) {
@@ -663,9 +683,9 @@ x Can't change languages on the fly
 
 				// clear video, unit
 				unitList.html('');
-				unitList.attr('disabled','disabled');
+				unitList.attr('disabled', 'disabled');
 				videoList.html('');
-				videoList.attr('disabled','disabled');
+				videoList.attr('disabled', 'disabled');
 
 				loadCoursesByLanguage();
 			}
@@ -685,7 +705,7 @@ x Can't change languages on the fly
 		// START UP
 		loadAllLanguages();
 		loadCourseInfoData();
-	
+
 	}
 
 
@@ -695,18 +715,18 @@ x Can't change languages on the fly
 		var transcriptData = [];
 
 		var _lastTime = 0;
-		
-		player.addEventListener('timeupdate', function() {
-			
+
+		player.addEventListener('timeupdate', function () {
+
 			var currentTime = player.currentTime;
-			
+
 			// TODO: new, super efficient pattern?
 			if (!isNaN(currentTime) && currentTime > 0) {
 				// slids
 				for (var i = 0; i < slidesData.length; i++) {
 					var cueTime = slidesData[i].time;
 					if (cueTime >= _lastTime && cueTime <= currentTime) {
-						showSlide('s-'  + i.toString());
+						showSlide('s-' + i.toString());
 						break;
 					}
 				}
@@ -714,32 +734,32 @@ x Can't change languages on the fly
 				for (var i = 0; i < transcriptData.length; i++) {
 					var cueTime = transcriptData[i].time;
 					if (cueTime >= _lastTime && cueTime <= currentTime) {
-						showTranscriptLine('t-'  + i.toString());
+						showTranscriptLine('t-' + i.toString());
 						break;
 					}
 				}
 
 				_lastTime = currentTime;
-			}		
-			
-		}, false);
-	
-		function showTranscriptLine(lineName) {
-								
-				var number = parseInt(lineName.split('-')[1],10);
-		
-				// unhighlight old
-				$('.transcript').find('.highlight').removeClass('highlight');;
+			}
 
-				// find this one and highlight it
-				var l = $('#' + lineName).addClass('highlight');
-				var newPos = l.outerHeight(true) * (number-1);
-								
-				// scroll to it
-				$('.transcript .text')
-					//.attr('scrollTop',l.height(true) * (number - 1)  +'px');
-					.animate({'scrollTop': newPos}, 250);
-		
+		}, false);
+
+		function showTranscriptLine(lineName) {
+
+			var number = parseInt(lineName.split('-')[1], 10);
+
+			// unhighlight old
+			$('.transcript').find('.highlight').removeClass('highlight'); ;
+
+			// find this one and highlight it
+			var l = $('#' + lineName).addClass('highlight');
+			var newPos = l.outerHeight(true) * (number - 1);
+
+			// scroll to it
+			$('.transcript .text')
+			//.attr('scrollTop',l.height(true) * (number - 1)  +'px');
+					.animate({ 'scrollTop': newPos }, 250);
+
 		}
 
 		function showSlide(slideName) {
@@ -747,8 +767,8 @@ x Can't change languages on the fly
 
 			// THUMB
 			// unhlight selected thumb
-			$('.slide-sorter').find('.highlight').removeClass('highlight');;
-			
+			$('.slide-sorter').find('.highlight').removeClass('highlight'); ;
+
 			// highlight current thumb
 			$('#' + slideName + '-thumb').addClass('highlight');
 
@@ -756,7 +776,7 @@ x Can't change languages on the fly
 			// hide current slide
 			var current = $('.slide-display').find('.highlight');
 			console.log('- current slide', current.attr('id'), slideName);
-			
+
 			if (current.attr('id') != slideName) {
 				current
 					.removeClass('highlight')
@@ -764,15 +784,15 @@ x Can't change languages on the fly
 			}
 
 			var slide = $('#' + slideName);
-			
-			if (!slide.hasClass('highlight')) {				
-				console.log('- showing slide', slide.attr('id'), slide.hasClass('highlight'));			
-				
+
+			if (!slide.hasClass('highlight')) {
+				console.log('- showing slide', slide.attr('id'), slide.hasClass('highlight'));
+
 				slide
 					.addClass('highlight')
-					.fadeIn(500, function() { console.log('- done fading', slide.attr('id')); });
+					.fadeIn(500, function () { console.log('- done fading', slide.attr('id')); });
 			} else {
-				console.log('- skipping slide', slide.attr('id'), slide.hasClass('highlight'));			
+				console.log('- skipping slide', slide.attr('id'), slide.hasClass('highlight'));
 			}
 
 
@@ -789,7 +809,7 @@ x Can't change languages on the fly
 			player.setCurrentTime(slide.time);
 
 		}
-		
+
 
 		return {
 
@@ -812,6 +832,21 @@ x Can't change languages on the fly
 				// always clear out the cues
 				//player.clearCuePoints();
 
+				// start loading video here to allow iPad
+				/*
+				if (videoUrl != '' && !changeLanguage) {
+				player.setSrc(videoUrl);
+				player.load();
+
+				setTimeout(function () {
+				console.log('load state');
+
+				//player.load();
+				//player.play();
+				}, 100);
+				}
+				*/
+
 				// reset
 				slidesData = [];
 				transcriptData = [];
@@ -823,64 +858,64 @@ x Can't change languages on the fly
 
 				function loadSlides() {
 					console.log('loading slides', slidesUrl);
-					
+
 					$.ajax({
 						url: slidesUrl,
 						success: function (data) {
 							console.log('- received slide data', data);
-							
+
 							var doc = $(data);
 
 							var slideNodes = doc.find('cue');
 							console.log('total slides', slideNodes.length);
 							console.log('-first slide', slideNodes[0]);
-							
-							slideNodes.each(function() {
+
+							slideNodes.each(function () {
 								var slideNode = $(this);
 								slidesData.push({
 									time: window.videoUtils.convertTimecodeToSeconds(slideNode.attr('timeCode')),
 									url: slidesPath + slideNode.attr('slideFileName')
-								});							
+								});
 							});
-							
+
 							console.log('- done loading slides');
 							loadTranscript();
 						},
-						error: function() {
+						error: function () {
 							//alert('There was an error loading the slides for this class');
-							
+
 							console.log('- error loading slides');
 							// skip to transcript
 							loadTranscript();
 						}
-						
+
 					});
 				}
 
 				function loadTranscript() {
 					console.log('loading transcript', transcriptUrl);
-				
+
 					$.ajax({
 						url: transcriptUrl,
 						success: function (data) {
 							console.log('- received transcript data', data);
-						
+
 							var doc = $(data);
 							var textNodes = doc.find('cue');
-							textNodes.each(function() {
+							textNodes.each(function () {
 								var textNode = $(this);
 								transcriptData.push({
 									time: window.videoUtils.convertTimecodeToSeconds(textNode.attr('timeCode')),
 									text: textNode.attr('text')
 								});
-							});									
-							
+							});
+
 							console.log('- done loading transcript');
 							buildClass();
 						},
-						error: function() {
+						error: function () {
 							//alert('There was an error loading the trnnscript for this class');
-							
+
 							// skip to setting up the class
 							buildClass();
 						}
@@ -904,14 +939,14 @@ x Can't change languages on the fly
 						slideSorterHtml += '<img ' + ((i == 0) ? ' class="highlight"' : '') + ' id="s-' + i.toString() + '-thumb" data-index="' + i.toString() + '" src="' + slideData.url + '" title="' + videoUtils.convertSecondsToTimecode(slideData.time) + '" alt"' + videoUtils.convertSecondsToTimecode(slideData.time) + '" />';
 					}
 					$('.slide-display')
-						.html( slideHtml )
+						.html(slideHtml)
 						.find('img')
 							.hide()
 							.first()
 								.show();
-								
+
 					$('.slide-sorter')
-						.html( slideSorterHtml );
+						.html(slideSorterHtml);
 
 					// add click events					
 					for (var i = 0; i < slidesData.length; i++) {
@@ -923,24 +958,38 @@ x Can't change languages on the fly
 					for (var i = 0; i < transcriptData.length; i++) {
 						var textData = transcriptData[i];
 						transcriptHtml += '<span id="t-' + i.toString() + '">' + textData.text + '</span>';
-						
+
 						//TODO; new cue
 						//player.addCuePoint('t-' + i.toString(), textData.time);
 					}
-					$('.transcript .text').html( transcriptHtml + '<span class="hilighter"></span>' );				
-					
+					$('.transcript .text').html(transcriptHtml + '<span class="hilighter"></span>');
 
-					console.log('-loading video file: ' + videoUrl);
-					
+
+					//console.log('-loading video file: ' + videoUrl);
+
 					hideMessage();
-					
+
+					//console.log('current ' + player.currentSrc);
+
+					//player.play();
+
+
 					if (videoUrl != '' && !changeLanguage) {
+						console.log('current ' + player.currentSrc);
+						console.log('loading ' + videoUrl);
+
 						player.setSrc(videoUrl);
-						setTimeout(function() {
-							player.load();
+						player.load();
+
+						console.log('after ' + player.currentSrc);
+
+						
+						setTimeout(function () {
+							//player.load();
 							player.play();
 						}, 100);
 					}
+
 					/*
 					setTimeout(function () {
 					player.play();

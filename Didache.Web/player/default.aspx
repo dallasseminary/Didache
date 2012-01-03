@@ -19,7 +19,7 @@
 <body class="landscape-smallvideo">
 
 	<div id="video1-frame" class="video-display-abs">	
-		<video id="video1-view" width="320" height="240"></video>
+		<video id="video1-view" width="320" height="240" type="video/mp4"></video>
 	</div>
 
 	<div id="player-container" class="player-container">

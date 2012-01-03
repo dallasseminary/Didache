@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Sequential Movies</title>
+    <script type="text/javascript">
+
+    	// listener function changes src
+    	function myNewSrc() {
+    		var myVideo = document.getElementsByTagName('video')[0];
+    		myVideo.src = "http://homepage.mac.com/qt4web/myMovie.m4v";
+    		myVideo.load();
+    		myVideo.play();
+    	}
+    	// add listener function to ended event -->
+    	function myAddListener() {
+    		var myVideo = document.getElementsByTagName('video')[0];
+    		myVideo.addEventListener('ended', myNewSrc, false);
+    	}
+    </script>
+</head>
+<body onload="myAddListener()">
+    <video controls
+    src="http://homepage.mac.com/qt4web/A-chord.m4v">
+    </video>
+</body>
+</html>

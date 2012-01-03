@@ -152,21 +152,22 @@ jQuery(document).ready(function ($) {
 	new MediaElement('video1-view', {
 		type: 'video/mp4',
 		plugins: ['flash'],
-		enablePluginDebug: false,
+		//enablePluginDebug: true,
+		startVolume: 1,
 		error: function () {
 			console.log('fail');
 
 			showMessage('Error, Call Martin Luther!', 'Your browser cannot play these videos. You can either install <a href="http://get.adobe.com/flashplayer/">Flash player</a> or upgrade to a newer browser');
 
 		},
-		success: function (v) {
-			console.log('video ready (HTML5, Flash, or Silverlight)');
+		success: function (mediaElement, domNode) {
+			console.log('video ready, type: ' + mediaElement.pluginType);
 
 			
 			//showMessage('Error, Call Martin Luther!', 'Your browser cannot play these videos. You can either install <a href="http://get.adobe.com/flashplayer/">Flash player</a> or upgrade to a newer browser');
 
 
-			video = v;
+			video = mediaElement;
 
 			// setup user controls
 			var dtsUserControls = new dts.DtsUserControls(video);

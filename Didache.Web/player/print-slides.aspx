@@ -151,6 +151,9 @@ XmlDocument LoadLocalXmlDocument(string xmlPath) {
 	XmlTextReader xmlReader = null;
 	XmlDocument xmlDoc = null;
 
+	if (!File.Exists(xmlPath))
+		return null;
+	
 	try {
 		xmlReader = new XmlTextReader(xmlPath);
 
