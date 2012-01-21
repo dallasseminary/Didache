@@ -24,4 +24,50 @@
 			.fadeOut();
 	}
 
+
+	// add classmates links
+	$('a.addclassmate-button').bind('click', function (e) {
+		e.preventDefault();
+
+		var link = $(this),
+			urlParts = link.attr('href').split('/'),
+			requesterUserID = urlParts[urlParts.length - 2],
+			targetUserID = urlParts[urlParts.length - 1];
+
+		$.ajax({
+			url: '/api/addclassmate/',
+			type: 'POST',
+			data: { requesterUserID: requesterUserID, targetUserID: targetUserID },
+			success: function (data) {
+				link
+					.after('<span class="relationship-status">Pending</span>')
+					.remove();
+			}
+		});
+
+		return false;
+	});
+
+	// approve friends!
+	$('a.approveclassmate-button').bind('click', function (e) {
+		e.preventDefault();
+
+		var link = $(this),
+			urlParts = link.attr('href').split('/'),
+			requesterUserID = urlParts[urlParts.length - 2],
+			targetUserID = urlParts[urlParts.length - 1];
+
+		$.ajax({
+			url: '/api/approveclassmate/',
+			type: 'POST',
+			data: { requesterUserID: requesterUserID, targetUserID: targetUserID },
+			success: function (data) {
+				link
+					.after('<span class="relationship-status">Classmate</span>')
+					.remove();
+			}
+		});
+
+		return false;
+	});
 });

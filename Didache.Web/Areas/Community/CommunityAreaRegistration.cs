@@ -16,6 +16,18 @@ namespace Didache.Web.Areas.Community {
 			);
 
 			context.MapRoute(
+				"Community_Search",
+				"community/search",
+				new { controller = "Community", action = "search" }
+			);
+
+			context.MapRoute(
+				"Community_Classmates",
+				"community/classmates",
+				new { controller = "Community", action = "Classmates" }
+			);
+
+			context.MapRoute(
 				"Community_name",
 				"community/{name}",
 				new { controller = "Community", action = "Display" }

@@ -63,7 +63,7 @@ namespace Didache.Web.Areas.Students.Controllers
 			} else {
 				// pick current URL by date
 				DateTime now = DateTime.Now.Date;
-				currentUnit = units.SingleOrDefault(u => u.StartDate <= now && u.EndDate >= now);
+				currentUnit = units.FirstOrDefault(u => u.StartDate <= now && u.EndDate >= now);
 			}
 
 			// fallback to first unit

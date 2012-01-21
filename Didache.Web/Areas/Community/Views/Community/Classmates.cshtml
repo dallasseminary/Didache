@@ -1,0 +1,80 @@
+﻿@model ClassmatesViewModel
+
+@{
+	ViewBag.Title = Didache.Resources.labels.submenu_community_classmates;
+}
+
+<style>
+.classmate-list {
+	overflow: hidden;
+}
+.classmate-list .classmate-user {
+	width: 160px;
+	height: 50px;
+	float: left;
+	margin: 0 20px 20px 0;
+	overflow: hidden;
+}
+.classmate-list .classmate-user .classmate-image {
+	width: 40px;
+	float: left;
+}
+.classmate-list .classmate-user .classmate-info {
+	width: 100px;
+	float: left;
+	margin: 0 0 0 10px;
+}
+</style>
+
+<div class="page-narrow">
+	<div class="main-column">
+		<div class="page-header">
+			<h2>@Didache.Resources.labels.submenu_community_classmates (@Model.ApprovedUsers.Count)</h2>
+		</div>
+
+	
+
+
+		<!-- list out approved friends -->
+		<div class="classmate-list">
+		@foreach (User user in Model.ApprovedUsers) {
+			<div class="classmate-user">
+				<div class="classmate-image">
+					<img src="@user.GetProfileImageUrl(40, 40)" alt="@user.FormattedName" width="40" height="40" />
+				</div>
+				<div class="classmate-info">
+					<a href="@user.ProfileDisplayUrl">@user.SecureFormattedName</a><br />
+					@user.Location
+				</div>
+			</div>
+		}
+		</div>
+
+	</div>
+	<div class="sub-column">
+		<h3>Pending Classmates</h3>
+
+		<p>Users who've requested to be your friends</p>
+
+
+		<div class="classmate-list">
+		@foreach (User user in Model.PendingUsers) {
+			<div class="classmate-user">
+				<div class="classmate-image">
+					<img src="@user.GetProfileImageUrl(40, 40)" alt="@user.FormattedName" width="40" height="40" />
+				</div>
+				<div class="classmate-info">
+					<a href="@user.ProfileDisplayUrl">@user.SecureFormattedName</a>
+					<a class="d-button action small approveclassmate-button" href="/api/approveclassmate/@Users.GetLoggedInUser().UserID/@user.UserID/">@Didache.Resources.labels.community_approveclassmate_button</a>
+				</div>
+			</div>
+		}
+		</div>
+
+		<h3>Pending Requests</h3>
+
+		<p>Users with whom you requested to be friends</p>
+
+	</div>
+
+</div>

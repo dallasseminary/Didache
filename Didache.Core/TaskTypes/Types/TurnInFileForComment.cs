@@ -24,7 +24,19 @@ namespace Didache.TaskTypes {
 			if (request.Files.Count > 0) {
 				HttpPostedFileBase file = request.Files[0];
 
-				studentFile = CourseFiles.SaveStudentFile(userID, data, file);
+				/* What if this is a GTA?
+				 * - Create a fake task for looking up and saving information
+				 */ 
+				UserTaskData dataForSaving = data;
+				if (dataForSaving == null) {
+					dataForSaving = new UserTaskData() {
+						UserID = userID,
+						TaskID = taskID
+					};
+				}
+
+
+				studentFile = CourseFiles.SaveStudentFile(userID, dataForSaving, file);
 			}
 
 			if (studentFile == null) {

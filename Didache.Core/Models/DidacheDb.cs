@@ -56,10 +56,14 @@ namespace Didache {
 		public DbSet<GradeGroup> GradeGroups { get; set; }
 		public DbSet<GradeItem> GradeItems { get; set; }
 
-
+		// additional user data
 		public DbSet<Student> Students { get; set; }
 		public DbSet<Employee> Employees { get; set; }
 		public DbSet<Degree> Degrees { get; set; }
+
+		// community
+		public DbSet<UserRelationship> UserRelationships { get; set; }
+		public DbSet<CarsCourse> CarsCourses { get; set; }
 
 		protected override void OnModelCreating(DbModelBuilder modelBuilder) {
 
@@ -177,8 +181,23 @@ namespace Didache {
 			modelBuilder.Entity<Student>()
 				.ToTable("dts_cars_Users_Students");
 
+			modelBuilder.Entity<User>()
+				.HasOptional(u=> u.Student)
+				.WithRequired(s=> s.User);
+
 			modelBuilder.Entity<Degree>()
 				.ToTable("dts_cars_Degrees");
+
+
+
+			// awesome
+			modelBuilder.Entity<UserRelationship>()
+				.HasKey(ur => new { ur.RequesterUserID, ur.TargetUserID })
+				.ToTable("oe_UserRelationships");
+
+			modelBuilder.Entity<CarsCourse>()
+				.HasKey(ur => new { ur.UserID, ur.CourseCode })
+				.ToTable("dts_cars_Courses_Students");
 
 		}
 	}

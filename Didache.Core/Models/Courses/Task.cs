@@ -25,6 +25,8 @@ namespace Didache {
 		[Display(Name = "Is Active")]
 		public bool IsActive { get; set; }
 
+		//public bool IsDeleted { get; set; }
+
 		[Required]
 		public int SortOrder { get; set; }
 

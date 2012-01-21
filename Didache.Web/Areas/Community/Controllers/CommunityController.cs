@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Didache.Models;
 
 namespace Didache.Web.Areas.Community.Controllers
 {
@@ -14,31 +15,84 @@ namespace Didache.Web.Areas.Community.Controllers
 
 		DidacheDb db = new DidacheDb();
 
+		public ActionResult Index() {
+			return Redirect("/community/search/");
+		}
 
+		public ActionResult Search(string s) {
 
-        public ActionResult Index()
-        {
-			List<Course> courses = Courses.GetUsersCourses(CourseUserRole.Student);
+			List<UserRelationship> searchRelationships = null;
 
-			return View(courses);
-        }
+			if (!String.IsNullOrEmpty(s)) {
+				//results.FriendUserIDs = UserRelationships.GetApprovedFriends().Select(user => user.UserID).ToList();
+
+				string query = s;
+
+				List<User> foundUsers = db.Users
+											.Include("Degrees")
+											.Where(u =>
+												u.FirstName == query ||
+												u.LastName == query ||
+												(u.FirstName + " " + u.LastName == query) ||
+												u.AliasFirstName == query ||
+												u.AliasLastName == query).ToList();
+
+				searchRelationships = UserRelationships.GetRelationshipStatuses(foundUsers);
+			}
+			
+			return View(searchRelationships);
+		}
+
+		public ActionResult Classmates() {
+
+			List<UserRelationship> allRelationships = UserRelationships.GetUserRelationships(Users.GetLoggedInUser().UserID, true);
+
+			ClassmatesViewModel viewModel = new ClassmatesViewModel();
+			viewModel.ApprovedUsers = allRelationships
+										.Where(ur => ur.RelationshipStatus == RelationshipStatus.Approved)
+										.Select(ur => ur.TargetUser)
+										.ToList();
+
+			viewModel.PendingUsers = allRelationships
+										.Where(ur => ur.RelationshipStatus == RelationshipStatus.PendingRequesterApproval)
+										.Select(ur => ur.TargetUser)
+										.ToList();
+
+			return View(viewModel);
+		}
 
 		public ActionResult Display(string name) {
 
-			User user = null;
+			ProfileViewModel profileViewModel = new ProfileViewModel();
+			User displayUser = null;
 			int userID = 0;
+			User thisUser = Users.GetLoggedInUser();
 
 			if (Int32.TryParse(name, out userID)) {
-				user = Users.GetUser(userID);
+				displayUser = Users.GetUser(userID);
 			} else {
-				user = Users.GetUser(name);
+				displayUser = Users.GetUser(name);
 			}
 
-			ViewBag.Student = db.Students.Find(user.UserID);
-			ViewBag.Degrees = db.Degrees.Where(d => d.UserID == user.UserID).ToList();
-			ViewBag.Employees = db.Employees.Where(d => d.UserID == user.UserID).ToList();
+		
+			profileViewModel.User = displayUser;
 
-			return View(user);
+			// relationships
+			if (displayUser.UserID != thisUser.UserID) {
+				profileViewModel.CommonUserRelationships = UserRelationships.GetCommonRelationshipUsers(displayUser.UserID, thisUser.UserID);
+				profileViewModel.CommonCarsCourses = UserRelationships.GetCommonCourses(displayUser.UserID, thisUser.UserID);
+
+				profileViewModel.ViewerRelationshipToUser = UserRelationships.GetRelationshipStatus(thisUser.UserID, displayUser.UserID);
+			} else {
+				
+				profileViewModel.CommonUserRelationships = null;
+				profileViewModel.CommonCarsCourses = null;
+			}
+
+
+
+
+			return View(profileViewModel);
 		}
 
 		

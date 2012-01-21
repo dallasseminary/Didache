@@ -109,8 +109,11 @@ namespace Didache {
 			List<CarsStudentUser> users = new List<CarsStudentUser>();
 
 			// get data
+			string dataUrl = "https://webservices.dts.edu/export/get.aspx?sessionYear=" + sessionYear + "&sessionCode=" + sessionCode + "&courseCode=" + courseCode + "&section=" + section + (!string.IsNullOrEmpty(courseHours) ? "&hours=" + courseHours : "");
+			
 			WebClient webClient = new WebClient();
-			string text = webClient.DownloadString("https://webservices.dts.edu/export/get.aspx?sessionYear=" + sessionYear + "&sessionCode=" + sessionCode + "&courseCode=" + courseCode + "&section=" + section + (!string.IsNullOrEmpty(courseHours) ? "&hours=" + courseHours : ""));
+
+			string text = webClient.DownloadString(dataUrl);
 
 			// parse it
 			string[] lines = text.Split(new char[] { '\n' });

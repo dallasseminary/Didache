@@ -202,7 +202,9 @@ namespace DTS.Online {
 			User user = Users.GetLoggedInUser();
 			if (user != null) {
 				// get the courseID by looking at all the user's classes and matching the courseID
-				List<Course> usersCourses = Courses.GetUsersRunningCourses(user.UserID, CourseUserRole.Student); //(int) UserRole.Student);
+				//List<Course> usersCourses = Courses.GetUsersRunningCourses(user.UserID, CourseUserRole.Student); //(int) UserRole.Student);
+				List<Course> usersCourses = Courses.GetUsersCourses(user.UserID, CourseUserRole.Student); //(int) UserRole.Student);
+				
 				//Course course = usersCourses.SingleOrDefault(uc => uc.CourseCode == courseCode);
 
 				Course course = MatchCourseCode(courseCode, usersCourses); 

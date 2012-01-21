@@ -1,63 +1,132 @@
-﻿@model List<Course>
-
+﻿@model List<UserRelationship>
 @{
-    ViewBag.Title = "People in My Classes";
-    int i = 0;
+	ViewBag.Title = Didache.Resources.labels.submenu_community_home;
 }
 
-<div id="main-column">
-<div class="block-list-header">
-<h3>People in My Classes</h3>
-</div>
-<div class="block-list">
-@foreach (Course course in Model) {
-    if (i < 3) {
-	    <div class="block-list-item course">
-	        <div class="block-list-item-label">
-	            <span>@course.CourseCode.ToString() &mdash; @course.Name</span>
-	        </div>
-	        <div class="course-members">
-	            @foreach (CourseUser user in course.CourseUsers) {
-                     if (user.User != null && user.RoleID == 5) {
-                         if (user.User != null) {
-					        <a class="course-member" href="@user.User.ProfileDisplayUrl">				
-						        <img src="@user.User.GetProfileImageUrl(100, 100)" /><br />
-						        <span>@user.User.SecureShortName</span>
-					        </a>
-                         }
-                     }
-                 }
-	        </div>
-            <span style="display:none;">@(i += 1)</span>
-	    </div>
-    }
+<style>
+.user-search-results {
+	overflow: hidden;
 }
-</div>
+.user-search-results .user-search-result{
+	overflow: hidden;
+	margin: 10px 0;
+	border-bottom: solid 1px #ccc;
+	padding: 10px 0;
+}
+.user-search-results .user-search-result .user-image{
+	float: left;
+	width: 40px;
+}
 
-<script type="text/javascript">
-    /*jQuery(document).ready(function ($) {
-        $("a[rel='slider']").attr("href", "javascript:void(0)");
+.user-search-results .user-search-result .user-info{
+	float: left;
+	margin: 0 0 0 20px;
+	width: 400px;
+}
 
-        $("ul.all-community li a[rel='slider']").click(function () {
-            var t = 300;
+.user-search-results .user-search-result .user-info .user-name {
+	display: block;
+	font-weight: bold;
+}
 
-            if ($(this).parent().hasClass("selected")) {
+.user-search-results .user-search-result .user-info .user-tags {
+	display: block;
+	margin: 5px 0;
+}
 
-                $(this).parent().find("img").animate({ height: 32 }, t);
-                $(this).parent().removeClass("selected", t);
+.user-search-results .user-search-result .user-info .user-tags .user-tag {
+	display: inline-block;
+	border: solid 1px #999;
+	border-width: 0 1px 1px 0;
+	background: #ddd;
+	padding: 3px 5px;
+	font-size: 10px;
+	margin: 0 10px 0 0;
+	border-radius: 2px;	
+}
 
-            } else {
+.user-search-results .user-search-result .user-info .relationship-status a {
+	
+}
 
-                // close any open ones
-                $("ul.all-community li.selected img").animate({ height: 32 }, t);
-                $("ul.all-community li.selected").removeClass("selected", t);
+.user-search-results .user-search-result .user-info .relationship-status span {
+	color: #666;
+}
 
-                // open the clicked on
-                $(this).parent().addClass("selected", t);
-                $(this).parent().find("img").animate({ height: 150 }, t);
+#search-form {
+	margin: 0 0 20px 0;
+}
+</style>
 
-            }
-        });
+<div class="page-narrow">
+	<div class="main-column">
+		<div class="page-header">
+			<h2>@Didache.Resources.labels.submenu_community_home</h2>
+			<h3>@Didache.Resources.labels.submenu_community_search</h3>
+		
+			<form id="search-form" action="/community/" method="get">
+				<input type="text" name="s" value="@Request.QueryString["s"]" placeholder="@Didache.Resources.labels.community_search_placeholder" />
+				<input class="d-button small" type="submit" value="@Didache.Resources.labels.community_search_button" />
+			</form>
+	
 
-    });*/
-</script>   
+		</div>
+
+
+	@if (Model != null) {
+		
+		<h3>Results</h3>
+	 
+		<div class="user-search-results">
+		@foreach (UserRelationship userRel in Model) {
+			<div class="user-search-result">
+				<div class="user-image">
+					<img src="@userRel.TargetUser.GetProfileImageUrl(40, 40)" alt="@userRel.TargetUser.SecureFormattedName" />
+				</div>
+				<div class="user-info">
+					<span class="user-name"><a href="@userRel.TargetUser.ProfileDisplayUrl">@userRel.TargetUser.SecureFormattedName</a></span>
+				
+					<div class="user-tags">
+					@if (userRel.TargetUser.Degrees.Count > 0) {
+						<span class="user-tag">
+						@Didache.Resources.labels.profile_constituency_alumni<text>:</text>
+						@Html.Raw(String.Join(", ", userRel.TargetUser.Degrees.Select(d => d.DegreeEarned + " (" + d.GradYear.ToString() + ")").ToArray()))
+						</span>
+					}
+						
+					@if (userRel.TargetUser.Student != null) {
+						<span class="user-tag">Student: @userRel.TargetUser.Student.Degree@(userRel.TargetUser.Student.PlannedGradYear > 0 ? ", " + @userRel.TargetUser.Student.PlannedGradYear.ToString() : "")</span>
+					}
+					
+					@if (userRel.TargetUser.Employees.Count > 0) {
+						<span class="user-tag">Staff</span>
+					}	
+
+					</div>
+				
+					<div class="relationship-status">
+					@switch (userRel.RelationshipStatus) {
+						case RelationshipStatus.None :
+							<a class="d-button action small	addclassmate-button" href="/community/addclassmate/@userRel.RequesterUserID/@userRel.TargetUserID">@Didache.Resources.labels.community_addclassmate_button</a>
+							break;
+						case RelationshipStatus.Pending :
+							<span>Pending</span>
+							break;
+						case RelationshipStatus.Approved :
+							<span>Friend</span>
+							break;
+					}
+					</div>
+				</div>
+			</div>
+		}
+		</div><!-- /.user-search-results -->
+	}
+	
+	</div><!-- /.main-column -->
+
+	<div class="sub-column">
+		??
+	</div>
+
+</div><!-- /.page-wide -->

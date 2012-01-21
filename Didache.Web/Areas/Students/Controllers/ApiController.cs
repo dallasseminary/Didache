@@ -197,7 +197,7 @@ namespace Didache.Web.Areas.Students.Controllers
 				return Json(new { 
 									success = true, 
 									postID = post.PostID, 
-									user = user,
+									user = serializer.Serialize(user),
 									post = serializer.Serialize(post),
 									isCompleted = isCompleted
 				});

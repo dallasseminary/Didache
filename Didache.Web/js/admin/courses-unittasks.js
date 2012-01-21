@@ -222,7 +222,7 @@
 	function updateUnitRow(unitRow, unit) {
 		//unitRow.data('unitid', unit.UnitID);
 		unitRow.attr('data-unitid', unit.UnitID);
-		unitRow.find('.unit-active').prop('checked', (unit.IsActive == 'True') );
+		unitRow.find('.unit-active').prop('checked', (unit.IsActive == 'True'));
 		unitRow.find('.unit-name').val(unit.Name);
 		unitRow.find('.unit-start-date').val(unit.StartDate == null ? '' : unit.StartDate.replace(' 12:00:00 AM', ''));
 		unitRow.find('.unit-end-date').val(unit.EndDate == null ? '' : unit.EndDate.replace(' 12:00:00 AM', ''));
@@ -260,7 +260,7 @@
 	function updateTaskRow(taskRow, task) {
 		//taskRow.data('taskid', task.TaskID);
 		taskRow.attr('data-taskid', task.TaskID);
-		taskRow.find('.task-active').prop('checked', (task.IsActive == 'True') );
+		taskRow.find('.task-active').prop('checked', (task.IsActive == 'True'));
 		taskRow.find('.task-type').html(task.TaskTypeName);
 		taskRow.find('.task-name').val(task.Name);
 		taskRow.find('.task-due-date').val((task.DueDate != null) ? task.DueDate.replace(' 12:00:00 AM', '') : '');
@@ -461,6 +461,27 @@
 
 			$('#task-editor').dialog('open');
 		});
+
+		return false;
+	});
+
+	$('#course-units').delegate('.task-delete', 'click', function (e) {
+		e.preventDefault();
+
+		var deleteButton = $(this),
+			taskRow = deleteButton.closest('.course-task'),
+			taskID = taskRow.data('taskid');
+
+		if ('YES' == prompt('Really? really? If so, type YES')) {
+			// ajax delete
+			$.ajax({
+				type: 'POST',
+				url: '/admin/courses/deletetask/' + taskID,
+				success: function () {
+					taskRow.remove();
+				}
+			});
+		}
 
 		return false;
 	});

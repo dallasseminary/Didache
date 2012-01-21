@@ -1,0 +1,63 @@
+﻿@model List<Course>
+
+@{
+    ViewBag.Title = "People in My Classes";
+    int i = 0;
+}
+
+<div id="main-column">
+<div class="block-list-header">
+<h3>People in My Classes</h3>
+</div>
+<div class="block-list">
+@foreach (Course course in Model) {
+    if (i < 3) {
+	    <div class="block-list-item course">
+	        <div class="block-list-item-label">
+	            <span>@course.CourseCode.ToString() &mdash; @course.Name</span>
+	        </div>
+	        <div class="course-members">
+	            @foreach (CourseUser user in course.CourseUsers) {
+                     if (user.User != null && user.RoleID == 5) {
+                         if (user.User != null) {
+					        <a class="course-member" href="@user.User.ProfileDisplayUrl">				
+						        <img src="@user.User.GetProfileImageUrl(100, 100)" /><br />
+						        <span>@user.User.SecureShortName</span>
+					        </a>
+                         }
+                     }
+                 }
+	        </div>
+            <span style="display:none;">@(i += 1)</span>
+	    </div>
+    }
+}
+</div>
+
+<script type="text/javascript">
+    /*jQuery(document).ready(function ($) {
+        $("a[rel='slider']").attr("href", "javascript:void(0)");
+
+        $("ul.all-community li a[rel='slider']").click(function () {
+            var t = 300;
+
+            if ($(this).parent().hasClass("selected")) {
+
+                $(this).parent().find("img").animate({ height: 32 }, t);
+                $(this).parent().removeClass("selected", t);
+
+            } else {
+
+                // close any open ones
+                $("ul.all-community li.selected img").animate({ height: 32 }, t);
+                $("ul.all-community li.selected").removeClass("selected", t);
+
+                // open the clicked on
+                $(this).parent().addClass("selected", t);
+                $(this).parent().find("img").animate({ height: 150 }, t);
+
+            }
+        });
+
+    });*/
+</script>   

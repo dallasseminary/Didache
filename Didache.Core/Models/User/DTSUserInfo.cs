@@ -34,6 +34,8 @@ namespace Didache {
 		public string PlannedGradSession { get; set; }
 		public int PlannedGradYear { get; set; }
 		public int CommencementYear { get; set; }
+
+		public virtual User User { get; set; }
 	}
 
 	public class Degree {

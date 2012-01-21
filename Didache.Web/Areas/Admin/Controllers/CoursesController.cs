@@ -333,6 +333,38 @@ namespace Didache.Web.Areas.Admin.Controllers
 
 		[HttpPost]
 		//[ValidateInput(false)]
+		public ActionResult DeleteTask(int id) {
+
+			Task task = db.Tasks.Find(id);
+
+			//task.IsDeleted = true;
+			db.Tasks.Remove(task);
+
+			// user tasks?
+
+			db.SaveChanges();
+
+
+			return Json(new {success= true});
+		}
+
+		[HttpPost]
+		//[ValidateInput(false)]
+		public ActionResult RemoveFileFromCourse(int courseID, int fileID) {
+
+			CourseFileAssociation cfa = db.CourseFileAssociations
+												.SingleOrDefault(cc => cc.FileID == fileID && cc.CourseFileGroup.CourseID == courseID);
+			
+			db.CourseFileAssociations.Remove(cfa);
+
+			db.SaveChanges();
+
+
+			return Json(new { success = true });
+		}
+
+		[HttpPost]
+		//[ValidateInput(false)]
 		public ActionResult UpdateUnit(Unit model) {
 
 			if (model.UnitID > 0) {

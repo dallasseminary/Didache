@@ -11,7 +11,22 @@ namespace Didache.Web.Controllers
 		DidacheDb db = new DidacheDb();
 		EntityObjectSerializer serializer = new EntityObjectSerializer();
 
-        public ActionResult GetCourse(int id) {
+
+		public ActionResult AddClassmate(int requesterUserID, int targetUserID) {
+
+			UserRelationships.AddClassmateRequest(requesterUserID, targetUserID);
+
+			return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+		}
+
+		public ActionResult ApproveClassmate(int requesterUserID, int targetUserID) {
+
+			UserRelationships.ApproveClassmateRequest(requesterUserID, targetUserID);
+
+			return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+		}
+		
+		public ActionResult GetCourse(int id) {
             return Json(serializer.Serialize(db.Courses.Find(id)), JsonRequestBehavior.AllowGet);
         }
 

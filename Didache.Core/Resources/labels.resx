@@ -702,4 +702,58 @@
   <data name="videos_watch" xml:space="preserve">
     <value>watch</value>
   </data>
+  <data name="community_search_button" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="community_search_placeholder" xml:space="preserve">
+    <value>Search for friends like Darrell Bock</value>
+  </data>
+  <data name="community_search_title" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="submenu_community_classmates" xml:space="preserve">
+    <value>Classmates</value>
+  </data>
+  <data name="submenu_community_search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="community_addclassmate_button" xml:space="preserve">
+    <value>Add Classmate</value>
+  </data>
+  <data name="community_approveclassmate_button" xml:space="preserve">
+    <value>Approve Request</value>
+  </data>
+  <data name="community_relationshipstatus_classmate" xml:space="preserve">
+    <value>Classmate</value>
+  </data>
+  <data name="community_relationshipstatus_pending" xml:space="preserve">
+    <value>Pending</value>
+  </data>
+  <data name="profile_heading_security" xml:space="preserve">
+    <value>Additional Security Settings</value>
+  </data>
+  <data name="profile_label_commonclassmates" xml:space="preserve">
+    <value>Common Classmates</value>
+  </data>
+  <data name="profile_label_commonclassmates_none" xml:space="preserve">
+    <value>You and {0} do not have any common classmates.</value>
+  </data>
+  <data name="profile_label_commoncourses" xml:space="preserve">
+    <value>Courses You Took Together</value>
+  </data>
+  <data name="profile_label_commoncourses_none" xml:space="preserve">
+    <value>You and {0} did not take any courses together.</value>
+  </data>
+  <data name="profile_label_coursessecurity" xml:space="preserve">
+    <value>Course Schedule</value>
+  </data>
+  <data name="profile_label_coursessecurity_description" xml:space="preserve">
+    <value>This controls whether or not other students can see if you took a course together.</value>
+  </data>
+  <data name="profile_label_picturesecurity" xml:space="preserve">
+    <value>Your Picture</value>
+  </data>
+  <data name="profile_label_picturesecurity_description" xml:space="preserve">
+    <value>Controls who can see your picture</value>
+  </data>
 </root>

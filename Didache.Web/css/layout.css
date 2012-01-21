@@ -69,6 +69,17 @@ a {
 	padding: 0;
 	margin-top: 10px;
 }
+#header-search {
+	margin: 0 10px 0 0;
+}
+#header-search input[type=search] {
+	width: 250px;
+	border: 1px solid #CCC;
+    border-radius: 2px;
+    height: 34px;
+    
+    padding: 0 10px;
+}
 #site-footer {
 	clear: both;
 	margin: 0 auto;
@@ -76,7 +87,7 @@ a {
 	text-align: center;
 	width: 1000px;
 }
-#site-header .user-settings form#language-wrapper {
+#site-header .user-settings #language-wrapper {
     width: 200px;
     background: #FFF url(images/select-arrow.jpg) 180px 5px no-repeat;
     overflow: hidden;
@@ -397,7 +408,10 @@ select#language {
 .d-button.edit, a.d-button.edit:hover {
 	border-color: #477eaa;
 }
-
+.d-button.small {
+	font-size: 10px;
+	padding: 5px;
+}
 
 /* update list */
 .activity {
@@ -785,3 +799,14 @@ select#language {
 	border: solid 1px #E0C79F;
 	color: #E0C79F;
 }	
+
+
+/* community stuff */
+.relationship-status {
+	display: inline-block;
+	background: #eee;
+	padding: 4px 6px;
+	border: solid 1px #999;
+	line-height: 1;
+	font-size: 11px;
+}

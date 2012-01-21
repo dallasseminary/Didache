@@ -53,12 +53,12 @@ namespace Didache  {
 				string savePath = Path.Combine(Settings.StudentFilesLocation, studentFile.UniqueID.ToString() + extension);
 
 				// check file type
+				/*
 				if (!String.IsNullOrWhiteSpace(userData.Task.FileTypesAllowed)) {
-
-
-
-					// fail?
+				
+				
 				}
+				*/
 
 
 				file.SaveAs(savePath);

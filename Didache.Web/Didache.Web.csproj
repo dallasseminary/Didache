@@ -129,6 +129,9 @@
     <Content Include="App_Data\DTS_webdata_log.ldf">
       <DependentUpon>DTS_webdata.mdf</DependentUpon>
     </Content>
+    <Content Include="Areas\Community\Views\Community\Index.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="js\lib\jquery-1.6.4.js" />
     <Content Include="js\lib\jquery-1.6.4.min.js" />
     <Content Include="mobile\js\jquery-1.6.2.min.js" />
@@ -456,9 +459,12 @@
     <Content Include="Areas\Admin\Views\Courses\Surveys.cshtml" />
     <Content Include="Areas\Admin\Views\Files\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Files\Edit.cshtml" />
+    <Content Include="Areas\Community\Views\Community\Index-ByClass.cshtml" />
+    <Content Include="Areas\Community\Views\Community\Classmates.cshtml" />
+    <Content Include="Areas\Community\Views\Community\Search.cshtml" />
     <None Include="Areas\Students\Views\Shared\TaskType-CommentOnPost.cshtml" />
     <Content Include="Areas\Students\Views\Shared\TaskType-Default.cshtml" />
-    <Content Include="Views\Account\EditProfile-Full.cshtml" />
+    <Content Include="Views\Account\EditProfile.cshtml" />
     <Content Include="mobile\mobile.master" />
     <Content Include="mobile\web.config" />
     <Content Include="tools\datetime.aspx" />
@@ -490,7 +496,6 @@
     <Content Include="Areas\Admin\Views\Courses\Files.cshtml" />
     <Content Include="Areas\Community\Views\Community\Display.cshtml" />
     <Content Include="Areas\Community\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Community\Views\Community\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\DateTime.cshtml" />
     <Content Include="Areas\Admin\Views\Courses\Users.cshtml" />
     <Content Include="Areas\Admin\Views\Courses\Grading.cshtml" />
@@ -514,7 +519,7 @@
     <None Include="css\fonts\league\League_Gothic-webfont.eot" />
     <None Include="css\fonts\league\League_Gothic-webfont.ttf" />
     <None Include="css\fonts\league\League_Gothic-webfont.woff" />
-    <Content Include="Views\Account\EditProfile.cshtml" />
+    <Content Include="Views\Account\EditProfile-Small.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\_SiteHeader.cshtml" />
     <Content Include="Views\Shared\_UserMenu.cshtml" />

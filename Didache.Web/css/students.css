@@ -998,7 +998,15 @@ a.cancel-thread {
 }
 */
 
+<<<<<<< HEAD
 .task-details b, .task-details strong {
+=======
+.session-archive ul {
+    border-left: 3px solid #CCC;
+    padding-left: 12px;
+    
+.task-instructions-text b, .task-instructions-text strong {
+>>>>>>> origin/master
 	font-weight: bold;
 }
 .task-details i, .task-details em {

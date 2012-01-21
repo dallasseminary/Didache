@@ -7,7 +7,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-
+using System.Web.Script.Serialization;
+using System.Runtime.Serialization;
 
 namespace Didache {
 	public class User {
@@ -65,6 +66,16 @@ namespace Didache {
 		public string FullName { get; set; }
 		public string NickName { get; set; }
 		public string NameFormat { get; set; }
+
+		public string Location {
+			get {
+				if (Country == "USA") {
+					return City + ", " + State;
+				} else {
+					return Country;
+				}
+			}
+		}
 
 		public string FormattedName {
 			get {
@@ -260,24 +271,51 @@ namespace Didache {
 		[Display(Name = "Alias Last Name")]
 		public string AliasLastName { get; set; }
 
+		[ScriptIgnore]
 		public int PictureSecurity { get; set; }
+		[ScriptIgnore]
 		public int AddressSecurity { get; set; }
+		[ScriptIgnore]
 		public int EmailSecurity { get; set; }
+		[ScriptIgnore]
 		public int PhoneSecurity { get; set; }
+		[ScriptIgnore]
 		public int SpouseSecurity { get; set; }
+		[ScriptIgnore]
 		public int ChildrenSecurity { get; set; }
+		[ScriptIgnore]
 		public int BiographySecurity { get; set; }
+		[ScriptIgnore]
 		public int ScheduleSecurity { get; set; }
+		[ScriptIgnore]
 		public int BirthdateSecurity { get; set; }
 
+		[ScriptIgnore]
 		public UserSecuritySetting PictureSecuritySetting { get { return (UserSecuritySetting)PictureSecurity; } set { PictureSecurity = (int)value; } }
+		[ScriptIgnore]
 		public UserSecuritySetting AddressSecuritySetting { get { return (UserSecuritySetting)AddressSecurity; } set { AddressSecurity = (int)value; } }
+		[ScriptIgnore]
 		public UserSecuritySetting EmailSecuritySetting { get { return (UserSecuritySetting)EmailSecurity; } set { EmailSecurity = (int)value; } }
+		[ScriptIgnore]
 		public UserSecuritySetting PhoneSecuritySetting { get { return (UserSecuritySetting)PhoneSecurity; } set { PhoneSecurity = (int)value; } }
+		[ScriptIgnore]
 		public UserSecuritySetting SpouseSecuritySetting { get { return (UserSecuritySetting)SpouseSecurity; } set { SpouseSecurity = (int)value; } }
+		[ScriptIgnore]
 		public UserSecuritySetting ChildrenSecuritySetting { get { return (UserSecuritySetting)ChildrenSecurity; } set { ChildrenSecurity = (int)value; } }
+		[ScriptIgnore]
 		public UserSecuritySetting BiographySecuritySetting { get { return (UserSecuritySetting)BiographySecurity; } set { BiographySecurity = (int)value; } }
+		[ScriptIgnore]
 		public UserSecuritySetting ScheduleSecuritySetting { get { return (UserSecuritySetting)ScheduleSecurity; } set { ScheduleSecurity = (int)value; } }
+		[ScriptIgnore]
 		public UserSecuritySetting BirthdateSecuritySetting { get { return (UserSecuritySetting)BirthdateSecurity; } set { BirthdateSecurity = (int)value; } }
+
+		[ScriptIgnore]
+		public virtual ICollection<Degree> Degrees { get; set; }
+
+		[ScriptIgnore]
+		public virtual Student Student { get; set; }
+
+		[ScriptIgnore]
+		public virtual ICollection<Employee> Employees { get; set; }
 	}
 }

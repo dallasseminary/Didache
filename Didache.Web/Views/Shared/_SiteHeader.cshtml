@@ -4,13 +4,14 @@
 			<a href="http://@Request.Url.Host/"><img src="/css/images/dts-logo.png" alt="DTS Home" /></a>
 		</div>
 		<div class="user-settings">
-			@*
+			
 			@if (User.Identity.IsAuthenticated) {
-			<form action="/community/search/">
-				<input type="search" name="q" placeholder="search for friends" />
+			<form action="/community/search/" method="get" id="header-search">
+				<input type="search" name="s" placeholder="@Didache.Resources.labels.community_search_placeholder" />
+				<input type="submit" value="Search" class="d-button" />
 			</form>
 			}
-			*@
+			
 			@{ string userLanguage = Users.GetUserLanguage(); }
 			<form action="/account/setlanguage/" id="language-wrapper">
 				@Html.DropDownList("language", new List<SelectListItem> {   

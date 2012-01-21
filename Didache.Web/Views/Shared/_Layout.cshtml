@@ -25,7 +25,7 @@
 	<link href="@Url.Content("~/css/students.css")" rel="stylesheet"  />
 	<link href="@Url.Content("~/css/admin.css")" rel="stylesheet"  />
 
-	<script src="@Url.Content("~/js/lib/jquery-1.6.4.min.js")"></script>
+	<script src="@Url.Content("~/js/lib/jquery-1.7.1.min.js")"></script>
 		
 	<script src="@Url.Content("~/js/lib/jquery-ui.min.js")"></script>
 	<link href="@Url.Content("~/js/lib/ui-lightness/jquery-ui.css")" rel="stylesheet"  />
@@ -65,7 +65,7 @@
 						<a href="@user.ProfileDisplayUrl">
 							<img alt="@user.SecureFormattedName" src="@user.GetProfileImageUrl(60, 60)" width="60" height="60" />
 							<span class="name">@user.SecureShortName</span>
-							<span class="title">@user.Country</span>
+							<span class="title">@user.Location</span>
 						</a>
 					</div>
 				}

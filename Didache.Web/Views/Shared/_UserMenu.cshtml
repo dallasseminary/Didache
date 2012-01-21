@@ -18,37 +18,38 @@
 		</ul>
 
 	</div>
+	
+	
+	<div id="community-menu" class="side-menu">
+		<h3>@Didache.Resources.labels.tabs_community</h3>
+		
+		<ul>
+			<li><a href="/community">@Didache.Resources.labels.submenu_community_search</a></li>
+			<li><a href="/community/classmates">@Didache.Resources.labels.submenu_community_classmates</a></li>
+		</ul>
+	</div>
    
    
-    if (facilitationCourses.Count > 0) {
+   if (facilitationCourses.Count > 0 || User.IsInRole(UserRoles.Facilitator)) {
 	<div id="facilitator-menu" class="side-menu">
-		<h3>Faculty &amp; GTAs</h3>
+		<h3>Faculty &amp; Facilitators</h3>
 		
 		<ul>
 			@foreach (Course course in facilitationCourses) {
 			<li@Html.Raw(ViewContext.RouteData.Values["slug"] != null && ViewContext.RouteData.Values["slug"].ToString() == course.Slug ? " class=\"selected\"" : "")><a href="/grading/@course.Slug/tasklist">@(course.Session.SessionCode + "-" + course.CourseCode + course.Section + " - " + course.FacultyLastNames)</a></li>	
-			}
+   }
 		
 			<li><a href="/grading/">All Courses</a></li>
 			
 		</ul>
 
 	</div>    
-    }
+   }
 
-	
-	@*
-	<div id="community-menu" class="side-menu">
-		<h3>@Didache.Resources.labels.tabs_community</h3>
-		
-		<ul>
-			<li><a href="/community">@Didache.Resources.labels.submenu_community_home</a></li>
-			<li><a href="@Users.GetLoggedInUser().ProfileDisplayUrl">@Didache.Resources.labels.submenu_view</a></li>
-		</ul>
-	</div>	
-	*@
-	
-	
+
+
+
+
 }
 
 	

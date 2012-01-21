@@ -69,7 +69,11 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Community\CarsCourse.cs" />
+    <Compile Include="Models\Community\UserRelationships.cs" />
     <Compile Include="Models\ViewModels\ContactStudents.cs" />
+    <Compile Include="Models\ViewModels\ProfileViewModel.cs" />
+    <Compile Include="Models\ViewModels\ClassmatesViewModel.cs" />
     <Compile Include="Models\ViewModels\UnitSurveyGroup.cs" />
     <Compile Include="MVC\ActionResults\iCalResult.cs" />
     <Compile Include="MVC\ActionResults\SyndicationResult.cs" />
@@ -79,7 +83,7 @@
     <Compile Include="Models\Activities\InteractionActivity.cs" />
     <Compile Include="Models\Activities\ForumReplyActivity.cs" />
     <Compile Include="Models\Activities\NewFileActivity.cs" />
-    <Compile Include="Models\Community\UserRelationships.cs" />
+    <Compile Include="Models\Community\UserRelationship.cs" />
     <Compile Include="Models\Courses\Campuses.cs" />
     <Compile Include="Models\Courses\CourseUsers.cs" />
     <Compile Include="Models\Courses\Files\BaseFile.cs" />

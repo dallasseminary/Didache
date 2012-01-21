@@ -134,6 +134,23 @@ namespace Didache.Web.Controllers {
 				string oldEmail = user.Email;
 
 				UpdateModel(user);
+
+				// fix stuff
+				if (!String.IsNullOrEmpty(user.Twitter) && user.Twitter.Contains("/")) {
+					user.Twitter = user.Twitter.Substring(user.Twitter.LastIndexOf("/") + 1);
+				}
+				if (!String.IsNullOrEmpty(user.Facebook) && user.Facebook.Contains("facebook.com")) {
+					user.Facebook = user.Facebook
+											.Replace("http://", "")
+											.Replace("https://", "")
+											.Replace("www.facebook.com/", "")
+											.Replace("facebook.com/", "");
+				}
+				if (!String.IsNullOrEmpty(user.Website) && !user.Website.Contains("http")) {
+					user.Website = "http://" + user.Website;
+				}
+
+
 				db.SaveChanges();
 
 

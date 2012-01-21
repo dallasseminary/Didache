@@ -90,9 +90,11 @@ namespace Didache  {
 					.ToList();
 		}
 
-		public static List<Course> GetCurrentlyRunningCourses() {			
+		public static List<Course> GetCurrentlyRunningCourses() {
+			DateTime now = DateTime.Now.Date;
+
 			return new DidacheDb().Courses
-					.Where(c => c.StartDate < DateTime.Now && c.EndDate > DateTime.Now)
+					.Where(c => c.StartDate <= now && c.EndDate >= now)
 					.OrderByDescending(c => c.Session.StartDate)
 						.ThenBy(c => c.CourseCode)
 						.ThenBy(c => c.Section)
@@ -152,7 +154,7 @@ namespace Didache  {
 
 		public static List<Course> GetUsersRunningCourses(int userID, CourseUserRole roleID) {
 
-			string key = String.Format("coursess-userrunning-{0}-{1}", userID, roleID);
+			string key = String.Format("courses-userrunning-{0}-{1}", userID, roleID);
 			List<Course> courses = (HttpContext.Current != null) ? HttpContext.Current.Cache[key] as List<Course> : null;
 
 			bool ignoreCache = true;
@@ -180,6 +182,7 @@ namespace Didache  {
 			return courses;
 		}
 
+		// Nasty way to join two lists
 		public static List<Course> GetUsersRunningCourses(int userID, CourseUserRole roleID, CourseUserRole roleID2) {
 
 			List<Course> courses = GetUsersRunningCourses(userID, roleID);

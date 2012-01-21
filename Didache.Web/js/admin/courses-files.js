@@ -222,8 +222,8 @@
 				'</span>' +
 				'<span class="file-link"><a href="#">download</a></span>' +
 				'<span class="file-user"></span>' +
-				//'<a class="file-edit edit-link" href="javascript:void(0);">Edit</a>' +
-				//'<a class="file-delete delete-link" href="javascript:void(0);">Delete</a>' +
+		//'<a class="file-edit edit-link" href="javascript:void(0);">Edit</a>' +
+				'<a class="file-delete delete-link" href="javascript:void(0);">Remove</a>' +
 			'</div>');
 
 		fileGroupRow.find('.files').append(fileRow);
@@ -239,7 +239,7 @@
 		taskRow.find('.file-title').val(file.CourseFile.Title);
 		taskRow.find('.file-user').val((file.CourseFile.User && file.CourseFile.User.FullName) ? file.CourseFile.User.FullName : 'no obj');
 
-		taskRow.find('.file-link a').attr('href',file.CourseFile.FileUrl).html(file.CourseFile.Filename);
+		taskRow.find('.file-link a').attr('href', file.CourseFile.FileUrl).html(file.CourseFile.Filename);
 
 		taskRow.find('.file-edit').attr('href', '/admin/courses/file/' + file.FileID);
 		taskRow.find('.file-delete').attr('href', '/admin/courses/deletefile/' + file.FileID);
@@ -281,6 +281,30 @@
 			$('#file-group-editor').dialog('open');
 
 		});
+
+		return false;
+	});
+
+
+	// popup group edit
+	$('#course-file-groups').delegate('.file-delete', 'click', function (e) {
+		e.preventDefault();
+
+		var link = $(this),
+			fileRow = link.closest('.coursefile'),
+			fileID = fileRow.data('fileid'),
+			courseID = $('#CourseID').val();
+
+		if ('YES' == prompt('Are you sure? If so, type YES')) {
+			$.ajax({
+				url: '/admin/courses/removefilefromcourse/',
+				type: 'POST',
+				data: { courseID: courseID, fileID: fileID },
+				success: function () {
+					fileRow.remove();
+				}
+			});
+		}
 
 		return false;
 	});

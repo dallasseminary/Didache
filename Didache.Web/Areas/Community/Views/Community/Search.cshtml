@@ -1,0 +1,152 @@
+﻿@model List<UserRelationship>
+@{
+	ViewBag.Title = Didache.Resources.labels.submenu_community_home;
+}
+
+<style>
+.user-search-results {
+	overflow: hidden;
+}
+.user-search-results .user-search-result{
+	overflow: hidden;
+	margin: 10px 0;
+	border-bottom: solid 1px #ccc;
+	padding: 10px 0;
+}
+.user-search-results .user-search-result .user-image{
+	float: left;
+	width: 40px;
+}
+
+.user-search-results .user-search-result .user-info{
+	float: left;
+	margin: 0 0 0 20px;
+	width: 200px;
+}
+
+.user-search-results .user-search-result .user-info .user-title {
+	margin: 0 0 8px 0;
+}
+
+	.user-search-results .user-search-result .user-info .user-name {
+		display: block;
+		font-weight: bold;
+	}
+	.user-search-results .user-search-result .user-info .user-location {
+		display: block;
+		color: #999;	
+	}
+	
+.user-search-results .user-search-result .relationship-options {
+	float: right;
+	margin: 0 0 0 20px;
+	width: 100px;
+	text-align: right;
+}
+
+.user-tags .user-tag {
+	display: inline-block;
+	border: solid 1px #999;
+	border-width: 0 1px 1px 0;
+	background: #ddd;
+	padding: 3px 5px;
+	font-size: 10px;
+	margin: 0 10px 0 0;
+	border-radius: 2px;	
+}
+
+.user-search-results .user-search-result .user-info .relationship-status a {
+	
+}
+
+.user-search-results .user-search-result .user-info .relationship-status span {
+	color: #666;
+}
+
+#search-form {
+	margin: 0 0 20px 0;
+}
+</style>
+
+<div class="page-narrow">
+	<div class="main-column">
+		<div class="page-header">
+
+			<h2>@Didache.Resources.labels.submenu_community_search</h2>
+		
+		
+			<form id="search-form" action="/community/search/" method="get">
+				<input type="text" name="s" value="@Request.QueryString["s"]" placeholder="@Didache.Resources.labels.community_search_placeholder" />
+				<input class="d-button small" type="submit" value="@Didache.Resources.labels.community_search_button" />
+			</form>
+		</div>	
+
+	@if (Model != null) {
+		
+		<h3>Results</h3>
+	 
+		<div class="user-search-results">
+		@foreach (UserRelationship userRel in Model) {
+			<div class="user-search-result">
+				<div class="user-image">
+					<img src="@userRel.TargetUser.GetProfileImageUrl(40, 40)" alt="@userRel.TargetUser.SecureFormattedName" />
+				</div>
+				<div class="user-info">
+					<div class="user-title">
+						<span class="user-name"><a href="@userRel.TargetUser.ProfileDisplayUrl">@userRel.TargetUser.SecureFormattedName</a></span>
+						<span class="user-location">@userRel.TargetUser.Location</span>
+					</div>
+				
+
+					<div class="user-tags">
+						@if (userRel.TargetUser.Degrees.Count > 0) {
+							<span class="user-tag">
+							@Didache.Resources.labels.profile_constituency_alumni<text>:</text>
+							@Html.Raw(String.Join(", ", userRel.TargetUser.Degrees.Select(d => d.DegreeEarned + " (" + d.GradYear.ToString() + ")").ToArray()))
+							</span>
+						}
+						
+						@if (userRel.TargetUser.Student != null) {
+							<span class="user-tag">Student: @userRel.TargetUser.Student.Degree@(userRel.TargetUser.Student.PlannedGradYear > 0 ? ", " + @userRel.TargetUser.Student.PlannedGradYear.ToString() : "")</span>
+						}
+					
+						@if (userRel.TargetUser.Employees.Count > 0) {
+							<span class="user-tag">Staff</span>
+						}	
+
+					</div>
+
+				</div>
+
+
+				<div class="relationship-options">
+				@switch (userRel.RelationshipStatus) {
+					case RelationshipStatus.None :
+						<a class="d-button action small addclassmate-button" href="/api/addclassmate/@userRel.RequesterUserID/@userRel.TargetUserID">@Didache.Resources.labels.community_addclassmate_button</a>
+						break;
+					case RelationshipStatus.PendingTargetApproval:
+						<span class="relationship-status">@Didache.Resources.labels.community_relationshipstatus_pending</span>
+						break;					
+					case RelationshipStatus.PendingRequesterApproval:
+						<a class="d-button approveclassmate-button action small" href="/api/approveclassmate/@userRel.RequesterUserID/@userRel.TargetUserID">@Didache.Resources.labels.community_approveclassmate_button</a>
+						break;
+					case RelationshipStatus.Approved:
+						<span class="relationship-status">@Didache.Resources.labels.community_relationshipstatus_classmate</span>
+						break;
+				}
+				</div>
+
+
+			</div>
+  }
+		</div><!-- /.user-search-results -->
+	}
+	
+	</div><!-- /.main-column -->
+
+
+	<div class="sub-column">
+		??
+	</div>
+
+</div><!-- /.page-wide -->
