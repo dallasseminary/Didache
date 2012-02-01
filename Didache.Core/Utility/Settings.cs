@@ -33,5 +33,17 @@ namespace Didache {
 			}
 		}
 
+		public static string UserImageLocation {
+			get {
+				return System.Configuration.ConfigurationManager.AppSettings["UserImageLocation"];
+			}
+		}
+
+		public static string UserImageThumbLocation {
+			get {
+				return System.Configuration.ConfigurationManager.AppSettings["UserImageThumbLocation"];
+			}
+		}
+
 	}
 }

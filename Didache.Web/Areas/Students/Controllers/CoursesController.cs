@@ -114,7 +114,19 @@ namespace Didache.Web.Areas.Students.Controllers
 
 			Course course = Didache.Courses.GetCourseBySlug(slug);
 
-			ViewBag.UserGroups = Didache.Courses.GetCourseUserGroups(course.CourseID);
+			List<CourseUserGroup> groups = Didache.Courses.GetCourseUserGroups(course.CourseID);
+
+			if (groups.Count == 0) {
+				// create a fake ungrouped list
+				CourseUserGroup ungroupedUsers = new CourseUserGroup() {
+					Name = "Ungrouped Users",
+					Students = Didache.Courses.GetUsersInCourse(course.CourseID, CourseUserRole.Student)
+				};
+
+				groups.Add(ungroupedUsers);
+			}
+
+			ViewBag.UserGroups = groups;
 
 			return View(course);
 		}

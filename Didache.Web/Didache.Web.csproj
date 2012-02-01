@@ -47,6 +47,7 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -451,7 +452,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Facilitators\Views\Grading\UserInteractions.cshtml" />
-    <Content Include="Areas\Students\Views\Shared\TaskType-AnswerQuestionForDiscussion.cshtml" />
+    <Content Include="Areas\Students\Views\Shared\TaskType-RespondToDiscussion.cshtml" />
     <Content Include="Areas\Admin\Views\Courses\CloneCourse.cshtml" />
     <Content Include="Areas\Facilitators\Views\Grading\Email.cshtml" />
     <Content Include="Areas\Facilitators\Views\Grading\EmailSuccess.cshtml" />
@@ -462,6 +463,8 @@
     <Content Include="Areas\Community\Views\Community\Index-ByClass.cshtml" />
     <Content Include="Areas\Community\Views\Community\Classmates.cshtml" />
     <Content Include="Areas\Community\Views\Community\Search.cshtml" />
+    <Content Include="Areas\Community\Views\Community\Feed.cshtml" />
+    <Content Include="Areas\Students\Views\Shared\TaskType-AnswerQuestionForDiscussion.cshtml" />
     <None Include="Areas\Students\Views\Shared\TaskType-CommentOnPost.cshtml" />
     <Content Include="Areas\Students\Views\Shared\TaskType-Default.cshtml" />
     <Content Include="Views\Account\EditProfile.cshtml" />
@@ -477,6 +480,9 @@
     <Content Include="player\web.config" />
     <None Include="player-old\dts-flame.psd" />
     <Content Include="Views\Home\Resources.cshtml" />
+    <Content Include="Views\Account\UploadPhoto.cshtml" />
+    <Content Include="Views\Shared\_WriteUserPosts.cshtml" />
+    <Content Include="Views\Home\IndexFeed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\students.css" />

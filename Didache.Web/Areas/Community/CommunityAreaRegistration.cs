@@ -27,6 +27,13 @@ namespace Didache.Web.Areas.Community {
 				new { controller = "Community", action = "Classmates" }
 			);
 
+
+			context.MapRoute(
+				"Community_feed",
+				"community/feed",
+				new { controller = "Community", action = "feed" }
+			);
+
 			context.MapRoute(
 				"Community_name",
 				"community/{name}",

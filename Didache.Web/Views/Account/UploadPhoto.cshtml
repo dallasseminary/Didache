@@ -1,0 +1,53 @@
+﻿@model User
+
+@{
+    ViewBag.Title = "UploadPhoTo";
+}
+
+<style>
+.profile-pics td {
+	padding-right: 20px;
+	vertical-align: top;
+}
+</style>
+
+<form enctype="multipart/form-data" action="/account/uploadphoto" method="post">
+<div id="edit-profile" class="page-narrow">
+	<div class="main-column">
+	
+		<div class="page-header">
+			<h2>@Model.SecureFormattedName</h2>
+			<h3>@Model.Location</h3>
+		</div>
+
+
+		<h3>@Didache.Resources.labels.profile_heading_uploadnewphoto</h3>
+
+		<p>@Didache.Resources.labels.profile_heading_uploadnewphoto_desc</p>
+
+
+		<input type="file" id="userimage" name="userimage" class="file-input required" accept="jpg,jpeg,jpe" data-val-accept="Sorry, please upload a jpeg image." /> 
+
+		<input type="submit" class="d-button action" value="@Didache.Resources.labels.profile_uploadphotobutton" />
+
+		<h3>@Didache.Resources.labels.profile_heading_existingphoto</h3>
+
+		<table class="profile-pics">
+		<tr>
+			<td>
+				<img src="@Model.ProfileImageUrl" />
+			</td>
+			<td>
+				<img src="@Model.GetProfileImageUrl(60, 60)" />
+			</td>
+			<td>
+				<img src="@Model.GetProfileImageUrl(40, 40)" />
+			</td>
+		</tr>
+		</table>
+		
+
+
+	</div>
+</div>
+</form>

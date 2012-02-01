@@ -69,9 +69,17 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Announcement.cs" />
     <Compile Include="Models\Community\CarsCourse.cs" />
     <Compile Include="Models\Community\UserRelationships.cs" />
+    <Compile Include="Models\Enum\UserActionType.cs" />
+    <Compile Include="Models\USerPosts\UserPost.cs" />
+    <Compile Include="Models\USerPosts\UserPostComment.cs" />
+    <Compile Include="Models\USerPosts\UserPostType.cs" />
+    <Compile Include="Models\UserAction.cs" />
     <Compile Include="Models\ViewModels\ContactStudents.cs" />
+    <Compile Include="Models\ViewModels\HomeViewModel.cs" />
+    <Compile Include="Models\ViewModels\SearchResultsModel.cs" />
     <Compile Include="Models\ViewModels\ProfileViewModel.cs" />
     <Compile Include="Models\ViewModels\ClassmatesViewModel.cs" />
     <Compile Include="Models\ViewModels\UnitSurveyGroup.cs" />
@@ -116,7 +124,7 @@
     <Compile Include="Models\ViewModels\AccountModels.cs" />
     <Compile Include="Models\Courses\Campus.cs" />
     <Compile Include="Models\Forums\Forums.cs" />
-    <Compile Include="Models\Forums\Post.cs" />
+    <Compile Include="Models\Forums\ForumPost.cs" />
     <Compile Include="Models\Forums\Thread.cs" />
     <Compile Include="Models\Forums\Forum.cs" />
     <Compile Include="Models\Courses\Course.cs" />
@@ -143,6 +151,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>labels.resx</DependentUpon>
     </Compile>
+    <Compile Include="TaskTypes\Types\AnswerQuestionForDiscussion.cs" />
     <Compile Include="TaskTypes\Types\CommentOnPost.cs" />
     <Compile Include="TaskTypes\Types\PercentComplete.cs" />
     <Compile Include="TaskTypes\Types\TurnInFileForComment.cs" />
@@ -150,7 +159,7 @@
     <Compile Include="TaskTypes\Types\TaskTypeResult.cs" />
     <Compile Include="TaskTypes\Types\VideoListing.cs" />
     <Compile Include="TaskTypes\Types\Default.cs" />
-    <Compile Include="TaskTypes\Types\AnswerQuestionForDiscussion.cs" />
+    <Compile Include="TaskTypes\Types\RespondToDiscussion.cs" />
     <Compile Include="TaskTypes\Types\TurnInFileSimple.cs" />
     <Compile Include="TaskTypes\Types\SimpleCompletionNoGrade.cs" />
     <Compile Include="TaskTypes\Types\SimpleCompletion.cs" />
@@ -161,6 +170,7 @@
     <Compile Include="Utility\Emails.cs" />
     <Compile Include="Utility\EntityObjectSerializer.cs" />
     <Compile Include="Utility\HtmlHelpers\DropDownGroupList.cs" />
+    <Compile Include="Utility\ImageTools.cs" />
     <Compile Include="Utility\Settings.cs" />
     <Compile Include="Utility\Utility.cs" />
   </ItemGroup>
@@ -184,7 +194,9 @@
     <EmbeddedResource Include="Resources\labels.zh-CN.resx" />
     <EmbeddedResource Include="Resources\labels.zh-TW.resx" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Models\User\ExtraData\" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

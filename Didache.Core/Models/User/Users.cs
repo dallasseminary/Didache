@@ -92,32 +92,40 @@ namespace Didache  {
 			}
 		}
 
-		public static User GetUser(int id) {
+		public static User GetUser(int id, bool flushCache = false) {
 
 			string key = string.Format(_userIdKey, id);
 			User user = (HttpContext.Current != null) ? HttpContext.Current.Cache[key] as User : null;
 
-			if (user == null) {
+			if (user == null || flushCache) {
 				user = new DidacheDb().Users.FirstOrDefault(u => u.UserID == id);
 
 				if (user != null) {
 					HttpContext.Current.Cache.Add(key, user, null, Cache.NoAbsoluteExpiration, new TimeSpan(1, 0, 0), CacheItemPriority.Default, null);
+
+					key = string.Format(_usernameKey, user.Username);
+					HttpContext.Current.Cache.Add(key, user, null, Cache.NoAbsoluteExpiration, new TimeSpan(1, 0, 0), CacheItemPriority.Default, null);
+				
 				}
 			}
 
 			return user;
 		}
 
-		public static User GetUser(string username) {
+		public static User GetUser(string username, bool flushCache = false) {
 
 			string key = string.Format(_usernameKey, username);
 			User user = (HttpContext.Current != null) ? HttpContext.Current.Cache[key] as User : null;
 
-			if (user == null) {
+			if (user == null || flushCache) {
 				user = new DidacheDb().Users.FirstOrDefault(u => u.Username == username);
 
 				if (user != null) {
 					HttpContext.Current.Cache.Add(key, user, null, Cache.NoAbsoluteExpiration, new TimeSpan(1, 0, 0), CacheItemPriority.Default, null);
+
+					key = string.Format(_userIdKey, user.UserID);
+					HttpContext.Current.Cache.Add(key, user, null, Cache.NoAbsoluteExpiration, new TimeSpan(1, 0, 0), CacheItemPriority.Default, null);
+				
 				}
 			}
 
@@ -128,9 +136,9 @@ namespace Didache  {
 
 
 
-		public static User GetLoggedInUser() {
+		public static User GetLoggedInUser(bool flushCache = false) {
 			if (HttpContext.Current != null && HttpContext.Current.User.Identity.IsAuthenticated) {
-				return GetUser(HttpContext.Current.User.Identity.Name);
+				return GetUser(HttpContext.Current.User.Identity.Name, flushCache);
 			} else {
 				return null;
 			}
@@ -143,12 +151,17 @@ namespace Didache  {
 		public static void ClearUserCache(User user) {
 			
 			string key = string.Format(_usernameKey, user.Username);
-			if (HttpContext.Current.Cache[key] != null)
+			if (HttpContext.Current.Cache[key] != null) {
 				HttpContext.Current.Cache.Remove(key);
+				//HttpContext.Current.Cache[key] = null;
+			}
+
 
 			key = string.Format(_userIdKey, user.UserID);
-			if (HttpContext.Current.Cache[key] != null)
+			if (HttpContext.Current.Cache[key] != null) {
 				HttpContext.Current.Cache.Remove(key);
+				//HttpContext.Current.Cache[key] = null;
+			}
 		}
 
 		public static Student GetStudent(int userID) {

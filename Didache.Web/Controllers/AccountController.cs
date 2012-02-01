@@ -118,7 +118,7 @@ namespace Didache.Web.Controllers {
 
 		public ActionResult EditProfile() {
 
-			User user = Users.GetLoggedInUser();
+			User user = Users.GetLoggedInUser(true);
 
 			return View(user);
 		}
@@ -150,6 +150,19 @@ namespace Didache.Web.Controllers {
 					user.Website = "http://" + user.Website;
 				}
 
+				UserAction ua = new UserAction() {
+					SourceUserID = user.UserID,
+					TargetUserID = 0,
+					UserActionType = UserActionType.UpdateSettings,
+					ActionDate = DateTime.Now,
+					GroupID = 0,
+					MessageID = 0,
+					PostCommentID = 0,
+					PostID = 0,
+					Text = ""
+				};
+				db.UserActions.Add(ua);
+
 
 				db.SaveChanges();
 
@@ -178,7 +191,7 @@ namespace Didache.Web.Controllers {
 				// save language to cookie for logout
 				Response.Cookies.Add(new HttpCookie("Language", model.Language));
 
-				Users.ClearUserCache(model);
+				Users.ClearUserCache(user);
 
 				return Redirect(user.ProfileDisplayUrl); // RedirectToAction("EditProfile");
 
@@ -190,7 +203,65 @@ namespace Didache.Web.Controllers {
 			
 		}
 
+		[Authorize]
+		public ActionResult UploadPhoto() {
 
+			User user = Users.GetLoggedInUser();
+			
+			return View(user);
+		}
+
+		[Authorize]
+		[HttpPost]
+		public ActionResult UploadPhoto(HttpPostedFileBase userimage) {
+
+			User user = Users.GetLoggedInUser();
+
+			// double check for image type
+			if (userimage != null && userimage.ContentLength > 0 && System.Text.RegularExpressions.Regex.IsMatch(userimage.FileName, "(jpeg|jpg|jpe)$", System.Text.RegularExpressions.RegexOptions.IgnoreCase)) {
+				
+				// delete thumbs?
+				//string[] thumbPaths = System.IO.Directory.GetFiles(@"D:\websites\www.dts.edu\www07\images\carsphotos\customthumbs\", user.UserID + "-*");
+				string[] thumbPaths = System.IO.Directory.GetFiles(Settings.UserImageThumbLocation, user.UserID + "-*");
+				
+				foreach (string thumbPath in thumbPaths) {
+					System.IO.File.Delete(thumbPath);
+				}
+
+				// save it to new path
+				string customPath = Settings.UserImageLocation + user.UserID + ".jpg";
+				string customOriginalPath = Settings.UserImageLocation + user.UserID + "-original.jpg";
+				
+				if (System.IO.File.Exists(customOriginalPath))
+					System.IO.File.Delete(customOriginalPath);
+
+				if (System.IO.File.Exists(customPath))
+					System.IO.File.Delete(customPath);
+				
+				// save original for later
+				userimage.SaveAs(customOriginalPath);
+
+				// resize to a decent file size
+				ImageTools.ScaleImage(customOriginalPath, customPath, 180, 1000, 90);
+
+
+				UserAction ua = new UserAction() {
+					SourceUserID = user.UserID,
+					TargetUserID = 0,
+					UserActionType = UserActionType.UpdatePicture,
+					ActionDate = DateTime.Now,
+					GroupID = 0,
+					MessageID = 0,
+					PostCommentID = 0,
+					PostID = 0,
+					Text = ""
+				};
+				db.UserActions.Add(ua);
+				db.SaveChanges();
+			}
+
+			return Redirect(user.ProfileDisplayUrl);
+		}
 
 		[Authorize]
 		public ActionResult ChangePassword() {

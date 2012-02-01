@@ -187,6 +187,15 @@ namespace Didache.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Think &apos;friends&apos; on Facebook, but without any of the theological connotations seminary students think of when they see &apos;friend&apos; or &apos;follower.&apos;.
+        /// </summary>
+        public static string community_classmates_desc {
+            get {
+                return ResourceManager.GetString("community_classmates_desc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Classmate.
         /// </summary>
         public static string community_relationshipstatus_classmate {
@@ -228,6 +237,15 @@ namespace Didache.Resources {
         public static string community_search_title {
             get {
                 return ResourceManager.GetString("community_search_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Get Classmates.
+        /// </summary>
+        public static string community_searchbycourse_button {
+            get {
+                return ResourceManager.GetString("community_searchbycourse_button", resourceCulture);
             }
         }
         
@@ -1078,6 +1096,15 @@ namespace Didache.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Existing Photo.
+        /// </summary>
+        public static string profile_heading_existingphoto {
+            get {
+                return ResourceManager.GetString("profile_heading_existingphoto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Personal Information.
         /// </summary>
         public static string profile_heading_personalinfo {
@@ -1114,6 +1141,24 @@ namespace Didache.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Upload New Photo.
+        /// </summary>
+        public static string profile_heading_uploadnewphoto {
+            get {
+                return ResourceManager.GetString("profile_heading_uploadnewphoto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please upload a photo that [1] shows only you (we love families, but it&apos;s harder to interact with them!), [2] is cropped to show mostly your face and shoulders (the rest of you is great, we just want to see your face!).
+        /// </summary>
+        public static string profile_heading_uploadnewphoto_desc {
+            get {
+                return ResourceManager.GetString("profile_heading_uploadnewphoto_desc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Address.
         /// </summary>
         public static string profile_label_address {
@@ -1137,6 +1182,33 @@ namespace Didache.Resources {
         public static string profile_label_birthday {
             get {
                 return ResourceManager.GetString("profile_label_birthday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change Photo.
+        /// </summary>
+        public static string profile_label_changephoto {
+            get {
+                return ResourceManager.GetString("profile_label_changephoto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Children.
+        /// </summary>
+        public static string profile_label_children {
+            get {
+                return ResourceManager.GetString("profile_label_children", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Classmate Requests.
+        /// </summary>
+        public static string profile_label_classmaterequests {
+            get {
+                return ResourceManager.GetString("profile_label_classmaterequests", resourceCulture);
             }
         }
         
@@ -1249,11 +1321,29 @@ namespace Didache.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Spouse.
+        /// </summary>
+        public static string profile_label_spouse {
+            get {
+                return ResourceManager.GetString("profile_label_spouse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Timezone.
         /// </summary>
         public static string profile_label_timezone {
             get {
                 return ResourceManager.GetString("profile_label_timezone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Job.
+        /// </summary>
+        public static string profile_label_work {
+            get {
+                return ResourceManager.GetString("profile_label_work", resourceCulture);
             }
         }
         
@@ -1290,6 +1380,15 @@ namespace Didache.Resources {
         public static string profile_security_private {
             get {
                 return ResourceManager.GetString("profile_security_private", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload Photo.
+        /// </summary>
+        public static string profile_uploadphotobutton {
+            get {
+                return ResourceManager.GetString("profile_uploadphotobutton", resourceCulture);
             }
         }
         

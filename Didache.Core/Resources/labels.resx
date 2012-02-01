@@ -729,8 +729,20 @@
   <data name="community_relationshipstatus_pending" xml:space="preserve">
     <value>Pending</value>
   </data>
+  <data name="profile_heading_existingphoto" xml:space="preserve">
+    <value>Existing Photo</value>
+  </data>
   <data name="profile_heading_security" xml:space="preserve">
     <value>Additional Security Settings</value>
+  </data>
+  <data name="profile_heading_uploadnewphoto" xml:space="preserve">
+    <value>Upload New Photo</value>
+  </data>
+  <data name="profile_heading_uploadnewphoto_desc" xml:space="preserve">
+    <value>Please upload a photo that [1] shows only you (we love families, but it's harder to interact with them!), [2] is cropped to show mostly your face and shoulders (the rest of you is great, we just want to see your face!)</value>
+  </data>
+  <data name="profile_label_changephoto" xml:space="preserve">
+    <value>Change Photo</value>
   </data>
   <data name="profile_label_commonclassmates" xml:space="preserve">
     <value>Common Classmates</value>
@@ -755,5 +767,26 @@
   </data>
   <data name="profile_label_picturesecurity_description" xml:space="preserve">
     <value>Controls who can see your picture</value>
+  </data>
+  <data name="profile_uploadphotobutton" xml:space="preserve">
+    <value>Upload Photo</value>
+  </data>
+  <data name="profile_label_children" xml:space="preserve">
+    <value>Children</value>
+  </data>
+  <data name="profile_label_spouse" xml:space="preserve">
+    <value>Spouse</value>
+  </data>
+  <data name="profile_label_work" xml:space="preserve">
+    <value>Job</value>
+  </data>
+  <data name="community_classmates_desc" xml:space="preserve">
+    <value>Think 'friends' on Facebook, but without any of the theological connotations seminary students think of when they see 'friend' or 'follower.'</value>
+  </data>
+  <data name="community_searchbycourse_button" xml:space="preserve">
+    <value>Get Classmates</value>
+  </data>
+  <data name="profile_label_classmaterequests" xml:space="preserve">
+    <value>Classmate Requests</value>
   </data>
 </root>

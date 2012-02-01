@@ -24,7 +24,8 @@
 				
 			} else {
 				   
-			   if (Model.ViewerRelationshipToUser.RelationshipStatus == RelationshipStatus.None) {
+	   
+			   if (Model.ViewerRelationshipToUser.RelationshipStatus == RelationshipStatus.None && Model.User.AllowClassmateRequests) {
 					<a class="d-button addclassmate-button action" href="/api/addclassmate/@Users.GetLoggedInUser().UserID/@Model.User.UserID">@Didache.Resources.labels.community_addclassmate_button</a>
 			   } else if (Model.ViewerRelationshipToUser.RelationshipStatus == RelationshipStatus.PendingRequesterApproval) {
 					<a class="d-button approveclassmate-button action" href="/api/approveclassmate/@Users.GetLoggedInUser().UserID/@Model.User.UserID">@Didache.Resources.labels.community_approveclassmate_button</a>
@@ -34,10 +35,12 @@
 					<span class="relationship-status">@Didache.Resources.labels.community_relationshipstatus_classmate</span>
 			   } else if (Model.ViewerRelationshipToUser.RelationshipStatus == RelationshipStatus.RejectedByRequester ||
 						Model.ViewerRelationshipToUser.RelationshipStatus == RelationshipStatus.RejectedByTarget) {
-					<span>???</span>
+					<span></span>
+			   } else if (Model.User.AllowClassmateRequests) {
+					<span></span>
 			   }
 
-   }
+			}
 			
 		   </div>
 		</div>
@@ -48,25 +51,26 @@
 					@Didache.Resources.labels.profile_constituency_alumni<text>:</text>
 					@Html.Raw(String.Join(", ", Model.User.Degrees.Select(d => d.DegreeEarned + " (" + d.GradYear.ToString() + ")").ToArray()))
 					</div>
-	}
-				@if (Model.User.Student != null) {
+				}
+				@if (Model.User.Students != null && Model.User.Students.Count > 0) {
 					<div class="profile-constituency">
 					@Didache.Resources.labels.profile_constituency_student<text>:</text>
-					
-					@Model.User.Student.Degree@(Model.User.Student.PlannedGradYear > 0 ? ", " + Model.User.Student.PlannedGradYear : "")
+					@Html.Raw(String.Join(", ", Model.User.Students.Select(s => s.Degree + (s.PlannedGradYear > 0 ? " (" + s.PlannedGradYear.ToString() + ")" : "")).ToArray()))
 					</div>
-	}
+				}
 				@if (Model.User.Employees != null && Model.User.Employees.Count > 0) {
 					<div class="profile-constituency">
-					@Didache.Resources.labels.profile_constituency_staff
+					@(Model.User.Employees.ToList()[0].IsFaculty && !Model.User.Employees.ToList()[0].IsStaff ? "Faculty" : "")
+					@(Model.User.Employees.ToList()[0].IsFaculty && Model.User.Employees.ToList()[0].IsStaff ? "Faculty/Staff" : "")
+					@(!Model.User.Employees.ToList()[0].IsFaculty && Model.User.Employees.ToList()[0].IsStaff ? "Staff" : "")
 					</div>
-	}
+				}
 			</div>
 				
 		<h3>@Didache.Resources.labels.profile_heading_personalinfo</h3>
 
 		<table class="user-profile">
-			
+			@if (Users.HasPermission(Model.User.UserID, Model.User.BiographySecuritySetting)) {	
 			<tr>
 				<th>
 					@Didache.Resources.labels.profile_label_birthday
@@ -75,6 +79,54 @@
 					@(Model.User.BirthDate.HasValue ? Model.User.BirthDate.Value.ToString("MMMM d") : "")
 				</td>
 			</tr>
+			}
+			
+			@if (Users.HasPermission(Model.User.UserID, Model.User.SpouseSecuritySetting) && (Model.User.Spouse != null || !Model.User.SpouseName.IsEmpty())) {	
+			<tr>
+				<th>
+					@Didache.Resources.labels.profile_label_spouse
+				</th>
+				<td>
+					@if (Model.User.Spouse != null) {
+						<a href="@Model.User.Spouse.ProfileDisplayUrl">@Model.User.Spouse.SecureFormattedName</a>
+					} else if (!Model.User.SpouseName.IsEmpty()) {
+						@Model.User.SpouseName
+					}
+				</td>
+			</tr>
+			}
+			
+			@if (Users.HasPermission(Model.User.UserID, Model.User.ChildrenSecuritySetting) && !String.IsNullOrWhiteSpace(Model.User.ChildrenList)) {	
+			<tr>
+				<th>
+					@Didache.Resources.labels.profile_label_children
+				</th>
+				<td>
+					@Model.User.ChildrenList
+				</td>
+			</tr>
+			}
+			
+			@if (Model.User.WorkplaceWorkers.Count > 0) {
+			<tr>
+				<th>
+					@Didache.Resources.labels.profile_label_work
+				</th>
+				<td>
+				    @foreach (WorkplaceWorker worker in Model.User.WorkplaceWorkers) {
+						<div>@worker.Position <text>at</text>
+						
+						@if (worker.Workplace != null) {
+							@Html.Raw(worker.Workplace.URL != "" ? "<a href=\"" + worker.Workplace.URL + "\">" : "")@worker.Workplace.FullName@Html.Raw(worker.Workplace.URL != "" ? "</a>" : "")
+						} else {
+							@worker.BusinessName	
+						}
+						@Html.Raw(worker.Phone != "" ? "<br />" + @worker.Phone + "" : "")
+						</div>
+					}
+				</td>
+			</tr>
+   }
 
 			@if (!Model.User.Hometown.IsEmpty()) {
 			<tr>
@@ -93,7 +145,7 @@
 					@Didache.Resources.labels.profile_label_biography
 				</th>
 				<td>
-					@Model.User.Bio
+					@Html.Raw(Model.User.Bio.Replace("\n", "<br>"))
 				</td>
 			</tr>
    }
@@ -103,43 +155,43 @@
 
 		<h3>@Didache.Resources.labels.profile_heading_contactinfo</h3>
 
-		<table class="user-profile">			
+		<table class="user-profile">	
+			@if (Users.HasPermission(Model.User.UserID, Model.User.EmailSecuritySetting)) {		
 			<tr>
 				<th>
 					@Didache.Resources.labels.profile_label_email
 				</th>
 				<td>
-					@if (Users.HasPermission(Model.User.UserID, Model.User.EmailSecuritySetting)) {
-						@Model.User.Email
-	 }
+					@Model.User.Email
 				</td>
 			</tr>
-						
+   }
+				
+			@if (Users.HasPermission(Model.User.UserID, Model.User.PhoneSecuritySetting)) {		
 			<tr>
 				<th>
 					@Didache.Resources.labels.profile_label_phone
 				</th>
 				<td>
-					@if (Users.HasPermission(Model.User.UserID, Model.User.PhoneSecuritySetting)) {
 						@Model.User.Phone
-	 }
+	
 				</td>
 			</tr>
+   }
 			
+			@if (Users.HasPermission(Model.User.UserID, Model.User.AddressSecuritySetting)) {		
 			<tr>
 				<th>
 					@Didache.Resources.labels.profile_label_address
 				</th>
 				<td>
-					@if (Users.HasPermission(Model.User.UserID, Model.User.AddressSecuritySetting)) {
 						@Model.User.Address1<br />
-						@(Model.User.Address2.IsEmpty() ? "" : @Model.User.Address2 + "<br />")
+						@Html.Raw(Model.User.Address2.IsEmpty() ? "" : @Model.User.Address2 + "<br />")
 						@(Model.User.City + " " + Model.User.State + " " + Model.User.Zip)<br />
 						@Model.User.Country
-	 }
-				</td>
+	 			</td>
 			</tr>
-			
+   }		
 		</table>
 
 		@if (!Model.User.Facebook.IsEmpty() || !Model.User.Twitter.IsEmpty() || !Model.User.Website.IsEmpty()) {
@@ -162,33 +214,36 @@
 	</div>
 	<div class="sub-column">
 	
-			
-		<h3>@Didache.Resources.labels.profile_label_commonclassmates</h3>
-		@if (Model.CommonUserRelationships != null && Model.CommonUserRelationships.Count > 0) {
+		@if (Model.User.UserID != Users.GetLoggedInUser().UserID) {
+			<h3>@Didache.Resources.labels.profile_label_commonclassmates</h3>
+			if (Model.CommonUserRelationships != null && Model.CommonUserRelationships.Count > 0) {
 		  
-			<div class="classmates-list-sidebar">
-			@foreach (User user in Model.CommonUserRelationships) {
-				<a href="@user.ProfileDisplayUrl" title="@user.SecureFormattedName" ><img alt="@user.SecureFormattedName" src="@user.GetProfileImageUrl(30, 30)" /></a>
-			}
-			</div>
+				<div class="classmates-list-sidebar">
+				@foreach (User user in Model.CommonUserRelationships) {
+					<a href="@user.ProfileDisplayUrl" title="@user.SecureFormattedName" ><img alt="@user.SecureFormattedName" src="@user.GetProfileImageUrl(30, 30)" /></a>
+				}
+				</div>
 			
 	  
 	  
-		} else {
-			<p>@(String.Format(Didache.Resources.labels.profile_label_commonclassmates_none, Model.User.SecureFormattedName))</p>
-		}
+			} else {
+				<p>@(String.Format(Didache.Resources.labels.profile_label_commonclassmates_none, Model.User.SecureFormattedName))</p>
+			}
 
-		<h3>@Didache.Resources.labels.profile_label_commoncourses</h3>
-		@if (Model.CommonCarsCourses != null && Model.CommonCarsCourses.Count > 0) {
+			<h3>@Didache.Resources.labels.profile_label_commoncourses</h3>
+			if (Model.CommonCarsCourses != null && Model.CommonCarsCourses.Count > 0) {
 		  
-			<ul>
-			@foreach (CarsCourse carsCourse in Model.CommonCarsCourses) {
-				<li>@carsCourse.CourseCode@carsCourse.Section - @carsCourse.Title @carsCourse.Session @carsCourse.Year</li>	
-			}
-			</ul>
+				<ul>
+				@foreach (CarsCourse carsCourse in Model.CommonCarsCourses) {
+					<li><a href="/community/search/?c=@carsCourse.CourseKey">@carsCourse.CourseCode@carsCourse.Section - @carsCourse.Session @carsCourse.Year</a></li>	
+				}
+				</ul>
 		
+			} else {
+				<p>@(String.Format(Didache.Resources.labels.profile_label_commoncourses_none, Model.User.SecureFormattedName))</p>
+			}
 		} else {
-			<p>@(String.Format(Didache.Resources.labels.profile_label_commoncourses_none, Model.User.SecureFormattedName))</p>
+			<p>This is you!</p>
 		}
 
 	</div>

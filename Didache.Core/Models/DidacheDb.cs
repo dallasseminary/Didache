@@ -34,7 +34,7 @@ namespace Didache {
 
 		// forums
 		public DbSet<Forum> Forums { get; set; }
-		public DbSet<Post> Posts { get; set; }
+		public DbSet<ForumPost> ForumPosts { get; set; }
 		public DbSet<Thread> Threads { get; set; }
 
 		// interactions
@@ -64,6 +64,17 @@ namespace Didache {
 		// community
 		public DbSet<UserRelationship> UserRelationships { get; set; }
 		public DbSet<CarsCourse> CarsCourses { get; set; }
+		public DbSet<UserAction> UserActions { get; set; }
+		public DbSet<UserPost> UserPosts { get; set; }
+		public DbSet<UserPostComment> UserPostComments { get; set; }
+
+
+		public DbSet<CarsRelationship> CarsRelationships { get; set; }
+		public DbSet<FamilyMember> FamilyMember { get; set; }
+		public DbSet<Workplace> Workplaces { get; set; }
+		public DbSet<WorkplaceWorker> WorkplaceWorkers { get; set; }
+
+		public DbSet<Announcement> Announcements { get; set; }
 
 		protected override void OnModelCreating(DbModelBuilder modelBuilder) {
 
@@ -125,7 +136,7 @@ namespace Didache {
 			modelBuilder.Entity<Thread>()
 				.ToTable("oe_Forums_Threads");
 
-			modelBuilder.Entity<Post>()
+			modelBuilder.Entity<ForumPost>()
 				.ToTable("oe_Forums_Posts");
 
 
@@ -181,14 +192,14 @@ namespace Didache {
 			modelBuilder.Entity<Student>()
 				.ToTable("dts_cars_Users_Students");
 
+			/*
 			modelBuilder.Entity<User>()
-				.HasOptional(u=> u.Student)
-				.WithRequired(s=> s.User);
+				.HasOptional(u => u.Students);
+			modelBuilder.Entity<Student>()
+				.HasRequired(s => s.User);*/
 
 			modelBuilder.Entity<Degree>()
 				.ToTable("dts_cars_Degrees");
-
-
 
 			// awesome
 			modelBuilder.Entity<UserRelationship>()
@@ -198,6 +209,32 @@ namespace Didache {
 			modelBuilder.Entity<CarsCourse>()
 				.HasKey(ur => new { ur.UserID, ur.CourseCode })
 				.ToTable("dts_cars_Courses_Students");
+
+			modelBuilder.Entity<UserAction>()
+				.ToTable("oe_UserActions");
+
+			// children, spouses
+			modelBuilder.Entity<CarsRelationship>()
+				.ToTable("dts_cars_Relationships");
+			modelBuilder.Entity<FamilyMember>()
+				.ToTable("dts_cars_Family");
+
+			modelBuilder.Entity<Workplace>()
+				.ToTable("dts_cars_Workplaces");
+			modelBuilder.Entity<WorkplaceWorker>()
+				.ToTable("dts_cars_Workplaces_Workers");
+
+
+			// posts!
+
+			modelBuilder.Entity<UserPost>()
+				.ToTable("oe_UserPosts");
+			modelBuilder.Entity<UserPostComment>()
+				.ToTable("oe_UserPosts_Comments");
+
+
+			modelBuilder.Entity<Announcement>()
+				.ToTable("oe_Announcements");
 
 		}
 	}

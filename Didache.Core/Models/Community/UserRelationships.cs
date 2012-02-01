@@ -33,7 +33,12 @@ namespace Didache {
 
 
 		public static List<User> GetApprovedRelationshipUsers() {
-			return GetRelationshipUsers(Users.GetLoggedInUser().UserID, RelationshipStatus.Approved);
+			User user = Users.GetLoggedInUser();
+			if (user != null) {
+				return GetRelationshipUsers(Users.GetLoggedInUser().UserID, RelationshipStatus.Approved);
+			} else {
+				return new List<User>();
+			}
 		}
 
 		/// <summary>
@@ -102,8 +107,9 @@ namespace Didache {
 
 			return db.CarsCourses
 				.Where(cu => cu.UserID == userID)
+				.ToList()
 				.OrderBy(cu => cu.Year)
-					.ThenBy(cu => cu.Session)
+					.ThenBy(cu => cu.SessionOrder)
 					.ThenBy(cu => cu.CourseCode)
 				.ToList();
 		}
@@ -186,6 +192,13 @@ namespace Didache {
 				db.UserRelationships.Add(rel);
 
 				db.SaveChanges();
+
+				User requesterUser = Users.GetUser(requesterUserID);
+				User targetUser = Users.GetUser(targetUserID);
+
+				string classmateRequestBody = Emails.FormatEmail(Didache.Resources.emails.classmates_approvalrequest, null,null,null, requesterUser, targetUser, null, null, null);
+
+				Emails.EnqueueEmail("automated@dts.edu", targetUser.Email, "Classmate Request", classmateRequestBody, false);
 			}
 
 		}
@@ -206,6 +219,33 @@ namespace Didache {
 				rel2.Status = (int) RelationshipStatus.Approved;
 			}
 
+			//db.SaveChanges();
+
+			// add user actions
+			UserAction ua = new UserAction() {
+				SourceUserID = requesterUserID,
+				TargetUserID = targetUserID,
+				UserActionType = UserActionType.BecomeClassmates,
+				ActionDate = DateTime.Now,
+				GroupID =0,
+				MessageID = 0,
+				PostCommentID = 0,
+				PostID = 0,
+				Text = ""
+			};
+			db.UserActions.Add(ua);
+			UserAction ua2 = new UserAction() {
+				SourceUserID = targetUserID,
+				TargetUserID = requesterUserID,
+				UserActionType = UserActionType.BecomeClassmates,
+				ActionDate = DateTime.Now,
+				GroupID = 0,
+				MessageID = 0,
+				PostCommentID = 0,
+				PostID = 0,
+				Text = ""
+			};
+			db.UserActions.Add(ua2);
 			db.SaveChanges();
 
 		}

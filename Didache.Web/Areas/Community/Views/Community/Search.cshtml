@@ -1,6 +1,6 @@
-﻿@model List<UserRelationship>
+﻿@model SearchResultsModel
 @{
-	ViewBag.Title = Didache.Resources.labels.submenu_community_home;
+	ViewBag.Title = Didache.Resources.labels.community_search_title ;
 }
 
 <style>
@@ -15,13 +15,13 @@
 }
 .user-search-results .user-search-result .user-image{
 	float: left;
-	width: 40px;
+	width: 60px;
 }
 
 .user-search-results .user-search-result .user-info{
 	float: left;
 	margin: 0 0 0 20px;
-	width: 200px;
+	width: 350px;
 }
 
 .user-search-results .user-search-result .user-info .user-title {
@@ -51,7 +51,7 @@
 	background: #ddd;
 	padding: 3px 5px;
 	font-size: 10px;
-	margin: 0 10px 0 0;
+	margin: 0 5px 0 0;
 	border-radius: 2px;	
 }
 
@@ -63,8 +63,30 @@
 	color: #666;
 }
 
-#search-form {
+#search-forms {
+	margin: 0 0 0 0;
+	overflow: hidden;
+}
+
+
+#searchbyname {
+	float: left;
+	width: 250px;
 	margin: 0 0 20px 0;
+}
+
+#searchbycourse {
+	float: left;
+	width: 250px;
+}
+
+#search-results-header {
+	position: relative;
+}
+#search-results-filters {
+	position: absolute;
+	right: 0;
+	top:0;	
 }
 </style>
 
@@ -72,24 +94,66 @@
 	<div class="main-column">
 		<div class="page-header">
 
-			<h2>@Didache.Resources.labels.submenu_community_search</h2>
+			@* <h2>@Didache.Resources.labels.submenu_community_search</h2> *@
 		
-		
-			<form id="search-form" action="/community/search/" method="get">
-				<input type="text" name="s" value="@Request.QueryString["s"]" placeholder="@Didache.Resources.labels.community_search_placeholder" />
-				<input class="d-button small" type="submit" value="@Didache.Resources.labels.community_search_button" />
-			</form>
+			<div id="search-forms">
+				<div id="searchbyname">
+					<h3>Search by name</h3>
+				
+					<form id="search-form" action="/community/search/" method="get">
+						<input type="text" name="s" value="@Request.QueryString["s"]" placeholder="@Didache.Resources.labels.community_search_placeholder" />
+						<input class="d-button small" type="submit" value="@Didache.Resources.labels.community_search_button" />
+					</form>					
+				</div>
+				
+				
+				@if (Model.Courses != null && Model.Courses.Count > 0) {
+				<div id="searchbycourse">
+					<h3>Search by course</h3>
+					@{ string lastSession = Model.Courses[0].SessionKey;}
+					<form id="coursesearch-form" action="/community/search/" method="get">
+							
+							
+						<select name="c">
+						<option value="">--Select a course --</option>
+							
+						@Html.Raw("<optgroup label=\"" + Model.Courses[0].SessionKey + "\">")
+						@foreach (CarsCourse carsCourse in Model.Courses) {
+							if (lastSession != carsCourse.SessionKey) {
+								@Html.Raw("<optgroup label=\"" + carsCourse.SessionKey + "\">")
+								lastSession = carsCourse.SessionKey;  
+							}
+							<option value="@carsCourse.CourseKey" @(carsCourse.CourseKey == Request["c"] ? " selected" : "")>@carsCourse.CourseCode@(!String.IsNullOrWhiteSpace(carsCourse.Title) ? " - " + carsCourse.Title : "")</option>
+						}
+						@Html.Raw("</optgroup>")
+						</select>
+						<input class="d-button small" type="submit" value="@Didache.Resources.labels.community_searchbycourse_button" />
+					</form>	
+				</div>
+				}
+			</div>		
 		</div>	
 
-	@if (Model != null) {
+	@if (Model.UserRelationships != null) {
 		
-		<h3>Results</h3>
+	 <div id="search-results-header">
+		
+			<h3>Results</h3>
+			<div id="search-results-filters">
+				<input type="radio" class="search-filter" name="search-filter" id="filter-all" value="all" checked="checked" /><label for="filter-all">All DTS (@Model.UserRelationships.Count)</label>
+				<input type="radio" class="search-filter" name="search-filter" id="filter-alumni" value="alumni" /><label for="filter-alumni">Alumni (@Model.UserRelationships.Count(ur => ur.TargetUser.Degrees.Count > 0))</label>
+				<input type="radio" class="search-filter" name="search-filter" id="filter-students" value="student" /><label for="filter-students">Students (@Model.UserRelationships.Count(ur => ur.TargetUser.Students.Count > 0))</label>
+				<input type="radio" class="search-filter" name="search-filter" id="filter-staff" value="staff" /><label for="filter-staff">Staff/Faculty (@Model.UserRelationships.Count(ur => ur.TargetUser.Employees.Count > 0))</label>
+			</div>
+	</div>
+
+
 	 
 		<div class="user-search-results">
-		@foreach (UserRelationship userRel in Model) {
-			<div class="user-search-result">
+		@foreach (UserRelationship userRel in Model.UserRelationships) {
+			<div class="user-search-result @(userRel.TargetUser.Students.Count > 0 ? " user-student" : "") @(userRel.TargetUser.Degrees.Count > 0 ? " user-alumni" : "") @(userRel.TargetUser.Employees.Count > 0 ? " user-staff" : "")">
 				<div class="user-image">
-					<img src="@userRel.TargetUser.GetProfileImageUrl(40, 40)" alt="@userRel.TargetUser.SecureFormattedName" />
+					<img src="@userRel.TargetUser.GetProfileImageUrl(60, 60)" alt="@userRel.TargetUser.SecureFormattedName" />
 				</div>
 				<div class="user-info">
 					<div class="user-title">
@@ -106,12 +170,22 @@
 							</span>
 						}
 						
-						@if (userRel.TargetUser.Student != null) {
-							<span class="user-tag">Student: @userRel.TargetUser.Student.Degree@(userRel.TargetUser.Student.PlannedGradYear > 0 ? ", " + @userRel.TargetUser.Student.PlannedGradYear.ToString() : "")</span>
+					
+						@if (userRel.TargetUser.Students != null && userRel.TargetUser.Students.Count > 0) {
+							<span class="user-tag">
+								Student:
+								@Html.Raw(String.Join(", ", userRel.TargetUser.Students.Select(s => s.Degree + (s.PlannedGradYear > 0 ? " (" + s.PlannedGradYear.ToString() + ")" : "")).ToArray()))
+							 
+							</span> 
 						}
 					
+					
 						@if (userRel.TargetUser.Employees.Count > 0) {
-							<span class="user-tag">Staff</span>
+							<span class="user-tag">
+								@(userRel.TargetUser.Employees.ToList()[0].IsFaculty && !userRel.TargetUser.Employees.ToList()[0].IsStaff ? "Faculty" : "")
+								@(userRel.TargetUser.Employees.ToList()[0].IsFaculty && userRel.TargetUser.Employees.ToList()[0].IsStaff ? "Faculty/Staff" : "")
+								@(!userRel.TargetUser.Employees.ToList()[0].IsFaculty && userRel.TargetUser.Employees.ToList()[0].IsStaff ? "Staff" : "")
+							</span>
 						}	
 
 					</div>
@@ -120,19 +194,23 @@
 
 
 				<div class="relationship-options">
-				@switch (userRel.RelationshipStatus) {
-					case RelationshipStatus.None :
-						<a class="d-button action small addclassmate-button" href="/api/addclassmate/@userRel.RequesterUserID/@userRel.TargetUserID">@Didache.Resources.labels.community_addclassmate_button</a>
-						break;
-					case RelationshipStatus.PendingTargetApproval:
-						<span class="relationship-status">@Didache.Resources.labels.community_relationshipstatus_pending</span>
-						break;					
-					case RelationshipStatus.PendingRequesterApproval:
-						<a class="d-button approveclassmate-button action small" href="/api/approveclassmate/@userRel.RequesterUserID/@userRel.TargetUserID">@Didache.Resources.labels.community_approveclassmate_button</a>
-						break;
-					case RelationshipStatus.Approved:
-						<span class="relationship-status">@Didache.Resources.labels.community_relationshipstatus_classmate</span>
-						break;
+				@if (userRel.TargetUserID != userRel.RequesterUserID) {
+					switch (userRel.RelationshipStatus) {
+						case RelationshipStatus.None :
+							if (userRel.TargetUser.AllowClassmateRequests) {
+								<a class="d-button action small addclassmate-button" href="/api/addclassmate/@userRel.RequesterUserID/@userRel.TargetUserID">@Didache.Resources.labels.community_addclassmate_button</a>
+							}
+							break;
+						case RelationshipStatus.PendingTargetApproval:
+							<span class="relationship-status">@Didache.Resources.labels.community_relationshipstatus_pending</span>
+							break;					
+						case RelationshipStatus.PendingRequesterApproval:
+							<a class="d-button approveclassmate-button action small" href="/api/approveclassmate/@userRel.RequesterUserID/@userRel.TargetUserID">@Didache.Resources.labels.community_approveclassmate_button</a>
+							break;
+						case RelationshipStatus.Approved:
+							<span class="relationship-status">@Didache.Resources.labels.community_relationshipstatus_classmate</span>
+							break;
+					}
 				}
 				</div>
 
@@ -140,13 +218,32 @@
 			</div>
   }
 		</div><!-- /.user-search-results -->
-	}
+	 
+	 
+		<script>
+			
+			// count
+			
+
+			$('.search-filter').on('click', function () {
+				var value = $(this).val(), allresults = $('.user-search-result')
+					.show();
+
+				if (value != 'all') {
+					allresults.filter(':not(.user-' + value + ')')
+						.hide();
+				}
+
+			});
+		</script>	 
+	 
+ }
 	
 	</div><!-- /.main-column -->
 
 
 	<div class="sub-column">
-		??
+		
 	</div>
 
 </div><!-- /.page-wide -->

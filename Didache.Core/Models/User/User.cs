@@ -67,6 +67,8 @@ namespace Didache {
 		public string NickName { get; set; }
 		public string NameFormat { get; set; }
 
+		public string SpouseName { get; set; }
+
 		public string Location {
 			get {
 				if (Country == "USA") {
@@ -260,6 +262,7 @@ namespace Didache {
 		// preferences
 		public string Language { get; set; }
 		public Double TimezoneOffset { get; set; }
+		public bool AllowClassmateRequests {get; set;}
 
 
 		// security
@@ -309,13 +312,70 @@ namespace Didache {
 		[ScriptIgnore]
 		public UserSecuritySetting BirthdateSecuritySetting { get { return (UserSecuritySetting)BirthdateSecurity; } set { BirthdateSecurity = (int)value; } }
 
+		
+
+
 		[ScriptIgnore]
 		public virtual ICollection<Degree> Degrees { get; set; }
 
 		[ScriptIgnore]
-		public virtual Student Student { get; set; }
+		//public virtual Student Student { get; set; }
+		public virtual ICollection<Student> Students { get; set; }
 
 		[ScriptIgnore]
 		public virtual ICollection<Employee> Employees { get; set; }
+
+		[ScriptIgnore]
+		public virtual ICollection<FamilyMember> FamilyMembers { get; set; }
+
+		[ScriptIgnore]
+		[ForeignKey("PrimaryID")]
+		public virtual ICollection<CarsRelationship> CarsRelationships { get; set; }
+
+		[ScriptIgnore]
+		public virtual ICollection<WorkplaceWorker> WorkplaceWorkers { get; set; }
+
+		private User spouse = null;
+		
+		[ScriptIgnore]
+		public User Spouse {
+			get {
+				// if it's been loaded once
+				if (spouse != null) 
+					return spouse;
+
+				// try to get spouse
+				var db = new DidacheDb();
+				CarsRelationship carsRelationship = db.CarsRelationships.FirstOrDefault(cr => cr.PrimaryID == UserID || cr.SecondaryID == UserID);
+				
+
+				if (carsRelationship != null) {
+					if (carsRelationship.PrimaryID == UserID)
+						spouse = carsRelationship.SecondaryUser;
+					else if (carsRelationship.SecondaryID == UserID)
+						spouse = carsRelationship.PrimaryUser;
+				}
+			
+				return spouse;
+			
+			}
+		}
+
+		public string ChildrenList {
+			get {
+				return String.Join(", ",FamilyMembers.Where(fm => fm.Family == "C").OrderBy(fm => fm.BirthDate).Select(fm=>fm.FirstName).ToArray());
+			}
+		}
+
+		public string PossessivePronoun {
+			get {
+				if (Gender == "M")
+					return "his";
+				else if (Gender == "F")
+					return "her";
+				else
+					return "their";
+			}
+		}
 	}
 }

@@ -4,9 +4,35 @@
 	ViewBag.Title = "Edit";
 }
 
+<style>
+.upload-photo-label {
+	position: relative;
+	display: block;
+}
+.upload-photo-label .upload-photo-text {
+	position: absolute;
+	display: none;
+	background: #000;
+	padding: 3px;
+	left: 5px;
+}
+.upload-photo-label:hover .upload-photo-text {
+	display: block;
+}
+#upload-photo-button {
+	width: 158px;
+	text-align: center;
+}
+</style>
+
 @section profileimage {
 	<div id="profile-large">
-		<img src="@Model.ProfileImageUrl" alt="@Model.SecureFormattedName" width="180" />
+		<a href="/account/uploadphoto/" class="upload-photo-label">
+			<span  class="upload-photo-text">@Didache.Resources.labels.profile_label_changephoto</span>
+			<img src="@Model.ProfileImageUrl" alt="@Model.SecureFormattedName" width="180" />
+		</a>
+
+		<a href="/account/uploadphoto/" class="d-button edit" id="upload-photo-button">@Didache.Resources.labels.profile_label_changephoto</a>
 	</div>
 }
 
@@ -19,7 +45,7 @@
 	  
 		<div class="page-header">
 			<h2>@Model.SecureFormattedName</h2>
-			<h3>@Model.Country</h3>			
+			<h3>@Model.Location</h3>			
 
 			@Html.ValidationSummary(true)	
 		
@@ -28,6 +54,9 @@
 			</div>
 		</div>
 
+		<div class="message-warning">
+			To change your address, phone number, or family information, please visit <a href="https://campus.dts.edu/cgi-bin/student/bioupd.cgi">CampusNet</a>
+		</div>
         
 	  
 		 @Html.HiddenFor(model => model.UserID)
@@ -45,6 +74,57 @@
 				</td>
 				<td class="security-setting">					
 					@Html.EditorFor(model => model.BirthdateSecuritySetting, "SecuritySetting", "BirthdateSecurity")	
+				</td>
+			</tr>
+
+			<tr>
+				<th>
+					@Didache.Resources.labels.profile_label_spouse
+				</th>
+				<td>
+					@if (Model.Spouse != null) {
+						<a href="@Model.Spouse.ProfileDisplayUrl">@Model.Spouse.SecureFormattedName</a>
+					} else if (!Model.SpouseName.IsEmpty()) {
+						@Model.SpouseName
+					}
+				</td>
+				<td class="security-setting">					
+					@Html.EditorFor(model => model.SpouseSecuritySetting, "SecuritySetting", "SpouseSecurity")	
+				</td>
+			</tr>
+			
+			
+			<tr>
+				<th>
+					@Didache.Resources.labels.profile_label_children
+				</th>
+				<td>
+					@Model.ChildrenList	
+				</td>
+				<td class="security-setting">					
+					@Html.EditorFor(model => model.ChildrenSecuritySetting, "SecuritySetting", "ChildrenSecurity")	
+				</td>
+			</tr>
+
+
+			<tr>
+				<th>
+					@Didache.Resources.labels.profile_label_work
+				</th>
+				<td>
+					@foreach (WorkplaceWorker worker in new DidacheDb().WorkplaceWorkers.Where(ww => ww.UserID == Model.UserID).ToList()) {
+						@worker.Position <text>at</text>
+						if (worker.Workplace != null) {
+							@worker.Workplace.FullName
+						} else {
+							@worker.BusinessName				
+						}
+					}
+				</td>
+				<td class="security-setting">					
+					<select disabled>
+						<option>All DTS</option>
+					</select>
 				</td>
 			</tr>
             
@@ -133,7 +213,10 @@
 					@Didache.Resources.labels.profile_label_address
 				</th>
 				<td>
-					<p>To change your address or phone number, please visit <a href="https://campus.dts.edu/cgi-bin/student/bioupd.cgi">CampusNet</a></p>
+						@Model.Address1<br />
+						@(Model.Address2.IsEmpty() ? "" : @Model.Address2 + "<br />")
+						@(Model.City + " " + Model.State + " " + Model.Zip)<br />
+						@Model.Country
 				</td>
 				<td class="security-setting">					
 					@Html.EditorFor(model => model.AddressSecuritySetting, "SecuritySetting", "AddressSecurity")	
@@ -201,6 +284,16 @@
 				</td>
 				<td class="security-setting">
 					@Html.EditorFor(model => model.PictureSecuritySetting, "SecuritySetting", "PictureSecurity")			
+				</td>
+			</tr>
+			<tr>
+				<th>
+					@Didache.Resources.labels.profile_label_classmaterequests
+				</th>
+				<td>
+					@Html.CheckBoxFor(model => model.AllowClassmateRequests)
+					@Html.LabelFor(model => model.AllowClassmateRequests, "Allow People to Request me as a 'classmate'")
+					
 				</td>
 			</tr>
 			@*

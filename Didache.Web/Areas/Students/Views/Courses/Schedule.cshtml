@@ -19,7 +19,7 @@
 			<h3>@(ViewBag.CurrentUnit != null ? "Unit " + ViewBag.CurrentUnit.SortOrder + ": " + ViewBag.CurrentUnit.Name : "")</h3>
 		</div>
 
-		@if (ViewBag.CurrentUnit.IsActive) {
+		@if (ViewBag.CurrentUnit != null && ViewBag.CurrentUnit.IsActive) {
 
 		<div id="schedule-tasks" class="block-list">
 	

@@ -1,0 +1,18 @@
+﻿@model Didache.UserTaskData
+
+
+@if (User.IsInRole(UserRoles.Facilitator) || User.IsInRole(UserRoles.Administrator) || User.IsInRole(UserRoles.Faculty)) {
+	<div class="message-warning">
+		As a grader or faculty member, you can use this entry box to start a new discussion thread that students need to respond to.
+		Students do not see the box below.
+	</div>
+	
+	<div class="turn-in-form">
+		<form method="post" action="/courses/api/taskfile/@Model.TaskID">
+			<textarea name="usercomment"></textarea>
+			<input type="submit" value="Create Discussion" class="d-button action task-submit" />
+		</form>
+	</div>
+}
+
+@{Html.RenderPartial("TaskType-CommentOnPost", Model); }

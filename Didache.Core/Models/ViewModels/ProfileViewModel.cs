@@ -10,5 +10,9 @@ namespace Didache.Models {
 		public List<CarsCourse> CommonCarsCourses { get; set; }
 
 		public UserRelationship ViewerRelationshipToUser { get; set; }
+
+
+		public List<CarsRelationship> Spouses { get; set; }
+		public List<FamilyMember> Children { get; set; }
 	}
 }

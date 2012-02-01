@@ -117,6 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="classmates_approvalrequest" xml:space="preserve">
+    <value>Hi {touser-secureshortname},
+
+{fromuser-secureshortname} has requested to be your 'Classmate' (think 'Friend' on Facebook, but without any of the theological connotations seminary student think of when they see 'Friend' or 'Follower') on https://online.dts.edu/. 
+
+You can approve the request at https://online.dts.edu/community/classmates/. 
+
+If you approve the request, you and {fromuser-secureshortname} will be able keep track of one another more easily, and you will also be able to control who in the DTS network can view your profile information by going to http://online.dts.edu/account/editprofile/
+
+Thanks!
+
+DTS Online</value>
+  </data>
   <data name="gradedtask_body" xml:space="preserve">
     <value>The assignment {task-name} in {course-code} has been graded by {fromuser-secureformattedname}. 
 
@@ -146,6 +159,8 @@ See the complete thread here:
 
 Please note: we will be adding some features in the coming weeks to give you greater control over which notifications you receive.
 
-DTS Online</value>
+DTS Online
+
+PS. If you're an alum, we are transitioning your classmates from https://alumni.dts.edu/ to https://online.dts.edu/.</value>
   </data>
 </root>
