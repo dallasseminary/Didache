@@ -189,7 +189,7 @@ namespace DTS.Online {
 					HttpContext.Current.User.IsInRole("oe-transcriber") ||
 					HttpContext.Current.User.IsInRole("oe-administrator") ||
 					HttpContext.Current.User.IsInRole("oe-faculty") ||
-					HttpContext.Current.User.IsInRole("oe-grader") ||
+					HttpContext.Current.User.IsInRole("oe-facilitator") ||
 					
 					courseCode.ToLower() == "st106" ||
 					courseCode.ToLower() == "be547" 
@@ -215,7 +215,12 @@ namespace DTS.Online {
 			}
 
 			// LOAD videoXmlPath		
-			string videoXmlPath = Settings.PlayerFilesLocation + courseCode + @"\titles\en-US.xml";
+			string videoXmlPath = Settings.PlayerFilesLocation + courseCode + @"\titles\" + language + ".xml";
+
+			if (!System.IO.File.Exists(videoXmlPath)) {
+				videoXmlPath = Settings.PlayerFilesLocation + courseCode + @"\titles\en-US.xml";
+
+			}
 
 			XmlDocument videosXmlDoc = new XmlDocument();
 			if (System.IO.File.Exists(videoXmlPath)) {

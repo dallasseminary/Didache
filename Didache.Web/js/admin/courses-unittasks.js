@@ -16,7 +16,7 @@
 				click: function () {
 
 					// serialize
-					var 
+					var
 						task = serializeEditor('#task-editor'),
 						isNew = false;
 
@@ -202,7 +202,7 @@
 							'<input type="text" class="unit-end-date date" value="" placeholder="end" />' +
 						'</span>' +
 						'<a class="unit-edit edit-link" href="/admin/courses/unit/0">Edit</a>' +
-						'<a class="unit-edit delete-link" href="/admin/courses/deleteunit/0">Delete</a>' +
+						'<a class="unit-delete delete-link" href="/admin/courses/deleteunit/0">Delete</a>' +
 					'</div>' +
 					'<div>' +
 						'<button type="button" class="add-task d-button action">Add Task</button>' +
@@ -499,6 +499,32 @@
 			$('#unit-editor').dialog('open');
 
 		});
+
+		return false;
+	});
+
+	$('#course-units').delegate('.unit-delete', 'click', function (e) {
+		e.preventDefault();
+
+		var deleteLink = $(this),
+			unitRow = deleteLink.closest('.course-unit'),
+			taskCount = unitRow.find('.course-task').length,
+			unitID = unitRow.data('unitid');
+
+		if (taskCount > 0) {
+			alert('Please delete the tasks first');
+		} else {
+			if ('YES' == prompt('Really? really? If so, type YES')) {
+				// ajax delete
+				$.ajax({
+					type: 'POST',
+					url: '/admin/courses/deleteunit/' + unitID,
+					success: function () {
+						unitRow.remove();
+					}
+				});
+			}			
+		}
 
 		return false;
 	});

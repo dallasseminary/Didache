@@ -28,7 +28,7 @@
 	</form>
 
 	@if (!String.IsNullOrEmpty(Model.Task.FileTypesAllowed)) {
-	 <p>Please submit one of the following file types: @Model.Task.FileTypesAllowed.Replace("|",", ")</p>
+	 <p>@Didache.Resources.labels.studentschedule_chooseafiletype: @Model.Task.FileTypesAllowed.Replace("|",", ")</p>
 	 }
 
 	</div>

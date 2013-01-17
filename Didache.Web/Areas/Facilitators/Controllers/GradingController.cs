@@ -203,8 +203,31 @@ namespace Didache.Web.Areas.Facilitators.Controllers
 			db.SaveChanges();
 
 			// email student and grader
-			
-			return Redirect("/grading/" + slug + "/entertaskgrades/" + id);
+			try {
+				User student = Users.GetUser(userTaskData.UserID);
+				User grader = Users.GetLoggedInUser();
+
+				Emails.FormatEmail(
+					Didache.Resources.emails.gradedtask_removed,
+					userTaskData.Course,
+					userTaskData.Unit,
+					userTaskData.Task,
+					grader,
+					student,
+					userTaskData,
+					null,
+					null,
+					null,
+					null,
+					null);
+			} catch { 
+			}
+
+			if (HttpContext.Request.UrlReferrer.ToString().IndexOf("usertasks") > -1) {
+				return Redirect(HttpContext.Request.UrlReferrer.ToString());
+			} else {
+				return Redirect("/grading/" + slug + "/entertaskgrades/" + id);
+			}
 		}
 
 		public ActionResult RemoveGraderFile(string slug, int id, int? id2) {
@@ -493,13 +516,16 @@ namespace Didache.Web.Areas.Facilitators.Controllers
 
 				ZipFile zipFile = ZipFile.Read(tempPath);
 				foreach (ZipEntry e in zipFile) {
-					
+
+					if (e.FileName.Contains("__MACOSX"))
+						continue;
 
 					// get task and student ID
 					string gradedFilename = e.FileName;
 					int userID = 0;
 					int taskID = 0;
-					Match match = Regex.Match(gradedFilename, @"\[(\d+),(\d+)\]");
+					int gradeNumber = 0;
+					Match match = Regex.Match(gradedFilename, @"\[(\d+),(\d+)(,(\d+))?\]");
 
 					if (match.Success && Int32.TryParse(match.Groups[1].Value, out taskID) && Int32.TryParse(match.Groups[2].Value, out userID)) {
 
@@ -518,12 +544,19 @@ namespace Didache.Web.Areas.Facilitators.Controllers
 						gradedFile.Filename = gradedFilename;
 						gradedFile.UploadedDate = DateTime.Now;
 
+
 						db.GradedFiles.Add(gradedFile);
 						db.SaveChanges();
 
 						// record to task
 						userData.GraderFileID = gradedFile.FileID;
 						userData.GraderSubmitDate = DateTime.Now;
+
+						// test for grade number
+						if (Int32.TryParse(match.Groups[4].Value, out gradeNumber)) {
+							userData.NumericGrade = gradeNumber;
+						}
+
 						db.SaveChanges();
 
 

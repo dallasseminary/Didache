@@ -28,6 +28,11 @@ namespace Didache {
 		public int PostID { get; set; }
 		public int PostCommentID { get; set; }
 		public int MessageID { get; set; }
+
+		public int DiscussionGroupID { get; set; }
+
+		[AllowHtml]
+		[MaxLength]
 		public string Text { get; set; }
 
 		[ForeignKey("SourceUserID")]
@@ -53,6 +58,10 @@ namespace Didache {
 						return "searched for '" + Text + "'.";
 					case UserActionType.ScheduleSearch:
 						return "schedule search on '" + Text + "'.";
+					case UserActionType.MakeNewPost:
+						return "Posted <blockquote>" + Text + "</blockquote><p><a href=\"/post/" + PostID + "\">Read Post</a>";
+					case UserActionType.MakeNewComment:
+						return "Replied to a <a href=\"/post/" + PostID + "\">post</a>";
 				}
 			}
 		}

@@ -1,0 +1,103 @@
+﻿@model Didache.UserTaskData
+
+@{	
+	List<VideoInfo> Videos = new List<VideoInfo>();
+
+	string externalThumbBase = "https://dtsoe.s3.amazonaws.com"; // "http://oefiles.dts.edu";
+	string courseCode = Model.Task.Course.CourseCode;
+	string versionInfo = (Model.Task.Course.VersionNumber > 1 ? "v" + Model.Task.Course.VersionNumber : ""); 
+	string xmlPath = Settings.PlayerFilesLocation + courseCode + versionInfo + @"\titles\" + Users.GetLoggedInUser().Language + ".xml";
+	
+	
+	// check language
+	if (!File.Exists(xmlPath)) {
+		// defatul back to english	
+		xmlPath = Settings.PlayerFilesLocation + courseCode + versionInfo + @"\titles\en-US.xml";
+	}		
+
+	// load XML
+	
+	
+	if (File.Exists(xmlPath))
+	{
+		System.Xml.XmlDocument doc = new System.Xml.XmlDocument();
+		doc.Load(xmlPath);
+
+		Random random = new Random();
+		int index = 1;
+
+		// pull videos
+		System.Xml.XmlNodeList videoNodes = doc.SelectNodes("//unit[@number=" + Model.Task.Unit.SortOrder + "]/video");
+		foreach (System.Xml.XmlNode vNode in videoNodes)
+		{
+
+			Videos.Add(new VideoInfo
+						{
+							SortOrder = index++,
+							Title = vNode.Attributes["name"].Value,
+							Duration = vNode.Attributes["duration"].Value,
+							VideoUrl = String.Format("{0}/{1}/{2}_u{3}_v{4}.mp4", externalThumbBase, courseCode.ToLower() + versionInfo, courseCode.ToUpper() + versionInfo, Model.Task.Unit.SortOrder.ToString().PadLeft(3, '0'), vNode.Attributes["number"].Value.ToString().PadLeft(3, '0')),
+
+							ThumbnailFilename = String.Format("{0}_u{1}_v{2}_thumb.jpg", courseCode.ToUpper() + versionInfo, Model.Task.Unit.SortOrder.ToString().PadLeft(3, '0'), vNode.Attributes["number"].Value.ToString().PadLeft(3, '0')),
+
+							//ThumbnailUrl = String.Format("{0}/{1}/videos/{2}_u{3}_v{4}_thumb.jpg", locaThumbBase, Model.Course.CourseCode.ToLower(), Model.Course.CourseCode.ToUpper(), Model.Unit.UnitNumber.ToString().PadLeft(3, '0'), vNode.Attributes["number"].Value.ToString().PadLeft(3, '0')),
+							ThumbnailUrl = String.Format("{0}/{1}/{2}_u{3}_v{4}_thumb.jpg", externalThumbBase, courseCode.ToLower() + versionInfo, courseCode.ToUpper() + versionInfo, Model.Task.Unit.SortOrder.ToString().PadLeft(3, '0'), vNode.Attributes["number"].Value.ToString().PadLeft(3, '0')),
+							PercentComplete = random.Next(100)
+						});
+		}
+	} else {
+		//Response.Write("can't find: " + xmlPath);	
+	}
+	
+}
+
+@if (Request.Browser.IsMobileDevice || Request.UserAgent.ToLower().Contains("ipad")) {
+	<div class="message-warning">
+	Since you are on a mobile device, you might consider using <a href="https://online.dts.edu/mobile">online.dts.edu/mobile</a> 
+	which will give you direct access to videos, slides, and transcripts in a mobile-friendly view.
+	</div>
+}
+
+@Didache.Resources.labels.videos_totaltime : 
+		@(TimeSpan.FromSeconds( Videos.Sum( v=>v.TotalSeconds) ).Hours ) 
+		@Didache.Resources.labels.videos_hours, 
+		@(TimeSpan.FromSeconds( Videos.Sum( v=>v.TotalSeconds) ).Minutes ) 
+		@Didache.Resources.labels.videos_minutes<br />
+
+<br /><br />
+
+<div class="video-list">
+
+
+@foreach (VideoInfo v in Videos) {
+	<div class="video">
+
+		<div class="video-thumb" @* title="You have watched about @((Double)v.Minutes*(Double)v.PercentComplete/100) out of the @v.Minutes minutes in this video" *@>
+			<div class="video-options-container" style="background-image:url(@v.ThumbnailUrl);">
+				<div class="video-options">
+					<a class="icon watchvideo" target="_blank" href="/player/#course=@(courseCode + versionInfo)&unit=@Model.Task.Unit.SortOrder&video=@v.SortOrder&language=@Users.GetLoggedInUser().Language">@Didache.Resources.labels.videos_watch</a>
+					<a class="icon slides" target="_blank" href="/player/print-slides.aspx?course=@(courseCode + versionInfo)&unit=@Model.Task.Unit.SortOrder&video=@v.SortOrder&language=@Users.GetLoggedInUser().Language">@Didache.Resources.labels.videos_slides</a>
+					<a class="icon transcript" target="_blank" href="/player/print-transcript.aspx?course=@(courseCode + versionInfo)&unit=@Model.Task.Unit.SortOrder&video=@v.SortOrder&language=@Users.GetLoggedInUser().Language">@Didache.Resources.labels.videos_transcript</a>
+				</div>
+			</div>
+			<div class="progress-outline" >
+				<div class="progress-percent" style="width:@(v.PercentComplete)px"></div>
+			</div>					
+		</div>					
+				
+		<a class="video-info" href="/player/#course=@(courseCode + versionInfo)&unit=@Model.Task.Unit.SortOrder&video=@v.SortOrder&language=@Users.GetLoggedInUser().Language" target="_blank" @* x-title="You have watched about @((Double)v.Minutes * (Double)v.PercentComplete / 100) out of the @v.Minutes minutes in this video" *@>
+			<span class="title">@v.Title</span>
+			<span class="duration">@v.Minutes @Didache.Resources.labels.videos_minutes</span>
+		</a>
+	</div>
+
+}
+</div>
+
+<a href="/player/print-transcript.aspx?course=@(courseCode + versionInfo)&unit=@Model.Task.Unit.SortOrder&language=@Users.GetLoggedInUser().Language" target="_blank" class="d-button">@Didache.Resources.labels.videos_printalltranscripts</a>
+<a href="/player/print-slides.aspx?course=@(courseCode + versionInfo)&unit=@Model.Task.Unit.SortOrder&language=@Users.GetLoggedInUser().Language" target="_blank"  class="d-button">@Didache.Resources.labels.videos_printallslides</a>
+
+
+
+@{Html.RenderPartial("TaskType-SimpleCompletion", Model); }
+

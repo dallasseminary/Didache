@@ -8,10 +8,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Didache.TaskTypes {
 
-	//[Display(Name = "Simple Completion (no grade)", Description = "Student presses a complete button, but the grade is not changed.")]
-	public class PercentComplete : ITaskType {
+	//[Display(Name = "Simple Completion", Description = "Student presses a complete button, then the grade is marked as 100.")]
+	public class SimpleCompletion : ITaskType {
 
-		public TaskTypeResult ProcessFormCollection(int taskID, int userID, FormCollection collection, HttpRequestBase request) {
+		public TaskTypeResult ProcessFormCollection(int taskID, int userID, FormCollection collection, HttpRequestBase request)
+		{
 			DidacheDb db = new DidacheDb();
 
 			UserTaskData data = db.UserTasks.SingleOrDefault(d=> d.TaskID == taskID && d.UserID == userID);
@@ -19,19 +20,15 @@ namespace Didache.TaskTypes {
 			data.TaskCompletionStatus = (TaskCompletionStatus)Int32.Parse(collection["TaskStatus"]);
 			data.StudentSubmitDate = DateTime.Now;
 
-			int percentComplete = -1;
-			if (Int32.TryParse(collection["PercentComplete"], out percentComplete) && percentComplete >= 1 && percentComplete <= 100) {
-
-				data.NumericGrade = percentComplete;
-
-				db.SaveChanges();
-
-				return new TaskTypeResult() { Success = true };
-
+			if (data.TaskCompletionStatus == TaskCompletionStatus.Completed) {
+				data.NumericGrade = 100;
 			} else {
-				return new TaskTypeResult() { Success = false };
-
+				data.NumericGrade = null;
 			}
+
+			db.SaveChanges();
+
+			return new TaskTypeResult () { Success = true };
 		}
 	}
 }

@@ -13,8 +13,8 @@ namespace Didache {
 			return new DidacheDb().Threads.Where(t => t.ForumID == forumID).OrderBy(t => t.LastPostDate).ToList();
 		}
 
-		public static List<Post> GetPosts(int threadID) {
-			return new DidacheDb().Posts.Where(t => t.ThreadID == threadID).ToList();
+		public static List<ForumPost> GetPosts(int threadID) {
+			return new DidacheDb().ForumPosts.Where(t => t.ThreadID == threadID).ToList();
 		}
 
 		public static Forum GetForum(int forumID, bool includeThreads) {

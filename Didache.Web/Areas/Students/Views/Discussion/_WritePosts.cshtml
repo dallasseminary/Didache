@@ -1,7 +1,7 @@
-﻿@model List<Post>
+﻿@model List<ForumPost>
 
 
-@foreach (Post post in Model) {
+@foreach (ForumPost post in Model) {
 <div class="post">
 	<div class="poster">
 		<a href="@post.User.ProfileDisplayUrl">
@@ -20,31 +20,6 @@
             </div>
             <div class="post-body">@Html.Raw(post.PostContentFormatted)</div>
 		</div>
-		@*
-        <div class="reply-link"><a class="d-button edit" rel="#replyto@(post.PostID)" href="javascript:void(0)">Reply</a><div class="clear"></div></div>
-
-        <div class="add-reply">
-            <form class="forum-post-new" method="post" action="/courses/@ViewContext.RouteData.Values["slug"]/discussion/reply/@post.ThreadID">
-	            <input type="hidden" class="ThreadID" name="ThreadID" value="@post.ThreadID" />
-	            <input type="hidden" class="ForumID" name="ForumID" value="@post.ForumID" />
-	            <input type="hidden" class="ReplyToPostID" name="ReplyToPostID" value="@post.PostID" />
-				<input type="hidden" class="Subject"name="Subject" value="RE: @post.Subject" />
-
-                <table>
-                    <tr>
-                        <th>
-                            <img src="@Users.GetLoggedInUser().GetProfileImageUrl(40,40)" alt="@Users.GetLoggedInUser().SecureShortName" />
-                        </th>
-                        <td>
-                            <textarea id="replyto@(post.PostID)" name="PostContent" cols="50" rows="8"></textarea>
-                            <input type="button" class="d-button action reply-button" value="Add Reply" />
-                        </td>
-                    </tr>
-                </table>
-
-            </form>
-        </div>
-		*@
 	</div>
 </div>
 }

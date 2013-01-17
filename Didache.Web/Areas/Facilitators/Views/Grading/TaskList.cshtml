@@ -58,6 +58,7 @@
 <script>
 jQuery(document).ready(function ($) {
 	// shorten task descriptions
+	/*
 	$('.task-instructions').expander({
 		slicePoint: 20
 		, widow: 2
@@ -65,6 +66,11 @@ jQuery(document).ready(function ($) {
 		, expandText: 'show »'
 		//, userCollapse: false
 		, userCollapseText: '« hide'
+	});
+	*/
+
+	$('.task-instructions').truncate({
+		max_length: 20
 	});
 });
 </script>

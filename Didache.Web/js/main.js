@@ -70,4 +70,25 @@
 
 		return false;
 	});
+
+	/*
+
+	//news feed shorten
+	// shorten task descriptions
+	$('.user-post .post-text').expander({
+		slicePoint: 500
+		, widow: 2
+		//,expandEffect: 'show'
+		, expandText: 'more »'
+		//, userCollapse: false
+		, userCollapseText: ''
+	});
+	*/
+
+
+
+
+
+	//$('.user-post .post-text').truncate({ max_length: 500 });
+
 });

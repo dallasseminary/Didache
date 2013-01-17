@@ -5,6 +5,7 @@
 		<a href="/courses/@ViewContext.RouteData.Values["slug"]/dashboard"@(Html.Raw(ViewContext.RouteData.Values["action"].ToString().ToLower() == "dashboard" ? " class=\"selected\"" : ""))>
 			<span>@Html.Raw(Didache.Resources.labels.coursetabs_dashboard) </span>
 			<dfn>@Html.Raw(Didache.Resources.labels.coursetabs_dashboard_desc) </dfn>
+			@* <span class="notification" style="background-color: green;">:)</span> *@
 		</a>
 	</li>
 	<li>

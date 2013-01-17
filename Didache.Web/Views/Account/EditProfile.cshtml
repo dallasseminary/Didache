@@ -336,32 +336,52 @@
 				<td>
 					@Html.DropDownListFor(model => model.Language, new SelectList(new[] {   
 																	new { Key = "en-US", Name = "English" }, 
-																	new { Key = "es", Name = "Español (Spanish)" }, 
-																	new { Key = "ar", Name = "العربية (Arabic)" }, 
+																	new { Key = "es-ES", Name = "Español (Spanish)" }, 
+																	//new { Key = "ar-AR", Name = "العربية (Arabic)" }, 
 																	new { Key = "zh-CN", Name = "汉语[简体字] (Simplified)" }, 
 																	new { Key = "zh-TW", Name = "漢語[繁體字] (Traditional)" }
 																}, "Key", "Name", ViewBag.Language))
 					@Html.ValidationMessageFor(model => model.Language)				
 				</td>
 			</tr>
-			@*
+			</table>
+			
+
+		<h3>@Didache.Resources.labels.profile_heading_notifications</h3>
+		<table class="user-profile">		
 			<tr>
-				<th>Notifications</th>
+				<th>Course Interactions</th>
 				<td>
-					Course Interactions<br />
-					When a classmate replies to my assignment<br />
-					When a classmate replies to an assignment I also commented upon<br />
-
-					Discussion Boards<br />
-					When a classmate replies to a thread I started<br />
-					When a classmate replies to a thread in which I've participated<br />
-
-					Walls<br />
-					When a someone replies to my post<br />
-					When a someone replies to a post I also replied to<br />
+					@Html.CheckBoxFor(model => model.NotifyInteractionThreadsReplies)
+					@Html.LabelFor(model => model.NotifyInteractionThreadsReplies, "Notify me when a student replies to an assignment I posted.")
+					<br />
+					<span class="example">When you post your assignment, do you want to get an email whenever someone replies?</span>
+					<br />
+					@Html.CheckBoxFor(model => model.NotifyInteractionPostReplies)
+					@Html.LabelFor(model => model.NotifyInteractionPostReplies, "Notify me when a student replies to an assignment I commented on.")
+					<br />
+					<span class="example">When a classmate posts an assignment, and you comment on it, do you want to be notified when another person comments on it?</span>
+					<br />
 				</td>
 			</tr>
-			*@
+
+			<tr>
+				<th>Public Posts</th>
+				<td>
+					@Html.CheckBoxFor(model => model.NotifyUserPostReplies)
+					@Html.LabelFor(model => model.NotifyUserPostReplies, "Notify me when someone comments on something I posted.")
+					<br />
+					<span class="example">When you post something, do you want to be notified when another person comments on it?</span>
+					<br />
+				
+					@Html.CheckBoxFor(model => model.NotifyUserPostCommentReplies)
+					@Html.LabelFor(model => model.NotifyUserPostCommentReplies, "Notify me when someone comments on a post I also commented on.")
+					<br />
+					<span class="example">When someone posts something, and you comment on it, do you want to be notified when another person adds a followup comment?</span>
+					
+				</td>
+			</tr>
+
 			@*
 			<tr>
 				<th>

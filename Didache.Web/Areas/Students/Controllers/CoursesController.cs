@@ -39,6 +39,19 @@ namespace Didache.Web.Areas.Students.Controllers
 		}
 
 		[Authorize]
+		public ActionResult UserPosts(string slug) {
+
+			Course course = Didache.Courses.GetCourseBySlug(slug);
+
+			ViewBag.UserPosts = db.UserPosts
+								.Where(up => up.CourseID == course.CourseID && !up.IsDeleted)
+								.OrderByDescending(up => up.PostDate)
+								.ToList();
+
+			return View(course);
+		}
+
+		[Authorize]
 		public ActionResult Tools(string slug) {
 
 			Course course = Didache.Courses.GetCourseBySlug(slug);

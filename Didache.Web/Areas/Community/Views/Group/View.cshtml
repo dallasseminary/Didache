@@ -1,0 +1,268 @@
+﻿@model Didache.Models.DiscussionGroupViewModel
+
+@{
+    ViewBag.Title = Model.DiscussionGroup.Name;
+}
+
+<style>
+	.page-header p {
+		max-width: 400px;
+		margin: 10px 0 0 0;
+		line-height: 1.5;
+	}
+	
+.sidebar-list {
+}
+.sidebar-list a {
+	display: block;
+	position: relative;
+	padding: 0 0 0 30px;
+	margin: 0 0 10px 0;
+	min-height: 20px;
+}
+.sidebar-list a img {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+/* invite stuff */
+#invite-input {
+	width: 122px;
+}
+#invite-button {
+	width: 40px;
+}
+
+</style>
+
+@section profileimage {
+	<div id="profile-large">
+		<img src="@(Model.DiscussionGroup.ProfileImageUrl)" alt="@Model.DiscussionGroup.Name" width="180" />
+	</div>
+}
+
+<div class="page-narrow">
+	<div class="main-column">
+		<div class="page-header">
+			<h2>@Model.DiscussionGroup.Name</h2>
+			<p>@Html.Raw(Model.DiscussionGroup.Description)</p>
+			<div class="actions" data-groupid="@Model.DiscussionGroup.GroupID">
+
+				@if (Model.Membership == null) {
+					if (Model.DiscussionGroup.GroupType == DiscussionGroupType.Open) {
+						<a class="d-button action" href="#" id="join-group-button">Join Group</a>
+					} else {
+						<text>unknown status</text>	
+					}
+				} else {
+					if (Model.Membership.GroupMembershipStatus == GroupMembershipStatus.Member) {
+						<a id="leave-group-button" class="d-button action" href="#">Leave Group</a>
+						<input type="checkbox" id="receive-messages" @(Model.Membership.IsSubscribed ? "checked" : "") /><label for="receive-messages">Receive Messages</label> 
+					} else if (Model.Membership.GroupMembershipStatus == GroupMembershipStatus.Administrator) {
+						<a id="leave-group-button"  class="d-button" href="#">Leave Group</a>
+						<a class="d-button edit" href="/groups/edit/@Model.DiscussionGroup.GroupID">Edit Group</a>
+					} else if (Model.Membership.GroupMembershipStatus == GroupMembershipStatus.Invited) {
+						<a id="accept-invite-button" class="d-button action" href="#">Accept Invite</a>
+					} else {
+						<text>unknown status</text>	
+					}
+				}
+				
+		   </div>
+		</div>
+
+		@Html.Partial("_DynamicUserPosts", new PostListViewOptions() { PostListType = Didache.PostListType.Group, KeyID = Model.DiscussionGroup.GroupID})
+
+	</div>
+	<div class="sub-column">	
+		
+		<div class="user-list-small">
+			@if (Model.Membership != null && (Model.Membership.GroupMembershipStatus == GroupMembershipStatus.Member || Model.Membership.GroupMembershipStatus == GroupMembershipStatus.Administrator)) {
+				<h3>Invite Users</h3>
+	   
+				<div id="invite-panel">
+					<input type="text" id="invite-input" />
+					<input type="button" class="d-button action small" id="invite-button" value="Find" />
+				</div>
+	   
+				<div id="invite-results">
+					
+				</div>
+			}
+			
+
+
+			<h3>Group Members</h3>
+			@foreach (DiscussionGroupMember member in Model.DiscussionGroup.GroupMembers) {
+				<div class="user">
+					<a href="@member.User.ProfileDisplayUrl" title="@member.User.SecureFormattedName">
+						<img src="@member.User.GetProfileImageUrl(30, 30)" width="30" height="30" alt="@member.User.SecureFormattedName">
+					</a>
+				</div>
+			}				
+			<div class="clear"></div>
+		</div>
+
+		@*
+		<h3>Members</h3>
+
+		<div class="sidebar-list">
+		@foreach (DiscussionGroupMember member in Model.GroupMembers) {
+			<a href="@member.User.ProfileImageUrl"><img src="@member.User.GetProfileImageUrl(20,20)" alt="@member.User.FormattedName" width="20" height="20" />@member.User.FormattedName</a>}
+		</div>
+		*@
+
+	</div>
+
+</div>
+
+@if (Model.Membership == null) {
+<script>
+	$('.user-post-input').hide();
+</script>
+}
+
+<script>
+	jQuery(function ($) {
+		$('#join-group-button').on('click', function () {
+
+			var button = $(this);
+
+			$.ajax({
+				type: 'POST',
+				url: '/api/JoinDiscussionGroup',
+				data: { discussiongroupid: $('.actions').attr('data-groupid') },
+				success: function (d) {
+					window.location.reload();
+				}
+			});
+		});
+
+
+		$('#leave-group-button').on('click', function () {
+
+			var button = $(this);
+
+			$.ajax({
+				type: 'POST',
+				url: '/api/LeaveDiscussionGroup',
+				data: { discussionGroupID: $('.actions').attr('data-groupid') },
+				success: function (d) {
+					window.location.reload();
+				}
+			});
+		});
+
+		$('#accept-invite-button').on('click', function () {
+			var button = $(this);
+
+			$.ajax({
+				type: 'POST',
+				url: '/api/AcceptDiscussionGroupInvite',
+				data: { discussionGroupID: $('.actions').attr('data-groupid') },
+				success: function (d) {
+					window.location.reload();
+				}
+			});
+		});
+
+		$('#receive-messages').on('click', function () {
+			var check = $(this);
+
+			$.ajax({
+				type: 'POST',
+				url: '/api/ToggleDiscussionGroupSubscription',
+				data: { discussionGroupID: $('.actions').attr('data-groupid'), isSubscribed: check.is(':checked') },
+				success: function (d) {
+					$('label[for="' + check.attr('id') + '"]').effect("highlight", {}, 500);
+				}
+			});
+
+		});
+
+
+		/* invite stuff */
+		$('#invite-button').on('click', function () {
+			doInviteSearch();
+		});
+
+		function doInviteSearch() {
+			$.ajax({
+				type: 'POST',
+				url: '/api/findinvitees',
+				data: { query: $('#invite-input').val(), discussionGroupID: $('.actions').attr('data-groupid') },
+				success: function (results) {
+					var html = '';
+					for (var i = 0, il = results.length; i < il; i++) {
+						var user = results[i];
+
+						html +=
+							'<div class="invitee" data-userid="' + user.userid + '">' +
+								'<a href="' + user.displayprofileurl + '">' +
+									'<img src="' + user.profileimageurl + '">' +
+									user.secureformattedname +
+								'</a>' +
+								(user.isMember ?
+									'<span class="status">member</span>' :
+									user.isInvited ?
+										'<span class="status">invited</span>' :
+										'<span class="d-button small action invite-user">invite</span>'
+								) +
+							'</div>';
+					}
+
+					$('#invite-results').html(html);
+
+				}
+			});
+		}
+
+		$('#invite-results').on('click', '.invite-user', function () {
+			var button = $(this),
+				userid = button.closest('.invitee').attr('data-userid'),
+				groupid = $('.actions').attr('data-groupid');
+
+			button.hide();
+
+			$.ajax({
+				type: 'POST',
+				url: '/api/inviteusertodiscussiongroup',
+				data: { userid: userid, discussiongroupid: groupid },
+				success: function (results) {
+					button
+						.before($('<span class="status">invited</span>'))
+						.remove();
+
+				}
+			});
+
+		});
+
+	});
+</script>
+
+<style>
+	
+	#invite-results {
+		max-height: 200px;
+		overflow: auto;
+	}
+.invitee {
+	padding: 0 0 0 40px;
+	margin: 0 0 15px 0;
+	position: relative;
+	height: 30px;
+}
+.invitee a img {
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+.invitee .invite-user, .invitee .status {
+	display: block;
+	width: 50px;
+	margin: 2px 0 0 0 ;
+}
+</style>
+

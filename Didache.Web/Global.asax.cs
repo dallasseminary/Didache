@@ -21,16 +21,24 @@ namespace Didache.Web {
 
 
 
-			string[] staticPages = new string[] {"about","tour","help","resources"};
+			string[] staticPages = new string[] {"about","tour","help","resources", "indexfeed", "posts", "faq"};
 
 			foreach (string page in staticPages) {
 				routes.MapRoute(
 					"static_" + page, // Route name
 					page, // URL with parameters
 					new { controller = "Home", action = page } // Parameter defaults
-					, new string[] {"Didache.Web.Controllers"}
+					, new string[] { "Didache.Web.Controllers" }
 				);
 			}
+
+			routes.MapRoute(
+				"ViewPost", // Route name
+				"post/{id}", // URL with parameters
+				new { controller = "Home", action = "Post" } // Parameter defaults
+				, new string[] { "Didache.Web.Controllers" }
+			);
+			
 
 			routes.MapRoute(
 				"Default", // Route name

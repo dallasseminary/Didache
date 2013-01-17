@@ -58,27 +58,54 @@ namespace Didache {
 		[Key]
 		public int UserID { get; set; }
 
+		[ScriptIgnore]
 		public bool IsDeceased { get; set; }
 
+		[ScriptIgnore]
 		public string FirstName { get; set; }
+
+		[ScriptIgnore]
 		public string MiddleName { get; set; }
+
+		[ScriptIgnore]
 		public string LastName { get; set; }
+
+		[ScriptIgnore]
 		public string FullName { get; set; }
+
+		[ScriptIgnore]
+
 		public string NickName { get; set; }
+		[ScriptIgnore]
 		public string NameFormat { get; set; }
 
+		[ScriptIgnore]
 		public string SpouseName { get; set; }
 
 		public string Location {
 			get {
-				if (Country == "USA") {
+				if (Country == "USA" || Country == "UNITED STATES OF AMERICA") {
 					return City + ", " + State;
 				} else {
-					return Country;
+					return ToTitleCase(Country);
 				}
 			}
 		}
 
+		private string ToTitleCase(string mText) {
+			string rText = "";
+			try {
+				System.Globalization.CultureInfo cultureInfo =
+	System.Threading.Thread.CurrentThread.CurrentCulture;
+				System.Globalization.TextInfo TextInfo = cultureInfo.TextInfo;
+				rText = TextInfo.ToTitleCase(mText);
+			} catch {
+				rText = mText;
+			}
+			return rText;
+		}  
+
+		[ScriptIgnore]
 		public string FormattedName {
 			get {
 				switch (NameFormat) {
@@ -99,6 +126,7 @@ namespace Didache {
 			}
 		}
 
+		[ScriptIgnore]
 		public string FormattedNameLastFirst {
 			get {
 				switch (NameFormat) {
@@ -119,6 +147,7 @@ namespace Didache {
 			}
 		}
 
+		[ScriptIgnore]
 		public string ShortName {
 			get {
 				switch (NameFormat) {
@@ -213,7 +242,10 @@ namespace Didache {
 			}
 		}
 
+		[ScriptIgnore]
 		public string Title { get; set; }
+
+		[ScriptIgnore]
 		public string Suffix { get; set; }
 
 		public string Address1 { get; set; }
@@ -222,6 +254,8 @@ namespace Didache {
 		public string State { get; set; }
 		public string Zip { get; set; }
 		public string Country { get; set; }
+
+		[ScriptIgnore]
 		public string Phone { get; set; }
 
 		[Required]
@@ -229,50 +263,91 @@ namespace Didache {
 		[RegularExpression(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", ErrorMessage="Invalid Email address")]
 		public string Email { get; set; }
 
+		[ScriptIgnore]
 		public string Gender { get; set; }
+		[ScriptIgnore]
 		public string Race { get; set; }
+		[ScriptIgnore]
 		public string Citizen { get; set; }
 
+		[ScriptIgnore]
 		public DateTime? BirthDate { get; set; }
 
+		[ScriptIgnore]
 		public DateTime? LastUpdatedDate { get; set; }
+
+		[ScriptIgnore]
 		public DateTime? DeceasedDate { get; set; }
 
 		// NON CARS
 		public Double Latitude { get; set; }
 		public Double Longitude { get; set; }
+
+		[ScriptIgnore]
 		public bool IsGeocoded { get; set; }
+		
+		[ScriptIgnore]
         public bool AttemptedGeocode { get; set; }
+		
+		[ScriptIgnore]
         public string Hometown { get; set; }
+		
+		[ScriptIgnore]
         public string AlmaMater { get; set; }
 
 		[MaxLength]
+		[ScriptIgnore]
         public string Bio { get; set; }
+
+		[ScriptIgnore]
         public string MinistryGoals { get; set; }
         public string Facebook { get; set; }
         public string Twitter { get; set; }
         public string Website { get; set; }
 
 		// LOGIN details
+		[ScriptIgnore]
 		public string Username { get; set; }
+
+		[ScriptIgnore]
 		public Guid AspnetUserID { get; set; }
+
+		[ScriptIgnore]
 		public Guid PersonID { get; set; }
+
+		[ScriptIgnore]
 		public bool IsRegistered { get; set; }
 
 		// preferences
 		public string Language { get; set; }
 		public Double TimezoneOffset { get; set; }
+
+		[ScriptIgnore]
 		public bool AllowClassmateRequests {get; set;}
 
 
 		// security
+		[ScriptIgnore]
 		public string AliasName { get; set; }
 
 		[Display(Name="Alias First Name")]
+		[ScriptIgnore]
 		public string AliasFirstName { get; set; }
 
 		[Display(Name = "Alias Last Name")]
+		[ScriptIgnore]
 		public string AliasLastName { get; set; }
+
+		// preferences
+		[ScriptIgnore]
+		public bool NotifyInteractionThreadsReplies { get; set; }
+		[ScriptIgnore]
+		public bool NotifyInteractionPostReplies { get; set; }
+		[ScriptIgnore]
+		public bool NotifyUserPostReplies { get; set; }
+		[ScriptIgnore]
+		public bool NotifyUserPostCommentReplies { get; set; }
+
 
 		[ScriptIgnore]
 		public int PictureSecurity { get; set; }
@@ -292,6 +367,9 @@ namespace Didache {
 		public int ScheduleSecurity { get; set; }
 		[ScriptIgnore]
 		public int BirthdateSecurity { get; set; }
+
+
+
 
 		[ScriptIgnore]
 		public UserSecuritySetting PictureSecuritySetting { get { return (UserSecuritySetting)PictureSecurity; } set { PictureSecurity = (int)value; } }
@@ -317,6 +395,10 @@ namespace Didache {
 
 		[ScriptIgnore]
 		public virtual ICollection<Degree> Degrees { get; set; }
+
+		[ScriptIgnore]
+		//public virtual Student Student { get; set; }
+		public virtual ICollection<AlumniInfo> AlumniInfos { get; set; }
 
 		[ScriptIgnore]
 		//public virtual Student Student { get; set; }
@@ -361,6 +443,7 @@ namespace Didache {
 			}
 		}
 
+		[ScriptIgnore]
 		public string ChildrenList {
 			get {
 				return String.Join(", ",FamilyMembers.Where(fm => fm.Family == "C").OrderBy(fm => fm.BirthDate).Select(fm=>fm.FirstName).ToArray());

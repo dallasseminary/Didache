@@ -19,10 +19,10 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-	<link href="@Url.Content("~/css/reset.css")" rel="stylesheet"  />
-	<link href="@Url.Content("~/css/type.css")" rel="stylesheet"  />
-	<link href="@Url.Content("~/css/layout.css")" rel="stylesheet"  />
-	<link href="@Url.Content("~/css/students.css")" rel="stylesheet"  />
+	<link href="@Url.Content("~/css/reset.css?v=12")" rel="stylesheet"  />
+	<link href="@Url.Content("~/css/type.css?v=12")" rel="stylesheet"  />
+	<link href="@Url.Content("~/css/layout.css?v=12")" rel="stylesheet"  />
+	<link href="@Url.Content("~/css/students.css?v=12")" rel="stylesheet"  />
 	<link href="@Url.Content("~/css/admin.css")" rel="stylesheet"  />
 
 	<script src="@Url.Content("~/js/lib/jquery-1.7.1.min.js")"></script>
@@ -33,6 +33,7 @@
 	<script src="@Url.Content("~/js/lib/jquery.validate.min.js")" ></script>
 	<script src="@Url.Content("~/js/lib/jquery.validate.unobtrusive.min.js")"></script>
 	<script src="@Url.Content("~/js/lib/jquery.expander.js")"></script>
+	<script src="@Url.Content("~/js/lib/jquery.truncate.js")"></script>
 	<script src="@Url.Content("~/js/lib/jquery.fileupload.js")"></script>
 	<script src="@Url.Content("~/js/lib/jquery.autoexpand.js")"></script>
 
@@ -40,10 +41,18 @@
 	<script src="@Url.Content("~/js/lib/jwysiwyg/jquery.wysiwyg.js")"></script>
 	<link href="@Url.Content("~/js/lib/jwysiwyg/jquery.wysiwyg.css")" rel="stylesheet"  />
 
+	<script src="@Url.Content("~/js/lib/bibly/bibly.min.js")"></script>
+	<script>
+		bibly.popupVersion = 'NET';
+	</script>
+	<link href="@Url.Content("~/js/lib/bibly/bibly.min.css")" rel="stylesheet"  />
+
 	<script src="@Url.Content("~/js/main.js?v=10")"></script>
 
 	<meta name="description" content="Dallas Theological Seminary's award-winning online education and degrees portal. HTML5 powered!" />
 	<meta name="keywords" content="seminary, online, education, degree, bible, thm, mdiv, dmin, phd, theology, jesus, god, christian, christianity, home, houston, austin, tampa, knoxville, atlanta, san antonio" />
+
+	<link rel="shortcut icon" type="image/ico" href="/favicon.ico" />
 
 	@RenderSection("head",false)
 </head>

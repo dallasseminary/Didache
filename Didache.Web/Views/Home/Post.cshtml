@@ -1,0 +1,23 @@
+﻿@model Int32
+
+@{
+    ViewBag.Title = "Post";
+}
+
+
+
+<div class="page-narrow">
+	<div class="main-column">
+	 
+		@Html.Partial("_DynamicUserPosts", new PostListViewOptions() { PostListType = PostListType.Single, KeyID = Model })	 
+	
+	</div>
+
+	<div class="sub-column">
+	
+		@Html.Partial("_HomeSideBar")
+
+	</div>
+
+
+</div>

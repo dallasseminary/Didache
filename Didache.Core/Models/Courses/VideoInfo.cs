@@ -19,9 +19,12 @@ namespace Didache {
 		public int UnitNumber { get; set;}
 		public int VideoNumber { get; set;}
 
+		public string WatchUrl {get; set;}
 		public string VideoUrl { get; set; }
 		public string TranscriptUrl { get; set; }
 		public string SlidesUrl { get; set; }
+		
+
 
 		public string FormattedDuration {
 			get {

@@ -33,13 +33,13 @@ namespace Didache {
 
 			// discussion replies
 			var posts = didache
-							.Posts
+							.ForumPosts
 								.Include("User")
 								.Include("Thread.Forum.Course")
 							.Where(p => courseIDs.Contains(p.Thread.Forum.CourseID))
 							.OrderByDescending(p => p.PostDate)
 							.Take(20);
-			foreach (Post post in posts) {
+			foreach (ForumPost post in posts) {
 				items.Add(new ForumReplyActivity() { User = post.User, ActivityDate = post.PostDate, Post = post });
 			}
 

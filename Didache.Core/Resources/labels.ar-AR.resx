@@ -118,235 +118,235 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="commonmenu_alumni" xml:space="preserve">
-    <value>Alumni</value>
+    <value>الخريجين</value>
   </data>
   <data name="commonmenu_bookcenter" xml:space="preserve">
-    <value>Book Center</value>
+    <value>مركز الكتاب</value>
   </data>
   <data name="commonmenu_campusnet" xml:space="preserve">
     <value>CampusNet</value>
   </data>
   <data name="commonmenu_dtswebsite" xml:space="preserve">
-    <value>DTS Sitio Web</value>
+    <value>DTS الموقع</value>
   </data>
   <data name="commonmenu_library" xml:space="preserve">
-    <value>Biblioteca</value>
+    <value>مكتبة</value>
   </data>
   <data name="commonmenu_onlineed" xml:space="preserve">
-    <value>Ed en línea</value>
+    <value>إد الانترنت</value>
   </data>
   <data name="confirm_delete" xml:space="preserve">
-    <value>¿Está seguro que desea eliminar este elemento?</value>
+    <value>هل أنت متأكد أنك تريد حذف هذا البند؟</value>
   </data>
   <data name="coursemenu_active_courses" xml:space="preserve">
-    <value>Cursos activos</value>
+    <value>نشط المقررات</value>
   </data>
   <data name="coursemenu_archived_courses" xml:space="preserve">
-    <value>Cursos archivados</value>
+    <value>أرشفة المقررات</value>
   </data>
   <data name="coursemenu_calendar" xml:space="preserve">
-    <value>Calendario</value>
+    <value>تقويم</value>
   </data>
   <data name="coursemenu_other_courses" xml:space="preserve">
-    <value>Otro</value>
+    <value>آخر</value>
   </data>
   <data name="coursetabs_assignments" xml:space="preserve">
-    <value>Asignaciones</value>
+    <value>تعيينات</value>
   </data>
   <data name="coursetabs_assignments_desc" xml:space="preserve">
-    <value>tus cosas clasificado</value>
+    <value>الحصول على الاشياء الخاصة بك متدرج</value>
   </data>
   <data name="coursetabs_dashboard" xml:space="preserve">
-    <value>Tablero de instrumentos</value>
+    <value>لوحة القيادة</value>
   </data>
   <data name="coursetabs_dashboard_desc" xml:space="preserve">
-    <value>Toda su base</value>
+    <value>كل ما تبذلونه من القاعدة</value>
   </data>
   <data name="coursetabs_dashboard_desc_long" xml:space="preserve">
-    <value>Toda la información importante acerca de su clase</value>
+    <value>جميع المعلومات المهمة حول صفك</value>
   </data>
   <data name="coursetabs_discussion" xml:space="preserve">
-    <value>Discusión</value>
+    <value>مناقشة</value>
   </data>
   <data name="coursetabs_discussion_desc" xml:space="preserve">
-    <value>Foros del Curso</value>
+    <value>بالطبع منتديات</value>
   </data>
   <data name="coursetabs_files" xml:space="preserve">
-    <value>Archivos</value>
+    <value>الملفات</value>
   </data>
   <data name="coursetabs_files_desc" xml:space="preserve">
-    <value>Materiales Profe</value>
+    <value>أستاذ في المواد</value>
   </data>
   <data name="coursetabs_roster" xml:space="preserve">
-    <value>Lista</value>
+    <value>قائمة</value>
   </data>
   <data name="coursetabs_roster_desc" xml:space="preserve">
-    <value>Conoce a tus compañeros de clase</value>
+    <value>تلبية زملائك</value>
   </data>
   <data name="coursetabs_schedule" xml:space="preserve">
-    <value>Horario</value>
+    <value>جدول</value>
   </data>
   <data name="coursetabs_schedule_desc" xml:space="preserve">
-    <value>las fechas y las asignaciones</value>
+    <value>تواريخ والاحالات</value>
   </data>
   <data name="error_desc" xml:space="preserve">
-    <value>Lo sentimos, ha ocurrido un error al procesar su solicitud</value>
+    <value>عذرا ، حدث خطأ أثناء معالجة طلبك</value>
   </data>
   <data name="forums_by" xml:space="preserve">
-    <value>por</value>
+    <value>بواسطة</value>
   </data>
   <data name="forums_courseforums" xml:space="preserve">
-    <value>Foros del Curso</value>
+    <value>بالطبع منتديات</value>
   </data>
   <data name="forums_header_forumname" xml:space="preserve">
-    <value>Nombre del Foro</value>
+    <value>منتدى اسم</value>
   </data>
   <data name="forums_header_lastpost" xml:space="preserve">
-    <value>Último mensaje</value>
+    <value>آخر مشاركة</value>
   </data>
   <data name="forums_header_threadsubject" xml:space="preserve">
-    <value>Tema</value>
+    <value>موضوع</value>
   </data>
   <data name="forums_header_totalposts" xml:space="preserve">
-    <value>Mensajes</value>
+    <value>المشاركات</value>
   </data>
   <data name="forums_header_totalreplies" xml:space="preserve">
-    <value>Respuestas</value>
+    <value>ردود</value>
   </data>
   <data name="forums_header_totalthreads" xml:space="preserve">
-    <value>Temas</value>
+    <value>المواضيع</value>
   </data>
   <data name="forums_header_totalviews" xml:space="preserve">
-    <value>Puntos de vista</value>
+    <value>آراء</value>
   </data>
   <data name="forums_replytopost" xml:space="preserve">
-    <value>Respuesta</value>
+    <value>رد</value>
   </data>
   <data name="homemenu_message" xml:space="preserve">
-    <value>Esta es la página principal, donde toda su materia debe ser</value>
+    <value>هذه هي الصفحة الرئيسية في كل ما تبذلونه من الاشياء التي ينبغي</value>
   </data>
   <data name="home_dashboard_heading_courseresources" xml:space="preserve">
-    <value>Recursos del curso</value>
+    <value>بالطبع الموارد</value>
   </data>
   <data name="home_dashboard_heading_stream" xml:space="preserve">
-    <value>¿Qué está pasando en MyDTS</value>
+    <value>ما يحدث في MyDTS</value>
   </data>
   <data name="home_dashboard_heading_upcoming" xml:space="preserve">
-    <value>Próximos</value>
+    <value>القادمة</value>
   </data>
   <data name="index_title" xml:space="preserve">
-    <value>Indice del</value>
+    <value>صفحة الفهرس</value>
   </data>
   <data name="login_instructions" xml:space="preserve">
-    <value>Por favor ingrese su nombre de usuario y contraseña</value>
+    <value>الرجاء إدخال اسم المستخدم وكلمة السر</value>
   </data>
   <data name="login_legend" xml:space="preserve">
-    <value>Información de la cuenta</value>
+    <value>معلومات الحساب</value>
   </data>
   <data name="login_login" xml:space="preserve">
-    <value>Login</value>
+    <value>دخول</value>
   </data>
   <data name="login_logout" xml:space="preserve">
-    <value>Cerrar sesión</value>
+    <value>خروج</value>
   </data>
   <data name="login_password" xml:space="preserve">
-    <value>Contraseña</value>
+    <value>كلمة السر</value>
   </data>
   <data name="login_rememberme" xml:space="preserve">
-    <value>Recordar mi nombre y en</value>
+    <value>يبقي لي في تسجيل</value>
   </data>
   <data name="login_title" xml:space="preserve">
-    <value>Login</value>
+    <value>دخول</value>
   </data>
   <data name="login_username" xml:space="preserve">
-    <value>DTS ID, Nombre de usuario o correo electrónico</value>
+    <value>DTS معرف ، اسم المستخدم ، أو البريد الالكتروني</value>
   </data>
   <data name="submenu_archive" xml:space="preserve">
-    <value>Archivo</value>
+    <value>أرشيف</value>
   </data>
   <data name="submenu_campuses" xml:space="preserve">
-    <value>Campus</value>
+    <value>الجامعات</value>
   </data>
   <data name="submenu_community_home" xml:space="preserve">
-    <value>Compañeros de clase</value>
+    <value>زملاء الدراسة</value>
   </data>
   <data name="submenu_courses" xml:space="preserve">
-    <value>Cursos</value>
+    <value>المقررات</value>
   </data>
   <data name="submenu_current" xml:space="preserve">
-    <value>Corriente</value>
+    <value>الحالية</value>
   </data>
   <data name="submenu_dashboard" xml:space="preserve">
-    <value>Tablero de instrumentos</value>
+    <value>لوحة القيادة</value>
   </data>
   <data name="submenu_edit" xml:space="preserve">
-    <value>Editar</value>
+    <value>تحرير</value>
   </data>
   <data name="submenu_files" xml:space="preserve">
-    <value>Archivos</value>
+    <value>الملفات</value>
   </data>
   <data name="submenu_sessions" xml:space="preserve">
-    <value>Sesiones</value>
+    <value>الدورات</value>
   </data>
   <data name="submenu_tools" xml:space="preserve">
-    <value>Instrumentos</value>
+    <value>أدوات</value>
   </data>
   <data name="submenu_users" xml:space="preserve">
-    <value>Los usuarios</value>
+    <value>المستخدمين</value>
   </data>
   <data name="submenu_view" xml:space="preserve">
-    <value>Mi página Perfil</value>
+    <value>صفحة ملفاتي</value>
   </data>
   <data name="tabs_about" xml:space="preserve">
-    <value>Sobre</value>
+    <value>حول</value>
   </data>
   <data name="tabs_admin" xml:space="preserve">
-    <value>Administración</value>
+    <value>مشرف</value>
   </data>
   <data name="tabs_community" xml:space="preserve">
-    <value>Comunidad</value>
+    <value>مجتمع</value>
   </data>
   <data name="tabs_contact" xml:space="preserve">
-    <value>Contacto</value>
+    <value>اتصل</value>
   </data>
   <data name="tabs_courses" xml:space="preserve">
-    <value>Cursos</value>
+    <value>المقررات</value>
   </data>
   <data name="tabs_help" xml:space="preserve">
-    <value>Ayuda</value>
+    <value>مساعدة</value>
   </data>
   <data name="tabs_home" xml:space="preserve">
-    <value>Casa</value>
+    <value>منزل</value>
   </data>
   <data name="tabs_login" xml:space="preserve">
-    <value>Login</value>
+    <value>دخول</value>
   </data>
   <data name="tabs_logout" xml:space="preserve">
-    <value>Cerrar sesión</value>
+    <value>خروج</value>
   </data>
   <data name="tabs_profile" xml:space="preserve">
-    <value>Perfil</value>
+    <value>الملف الشخصي</value>
   </data>
   <data name="tabs_tour" xml:space="preserve">
-    <value>Gira</value>
+    <value>جولة</value>
   </data>
   <data name="home_dashboard_heading_onlineedresources" xml:space="preserve">
-    <value>Recursos en la Red Educación</value>
+    <value>موارد التعليم على الانترنت</value>
   </data>
   <data name="home_dashboard_li_downloadallfiles" xml:space="preserve">
-    <value>Descargar todos los archivos (los actuales cursos)</value>
+    <value>تحميل جميع الملفات (دورات الحالي)</value>
   </data>
   <data name="home_dashboard_li_downloadcalendar" xml:space="preserve">
-    <value>Descarga tu calendario plazo</value>
+    <value>تحميل تقويمك المدى</value>
   </data>
   <data name="home_dashboard_heading_bibsoftware" xml:space="preserve">
-    <value>Bibliografía Software</value>
+    <value>ببليوغرافيا البرمجيات</value>
   </data>
   <data name="home_dashboard_li_endnote" xml:space="preserve">
-    <value>EndNote</value>
+    <value>تعليق ختامي</value>
   </data>
   <data name="home_dashboard_li_msword" xml:space="preserve">
-    <value>Microsoft Word el paquete de compatibilidad</value>
+    <value>حزمة مايكروسوفت كلمة التوافق</value>
   </data>
   <data name="home_dashboard_li_libreoffice" xml:space="preserve">
     <value>LibreOffice.org</value>
@@ -355,156 +355,159 @@
     <value>StyleEase</value>
   </data>
   <data name="home_dashboard_li_turabianformattutorial" xml:space="preserve">
-    <value>Turabian Tutorial Formato</value>
+    <value>Turabian تنسيق ملف</value>
   </data>
   <data name="home_dashboard_li_zotero" xml:space="preserve">
-    <value>Zotero (gratis)</value>
+    <value>Zotero (مجانا)</value>
   </data>
   <data name="courses_heading_archivedcourses" xml:space="preserve">
-    <value>Cursos archivados</value>
+    <value>أرشفة المقررات</value>
   </data>
   <data name="courses_heading_assignments" xml:space="preserve">
-    <value>Asignaciones</value>
+    <value>تعيينات</value>
   </data>
   <data name="courses_heading_coursedesc" xml:space="preserve">
-    <value>Descripción del curso</value>
+    <value>بالطبع الوصف</value>
   </data>
   <data name="courses_heading_coursefiles" xml:space="preserve">
-    <value>Archivos del curso</value>
+    <value>بالطبع الملفات</value>
   </data>
   <data name="courses_heading_courseroster" xml:space="preserve">
-    <value>Curso de lista</value>
+    <value>طبعا القائمة</value>
   </data>
   <data name="courses_heading_units" xml:space="preserve">
-    <value>Unidades</value>
+    <value>الوحدات</value>
   </data>
   <data name="courses_heading_dashboard" xml:space="preserve">
-    <value>Próximos ...</value>
+    <value>القادم...</value>
   </data>
   <data name="courses_label_gradedfiles" xml:space="preserve">
-    <value>Archivos clasificados</value>
+    <value>تصنيف الملفات</value>
   </data>
   <data name="studentschedule_markcompleted" xml:space="preserve">
-    <value>Marcar como completada</value>
+    <value>اكتمل علامة</value>
   </data>
   <data name="studentschedule_skip" xml:space="preserve">
-    <value>Salto</value>
+    <value>تخطى</value>
   </data>
   <data name="studentschedule_submitfordiscussion" xml:space="preserve">
-    <value>Enviar trabajo para la discusión</value>
+    <value>يقدم التنازل للمناقشة</value>
   </data>
   <data name="studentschedule_submitfile" xml:space="preserve">
-    <value>A su vez en el archivo</value>
+    <value>بدوره ملف</value>
   </data>
   <data name="interactions_replies" xml:space="preserve">
-    <value>Abrir [{0} Respuestas]</value>
+    <value>فتح [{0} مشاركات]</value>
   </data>
   <data name="profile_edit_button" xml:space="preserve">
-    <value>Editar Perfil</value>
+    <value>تحرير لمحة</value>
   </data>
   <data name="profile_heading_contactinfo" xml:space="preserve">
-    <value>Información de Contacto</value>
+    <value>معلومات الاتصال</value>
   </data>
   <data name="profile_heading_personalinfo" xml:space="preserve">
-    <value>Información Personal</value>
+    <value>المعلومات الشخصية</value>
   </data>
   <data name="profile_heading_preferences" xml:space="preserve">
-    <value>Preferencias</value>
+    <value>تفضيلات</value>
   </data>
   <data name="profile_heading_socialmedia" xml:space="preserve">
-    <value>Social Media</value>
+    <value>وسائل الاعلام الاجتماعية</value>
   </data>
   <data name="profile_label_address" xml:space="preserve">
-    <value>Dirección</value>
+    <value>عنوان</value>
   </data>
   <data name="profile_label_biography" xml:space="preserve">
-    <value>Biografía</value>
+    <value>سيرة</value>
   </data>
   <data name="profile_label_birthday" xml:space="preserve">
-    <value>Fecha de Nacimiento</value>
+    <value>تاريخ الميلاد</value>
   </data>
   <data name="profile_label_email" xml:space="preserve">
-    <value>E-mail</value>
+    <value>البريد الإلكتروني</value>
   </data>
   <data name="profile_label_hometown" xml:space="preserve">
-    <value>Procedencia</value>
+    <value>مسقط</value>
   </data>
   <data name="profile_label_language" xml:space="preserve">
-    <value>Lengua</value>
+    <value>لغة</value>
   </data>
   <data name="profile_label_phone" xml:space="preserve">
-    <value>Teléfono</value>
+    <value>هاتف</value>
   </data>
   <data name="profile_label_timezone" xml:space="preserve">
-    <value>Zona horaria</value>
+    <value>التوقيت</value>
   </data>
   <data name="profile_save_button" xml:space="preserve">
-    <value>Guardar perfil</value>
+    <value>حفظ الملف</value>
   </data>
   <data name="profile_security_all" xml:space="preserve">
-    <value>Todos los DTS</value>
+    <value>جميع DTS</value>
   </data>
   <data name="profile_security_friends" xml:space="preserve">
-    <value>Compañeros de clase</value>
+    <value>زملاء الدراسة</value>
   </data>
   <data name="profile_security_private" xml:space="preserve">
-    <value>Privado</value>
+    <value>خاص</value>
   </data>
   <data name="studentschedule_instructionsnotavailable" xml:space="preserve">
-    <value>Las instrucciones para esta tarea estará disponible {0}.</value>
+    <value>والإرشادات للقيام بهذه المهمة تكون متاحة {0}.</value>
   </data>
   <data name="studentschedule_submissionnotavailable" xml:space="preserve">
-    <value>Usted será capaz de presentar este principio de asignación {0}.</value>
+    <value>سوف تكون قادرة على تقديم هذه بداية مهمة {0}.</value>
   </data>
   <data name="courses_heading_tools" xml:space="preserve">
-    <value>Instrumentos</value>
+    <value>أدوات</value>
   </data>
   <data name="courses_tools_icalendar" xml:space="preserve">
-    <value>Calendario de alimentación</value>
+    <value>تقويم تغذية</value>
   </data>
   <data name="courses_tools_icalendar_desc" xml:space="preserve">
-    <value>Utilice los siguientes enlaces para importar los requisitos del curso en su programa de calendario (Mac Mail, Outlook, Google Calendar, etc)</value>
+    <value>استخدام الروابط أدناه لاستيراد مستلزمات دورة في برنامج التقويم الخاص بك (ماك بريد ، والتوقعات ، تقويم Google ، الخ.)</value>
   </data>
   <data name="courses_tools_itunes" xml:space="preserve">
-    <value>iTunes de alimentación</value>
+    <value>اي تيونز تغذية</value>
   </data>
   <data name="courses_tools_itunes_desc" xml:space="preserve">
-    <value>Importar videos por supuesto, diapositivas, y las transcripciones en iTunes (o software de otros medios de comunicación) para verlas sin conexión.</value>
+    <value>استيراد ملفات الفيديو بالطبع ، والشرائح ، والنصوص في اي تيونز (أو غيرها من وسائط برامج) للعرض دون اتصال.</value>
   </data>
   <data name="coursetabs_tools" xml:space="preserve">
-    <value>Instrumentos</value>
+    <value>أدوات</value>
   </data>
   <data name="coursetabs_tools_desc" xml:space="preserve">
-    <value>Descargas, calendarios y fuentes RSS</value>
+    <value>التنزيلات ، والتقويمات ، وآر إس إس</value>
   </data>
   <data name="labels_dashboard_downloadallfiles" xml:space="preserve">
-    <value>Descargar todos los archivos</value>
+    <value>تحميل جميع الملفات</value>
   </data>
   <data name="labels_dashboard_facilitators" xml:space="preserve">
     <value>Faciliators</value>
   </data>
   <data name="labels_dashboard_faculty" xml:space="preserve">
-    <value>Facultad</value>
+    <value>هيئة التدريس</value>
   </data>
   <data name="labels_dashboard_groupmembers" xml:space="preserve">
-    <value>Miembros del Grupo</value>
+    <value>مجموعة الأعضاء</value>
   </data>
   <data name="labels_dashboard_keyassignments" xml:space="preserve">
-    <value>Misiones importantes</value>
+    <value>المهم بيتية</value>
   </data>
   <data name="labels_dashboard_keydownloads" xml:space="preserve">
-    <value>Descargas</value>
+    <value>التنزيلات</value>
   </data>
   <data name="labels_dashboard_syllabus" xml:space="preserve">
-    <value>Plan de estudios</value>
+    <value>المنهج</value>
   </data>
   <data name="tab_about" xml:space="preserve">
-    <value>Sobre</value>
+    <value>حول</value>
   </data>
   <data name="home_currentcourses" xml:space="preserve">
-    <value>Cursos actuales</value>
+    <value>المقررات الحالية</value>
   </data>
   <data name="home_nocourses" xml:space="preserve">
-    <value>Usted no tiene ningún curso activo</value>
+    <value>ليس لديك أي من المقررات الدراسية النشطة حاليا</value>
+  </data>
+  <data name="studentschedule_nopostsyet" xml:space="preserve">
+    <value>No posts yet. Check back soon.</value>
   </data>
 </root>

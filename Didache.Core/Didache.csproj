@@ -69,15 +69,35 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Markdown\Escapes.cs" />
+    <Compile Include="Markdown\Markdown.cs" />
     <Compile Include="Models\Announcement.cs" />
     <Compile Include="Models\Community\CarsCourse.cs" />
     <Compile Include="Models\Community\UserRelationships.cs" />
+    <Compile Include="Models\Enum\PostListType.cs" />
     <Compile Include="Models\Enum\UserActionType.cs" />
-    <Compile Include="Models\USerPosts\UserPost.cs" />
-    <Compile Include="Models\USerPosts\UserPostComment.cs" />
-    <Compile Include="Models\USerPosts\UserPostType.cs" />
+    <Compile Include="Models\Groups\GroupMembershipStatus.cs" />
+    <Compile Include="Models\Groups\DiscussionGroup.cs" />
+    <Compile Include="Models\Groups\DiscussionGroupMember.cs" />
+    <Compile Include="Models\Groups\DiscussionGroupType.cs" />
+    <Compile Include="Models\Help\HelpQuestion.cs" />
+    <Compile Include="Models\Help\HelpCategory.cs" />
+    <Compile Include="Models\UserPosts\PostListViewOptions.cs" />
+    <Compile Include="Models\UserPosts\UserPost.cs" />
+    <Compile Include="Models\UserPosts\UserPostComment.cs" />
+    <Compile Include="Models\UserPosts\UserPostType.cs" />
     <Compile Include="Models\UserAction.cs" />
+    <Compile Include="Models\User\ExtraData\CarsRelationship.cs" />
+    <Compile Include="Models\User\ExtraData\AlumniInfo.cs" />
+    <Compile Include="Models\User\ExtraData\Degree.cs" />
+    <Compile Include="Models\User\ExtraData\Employee.cs" />
+    <Compile Include="Models\User\ExtraData\FamilyMember.cs" />
+    <Compile Include="Models\User\ExtraData\Student.cs" />
+    <Compile Include="Models\User\ExtraData\Workplace.cs" />
+    <Compile Include="Models\User\ExtraData\WorkplaceWorker.cs" />
     <Compile Include="Models\ViewModels\ContactStudents.cs" />
+    <Compile Include="Models\ViewModels\DiscussionGroupListViewModel.cs" />
+    <Compile Include="Models\ViewModels\DiscussionGroupViewModel.cs" />
     <Compile Include="Models\ViewModels\HomeViewModel.cs" />
     <Compile Include="Models\ViewModels\SearchResultsModel.cs" />
     <Compile Include="Models\ViewModels\ProfileViewModel.cs" />
@@ -113,7 +133,7 @@
     <Compile Include="Models\Enum\UserSecuritySetting.cs" />
     <Compile Include="Models\Grading\Grading.cs" />
     <Compile Include="Models\Courses\Courses.cs" />
-    <Compile Include="Models\User\DTSUserInfo.cs" />
+    <None Include="Models\User\DTSUserInfo.cs_" />
     <Compile Include="Models\User\UserRoles.cs" />
     <Compile Include="Models\User\Users.cs" />
     <Compile Include="Models\Courses\Sessions.cs" />
@@ -153,7 +173,8 @@
     </Compile>
     <Compile Include="TaskTypes\Types\AnswerQuestionForDiscussion.cs" />
     <Compile Include="TaskTypes\Types\CommentOnPost.cs" />
-    <Compile Include="TaskTypes\Types\PercentComplete.cs" />
+    <Compile Include="TaskTypes\Types\EnterText.cs" />
+    <Compile Include="TaskTypes\Types\SimpleCompletionNoGrade.cs" />
     <Compile Include="TaskTypes\Types\TurnInFileForComment.cs" />
     <Compile Include="TaskTypes\Types\Survey.cs" />
     <Compile Include="TaskTypes\Types\TaskTypeResult.cs" />
@@ -161,8 +182,8 @@
     <Compile Include="TaskTypes\Types\Default.cs" />
     <Compile Include="TaskTypes\Types\RespondToDiscussion.cs" />
     <Compile Include="TaskTypes\Types\TurnInFileSimple.cs" />
-    <Compile Include="TaskTypes\Types\SimpleCompletionNoGrade.cs" />
     <Compile Include="TaskTypes\Types\SimpleCompletion.cs" />
+    <Compile Include="TaskTypes\Types\PercentComplete.cs" />
     <Compile Include="TaskTypes\ITaskType.cs" />
     <Compile Include="TaskTypes\TaskTypeInfo.cs" />
     <Compile Include="TaskTypes\TaskTypeManager.cs" />
@@ -171,6 +192,7 @@
     <Compile Include="Utility\EntityObjectSerializer.cs" />
     <Compile Include="Utility\HtmlHelpers\DropDownGroupList.cs" />
     <Compile Include="Utility\ImageTools.cs" />
+    <Compile Include="Utility\Markdown.cs" />
     <Compile Include="Utility\Settings.cs" />
     <Compile Include="Utility\Utility.cs" />
   </ItemGroup>
@@ -185,17 +207,19 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>emails.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\labels.ar.resx" />
-    <EmbeddedResource Include="Resources\labels.es.resx" />
+    <EmbeddedResource Include="Resources\labels.ar-AR.resx" />
+    <EmbeddedResource Include="Resources\labels.es-ES.resx" />
     <EmbeddedResource Include="Resources\labels.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>labels.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\labels.zh-CN.resx" />
     <EmbeddedResource Include="Resources\labels.zh-TW.resx" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Models\User\ExtraData\" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

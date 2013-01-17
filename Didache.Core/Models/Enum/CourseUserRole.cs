@@ -9,6 +9,7 @@ namespace Didache {
 		//Grader = 2, // no longer used
 		Faculty = 3,
 		Editor = 4,
-		Faciliator = 8
+		Faciliator = 8,
+		All = 0
 	}
 }

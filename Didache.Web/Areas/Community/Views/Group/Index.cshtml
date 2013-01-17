@@ -1,0 +1,94 @@
+﻿@model Didache.Models.DiscussionGroupListViewModel
+@{
+	ViewBag.Title = Didache.Resources.labels.groups_list;
+}
+
+<style>
+.group-list {
+	overflow: hidden;
+}
+.group-list .group {
+	width: 180px;
+	padding: 0 0 0 70px;
+	height: 65px;
+	float: left;
+	margin: 0 20px 20px 0;
+	overflow: hidden;
+	position: relative;
+}
+.group-list .group a {
+	color: #333;
+	font-weight: bold;
+}
+.group-list .group a img {
+	display: block;
+	position: absolute;
+	left: 0;
+	width: 50px;
+	height: 50px;
+}
+.group-list .group .type {
+	color: #999;
+	font-size: 11px;
+	font-weight: bold;
+	display: block;
+}
+.group-list .group .members {
+	color: #777;
+	font-size: 11px;
+	display: block;
+}
+
+
+.sidebar-list {
+}
+.sidebar-list a {
+	display: block;
+	position: relative;
+	padding: 0 0 0 30px;
+	margin: 0 0 10px 0;
+	min-height: 20px;
+}
+.sidebar-list a img {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+</style>
+
+<div class="page-narrow">
+	<div class="main-column">
+		<div class="page-header">
+			<h2>@Didache.Resources.labels.groups_list</h2>
+			<p>@Didache.Resources.labels.groups_list_description</p>
+			<div class="actions">
+				<a class="d-button action" href="/groups/edit">Create Group</a>
+		   </div>
+		</div>
+
+		<!-- list out all groups -->
+		<div class="group-list">
+		@foreach (DiscussionGroup group in Model.AllGroups) {
+			<div class="group">
+				<a href="@group.GroupUrl"><img src="@group.ThumbImageUrl" alt="@group.Name" width="40" height="40" />@group.Name</a><br />
+				<span class="type">@group.GroupType</span>
+				<span class="members">@group.GroupMembers.Count Members</span>
+			</div>
+		}
+		</div>
+
+	</div>
+	<div class="sub-column">	
+		
+		<h3>Your Groups</h3>
+
+		<div class="sidebar-list">
+		@foreach (DiscussionGroup group in Model.UsersGroups) {
+			<a href="@group.GroupUrl"><img src="@group.ThumbImageUrl" alt="@group.Name" width="20" height="20" />@group.Name</a>
+		}
+		</div>
+
+	</div>
+
+</div>
+

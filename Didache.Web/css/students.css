@@ -194,6 +194,9 @@
 		 width: 100px; 
 		 height: 75px; 
 		 text-align: left;
+		background-repeat: no-repeat;
+		background-color: black;
+		background-position: 50% 50%;		 
 	}
 	.video-list .video-options-container .video-options {
 		 display: none; 
@@ -578,6 +581,14 @@ ul.course-archive, ul.course-filegroup-files, ul.all-community {
 			margin: 10px 0 0 0;
 			display: none;
 		}
+		
+		.task-interaction-text ul {
+			margin: 1em 0 1em 2em;
+		}
+		.task-interaction-text ul li {
+			padding: 0 0 0 0;
+			list-style-type: disc;
+		}		
 		/*.task-interaction-main .task-interaction-text .reply-text {
 			font-size: 
 		}

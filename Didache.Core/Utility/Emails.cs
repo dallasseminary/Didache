@@ -25,8 +25,12 @@ namespace Didache {
 
 			MailMessage message = new MailMessage();
 			message.From = new MailAddress(fromEmail);
-			foreach (String email in toEmails)
-				message.To.Add(new MailAddress(email));
+
+			foreach (String email in toEmails) {
+				try {
+					message.To.Add(new MailAddress(email));
+				} catch { }
+			}
 			
 			
 			message.Subject = "[DTS Online] " + subject;
@@ -49,7 +53,7 @@ namespace Didache {
 			SendEmail(fromEmail, toEmail,  subject,  body,  isHtml);
 		}
 
-		public static string FormatEmail(string text, Course course, Unit unit, Task task, User fromUser, User toUser, UserTaskData userTaskData, InteractionPost interactionPost, Post forumPost) {
+		public static string FormatEmail(string text, Course course, Unit unit, Task task, User fromUser, User toUser, UserTaskData userTaskData = null, InteractionPost interactionPost = null, ForumPost forumPost = null, UserPost userPost = null, UserPostComment userPostComment = null, DiscussionGroup discussionGroup = null) {
 
 			if (course != null) {
 				text = text.Replace("{course-code}", course.CourseCode + course.Section);
@@ -81,6 +85,21 @@ namespace Didache {
 			if (interactionPost != null) {
 				text = text.Replace("{interactionpost-postcontent}", interactionPost.PostContent);
 				text = text.Replace("{interactionpost-posturl}", "https://online.dts.edu" + interactionPost.PostUrl);
+			}
+
+			// NOTE: using unformated text for now?!
+			if (userPost != null) {
+				text = text.Replace("{userpost-text}", userPost.Text);
+				text = text.Replace("{userpost-posturl}", "https://online.dts.edu" + userPost.PostUrl);
+			}
+
+			if (discussionGroup != null) {
+				text = text.Replace("{discussiongroup-name}", discussionGroup.Name);
+				text = text.Replace("{discussiongroup-groupurl}", "https://online.dts.edu" + discussionGroup.GroupUrl);
+			}
+
+			if (userPostComment != null) {
+				text = text.Replace("{postcomment-text}", userPostComment.Text);
 			}
 
 			return text;

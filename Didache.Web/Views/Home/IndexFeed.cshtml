@@ -1,0 +1,96 @@
+﻿@model HomeViewModel
+
+@{
+	ViewBag.Title = "DTS Online Ed";
+    
+}
+
+
+<div class="page-narrow">
+	<div class="main-column">
+
+	@if (Users.GetLoggedInUser() != null) {
+	 
+		foreach (Announcement announcement in Model.Announcements) {
+			<div class="message-warning">
+				<strong>@announcement.StartDate.ToString("MMMM d, yyyy")</strong> - @announcement.Text
+			</div>	  
+		}
+		
+		<style>
+		#user-post-entry {
+			background: #eee;
+			padding: 10px;
+			margin: 0 0 10px 0;
+			font-family: helvetica, Arial;
+		}
+		#user-post-text {
+			width: 529px;
+			height: 40px;
+		}
+		#user-post-options {
+			text-align: right;
+		}
+		</style>
+		
+		<div id="user-post-entry">
+			<textarea id="user-post-text"></textarea>
+			<div id="user-post-options">
+				<input type="radio" name="user-post-type" id="user-post-type-public" checked /><label for="user-post-type-public">All DTS</label>
+				<input type="radio" name="user-post-type" id="user-post-type-classmates"  /><label for="user-post-type-classmates">Classmates Only</label>
+				
+				<input type="button" class="d-button action" value="Post" />
+			</div>
+		</div>
+		
+		@Html.Partial("_WriteUserPosts", Model.UserPosts)
+
+	} else {
+		<h2>Welcome</h2>
+	
+		<p>This is Dallas Theological Seminary's online education portal. Feel free to check out <a href="http://www.dts.edu/onlineeducation/">some classes</a>.</p>
+	
+		<h3>Take a Tour</h3>
+	 
+		<p>If you'd like to know more about how DTS's online education system works, please click on the video below</p>
+	 
+		<a href="/tour"><img src="https://dtsoe.s3.amazonaws.com/preview/dts-oe-preview-20110722.png" width="100%" /></a>
+	}
+	</div>
+
+	<div class="sub-column">
+
+  @{ List<Course> currentCourses = Didache.Courses.GetUsersRunningCourses(CourseUserRole.Student); }
+
+	@if (currentCourses.Count > 0) {
+		foreach (Course course in currentCourses) {
+
+			<h3><a href="@course.CourseUrl">@course.CourseCode@course.Section - @course.Name</a></h3>	
+			@Html.Partial("_CourseSideBar", course)
+		
+		}
+	} else {
+	<p>@Didache.Resources.labels.home_nocourses</p>
+	}
+
+
+
+        <h3>@Didache.Resources.labels.home_dashboard_heading_onlineedresources</h3>
+        <ul>
+            <li><a href="http://www.microsoft.com/downloads/details.aspx?FamilyId=941b3470-3ae9-4aee-8f43-c6bb74cd1466&displaylang=en">@Didache.Resources.labels.home_dashboard_li_msword</a></li>
+            <li><a href="http://libreoffice.org">@Didache.Resources.labels.home_dashboard_li_libreoffice</a></li>   
+			<li><a href="http://library.dts.edu/Pages/RM/Write/">Library Resources (Turabian templates)</a></li>         
+        </ul>
+
+        <h3>@Didache.Resources.labels.home_dashboard_heading_bibsoftware</h3>
+        <ul>
+            <li><a href="http://www.zotero.org">@Didache.Resources.labels.home_dashboard_li_zotero</a></li>
+            <li><a href="http://endnote.com">@Didache.Resources.labels.home_dashboard_li_endnote</a></li>
+            <li><a href="http://styleease.com">@Didache.Resources.labels.home_dashboard_li_styleease</a></li>
+        </ul>
+
+
+	</div>
+
+
+</div>

@@ -1,0 +1,152 @@
+﻿@model Didache.DiscussionGroup
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<style>
+.group-types .group-type {
+	margin: 0 0 5px 0 ;
+	padding: 0 0 0 25px;
+	position: relative;
+}
+.group-types .group-type input {
+	display: block;
+	position: absolute;	
+	left:0;
+	top: 0;
+}
+.group-types .group-type .title {
+	display: block;
+	font-weight: bold;
+}
+</style>
+
+
+<form enctype="multipart/form-data" action="/admin/discussiongroups/edit/@(Model != null ? Model.GroupID.ToString() : "")" method="post">
+
+<div id="edit-profile" class="page-narrow">
+	<div class="main-column">
+	
+		<div class="page-header">
+			<h2>@(Model.GroupID > 0 ? "Group Editor" : "Create New Group")</h2>		
+
+			@Html.ValidationSummary(true)	
+		
+			<div class="actions">
+				<input type="submit" class="d-button action" value="@Didache.Resources.labels.group_save_button" />
+			</div>
+		</div>
+
+		 @Html.HiddenFor(model => model.GroupID)
+	 
+
+		<h3>@Didache.Resources.labels.group_editor_header</h3>
+
+		<table class="user-profile">
+			<tr>
+				<th>Approved</th>
+				<td>@Html.CheckBoxFor(m => m.IsApproved)</td>
+			</tr>
+			<tr>
+				<th>
+					@Didache.Resources.labels.group_editor_type
+				</th>
+				<td class="group-types">
+
+					<div class="group-type">
+						<input type="radio" name="GroupTypeID" id="GroupTypeID_1" value="1" @(Model.GroupTypeID == 1 ? "checked" : "") />
+						<label for="GroupTypeID_1">
+							<span class="title">Closed Group</span>
+							<span class="description">Invisible except to people in the group (class of</span>
+						</label>
+					</div>
+
+					<div class="group-type">
+						<input type="radio" name="GroupTypeID" id="GroupTypeID_8" value="8" @(Model.GroupTypeID == 8 ? "checked" : "") />
+						<label for="GroupTypeID_8">
+							<span class="title">Open Group</span>
+							<span class="description">Open for anyone to join or view</span>
+						</label>
+					</div>
+
+					<div class="group-type">
+						<input type="radio" name="GroupTypeID" id="GroupTypeID_4" value="4" @(Model.GroupTypeID == 4 ? "checked" : "") />
+						<label for="GroupTypeID_4">
+							<span class="title">Invite Only</span>
+							<span class="description">Everyone can see the group, but administrators must invite members</span>
+						</label>
+					</div>
+
+					<div class="group-type">
+						<input type="radio" name="GroupTypeID" id="GroupTypeID_2" value="2"  @(Model.GroupTypeID == 2 ? "checked" : "") />
+						<label for="GroupTypeID_2">
+							<span class="title">Private Group</span>
+							<span class="description">Administrators must invite members and the group is hidden from everyon else</span>
+						</label>
+					</div>
+
+					@*
+					@Html.EditorFor(model => model.GroupTypeID)
+					*@
+				</td>
+			</tr>
+
+			<tr>
+				<th>
+					@Didache.Resources.labels.group_editor_name
+				</th>
+				<td>
+					@Html.EditorFor(model => model.Name)
+				</td>
+			</tr>
+
+
+			<tr>
+				<th>
+					@Didache.Resources.labels.group_editor_description
+				</th>
+				<td>
+					@Html.TextAreaFor(model => model.Description)
+				</td>
+			</tr>
+
+
+			<tr>
+				<th>
+					@Didache.Resources.labels.group_editor_image
+				</th>
+				<td>
+					<input type="file" id="groupimage" name="groupimage" class="file-input" accept="jpg,jpeg,jpe" data-val-accept="Sorry, please upload a jpeg image." /> 
+
+					@if (Model != null) {
+						<table>
+							<tr>
+								<td>Image</td>
+								<td>Thumb</td>
+							</tr>
+							<tr>
+								<td><img src="@Model.ProfileImageUrl" /></td>
+								<td><img src="@Model.ThumbImageUrl" /></td>
+							</tr>
+						</table>					
+					}
+				</td>
+			</tr>
+
+		</table>
+
+	</div>
+
+	<div class="sub-column">
+	
+		@if (Model.GroupID > 0 && Model.GroupType == DiscussionGroupType.InviteOnly) {
+			<h3>Approvals</h3>
+
+			<p>Invite people</p>
+  }
+
+	</div>
+</div>
+
+</form>

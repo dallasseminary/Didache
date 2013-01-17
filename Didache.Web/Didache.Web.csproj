@@ -100,12 +100,14 @@
     <Compile Include="Areas\Admin\Controllers\AdminController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Areas\Admin\Controllers\AnnouncementsController.cs" />
     <Compile Include="Areas\Admin\Controllers\CampusesController.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Areas\Admin\Controllers\CoursesController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Areas\Admin\Controllers\DiscussionGroupsController.cs" />
     <Compile Include="Areas\Admin\Controllers\FilesController.cs" />
     <Compile Include="Areas\Admin\Controllers\SessionsController.cs">
       <SubType>Code</SubType>
@@ -113,6 +115,7 @@
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Areas\Community\CommunityAreaRegistration.cs" />
     <Compile Include="Areas\Community\Controllers\CommunityController.cs" />
+    <Compile Include="Areas\Community\Controllers\GroupController.cs" />
     <Compile Include="Areas\Facilitators\Controllers\GradingController.cs" />
     <Compile Include="Areas\Facilitators\Controllers\HomeController.cs" />
     <Compile Include="Areas\Facilitators\FacilitatorsAreaRegistration.cs" />
@@ -133,8 +136,12 @@
     <Content Include="Areas\Community\Views\Community\Index.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="js\lib\bibly\bibly.min.css" />
+    <Content Include="js\lib\bibly\bibly.min.js" />
     <Content Include="js\lib\jquery-1.6.4.js" />
     <Content Include="js\lib\jquery-1.6.4.min.js" />
+    <Content Include="js\lib\jquery.truncate.js" />
+    <Content Include="js\lib\mustache.js" />
     <Content Include="mobile\js\jquery-1.6.2.min.js" />
     <Content Include="mobile\js\jquery.mobile-1.0b3.css" />
     <Content Include="mobile\js\jquery.mobile-1.0b3.js" />
@@ -336,9 +343,11 @@
     <Content Include="player-old\widescreen-smallvideo.png" />
     <Content Include="sql.aspx" />
     <Content Include="todo.txt" />
+    <Content Include="tools\cleanuserposts.aspx" />
     <Content Include="tools\fixposts.aspx" />
     <Content Include="tools\download-url.aspx" />
     <Content Include="tools\loginas.aspx" />
+    <Content Include="tools\report.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -461,10 +470,21 @@
     <Content Include="Areas\Admin\Views\Files\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Files\Edit.cshtml" />
     <Content Include="Areas\Community\Views\Community\Index-ByClass.cshtml" />
-    <Content Include="Areas\Community\Views\Community\Classmates.cshtml" />
+    <Content Include="Areas\Community\Views\Community\Friends.cshtml" />
     <Content Include="Areas\Community\Views\Community\Search.cshtml" />
     <Content Include="Areas\Community\Views\Community\Feed.cshtml" />
     <Content Include="Areas\Students\Views\Shared\TaskType-AnswerQuestionForDiscussion.cshtml" />
+    <Content Include="Areas\Students\Views\Courses\UserPosts.cshtml" />
+    <Content Include="Areas\Students\Views\Shared\Show.cshtml" />
+    <Content Include="Areas\Community\Views\Group\Index.cshtml" />
+    <Content Include="Areas\Community\Views\Group\Edit.cshtml" />
+    <Content Include="Areas\Community\Views\Group\View.cshtml" />
+    <Content Include="Areas\Admin\Views\DiscussionGroups\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\DiscussionGroups\Edit.cshtml" />
+    <Content Include="Areas\Students\Views\Shared\TaskType-VideoListing-copy.cshtml" />
+    <Content Include="Areas\Admin\Views\Announcements\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Announcements\Index.cshtml" />
+    <Content Include="Areas\Students\Views\Shared\TaskType-EnterText.cshtml" />
     <None Include="Areas\Students\Views\Shared\TaskType-CommentOnPost.cshtml" />
     <Content Include="Areas\Students\Views\Shared\TaskType-Default.cshtml" />
     <Content Include="Views\Account\EditProfile.cshtml" />
@@ -483,6 +503,12 @@
     <Content Include="Views\Account\UploadPhoto.cshtml" />
     <Content Include="Views\Shared\_WriteUserPosts.cshtml" />
     <Content Include="Views\Home\IndexFeed.cshtml" />
+    <Content Include="Views\Shared\_DynamicUserPosts.cshtml" />
+    <Content Include="Views\Home\Post.cshtml" />
+    <Content Include="Views\Home\_HomeSideBar.cshtml" />
+    <Content Include="Views\Shared\_CourseDashboardSmall.cshtml" />
+    <Content Include="Views\Home\Index%28BeforePosts%29.cshtml" />
+    <Content Include="Views\Home\Faq.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\students.css" />

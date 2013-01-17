@@ -140,10 +140,10 @@
 		
 			<h3>Results</h3>
 			<div id="search-results-filters">
-				<input type="radio" class="search-filter" name="search-filter" id="filter-all" value="all" checked="checked" /><label for="filter-all">All DTS (@Model.UserRelationships.Count)</label>
-				<input type="radio" class="search-filter" name="search-filter" id="filter-alumni" value="alumni" /><label for="filter-alumni">Alumni (@Model.UserRelationships.Count(ur => ur.TargetUser.Degrees.Count > 0))</label>
-				<input type="radio" class="search-filter" name="search-filter" id="filter-students" value="student" /><label for="filter-students">Students (@Model.UserRelationships.Count(ur => ur.TargetUser.Students.Count > 0))</label>
-				<input type="radio" class="search-filter" name="search-filter" id="filter-staff" value="staff" /><label for="filter-staff">Staff/Faculty (@Model.UserRelationships.Count(ur => ur.TargetUser.Employees.Count > 0))</label>
+				<input type="radio" class="search-filter" name="search-filter" id="filter-all" value="all" @(Request["filter"] + "" == "" ? "checked" : "") /><label for="filter-all">All DTS (@Model.UserRelationships.Count)</label>
+				<input type="radio" class="search-filter" name="search-filter" id="filter-alumni" value="alumni" @(Request["filter"] + "" == "alumni" ? "checked" : "") /><label for="filter-alumni">Alumni (@Model.UserRelationships.Count(ur => ur.TargetUser.Degrees.Count > 0))</label>
+				<input type="radio" class="search-filter" name="search-filter" id="filter-students" value="student" @(Request["filter"] + "" == "student" ? "checked" : "") /><label for="filter-students">Students (@Model.UserRelationships.Count(ur => ur.TargetUser.Students.Count > 0))</label>
+				<input type="radio" class="search-filter" name="search-filter" id="filter-staff" value="staff" @(Request["filter"] + "" == "staff" ? "checked" : "") /><label for="filter-staff">Staff/Faculty (@Model.UserRelationships.Count(ur => ur.TargetUser.Employees.Count > 0))</label>
 			</div>
 	</div>
 
@@ -151,7 +151,7 @@
 	 
 		<div class="user-search-results">
 		@foreach (UserRelationship userRel in Model.UserRelationships) {
-			<div class="user-search-result @(userRel.TargetUser.Students.Count > 0 ? " user-student" : "") @(userRel.TargetUser.Degrees.Count > 0 ? " user-alumni" : "") @(userRel.TargetUser.Employees.Count > 0 ? " user-staff" : "")">
+			<div class="user-search-result @(userRel.TargetUser.Students.Count > 0 ? " user-student" : "") @(userRel.TargetUser.Degrees.Count > 0 || userRel.TargetUser.AlumniInfos.Count > 0 ? " user-alumni" : "") @(userRel.TargetUser.Employees.Count > 0 ? " user-staff" : "")">
 				<div class="user-image">
 					<img src="@userRel.TargetUser.GetProfileImageUrl(60, 60)" alt="@userRel.TargetUser.SecureFormattedName" />
 				</div>
@@ -163,10 +163,11 @@
 				
 
 					<div class="user-tags">
-						@if (userRel.TargetUser.Degrees.Count > 0) {
+						@if (userRel.TargetUser.Degrees.Count > 0 || userRel.TargetUser.AlumniInfos.Count > 0) {
 							<span class="user-tag">
 							@Didache.Resources.labels.profile_constituency_alumni<text>:</text>
 							@Html.Raw(String.Join(", ", userRel.TargetUser.Degrees.Select(d => d.DegreeEarned + " (" + d.GradYear.ToString() + ")").ToArray()))
+							@(userRel.TargetUser.Degrees.Count == 0 && !String.IsNullOrWhiteSpace(userRel.TargetUser.AlumniInfos.ToList()[0].ClassYear) ? "Class of " + userRel.TargetUser.AlumniInfos.ToList()[0].ClassYear : "")
 							</span>
 						}
 						
@@ -223,18 +224,24 @@
 		<script>
 			
 			// count
-			
+
 
 			$('.search-filter').on('click', function () {
-				var value = $(this).val(), allresults = $('.user-search-result')
-					.show();
+				runFilter();
+			});
+
+			function runFilter() {
+				var value = $('#search-results-filters input:checked').val(),
+					allresults = $('.user-search-result').show();
 
 				if (value != 'all') {
-					allresults.filter(':not(.user-' + value + ')')
+					allresults
+						.filter(':not(.user-' + value + ')')
 						.hide();
 				}
+			}
 
-			});
+			runFilter();
 		</script>	 
 	 
  }

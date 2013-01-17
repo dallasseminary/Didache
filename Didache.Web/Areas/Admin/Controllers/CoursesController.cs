@@ -13,7 +13,7 @@ using System.Data.SqlClient;
 
 namespace Didache.Web.Areas.Admin.Controllers
 {
-	[AdminAndBuilder]
+	
     public class CoursesController : Controller
     {
 		private DidacheDb db = new DidacheDb();
@@ -21,10 +21,16 @@ namespace Didache.Web.Areas.Admin.Controllers
 		
 		//
         // GET: /Admin/Courses/
-		
 
-		
-		
+		[AdminAndBuilder]
+		public ActionResult DeleteCourse(int id) {
+
+			Courses.DeleteCourse(id);
+
+			return Redirect(Request.UrlReferrer.ToString());
+		}
+
+		[AdminAndBuilder]
         public ActionResult Index()
         {
 			List<Course> courses = Didache.Courses.GetCurrentlyRunningCourses();
@@ -34,6 +40,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 			return View("List", courses);		
         }
 
+		[AdminAndBuilder]
 		public ActionResult BySession(int id) {
 
 			List<Course> courses = Didache.Courses.GetCoursesBySession(id);
@@ -43,7 +50,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 			return View("List", courses);
 		}
 
-
+		[AdminAndBuilder]
 		public ActionResult Units(int id) {
 
 			List<Unit> units = Didache.Courses.GetCourseUnits(id);
@@ -52,7 +59,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 			return View(units);
 		}
 
-
+		[AdminAndBuilder]
 		public ActionResult Grading(int id) {
 
 			ViewBag.GradeGroups = Didache.GradeGroups.GetCourseGradeGroups(id);
@@ -61,7 +68,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 			return View(Courses.GetCourse(id));
 		}
 
-
+		[AdminAndBuilder]
 		public ActionResult CourseEditor(int? id) {
 
 			ViewBag.Sessions = db.Sessions.OrderByDescending(s => s.StartDate).ToList();
@@ -72,6 +79,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 			return View(course);
 		}
 
+		[AdminAndBuilder]
 		public ActionResult SyncUsers(int id, string sessionYear, string sessionCode, string courseCode, string courseSection, string courseHours) {
 
 			Course course = Courses.GetCourse(id, false);
@@ -81,7 +89,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 			return Json(new {success= true});
 		}
 
-
+		[AdminAndBuilder]
 		public ActionResult CloneCourse() {
 
 			List<Course> courses = db.Courses
@@ -98,6 +106,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 			return View(courses);
 		}
 
+		[AdminAndBuilder]
 		[HttpPost]
 		public ActionResult CloneCourse(int courseID, int sessionID, DateTime startDate, string courseCode, string section) {
 
@@ -108,6 +117,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 			return Redirect("/admin/courses/courseeditor/" + newCourse.CourseID);
 		}
 
+		[AdminAndBuilder]
 		[HttpPost]
 		[ValidateInput(false)]
 		public ActionResult UpdateCourse(Course model) {
@@ -159,11 +169,13 @@ namespace Didache.Web.Areas.Admin.Controllers
 					);
 		}
 
+		[AdminAndBuilder]
 		public ActionResult Users(int id) {
 			ViewBag.CourseUserGroups = db.CourseUserGroups.Where(cug => cug.CourseID == id).ToList();
 			return View(Courses.GetCourse(id));
 		}
 
+		[AdminAndBuilder]
 		public ActionResult UpdateUserInCourse(int userID, int courseID, int roleID, int groupID, bool remove) {
 
 			bool added = false;
@@ -182,12 +194,13 @@ namespace Didache.Web.Areas.Admin.Controllers
 			return Json(serializer.Serialize(courseUser));
 		}
 
-
+		[AdminAndBuilder]
 		public ActionResult UserGroups(int id) {
 
 			return View(Courses.GetCourse(id));
 		}
 
+		[AdminAndBuilder]
 		[HttpPost]
 		public ActionResult UpdateUserGroup(CourseUserGroup model) {
 
@@ -248,6 +261,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 		}
 		*/
 
+		[AdminAndBuilder]
 		[HttpPost]
 		//[ValidateInput(false)]
 		public ActionResult UpdateTask(Task model) {
@@ -331,6 +345,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 			}
 		}
 
+		[AdminAndBuilder]
 		[HttpPost]
 		//[ValidateInput(false)]
 		public ActionResult DeleteTask(int id) {
@@ -348,6 +363,25 @@ namespace Didache.Web.Areas.Admin.Controllers
 			return Json(new {success= true});
 		}
 
+		[AdminAndBuilder]
+		[HttpPost]
+		//[ValidateInput(false)]
+		public ActionResult DeleteUnit(int id) {
+
+			Unit unit = db.Units.Find(id);
+
+			//task.IsDeleted = true;
+			db.Units.Remove(unit);
+
+			// user tasks?
+
+			db.SaveChanges();
+
+
+			return Json(new { success = true });
+		}
+
+		[AdminAndBuilder]
 		[HttpPost]
 		//[ValidateInput(false)]
 		public ActionResult RemoveFileFromCourse(int courseID, int fileID) {
@@ -363,6 +397,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 			return Json(new { success = true });
 		}
 
+		[AdminAndBuilder]
 		[HttpPost]
 		//[ValidateInput(false)]
 		public ActionResult UpdateUnit(Unit model) {
@@ -400,7 +435,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 			}
 		}
 
-
+		[AdminAndBuilder]
 		[HttpPost]
 		public ActionResult UpdateUnitSorting(int id) {
 
@@ -448,7 +483,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 			return Json(new { success = success, errorMessage = errorMessage});
 		}
 
-
+		[AdminAndBuilder]
 		public ActionResult Files(int id) {
 
 			ViewBag.CourseFileGroups = CourseFiles.GetCourseFileGroups(id);
@@ -459,7 +494,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 
 		}
 
-
+		[AdminFacultyFacilitatorBuilder]
 		public ActionResult Surveys(int id) {
 
 			List<UnitSurvey> surveys = db.UnitSurveys
@@ -482,7 +517,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 			return View(unitGroups);
 		}
 
-
+		[AdminAndBuilder]
 		[HttpPost]
 		public ActionResult AddFileGroup(int id) {
 
@@ -504,7 +539,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 			return Json(new {groupid = group.GroupID, name=json.name, courseid= id});
 		}
 
-
+		[AdminAndBuilder]
 		[HttpPost]
 		public ActionResult FileUpload(int id) {
 
@@ -585,6 +620,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 			return Json(returnObject);
 		}
 
+		[AdminAndBuilder]
 		[HttpPost]
 		public ActionResult UpdateFileSorting(int id) {
 
@@ -685,6 +721,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 			return Json(new { success= true});
 		}
 
+		[AdminAndBuilder]
 		[HttpPost]
 		[ValidateInput(false)]
 		public ActionResult UpdateCourseFileGroup(CourseFileGroup model) {
@@ -722,6 +759,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 			}
 		}
 
+		[AdminAndBuilder]
 		[HttpPost]
 		public ActionResult UpdateCourseFileAssociation(int groupID, int fileID, string title, bool isActive) {
 			
@@ -756,6 +794,7 @@ namespace Didache.Web.Areas.Admin.Controllers
 		
 		}
 
+		[AdminAndBuilder]
 		[HttpPost]
 		public ActionResult UpdateUserGroupSorting(int id) {
 

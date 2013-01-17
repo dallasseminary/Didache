@@ -58,7 +58,8 @@ namespace Didache {
 			var properties = from p in type.GetProperties()
 							 where /* p.CanWrite && */
 								   p.CanRead &&
-								   _builtInTypes.Contains(p.PropertyType)
+								   _builtInTypes.Contains(p.PropertyType) &&
+								   p.GetCustomAttributes(typeof(ScriptIgnoreAttribute), true).Length == 0
 							 select p;
 
 			// add them to the dictionary

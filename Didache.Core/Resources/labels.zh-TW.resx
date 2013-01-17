@@ -157,7 +157,7 @@
     <value>讓您的分級東西</value>
   </data>
   <data name="coursetabs_dashboard" xml:space="preserve">
-    <value>研習指標</value>
+    <value>課程報告</value>
   </data>
   <data name="coursetabs_dashboard_desc" xml:space="preserve">
     <value>你所有的基地</value>
@@ -166,7 +166,7 @@
     <value>所有的重要信息類</value>
   </data>
   <data name="coursetabs_discussion" xml:space="preserve">
-    <value>課程報告</value>
+    <value>茶餘飯後</value>
   </data>
   <data name="coursetabs_discussion_desc" xml:space="preserve">
     <value>課程論壇</value>
@@ -379,7 +379,7 @@
     <value>單位</value>
   </data>
   <data name="courses_heading_dashboard" xml:space="preserve">
-    <value>研習指標</value>
+    <value>課程報告</value>
   </data>
   <data name="courses_label_gradedfiles" xml:space="preserve">
     <value>分級文件</value>
@@ -545,21 +545,125 @@
     <value>打印所有幻燈片</value>
   </data>
   <data name="videos_printalltranscripts" xml:space="preserve">
-    <value>打印所有成績單</value>
+    <value>列印所有講稿</value>
   </data>
   <data name="videos_seconds" xml:space="preserve">
     <value>秒</value>
   </data>
   <data name="videos_slides" xml:space="preserve">
-    <value>抄本</value>
+    <value>幻燈片</value>
   </data>
   <data name="videos_totaltime" xml:space="preserve">
     <value>總時間</value>
   </data>
   <data name="videos_transcript" xml:space="preserve">
-    <value>幻燈片</value>
+    <value>講稿</value>
   </data>
   <data name="videos_watch" xml:space="preserve">
-    <value>手錶</value>
+    <value>影片</value>
+  </data>
+  <data name="community_search_button" xml:space="preserve">
+    <value>搜尋</value>
+  </data>
+  <data name="community_search_placeholder" xml:space="preserve">
+    <value>Search for friends like Darrell Bock</value>
+  </data>
+  <data name="community_search_title" xml:space="preserve">
+    <value>搜尋</value>
+  </data>
+  <data name="usersposts_post_button" xml:space="preserve">
+    <value>上帖</value>
+  </data>
+  <data name="usersposts_post_everyonein" xml:space="preserve">
+    <value>本班所有成員</value>
+  </data>
+  <data name="usersposts_post_placeholder" xml:space="preserve">
+    <value>分享報告事項</value>
+  </data>
+  <data name="usersposts_post_visibleto" xml:space="preserve">
+    <value>發函給</value>
+  </data>
+  <data name="survey_footer" xml:space="preserve">
+    <value>請寫下您到目前為止對本課程中的任何部份可能有的任何建議或評論，以便幫助學校研發更好的內容來協助您有效地學習。 
+記住： 如果您有任何與課程內容相關的問題，請與你的助教(GTA) 聯繫。如果你遇到了任何技術上的困難，你需要幫助，請寄電子郵件至 coursemanagement@dts.edu。</value>
+  </data>
+  <data name="survey_header_classinteraction" xml:space="preserve">
+    <value>網絡互動</value>
+  </data>
+  <data name="survey_header_comments" xml:space="preserve">
+    <value>附加評論</value>
+  </data>
+  <data name="survey_header_comments_desc" xml:space="preserve">
+    <value>請寫下你對此課程或網路教育網站之任何部分的建議、稱讚、或投訴。</value>
+  </data>
+  <data name="survey_header_devotional" xml:space="preserve">
+    <value>靈修</value>
+  </data>
+  <data name="survey_header_instructions" xml:space="preserve">
+    <value>您對本課程的意見對於 DTS之網路課程內容推動與發展將有極大貢獻。 
+請從 1至5為每一領域排列等級，1 為最低，5 為最高。</value>
+  </data>
+  <data name="survey_header_learningactivity" xml:space="preserve">
+    <value>教學活動</value>
+  </data>
+  <data name="survey_header_navigation" xml:space="preserve">
+    <value>版面設計</value>
+  </data>
+  <data name="survey_header_reading" xml:space="preserve">
+    <value>閱讀</value>
+  </data>
+  <data name="survey_header_service" xml:space="preserve">
+    <value>服務和支援</value>
+  </data>
+  <data name="survey_header_tasks" xml:space="preserve">
+    <value>作業</value>
+  </data>
+  <data name="survey_header_video" xml:space="preserve">
+    <value>教學錄影</value>
+  </data>
+  <data name="survey_header_website" xml:space="preserve">
+    <value>網站介面</value>
+  </data>
+  <data name="survey_notapplicable" xml:space="preserve">
+    <value>不適用</value>
+  </data>
+  <data name="survey_question_clarity" xml:space="preserve">
+    <value>說明的清晰度</value>
+  </data>
+  <data name="survey_question_easeofuse" xml:space="preserve">
+    <value>易用性</value>
+  </data>
+  <data name="survey_question_instructionalsupport" xml:space="preserve">
+    <value>助教/導師的教學支援</value>
+  </data>
+  <data name="survey_question_labels" xml:space="preserve">
+    <value>網頁標記清楚的程度</value>
+  </data>
+  <data name="survey_question_learningobjectives" xml:space="preserve">
+    <value>是否符合課程目標並有助於課程目標的達成嗎？</value>
+  </data>
+  <data name="survey_question_lookandfeel" xml:space="preserve">
+    <value>版面的外觀和感覺</value>
+  </data>
+  <data name="survey_question_qualityvalue" xml:space="preserve">
+    <value>價值程度</value>
+  </data>
+  <data name="survey_question_slidesqualityvalue" xml:space="preserve">
+    <value>幻燈片的價值程度</value>
+  </data>
+  <data name="survey_question_techsupport" xml:space="preserve">
+    <value>技術方面的支援</value>
+  </data>
+  <data name="survey_question_videoqualityvalue" xml:space="preserve">
+    <value>教學錄影帶的價值程度</value>
+  </data>
+  <data name="survey_question_videotechnicalproblems" xml:space="preserve">
+    <value>技術問題 （5表示沒有問題）</value>
+  </data>
+  <data name="survey_question_videotranscript" xml:space="preserve">
+    <value>講稿對你是否有用？</value>
+  </data>
+  <data name="survey_thankyou" xml:space="preserve">
+    <value>Thank you for submitting the survey.</value>
   </data>
 </root>

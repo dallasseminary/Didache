@@ -21,8 +21,22 @@ namespace Didache  {
 
 		}
 
-	
 
+		public static bool IsAdministratorFacultyOrFacilitator(int userID) {
+
+			DidacheDb db = new DidacheDb();
+
+			User user = db.Users.Find(userID);
+
+			if (user == null)
+				return false;
+
+			return
+					System.Web.Security.Roles.IsUserInRole(user.Username, UserRoles.Administrator) ||
+					System.Web.Security.Roles.IsUserInRole(user.Username, UserRoles.Facilitator) ||
+					System.Web.Security.Roles.IsUserInRole(user.Username, UserRoles.Faculty);
+		}
+	
 		private static string _usernameKey = "user-name-{0}";
 		private static string _userIdKey = "user-id-{0}";
 
@@ -79,16 +93,20 @@ namespace Didache  {
 
 		public static bool HasPermission(int profileUserID, int viewerUserID, UserSecuritySetting setting) {
 
-			return true;
+			if (Users.IsAdministratorFacultyOrFacilitator(viewerUserID)) {
+				return true;
 
-			switch (setting) {
-				default:
-				case UserSecuritySetting.Private:
-					return false;
-				case UserSecuritySetting.Public:
-					return true;
-				case UserSecuritySetting.Friends:
-					return true;
+			} else {
+
+				switch (setting) {
+					default:
+					case UserSecuritySetting.Private:
+						return false;
+					case UserSecuritySetting.Public:
+						return true;
+					case UserSecuritySetting.Friends:
+						return UserRelationships.IsRelationshipApproved(viewerUserID, profileUserID);
+				}
 			}
 		}
 
@@ -166,6 +184,29 @@ namespace Didache  {
 
 		public static Student GetStudent(int userID) {
 			return new DidacheDb().Students.Where(u => u.UserID == userID).FirstOrDefault();
+		}
+
+		public static void MakeUserPrivate(int userID) {
+
+			DidacheDb db = new DidacheDb();
+
+			User user = db.Users.Find(userID);
+
+			if (user != null) {
+				user.AllowClassmateRequests = false;
+
+				user.AddressSecuritySetting = UserSecuritySetting.Private;
+				user.BiographySecuritySetting = UserSecuritySetting.Private;
+				user.BirthdateSecuritySetting = UserSecuritySetting.Private;
+				user.ChildrenSecuritySetting = UserSecuritySetting.Private;
+				user.EmailSecuritySetting = UserSecuritySetting.Private;
+				user.PhoneSecuritySetting = UserSecuritySetting.Private;
+				user.PictureSecuritySetting = UserSecuritySetting.Private;
+				user.ScheduleSecuritySetting = UserSecuritySetting.Private;
+				user.SpouseSecuritySetting = UserSecuritySetting.Private;
+
+				db.SaveChanges();
+			}
 		}
 	}
 }

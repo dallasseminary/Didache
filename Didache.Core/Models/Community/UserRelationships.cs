@@ -163,6 +163,10 @@ namespace Didache {
 			}
 		}
 
+		public static bool IsRelationshipApproved(int requesterUserID, int targetUserID) {
+			return GetRelationshipStatus(requesterUserID, targetUserID).RelationshipStatus == RelationshipStatus.Approved;
+		}
+
 		
 		public static void AddClassmateRequest(int requesterUserID, int targetUserID) {
 

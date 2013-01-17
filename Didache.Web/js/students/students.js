@@ -19,6 +19,7 @@ jQuery(document).ready(function ($) {
 
 	});
 
+	/*
 	// shorten task descriptions
 	$('.task-instructions-text').expander({
 		slicePoint: 1000
@@ -38,6 +39,20 @@ jQuery(document).ready(function ($) {
 		, expandText: 'show instructions »'
 		//, userCollapse: false
 		, userCollapseText: '« hide'
+	});
+	*/
+
+	// shorten task descriptions
+	$('.task-instructions-text').truncate({
+		max_length: 1000
+	});
+
+
+	// shorten task descriptions
+	$('.task-instructions-completed').truncate({
+		max_length: 0
+		, more: 'show instructions »'
+		, less: '« hide'
 	});
 
 

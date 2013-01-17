@@ -28,7 +28,7 @@
 
 	background: #eee;
 	border: solid 1px #666;
-	
+	z-index: 1000;
 }
 #email-form .email-body{
 	background: #fff;
@@ -43,6 +43,40 @@
 .overdue {
 	color: #ff0000;
 }
+
+.grading-form {
+	position: relative;
+}
+
+.graded-file-outer {
+	display: inline-block;
+	width: 100px;
+	height: 20px;
+	position: relative;
+}
+	.graded-file-outer .fake-container {
+		position: absolute;
+		z-index: 1;
+	}
+	.graded-file-outer .fake-container .fake-filename{
+		width: 50px;
+		display: inline-block;
+		height: 18px;
+		overflow: hidden;
+		white-space: nowrap;
+	}	
+	.graded-file-outer .real-choose {
+		position: absolute;
+		opacity: 0;
+		width: 100px;
+		z-index: 2;
+	}	
+	
+	.upload-button {
+		position: absolute;
+		right: 0;
+		z-index: 3;
+	}
 </style>
 
 <div class="page-wide">
@@ -126,7 +160,7 @@
 							<td><a class="d-button" href="/grading/@Model.Slug/downloadfiles/@userTaskData.TaskID/@lastGroupID/">All Files</a> <a class="d-button" href="/grading/@Model.Slug/downloadfiles/@userTaskData.TaskID/@lastGroupID/?excludeUngraded=true">Ungraded Files</a>
 							<th>Upload</th>
 							<td>
-								<form class="mass-upload" enctype="multipart/form-data" action="/grading/@Model.Slug/massupload/@ViewBag.Task.TaskID" method="post">
+								<form class="mass-upload" enctype="multipart/form-data" action="/grading/@Model.Slug/massupload/@ViewBag.Task.TaskID" method="post">																	
 									<input type="file" name="massfiles" />
 									<input type="submit" class="d-button" value="Upload Files" />
 								</form>	
@@ -189,9 +223,12 @@
 							@if (userTaskData.PostID > 0) {
 								<a href="/courses/@Model.Slug/schedule/@userTaskData.UnitID#thread-@userTaskData.Post.ThreadID" target="_blank">thread</a>
 							}
+							
+							@if (userTaskData.Task.TaskTypeName.IndexOf("Respond") > -1) {
+								<a href="/courses/@Model.Slug/schedule/@userTaskData.UnitID#task-@userTaskData.TaskID" target="_blank">discussion</a>
+							}
 
-
-							@if (userTaskData.Task.TaskTypeName.IndexOf("CommentOn") > -1) {
+							@if (userTaskData.Task.TaskTypeName.IndexOf("CommentOn") > -1 || userTaskData.Task.TaskTypeName.IndexOf("Respond") > -1) {
 								<a href="/grading/@Model.Slug/userinteractions/@userTaskData.TaskID/@user.UserID/" target="_blank">Interactions</a>
 							}
 							
@@ -199,13 +236,22 @@
 					</td>
 					if (userTaskData.Task.TaskTypeName.IndexOf("TurnInFile") > -1) {
 					<td class="grader-file">
+						
+					
+
 								
 							@if (userTaskData.GraderFileID > 0 && userTaskData.GradedFile != null) {
 								<a href="@userTaskData.GradedFile.FileUrl">Grader File</a> <a href="/grading/@Model.Slug/removegraderfile/@userTaskData.TaskID/@user.UserID" class="d-button">Remove</a>
 							} else {
 								<form class="grading-form" enctype="multipart/form-data" action="/grading/@Model.Slug/uploadgraderfile/@userTaskData.TaskID/@userTaskData.UserID" method="post">
-									<input type="file" name="GradedFile" style="width:100px;" />
-									<input type="submit" value="Upload" class="d-button action" />
+									<span class="graded-file-outer">
+										<input class="real-choose" type="file" name="GradedFile"  />
+										<span class="fake-container">
+											<input class="fake-choose" type="button" value="Choose" />
+											<span class="fake-filename" ></span>
+										</span>
+									</span>
+									<input type="submit" value="Upload" class="d-button action upload-button" />
 								</form>
 							}
 					</td>
@@ -476,6 +522,12 @@
 
 
 			}
+		});
+
+
+		// fake file
+		$('.real-choose').on('change', function() {
+			$(this).parent().find('.fake-filename').html($(this).val());
 		});
 	});
 </script>

@@ -10,16 +10,26 @@
 	@Html.Partial("_CourseMenu")
 
 	<div class="main-column">
-		
-		@Html.Partial("_CourseDashboard", Model)
+		<div class="message-warning">
+			This new area is designed for you and your fellow classmates
+			to have a place where you can interact outside of the required assignments in the "Schedule" area.
+			You can ask for help on assignments, but you can also share prayer requests or anything else you'd like to talk about.
+			In the coming weeks, this discussion area will also show up on the front page of the website.
+			Until then, please experiment with it and let us know what you think.
+		</div>
 
+
+		@Html.Partial("_DynamicUserPosts", new PostListViewOptions() { PostListType = PostListType.Course, Course = Model, KeyID = Model.CourseID })
+
+		@*
+		@Html.Partial("_CourseDashboard", Model)
+		*@
 	</div>
 	<div class="sub-column">
 		
 		<div class="sub-column-padding">
-			<h3>@Didache.Resources.labels.courses_heading_coursedesc</h3>
-		
-			<p>@Html.Raw(Utility.StripHtml(Model.Description))</p>
+			@Html.Partial("_CourseDashboardSmall", Model)
+			
 		</div>
 		
 	</div>

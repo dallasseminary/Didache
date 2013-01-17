@@ -1,25 +1,22 @@
 ﻿@model Didache.UserTaskData
 
-@{	
-	List<VideoInfo> Videos = new List<VideoInfo>();
 
-	string externalThumbBase = "https://dtsoe.s3.amazonaws.com"; // "http://oefiles.dts.edu";
-	string courseCode = Model.Task.Course.CourseCode;
-	string versionInfo = (Model.Task.Course.VersionNumber > 1 ? "v" + Model.Task.Course.VersionNumber : ""); 
-	string xmlPath = Settings.PlayerFilesLocation + courseCode + versionInfo + @"\titles\" + Users.GetLoggedInUser().Language + ".xml";
+@functions{
 	
-	
+public List<VideoInfo> GetVideos(string externalThumbBase, string language, string courseCode, string versionInfo, string unitNumber, string singleVideoNumber) {
+	List<VideoInfo> videoList = new List<VideoInfo>();
+
+	// path with language
+	string xmlPath = Settings.PlayerFilesLocation + courseCode + versionInfo + @"\titles\" + language + ".xml";
+
 	// check language
 	if (!File.Exists(xmlPath)) {
-		// defatul back to english	
+		// default back to english	
 		xmlPath = Settings.PlayerFilesLocation + courseCode + versionInfo + @"\titles\en-US.xml";
-	}		
+	}
 
 	// load XML
-	
-	
-	if (File.Exists(xmlPath))
-	{
+	if (File.Exists(xmlPath)) {
 		System.Xml.XmlDocument doc = new System.Xml.XmlDocument();
 		doc.Load(xmlPath);
 
@@ -27,28 +24,93 @@
 		int index = 1;
 
 		// pull videos
-		System.Xml.XmlNodeList videoNodes = doc.SelectNodes("//unit[@number=" + Model.Task.Unit.SortOrder + "]/video");
-		foreach (System.Xml.XmlNode vNode in videoNodes)
-		{
+		System.Xml.XmlNodeList videoNodes = doc.SelectNodes("//unit[@number=" + unitNumber + "]/video");
+		foreach (System.Xml.XmlNode vNode in videoNodes) {
 
-			Videos.Add(new VideoInfo
-						{
-							SortOrder = index++,
-							Title = vNode.Attributes["name"].Value,
-							Duration = vNode.Attributes["duration"].Value,
-							VideoUrl = String.Format("{0}/{1}/{2}_u{3}_v{4}.mp4", externalThumbBase, courseCode.ToLower() + versionInfo, courseCode.ToUpper() + versionInfo, Model.Task.Unit.SortOrder.ToString().PadLeft(3, '0'), vNode.Attributes["number"].Value.ToString().PadLeft(3, '0')),
+			string videoNumber = vNode.Attributes["number"].Value.ToString();
 
-							ThumbnailFilename = String.Format("{0}_u{1}_v{2}_thumb.jpg", courseCode.ToUpper() + versionInfo, Model.Task.Unit.SortOrder.ToString().PadLeft(3, '0'), vNode.Attributes["number"].Value.ToString().PadLeft(3, '0')),
-
-							//ThumbnailUrl = String.Format("{0}/{1}/videos/{2}_u{3}_v{4}_thumb.jpg", locaThumbBase, Model.Course.CourseCode.ToLower(), Model.Course.CourseCode.ToUpper(), Model.Unit.UnitNumber.ToString().PadLeft(3, '0'), vNode.Attributes["number"].Value.ToString().PadLeft(3, '0')),
-							ThumbnailUrl = String.Format("{0}/{1}/{2}_u{3}_v{4}_thumb.jpg", externalThumbBase, courseCode.ToLower() + versionInfo, courseCode.ToUpper() + versionInfo, Model.Task.Unit.SortOrder.ToString().PadLeft(3, '0'), vNode.Attributes["number"].Value.ToString().PadLeft(3, '0')),
-							PercentComplete = random.Next(100)
-						});
-		}
+			if (String.IsNullOrEmpty(singleVideoNumber) || singleVideoNumber == videoNumber) {
+			
+				videoList.Add(new VideoInfo {
+					SortOrder = index++,
+					Title = vNode.Attributes["name"].Value,
+					Duration = vNode.Attributes["duration"].Value,
+					VideoUrl = String.Format("{0}/{1}/{2}_u{3}_v{4}.mp4", externalThumbBase, courseCode.ToLower() + versionInfo, courseCode.ToUpper() + versionInfo, unitNumber.PadLeft(3, '0'), videoNumber.PadLeft(3, '0')),
+					ThumbnailFilename = String.Format("{0}_u{1}_v{2}_thumb.jpg", courseCode.ToUpper() + versionInfo, unitNumber.PadLeft(3, '0'), videoNumber.PadLeft(3, '0')),
+					ThumbnailUrl = String.Format("{0}/{1}/{2}_u{3}_v{4}_thumb.jpg", externalThumbBase, courseCode.ToLower() + versionInfo, courseCode.ToUpper() + versionInfo, unitNumber.PadLeft(3, '0'), videoNumber.PadLeft(3, '0')),
+					PercentComplete = random.Next(100),
+					WatchUrl = "/player/#course=" + courseCode + versionInfo + "&unit=" + unitNumber + "&video=" + videoNumber + "&language=" + language,
+					SlidesUrl = "/player/print-slides.aspx?course=" + courseCode + versionInfo + "&unit=" + unitNumber + "&video=" + videoNumber + "&language=" + language,
+					TranscriptUrl = "/player/print-transcript.aspx?course=" + courseCode + versionInfo + "&unit=" + unitNumber + "&video=" + videoNumber + "&language=" + language
+				});
+			}
+		}	
 	} else {
-		//Response.Write("can't find: " + xmlPath);	
+		//Response.Write("Can't find: " + xmlPath + "<BR>");	
 	}
+
+	return videoList;
+}
+
+}
+
+@{	
 	
+	string externalThumbBase = "https://dtsoe.s3.amazonaws.com"; // "http://oefiles.dts.edu";
+	
+	
+	List<VideoInfo> Videos = new List<VideoInfo>();
+	
+	// TEST
+	string language = Users.GetLoggedInUser().Language;
+	string courseCode = Model.Task.Course.CourseCode;
+	string versionInfo = (Model.Task.Course.VersionNumber > 1 ? "v" + Model.Task.Course.VersionNumber : "");
+	string unitNumber = Model.Task.Unit.SortOrder.ToString();
+		
+	if (String.IsNullOrEmpty(Model.Task.CustomAttributes)) {
+		
+		// all defaults
+		Videos.AddRange(GetVideos(externalThumbBase, language, courseCode, versionInfo, unitNumber, null)); 
+	
+	} else {
+		string[] requestedVideos = Model.Task.CustomAttributes.Split(new char[] { ',' });
+		
+		foreach (string requestedVideo in requestedVideos) {
+			string[] requestedVideoParts = requestedVideo.Trim().Split(new char[] { '_' });
+
+			string requestedCourseCode = "";
+			string requestedVersionInfo = "";
+			string requestedUnitNumber = "";
+			string requestedVideoNumber = "";
+			
+			if (requestedVideoParts.Length == 1) {
+				requestedCourseCode = courseCode;
+				requestedVersionInfo = versionInfo;
+				requestedUnitNumber = unitNumber;
+				requestedVideoNumber = requestedVideoParts[0].Trim();
+			} else if (requestedVideoParts.Length == 2) {
+				requestedCourseCode = courseCode;
+				requestedVersionInfo = versionInfo;
+				requestedUnitNumber = requestedVideoParts[0].Trim();
+				requestedVideoNumber = requestedVideoParts[1].Trim();
+			} else if (requestedVideoParts.Length == 3) {
+				requestedCourseCode = requestedVideoParts[0].Trim();
+				requestedUnitNumber = requestedVideoParts[1].Trim();
+				requestedVideoNumber = requestedVideoParts[2].Trim();
+				// check for second to last "v" as in BE101v2
+				if (requestedCourseCode.Substring(requestedCourseCode.Length-2, 1) == "v") {
+					requestedVersionInfo = requestedCourseCode.Substring(requestedCourseCode.Length - 2);
+					requestedCourseCode = requestedCourseCode.Substring(0, requestedCourseCode.Length - 2);
+				} else {
+					requestedVersionInfo = "";
+				}
+			}
+
+			//Response.Write(requestedVideo + " = " + requestedCourseCode + "|" + requestedVersionInfo + "|" + requestedUnitNumber + "|" + requestedVideoNumber + "<BR>");
+			
+			Videos.AddRange(GetVideos(externalThumbBase, language, requestedCourseCode, requestedVersionInfo, requestedUnitNumber, requestedVideoNumber)); 
+		}
+	}
 }
 
 @if (Request.Browser.IsMobileDevice || Request.UserAgent.ToLower().Contains("ipad")) {
@@ -75,9 +137,9 @@
 		<div class="video-thumb" @* title="You have watched about @((Double)v.Minutes*(Double)v.PercentComplete/100) out of the @v.Minutes minutes in this video" *@>
 			<div class="video-options-container" style="background-image:url(@v.ThumbnailUrl);">
 				<div class="video-options">
-					<a class="icon watchvideo" target="_blank" href="/player/#course=@(courseCode + versionInfo)&unit=@Model.Task.Unit.SortOrder&video=@v.SortOrder&language=@Users.GetLoggedInUser().Language">@Didache.Resources.labels.videos_watch</a>
-					<a class="icon slides" target="_blank" href="/player/print-slides.aspx?course=@(courseCode + versionInfo)&unit=@Model.Task.Unit.SortOrder&video=@v.SortOrder&language=@Users.GetLoggedInUser().Language">@Didache.Resources.labels.videos_slides</a>
-					<a class="icon transcript" target="_blank" href="/player/print-transcript.aspx?course=@(courseCode + versionInfo)&unit=@Model.Task.Unit.SortOrder&video=@v.SortOrder&language=@Users.GetLoggedInUser().Language">@Didache.Resources.labels.videos_transcript</a>
+					<a class="icon watchvideo" target="_blank" href="@v.WatchUrl">@Didache.Resources.labels.videos_watch</a>
+					<a class="icon slides" target="_blank" href="@v.SlidesUrl">@Didache.Resources.labels.videos_slides</a>
+					<a class="icon transcript" target="_blank" href="@v.TranscriptUrl">@Didache.Resources.labels.videos_transcript</a>
 				</div>
 			</div>
 			<div class="progress-outline" >
@@ -85,7 +147,7 @@
 			</div>					
 		</div>					
 				
-		<a class="video-info" href="/player/#course=@(courseCode + versionInfo)&unit=@Model.Task.Unit.SortOrder&video=@v.SortOrder&language=@Users.GetLoggedInUser().Language" target="_blank" @* x-title="You have watched about @((Double)v.Minutes * (Double)v.PercentComplete / 100) out of the @v.Minutes minutes in this video" *@>
+		<a class="video-info" href="@v.WatchUrl" target="_blank" @* x-title="You have watched about @((Double)v.Minutes * (Double)v.PercentComplete / 100) out of the @v.Minutes minutes in this video" *@>
 			<span class="title">@v.Title</span>
 			<span class="duration">@v.Minutes @Didache.Resources.labels.videos_minutes</span>
 		</a>

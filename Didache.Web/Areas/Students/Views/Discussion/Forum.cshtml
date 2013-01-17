@@ -30,11 +30,11 @@
 					} else {
 						foreach (Thread thread in Model.Threads) {
 							<div class="thread" id="thread-@thread.ThreadID">
-								<span class="thumb"><img src="@thread.User.GetProfileImageUrl(40,40)" /></span>
-								<span class="subject"><h4><a href="/courses/@ViewContext.RouteData.Values["slug"]/discussion/thread/@thread.ThreadID">@Html.Raw(thread.Subject)</a></h4><span class="date">Posted by <a href="@thread.User.ProfileDisplayUrl">@thread.User.SecureShortName</a> &mdash; @thread.ThreadDate.ToShortDateString() at @thread.ThreadDate.ToShortTimeString()</span></span>
+								<span class="thumb"><img src="@(thread.User != null ? thread.User.GetProfileImageUrl(40,40) : "")" /></span>
+								<span class="subject"><h4><a href="/courses/@ViewContext.RouteData.Values["slug"]/discussion/thread/@thread.ThreadID">@Html.Raw(thread.Subject)</a></h4><span class="date">Posted by <a href="@(thread.User != null ? thread.User.ProfileDisplayUrl : "#")">@(thread.User != null ? thread.User.SecureShortName : "missing")</a> &mdash; @thread.ThreadDate.ToShortDateString() at @thread.ThreadDate.ToShortTimeString()</span></span>
 								<span class="replies">
 									<span class="number">@thread.TotalReplies @(thread.TotalReplies == 1 ? "reply" : "replies") </span>
-									<span class="last-poster">Last by <a href="@thread.LastPostUser.ProfileDisplayUrl">@thread.LastPostUser.SecureShortName</a></span>
+									<span class="last-poster">Last by <a href="@(thread.LastPostUser != null ? thread.LastPostUser.ProfileDisplayUrl : "#")">@(thread.LastPostUser != null ? thread.LastPostUser.SecureShortName : "missing")</a></span>
 									<span class="date">@thread.LastPostDate.ToShortDateString() at @thread.LastPostDate.ToShortTimeString()</span> </span>
 							
 							</div>

@@ -8,6 +8,36 @@ using System.Web.Caching;
 namespace Didache  {
 	public class Courses {
 
+
+		public static void DeleteCourse(int courseID) {
+			var db = new DidacheDb();
+
+			// files
+			db.Database.ExecuteSqlCommand("DELETE FROM oe_CourseFileGroups_Files WHERE GroupID IN (SELECT GroupID FROM oe_CourseFileGroups WHERE CourseID = " + courseID + ");");
+			db.Database.ExecuteSqlCommand("DELETE FROM oe_CourseFileGroups WHERE CourseID = " + courseID + ";");
+
+			// interactions
+			db.Database.ExecuteSqlCommand("DELETE FROM oe_Interactions_Posts WHERE TaskID IN (SELECT TaskID FROM oe_Courses_Tasks WHERE CourseID = " + courseID + ");");
+			db.Database.ExecuteSqlCommand("DELETE FROM oe_Interactions_Threads WHERE TaskID IN (SELECT TaskID FROM oe_Courses_Tasks WHERE CourseID = " + courseID + ");");
+
+			// forums
+			db.Database.ExecuteSqlCommand("DELETE FROM oe_Forums_Posts WHERE ForumID IN (SELECT ForumID FROM oe_Forums WHERE CourseID = " + courseID + ");");
+			db.Database.ExecuteSqlCommand("DELETE FROM oe_Forums_Threads WHERE ForumID IN (SELECT ForumID FROM oe_Forums WHERE CourseID = " + courseID + ");");
+			db.Database.ExecuteSqlCommand("DELETE FROM oe_Forums WHERE CourseID = " + courseID + ";");
+
+			// main stuff
+			db.Database.ExecuteSqlCommand("DELETE FROM oe_Courses WHERE CourseID = " + courseID + ";");
+			db.Database.ExecuteSqlCommand("DELETE FROM oe_Courses_Units WHERE CourseID = " + courseID + ";");
+			db.Database.ExecuteSqlCommand("DELETE FROM oe_Courses_Tasks WHERE CourseID = " + courseID + ";");
+			db.Database.ExecuteSqlCommand("DELETE FROM oe_Courses_Tasks_UserData WHERE CourseID = " + courseID + ";");
+			db.Database.ExecuteSqlCommand("DELETE FROM oe_Courses_UserGroups WHERE CourseID = " + courseID + ";");
+			db.Database.ExecuteSqlCommand("DELETE FROM oe_Courses_Users WHERE CourseID = " + courseID + ";");
+
+			db.Database.ExecuteSqlCommand("DELETE FROM oe_UnitSurveys WHERE CourseID = " + courseID + ";");
+		
+		}
+
+
 		private static string _courseById = "course-id-{0}";
 		private static string _courseBySlug = "course-slug-{0}";
 
@@ -123,6 +153,7 @@ namespace Didache  {
 				.ToList();
 		}
 
+
 		public static List<Course> GetUsersCourses(CourseUserRole roleID) {
 			return GetUsersCourses(Users.GetLoggedInUser().UserID, roleID);
 		}
@@ -132,6 +163,48 @@ namespace Didache  {
 				.Where(c => c.CourseUsers.Any(cu => cu.UserID == userID && cu.RoleID == (int)roleID))
 				.OrderByDescending(c => c.Session.StartDate)
 				.ToList();
+		}
+
+		public static List<Course> GetUsersCourses() {
+
+			User user = Users.GetLoggedInUser();
+
+			if (user != null) {
+
+				int userID = user.UserID;
+
+				return new DidacheDb().Courses
+					.Where(c => c.CourseUsers.Any(cu => cu.UserID == userID))
+					.OrderByDescending(c => c.Session.StartDate)
+					.ToList();
+			} else {
+				return new List<Course>();
+			}
+		}
+
+		public static List<CourseUserGroup> GetUsersGroups() {
+			User user = Users.GetLoggedInUser();
+
+			if (user != null) {
+				return GetUsersGroups(user.UserID);
+			} else {
+				return new List<CourseUserGroup>();
+			}
+		}
+
+		public static List<CourseUserGroup> GetUsersGroups(int userID) {
+			return new DidacheDb().CourseUserGroups
+				.Where(cug => cug.Students.Any(cu => cu.UserID == userID) || cug.FacilitatorUserID == userID)
+				.ToList();
+		}
+
+		public static List<Course> GetUsersRunningCourses() {
+			User profile = Users.GetLoggedInUser();
+
+			if (profile != null)
+				return GetUsersRunningCourses(profile.UserID, CourseUserRole.All);
+			else
+				return null;
 		}
 
 		public static List<Course> GetUsersRunningCourses(CourseUserRole roleID) {
@@ -165,13 +238,27 @@ namespace Didache  {
 				DateTime targetStartDate = DateTime.Now.AddDays(7);
 				DateTime targetEndDate = DateTime.Now.AddDays(-7);
 
-				courses = new DidacheDb().Courses
-					.Where(c => c.CourseUsers.Any(cu => cu.UserID == userID &&
+				var courseQuery = new DidacheDb().Courses.AsQueryable();
+
+				// all the roles
+				if (roleID == CourseUserRole.All) {
+
+					courseQuery = courseQuery.Where(c => c.CourseUsers.Any(cu => cu.UserID == userID) &&
+														c.StartDate <= targetStartDate &&
+														c.EndDate >= targetEndDate);
+				} else {
+					courseQuery = courseQuery.Where(c => c.CourseUsers.Any(cu => cu.UserID == userID &&
 														cu.RoleID == (int)roleID) &&
 														c.StartDate <= targetStartDate &&
-														c.EndDate >= targetEndDate)
+														c.EndDate >= targetEndDate);
+				}
+
+				courses = courseQuery
+					.Distinct()
 					.OrderByDescending(c => c.StartDate)
 					.ToList();
+
+			
 
 				if (roleID == CourseUserRole.Student)
 					courses = courses.Where(c => c.IsActive).ToList();
@@ -383,7 +470,8 @@ namespace Didache  {
 						SubmissionAvailableDate = null,
 						TaskID = oldTask.TaskID,
 						TaskTypeName = oldTask.TaskTypeName,
-						Instructions = oldTask.Instructions
+						Instructions = oldTask.Instructions,
+						CustomAttributes = oldTask.CustomAttributes
 					};
 
 					if (oldTask.DueDate.HasValue)

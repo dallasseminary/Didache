@@ -46,10 +46,12 @@
 		</div>
 
 		<div class="profile-constituencies">
-				@if (Model.User.Degrees != null && Model.User.Degrees.Count > 0) {
+				@if ((Model.User.Degrees != null && Model.User.Degrees.Count > 0) || Model.User.AlumniInfos != null && Model.User.AlumniInfos.Count > 0) {
 					<div class="profile-constituency">
 					@Didache.Resources.labels.profile_constituency_alumni<text>:</text>
 					@Html.Raw(String.Join(", ", Model.User.Degrees.Select(d => d.DegreeEarned + " (" + d.GradYear.ToString() + ")").ToArray()))
+					@(!String.IsNullOrWhiteSpace(Model.User.AlumniInfos.ToList()[0].ClassYear) && Model.User.Degrees.Count == 0 ? "Class of " + Model.User.AlumniInfos.ToList()[0].ClassYear : "")
+							
 					</div>
 				}
 				@if (Model.User.Students != null && Model.User.Students.Count > 0) {
@@ -116,7 +118,7 @@
 				    @foreach (WorkplaceWorker worker in Model.User.WorkplaceWorkers) {
 						<div>@worker.Position <text>at</text>
 						
-						@if (worker.Workplace != null) {
+						@if (worker.Workplace != null && worker.WorkplaceID != 93) {
 							@Html.Raw(worker.Workplace.URL != "" ? "<a href=\"" + worker.Workplace.URL + "\">" : "")@worker.Workplace.FullName@Html.Raw(worker.Workplace.URL != "" ? "</a>" : "")
 						} else {
 							@worker.BusinessName	

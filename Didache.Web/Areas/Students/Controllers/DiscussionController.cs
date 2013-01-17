@@ -98,7 +98,7 @@ namespace Didache.Web.Areas.Students.Controllers
 			db.SaveChanges();
 
 			// add post to thread
-			Post post = new Post();
+			ForumPost post = new ForumPost();
 			post.ThreadID = thread.ThreadID;
 			post.ForumID = Int32.Parse(collection["ForumID"]);
 			post.PostDate = DateTime.Now;
@@ -110,7 +110,7 @@ namespace Didache.Web.Areas.Students.Controllers
 			post.PostContentFormatted = Forums.FormatPost(post.PostContent);
 
 			
-			db.Posts.Add(post);
+			db.ForumPosts.Add(post);
 			db.SaveChanges();
 
 
@@ -125,7 +125,7 @@ namespace Didache.Web.Areas.Students.Controllers
 
 			User profile = Users.GetLoggedInUser();
 
-			Post post = new Post();
+			ForumPost post = new ForumPost();
 			post.ThreadID = id;
 			post.ForumID = Int32.Parse(collection["ForumID"]);
 			post.PostDate = DateTime.Now;
@@ -136,7 +136,7 @@ namespace Didache.Web.Areas.Students.Controllers
 			post.PostContent = collection["PostContent"];
 			post.PostContentFormatted = Forums.FormatPost(post.PostContent);
 
-			db.Posts.Add(post);
+			db.ForumPosts.Add(post);
 			db.SaveChanges();
 
 			Thread thread = db.Threads.Include("Posts").FirstOrDefault(t => t.ThreadID == id);

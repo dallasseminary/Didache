@@ -13,7 +13,7 @@
 	padding: 3px;
 }
 .user-unit-grades tr:nth-child(odd) {
-	background: #f7f7f7;
+	background: #f7f7f7;	
 }
 
 </style>
@@ -64,6 +64,9 @@
 				<td class="student-file">
 					@if (utd.StudentFileID > 0) {
 						<a href="/courses/studentfile/@utd.StudentFileID/@StudentFile.GetFriendlyFilename(utd.Course, utd.Unit, utd.Task, utd.User, utd.StudentFile.Filename)">Student File</a>
+						
+						<a href="/grading/@Model.Slug/removestudentfile/@utd.TaskID/@utd.UserID" class="d-button">Remove</a>
+					
 					}
 				</td>
 			</tr>

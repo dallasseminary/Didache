@@ -11,7 +11,7 @@ using System.Web.Security;
 namespace Didache {
 
 
-	public class Post {
+	public class ForumPost {
 		[Key]
 		public int PostID { get; set; }
 		public int ThreadID { get; set; }

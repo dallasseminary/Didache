@@ -147,16 +147,15 @@ namespace Didache.Web.Areas.Students.Controllers
 
 
 				// check for completion
-				// threads for this unit
 				List<InteractionThread> threads = db.InteractionThreads.Where(t => t.TaskID == thread.TaskID).ToList();
 				List<int> threadIDs = threads.Select(t => t.ThreadID).ToList();
-				List<InteractionPost> posts = db.InteractionPosts
+				List<InteractionPost> usersPostsForTask = db.InteractionPosts
 													.Where(p => threadIDs.Contains(p.ThreadID) && p.UserID == user.UserID)
 													.ToList();
 
 				int minimumInteractions = 4; // note: the student's initial task is also counted in this!
 				bool isCompleted = false;
-				if (posts.Count >= minimumInteractions) {
+				if (usersPostsForTask.Count >= minimumInteractions) {
 					isCompleted = true;
 					UserTaskData data = db.UserTasks.SingleOrDefault(ud => ud.UserID == user.UserID && ud.TaskID == thread.TaskID);
 					if (data != null) {
@@ -164,34 +163,78 @@ namespace Didache.Web.Areas.Students.Controllers
 						db.SaveChanges();
 					}
 				}
-				
+
+
+				// get all the posts, 
+				// where a user wants to get followups
+				List<User> usersToNotify = db.InteractionPosts
+												.Where(p => p.ThreadID == threadID && 
+															!p.IsDeleted && 
+															p.IsApproved && 
+															p.User.NotifyInteractionPostReplies)
+												.Select(p => p.User)
+												.Distinct()
+												.ToList();
+
+				// check if thread starter wants replies
+				if (thread.User.NotifyInteractionThreadsReplies) {
+					usersToNotify.Add(thread.User);
+				}
+
+				// remove dups
+				usersToNotify = usersToNotify.Distinct().ToList();
+
+				// remove commenter
+				usersToNotify.RemoveAll(u => u.UserID == user.UserID);
+
+
+				foreach (User userToNotify in usersToNotify) {
+					
+					string message = Emails.FormatEmail(Didache.Resources.emails.interaction_reply,
+								task.Course,
+								null,
+								task,
+								user,
+								userToNotify,
+								null,
+								post,
+								null);
+
+					Emails.EnqueueEmail("automated@dts.edu", userToNotify.Email, task.Course.CourseCode + ": Reply to " + task.Name, message, false);
+					
+				}
+
+
+				/*
 				// email responses
-				List<User> emailToUsers = db.InteractionPosts.Where(p => p.ThreadID == threadID).Select(p => p.User).Distinct().ToList();
-				foreach (User emailToUser in emailToUsers) {
-					if (emailToUser.UserID != user.UserID) {
+				List<User> usersToNotify = db.InteractionPosts
+												.Where(p => p.ThreadID == threadID && !p.IsDeleted && p.IsApproved && p.UserID != user.UserID)
+												.Select(p => p.User)
+												.Distinct()
+												.ToList();
+
+				// remove thread starter from replies if not wanted
+				if (!thread.User.NotifyInteractionThreadsReplies) {
+					usersToNotify.RemoveAll(u => u.UserID == thread.User.UserID);
+				}
+
+				foreach (User userToNotify in usersToNotify) {
+					if (userToNotify.NotifyInteractionPostReplies || (userToNotify.UserID == thread.UserID && userToNotify.NotifyInteractionThreadsReplies)) {
 
 						string message = Emails.FormatEmail(Didache.Resources.emails.interaction_reply,
 									task.Course,
 									null,
 									task,
 									user,
-									emailToUser,
+									userToNotify,
 									null,
 									post,
 									null);
 
-
-						/*
-						 * string message = string.Format(Didache.Resources.emails.interaction_reply,
-										emailToUser.SecureShortName,
-										user.SecureShortName,
-										post.PostContent,
-										"https://online.dts.edu/courses/" + task.Course.Slug + "/schedule/" + task.UnitID + "#post-" + post.PostID);
-						*/
-
-						Emails.EnqueueEmail("automated@dts.edu", emailToUser.Email, task.Course.CourseCode + ": Reply to " + task.Name, message, false);
+						Emails.EnqueueEmail("automated@dts.edu", userToNotify.Email, task.Course.CourseCode + ": Reply to " + task.Name, message, false);
 					}
 				}
+				 * */
 
 
 				return Json(new { 

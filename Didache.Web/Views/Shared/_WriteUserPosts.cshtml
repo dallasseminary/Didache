@@ -1,0 +1,151 @@
+﻿@model List<UserPost>
+
+<style>
+.user-posts {
+	overflow: hidden;
+	margin: 0 -20px;
+}
+.user-post {
+	overflow: hidden;
+	border-top: solid 1px #ccc;
+	padding: 20px 20px 20px 80px;
+	position: relative;
+}
+.user-post .post-author {
+	font-weight: bold;
+}
+.user-post .post-author:hover {
+	text-decoration:underline;
+}
+.user-post .post-author img {
+	position: absolute;
+	top: 20px;
+	left: 20px;
+}
+.user-post .post-type {
+	color: #777;
+	font-size: 12px;
+}
+.user-post .post-content {
+	float: left;
+	width: 470px;
+	font-size: 13px;
+	line-height: 1.4;
+}
+.user-post .post-text {
+	margin: 5px 0;
+}
+.user-post .post-footer {
+	color: #999;
+	font-size: 12px;
+}
+
+.post-comments-list {
+	margin: 8px 0 0 0;
+	-x-background: #eee;
+	-x-border: solid 1px #aaa;
+}
+
+.user-post-comment {
+	padding: 5px 5px 5px 40px ;
+	position: relative;
+	border-top: solid 1px #bbb;
+}
+.post-comments-list .user-post-comment:first-child {
+	-x-border-top: solid 1px #bbb;
+}
+
+
+.comment-author img {
+	position: absolute;
+	top: 5px;
+	left: 5px;
+}
+
+.user-post-comment .comment-text{
+	margin: 5px 0;
+}
+.user-post-comment .comment-date{
+	color: #999;
+}
+
+.add-comment {
+	background: #eee;
+	padding: 5px;
+}
+
+.add-comment textarea {
+	width: 300px;
+	height: 40px;
+	font-family: Arial;
+}
+</style>
+
+<div class="user-posts">
+
+@foreach (UserPost post in Model) {
+<div class="user-post">
+
+	<a href="@post.User.ProfileDisplayUrl" class="post-author">
+		@post.User.SecureFormattedName
+		<img src="@post.User.GetProfileImageUrl(50,50)" alt="@post.User.SecureShortName" />	
+	</a>
+	- 
+	<span class="post-type">@post.UserPostTypeFormatted</span>
+		
+	<div class="post-text">
+		@Html.Raw(System.Text.RegularExpressions.Regex.Replace(post.TextFormatted,"</?(div|font|span|style|script|img).*?>"," "))
+	</div>
+	<div class="post-footer">
+		<a class="post-comments">@Html.Raw(post.PostComments.Count == 0 ? "Comment" : "Comments")</a> - 
+		<span class="post-date">@post.PostDate.ToString("MM/dd/yy hh:mm tt")</span>	
+	</div>
+	
+
+
+	<div class="post-comments-list" @Html.Raw(post.PostComments.Count == 0 ? " style=\"display: none;\"" : "")>
+		@foreach (UserPostComment comment in post.PostComments) {
+			<div class="user-post-comment">
+				
+				<a href="@post.User.ProfileDisplayUrl" class="comment-author">
+					@comment.User.SecureFormattedName
+					<img src="@comment.User.GetProfileImageUrl(30,30)" alt="@comment.User.SecureShortName"  />
+				</a>
+			
+				<div class="comment-text">
+					@Html.Raw(comment.TextFormatted)
+				</div>
+				<div class="comment-date">
+					@comment.CommentDate
+				</div>
+				
+			</div>
+		}
+
+		<div class="user-post-comment comment-entry">
+				
+			<a href="@post.User.ProfileDisplayUrl" class="comment-author">
+				@Users.GetLoggedInUser().SecureFormattedName
+				<img src="@Users.GetLoggedInUser().GetProfileImageUrl(30, 30)"  />
+			</a>
+			
+			<div class="comment-text">
+				<textarea class="add-comment-text"></textarea>
+			</div>
+			<input type="button" class="d-button action small" value="Comment" />
+		</div>		
+	</div>
+
+</div>
+}
+
+</div>
+
+<script>
+	$('.user-post .post-comments').on('click', function () {
+		var commentLink = $(this),
+			commentList = commentLink.parent().siblings('.post-comments-list');
+
+		commentList.show();
+	});
+</script>

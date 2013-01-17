@@ -7,15 +7,45 @@ using Didache.Models;
 
 namespace Didache.Web.Controllers
 {
+
     public class HomeController : Controller
     {
         //
         // GET: /Home/
+		DidacheDb db = new DidacheDb();
 
         public ActionResult Index()
         {
-            return View();
+			HomeViewModel homeModel = new HomeViewModel();
+
+			DateTime now = DateTime.Now;
+			homeModel.Announcements = db.Announcements
+											.Where(an => an.IsActive && now > an.StartDate && (an.EndDate == null || now < an.EndDate))
+											.OrderBy(an => an.StartDate)
+											.ToList();
+
+            return View(homeModel);
         }
+
+		[Authorize]
+		public ActionResult Posts() {
+			HomeViewModel homeModel = new HomeViewModel();
+
+			DateTime now = DateTime.Now;
+			homeModel.Announcements = db.Announcements
+											.Where(an => an.IsActive && now > an.StartDate && (an.EndDate == null || now < an.EndDate))
+											.OrderBy(an => an.StartDate)
+											.ToList();
+
+			return View(homeModel);
+		}
+
+		[Authorize]
+		public ActionResult Post(int id) {
+			return View(id);
+		}
+
+
 
 
 		public ActionResult Resources() {
@@ -73,6 +103,22 @@ Message:
 
 		public ActionResult About() {
 			return View();
+		}
+
+		public ActionResult Faq() {
+
+			List<HelpCategory> categories = db.HelpCategories
+												.Include("HelpQuestions")
+												.OrderBy(cat => cat.SortOrder)
+												.ToList();
+
+			foreach (HelpCategory cat in categories) {
+				cat.HelpQuestions = cat.HelpQuestions
+											.OrderBy(question => question.SortOrder)
+											.ToList();
+			}
+
+			return View(categories);
 		}
 
     }

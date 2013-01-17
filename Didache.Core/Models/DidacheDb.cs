@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Data;
 using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -60,6 +59,7 @@ namespace Didache {
 		public DbSet<Student> Students { get; set; }
 		public DbSet<Employee> Employees { get; set; }
 		public DbSet<Degree> Degrees { get; set; }
+		public DbSet<AlumniInfo> AlumniInfos { get; set; }
 
 		// community
 		public DbSet<UserRelationship> UserRelationships { get; set; }
@@ -68,13 +68,23 @@ namespace Didache {
 		public DbSet<UserPost> UserPosts { get; set; }
 		public DbSet<UserPostComment> UserPostComments { get; set; }
 
+		public DbSet<DiscussionGroup> DiscussionGroups { get; set; }
+		public DbSet<DiscussionGroupMember> DiscussionGroupMembers { get; set; }
 
+
+		// DTS Stuff
 		public DbSet<CarsRelationship> CarsRelationships { get; set; }
 		public DbSet<FamilyMember> FamilyMember { get; set; }
 		public DbSet<Workplace> Workplaces { get; set; }
 		public DbSet<WorkplaceWorker> WorkplaceWorkers { get; set; }
 
+		
+
+		// quetsions
 		public DbSet<Announcement> Announcements { get; set; }
+		public DbSet<HelpQuestion> HelpQuestions { get; set; }
+		public DbSet<HelpCategory> HelpCategories { get; set; }
+
 
 		protected override void OnModelCreating(DbModelBuilder modelBuilder) {
 
@@ -191,6 +201,9 @@ namespace Didache {
 
 			modelBuilder.Entity<Student>()
 				.ToTable("dts_cars_Users_Students");
+			modelBuilder.Entity<AlumniInfo>()
+				.ToTable("dts_cars_Users_Alumni");
+
 
 			/*
 			modelBuilder.Entity<User>()
@@ -232,9 +245,22 @@ namespace Didache {
 			modelBuilder.Entity<UserPostComment>()
 				.ToTable("oe_UserPosts_Comments");
 
+			modelBuilder.Entity<DiscussionGroup>()
+				.ToTable("oe_DiscussionGroups");
+			modelBuilder.Entity<DiscussionGroupMember>()
+				.HasKey(dgu => new { dgu.UserID, dgu.GroupID })
+				.ToTable("oe_DiscussionGroups_Users");
+
+
 
 			modelBuilder.Entity<Announcement>()
 				.ToTable("oe_Announcements");
+
+			modelBuilder.Entity<HelpQuestion>()
+				.ToTable("oe_HelpQuestions");
+			
+			modelBuilder.Entity<HelpCategory>()
+				.ToTable("oe_HelpCategories");
 
 		}
 	}

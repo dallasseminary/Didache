@@ -42,7 +42,7 @@ namespace Didache {
 	
 
 		public virtual Forum Forum { get; set; }
-		public virtual ICollection<Post> Posts { get; set; }
+		public virtual ICollection<ForumPost> Posts { get; set; }
 	}
 
 

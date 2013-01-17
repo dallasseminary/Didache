@@ -7,7 +7,9 @@
 			underline: { visible: true },
 			strikeThrough: { visible: true },
 			html: { visible: true },
-			createLink: { visible: true }
+			createLink: { visible: true },
+			insertOrderedList: { visible: true },
+			insertUnorderedList: { visible: true }
 		}
 	});
 }

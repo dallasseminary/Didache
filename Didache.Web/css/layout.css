@@ -157,7 +157,7 @@ select#language {
 .page-wide .sub-column {
 	float: right;
 	width: 177px;
-	border-left: solid 1px #ccc;
+	-x-border-left: solid 1px #ccc;
 	background: #f7f7f7; /* #F1F2F4; */
 }
 /* used when you don't need a main & sub */
@@ -345,6 +345,7 @@ select#language {
 	list-style-type: none;
 	display: block;
 	float: left;
+	position: relative;
 }
 .page-menu li a {
 	display: block;
@@ -369,6 +370,22 @@ select#language {
 /* TODO: magical popup? */
 .page-menu li a dfn {
 	display: none;
+}
+.page-menu li .notification {
+	width: 15px;
+	height: 15px;
+	text-align: center;
+	position: absolute;
+	top: -5px;
+	right: -5px;
+	color: #fff;
+	background: #f00;
+	border: solid 1px #fff;
+	border-radius: 50%;
+	box-shadow: rgba(0,0,0,0.5) 0 0 2px;
+	z-index: 100;
+	font-weight: bold;
+	font-size: 10px;
 }
 
 .sub-column .header, .sub-column .list {
@@ -482,7 +499,11 @@ select#language {
 	font-size: 12px;
 	margin: 0 5px 0 0;
 }
-
+.user-profile .example {
+	font-size: 10px;
+	font-style: italic;
+	color: #666;
+}
 
 #edit-profile .sub-column label {
     color: transparent;
@@ -598,7 +619,7 @@ select#language {
 }
 	.user-list-large, .user-list-small {
 		clear: both;
-		margin: 10px 0 ;
+		margin: 10px -10px 10px 0 ;
 	}
 
 	.user-list-large .user {
@@ -630,7 +651,7 @@ select#language {
 		float: left;
 		width: 40px;
 		height: 40px;
-		margin: 0 10px 10px 0;
+		margin: 0 8px 8px 0;
 	}
 
 .home-dashboard {
@@ -648,6 +669,104 @@ select#language {
 	color: #111111;
 }
 
+
+/* sidebars */
+.course-sidebar {
+}
+.course-sidebar-homeheader {
+	background: #eee;
+	border: solid 1px #ddd; 
+	border-width: 1px 1px 1px 0; 
+	margin: 0 0 0 -21px; 
+	padding: 5px 5px 5px 20px;
+}
+	.course-sidebar-homeheader a {
+		color: #333;
+		font-weight: bold;
+	}
+.course-sidebar h3 {
+	font-size: 13px;
+	font-weight: bold;
+	color: #999;
+	border-bottom: solid 1px #999;
+	padding: 5px 0 4px 0;
+}
+
+	.course-sidebar-downloads {
+		margin: 0 0 20px 0;
+	}
+	.course-sidebar-assignments {
+		margin: 0 0 20px 0;
+	}
+	.course-sidebar-assignments .assignment {
+		overflow: hidden;
+		position: relative;
+		margin: 0 0 10px 0;
+	}		
+	.course-sidebar-assignments .due-date {
+		display: block;
+		position: absolute;
+		top: 0;
+		right: 0;		
+		width: 80px;
+		
+		color: #aaa; /* #5E98CA; */
+		text-align: right;
+	}
+	.course-sidebar-assignments .overdue {		
+		color: #BD1816;
+	}
+	.course-sidebar-assignments .name {
+		display: block;		
+		width: 100px;
+		color: #444;		
+		font-weight: bold;
+		height: 14px;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}	
+	.course-sidebar-assignments .description {
+		display: block;		
+		width: 150px;
+		color: #444;		
+		height: 14px;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}					
+
+.course-sidebar-people {
+	width: 200px;
+	float: right;
+	padding: 0 10px;
+	background: #f7f7f7;
+}
+	.user-list-large, .user-list-small {
+		clear: both;
+		margin: 10px -10px 10px 0 ;
+	}
+			
+	.user-list-small .user {
+		float: left;
+		width: 30px;
+		height: 30px;
+		margin: 0 8px 8px 0;
+	}
+
+.home-sidebar {
+	
+	padding: 0 0 10px 0;
+	margin: 0 0 10px 0;
+}
+	
+.home-sidebar h2 {
+	background: #F1F2F4;
+	padding: 20px;
+	margin: 0 -20px 10px -20px;
+}
+.home-sidebar h2 a {
+	color: #111111;
+}
 
 /* grading */
 .grading-list {
@@ -819,4 +938,188 @@ select#language {
 	border: solid 1px #999;
 	line-height: 1;
 	font-size: 11px;
+}
+
+/* POSTS */
+
+/* post input */
+.user-post-input {
+	background: #fff;
+	border: solid 1px #ddd;
+}
+.user-post-input #user-post-text {
+	border: 0;
+	width: 540px;
+	font-family: Helvetica, Arial;
+	margin: 8px;
+	resize: none;
+	outline: none;
+}
+.user-post-input .user-post-options {
+	background: #ddd;
+	position: relative;
+	height: 30px;
+	text-align: right;
+	padding: 5px;
+}
+.user-post-input #user-post-visibility {
+	/*position: absolute;
+	top: 7px;
+	right: 70px;
+	
+*/	
+	height: 26px;
+	diplay: inline-block;
+}
+.user-post-input #user-post-button {
+	/*
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	*/
+	diplay: inline-block;
+}
+
+/* post list */
+.user-posts {
+	overflow: hidden;
+	margin: 0 -20px;
+}
+.user-post {
+	overflow: hidden;
+	border-top: solid 1px #ccc;
+	padding: 20px 20px 20px 80px;
+	position: relative;
+}
+.user-post .delete-post, .user-post .delete-comment{
+	position: absolute;
+	top: 20px;
+	right: 0;
+	height: 14px;
+	width: 14px;
+	color: #ccc;
+	border: solid 1px #ccc;
+	text-align: center;
+	cursor: pointer;
+	font-size: 10px;
+}
+
+.user-post .delete-comment{
+	top: 6px;
+}
+.user-post .delete-post:hover, .user-post .delete-comment:hover {
+	background: pink;
+	color: Red;
+	border-color: Red;
+}
+.user-post .post-author {
+	font-weight: bold;
+}
+.user-post .post-author:hover {
+	text-decoration:underline;
+}
+.user-post .post-author img {
+	position: absolute;
+	top: 20px;
+	left: 20px;
+}
+.user-post .post-type {
+	color: #777;
+	font-size: 12px;
+}
+.user-post .post-type a {
+	color: #777;
+}
+.user-post .post-type a:hover {
+	text-decoration: underline;
+}
+.user-post .post-content {
+	float: left;
+	width: 470px;
+	font-size: 13px;
+	line-height: 1.4;
+}
+.user-post .post-text {
+	margin: 5px 0;
+}
+
+.user-post .post-text ul, .user-post .post-text ol {
+	margin: 1em 0 1em 2em;
+}
+
+.user-post .post-text ol li {
+	padding: 0 0 0 0;
+	list-style-type: decimal;
+}
+.user-post .post-text ul li {
+	padding: 0 0 0 0;
+	list-style-type: disc;
+}
+
+
+.user-post .post-footer {
+	color: #999;
+	font-size: 12px;
+}
+.user-post .post-date a{
+	color: #999;
+}
+.user-post .post-date a:hover{
+	text-decoration: underline;
+}
+
+.post-comments {
+	cursor: pointer;
+}
+.post-comments:hover {
+	text-decoration: underline;
+}
+
+.load-more-posts-button {
+	margin: 10px 0 0 0;
+	border: solid 1px #ccc;
+	background: #eee;
+	color: #999;
+	text-align: center;
+	padding: 4px;
+	cursor: pointer;
+}
+.load-more-posts-button:hover {
+	background: #ddd;
+	color: #333;
+}
+
+/* user post comments */
+.post-comments-list {
+	margin: 8px 0 0 0;
+	-x-background: #eee;
+	-x-border: solid 1px #aaa;
+}
+
+.user-post-comment {
+	padding: 5px 5px 5px 40px ;
+	position: relative;
+	border-top: solid 1px #bbb;
+}
+.post-comments-list .user-post-comment:first-child {
+	-x-border-top: solid 1px #bbb;
+}
+.comment-author img {
+	position: absolute;
+	top: 5px;
+	left: 5px;
+}
+
+.user-post-comment .comment-text{
+	margin: 5px 0;
+}
+.user-post-comment .comment-date{
+	color: #999;
+}
+.user-comment-entry .add-comment-text {
+	width: 300px;
+	height: 40px;
+	font-family: Arial;
+	font-size: 11px;
+	resize: none;
 }

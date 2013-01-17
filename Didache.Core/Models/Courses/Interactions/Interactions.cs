@@ -171,6 +171,9 @@ namespace Didache {
 		}
 
 		public static string FormatPost(String input) {
+			return Markdown.Transform(input);
+
+
 			return "<p>" + input.Replace("\r", "").Replace("\n\n", "</p><p>").Replace("\n", "<br>") + "</p>";
 		}
 	}

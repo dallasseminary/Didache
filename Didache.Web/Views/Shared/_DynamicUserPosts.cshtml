@@ -1,0 +1,370 @@
+﻿@model PostListViewOptions
+
+
+<div id="user-posts" data-type="@Model.PostListType" data-id="@Model.KeyID">
+
+	@if (Model.PostListType != PostListType.Single) {
+	<div class="user-post-input">
+		<textarea id="user-post-text" rows="5" cols="50" placeholder="@Didache.Resources.labels.usersposts_post_placeholder"></textarea>
+		<div class="user-post-options">
+			
+			<label for="user-post-visibility">@Didache.Resources.labels.usersposts_post_visibleto</label>
+
+			@switch (Model.PostListType) {
+				default:
+				case PostListType.Public:
+					<select id="user-post-visibility">
+						<optgroup label="Public">
+							<option value="@UserPostType.Public.ToString()">All DTS</option>
+							<option value="@UserPostType.Classmates.ToString()">Friends Only</option>
+						</optgroup>
+						@foreach (Course course in Courses.GetUsersRunningCourses()) {
+						<optgroup label="@(course.CourseCode + course.Section)">
+							<option value="@UserPostType.Course.ToString()" data-id="@course.CourseID">@Didache.Resources.labels.usersposts_post_everyonein @(course.CourseCode + course.Section)</option>
+
+							@if (Courses.IsUserFaculty(course.CourseID, Users.GetLoggedInUser().UserID)) {
+								@* Faculty can see all the groups *@
+								foreach (CourseUserGroup group in course.CourseUserGroups) {
+							<option value="@UserPostType.CourseGroup.ToString()" data-id="@group.GroupID">@group.Name</option>
+								}
+							} else { 
+								@* Students and faclitators see only their groups *@
+								foreach (CourseUserGroup group in Courses.GetUsersGroups().Where(cg => cg.CourseID == course.CourseID)) {
+							<option value="@UserPostType.CourseGroup.ToString()" data-id="@group.GroupID">@group.Name</option>	
+								}
+							}
+
+						</optgroup>
+						}
+					</select>
+					break;
+				case PostListType.Course:
+				
+					
+					<select id="user-post-visibility">
+						<option value="@UserPostType.Course.ToString()" data-id="@Model.Course.CourseID">@Didache.Resources.labels.usersposts_post_everyonein @(Model.Course.CourseCode + Model.Course.Section)</option>
+					
+					@if (Courses.IsUserFaculty(Model.Course.CourseID, Users.GetLoggedInUser().UserID)) {
+						@* Faculty can see all the groups *@
+						foreach (CourseUserGroup group in Model.Course.CourseUserGroups) {
+					<option value="@UserPostType.CourseGroup.ToString()" data-id="@group.GroupID">@group.Name</option>
+						}
+					} else { 
+						@* Students and faclitators see only their groups *@
+						foreach (CourseUserGroup group in Courses.GetUsersGroups().Where(cg => cg.CourseID == Model.Course.CourseID)) {
+					<option value="@UserPostType.CourseGroup.ToString()" data-id="@group.GroupID">@group.Name</option>	
+						}
+					}
+					</select>
+   
+   					if (Courses.IsUserFaculty(Model.Course.CourseID, Users.GetLoggedInUser().UserID)) {
+						<span class="user-post-send">
+							<input type="checkbox" id="user-post-send" /><label for="user-post-send">Email to Class</label>
+						</span>
+					}
+					break;
+				case PostListType.Group:
+					DiscussionGroup dGroup = new DidacheDb().DiscussionGroups.SingleOrDefault(dg => dg.GroupID == Model.KeyID);
+					
+					<select id="user-post-visibility">
+						<option value="DiscussionGroup" data-id="@dGroup.GroupID">@dGroup.Name</option>
+					</select>
+						
+					break;
+   }
+
+			<input type="button" id="user-post-button" value="@Didache.Resources.labels.usersposts_post_button" class="d-button action" />
+		</div>
+		
+	</div>
+ }
+
+	<div class="user-post-list"></div> 
+
+	@if (Model.PostListType != PostListType.Single) {
+	<div class="load-more-posts-button">Load More</div> 
+ }
+</div>	 
+	 
+<script>
+	jQuery(function ($) {
+		var rootID = '#user-posts',
+			user = {
+				UserID: @Users.GetLoggedInUser().UserID,
+				SecureFormattedName: '@Users.GetLoggedInUser().SecureFormattedName',
+				ProfileDisplayUrl: '@Users.GetLoggedInUser().ProfileDisplayUrl',
+				ProfileImageUrl: '@Users.GetLoggedInUser().ProfileImageUrl',
+				IsAdmin: @Users.IsAdministratorFacultyOrFacilitator().ToString().ToLower()
+			};
+
+
+		$('#user-post-text').autoResize();
+
+		$('#user-post-text').on('keydown', function(e) {
+			// allow tab insert
+			if (e.keyCode == 9 && this.selectionStart) {
+				var myValue = "\t",
+					startPos = this.selectionStart,
+					endPos = this.selectionEnd,
+					scrollTop = this.scrollTop;
+
+				this.value = this.value.substring(0, startPos) + myValue + this.value.substring(endPos,this.value.length);
+				this.focus();
+				this.selectionStart = startPos + myValue.length;
+				this.selectionEnd = startPos + myValue.length;
+				this.scrollTop = scrollTop;
+
+				e.preventDefault();
+			}
+		});
+
+		// send update
+		$('#user-post-button').on('click', function () {
+			var 
+				postButton = $('#user-post-button'),
+				textInput = $('#user-post-text'),
+				text = textInput.val(),
+				postTypeInput = $('#user-post-visibility'),
+				postType = postTypeInput.val(),
+				notifyCourse = $('#user-post-send').is(':checked'),
+				id = postTypeInput.find('option:selected').attr('data-id');
+
+			if (text != '') {
+				textInput.prop('disabled', true);
+				postButton.prop('disabled', true);
+				postTypeInput.prop('disabled', true);
+
+				$.ajax({
+					url: '/api/createuserpost',
+					type: 'POST',
+					data: { text: text, postType: postType, id: id, notifyCourse: notifyCourse },
+					success: function (data) {
+
+						// insert posts
+						var node = $(rootID);
+
+						renderPosts(node, [data], true);
+
+						// reenable
+						textInput.prop('disabled', false).val('');
+						postButton.prop('disabled', false);
+						postTypeInput.prop('disabled', false);
+					}
+				});
+			}
+		});
+
+
+		// delete post
+		$(rootID).on('click', '.delete-post', function () {
+			var deleteButton = $(this),
+				post = deleteButton.closest('.user-post'),
+				postID = post.attr('data-postid');
+
+			$.ajax({
+				url: '/api/deleteuserpost',
+				type: 'post',
+				data: { postID: postID },
+				success: function (data) {
+					post.slideUp(250);
+				}
+			});
+		});
+
+		// toggle comments visibility
+		$(rootID).on('click','.post-comments', function(e) {
+			$(this).closest('.user-post').find('.post-comments-list').toggle();
+		});
+
+		// add comment
+		$(rootID).on('click','.add-comment-button', function(e) {
+			var commentButton = $(this),
+				commentBlock = commentButton.closest('.user-comment-entry'),
+				postBlock = commentBlock.closest('.user-post'),
+				postID = postBlock.attr('data-postid'),
+				commentTextInput = commentBlock.find('.add-comment-text'),
+				commentText = commentTextInput.val();
+
+			if (commentText != '') {
+				commentButton.attr('disabled',true);
+				commentTextInput.attr('disabled',true);
+
+				$.ajax({
+					url: '/api/createuserpostcomment',
+					type: 'POST',
+					data: { text: commentText, postID: postID },
+					success: function (data) {
+
+						// insert comment as HTML
+						commentBlock.before( $(getCommentHtml(data)) );
+
+						// reenable
+						commentTextInput.prop('disabled', false).val('');
+						commentButton.prop('disabled', false);
+					}
+				});
+			}
+		});
+
+		// delete comment
+		$(rootID).on('click', '.delete-comment', function () {
+			var deleteButton = $(this),
+				commentBlock = deleteButton.closest('.user-post-comment'),
+				commentID = commentBlock.attr('data-commentid');
+
+			$.ajax({
+				url: '/api/deleteuserpostcomment',
+				type: 'post',
+				data: { commentID: commentID },
+				success: function (data) {
+					commentBlock.slideUp(250);
+				}
+			});
+		});
+
+
+		// load data
+		$(rootID + ' .load-more-posts-button').on('click', function () {
+			var pageNumber = $(rootID).data('page-number');
+			if (pageNumber == null) {
+				pageNumber = 1
+			} else {
+				pageNumber++;
+			}
+
+			loadPosts(rootID, pageNumber);
+		});
+
+		function loadPosts(id, pageNumber) {
+
+			// get the type and info
+			var 
+				node = $(id),
+				type = node.attr('data-type'),
+				id = node.attr('data-id');
+
+			showLoading('Loading Posts');
+
+			$.ajax({
+				url: '/api/getuserposts',
+				data: { pageNumber: pageNumber, type: type, id: id },
+				success: function (data) {
+					showLoading('Rendering Posts');
+
+					//console.log(data);
+
+					renderPosts(node, data, false);
+
+					// update page number
+					node.data('page-number', pageNumber)
+
+					hideLoading();
+				}
+
+			});
+		}
+
+		function renderPosts(node, posts, before) {
+			var html = '', post;
+
+			for (var i = 0, il = posts.length; i < il; i++) {
+				post = posts[i];
+				html +=
+'<div class="user-post" data-postid="' + post.PostID + '">' +
+	(user.IsAdmin || user.UserID == post.UserID ? '<span class="delete-post" title="Delete">X</span>' : '') +
+	'<a href="' + post.User.ProfileDisplayUrl + '" class="post-author">' +
+		post.User.SecureFormattedName +
+		'<img src="' + post.User.ProfileImageUrl + '&width=50&height=50" alt="' + post.User.SecureFormattedName + '" />' +
+	'</a>' +
+	' - ' +
+	'<span class="post-type">' + 
+		(post.UserPostTypeUrl != '' ? '<a href="' + post.UserPostTypeUrl + '">' : '') + 
+		post.UserPostTypeFormatted + 
+		(post.UserPostTypeUrl != '' ? '</a>' : '') + 
+	'</span>' +
+	'<div class="post-text">' +
+		post.Text +
+	'</div>' +
+	'<div class="post-footer">' +
+		'<a class="post-comments">' + (post.PostComments.length == 0 ? 'Comment' : 'Comments (' + post.PostComments.length.toString() + ')') + '</a> - ' +
+		'<span class="post-date"><a href="/post/' + post.PostID + '">' + post.PostDateFormatted + '</a></span>' +
+	'</div>' +
+	'<div class="post-comments-list" ' + (node.attr('data-type') == 'Single' ? '' : ' style="display:none;"') + '>';
+
+
+				for (var j = 0, jl = post.PostComments.length; j < jl; j++) {
+					var comment = post.PostComments[j];
+					html += getCommentHtml(comment);
+				}
+
+				html +=
+'<div class="user-post-comment user-comment-entry">' +
+	'<a href="' + user.ProfileDisplayUrl + '" class="comment-author">' +
+		user.SecureFormattedName +
+		'<img src="' + user.ProfileImageUrl + '&width=30&height=30"  />' +
+	'</a>' +
+	'<div class="comment-text">' +
+		'<textarea class="add-comment-text"></textarea>' +
+	'</div>' +
+	'<input type="button" class="add-comment-button d-button action small" value="Comment" />' +
+'</div>';
+
+
+				html +=
+'</div>' +
+'</div>';
+			}
+
+			// inject the html
+			var newPosts = $(html);
+
+			if (before) {
+				node.find('.user-post-list').prepend(newPosts);
+			} else {
+				node.find('.user-post-list').append(newPosts);
+			}
+
+			/*
+			newPosts
+				.find('.post-text').expander({
+					slicePoint: 500
+					, widow: 2
+					, expandText: 'more »'
+					, userCollapseText: ''
+				});
+			*/
+			newPosts
+				.find('.post-text').truncate({
+					max_length: 500
+				});
+
+
+			newPosts
+				.find('.add-comment-text')
+				.autoResize();
+
+			bibly.scanForReferences(node[0]);
+
+		}
+	
+		function getCommentHtml(comment) {
+			return '<div class="user-post-comment" data-commentid="' + comment.PostCommentID + '">' +
+				(user.IsAdmin || user.UserID == comment.UserID ? '<span class="delete-comment" title="Delete">X</span>' : '') +
+				'<a href="' + comment.User.ProfileDisplayUrl + '" class="comment-author">' +
+					comment.User.SecureFormattedName +
+					'<img src="' + comment.User.ProfileImageUrl + '&width=30&height=30" alt="' + comment.User.SecureShortName + '" />' +
+				'</a>' +
+				'<div class="comment-text">' +
+					comment.Text +
+				'</div>' +
+				'<div class="comment-date">' +
+					comment.CommentDateFormatted +
+				'</div>' +
+			'</div>';
+
+		}
+
+		// START UP
+		loadPosts(rootID, 1);
+	});
+</script>

@@ -1,0 +1,33 @@
+﻿
+@if (User.Identity.IsAuthenticated) {
+
+  List<Course> currentCourses = Didache.Courses.GetUsersRunningCourses(CourseUserRole.Student);
+
+  if (currentCourses.Count > 0) {
+	  foreach (Course course in currentCourses) {
+
+			<div class="course-sidebar-homeheader" >
+				<a href="@course.CourseUrl">@course.CourseCode@course.Section - @course.Name</a>
+			</div>
+		  
+			@Html.Partial("_CourseDashboardSmall", course)
+		
+	  }
+  } else {
+			<p>@Didache.Resources.labels.home_nocourses</p>
+  }
+}
+
+<h3>@Didache.Resources.labels.home_dashboard_heading_onlineedresources</h3>
+<ul>
+    <li><a href="http://www.microsoft.com/downloads/details.aspx?FamilyId=941b3470-3ae9-4aee-8f43-c6bb74cd1466&displaylang=en">@Didache.Resources.labels.home_dashboard_li_msword</a></li>
+    <li><a href="http://libreoffice.org">@Didache.Resources.labels.home_dashboard_li_libreoffice</a></li>   
+	<li><a href="http://library.dts.edu/Pages/RM/Write/">Library Resources (Turabian templates)</a></li>         
+</ul>
+
+<h3>@Didache.Resources.labels.home_dashboard_heading_bibsoftware</h3>
+<ul>
+    <li><a href="http://www.zotero.org">@Didache.Resources.labels.home_dashboard_li_zotero</a></li>
+    <li><a href="http://endnote.com">@Didache.Resources.labels.home_dashboard_li_endnote</a></li>
+    <li><a href="http://styleease.com">@Didache.Resources.labels.home_dashboard_li_styleease</a></li>
+</ul>

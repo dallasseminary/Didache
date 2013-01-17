@@ -8,18 +8,18 @@
 			@if (User.Identity.IsAuthenticated) {
 			<form action="/community/search/" method="get" id="header-search">
 				<input type="search" name="s" placeholder="@Didache.Resources.labels.community_search_placeholder" />
-				<input type="submit" value="Search" class="d-button" />
+				<input type="submit" value="@Didache.Resources.labels.community_search_button" class="d-button" />
 			</form>
 			}
 			
 			@{ string userLanguage = Users.GetUserLanguage(); }
-			<form action="/account/setlanguage/" id="language-wrapper">
+			<form action="/account/setlanguage/" id="language-wrapper" data-lang="@userLanguage">
 				@Html.DropDownList("language", new List<SelectListItem> {   
-													new SelectListItem() { Value = "en-US", Text = "English", Selected = (userLanguage == "en-US")}, 
-													new SelectListItem() { Value = "es", Text = "Español (Spanish)", Selected = (userLanguage == "es") }, 
-													new SelectListItem() { Value = "ar", Text = "العربية (Arabic)", Selected = (userLanguage == "ar") }, 
-													new SelectListItem() { Value = "zh-CN", Text = "汉语[简体字] (Simplified)", Selected = (userLanguage == "zh-CN") }, 
-													new SelectListItem() { Value = "zh-TW", Text = "漢語[繁體字] (Traditional)", Selected = (userLanguage == "zh-TW") }
+													new SelectListItem() { Value = "en-US", Text = "English", Selected = (userLanguage.ToLower() == "en-US".ToLower())}, 
+													new SelectListItem() { Value = "es-ES", Text = "Español (Spanish)", Selected = (userLanguage.ToLower() == "es-ES".ToLower()) }, 
+													//new SelectListItem() { Value = "ar-AR", Text = "العربية (Arabic)", Selected = (userLanguage.ToLower() == "ar-AR".ToLower()) }, 
+													new SelectListItem() { Value = "zh-CN", Text = "汉语[简体字] (Simplified)", Selected = (userLanguage.ToLower() == "zh-CN".ToLower()) }, 
+													new SelectListItem() { Value = "zh-TW", Text = "漢語[繁體字] (Traditional)", Selected = (userLanguage.ToLower() == "zh-TW".ToLower()) }
 												})
 
 			</form>

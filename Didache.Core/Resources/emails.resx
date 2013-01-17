@@ -120,15 +120,39 @@
   <data name="classmates_approvalrequest" xml:space="preserve">
     <value>Hi {touser-secureshortname},
 
-{fromuser-secureshortname} has requested to be your 'Classmate' (think 'Friend' on Facebook, but without any of the theological connotations seminary student think of when they see 'Friend' or 'Follower') on https://online.dts.edu/. 
+{fromuser-secureshortname} has requested to be your 'Friend' (or 'Classmate').
 
-You can approve the request at https://online.dts.edu/community/classmates/. 
+You can approve the request at https://online.dts.edu/community/friend/. 
 
 If you approve the request, you and {fromuser-secureshortname} will be able keep track of one another more easily, and you will also be able to control who in the DTS network can view your profile information by going to http://online.dts.edu/account/editprofile/
 
 Thanks!
 
-DTS Online</value>
+DTS Online
+https://online.dts.edu/</value>
+  </data>
+  <data name="discussiongroup_invitation" xml:space="preserve">
+    <value>Hi {touser-secureshortname},
+
+{fromuser-secureformattedname} has invited you to join the group '{discussiongroup-name}.' If you'd like to join, please visit {discussiongroup-groupurl} and click the "Accept Invite" button. This will allow you to share updates, give advice, or ask questions to those with similar interests.
+
+DTS Online
+https://online.dts.edu/</value>
+  </data>
+  <data name="discussiongroup_message" xml:space="preserve">
+    <value>Hi {touser-secureshortname},
+
+{fromuser-secureshortname} has posted a new message to '{discussiongroup-name}' a group to which you have subscribed.
+
+--------------------------------
+{userpost-text}
+--------------------------------
+
+Read more here: 
+{userpost-posturl}
+
+DTS Online
+https://online.dts.edu/</value>
   </data>
   <data name="gradedtask_body" xml:space="preserve">
     <value>The assignment {task-name} in {course-code} has been graded by {fromuser-secureformattedname}. 
@@ -141,6 +165,9 @@ Grader Comments:
 Your File: {usertaskdata-studentfile-url}
 Your Comments:
 {usertaskdata-studentcomments}</value>
+  </data>
+  <data name="gradedtask_removed" xml:space="preserve">
+    <value>The file you uploaded for the assignment {task-name} in {course-code} has been removed by {fromuser-secureformattedname} so that you can upload a new one.</value>
   </data>
   <data name="gradedtask_subject" xml:space="preserve">
     <value>{course-code} - {task-name} graded</value>
@@ -157,10 +184,41 @@ Your Comments:
 See the complete thread here:
 {interactionpost-posturl}
 
-Please note: we will be adding some features in the coming weeks to give you greater control over which notifications you receive.
+Please note: you can control the notifications you receive at https://online.dts.edu/account/editprofile
 
 DTS Online
+https://online.dts.edu/</value>
+  </data>
+  <data name="userpost_announcement" xml:space="preserve">
+    <value>Hi {touser-secureshortname},
 
-PS. If you're an alum, we are transitioning your classmates from https://alumni.dts.edu/ to https://online.dts.edu/.</value>
+{fromuser-secureshortname} has made an announcement on DTS Online.
+
+--------------------------------
+{userpost-text}
+--------------------------------
+
+Read more here: 
+{userpost-posturl}
+
+DTS Online
+https://online.dts.edu/</value>
+  </data>
+  <data name="userpost_comment" xml:space="preserve">
+    <value>Hi {touser-secureshortname},
+
+{fromuser-secureshortname} added a comment to one of your posts at DTS Online.
+
+--------------------------------
+{postcomment-text}
+--------------------------------
+
+Read more here: 
+{userpost-posturl}
+
+Please note: you can control the notifications you receive at https://online.dts.edu/account/editprofile
+
+DTS Online
+https://online.dts.edu/</value>
   </data>
 </root>

@@ -1,0 +1,68 @@
+﻿@model Didache.Announcement
+
+@{
+	ViewBag.Title = (Model != null) ? "Edit " + Model.Title : "New Announcement";
+}
+
+<div class="page-wide">
+	<div class="full-column">
+		<div class="page-header">
+			<h2>@((Model != null) ? "Edit " + Model.Title : "New Announcement")</h2>
+		</div>
+
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+	
+	@Html.HiddenFor(model => model.AnnouncementID)
+	
+    <table class="admin-table">
+
+        
+	<tr>
+        <th>
+            @Html.LabelFor(model => model.IsActive):
+        </th>
+        <td>
+            @Html.EditorFor(model => model.IsActive)
+            @Html.ValidationMessageFor(model => model.IsActive)
+        </td>
+	</tr>
+	<tr>
+       <th>
+            @Html.LabelFor(model => model.StartDate):
+        </th>
+        <td>
+            @Html.EditorFor(model => model.StartDate)
+            @Html.ValidationMessageFor(model => model.StartDate)
+        </td>
+	</tr>
+	<tr>
+       <th>
+            @Html.LabelFor(model => model.EndDate):
+        </th>
+        <td>
+            @Html.EditorFor(model => model.EndDate)
+            @Html.ValidationMessageFor(model => model.EndDate)
+        </td>
+	</tr>
+	
+	<tr>
+        <th>
+            @Html.LabelFor(model => model.Text):
+        </th>
+        <td>
+            @Html.TextAreaFor(model => model.Text)
+            @Html.ValidationMessageFor(model => model.Text)
+        </td>
+	</tr>
+
+
+   </table>
+	
+	<input type="submit" value="Save" class="d-button action" />
+}
+
+</div>
+</div>

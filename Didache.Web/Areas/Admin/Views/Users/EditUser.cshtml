@@ -1,21 +1,27 @@
 ﻿@model Didache.User
 
 @{
-    ViewBag.Title = "EditUser";
+	ViewBag.Title = "EditUser";
 }
-
-<div class="page-wide">
-	<div class="full-column">
-		<div class="page-header">
-			<h2>Edit User</h2>
-		</div>
-
-		<p><a href="/tools/loginas.aspx?username=@Model.Username">Login as @Model.SecureFormattedName</a></p>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
 	@Html.HiddenFor(m => m.UserID)
+
+<div class="page-wide">
+	<div class="full-column">
+		
+		<div class="page-header">
+			<h2>Edit User</h2>
+			<div class="actions">
+				 <input type="submit" value="Save" class="d-button action" />
+				
+				 <input type="button" value="Make Private" class="d-button" id="make-private-button" />
+			</div>
+		</div>
+
+		<p><a href="/tools/loginas.aspx?username=@Model.Username">Login as @Model.SecureFormattedName</a></p>
 	
 		<table class="admin-table">
 			<tbody>
@@ -24,11 +30,11 @@
 					<td>@Model.UserID</td>
 				</tr>
 				<tr>
-					<th>@Html.LabelFor(m=>m.AliasFirstName)</th>
+					<th>@Html.LabelFor(m => m.AliasFirstName)</th>
 					<td>@Html.EditorFor(m => m.AliasFirstName)</td>
 				</tr>
 				<tr>
-					<th>@Html.LabelFor(m=>m.AliasLastName)</th>
+					<th>@Html.LabelFor(m => m.AliasLastName)</th>
 					<td>@Html.EditorFor(m => m.AliasLastName)</td>
 				</tr>
 				<tr>
@@ -55,6 +61,62 @@
 					<th>Username</th>
 					<td>@Model.Username</td>
 				</tr>
+
+				<tr>
+					<th>Allow Friend Requests</th>
+					<td>@Html.EditorFor(model => model.AllowClassmateRequests)</td>
+				</tr>
+
+				<tr>
+					<th>Address</th>
+					<td>
+						@Html.EditorFor(model => model.AddressSecuritySetting, "SecuritySetting", "AddressSecurity")
+					</td>
+				</tr>
+				<tr>
+					<th>Biography</th>
+					<td>
+						@Html.EditorFor(model => model.BiographySecuritySetting, "SecuritySetting", "BiographySecurity")
+					</td>
+				</tr>
+				<tr>
+					<th>Birthdate</th>
+					<td>
+						@Html.EditorFor(model => model.BirthdateSecuritySetting, "SecuritySetting", "BirthdateSecurity")
+					</td>
+				</tr>
+				<tr>
+					<th>Children</th>
+					<td>
+						@Html.EditorFor(model => model.ChildrenSecuritySetting, "SecuritySetting", "ChildrenSecurity")
+					</td>
+				</tr>
+				<tr>
+					<th>Email</th>
+					<td>
+						@Html.EditorFor(model => model.EmailSecuritySetting, "SecuritySetting", "EmailSecurity")
+					</td>
+				</tr>
+				<tr>
+					<th>Phone</th>
+					<td>
+						@Html.EditorFor(model => model.PhoneSecuritySetting, "SecuritySetting", "PhoneSecurity")
+					</td>
+				</tr>
+				<tr>
+					<th>Schedule</th>
+					<td>
+						@Html.EditorFor(model => model.ScheduleSecuritySetting, "SecuritySetting", "ScheduleSecurity")
+					</td>
+				</tr>
+				<tr>
+					<th>Spouse</th>
+					<td>
+						@Html.EditorFor(model => model.ScheduleSecuritySetting, "SecuritySetting", "SpouseSecurity")
+					</td>
+				</tr>	
+		
+	
 				<tr>
 					<th>Picture</th>
 					<td>
@@ -92,7 +154,29 @@
 		</table>
 	
 	 <input type="submit" value="Save" class="d-button action" />
+
+
+	</div>
+</div>
+
 }
 
-</div>
-</div>
+<script>
+	jQuery(function ($) {
+		$('#make-private-button').on('click', function () {
+			var userid = $('#UserID').val();
+
+			$.ajax({
+				url: '/admin/Users/MakeUserPrivate',
+				type: 'post',
+				data: { userID: userid },
+				success: function () {
+					console.log('done');
+
+					// reload page
+					window.location.href = window.location.href;
+				}
+			});
+		});
+	});
+</script>

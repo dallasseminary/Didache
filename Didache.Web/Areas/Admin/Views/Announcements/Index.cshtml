@@ -1,0 +1,48 @@
+﻿@model List<Announcement>
+
+@{
+    ViewBag.Title = "Announcements";
+	 Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+.inactive {
+	color: #999;
+}
+</style>
+
+<div class="page-wide">
+	<div class="full-column">
+		<div class="page-header">
+			<h2>Announcements</h2>
+		</div>
+
+		<a class="d-button action" href="/admin/announcements/edit/0">New Announcement</a>
+
+		<table class="admin-list">
+		<thead>
+			<tr>
+				<th>Active</th>
+				<th>Start</th>
+				<th>End</th>
+				<th>Text</th>
+				<th></th>
+
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (Announcement announcement in Model) {
+			<tr class="@(!announcement.IsActive || DateTime.Now < announcement.StartDate || (announcement.EndDate.HasValue && announcement.EndDate < DateTime.Now) ? "inactive" : "")">
+				<td>@announcement.IsActive</td>
+				<td>@announcement.StartDate.ToString("MM/dd/yyyy")</td>
+				<td>@(announcement.EndDate.HasValue ? announcement.EndDate.Value.ToString("MM/dd/yyyy") : "none")</td>
+				<td>@announcement.Text</td>
+				<td><a href="/admin/announcements/edit/@announcement.AnnouncementID">edit</a></td>
+			</tr>
+			}
+		</tbody>
+		</table>
+
+
+</div>
+</div>

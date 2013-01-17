@@ -1,0 +1,129 @@
+﻿@model bibly.Models.ReferenceViewModel
+		   
+@{
+
+	ViewBag.Title = Bible.Settings.PageTitle(Model.Reference.ToString());
+	
+	string description = "Loading passages...";
+	
+	string reference = Model.Reference.ToString();
+	string version = Model.Reference.VersionString;
+	
+	
+	
+	if (Request.UserAgent != null && Request.UserAgent.IndexOf("facebook") > -1) {
+		string BIBLIA_KEY = "436e02d01081d28a78a45d65f66f4416";
+		
+		string text = "";
+	
+		System.Net.WebClient client = new System.Net.WebClient();
+		System.Web.Script.Serialization.JavaScriptSerializer jss = new System.Web.Script.Serialization.JavaScriptSerializer();
+		string jsonString = "";
+			
+		switch (version) {
+			case "KJV":
+			case "LEB":
+			case "ASV":
+			case "YLT":
+			case "DARBY":
+				jsonString = client.DownloadString("http://api.biblia.com/v1/bible/content/" + version + ".html.json?style=oneVersePerLine&key=" + BIBLIA_KEY + "&passage=" + HttpUtility.UrlEncode(reference));
+	
+				try {
+					dynamic bibliaJson = jss.Deserialize<dynamic>(jsonString);
+					text = (string)bibliaJson["text"];
+				} catch { };
+				break;
+			default:	
+			case "ESV":
+				jsonString = client.DownloadString("http://www.esvapi.org/crossref/ref.php?reference=" + HttpUtility.UrlEncode(reference) + "&type=json");
+	
+				// trim off starting (
+				jsonString = jsonString.Substring(1);
+	
+				// and ending );
+				jsonString = jsonString.Substring(0, jsonString.Length-2);
+				
+			
+				try {
+					dynamic esvJson = jss.Deserialize<dynamic>(jsonString);
+					text = (string)esvJson["content"];
+					
+				} catch { };
+				break;
+				
+			case "NET":
+				jsonString = client.DownloadString("http://labs.bible.org/api/?passage=" + HttpUtility.UrlEncode(reference) + "&type=json");
+			
+				try {
+					dynamic netJson = jss.Deserialize<dynamic>(jsonString);
+	
+					foreach (dynamic verse in netJson) {
+						text += verse["verse"] + " " + verse["text"] + " ";
+						//Response.Write(verse["text"]);	
+					}
+				} catch { }
+				
+				break;
+		}
+		
+		// remove HTML
+		text = System.Text.RegularExpressions.Regex.Replace(text, "<[^>]+?>", "");
+		
+		description = text;
+
+	}
+	
+}
+
+@section head {
+	<meta property="og:title" content="@(Model.Reference.ToString())" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="@Request.Url.ToString()" />
+	<meta property="og:description" content="@description" />
+}
+
+<div id="reference-box" class="box"><div class="box-inner">
+
+	<h2>You clicked a link for</h2>
+
+	<span id="reference-current">
+		<span id="linked-reference">@(Model.Reference.ToString())</span>
+		@Html.Raw(Model.Reference.VersionString != "" ? " (<span id=\"linked-version\">" + Model.Reference.VersionString + "</span>)" : "")
+	</span>
+	<!-- @(Model.Url) -->
+
+	<div id="linked-text"></div>
+	<div id="text-copyright"></div>
+
+</div></div>
+
+
+
+<div id="version-links" class="box"><div class="box-inner">
+	<h2>Select a site to read @(Model.Reference.ToString())</h2>
+
+	<ul id="site-links">
+	@foreach (Bible.BibleSite site in Model.Sites) {
+		<li class="site-@site.Key"><a href="@site.FormatPassage(Model.Reference)" data-inid="@Model.InID" data-site="@site.Key">@site.Name</a></li>
+	}
+	</ul>
+
+	<div id="remember-me-area">
+		<input type="checkbox" id="remember-my-site" name="remember-my-site" value="1" /><label for="remember-my-site">Skip this page next time and always take me to my choice</label>
+	</div>
+</div></div>
+
+<div id="sample-verse" class="box"><div class="box-inner">
+	<h2>Site Popups</h2>
+
+	<p>You can add popups to verses like @Model.Reference.ToString() on your site by installing a simple <a href="/plugins/">plugin</a>.</p>
+</div></div>
+
+
+
+@*
+<div id="qrcode"></div>
+<script>
+	$('#qrcode').qrcode({text:'@Request.Url.ToString()', width: 64, height: 64, typeNumber:4 });
+</script>
+*@

@@ -63,7 +63,11 @@ namespace Didache {
 		[Display(Name = "Related Task")]
 		public int RelatedTaskID { get; set; }
 
+		[Display(Name = "File Types Allowed")]
 		public string FileTypesAllowed { get; set; }
+
+		[Display(Name = "Custom")]
+		public string CustomAttributes { get; set; }
 
 		[ScriptIgnore]
 		public virtual Unit Unit { get; set; }

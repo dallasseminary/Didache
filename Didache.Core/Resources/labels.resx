@@ -322,7 +322,7 @@
     <value>Open [{0} Replies]</value>
   </data>
   <data name="labels_dashboard_downloadallfiles" xml:space="preserve">
-    <value>Download All Files</value>
+    <value>All Files</value>
   </data>
   <data name="labels_dashboard_facilitators" xml:space="preserve">
     <value>Faciliators</value>
@@ -664,7 +664,7 @@
     <value>Your password was successfully changed</value>
   </data>
   <data name="studentschedule_resubmitfile_message" xml:space="preserve">
-    <value>You have already submitted this assignment. But since it is before the due date and no one has repsonded to your post, you can resubmit it replacing your earlier file.</value>
+    <value>You have already submitted this assignment. But since it is before the due date and no one has responded to your post, you can resubmit it replacing your earlier file.</value>
   </data>
   <data name="studentschedule_resubmitfile_contactfacilitator" xml:space="preserve">
     <value>If you need to resubmit your file, please contact your facilitator.</value>
@@ -788,5 +788,62 @@
   </data>
   <data name="profile_label_classmaterequests" xml:space="preserve">
     <value>Classmate Requests</value>
+  </data>
+  <data name="profile_heading_notifications" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="studentschedule_nopostsyet" xml:space="preserve">
+    <value>There are no discussions ready for you to comment upon. Check back soon.</value>
+  </data>
+  <data name="usersposts_post_button" xml:space="preserve">
+    <value>Post</value>
+  </data>
+  <data name="usersposts_post_everyonein" xml:space="preserve">
+    <value>Everyone in</value>
+  </data>
+  <data name="usersposts_post_placeholder" xml:space="preserve">
+    <value>Share something here...</value>
+  </data>
+  <data name="usersposts_post_visibleto" xml:space="preserve">
+    <value>Visible to</value>
+  </data>
+  <data name="submenu_community_groups" xml:space="preserve">
+    <value>Groups</value>
+  </data>
+  <data name="groups_list" xml:space="preserve">
+    <value>Groups</value>
+  </data>
+  <data name="groups_list_description" xml:space="preserve">
+    <value>Create or join groups to discuss ministry with DTS alumni and students.</value>
+  </data>
+  <data name="group_editor_description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="group_editor_header" xml:space="preserve">
+    <value>Group Settings</value>
+  </data>
+  <data name="group_editor_image" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="group_editor_name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="group_editor_type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="group_save_button" xml:space="preserve">
+    <value>Save Group</value>
+  </data>
+  <data name="submenu_community_friends" xml:space="preserve">
+    <value>Friends</value>
+  </data>
+  <data name="tabs_faq" xml:space="preserve">
+    <value>Frequent Questions</value>
+  </data>
+  <data name="survey_notapplicable" xml:space="preserve">
+    <value>N/A</value>
+  </data>
+  <data name="studentschedule_sendtofacilitator" xml:space="preserve">
+    <value>Send to Facilitator</value>
   </data>
 </root>

@@ -131,6 +131,10 @@ namespace Didache.Web.Areas.Community.Controllers
 		}
 
 		public ActionResult Classmates() {
+			return RedirectToAction("Friends");
+		}
+
+		public ActionResult Friends() {
 
 			List<UserRelationship> allRelationships = UserRelationships.GetUserRelationships(Users.GetLoggedInUser().UserID, true);
 
@@ -165,7 +169,10 @@ namespace Didache.Web.Areas.Community.Controllers
 				displayUser = Users.GetUser(name);
 			}
 
-		
+			if (displayUser == null) {
+				return RedirectToAction("Index");
+			}
+
 			profileViewModel.User = displayUser;
 
 			// relationships
@@ -217,7 +224,10 @@ namespace Didache.Web.Areas.Community.Controllers
 										(int) UserActionType.SimpleSearch, 
 										(int) UserActionType.ScheduleSearch, 
 										(int) UserActionType.UpdatePicture, 
-										(int) UserActionType.UpdateSettings };
+										(int) UserActionType.UpdateSettings,
+										(int) UserActionType.MakeNewComment	,
+										(int) UserActionType.MakeNewPost
+			};
 
 			List<UserAction> actions = db.UserActions
 											.Include("SourceUser")

@@ -16,6 +16,12 @@ namespace Didache.Web.Areas.Admin.Controllers
         // GET: /Admin/Users/
 		DidacheDb db = new DidacheDb();
 
+		public ActionResult MakeUserPrivate(int userID) {
+			Users.MakeUserPrivate(userID);
+
+			return Json(new { success = true });
+		}
+
 		
         public ActionResult Index(string query)
         {
@@ -68,6 +74,16 @@ namespace Didache.Web.Areas.Admin.Controllers
 				// Update model didn't work, so I'm just doing a simple update of the one propery we're editing
 				user.AliasFirstName = model.AliasFirstName;
 				user.AliasLastName = model.AliasLastName;
+
+				user.AllowClassmateRequests = model.AllowClassmateRequests;
+				user.AddressSecuritySetting = model.AddressSecuritySetting;
+				user.BiographySecuritySetting = model.BiographySecuritySetting;
+				user.BirthdateSecuritySetting = model.BirthdateSecuritySetting;
+				user.ChildrenSecuritySetting = model.ChildrenSecuritySetting;
+				user.EmailSecuritySetting = model.EmailSecuritySetting;
+				user.PhoneSecuritySetting = model.PhoneSecuritySetting;
+				user.ScheduleSecuritySetting = model.ScheduleSecuritySetting;
+				user.SpouseSecuritySetting = model.SpouseSecuritySetting;
 				user.PictureSecuritySetting = model.PictureSecuritySetting;
 				//UpdateModel(user);
 

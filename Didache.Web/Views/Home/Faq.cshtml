@@ -1,0 +1,64 @@
+﻿@model List<HelpCategory>
+
+@{
+	ViewBag.Title = "Frequently Asked Questions";
+}
+
+<style>
+.help-category {
+	margin: 0 0 20px 0;
+}
+
+.help-category dt {
+	font-weight: bold;
+	display: block;
+	cursor: pointer;
+	margin: 0 0 5px 20px;
+	width: 500px;
+}
+
+
+.help-category dd {
+	margin: 10px 0 10px 25px;
+	display: none;
+	width: 500px;
+}
+</style>
+
+<div class="page-wide">
+	
+	<div class="page-header">
+		<h2>Frequently Asked Questions</h2>
+		<p>Click on a question below to get help with your issues</p>
+	</div>
+
+	
+	<div class="full-column">
+		
+		@foreach (HelpCategory category in Model) {
+			<div class="help-category">
+			<h3>@category.Name</h3>
+	  
+			<dl>
+			@foreach(HelpQuestion question in category.HelpQuestions) {
+				<dt>@Html.Raw(question.Question)</dt>
+				<dd>@Html.Raw(Markdown.Transform(question.Answer))</dd>
+			}
+			</dl>
+			</div>
+		}
+				
+		
+	</div>
+
+</div>
+
+<script>
+	jQuery(function ($) {
+		$('.help-category dt').toggle(function () {
+			$(this).next('dd').slideDown();
+		}, function () {
+			$(this).next('dd').slideUp();
+		});
+	});
+</script>

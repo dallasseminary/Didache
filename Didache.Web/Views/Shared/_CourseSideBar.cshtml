@@ -1,0 +1,85 @@
+﻿@model Didache.Course
+		   
+<style>
+.course-sidebar {
+
+}
+.course-sidebar .user-list {
+	overflow: hidden;
+}
+.course-sidebar .user-list .user {
+	float: left;
+	margin: 0 0 2px 2px;
+}
+</style>
+
+<div class="course-sidebar">
+	
+
+
+	@{ List<CourseUser> courseUsers = new DidacheDb().CourseUsers.Include("User").Where(cu => cu.CourseID == Model.CourseID).ToList();}
+
+	<div class="user-list sidebar-section">
+		<h3>@Didache.Resources.labels.labels_dashboard_faculty</h3>
+
+		@foreach (CourseUser user in courseUsers.Where(cu => cu.CourseUserRole == CourseUserRole.Faculty).OrderBy(cu => cu.User.LastName)) {
+			<div class="user">
+				<a href="@user.User.ProfileDisplayUrl" title="@user.User.SecureFormattedName">
+					<img src="@user.User.GetProfileImageUrl(30,30)" width="30" height="30" alt="@user.User.SecureFormattedName" />
+					
+				</a>
+			</div>
+		}
+		@foreach (CourseUser user in courseUsers.Where(cu => cu.CourseUserRole == CourseUserRole.Faciliator).OrderBy(cu => cu.User.LastName)) {
+			<div class="user">
+				<a href="@user.User.ProfileDisplayUrl" title="@user.User.SecureFormattedName">
+					<img src="@user.User.GetProfileImageUrl(30,30)" width="30" height="30" alt="@user.User.SecureFormattedName" />
+					
+				</a>
+			</div>			
+		}
+	</div>
+
+	<div class="user-list sidebar-section">
+		<h3>@Didache.Resources.labels.labels_dashboard_groupmembers</h3>
+		@{ CourseUser currentUserAsStudent = courseUsers.SingleOrDefault(thisUser => thisUser.UserID == Users.GetLoggedInUser().UserID && thisUser.CourseUserRole == CourseUserRole.Student); }
+
+			
+		@if (currentUserAsStudent != null) {
+			foreach (CourseUser user in courseUsers.Where(cu => 
+												cu.CourseUserRole == CourseUserRole.Student &&
+												cu.GroupID == currentUserAsStudent.GroupID)
+											.OrderBy(cu => cu.User.LastName)) {
+			<div class="user">
+				<a href="@user.User.ProfileDisplayUrl" title="@user.User.SecureFormattedName">
+					<img src="@user.User.GetProfileImageUrl(30, 30)" width="30" height="30" />						
+				</a>
+			</div>				
+			}
+		}
+			
+	</div>
+
+	<div class="course-sidebar-downloads sidebar-section">
+	
+		@{ CourseFileAssociation syllabus = CourseFiles.GetCourseSyllabus(Model.CourseID);}
+
+		@if (syllabus != null) {
+			<a class="d-button" href="@syllabus.CourseFile.FileUrl">@Didache.Resources.labels.labels_dashboard_syllabus</a>
+		}
+		<a class="d-button" href="/courses/downloadall/@(Model.Slug).zip">@Didache.Resources.labels.labels_dashboard_downloadallfiles</a>
+	</div>
+
+	<div class="course-sidebar-assignments sidebar-section">
+		<h3>@Didache.Resources.labels.labels_dashboard_keyassignments</h3>
+			
+		@foreach (UserTaskData task in Courses.GetImportantTasksForUser(Model.CourseID)) {        
+			<div class="assignment">
+				<a class="name" href="/courses/@Model.Slug/schedule/@task.UnitID/#task-@task.TaskID">@task.Task.Name</a>
+				<span class="due-date @(task.TaskCompletionStatus == TaskCompletionStatus.NotStarted && DateTime.Now > task.Task.DueDate.Value ? "overdue" : "")">@task.Task.DueDate.Value.ToShortDateString()</span> 
+			</div>
+		}
+	</div>
+
+
+</div>

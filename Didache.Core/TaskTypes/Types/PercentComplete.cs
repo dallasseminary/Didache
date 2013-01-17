@@ -9,20 +9,29 @@ using System.ComponentModel.DataAnnotations;
 namespace Didache.TaskTypes {
 
 	//[Display(Name = "Simple Completion (no grade)", Description = "Student presses a complete button, but the grade is not changed.")]
-	public class SimpleCompletionNoGrade : ITaskType {
+	public class PercentComplete : ITaskType {
 
 		public TaskTypeResult ProcessFormCollection(int taskID, int userID, FormCollection collection, HttpRequestBase request) {
 			DidacheDb db = new DidacheDb();
 
-			UserTaskData data = db.UserTasks.SingleOrDefault(d=> d.TaskID == taskID && d.UserID == userID);
+			UserTaskData data = db.UserTasks.SingleOrDefault(d => d.TaskID == taskID && d.UserID == userID);
 
 			data.TaskCompletionStatus = (TaskCompletionStatus)Int32.Parse(collection["TaskStatus"]);
 			data.StudentSubmitDate = DateTime.Now;
-			data.NumericGrade = 100;
 
-			db.SaveChanges();
+			int percentComplete = -1;
+			if (Int32.TryParse(collection["PercentComplete"], out percentComplete) && percentComplete >= 1 && percentComplete <= 100) {
 
-			return new TaskTypeResult () { Success = true };
+				data.NumericGrade = percentComplete;
+
+				db.SaveChanges();
+
+				return new TaskTypeResult() { Success = true };
+
+			} else {
+				return new TaskTypeResult() { Success = false };
+
+			}
 		}
 	}
 }

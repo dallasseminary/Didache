@@ -32,6 +32,7 @@
 		<th>Code</th>
 		<th>Sec</th>
 		<th>Name</th>
+		<th></th>
 		<!-- <th>Profs</th> -->
 		<th>Start</th>
 		<th>End</th>
@@ -43,6 +44,7 @@
 		<th></th>
 		<th></th>
 		<th></th>
+		
 	</tr>
 </thead>
 <tbody>
@@ -53,6 +55,7 @@
 		<td><span class="course-coursecode">@course.CourseCode</span></td>
 		<td><span class="course-section">@course.Section</span></td>
 		<td><span class="course-name">@course.Name</span></td>
+		<td><a class="course-delete" href="/admin/courses/DeleteCourse/@course.CourseID">delete</a></td>
 		<!-- <td><span class="course-profs">@course.FacultyLastNames</span></td> -->
 		<td><span class="course-startdate">@course.StartDate.ToString("MM/dd/yyyy")</span></td>
 		<td><span class="course-enddate">@course.EndDate.ToString("MM/dd/yyyy")</span></td>
@@ -68,6 +71,7 @@
 		<td><a class="course-users" href="/admin/courses/usergroups/@course.CourseID">groups</a></td>
 		<td><a class="course-units" href="/admin/courses/courseeditor/@course.CourseID">tasks</a></td>
 		<td><a class="course-edit" href="/admin/courses/edit/@course.CourseID">edit</a></td>
+		
 	</tr>
 
 		<!-- td><a href="/admin/courses/outline/@course.CourseID">outline</a></td>
@@ -122,3 +126,23 @@
 
 </div>
 </div>
+
+
+<script>
+	jQuery(function ($) {
+		$('.course-delete').on('click', function (e) {
+
+			var a = Math.floor(Math.random() * 12),
+				b = Math.floor(Math.random() * 12),
+				answer = prompt('If you want to delete this, please answer the following math problem\n\t' + a.toString() + ' + ' + b.toString() + ' = ?')
+
+			answer = parseInt(answer);
+
+			if (isNaN(answer) || a + b != answer) {
+				e.preventDefault();
+				return false;
+			}
+
+		});
+	});
+</script>

@@ -1,1 +1,26 @@
 ﻿- 
+
+
+SET  Identity_insert oe_UserPosts ON;
+
+insert into oe_UserPosts 
+(PostID, UserID, Text, Textformatted, IsDeleted, PostDate, UserPostTypeID, CourseID, CourseGroupID, FileID, UserGroupID)
+select 
+PostID, AuthorID, Text, Text, CASE WHEN IsPublished = 0 THEN 1 ELSE 0 END, Postdate, CASE WHEN VisibleToAlumni = 1 THEN 1 ELSE 2 END, 0, 0, 0, 0
+FROM 
+koin_Posts;
+
+SET  Identity_insert oe_UserPosts Off;
+
+
+
+SET  Identity_insert oe_UserPosts_Comments ON;
+
+insert into oe_UserPosts_Comments 
+(PostCommentID, PostID, UserID, Text, Textformatted, IsDeleted, CommentDate)
+select 
+CommentID, PostID, AuthorUserID, Text, Text, IsDeleted, CommentDate
+FROM 
+koin_PostComments;
+
+SET  Identity_insert oe_UserPosts_Comments Off;

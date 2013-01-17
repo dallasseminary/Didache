@@ -1,0 +1,24 @@
+﻿@model Didache.Course
+
+@{
+	ViewBag.Title = Model.CourseCode + Model.Section + " " + Didache.Resources.labels.coursetabs_dashboard;
+}
+
+<div class="page-wide page-split">
+
+	@Html.Partial("_CourseHeader", Model)
+	@Html.Partial("_CourseMenu")
+
+	<div class="main-column">
+		
+		@Html.Partial("_WriteUserPosts", (List<UserPost>) ViewBag.UserPosts)
+
+	</div>
+	<div class="sub-column">
+		
+		@Html.Partial("_CourseSideBar", Model)
+		
+	</div>
+	
+	<div class="clear"></div>
+</div>
